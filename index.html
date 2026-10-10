@@ -3,172 +3,94 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lekka Lab | Class 6 Mathematics Complete</title>
+  <title>Lekka Lab | Mathematics Hub</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
-    body { background-color: #f1f5f9; color: #0f172a; padding-bottom: 60px; }
-
-    header {
-      background: linear-gradient(135deg, #1e3a8a, #0284c7);
-      color: white;
-      padding: 22px 16px;
-      text-align: center;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.08);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    header h1 { font-size: 24px; margin-bottom: 4px; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
+    body { background-color: #f1f5f9; color: #0f172a; padding-bottom: 50px; }
+    header { background: #1e3a8a; color: white; padding: 20px; text-align: center; }
+    header h1 { font-size: 22px; margin-bottom: 4px; }
     header p { font-size: 13px; opacity: 0.9; }
+    .container { max-width: 850px; margin: 15px auto; padding: 0 14px; }
+    .card { background: white; border-radius: 8px; padding: 16px; margin-bottom: 16px; border: 1px solid #cbd5e1; }
+    .title { font-size: 16px; color: #1e3a8a; font-weight: bold; margin-bottom: 10px; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; }
+    .box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 12px; margin-bottom: 10px; font-size: 14px; line-height: 1.6; }
+    .formula { background: #eff6ff; border-left: 4px solid #2563eb; padding: 8px 12px; margin-top: 6px; font-family: monospace; font-weight: bold; color: #1e40af; }
+    .btn { display: inline-block; padding: 6px 12px; background: #e2e8f0; border-radius: 4px; font-size: 12px; font-weight: bold; cursor: pointer; margin-top: 6px; }
+    .solution { display: none; margin-top: 8px; padding-top: 8px; border-top: 1px dashed #cbd5e1; font-size: 13px; color: #334155; }
+    .link-btn { display: inline-block; padding: 6px 12px; background: #1e3a8a; color: white; text-decoration: none; border-radius: 4px; font-size: 12px; font-weight: bold; }
+  </style>
+</head>
+<body>
 
-    .container { max-width: 900px; margin: 20px auto; padding: 0 16px; }
+<header>
+  <h1>Lekka Lab: Mathematics Hub</h1>
+  <p>Class 6 Mathematics (Telangana SCERT &amp; NCERT)</p>
+</header>
 
-    /* Class Selection Tabs */
-    .class-bar {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-    }
-    .class-btn {
-      padding: 9px 18px;
-      border: 1.5px solid #0284c7;
-      background: white;
-      color: #0284c7;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 14px;
-      cursor: pointer;
-    }
-    .class-btn.active {
-      background: #0284c7;
-      color: white;
-    }
+<div class="container">
+  <!-- Textbooks -->
+  <div class="card">
+    <div class="title">📚 Official Textbooks</div>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+      <span><b>SCERT Telangana Class 6 Maths</b></span>
+      <a href="https://scert.telangana.gov.in/" target="_blank" class="link-btn">Download ↗</a>
+    </div>
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <span><b>NCERT Class 6 Maths</b></span>
+      <a href="https://ncert.nic.in/textbook.php?femh1=0-14" target="_blank" class="link-btn">Download ↗</a>
+    </div>
+  </div>
 
-    /* Chapter Quick Jump Navigation */
-    .chapter-nav {
-      background: white;
-      border-radius: 10px;
-      padding: 14px;
-      border: 1px solid #cbd5e1;
-      margin-bottom: 20px;
-    }
-    .chapter-nav-title {
-      font-size: 13px;
-      font-weight: 700;
-      color: #1e3a8a;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-    .jump-pills {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-    .jump-pill {
-      font-size: 12px;
-      font-weight: 600;
-      color: #0369a1;
-      background: #e0f2fe;
-      padding: 5px 10px;
-      border-radius: 6px;
-      text-decoration: none;
-      border: 1px solid #bae6fd;
-    }
-    .jump-pill:hover {
-      background: #0284c7;
-      color: white;
-    }
+  <!-- Chapter 1 -->
+  <div class="card">
+    <div class="title">Chapter 1: Knowing Our Numbers (మన సంఖ్యలను తెలుసుకుందాం)</div>
+    <div class="box">
+      <b>1. Introduction:</b> మనం నిత్యజీవితంలో సంఖ్యలను లెక్కింపు మరియు కొలతలకు ఉపయోగిస్తాం. పెద్ద సంఖ్యలు, స్థాన విలువలు మరియు రోమన్ సంఖ్యల గురించి ఇందులో నేర్చుకుంటాం.
+    </div>
+    <div class="box">
+      <b>2. Synopsis &amp; Formulas:</b><br>
+      • భారతీయ సంఖ్యామానం: కుడి నుండి 3 స్థానాల తర్వాత, ఆపై ప్రతి 2 స్థానాలకు కామా వస్తుంది.<br>
+      • అంతర్జాతీయ సంఖ్యామానం: కుడి నుండి ప్రతి 3 స్థానాలకు కామా వస్తుంది.
+      <div class="formula">1 Lakh = 100,000 | 1 Crore = 10,000,000</div>
+      <div class="formula">Roman: I=1, V=5, X=10, L=50, C=100, D=500, M=1000</div>
+    </div>
+    <div class="box">
+      <b>3. Exercise 1.1 - Q1:</b> 1 లక్ష = _____ పది వేలు.<br>
+      <span class="btn" onclick="toggle(this)">Show Solution</span>
+      <div class="solution">1,00,000 ÷ 10,000 = 10.<br><b>జవాబు: 10</b></div>
+    </div>
+  </div>
 
-    /* Content Cards */
-    .card {
-      background: white;
-      border-radius: 10px;
-      padding: 20px;
-      margin-bottom: 20px;
-      border: 1px solid #cbd5e1;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
-    }
-    .card-title {
-      font-size: 17px;
-      color: #1e3a8a;
-      border-bottom: 2px solid #e2e8f0;
-      padding-bottom: 8px;
-      margin-bottom: 14px;
-      font-weight: bold;
-    }
+  <!-- Chapter 2 -->
+  <div class="card">
+    <div class="title">Chapter 2: Whole Numbers (పూర్ణాంకాలు)</div>
+    <div class="box">
+      <b>1. Introduction:</b> సహజ సంఖ్యలకు సున్నాను (0) చేర్చడం ద్వారా ఏర్పడే సంఖ్యా సముదాయాన్ని పూర్ణాంకాలు (W) అంటారు.
+    </div>
+    <div class="box">
+      <b>2. Formulas:</b>
+      <div class="formula">విభాగ న్యాయం (Distributive): a × (b + c) = (a × b) + (a × c)</div>
+    </div>
+    <div class="box">
+      <b>3. Exercise 2.1:</b> 12 × 35 ను విభాగ న్యాయం ద్వారా లెక్కించండి.<br>
+      <span class="btn" onclick="toggle(this)">Show Solution</span>
+      <div class="solution">12 × (30 + 5) = (12 × 30) + (12 × 5) = 360 + 60 = <b>420</b></div>
+    </div>
+  </div>
+</div>
 
-    /* Textbooks Section */
-    .book-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 14px;
-      background: #f8fafc;
-      border-radius: 6px;
-      margin-bottom: 10px;
-      border-left: 4px solid #0284c7;
-      flex-wrap: wrap;
-      gap: 8px;
+<script>
+  function toggle(btn) {
+    var sol = btn.nextElementSibling;
+    if (sol.style.display === "block") {
+      sol.style.display = "none";
+      btn.innerText = "Show Solution";
+    } else {
+      sol.style.display = "block";
+      btn.innerText = "Hide Solution";
     }
-    .badge {
-      font-size: 11px;
-      padding: 3px 8px;
-      border-radius: 4px;
-      color: white;
-      font-weight: bold;
-      margin-left: 6px;
-    }
-    .btn-link {
-      padding: 6px 14px;
-      background: #1e3a8a;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
-      font-size: 13px;
-      font-weight: bold;
-    }
+  }
+</script>
 
-    /* Chapter Structure */
-    .chapter-heading {
-      background: #e0f2fe;
-      color: #0369a1;
-      padding: 10px 14px;
-      border-radius: 6px;
-      font-size: 16px;
-      font-weight: bold;
-      margin-bottom: 14px;
-      border-left: 5px solid #0284c7;
-    }
-    .sec-tag {
-      font-size: 14px;
-      font-weight: bold;
-      color: #0284c7;
-      margin: 14px 0 6px 0;
-    }
-    .sec-body {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 6px;
-      padding: 12px 14px;
-      line-height: 1.7;
-      font-size: 14px;
-    }
-    .formula-tag {
-      background: #eff6ff;
-      border-left: 4px solid #2563eb;
-      padding: 8px 12px;
-      margin-top: 6px;
-      font-family: monospace;
-      font-size: 14px;
-      font-weight: bold;
-      border-radius: 4px;
-      color: #1e40af;
-    }
-
-    /* QA and Toggle Solution */
-    .qa-box {
-      background: white;
-      border: 1px solid #cbd5e1;
-      border-rad
+</body>
+</html>
