@@ -4,27 +4,49 @@
   <meta charset="UTF-8">
   <title>VidyaSetu: Maths Learning Hub</title>
   <style>
-    body { font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; background-color: #f4f6f9; }
+    body { font-family: 'Segoe UI', Tahoma, sans-serif; margin: 0; background-color: #f4f6f9; color: #333; }
     header { background-color: #1a252f; color: white; padding: 25px; text-align: center; }
     header h1 { margin: 0; font-size: 26px; }
     header p { margin: 5px 0 0; font-size: 14px; opacity: 0.8; }
-    .nav-bar { display: flex; justify-content: center; gap: 10px; margin: 20px 0; }
-    button { padding: 8px 18px; border: 1px solid #007bff; border-radius: 6px; cursor: pointer; background: white; font-weight: 500; }
-    button.active { background-color: #007bff; color: white; }
-    .container { max-width: 900px; margin: auto; padding: 0 20px 30px; }
-    .card { background: white; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.08); }
-    h3 { margin-top: 0; color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 8px; }
-    .formula-list { line-height: 1.8; }
+    
+    .nav-bar { display: flex; justify-content: center; gap: 10px; margin: 20px 0; flex-wrap: wrap; }
+    button.class-btn { padding: 9px 18px; border: 1px solid #007bff; border-radius: 6px; cursor: pointer; background: white; font-weight: 600; color: #007bff; transition: 0.2s; }
+    button.class-btn.active, button.class-btn:hover { background-color: #007bff; color: white; }
+    
+    .container { max-width: 950px; margin: auto; padding: 0 20px 40px; }
+    .card { background: white; border-radius: 8px; padding: 22px; margin-bottom: 22px; box-shadow: 0 2px 6px rgba(0,0,0,0.08); }
+    h3 { margin-top: 0; color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 10px; font-size: 18px; }
+    
+    /* Books Section */
+    .book-item { display: flex; justify-content: space-between; align-items: center; padding: 12px; background: #f8f9fa; border-radius: 6px; margin-bottom: 10px; }
+    .badge { font-size: 11px; padding: 3px 8px; border-radius: 4px; color: white; margin-left: 8px; font-weight: normal; }
+    .btn-link { padding: 6px 14px; background: #1a252f; color: white; text-decoration: none; border-radius: 4px; font-size: 13px; }
+    .btn-link:hover { background: #007bff; }
+    
+    /* Formulas Section */
+    .chapter-box { background: #fafbfc; border: 1px solid #e1e4e8; border-radius: 6px; padding: 12px 16px; margin-bottom: 12px; }
+    .chapter-title { font-weight: bold; color: #0056b3; margin-bottom: 6px; }
+    .chapter-box ul { margin: 0; padding-left: 20px; line-height: 1.7; font-size: 14px; }
+    
+    /* Quiz Section */
+    .quiz-question { font-weight: 600; font-size: 16px; margin-bottom: 12px; }
+    .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+    .option-btn { padding: 10px; border: 1px solid #ced4da; border-radius: 6px; background: white; cursor: pointer; text-align: left; font-size: 14px; transition: 0.2s; }
+    .option-btn:hover { background: #e9ecef; }
+    .option-btn.correct { background-color: #d4edda !important; border-color: #28a745 !important; color: #155724; font-weight: bold; }
+    .option-btn.wrong { background-color: #f8d7da !important; border-color: #dc3545 !important; color: #721c24; }
+    .quiz-feedback { font-size: 14px; font-weight: 600; min-height: 20px; }
   </style>
 </head>
 <body>
 
 <header>
   <h1>VidyaSetu: Maths Learning Hub</h1>
-  <p>Classes 6 to 10 Mathematics Portal</p>
+  <p>Classes 6 to 10 Mathematics Portal (SCERT & NCERT)</p>
 </header>
 
 <div class="container">
+  <!-- Class Selectors -->
   <div class="nav-bar">
     <button class="class-btn active" onclick="selectClass(6)">Class 6</button>
     <button class="class-btn" onclick="selectClass(7)">Class 7</button>
@@ -33,18 +55,21 @@
     <button class="class-btn" onclick="selectClass(10)">Class 10</button>
   </div>
 
+  <!-- Textbooks & Solutions -->
   <div class="card">
-    <h3>Official Reference Textbooks</h3>
+    <h3>Official Reference Textbooks & Solutions</h3>
     <div id="textbook-content">Loading...</div>
   </div>
 
+  <!-- Chapter-wise Formulas -->
   <div class="card">
-    <h3>Important Formulas & Key Concepts</h3>
-    <div id="formula-content" class="formula-list">Loading...</div>
+    <h3>Chapter-Wise Important Formulas</h3>
+    <div id="formula-content">Loading...</div>
   </div>
 
+  <!-- Interactive Quiz -->
   <div class="card">
-    <h3>Subject Smart Mini-Quiz</h3>
+    <h3>Interactive Mini-Quiz</h3>
     <div id="quiz-content">Loading...</div>
   </div>
 </div>
@@ -53,95 +78,149 @@
   const portalData = {
     6: {
       books: [
-        { name: "NCERT Class 6 Mathematics", link: "https://ncert.nic.in/textbook.php?femh1=0-14", type: "Textbook" },
-        { name: "SCERT Class 6 Maths (EM/TM)", link: "https://scert.telangana.gov.in/", type: "Textbook" },
-        { name: "Class 6 NCERT Solutions (All Chapters)", link: "https://www.learncbse.in/ncert-solutions-for-class-6-maths/", type: "Solutions" }
+        { name: "NCERT Class 6 Mathematics Textbook", link: "https://ncert.nic.in/textbook.php?femh1=0-14", type: "NCERT" },
+        { name: "SCERT Class 6 Mathematics Textbook", link: "https://scert.telangana.gov.in/", type: "SCERT" },
+        { name: "Class 6 Complete Chapter Solutions", link: "https://www.learncbse.in/ncert-solutions-for-class-6-maths/", type: "Solutions" }
       ],
-      formulas: [
-        "Perimeter of Rectangle = 2 × (Length + Breadth)",
-        "Area of Square = Side × Side",
-        "HCF × LCM = Product of Two Numbers"
+      chapters: [
+        { name: "1. Knowing Our Numbers", formulas: ["1 Lakh = 100,000", "1 Million = 1,000,000", "Roman Numerals: I=1, V=5, X=10, L=50, C=100, D=500, M=1000"] },
+        { name: "2. Mensuration", formulas: ["Perimeter of Rectangle = 2 × (Length + Breadth)", "Perimeter of Regular Hexagon = 6 × Side", "Area of Rectangle = Length × Breadth", "Area of Square = Side × Side"] }
       ],
-      quiz: "Q: What is the predecessor of 1000? <br> <b>A: 999</b>"
+      quiz: {
+        question: "What is the Roman numeral for 50?",
+        options: ["C", "D", "L", "M"],
+        answer: 2,
+        hint: "L represents 50, C represents 100."
+      }
     },
     7: {
       books: [
-        { name: "NCERT Class 7 Mathematics", link: "https://ncert.nic.in/textbook.php?gemh1=0-15", type: "Textbook" },
-        { name: "SCERT Class 7 Maths (EM/TM)", link: "https://scert.telangana.gov.in/", type: "Textbook" },
-        { name: "Class 7 NCERT Solutions (Step-by-Step)", link: "https://www.learncbse.in/ncert-solutions-for-class-7-maths/", type: "Solutions" }
+        { name: "NCERT Class 7 Mathematics Textbook", link: "https://ncert.nic.in/textbook.php?gemh1=0-15", type: "NCERT" },
+        { name: "SCERT Class 7 Mathematics Textbook", link: "https://scert.telangana.gov.in/", type: "SCERT" },
+        { name: "Class 7 Complete Chapter Solutions", link: "https://www.learncbse.in/ncert-solutions-for-class-7-maths/", type: "Solutions" }
       ],
-      formulas: [
-        "Simple Interest (I) = (P × T × R) / 100",
-        "Area of Triangle = 1/2 × Base × Height",
-        "Speed = Distance / Time"
+      chapters: [
+        { name: "1. Integers & Simple Equations", formulas: ["(-a) × (-b) = a × b", "Simple Interest (I) = (P × T × R) / 100", "Total Amount (A) = Principal (P) + Interest (I)"] },
+        { name: "2. Perimeter and Area", formulas: ["Area of Triangle = 1/2 × Base × Height", "Circumference of Circle = 2πr", "Area of Circle = πr² (where π ≈ 22/7)"] }
       ],
-      quiz: "Q: What is (-5) × (-4)? <br> <b>A: 20</b>"
+      quiz: {
+        question: "What is the value of (-12) × (-5)?",
+        options: ["-60", "60", "-17", "17"],
+        answer: 1,
+        hint: "Minus multiplied by minus is always positive."
+      }
     },
     8: {
       books: [
-        { name: "NCERT Class 8 Mathematics", link: "https://ncert.nic.in/textbook.php?hemh1=0-16", type: "Textbook" },
-        { name: "SCERT Class 8 Maths Textbook", link: "https://scert.telangana.gov.in/", type: "Textbook" },
-        { name: "Class 8 NCERT Solutions", link: "https://www.learncbse.in/ncert-solutions-for-class-8-maths/", type: "Solutions" }
+        { name: "NCERT Class 8 Mathematics Textbook", link: "https://ncert.nic.in/textbook.php?hemh1=0-16", type: "NCERT" },
+        { name: "SCERT Class 8 Mathematics Textbook", link: "https://scert.telangana.gov.in/", type: "SCERT" },
+        { name: "Class 8 Complete Chapter Solutions", link: "https://www.learncbse.in/ncert-solutions-for-class-8-maths/", type: "Solutions" }
       ],
-      formulas: [
-        "(a + b)² = a² + 2ab + b²",
-        "Volume of Cuboid = l × b × h",
-        "Compound Interest: A = P(1 + r/100)ⁿ"
+      chapters: [
+        { name: "1. Algebraic Identities", formulas: ["(a + b)² = a² + 2ab + b²", "(a - b)² = a² - 2ab + b²", "a² - b² = (a + b)(a - b)"] },
+        { name: "2. Mensuration", formulas: ["Area of Trapezium = 1/2 × (Sum of Parallel Sides) × Height", "Total Surface Area of Cylinder = 2πr(r + h)", "Volume of Cylinder = πr²h"] }
       ],
-      quiz: "Q: How many diagonals does a quadrilateral have? <br> <b>A: 2</b>"
+      quiz: {
+        question: "What is (x + 3)(x - 3) expanded?",
+        options: ["x² + 9", "x² - 6", "x² - 9", "2x - 6"],
+        answer: 2,
+        hint: "Using identity (a + b)(a - b) = a² - b²"
+      }
     },
     9: {
       books: [
-        { name: "NCERT Class 9 Mathematics", link: "https://ncert.nic.in/textbook.php?iemh1=0-15", type: "Textbook" },
-        { name: "SCERT Class 9 Maths Textbook", link: "https://scert.telangana.gov.in/", type: "Textbook" },
-        { name: "Class 9 NCERT Solutions & Theorems", link: "https://www.learncbse.in/ncert-solutions-for-class-9-maths/", type: "Solutions" }
+        { name: "NCERT Class 9 Mathematics Textbook", link: "https://ncert.nic.in/textbook.php?iemh1=0-15", type: "NCERT" },
+        { name: "SCERT Class 9 Mathematics Textbook", link: "https://scert.telangana.gov.in/", type: "SCERT" },
+        { name: "Class 9 Complete Chapter Solutions", link: "https://www.learncbse.in/ncert-solutions-for-class-9-maths/", type: "Solutions" }
       ],
-      formulas: [
-        "Heron's Formula: √[s(s-a)(s-b)(s-c)]",
-        "Surface Area of Sphere = 4πr²",
-        "Volume of Cone = 1/3 πr²h"
+      chapters: [
+        { name: "1. Heron's Formula", formulas: ["Area = √[s(s - a)(s - b)(s - c)]", "Semi-perimeter (s) = (a + b + c) / 2"] },
+        { name: "2. Surface Areas and Volumes", formulas: ["Curved Surface Area of Cone = πrl", "Total Surface Area of Sphere = 4πr²", "Volume of Sphere = 4/3 πr³"] }
       ],
-      quiz: "Q: What is the degree of a non-zero constant polynomial? <br> <b>A: 0</b>"
+      quiz: {
+        question: "What is the semi-perimeter (s) of a triangle with sides 6, 8, and 10?",
+        options: ["24", "12", "14", "10"],
+        answer: 1,
+        hint: "s = (6 + 8 + 10) / 2 = 24 / 2 = 12."
+      }
     },
     10: {
       books: [
-        { name: "NCERT Class 10 Mathematics", link: "https://ncert.nic.in/textbook.php?jemh1=0-15", type: "Textbook" },
-        { name: "SCERT Class 10 Maths (State Board)", link: "https://scert.telangana.gov.in/", type: "Textbook" },
-        { name: "Class 10 Board Solutions & Model Papers", link: "https://www.learncbse.in/ncert-solutions-for-class-10-maths/", type: "Solutions" }
+        { name: "NCERT Class 10 Mathematics Textbook", link: "https://ncert.nic.in/textbook.php?jemh1=0-15", type: "NCERT" },
+        { name: "SCERT Class 10 Mathematics Textbook", link: "https://scert.telangana.gov.in/", type: "SCERT" },
+        { name: "Class 10 Board Solutions & Guides", link: "https://www.learncbse.in/ncert-solutions-for-class-10-maths/", type: "Solutions" }
       ],
-      formulas: [
-        "Quadratic Formula: x = [-b ± √(b² - 4ac)] / 2a",
-        "Trigonometric Identity: sin²θ + cos²θ = 1",
-        "Distance Formula: √[(x₂ - x₁)² + (y₂ - y₁)²]"
+      chapters: [
+        { name: "1. Quadratic Equations & Progressions", formulas: ["Roots: x = [-b ± √(b² - 4ac)] / 2a", "nth term of AP: aₙ = a + (n - 1)d", "Sum of n terms: Sₙ = n/2 [2a + (n - 1)d]"] },
+        { name: "2. Trigonometry & Identities", formulas: ["sin²θ + cos²θ = 1", "sec²θ - tan²θ = 1", "cosec²θ - cot²θ = 1", "tanθ = sinθ / cosθ"] },
+        { name: "3. Coordinate Geometry", formulas: ["Distance = √[(x₂ - x₁)² + (y₂ - y₁)²]", "Section Formula: [(m₁x₂ + m₂x₁)/(m₁+m₂), (m₁y₂ + m₂y₁)/(m₁+m₂)]"] }
       ],
-      quiz: "Q: For which value of discriminant does an equation have real & equal roots? <br> <b>A: D = 0</b>"
+      quiz: {
+        question: "What is the value of sin²(30°) + cos²(30°)?",
+        options: ["0", "1/2", "1", "2"],
+        answer: 2,
+        hint: "Universal Identity: sin²θ + cos²θ = 1 for any angle θ."
+      }
     }
   };
 
   function renderClassData(grade) {
     const data = portalData[grade];
 
-    let booksHtml = '<div style="display: flex; flex-direction: column; gap: 10px;">';
+    // 1. Textbooks
+    let booksHtml = '';
     data.books.forEach(b => {
-      const badgeColor = b.type === "Solutions" ? "#28a745" : "#007bff";
+      const badgeColor = b.type === "Solutions" ? "#28a745" : (b.type === "SCERT" ? "#fd7e14" : "#007bff");
       booksHtml += `
-        <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px; background: #f8f9fa; border-radius: 6px; border-left: 4px solid ${badgeColor};">
+        <div class="book-item" style="border-left: 4px solid ${badgeColor};">
           <div>
             <strong>${b.name}</strong> 
-            <span style="font-size: 11px; background: ${badgeColor}; color: white; padding: 2px 6px; border-radius: 4px; margin-left: 8px;">${b.type}</span>
+            <span class="badge" style="background: ${badgeColor};">${b.type}</span>
           </div>
-          <a href="${b.link}" target="_blank" style="padding: 6px 12px; background: #1a252f; color: white; text-decoration: none; border-radius: 4px; font-size: 13px;">View / Download</a>
+          <a href="${b.link}" target="_blank" class="btn-link">Open</a>
         </div>`;
     });
-    booksHtml += '</div>';
     document.getElementById('textbook-content').innerHTML = booksHtml;
 
-    let formulasHtml = "<ul>";
-    data.formulas.forEach(f => { formulasHtml += `<li>${f}</li>`; });
-    formulasHtml += "</ul>";
+    // 2. Formulas
+    let formulasHtml = '';
+    data.chapters.forEach(ch => {
+      formulasHtml += `
+        <div class="chapter-box">
+          <div class="chapter-title">${ch.name}</div>
+          <ul>`;
+      ch.formulas.forEach(f => { formulasHtml += `<li>${f}</li>`; });
+      formulasHtml += `</ul></div>`;
+    });
     document.getElementById('formula-content').innerHTML = formulasHtml;
 
-    document.getElementById('quiz-content').innerHTML = `<p>${data.quiz}</p>`;
+    // 3. Quiz
+    let quizHtml = `
+      <div class="quiz-question">${data.quiz.question}</div>
+      <div class="options-grid">`;
+    data.quiz.options.forEach((opt, idx) => {
+      quizHtml += `<button class="option-btn" onclick="checkAnswer(this, ${idx}, ${data.quiz.answer}, '${data.quiz.hint}')">${opt}</button>`;
+    });
+    quizHtml += `</div><div id="feedback" class="quiz-feedback"></div>`;
+    document.getElementById('quiz-content').innerHTML = quizHtml;
+  }
+
+  function checkAnswer(btn, selectedIdx, correctIdx, hint) {
+    const parent = btn.parentElement;
+    const buttons = parent.querySelectorAll('.option-btn');
+    buttons.forEach(b => b.disabled = true); // Disable all buttons after choice
+
+    const feedback = document.getElementById('feedback');
+    if (selectedIdx === correctIdx) {
+      btn.classList.add('correct');
+      feedback.style.color = '#28a745';
+      feedback.innerHTML = `✓ Correct! ${hint}`;
+    } else {
+      btn.classList.add('wrong');
+      buttons[correctIdx].classList.add('correct');
+      feedback.style.color = '#dc3545';
+      feedback.innerHTML = `✗ Incorrect. ${hint}`;
+    }
   }
 
   function selectClass(grade) {
