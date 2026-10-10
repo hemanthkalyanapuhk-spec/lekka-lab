@@ -3,94 +3,70 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lekka Lab | Mathematics Hub</title>
+  <title>Lekka Lab | Class 6 Mathematics</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
-    body { background-color: #f1f5f9; color: #0f172a; padding-bottom: 50px; }
-    header { background: #1e3a8a; color: white; padding: 20px; text-align: center; }
+    body { background-color: #f1f5f9; color: #0f172a; padding-bottom: 60px; }
+    header { background: #1e3a8a; color: white; padding: 22px 16px; text-align: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
     header h1 { font-size: 22px; margin-bottom: 4px; }
     header p { font-size: 13px; opacity: 0.9; }
-    .container { max-width: 850px; margin: 15px auto; padding: 0 14px; }
-    .card { background: white; border-radius: 8px; padding: 16px; margin-bottom: 16px; border: 1px solid #cbd5e1; }
-    .title { font-size: 16px; color: #1e3a8a; font-weight: bold; margin-bottom: 10px; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; }
-    .box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 12px; margin-bottom: 10px; font-size: 14px; line-height: 1.6; }
-    .formula { background: #eff6ff; border-left: 4px solid #2563eb; padding: 8px 12px; margin-top: 6px; font-family: monospace; font-weight: bold; color: #1e40af; }
-    .btn { display: inline-block; padding: 6px 12px; background: #e2e8f0; border-radius: 4px; font-size: 12px; font-weight: bold; cursor: pointer; margin-top: 6px; }
-    .solution { display: none; margin-top: 8px; padding-top: 8px; border-top: 1px dashed #cbd5e1; font-size: 13px; color: #334155; }
+
+    .container { max-width: 850px; margin: 18px auto; padding: 0 14px; }
+
+    /* Quick Jump Navigation */
+    .nav-pills { background: white; border-radius: 8px; padding: 12px; margin-bottom: 16px; border: 1px solid #cbd5e1; display: flex; flex-wrap: wrap; gap: 8px; }
+    .nav-pills a { font-size: 12px; font-weight: 600; text-decoration: none; color: #1e3a8a; background: #e0f2fe; padding: 6px 10px; border-radius: 4px; border: 1px solid #bae6fd; }
+    .nav-pills a:hover { background: #1e3a8a; color: white; }
+
+    .card { background: white; border-radius: 8px; padding: 18px; margin-bottom: 18px; border: 1px solid #cbd5e1; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
+    .title { font-size: 17px; color: #1e3a8a; font-weight: bold; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; }
+    .box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 12px 14px; margin-bottom: 12px; font-size: 14px; line-height: 1.6; }
+    .formula { background: #eff6ff; border-left: 4px solid #2563eb; padding: 8px 12px; margin-top: 8px; font-family: monospace; font-weight: bold; color: #1e40af; border-radius: 2px; }
+    
+    .btn { display: inline-block; padding: 6px 12px; background: #e2e8f0; border-radius: 4px; font-size: 12px; font-weight: bold; cursor: pointer; margin-top: 8px; color: #334155; }
+    .btn:hover { background: #cbd5e1; }
+    .solution { display: none; margin-top: 8px; padding-top: 8px; border-top: 1px dashed #cbd5e1; font-size: 13px; color: #334155; line-height: 1.6; }
+    
     .link-btn { display: inline-block; padding: 6px 12px; background: #1e3a8a; color: white; text-decoration: none; border-radius: 4px; font-size: 12px; font-weight: bold; }
+    .link-btn:hover { background: #2563eb; }
   </style>
 </head>
 <body>
 
 <header>
   <h1>Lekka Lab: Mathematics Hub</h1>
-  <p>Class 6 Mathematics (Telangana SCERT &amp; NCERT)</p>
+  <p>Class 6 Mathematics • English Medium (Telangana SCERT &amp; NCERT)</p>
 </header>
 
 <div class="container">
-  <!-- Textbooks -->
-  <div class="card">
-    <div class="title">📚 Official Textbooks</div>
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-      <span><b>SCERT Telangana Class 6 Maths</b></span>
-      <a href="https://scert.telangana.gov.in/" target="_blank" class="link-btn">Download ↗</a>
+  <!-- Quick Navigation -->
+  <div class="nav-pills">
+    <a href="#books">📚 Textbooks</a>
+    <a href="#ch1">Ch 1: Numbers</a>
+    <a href="#ch2">Ch 2: Whole Numbers</a>
+    <a href="#ch3">Ch 3: Playing with Numbers</a>
+    <a href="#ch4">Ch 4: Integers</a>
+    <a href="#ch5">Ch 5: Fractions &amp; Decimals</a>
+    <a href="#ch6">Ch 6: Geometry</a>
+    <a href="#ch7">Ch 7: Mensuration</a>
+    <a href="#ch8">Ch 8: Algebra</a>
+  </div>
+
+  <!-- Official Textbooks -->
+  <div class="card" id="books">
+    <div class="title">📚 Official Prescribed Textbooks (English Medium)</div>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:8px;">
+      <span><b>Telangana SCERT Class 6 Mathematics Textbook</b></span>
+      <a href="https://scert.telangana.gov.in/" target="_blank" rel="noopener noreferrer" class="link-btn">Download ↗</a>
     </div>
-    <div style="display:flex; justify-content:space-between; align-items:center;">
-      <span><b>NCERT Class 6 Maths</b></span>
-      <a href="https://ncert.nic.in/textbook.php?femh1=0-14" target="_blank" class="link-btn">Download ↗</a>
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+      <span><b>NCERT Class 6 Mathematics Textbook</b></span>
+      <a href="https://ncert.nic.in/textbook.php?femh1=0-14" target="_blank" rel="noopener noreferrer" class="link-btn">Download ↗</a>
     </div>
   </div>
 
   <!-- Chapter 1 -->
-  <div class="card">
-    <div class="title">Chapter 1: Knowing Our Numbers (మన సంఖ్యలను తెలుసుకుందాం)</div>
+  <div class="card" id="ch1">
+    <div class="title">Chapter 1: Knowing Our Numbers</div>
     <div class="box">
-      <b>1. Introduction:</b> మనం నిత్యజీవితంలో సంఖ్యలను లెక్కింపు మరియు కొలతలకు ఉపయోగిస్తాం. పెద్ద సంఖ్యలు, స్థాన విలువలు మరియు రోమన్ సంఖ్యల గురించి ఇందులో నేర్చుకుంటాం.
-    </div>
-    <div class="box">
-      <b>2. Synopsis &amp; Formulas:</b><br>
-      • భారతీయ సంఖ్యామానం: కుడి నుండి 3 స్థానాల తర్వాత, ఆపై ప్రతి 2 స్థానాలకు కామా వస్తుంది.<br>
-      • అంతర్జాతీయ సంఖ్యామానం: కుడి నుండి ప్రతి 3 స్థానాలకు కామా వస్తుంది.
-      <div class="formula">1 Lakh = 100,000 | 1 Crore = 10,000,000</div>
-      <div class="formula">Roman: I=1, V=5, X=10, L=50, C=100, D=500, M=1000</div>
-    </div>
-    <div class="box">
-      <b>3. Exercise 1.1 - Q1:</b> 1 లక్ష = _____ పది వేలు.<br>
-      <span class="btn" onclick="toggle(this)">Show Solution</span>
-      <div class="solution">1,00,000 ÷ 10,000 = 10.<br><b>జవాబు: 10</b></div>
-    </div>
-  </div>
-
-  <!-- Chapter 2 -->
-  <div class="card">
-    <div class="title">Chapter 2: Whole Numbers (పూర్ణాంకాలు)</div>
-    <div class="box">
-      <b>1. Introduction:</b> సహజ సంఖ్యలకు సున్నాను (0) చేర్చడం ద్వారా ఏర్పడే సంఖ్యా సముదాయాన్ని పూర్ణాంకాలు (W) అంటారు.
-    </div>
-    <div class="box">
-      <b>2. Formulas:</b>
-      <div class="formula">విభాగ న్యాయం (Distributive): a × (b + c) = (a × b) + (a × c)</div>
-    </div>
-    <div class="box">
-      <b>3. Exercise 2.1:</b> 12 × 35 ను విభాగ న్యాయం ద్వారా లెక్కించండి.<br>
-      <span class="btn" onclick="toggle(this)">Show Solution</span>
-      <div class="solution">12 × (30 + 5) = (12 × 30) + (12 × 5) = 360 + 60 = <b>420</b></div>
-    </div>
-  </div>
-</div>
-
-<script>
-  function toggle(btn) {
-    var sol = btn.nextElementSibling;
-    if (sol.style.display === "block") {
-      sol.style.display = "none";
-      btn.innerText = "Show Solution";
-    } else {
-      sol.style.display = "block";
-      btn.innerText = "Hide Solution";
-    }
-  }
-</script>
-
-</body>
-</html>
+      <b>1. Introduction:</b> Numbers help us count objects, represent quantities, and make comparisons. In this chap
