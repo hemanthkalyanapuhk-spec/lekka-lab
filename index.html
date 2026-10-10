@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lekka Lab: Mathematics Textbooks</title>
+  <title>Lekka Lab: Textbooks</title>
   <style>
     * {
       box-sizing: border-box;
@@ -44,7 +44,7 @@
       padding: 0 16px;
     }
 
-    /* CSS Radio Tabs */
+    /* PURE CSS TAB CONTROLLERS */
     input[type="radio"].tab-toggle {
       display: none;
     }
@@ -71,7 +71,7 @@
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
     }
 
-    /* Active Tab Buttons */
+    /* Active Tab Colors */
     #tab-scert:checked ~ .tab-nav label[for="tab-scert"] {
       background: #ea580c;
       color: white;
@@ -86,7 +86,7 @@
       box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
     }
 
-    /* Tab Panes */
+    /* Tab Content Visibility */
     .tab-content {
       display: none;
     }
@@ -99,7 +99,7 @@
       display: block;
     }
 
-    /* Portal Card */
+    /* Card Layout */
     .portal-card {
       background: white;
       border-radius: 12px;
@@ -124,8 +124,9 @@
       color: #64748b;
     }
 
+    /* Download Buttons */
     .download-btn {
-      padding: 10px 20px;
+      padding: 10px 22px;
       color: white;
       text-decoration: none;
       border-radius: 6px;
@@ -146,17 +147,17 @@
 <body>
 
 <header>
-  <h1>Lekka Lab: Mathematics Hub</h1>
-  <p>Official Mathematics Textbooks Portal</p>
+  <h1>Lekka Lab: Textbooks Hub</h1>
+  <p>Official Textbooks Portal</p>
 </header>
 
 <div class="container">
 
-  <!-- Radio controllers for pure CSS tabs -->
+  <!-- Radio controllers for CSS tabs -->
   <input type="radio" name="board_tab" id="tab-scert" class="tab-toggle" checked>
   <input type="radio" name="board_tab" id="tab-ncert" class="tab-toggle">
 
-  <!-- Two Tabs Only -->
+  <!-- Two Tabs -->
   <div class="tab-nav">
     <label for="tab-scert" class="tab-label">SCERT Textbooks</label>
     <label for="tab-ncert" class="tab-label">NCERT Textbooks</label>
@@ -166,8 +167,8 @@
   <div id="content-scert" class="tab-content">
     <div class="portal-card" style="border-left: 5px solid #ea580c;">
       <div class="portal-info">
-        <h3>SCERT Mathematics Textbooks</h3>
-        <p>Download official State Board Mathematics e-books</p>
+        <h3>SCERT Textbooks</h3>
+        <p>Download official State Board e-textbooks</p>
       </div>
       <a href="https://scert.telangana.gov.in/" target="_blank" rel="noopener noreferrer" class="download-btn btn-scert">Download ↗</a>
     </div>
@@ -175,4 +176,4 @@
 
   <!-- NCERT TAB -->
   <div id="content-ncert" class="tab-content">
-    <div class="p
+    <div class="portal-c
