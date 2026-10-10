@@ -1,67 +1,94 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lekka Lab | School Learning Hub</title>
-<style>
-:root{--blue:#1746a2;--blue-light:#3275e8;--bg:#f4f7fc;--border:#e1e8f2;--text:#17243b}
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--text)}
-header{background:white;padding:15px 5%;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--border)}
-.brand{font-size:24px;font-weight:bold;color:var(--blue);cursor:pointer}
-nav{display:flex;gap:8px;flex-wrap:wrap}
-button,a{cursor:pointer}
-button{border:0;border-radius:9px;padding:11px 15px;background:#eaf0ff;color:var(--blue);font-weight:bold;transition:0.2s}
-button:hover{background:#d6e3ff}
-main{max-width:1100px;margin:auto;padding:22px 16px}
+<section id="textbook-library">
+  <h2>📚 Complete Textbook Library</h2>
+  <p>Access textbooks for Classes 1–12 in English medium where available.</p>
 
-/* Hero Section */
-.hero{background:linear-gradient(120deg,#12377f,#3275e8);color:white;border-radius:20px;padding:32px;margin-bottom:25px}
-.hero h1{font-size:clamp(26px,4vw,40px);margin:8px 0}
-.hero p{line-height:1.7}
-.hero button{background:white;color:var(--blue);margin-top:10px}
+  <label for="textClass">Select Class</label>
+  <select id="textClass">
+    <option value="1">Class 1</option>
+    <option value="2">Class 2</option>
+    <option value="3">Class 3</option>
+    <option value="4">Class 4</option>
+    <option value="5">Class 5</option>
+    <option value="6">Class 6</option>
+    <option value="7">Class 7</option>
+    <option value="8">Class 8</option>
+    <option value="9">Class 9</option>
+    <option value="10" selected>Class 10</option>
+    <option value="11">Class 11</option>
+    <option value="12">Class 12</option>
+  </select>
 
-/* Filters & Layout */
-.filter-box{background:white;padding:18px;border-radius:14px;border:1px solid var(--border);margin-bottom:20px;display:flex;gap:20px;flex-wrap:wrap;align-items:center}
-.filter-box label{font-weight:bold;font-size:14px;color:var(--blue);display:block;margin-bottom:6px}
-.filter-group{display:flex;gap:8px;flex-wrap:wrap}
-.pill{padding:8px 16px;border-radius:20px;border:1px solid var(--border);background:white;font-weight:bold;font-size:14px;color:#475569}
-.pill.active{background:var(--blue);color:white;border-color:var(--blue)}
+  <label for="textBoard">Select Board</label>
+  <select id="textBoard">
+    <option value="SCERT">Telangana SCERT</option>
+    <option value="NCERT">NCERT</option>
+  </select>
 
-.grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));gap:14px}
-.card{background:white;border:1px solid var(--border);border-radius:14px;padding:18px;cursor:pointer;transition:0.2s}
-.card:hover{transform:translateY(-2px);border-color:var(--blue)}
-.card span{font-size:28px;display:block;margin-bottom:8px}
+  <button onclick="openTextbooks()">Find Textbooks →</button>
 
-/* Detail View */
-.hidden{display:none}
-.view-panel{background:white;padding:24px;border-radius:14px;border:1px solid var(--border);margin-top:15px;line-height:1.7}
-.breadcrumb{margin-bottom:15px;font-size:14px;color:#555}
-.breadcrumb span{color:var(--blue);font-weight:bold;cursor:pointer}
-.sec-title{color:var(--blue);border-bottom:2px solid var(--bg);padding-bottom:6px;margin:22px 0 10px 0;font-size:17px;font-weight:bold}
-.box{background:#f8fafc;border-left:4px solid var(--blue);padding:14px;border-radius:6px;margin-bottom:12px;font-size:15px}
-.formula-item{background:#eef4ff;padding:10px 14px;border-radius:6px;font-family:monospace;font-size:15px;font-weight:bold;margin:6px 0;border:1px solid #d0e0fc;color:#1e3a8a}
-.qa-item{background:white;border:1px solid var(--border);padding:14px;border-radius:8px;margin-top:10px}
+  <div id="textbookResults" class="grid subjects"
+       style="margin-top:20px"></div>
+</section>
 
-footer{text-align:center;padding:25px;background:white;color:#65738a;font-size:13px;border-top:1px solid var(--border);margin-top:40px}
-</style>
-</head>
-<body>
+<script>
+function openTextbooks() {
+  const cls = document.getElementById("textClass").value;
+  const board = document.getElementById("textBoard").value;
+  const results = document.getElementById("textbookResults");
 
-<header>
-  <div class="brand" onclick="goHome()">📘 Lekka Lab</div>
-  <nav>
-    <button onclick="goHome()">Home</button>
-    <button onclick="quickSubject('Mathematics')">Maths</button>
-    <button onclick="quickOfficial()">Official Textbooks</button>
-  </nav>
-</header>
+  const links = board === "NCERT"
+    ? [
+        {
+          title: "NCERT Chapter-wise PDFs",
+          description: "Find textbooks and individual chapter PDFs.",
+          url: "https://ncert.nic.in/textbook.php"
+        },
+        {
+          title: "ePathshala",
+          description: "Explore digital textbooks and learning materials.",
+          url: "https://epathshala.nic.in/"
+        },
+        {
+          title: "DIKSHA",
+          description: "Explore digital school learning resources.",
+          url: "https://diksha.gov.in/"
+        }
+      ]
+    : [
+        {
+          title: "Telangana SCERT Textbooks",
+          description: "Open the official Telangana e-textbook section.",
+          url: "https://scert.telangana.gov.in/EBooks.aspx"
+        },
+        {
+          title: "Telangana SCERT Website",
+          description: "Explore official curriculum and education resources.",
+          url: "https://scert.telangana.gov.in/"
+        },
+        {
+          title: "DIKSHA",
+          description: "Explore available digital learning materials.",
+          url: "https://diksha.gov.in/"
+        }
+      ];
 
-<main>
-  <!-- Home Page View -->
-  <section id="homePage">
-    <div class="hero">
-      <p>CLASSES 6–10 · ENGLISH MEDIUM CURRICULUM</p>
-      <h1>Learn Better. Score Higher.</h1>
-      <p>Chapter introductions,r
+  results.innerHTML = `
+    <div class="card" style="grid-column:1/-1">
+      <h3>${board} · Class ${cls}</h3>
+      <p>Choose an official resource below. Select Class ${cls},
+      English medium and your subject on the source website
+      wherever these options are available.</p>
+    </div>
+    ${links.map(item => `
+      <div class="card">
+        <h3>${item.title}</h3>
+        <p>${item.description}</p>
+        <a href="${item.url}" target="_blank" rel="noopener">
+          Open resource ↗
+        </a>
+      </div>
+    `).join("")}
+  `;
+}
+openTextbooks();
+</script>
