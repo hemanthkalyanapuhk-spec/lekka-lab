@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>VidyaSetu - All-in-One School Learning App</title>
   <style>
-    :root { --primary: #2563eb; --secondary: #0f172a; --bg: #f8fafc; --card-bg: #ffffff; --accent: #10b981; }
+    :root { --primary: #2563eb; --secondary: #0f172a; --bg: #f8fafc; --card-bg: #ffffff; --accent: #10b981; --warn: #f59e0b; }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
     body { background-color: var(--bg); color: #334155; line-height: 1.6; }
     header { background: var(--secondary); color: white; padding: 1.5rem; text-align: center; }
@@ -22,13 +22,16 @@
     .solution-item h4 { color: var(--primary); margin-bottom: 0.3rem; }
     .step-box { background: white; padding: 0.6rem; border-left: 4px solid var(--primary); margin-top: 0.4rem; font-family: monospace; font-size: 0.9rem; }
     .tool-box input { padding: 0.5rem; border: 1px solid #cbd5e1; border-radius: 4px; margin-right: 0.5rem; }
-    .tool-box button { padding: 0.5rem 1rem; background: var(--primary); color: white; border: none; border-radius: 4px; cursor: pointer; }
+    .tool-box button, .quiz-box button { padding: 0.5rem 1rem; background: var(--primary); color: white; border: none; border-radius: 4px; cursor: pointer; }
+    .quiz-option { display: block; margin: 0.5rem 0; padding: 0.5rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; cursor: pointer; text-align: left; width: 100%; }
+    .quiz-option:hover { background: #e2e8f0; }
+    .formula-list { background: #fffbeb; border-left: 4px solid var(--warn); padding: 1rem; border-radius: 6px; }
   </style>
 </head>
 <body>
   <header>
     <h1>VidyaSetu: English Medium School Portal</h1>
-    <p>Free Textbooks, Maths Step-by-Step Solutions & Tools (Classes 6-10)</p>
+    <p>Free Textbooks, Maths Step-by-Step Solutions & Live Quizzes (Classes 6-10)</p>
   </header>
   <div class="container">
     <div class="class-tabs">
@@ -38,11 +41,27 @@
       <button class="tab-btn" onclick="loadClass(9)">Class 9</button>
       <button class="tab-btn" onclick="loadClass(10)">Class 10</button>
     </div>
+
+    <!-- Official Textbook Links -->
     <div class="card">
       <h2 id="textbook-title">Official Mathematics Textbooks</h2>
-      <p>Download authentic textbooks directly from official education portals:</p>
       <div id="textbook-links" style="margin-top: 0.8rem; display: flex; gap: 1rem; flex-wrap: wrap;"></div>
     </div>
+
+    <!-- Formula Sheet Card -->
+    <div class="card">
+      <h2>Important Formula Cheat Sheet</h2>
+      <div id="formula-container" class="formula-list"></div>
+    </div>
+
+    <!-- Interactive Quiz Card -->
+    <div class="card">
+      <h2>Daily Maths Mini-Quiz</h2>
+      <div id="quiz-container" class="quiz-box"></div>
+      <p id="quiz-feedback" style="margin-top: 0.8rem; font-weight: bold;"></p>
+    </div>
+
+    <!-- Quick Maths Tool -->
     <div class="card">
       <h2>Quick Maths Tool: Prime Factor & HCF Helper</h2>
       <div class="tool-box">
@@ -51,6 +70,8 @@
         <p id="factorOutput" style="margin-top: 0.5rem; font-weight: bold; color: var(--primary);"></p>
       </div>
     </div>
+
+    <!-- Maths Chapter Solutions -->
     <div class="card">
       <h2 id="solutions-title">Class Maths Solutions (Step-by-Step)</h2>
       <div id="solutions-container"></div>
@@ -61,41 +82,65 @@
       6: {
         tsLink: "https://telangana.gov.in",
         ncertLink: "https://ncert.nic.in",
+        formulas: "• Area of Rectangle = Length × Breadth<br>• Perimeter of Square = 4 × Side<br>• Smallest Whole Number = 0",
+        quiz: { q: "What is the HCF of 12 and 18?", options: ["2", "3", "6", "12"], ans: "6" },
         solutions: [
-          { chapter: "Chapter 1: Knowing Our Numbers", problem: "Exercise 1.1 - Write numeral: 'Seventy-three lakh seventy-five thousand three hundred seven'", steps: "1. Lakhs: 73 | Thousands: 75 | Ones: 307\nAnswer = 73,75,307" },
+          { chapter: "Chapter 1: Knowing Our Numbers", problem: "Write numeral: 'Seventy-three lakh seventy-five thousand three hundred seven'", steps: "1. Lakhs: 73 | Thousands: 75 | Ones: 307\nAnswer = 73,75,307" },
           { chapter: "Chapter 2: Whole Numbers", problem: "Find 12 × 35 using Distributive Property.", steps: "12 × (30 + 5) = (12 × 30) + (12 × 5) = 360 + 60\nAnswer = 420" }
         ]
       },
       7: {
         tsLink: "https://telangana.gov.in", ncertLink: "https://ncert.nic.in",
+        formulas: "• Product of two negative integers is always Positive.<br>• Probability of a certain event = 1",
+        quiz: { q: "Evaluate: (-10) + (-5)", options: ["-15", "-5", "5", "15"], ans: "-15" },
         solutions: [{ chapter: "Chapter 1: Integers", problem: "Evaluate: (-30) ÷ 10", steps: "- (30 / 10) = -3\nAnswer = -3" }]
       },
       8: {
         tsLink: "https://telangana.gov.in", ncertLink: "https://ncert.nic.in",
+        formulas: "• Linear Equation highest power = 1<br>• Sum of interior angles of a quadrilateral = 360°",
+        quiz: { q: "Solve for x: 3x = 15", options: ["3", "5", "12", "45"], ans: "5" },
         solutions: [{ chapter: "Chapter 2: Linear Equations", problem: "Solve: 2x - 3 = 7", steps: "2x = 7 + 3 => 2x = 10 => x = 5\nAnswer = 5" }]
       },
       9: {
         tsLink: "https://telangana.gov.in", ncertLink: "https://ncert.nic.in",
+        formulas: "• Area of Triangle (Heron's Formula) = √[s(s-a)(s-b)(s-c)]<br>• Linear Equation in two variables has infinitely many solutions.",
+        quiz: { q: "Is √2 a rational or irrational number?", options: ["Rational", "Irrational", "Whole number", "Integer"], ans: "Irrational" },
         solutions: [{ chapter: "Chapter 1: Number Systems", problem: "Find a rational number between 1 and 2.", steps: "Mean = (1 + 2) / 2 = 3/2 = 1.5\nAnswer = 3/2" }]
       },
       10: {
         tsLink: "https://telangana.gov.inpdf/publication/ebooks2019/xth%20maths%20em.pdf",
         ncertLink: "https://ncert.nic.in",
+        formulas: "• Euclid's Lemma: a = bq + r (0 ≤ r < b)<br>• Quadratic Formula: x = [-b ± √(b² - 4ac)] / 2a",
+        quiz: { q: "If the discriminant (b² - 4ac) is zero, the roots are:", options: ["Real and Equal", "Real and Distinct", "Imaginary", "No roots"], ans: "Real and Equal" },
         solutions: [
           { chapter: "Chapter 1: Real Numbers", problem: "Find HCF of 135 and 225.", steps: "225 = 135×1 + 90\n135 = 90×1 + 45\n90 = 45×2 + 0\nAnswer: HCF = 45" },
           { chapter: "Chapter 3: Polynomials", problem: "Find zeroes of x² + 7x + 10.", steps: "x² + 5x + 2x + 10 = 0 => (x + 2)(x + 5) = 0\nAnswer: Zeroes are -2 and -5" }
         ]
       }
     };
+
+    let currentCorrectAns = "";
+
     function loadClass(classNum) {
       document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-      if(event) event.target.classList.add('active');
+      if(event && event.target) event.target.classList.add('active');
       const data = classData[classNum];
+      
       document.getElementById('textbook-title').innerText = `Class ${classNum} Official Textbooks`;
       document.getElementById('textbook-links').innerHTML = `
         <a class="btn-link" href="${data.tsLink}" target="_blank">TS SCERT Class ${classNum} PDF</a>
         <a class="btn-link" href="${data.ncertLink}" target="_blank" style="background:#4338ca;">NCERT Portal</a>
       `;
+
+      document.getElementById('formula-container').innerHTML = data.formulas;
+
+      document.getElementById('quiz-feedback').innerText = "";
+      currentCorrectAns = data.quiz.ans;
+      document.getElementById('quiz-container').innerHTML = `
+        <p style="margin-bottom:0.5rem;"><strong>Question:</strong> ${data.quiz.q}</p>
+        ${data.quiz.options.map(opt => `<button class="quiz-option" onclick="checkQuizAnswer('${opt}')">${opt}</button>`).join('')}
+      `;
+
       document.getElementById('solutions-title').innerText = `Class ${classNum} Maths Solutions`;
       document.getElementById('solutions-container').innerHTML = data.solutions.map(sol => `
         <div class="solution-item">
@@ -105,14 +150,19 @@
         </div>
       `).join('');
     }
+
+    function checkQuizAnswer(selected) {
+      const fb = document.getElementById('quiz-feedback');
+      if(selected === currentCorrectAns) {
+        fb.innerText = "🎉 Correct Answer! Good Job.";
+        fb.style.color = "var(--accent)";
+      } else {
+        fb.innerText = `❌ Incorrect. Try again! (Hint: Correct answer is ${currentCorrectAns})`;
+        fb.style.color = "red";
+      }
+    }
+
     function findFactors() {
       const num = parseInt(document.getElementById('numInput').value);
       if (!num || num <= 0) { document.getElementById('factorOutput').innerText = "Enter a positive number."; return; }
       let factors = [];
-      for (let i = 1; i <= num; i++) { if (num % i === 0) factors.push(i); }
-      document.getElementById('factorOutput').innerText = `Factors of ${num}: ${factors.join(', ')}`;
-    }
-    loadClass(6);
-  </script>
-</body>
-</html>
