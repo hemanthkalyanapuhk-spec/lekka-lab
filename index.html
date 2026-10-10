@@ -5,81 +5,174 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lekka Lab: Mathematics Textbooks</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: sans-serif; }
-    body { background-color: #f1f5f9; padding: 20px; text-align: center; color: #0f172a; }
-    header { background: #1e3a8a; color: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
-    h1 { font-size: 22px; margin-bottom: 6px; }
-    p { font-size: 14px; opacity: 0.9; }
-    
-    .container { max-width: 600px; margin: 0 auto; }
-    
-    /* Native CSS Tabs */
-    input[type="radio"] { display: none; }
-    .tabs { display: flex; gap: 10px; margin-bottom: 20px; }
-    label { flex: 1; padding: 12px; background: white; border: 2px solid #cbd5e1; border-radius: 6px; font-weight: bold; cursor: pointer; }
-    
-    #tab1:checked ~ .tabs label[for="tab1"] { background: #ea580c; color: white; border-color: #ea580c; }
-    #tab2:checked ~ .tabs label[for="tab2"] { background: #0284c7; color: white; border-color: #0284c7; }
-    
-    .pane { display: none; }
-    #tab1:checked ~ #scert-pane { display: block; }
-    #tab2:checked ~ #ncert-pane { display: block; }
-    
-    .card { background: white; border: 1px solid #cbd5e1; border-radius: 8px; padding: 16px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
-    .card span { font-weight: bold; font-size: 15px; }
-    .btn { padding: 8px 16px; background: #1e3a8a; color: white; text-decoration: none; border-radius: 4px; font-size: 13px; font-weight: bold; }
-    .btn:hover { opacity: 0.9; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    body {
+      background-color: #f8fafc;
+      color: #0f172a;
+      padding-bottom: 60px;
+    }
+
+    header {
+      background: linear-gradient(135deg, #1e3a8a, #0284c7);
+      color: white;
+      padding: 28px 16px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+    }
+
+    header h1 {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 6px;
+    }
+
+    header p {
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 32px auto;
+      padding: 0 16px;
+    }
+
+    /* CSS Radio Tabs */
+    input[type="radio"].tab-toggle {
+      display: none;
+    }
+
+    .tab-nav {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .tab-label {
+      flex: 1;
+      text-align: center;
+      padding: 14px 16px;
+      background: white;
+      border: 2px solid #cbd5e1;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      user-select: none;
+      color: #475569;
+      transition: all 0.2s ease;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+
+    /* Active Tab Buttons */
+    #tab-scert:checked ~ .tab-nav label[for="tab-scert"] {
+      background: #ea580c;
+      color: white;
+      border-color: #ea580c;
+      box-shadow: 0 4px 12px rgba(234, 88, 12, 0.25);
+    }
+
+    #tab-ncert:checked ~ .tab-nav label[for="tab-ncert"] {
+      background: #0284c7;
+      color: white;
+      border-color: #0284c7;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
+    }
+
+    /* Tab Panes */
+    .tab-content {
+      display: none;
+    }
+
+    #tab-scert:checked ~ #content-scert {
+      display: block;
+    }
+
+    #tab-ncert:checked ~ #content-ncert {
+      display: block;
+    }
+
+    /* Portal Card */
+    .portal-card {
+      background: white;
+      border-radius: 12px;
+      padding: 24px 20px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .portal-info h3 {
+      font-size: 17px;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+
+    .portal-info p {
+      font-size: 13px;
+      color: #64748b;
+    }
+
+    .download-btn {
+      padding: 10px 20px;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 700;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+
+    .download-btn:hover {
+      opacity: 0.9;
+    }
+
+    .btn-scert { background: #ea580c; }
+    .btn-ncert { background: #0284c7; }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <header>
-      <h1>Lekka Lab: Mathematics Hub</h1>
-      <p>Official Mathematics Textbooks • Classes 6 to 10</p>
-    </header>
+<header>
+  <h1>Lekka Lab: Mathematics Hub</h1>
+  <p>Official Mathematics Textbooks Portal</p>
+</header>
 
-    <input type="radio" name="board" id="tab1" checked>
-    <input type="radio" name="board" id="tab2">
+<div class="container">
 
-    <div class="tabs">
-      <label for="tab1">SCERT Textbooks</label>
-      <label for="tab2">NCERT Textbooks</label>
+  <!-- Radio controllers for pure CSS tabs -->
+  <input type="radio" name="board_tab" id="tab-scert" class="tab-toggle" checked>
+  <input type="radio" name="board_tab" id="tab-ncert" class="tab-toggle">
+
+  <!-- Two Tabs Only -->
+  <div class="tab-nav">
+    <label for="tab-scert" class="tab-label">SCERT Textbooks</label>
+    <label for="tab-ncert" class="tab-label">NCERT Textbooks</label>
+  </div>
+
+  <!-- SCERT TAB -->
+  <div id="content-scert" class="tab-content">
+    <div class="portal-card" style="border-left: 5px solid #ea580c;">
+      <div class="portal-info">
+        <h3>SCERT Mathematics Textbooks</h3>
+        <p>Download official State Board Mathematics e-books</p>
+      </div>
+      <a href="https://scert.telangana.gov.in/" target="_blank" rel="noopener noreferrer" class="download-btn btn-scert">Download ↗</a>
     </div>
+  </div>
 
-    <!-- SCERT Section -->
-    <div id="scert-pane" class="pane">
-      <div class="card" style="border-left: 5px solid #ea580c;">
-        <span>Class 6 Mathematics (SCERT)</span>
-        <a href="https://scert.telangana.gov.in/" target="_blank" rel="noopener noreferrer" class="btn">Download ↗</a>
-      </div>
-      <div class="card" style="border-left: 5px solid #ea580c;">
-        <span>Class 7 Mathematics (SCERT)</span>
-        <a href="https://scert.telangana.gov.in/" target="_blank" rel="noopener noreferrer" class="btn">Download ↗</a>
-      </div>
-      <div class="card" style="border-left: 5px solid #ea580c;">
-        <span>Class 8 Mathematics (SCERT)</span>
-        <a href="https://scert.telangana.gov.in/" target="_blank" rel="noopener noreferrer" class="btn">Download ↗</a>
-      </div>
-      <div class="card" style="border-left: 5px solid #ea580c;">
-        <span>Class 9 Mathematics (SCERT)</span>
-        <a href="https://scert.telangana.gov.in/" target="_blank" rel="noopener noreferrer" class="btn">Download ↗</a>
-      </div>
-      <div class="card" style="border-left: 5px solid #ea580c;">
-        <span>Class 10 Mathematics (SCERT)</span>
-        <a href="https://scert.telangana.gov.in/" target="_blank" rel="noopener noreferrer" class="btn">Download ↗</a>
-      </div>
-    </div>
-
-    <!-- NCERT Section -->
-    <div id="ncert-pane" class="pane">
-      <div class="card" style="border-left: 5px solid #0284c7;">
-        <span>Class 6 Mathematics (NCERT)</span>
-        <a href="https://ncert.nic.in/textbook.php?femh1=0-14" target="_blank" rel="noopener noreferrer" class="btn">Download ↗</a>
-      </div>
-      <div class="card" style="border-left: 5px solid #0284c7;">
-        <span>Class 7 Mathematics (NCERT)</span>
-        <a href="https://ncert.nic.in/textbook.php?gemh1=0-15" target="_blank" rel="noopener noreferrer" class="btn">Download ↗</a>
-      </div>
-      <div class="card" style="border-left: 5px solid #0284c7;">
-        <span>Class 8 Ma
+  <!-- NCERT TAB -->
+  <div id="content-ncert" class="tab-content">
+    <div class="p
