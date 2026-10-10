@@ -18,62 +18,79 @@
     header h1 { font-size: 24px; margin-bottom: 4px; }
     header p { font-size: 13px; opacity: 0.9; }
 
-    .container { max-width: 800px; margin: 20px auto; padding: 0 16px; }
+    .container { max-width: 800px; margin: 24px auto; padding: 0 16px; }
 
-    .class-card {
+    /* Two Main Tabs */
+    .tab-bar {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .tab-btn {
+      flex: 1;
+      max-width: 250px;
+      padding: 12px 20px;
+      border: 2px solid #1e3a8a;
+      background: white;
+      color: #1e3a8a;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+    .tab-btn.active {
+      background: #1e3a8a;
+      color: white;
+    }
+
+    /* Tab Panes */
+    .tab-pane { display: none; }
+    .tab-pane.active { display: block; }
+
+    /* Content Cards */
+    .book-card {
       background: white;
       border-radius: 8px;
-      padding: 18px;
-      margin-bottom: 16px;
+      padding: 16px 20px;
+      margin-bottom: 12px;
       border: 1px solid #cbd5e1;
       box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-    }
-    .class-title {
-      font-size: 17px;
-      color: #1e3a8a;
-      font-weight: bold;
-      border-bottom: 2px solid #e2e8f0;
-      padding-bottom: 8px;
-      margin-bottom: 14px;
-    }
-
-    .book-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 12px;
-      background: #f8fafc;
-      border-radius: 6px;
-      margin-bottom: 8px;
-      border-left: 4px solid #0284c7;
       flex-wrap: wrap;
-      gap: 10px;
+      gap: 12px;
     }
-    .book-name {
-      font-size: 14px;
+    .book-info {
+      font-size: 15px;
       font-weight: 600;
       color: #1e293b;
     }
     .badge {
       font-size: 11px;
-      padding: 2px 7px;
+      padding: 3px 8px;
       border-radius: 4px;
       color: white;
-      font-weight: bold;
-      margin-left: 6px;
+      font-weight: 700;
+      margin-left: 8px;
     }
+    .badge-scert { background: #ea580c; }
+    .badge-ncert { background: #0284c7; }
 
     .download-btn {
-      padding: 7px 16px;
+      padding: 8px 18px;
       background: #1e3a8a;
       color: white;
       text-decoration: none;
-      border-radius: 4px;
+      border-radius: 5px;
       font-size: 13px;
-      font-weight: bold;
+      font-weight: 600;
       transition: background 0.2s;
     }
-    .download-btn:hover { background: #0284c7; }
+    .download-btn:hover { background: #2563eb; }
   </style>
 </head>
 <body>
@@ -85,38 +102,22 @@
 
 <div class="container">
 
-  <!-- Class 6 -->
-  <div class="class-card">
-    <div class="class-title">📖 Class 6 Mathematics</div>
-    <div class="book-row">
-      <div class="book-name">Telangana SCERT Class 6 Mathematics<span class="badge" style="background:#f97316;">SCERT</span></div>
-      <a href="https://scert.telangana.gov.in/" target="_blank" rel="noopener noreferrer" class="download-btn">Download ↗</a>
-    </div>
-    <div class="book-row">
-      <div class="book-name">NCERT Class 6 Mathematics Textbook<span class="badge" style="background:#0284c7;">NCERT</span></div>
-      <a href="https://ncert.nic.in/textbook.php?femh1=0-14" target="_blank" rel="noopener noreferrer" class="download-btn">Download ↗</a>
-    </div>
+  <!-- Two Main Category Tabs -->
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="switchBoard('scert', this)">SCERT Textbooks</button>
+    <button class="tab-btn" onclick="switchBoard('ncert', this)">NCERT Textbooks</button>
   </div>
 
-  <!-- Class 7 -->
-  <div class="class-card">
-    <div class="class-title">📖 Class 7 Mathematics</div>
-    <div class="book-row">
-      <div class="book-name">Telangana SCERT Class 7 Mathematics<span class="badge" style="background:#f97316;">SCERT</span></div>
+  <!-- SCERT TAB PANE -->
+  <div id="pane-scert" class="tab-pane active">
+    <div class="book-card" style="border-left: 4px solid #ea580c;">
+      <div class="book-info">Class 6 Mathematics<span class="badge badge-scert">SCERT</span></div>
       <a href="https://scert.telangana.gov.in/" target="_blank" rel="noopener noreferrer" class="download-btn">Download ↗</a>
     </div>
-    <div class="book-row">
-      <div class="book-name">NCERT Class 7 Mathematics Textbook<span class="badge" style="background:#0284c7;">NCERT</span></div>
-      <a href="https://ncert.nic.in/textbook.php?gemh1=0-15" target="_blank" rel="noopener noreferrer" class="download-btn">Download ↗</a>
-    </div>
-  </div>
 
-  <!-- Class 8 -->
-  <div class="class-card">
-    <div class="class-title">📖 Class 8 Mathematics</div>
-    <div class="book-row">
-      <div class="book-name">Telangana SCERT Class 8 Mathematics<span class="badge" style="background:#f97316;">SCERT</span></div>
+    <div class="book-card" style="border-left: 4px solid #ea580c;">
+      <div class="book-info">Class 7 Mathematics<span class="badge badge-scert">SCERT</span></div>
       <a href="https://scert.telangana.gov.in/" target="_blank" rel="noopener noreferrer" class="download-btn">Download ↗</a>
     </div>
-    <div class="book-row">
-      <div class="book-name">NCERT Class 8 Mathematics Textbook<span class="badge"
+
+    <div class="
