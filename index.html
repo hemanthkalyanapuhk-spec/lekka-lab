@@ -3,70 +3,120 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lekka Lab | Class 6 Mathematics</title>
+  <title>Lekka Lab: Mathematics Textbooks</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
-    body { background-color: #f1f5f9; color: #0f172a; padding-bottom: 60px; }
-    header { background: #1e3a8a; color: white; padding: 22px 16px; text-align: center; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-    header h1 { font-size: 22px; margin-bottom: 4px; }
+    body { background-color: #f1f5f9; color: #0f172a; padding-bottom: 50px; }
+    
+    header {
+      background: #1e3a8a;
+      color: white;
+      padding: 24px 16px;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    header h1 { font-size: 24px; margin-bottom: 4px; }
     header p { font-size: 13px; opacity: 0.9; }
 
-    .container { max-width: 850px; margin: 18px auto; padding: 0 14px; }
+    .container { max-width: 800px; margin: 20px auto; padding: 0 16px; }
 
-    /* Quick Jump Navigation */
-    .nav-pills { background: white; border-radius: 8px; padding: 12px; margin-bottom: 16px; border: 1px solid #cbd5e1; display: flex; flex-wrap: wrap; gap: 8px; }
-    .nav-pills a { font-size: 12px; font-weight: 600; text-decoration: none; color: #1e3a8a; background: #e0f2fe; padding: 6px 10px; border-radius: 4px; border: 1px solid #bae6fd; }
-    .nav-pills a:hover { background: #1e3a8a; color: white; }
+    .class-card {
+      background: white;
+      border-radius: 8px;
+      padding: 18px;
+      margin-bottom: 16px;
+      border: 1px solid #cbd5e1;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .class-title {
+      font-size: 17px;
+      color: #1e3a8a;
+      font-weight: bold;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 8px;
+      margin-bottom: 14px;
+    }
 
-    .card { background: white; border-radius: 8px; padding: 18px; margin-bottom: 18px; border: 1px solid #cbd5e1; box-shadow: 0 1px 3px rgba(0,0,0,0.04); }
-    .title { font-size: 17px; color: #1e3a8a; font-weight: bold; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; }
-    .box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 12px 14px; margin-bottom: 12px; font-size: 14px; line-height: 1.6; }
-    .formula { background: #eff6ff; border-left: 4px solid #2563eb; padding: 8px 12px; margin-top: 8px; font-family: monospace; font-weight: bold; color: #1e40af; border-radius: 2px; }
-    
-    .btn { display: inline-block; padding: 6px 12px; background: #e2e8f0; border-radius: 4px; font-size: 12px; font-weight: bold; cursor: pointer; margin-top: 8px; color: #334155; }
-    .btn:hover { background: #cbd5e1; }
-    .solution { display: none; margin-top: 8px; padding-top: 8px; border-top: 1px dashed #cbd5e1; font-size: 13px; color: #334155; line-height: 1.6; }
-    
-    .link-btn { display: inline-block; padding: 6px 12px; background: #1e3a8a; color: white; text-decoration: none; border-radius: 4px; font-size: 12px; font-weight: bold; }
-    .link-btn:hover { background: #2563eb; }
+    .book-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 12px;
+      background: #f8fafc;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      border-left: 4px solid #0284c7;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .book-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1e293b;
+    }
+    .badge {
+      font-size: 11px;
+      padding: 2px 7px;
+      border-radius: 4px;
+      color: white;
+      font-weight: bold;
+      margin-left: 6px;
+    }
+
+    .download-btn {
+      padding: 7px 16px;
+      background: #1e3a8a;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 13px;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+    .download-btn:hover { background: #0284c7; }
   </style>
 </head>
 <body>
 
 <header>
   <h1>Lekka Lab: Mathematics Hub</h1>
-  <p>Class 6 Mathematics • English Medium (Telangana SCERT &amp; NCERT)</p>
+  <p>Official Mathematics Textbooks • Classes 6 to 10 (English Medium)</p>
 </header>
 
 <div class="container">
-  <!-- Quick Navigation -->
-  <div class="nav-pills">
-    <a href="#books">📚 Textbooks</a>
-    <a href="#ch1">Ch 1: Numbers</a>
-    <a href="#ch2">Ch 2: Whole Numbers</a>
-    <a href="#ch3">Ch 3: Playing with Numbers</a>
-    <a href="#ch4">Ch 4: Integers</a>
-    <a href="#ch5">Ch 5: Fractions &amp; Decimals</a>
-    <a href="#ch6">Ch 6: Geometry</a>
-    <a href="#ch7">Ch 7: Mensuration</a>
-    <a href="#ch8">Ch 8: Algebra</a>
-  </div>
 
-  <!-- Official Textbooks -->
-  <div class="card" id="books">
-    <div class="title">📚 Official Prescribed Textbooks (English Medium)</div>
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:8px;">
-      <span><b>Telangana SCERT Class 6 Mathematics Textbook</b></span>
-      <a href="https://scert.telangana.gov.in/" target="_blank" rel="noopener noreferrer" class="link-btn">Download ↗</a>
+  <!-- Class 6 -->
+  <div class="class-card">
+    <div class="class-title">📖 Class 6 Mathematics</div>
+    <div class="book-row">
+      <div class="book-name">Telangana SCERT Class 6 Mathematics<span class="badge" style="background:#f97316;">SCERT</span></div>
+      <a href="https://scert.telangana.gov.in/" target="_blank" rel="noopener noreferrer" class="download-btn">Download ↗</a>
     </div>
-    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
-      <span><b>NCERT Class 6 Mathematics Textbook</b></span>
-      <a href="https://ncert.nic.in/textbook.php?femh1=0-14" target="_blank" rel="noopener noreferrer" class="link-btn">Download ↗</a>
+    <div class="book-row">
+      <div class="book-name">NCERT Class 6 Mathematics Textbook<span class="badge" style="background:#0284c7;">NCERT</span></div>
+      <a href="https://ncert.nic.in/textbook.php?femh1=0-14" target="_blank" rel="noopener noreferrer" class="download-btn">Download ↗</a>
     </div>
   </div>
 
-  <!-- Chapter 1 -->
-  <div class="card" id="ch1">
-    <div class="title">Chapter 1: Knowing Our Numbers</div>
-    <div class="box">
-      <b>1. Introduction:</b> Numbers help us count objects, represent quantities, and make comparisons. In this chap
+  <!-- Class 7 -->
+  <div class="class-card">
+    <div class="class-title">📖 Class 7 Mathematics</div>
+    <div class="book-row">
+      <div class="book-name">Telangana SCERT Class 7 Mathematics<span class="badge" style="background:#f97316;">SCERT</span></div>
+      <a href="https://scert.telangana.gov.in/" target="_blank" rel="noopener noreferrer" class="download-btn">Download ↗</a>
+    </div>
+    <div class="book-row">
+      <div class="book-name">NCERT Class 7 Mathematics Textbook<span class="badge" style="background:#0284c7;">NCERT</span></div>
+      <a href="https://ncert.nic.in/textbook.php?gemh1=0-15" target="_blank" rel="noopener noreferrer" class="download-btn">Download ↗</a>
+    </div>
+  </div>
+
+  <!-- Class 8 -->
+  <div class="class-card">
+    <div class="class-title">📖 Class 8 Mathematics</div>
+    <div class="book-row">
+      <div class="book-name">Telangana SCERT Class 8 Mathematics<span class="badge" style="background:#f97316;">SCERT</span></div>
+      <a href="https://scert.telangana.gov.in/" target="_blank" rel="noopener noreferrer" class="download-btn">Download ↗</a>
+    </div>
+    <div class="book-row">
+      <div class="book-name">NCERT Class 8 Mathematics Textbook<span class="badge"
