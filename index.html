@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lekka Lab: Textbooks</title>
+  <title>Lekka Lab: Textbooks Hub</title>
   <style>
     * {
       box-sizing: border-box;
@@ -15,7 +15,7 @@
     body {
       background-color: #f8fafc;
       color: #0f172a;
-      padding-bottom: 60px;
+      padding-bottom: 50px;
     }
 
     header {
@@ -24,6 +24,7 @@
       padding: 28px 16px;
       text-align: center;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+      margin-bottom: 30px;
     }
 
     header h1 {
@@ -39,71 +40,18 @@
     }
 
     .container {
-      max-width: 600px;
-      margin: 32px auto;
+      max-width: 620px;
+      margin: 0 auto;
       padding: 0 16px;
-    }
-
-    /* PURE CSS TAB CONTROLLERS */
-    input[type="radio"].tab-toggle {
-      display: none;
-    }
-
-    .tab-nav {
       display: flex;
-      gap: 12px;
-      margin-bottom: 24px;
+      flex-direction: column;
+      gap: 18px;
     }
 
-    .tab-label {
-      flex: 1;
-      text-align: center;
-      padding: 14px 16px;
-      background: white;
-      border: 2px solid #cbd5e1;
-      border-radius: 10px;
-      font-weight: 700;
-      font-size: 15px;
-      cursor: pointer;
-      user-select: none;
-      color: #475569;
-      transition: all 0.2s ease;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-    }
-
-    /* Active Tab Colors */
-    #tab-scert:checked ~ .tab-nav label[for="tab-scert"] {
-      background: #ea580c;
-      color: white;
-      border-color: #ea580c;
-      box-shadow: 0 4px 12px rgba(234, 88, 12, 0.25);
-    }
-
-    #tab-ncert:checked ~ .tab-nav label[for="tab-ncert"] {
-      background: #0284c7;
-      color: white;
-      border-color: #0284c7;
-      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
-    }
-
-    /* Tab Content Visibility */
-    .tab-content {
-      display: none;
-    }
-
-    #tab-scert:checked ~ #content-scert {
-      display: block;
-    }
-
-    #tab-ncert:checked ~ #content-ncert {
-      display: block;
-    }
-
-    /* Card Layout */
-    .portal-card {
+    .card {
       background: white;
       border-radius: 12px;
-      padding: 24px 20px;
+      padding: 22px 20px;
       border: 1px solid #e2e8f0;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
       display: flex;
@@ -113,67 +61,79 @@
       gap: 16px;
     }
 
-    .portal-info h3 {
-      font-size: 17px;
+    .card-scert {
+      border-left: 6px solid #ea580c;
+    }
+
+    .card-ncert {
+      border-left: 6px solid #0284c7;
+    }
+
+    .info h2 {
+      font-size: 18px;
       color: #0f172a;
+      font-weight: 700;
       margin-bottom: 4px;
     }
 
-    .portal-info p {
+    .info p {
       font-size: 13px;
       color: #64748b;
     }
 
-    /* Download Buttons */
-    .download-btn {
+    .btn {
+      display: inline-block;
       padding: 10px 22px;
-      color: white;
+      color: #ffffff;
       text-decoration: none;
       border-radius: 6px;
       font-size: 14px;
       font-weight: 700;
       white-space: nowrap;
-      transition: opacity 0.2s;
+      transition: opacity 0.2s ease;
     }
 
-    .download-btn:hover {
+    .btn:hover {
       opacity: 0.9;
     }
 
-    .btn-scert { background: #ea580c; }
-    .btn-ncert { background: #0284c7; }
+    .btn-scert {
+      background-color: #ea580c;
+    }
+
+    .btn-ncert {
+      background-color: #0284c7;
+    }
   </style>
 </head>
 <body>
 
-<header>
-  <h1>Lekka Lab: Textbooks Hub</h1>
-  <p>Official Textbooks Portal</p>
-</header>
+  <header>
+    <h1>Lekka Lab: Textbooks Hub</h1>
+    <p>Official Textbooks Download Portal</p>
+  </header>
 
-<div class="container">
+  <div class="container">
 
-  <!-- Radio controllers for CSS tabs -->
-  <input type="radio" name="board_tab" id="tab-scert" class="tab-toggle" checked>
-  <input type="radio" name="board_tab" id="tab-ncert" class="tab-toggle">
-
-  <!-- Two Tabs -->
-  <div class="tab-nav">
-    <label for="tab-scert" class="tab-label">SCERT Textbooks</label>
-    <label for="tab-ncert" class="tab-label">NCERT Textbooks</label>
-  </div>
-
-  <!-- SCERT TAB -->
-  <div id="content-scert" class="tab-content">
-    <div class="portal-card" style="border-left: 5px solid #ea580c;">
-      <div class="portal-info">
-        <h3>SCERT Textbooks</h3>
-        <p>Download official State Board e-textbooks</p>
+    <!-- SCERT Card -->
+    <div class="card card-scert">
+      <div class="info">
+        <h2>SCERT Textbooks</h2>
+        <p>Official Telangana State Board Textbooks</p>
       </div>
-      <a href="https://scert.telangana.gov.in/" target="_blank" rel="noopener noreferrer" class="download-btn btn-scert">Download ↗</a>
+      <a href="https://scert.telangana.gov.in/" target="_blank" rel="noopener noreferrer" class="btn btn-scert">Download ↗</a>
     </div>
+
+    <!-- NCERT Card -->
+    <div class="card card-ncert">
+      <div class="info">
+        <h2>NCERT Textbooks</h2>
+        <p>Official Central Board (NCERT) Textbooks</p>
+      </div>
+      <a href="https://ncert.nic.in/textbook.php" target="_blank" rel="noopener noreferrer" class="btn btn-ncert">Download ↗</a>
+    </div>
+
   </div>
 
-  <!-- NCERT TAB -->
-  <div id="content-ncert" class="tab-content">
-    <div class="portal-c
+</body>
+</html>
