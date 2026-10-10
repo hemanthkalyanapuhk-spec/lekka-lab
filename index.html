@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VidyaSetu - All-in-One School Learning App</title>
+  <style>
+    :root { --primary: #2563eb; --secondary: #0f172a; --bg: #f8fafc; --card-bg: #ffffff; --accent: #10b981; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+    body { background-color: var(--bg); color: #334155; line-height: 1.6; }
+    header { background: var(--secondary); color: white; padding: 1.5rem; text-align: center; }
+    header h1 { font-size: 1.8rem; margin-bottom: 0.3rem; }
+    header p { font-size: 0.95rem; opacity: 0.9; }
+    .container { max-width: 1000px; margin: 1.5rem auto; padding: 0 1rem; }
+    .class-tabs { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem; }
+    .tab-btn { padding: 0.6rem 1.2rem; border: 2px solid var(--primary); background: white; color: var(--primary); font-weight: bold; border-radius: 8px; cursor: pointer; transition: 0.2s; }
+    .tab-btn.active, .tab-btn:hover { background: var(--primary); color: white; }
+    .card { background: var(--card-bg); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+    .card h2 { color: var(--secondary); margin-bottom: 1rem; font-size: 1.3rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem; }
+    .btn-link { display: inline-block; background: var(--accent); color: white; text-decoration: none; padding: 0.6rem 1rem; border-radius: 6px; font-size: 0.9rem; font-weight: 600; margin-top: 0.5rem; }
+    .solution-item { margin-bottom: 1.2rem; padding: 0.8rem; background: #f1f5f9; border-radius: 8px; }
+    .solution-item h4 { color: var(--primary); margin-bottom: 0.3rem; }
+    .step-box { background: white; padding: 0.6rem; border-left: 4px solid var(--primary); margin-top: 0.4rem; font-family: monospace; font-size: 0.9rem; }
+    .tool-box input { padding: 0.5rem; border: 1px solid #cbd5e1; border-radius: 4px; margin-right: 0.5rem; }
+    .tool-box button { padding: 0.5rem 1rem; background: var(--primary); color: white; border: none; border-radius: 4px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>VidyaSetu: English Medium School Portal</h1>
+    <p>Free Textbooks, Maths Step-by-Step Solutions & Tools (Classes 6-10)</p>
+  </header>
+  <div class="container">
+    <div class="class-tabs">
+      <button class="tab-btn active" onclick="loadClass(6)">Class 6</button>
+      <button class="tab-btn" onclick="loadClass(7)">Class 7</button>
+      <button class="tab-btn" onclick="loadClass(8)">Class 8</button>
+      <button class="tab-btn" onclick="loadClass(9)">Class 9</button>
+      <button class="tab-btn" onclick="loadClass(10)">Class 10</button>
+    </div>
+    <div class="card">
+      <h2 id="textbook-title">Official Mathematics Textbooks</h2>
+      <p>Download authentic textbooks directly from official education portals:</p>
+      <div id="textbook-links" style="margin-top: 0.8rem; display: flex; gap: 1rem; flex-wrap: wrap;"></div>
+    </div>
+    <div class="card">
+      <h2>Quick Maths Tool: Prime Factor & HCF Helper</h2>
+      <div class="tool-box">
+        <input type="number" id="numInput" placeholder="Enter a number (e.g. 36)" />
+        <button onclick="findFactors()">Find Factors</button>
+        <p id="factorOutput" style="margin-top: 0.5rem; font-weight: bold; color: var(--primary);"></p>
+      </div>
+    </div>
+    <div class="card">
+      <h2 id="solutions-title">Class Maths Solutions (Step-by-Step)</h2>
+      <div id="solutions-container"></div>
+    </div>
+  </div>
+  <script>
+    const classData = {
+      6: {
+        tsLink: "https://telangana.gov.in",
+        ncertLink: "https://ncert.nic.in",
+        solutions: [
+          { chapter: "Chapter 1: Knowing Our Numbers", problem: "Exercise 1.1 - Write numeral: 'Seventy-three lakh seventy-five thousand three hundred seven'", steps: "1. Lakhs: 73 | Thousands: 75 | Ones: 307\nAnswer = 73,75,307" },
+          { chapter: "Chapter 2: Whole Numbers", problem: "Find 12 × 35 using Distributive Property.", steps: "12 × (30 + 5) = (12 × 30) + (12 × 5) = 360 + 60\nAnswer = 420" }
+        ]
+      },
+      7: {
+        tsLink: "https://telangana.gov.in", ncertLink: "https://ncert.nic.in",
+        solutions: [{ chapter: "Chapter 1: Integers", problem: "Evaluate: (-30) ÷ 10", steps: "- (30 / 10) = -3\nAnswer = -3" }]
+      },
+      8: {
+        tsLink: "https://telangana.gov.in", ncertLink: "https://ncert.nic.in",
+        solutions: [{ chapter: "Chapter 2: Linear Equations", problem: "Solve: 2x - 3 = 7", steps: "2x = 7 + 3 => 2x = 10 => x = 5\nAnswer = 5" }]
+      },
+      9: {
+        tsLink: "https://telangana.gov.in", ncertLink: "https://ncert.nic.in",
+        solutions: [{ chapter: "Chapter 1: Number Systems", problem: "Find a rational number between 1 and 2.", steps: "Mean = (1 + 2) / 2 = 3/2 = 1.5\nAnswer = 3/2" }]
+      },
+      10: {
+        tsLink: "https://telangana.gov.inpdf/publication/ebooks2019/xth%20maths%20em.pdf",
+        ncertLink: "https://ncert.nic.in",
+        solutions: [
+          { chapter: "Chapter 1: Real Numbers", problem: "Find HCF of 135 and 225.", steps: "225 = 135×1 + 90\n135 = 90×1 + 45\n90 = 45×2 + 0\nAnswer: HCF = 45" },
+          { chapter: "Chapter 3: Polynomials", problem: "Find zeroes of x² + 7x + 10.", steps: "x² + 5x + 2x + 10 = 0 => (x + 2)(x + 5) = 0\nAnswer: Zeroes are -2 and -5" }
+        ]
+      }
+    };
+    function loadClass(classNum) {
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      if(event) event.target.classList.add('active');
+      const data = classData[classNum];
+      document.getElementById('textbook-title').innerText = `Class ${classNum} Official Textbooks`;
+      document.getElementById('textbook-links').innerHTML = `
+        <a class="btn-link" href="${data.tsLink}" target="_blank">TS SCERT Class ${classNum} PDF</a>
+        <a class="btn-link" href="${data.ncertLink}" target="_blank" style="background:#4338ca;">NCERT Portal</a>
+      `;
+      document.getElementById('solutions-title').innerText = `Class ${classNum} Maths Solutions`;
+      document.getElementById('solutions-container').innerHTML = data.solutions.map(sol => `
+        <div class="solution-item">
+          <h4>${sol.chapter}</h4>
+          <p><strong>Problem:</strong> ${sol.problem}</p>
+          <div class="step-box"><strong>Solution:</strong><br>${sol.steps.replace(/\n/g, '<br>')}</div>
+        </div>
+      `).join('');
+    }
+    function findFactors() {
+      const num = parseInt(document.getElementById('numInput').value);
+      if (!num || num <= 0) { document.getElementById('factorOutput').innerText = "Enter a positive number."; return; }
+      let factors = [];
+      for (let i = 1; i <= num; i++) { if (num % i === 0) factors.push(i); }
+      document.getElementById('factorOutput').innerText = `Factors of ${num}: ${factors.join(', ')}`;
+    }
+    loadClass(6);
+  </script>
+</body>
+</html>
