@@ -23,8 +23,8 @@
     .content-item { margin-bottom: 1.2rem; padding: 0.8rem; background: #f1f5f9; border-radius: 8px; }
     .content-item h4 { color: var(--primary); margin-bottom: 0.3rem; }
     .step-box { background: white; padding: 0.6rem; border-left: 4px solid var(--primary); margin-top: 0.4rem; font-size: 0.95rem; }
-    .quiz-option { display: block; margin: 0.5rem 0; padding: 0.5rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; cursor: pointer; text-align: left; width: 100%; }
-    .quiz-option:hover { background: #e2e8f0; }
+    .quiz-option { display: inline-block; margin: 0.5rem 0.5rem 0 0; padding: 0.5rem 1rem; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; cursor: pointer; font-weight: 500; }
+    .quiz-option:hover { background: #cbd5e1; }
     .formula-list { background: #fffbeb; border-left: 4px solid var(--warn); padding: 1rem; border-radius: 6px; }
   </style>
 </head>
@@ -79,22 +79,22 @@
     const appData = {
       6: {
         maths: {
-          books: '<a class="btn-link" href="https://telangana.gov.in" target="_blank">TS SCERT Maths</a>',
+          books: '<a class="btn-link" href="https://telangana.gov.in" target="_blank">TS SCERT Class 6 Maths</a>',
           summary: "• Area of Rectangle = Length x Breadth<br>• Perimeter of Square = 4 x Side",
           quiz: { q: "What is the HCF of 12 and 18?", options: ["2", "3", "6", "12"], ans: "6" },
           topics: [{ chapter: "Chapter 1: Knowing Our Numbers", problem: "Write numeral for: Seventy-three lakh seventy-five thousand three hundred seven", steps: "Answer = 73,75,307" }]
         },
         science: {
           books: '<a class="btn-link" href="https://ncert.nic.in" target="_blank">NCERT Science Portal</a>',
-          summary: "• Herbivores: Animals that eat only plants.<br>• Balanced Diet: Contains all nutrients.",
+          summary: "• Herbivores: Animals that eat only plants.<br>• Balanced Diet: Contains all necessary nutrients.",
           quiz: { q: "Which vitamin deficiency causes Scurvy?", options: ["Vitamin A", "Vitamin B", "Vitamin C", "Vitamin D"], ans: "Vitamin C" },
-          topics: [{ chapter: "Chapter 1: Components of Food", problem: "Name the major nutrients.", steps: "Carbohydrates, Proteins, Fats, Vitamins, Minerals." }]
+          topics: [{ chapter: "Chapter 1: Components of Food", problem: "Name the major nutrients in our food.", steps: "Carbohydrates, Proteins, Fats, Vitamins, Minerals." }]
         },
         social: {
-          books: '<a class="btn-link" href="https://ncert.nic.in" target="_blank">NCERT Social Portal</a>',
+          books: '<a class="btn-link" href="https://ncert.nic.in" target="_blank">NCERT Geography Portal</a>',
           summary: "• Planet Earth is known as the Blue Planet.",
           quiz: { q: "Which planet is known as Earth Twin?", options: ["Mars", "Venus", "Jupiter"], ans: "Venus" },
-          topics: [{ chapter: "Chapter 1: Earth in Solar System", problem: "Why is Earth blue?", steps: "Because two-thirds surface is water." }]
+          topics: [{ chapter: "Chapter 1: Earth in Solar System", problem: "Why is Earth called blue planet?", steps: "Because two-thirds of its surface is covered with water." }]
         }
       },
       7: {
@@ -155,7 +155,3 @@
           summary: "• French Revolution started in 1789.",
           quiz: { q: "When did French Revolution start?", options: ["1779", "1789", "1799"], ans: "1789" },
           topics: [{ chapter: "Chapter 1: French Rev", problem: "National Assembly?", steps: "Formed by Third Estate." }]
-        }
-      },
-      10: {
-        maths: {
