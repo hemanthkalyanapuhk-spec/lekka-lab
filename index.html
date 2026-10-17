@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lekka Lab: Textbooks Hub</title>
+  <title>Lekka Lab: Educational Portal</title>
   <style>
     * {
       box-sizing: border-box;
@@ -15,7 +15,7 @@
     body {
       background-color: #f8fafc;
       color: #0f172a;
-      padding-bottom: 50px;
+      padding-bottom: 60px;
     }
 
     header {
@@ -24,7 +24,7 @@
       padding: 28px 16px;
       text-align: center;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
-      margin-bottom: 30px;
+      margin-bottom: 24px;
     }
 
     header h1 {
@@ -45,35 +45,31 @@
       padding: 0 16px;
       display: flex;
       flex-direction: column;
-      gap: 18px;
+      gap: 16px;
     }
 
+    /* Textbook Cards */
     .card {
       background: white;
       border-radius: 12px;
-      padding: 22px 20px;
+      padding: 18px 20px;
       border: 1px solid #e2e8f0;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 16px;
+      gap: 14px;
     }
 
-    .card-scert {
-      border-left: 6px solid #ea580c;
-    }
-
-    .card-ncert {
-      border-left: 6px solid #0284c7;
-    }
+    .card-scert { border-left: 6px solid #ea580c; }
+    .card-ncert { border-left: 6px solid #0284c7; }
 
     .info h2 {
-      font-size: 18px;
+      font-size: 17px;
       color: #0f172a;
       font-weight: 700;
-      margin-bottom: 4px;
+      margin-bottom: 3px;
     }
 
     .info p {
@@ -81,57 +77,215 @@
       color: #64748b;
     }
 
-    .btn {
+    .btn-download {
       display: inline-block;
-      padding: 10px 22px;
+      padding: 9px 20px;
       color: #ffffff;
       text-decoration: none;
       border-radius: 6px;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
       white-space: nowrap;
-      transition: opacity 0.2s ease;
     }
 
-    .btn:hover {
-      opacity: 0.9;
+    .btn-scert { background-color: #ea580c; }
+    .btn-ncert { background-color: #0284c7; }
+
+    /* Section Heading */
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1e293b;
+      margin-top: 10px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #e2e8f0;
     }
 
-    .btn-scert {
-      background-color: #ea580c;
+    /* Interactive Class Accordions */
+    details.class-box {
+      background: white;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
     }
 
-    .btn-ncert {
-      background-color: #0284c7;
+    details.class-box > summary {
+      background: #1e293b;
+      color: white;
+      padding: 14px 18px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      user-select: none;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    details.class-box > summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details.class-box > summary::after {
+      content: "▼";
+      font-size: 12px;
+      transition: transform 0.2s;
+    }
+
+    details.class-box[open] > summary::after {
+      transform: rotate(180deg);
+    }
+
+    .class-content {
+      padding: 14px;
+      background: #f8fafc;
+    }
+
+    /* Formative Assessment Dropdown */
+    details.fa-box {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    details.fa-box > summary {
+      background: #0284c7;
+      color: white;
+      padding: 12px 16px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    details.fa-box > summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details.fa-box > summary::after {
+      content: "▼";
+      font-size: 11px;
+      transition: transform 0.2s;
+    }
+
+    details.fa-box[open] > summary::after {
+      transform: rotate(180deg);
+    }
+
+    /* FA Buttons Grid */
+    .fa-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      padding: 14px;
+    }
+
+    .fa-btn {
+      display: block;
+      text-align: center;
+      background: #f1f5f9;
+      color: #0f172a;
+      text-decoration: none;
+      padding: 12px 8px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.15s ease;
+    }
+
+    .fa-btn:hover {
+      background: #0284c7;
+      color: white;
+      border-color: #0284c7;
     }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>Lekka Lab: Textbooks Hub</h1>
-    <p>Official Textbooks Download Portal</p>
+    <h1>Lekka Lab: Educational Portal</h1>
+    <p>Official Textbooks & Assessments</p>
   </header>
 
   <div class="container">
 
-    <!-- SCERT Card -->
+    <!-- Official Textbooks Section -->
     <div class="card card-scert">
       <div class="info">
         <h2>SCERT Textbooks</h2>
-        <p>Official Telangana State Board Textbooks</p>
+        <p>Official State Board Textbooks</p>
       </div>
-      <a href="https://scert.telangana.gov.in/" target="_blank" rel="noopener noreferrer" class="btn btn-scert">Download ↗</a>
+      <a href="https://scert.telangana.gov.in/" target="_blank" rel="noopener noreferrer" class="btn-download btn-scert">Download ↗</a>
     </div>
 
-    <!-- NCERT Card -->
     <div class="card card-ncert">
       <div class="info">
         <h2>NCERT Textbooks</h2>
-        <p>Official Central Board (NCERT) Textbooks</p>
+        <p>Official Central Board Textbooks</p>
       </div>
-      <a href="https://ncert.nic.in/textbook.php" target="_blank" rel="noopener noreferrer" class="btn btn-ncert">Download ↗</a>
+      <a href="https://ncert.nic.in/textbook.php" target="_blank" rel="noopener noreferrer" class="btn-download btn-ncert">Download ↗</a>
     </div>
+
+    <h2 class="section-title">Assessments</h2>
+
+    <!-- ================= CLASS 8 ================= -->
+    <details class="class-box">
+      <summary>Class 8</summary>
+      <div class="class-content">
+        <details class="fa-box">
+          <summary>Formative Assessment</summary>
+          <div class="fa-grid">
+            <!-- Replace "#" with your PDF link -->
+            <a href="#" target="_blank" class="fa-btn">FA 1 (PDF)</a>
+            <a href="#" target="_blank" class="fa-btn">FA 2 (PDF)</a>
+            <a href="#" target="_blank" class="fa-btn">FA 3 (PDF)</a>
+            <a href="#" target="_blank" class="fa-btn">FA 4 (PDF)</a>
+          </div>
+        </details>
+      </div>
+    </details>
+
+    <!-- ================= CLASS 9 ================= -->
+    <details class="class-box">
+      <summary>Class 9</summary>
+      <div class="class-content">
+        <details class="fa-box">
+          <summary>Formative Assessment</summary>
+          <div class="fa-grid">
+            <!-- Replace "#" with your PDF link -->
+            <a href="#" target="_blank" class="fa-btn">FA 1 (PDF)</a>
+            <a href="#" target="_blank" class="fa-btn">FA 2 (PDF)</a>
+            <a href="#" target="_blank" class="fa-btn">FA 3 (PDF)</a>
+            <a href="#" target="_blank" class="fa-btn">FA 4 (PDF)</a>
+          </div>
+        </details>
+      </div>
+    </details>
+
+    <!-- ================= CLASS 10 ================= -->
+    <details class="class-box">
+      <summary>Class 10</summary>
+      <div class="class-content">
+        <details class="fa-box">
+          <summary>Formative Assessment</summary>
+          <div class="fa-grid">
+            <!-- Replace "#" with your PDF link -->
+            <a href="#" target="_blank" class="fa-btn">FA 1 (PDF)</a>
+            <a href="#" target="_blank" class="fa-btn">FA 2 (PDF)</a>
+            <a href="#" target="_blank" class="fa-btn">FA 3 (PDF)</a>
+            <a href="#" target="_blank" class="fa-btn">FA 4 (PDF)</a>
+          </div>
+        </details>
+      </div>
+    </details>
 
   </div>
 
