@@ -172,12 +172,6 @@
       display: none;
     }
 
-    details.fa-wrapper > summary::after {
-      content: "▼";
-      font-size: 11px;
-      transition: transform 0.2s;
-    }
-
     details.fa-wrapper[open] > summary::after {
       transform: rotate(180deg);
     }
@@ -189,7 +183,7 @@
       gap: 10px;
     }
 
-    /* Nested FA1 Accordion */
+    /* Nested FA Accordions */
     details.fa-accordion {
       background: #ffffff;
       border: 1px solid #cbd5e1;
@@ -213,6 +207,10 @@
 
     details.fa-accordion > summary::-webkit-details-marker {
       display: none;
+    }
+
+    details.fa-accordion[open] > summary {
+      background: #0284c7;
     }
 
     details.fa-accordion > summary::after {
@@ -262,10 +260,17 @@
       font-size: 11px;
     }
 
-    .fa-grid {
+    .fa-grid-2 {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 10px;
+    }
+
+    .fa-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      padding: 12px;
     }
 
     .fa-grid-btn {
@@ -279,13 +284,6 @@
       border-radius: 6px;
       font-weight: 600;
       font-size: 13px;
-    }
-
-    .fa-grid-4 {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      padding: 12px;
     }
   </style>
 </head>
@@ -325,35 +323,46 @@
           <summary>Formative Assessment</summary>
           <div class="fa-container">
 
-            <!-- Clickable FA1 with exact order and verified links -->
-            <details class="fa-accordion" open>
+            <!-- FA 1 Accordion -->
+            <details class="fa-accordion">
               <summary>FA 1 (Tap to View Files)</summary>
               <div class="file-list">
-                
-                <!-- 1. Generating New Problems -->
                 <a href="FA-1%20Generating%20New%20Problems.pdf" download="FA-1_Generating_New_Problems.pdf" class="file-btn">
                   <span>📄 Generating New Problems</span>
                   <span class="dl-badge">Download 📥</span>
                 </a>
-
-                <!-- 2. Project Work -->
                 <a href="Class%208%20FA1%20Project.pdf" download="Class_8_FA1_Project.pdf" class="file-btn">
                   <span>📄 Project Work</span>
                   <span class="dl-badge">Download 📥</span>
                 </a>
-
-                <!-- 3. Slip Test -->
                 <a href="FA-1%20Slip%20Test.pdf" download="FA-1_Slip_Test.pdf" class="file-btn">
                   <span>📄 Slip Test</span>
                   <span class="dl-badge">Download 📥</span>
                 </a>
-
               </div>
             </details>
 
-            <!-- Other FA buttons -->
-            <div class="fa-grid">
-              <a href="#" class="fa-grid-btn">FA 2</a>
+            <!-- FA 2 Accordion -->
+            <details class="fa-accordion">
+              <summary>FA 2 (Tap to View Files)</summary>
+              <div class="file-list">
+                <a href="class8%20fa2-generating%20new-problems.pdf" download="Class8_FA2_Generating_Problems.pdf" class="file-btn">
+                  <span>📄 Generating New Problems</span>
+                  <span class="dl-badge">Download 📥</span>
+                </a>
+                <a href="class8-fa2-project.pdf" download="Class8_FA2_Project.pdf" class="file-btn">
+                  <span>📄 Project Work</span>
+                  <span class="dl-badge">Download 📥</span>
+                </a>
+                <a href="class8-fa2-slip-test.pdf" download="Class8_FA2_Slip_Test.pdf" class="file-btn">
+                  <span>📄 Slip Test</span>
+                  <span class="dl-badge">Download 📥</span>
+                </a>
+              </div>
+            </details>
+
+            <!-- Remaining FA Buttons (FA 3, FA 4) -->
+            <div class="fa-grid-2">
               <a href="#" class="fa-grid-btn">FA 3</a>
               <a href="#" class="fa-grid-btn">FA 4</a>
             </div>
