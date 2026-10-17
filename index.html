@@ -141,17 +141,20 @@
     .class-content {
       padding: 14px;
       background: #f8fafc;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
 
-    /* Formative Assessment Dropdown */
-    details.fa-box {
+    /* Formative Assessment Box */
+    details.fa-wrapper {
       background: white;
       border: 1px solid #e2e8f0;
       border-radius: 8px;
       overflow: hidden;
     }
 
-    details.fa-box > summary {
+    details.fa-wrapper > summary {
       background: #0284c7;
       color: white;
       padding: 12px 16px;
@@ -165,46 +168,124 @@
       align-items: center;
     }
 
-    details.fa-box > summary::-webkit-details-marker {
+    details.fa-wrapper > summary::-webkit-details-marker {
       display: none;
     }
 
-    details.fa-box > summary::after {
+    details.fa-wrapper > summary::after {
       content: "▼";
       font-size: 11px;
       transition: transform 0.2s;
     }
 
-    details.fa-box[open] > summary::after {
+    details.fa-wrapper[open] > summary::after {
       transform: rotate(180deg);
     }
 
-    /* FA Buttons Grid */
-    .fa-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
+    .fa-container {
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
       gap: 10px;
-      padding: 14px;
     }
 
-    .fa-btn {
-      display: block;
-      text-align: center;
-      background: #f1f5f9;
-      color: #0f172a;
-      text-decoration: none;
-      padding: 12px 8px;
+    /* Nested FA1 Accordion */
+    details.fa-accordion {
+      background: #ffffff;
       border: 1px solid #cbd5e1;
       border-radius: 6px;
-      font-weight: 600;
+      overflow: hidden;
+    }
+
+    details.fa-accordion > summary {
+      background: #0ea5e9;
+      color: white;
+      padding: 12px 14px;
       font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      user-select: none;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    details.fa-accordion > summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details.fa-accordion > summary::after {
+      content: "▼";
+      font-size: 11px;
+      transition: transform 0.2s;
+    }
+
+    details.fa-accordion[open] > summary::after {
+      transform: rotate(180deg);
+    }
+
+    .file-list {
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      background: #f1f5f9;
+    }
+
+    .file-btn {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: white;
+      color: #0f172a;
+      text-decoration: none;
+      padding: 10px 14px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
       transition: all 0.15s ease;
     }
 
-    .fa-btn:hover {
+    .file-btn:hover {
+      background: #e0f2fe;
+      border-color: #0284c7;
+      color: #0369a1;
+    }
+
+    .dl-badge {
       background: #0284c7;
       color: white;
-      border-color: #0284c7;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+    }
+
+    .fa-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .fa-grid-btn {
+      display: block;
+      text-align: center;
+      background: #f8fafc;
+      color: #475569;
+      text-decoration: none;
+      padding: 10px 4px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    .fa-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      padding: 12px;
     }
   </style>
 </head>
@@ -237,17 +318,39 @@
     <h2 class="section-title">Assessments</h2>
 
     <!-- ================= CLASS 8 ================= -->
-    <details class="class-box">
+    <details class="class-box" open>
       <summary>Class 8</summary>
       <div class="class-content">
-        <details class="fa-box">
+        <details class="fa-wrapper" open>
           <summary>Formative Assessment</summary>
-          <div class="fa-grid">
-            <!-- Replace "#" with your PDF link -->
-            <a href="#" target="_blank" class="fa-btn">FA 1 (PDF)</a>
-            <a href="#" target="_blank" class="fa-btn">FA 2 (PDF)</a>
-            <a href="#" target="_blank" class="fa-btn">FA 3 (PDF)</a>
-            <a href="#" target="_blank" class="fa-btn">FA 4 (PDF)</a>
+          <div class="fa-container">
+
+            <!-- Clickable FA1 to reveal the 3 files -->
+            <details class="fa-accordion">
+              <summary>FA 1 (Tap to View Files)</summary>
+              <div class="file-list">
+                <a href="FA-1%20Slip%20Test.pdf" download class="file-btn">
+                  <span>📄 FA-1 Slip Test</span>
+                  <span class="dl-badge">Download 📥</span>
+                </a>
+                <a href="FA-1%20Generating%20New%20Problems.pdf" download class="file-btn">
+                  <span>📄 FA-1 Generating New Problems</span>
+                  <span class="dl-badge">Download 📥</span>
+                </a>
+                <a href="Class%208%20FA1%20Number%20System%20Projects.pdf" download class="file-btn">
+                  <span>📄 FA-1 Number System Project</span>
+                  <span class="dl-badge">Download 📥</span>
+                </a>
+              </div>
+            </details>
+
+            <!-- Other FA buttons -->
+            <div class="fa-grid">
+              <a href="#" class="fa-grid-btn">FA 2</a>
+              <a href="#" class="fa-grid-btn">FA 3</a>
+              <a href="#" class="fa-grid-btn">FA 4</a>
+            </div>
+
           </div>
         </details>
       </div>
@@ -257,14 +360,13 @@
     <details class="class-box">
       <summary>Class 9</summary>
       <div class="class-content">
-        <details class="fa-box">
+        <details class="fa-wrapper">
           <summary>Formative Assessment</summary>
-          <div class="fa-grid">
-            <!-- Replace "#" with your PDF link -->
-            <a href="#" target="_blank" class="fa-btn">FA 1 (PDF)</a>
-            <a href="#" target="_blank" class="fa-btn">FA 2 (PDF)</a>
-            <a href="#" target="_blank" class="fa-btn">FA 3 (PDF)</a>
-            <a href="#" target="_blank" class="fa-btn">FA 4 (PDF)</a>
+          <div class="fa-grid-4">
+            <a href="#" class="fa-grid-btn">FA 1</a>
+            <a href="#" class="fa-grid-btn">FA 2</a>
+            <a href="#" class="fa-grid-btn">FA 3</a>
+            <a href="#" class="fa-grid-btn">FA 4</a>
           </div>
         </details>
       </div>
@@ -274,14 +376,13 @@
     <details class="class-box">
       <summary>Class 10</summary>
       <div class="class-content">
-        <details class="fa-box">
+        <details class="fa-wrapper">
           <summary>Formative Assessment</summary>
-          <div class="fa-grid">
-            <!-- Replace "#" with your PDF link -->
-            <a href="#" target="_blank" class="fa-btn">FA 1 (PDF)</a>
-            <a href="#" target="_blank" class="fa-btn">FA 2 (PDF)</a>
-            <a href="#" target="_blank" class="fa-btn">FA 3 (PDF)</a>
-            <a href="#" target="_blank" class="fa-btn">FA 4 (PDF)</a>
+          <div class="fa-grid-4">
+            <a href="#" class="fa-grid-btn">FA 1</a>
+            <a href="#" class="fa-grid-btn">FA 2</a>
+            <a href="#" class="fa-grid-btn">FA 3</a>
+            <a href="#" class="fa-grid-btn">FA 4</a>
           </div>
         </details>
       </div>
