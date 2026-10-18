@@ -187,25 +187,36 @@
     /* Container */
     .container {
       max-width: 640px;
-      margin: 20px auto 0;
+      margin: 16px auto 0;
       padding: 0 16px;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 14px;
     }
 
-    /* Cards */
+    /* Adjusted Compact Textbook Cards */
+    .textbooks-wrapper {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    @media (min-width: 480px) {
+      .textbooks-wrapper {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+    }
+
     .card {
       background: var(--card-bg);
-      border-radius: 14px;
-      padding: 18px 20px;
+      border-radius: 12px;
+      padding: 12px 14px;
       border: 1px solid var(--card-border);
       box-shadow: var(--card-shadow);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 14px;
       position: relative;
       overflow: hidden;
     }
@@ -216,7 +227,7 @@
       left: 0;
       top: 0;
       bottom: 0;
-      width: 5px;
+      width: 4px;
     }
 
     .card-scert::before { background: linear-gradient(to bottom, #ea580c, #f97316); }
@@ -224,27 +235,30 @@
 
     .info h2 {
       font-family: 'Playfair Display', serif;
-      font-size: 17.5px;
+      font-size: 15px;
       color: var(--text-heading);
       font-weight: 700;
       margin-bottom: 2px;
+      line-height: 1.2;
     }
 
     .info p {
-      font-size: 13px;
+      font-size: 11.5px;
       color: var(--text-muted);
+      line-height: 1.2;
     }
 
     .btn-download {
       display: inline-block;
-      padding: 9px 18px;
+      padding: 6px 12px;
       color: #ffffff;
       text-decoration: none;
-      border-radius: 8px;
-      font-size: 13px;
+      border-radius: 6px;
+      font-size: 11.5px;
       font-weight: 700;
       white-space: nowrap;
-      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+      margin-left: 8px;
     }
 
     .btn-scert { background: linear-gradient(135deg, #ea580c, #c2410c); }
@@ -252,10 +266,10 @@
 
     .section-title {
       font-family: 'Playfair Display', serif;
-      font-size: 18px;
+      font-size: 17.5px;
       font-weight: 700;
       color: var(--text-heading);
-      margin-top: 8px;
+      margin-top: 4px;
       padding-bottom: 6px;
       border-bottom: 2px solid var(--gold-border);
     }
@@ -272,8 +286,8 @@
     details.class-box > summary {
       background: var(--class-header-bg);
       color: white;
-      padding: 15px 18px;
-      font-size: 16px;
+      padding: 14px 18px;
+      font-size: 15.5px;
       font-weight: 700;
       cursor: pointer;
       user-select: none;
@@ -469,21 +483,23 @@
 
   <div class="container">
 
-    <!-- Official Textbooks -->
-    <div class="card card-scert">
-      <div class="info">
-        <h2>SCERT Textbooks</h2>
-        <p>Official State Board Textbooks</p>
+    <!-- Official Textbooks (Compact Sized) -->
+    <div class="textbooks-wrapper">
+      <div class="card card-scert">
+        <div class="info">
+          <h2>SCERT Textbooks</h2>
+          <p>State Board Books</p>
+        </div>
+        <a href="https://scert.telangana.gov.in/" target="_blank" rel="noopener noreferrer" class="btn-download btn-scert">Download ↗</a>
       </div>
-      <a href="https://scert.telangana.gov.in/" target="_blank" rel="noopener noreferrer" class="btn-download btn-scert">Download ↗</a>
-    </div>
 
-    <div class="card card-ncert">
-      <div class="info">
-        <h2>NCERT Textbooks</h2>
-        <p>Official Central Board Textbooks</p>
+      <div class="card card-ncert">
+        <div class="info">
+          <h2>NCERT Textbooks</h2>
+          <p>Central Board Books</p>
+        </div>
+        <a href="https://ncert.nic.in/textbook.php" target="_blank" rel="noopener noreferrer" class="btn-download btn-ncert">Download ↗</a>
       </div>
-      <a href="https://ncert.nic.in/textbook.php" target="_blank" rel="noopener noreferrer" class="btn-download btn-ncert">Download ↗</a>
     </div>
 
     <h2 class="section-title">Academic Assessments</h2>
@@ -745,7 +761,7 @@
   <!-- Footer -->
   <footer>
     <p>Curated &amp; Designed with Excellence for High School Mathematics</p>
-    <p style="margin-top: 6px;">Created by <span class="creator-name">Hemanth Kalyan</span> &bull; <strong>LEKKA LAB</strong></p>
+    <p style="margin-top: 6px;">Created by <span class="creator-name">Hemanth Kalyanapu</span> &bull; <strong>LEKKA LAB</strong></p>
   </footer>
 
   <script>
