@@ -21,10 +21,17 @@
     header {
       background: linear-gradient(135deg, #1e3a8a, #0284c7);
       color: white;
-      padding: 30px 16px 24px;
+      padding: 26px 16px 22px;
       text-align: center;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       margin-bottom: 24px;
+    }
+
+    .emblem-wrapper {
+      width: 90px;
+      height: 90px;
+      margin: 0 auto 10px;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.25));
     }
 
     header h1 {
@@ -57,7 +64,6 @@
       gap: 16px;
     }
 
-    /* Textbook Cards */
     .card {
       background: white;
       border-radius: 12px;
@@ -100,7 +106,6 @@
     .btn-scert { background-color: #ea580c; }
     .btn-ncert { background-color: #0284c7; }
 
-    /* Section Heading */
     .section-title {
       font-size: 18px;
       font-weight: 700;
@@ -110,7 +115,6 @@
       border-bottom: 2px solid #e2e8f0;
     }
 
-    /* Interactive Class Accordions */
     details.class-box {
       background: white;
       border: 1px solid #cbd5e1;
@@ -155,7 +159,6 @@
       gap: 12px;
     }
 
-    /* Formative Assessment Box */
     details.fa-wrapper {
       background: white;
       border: 1px solid #e2e8f0;
@@ -192,7 +195,6 @@
       gap: 10px;
     }
 
-    /* Nested FA Accordions */
     details.fa-accordion {
       background: #ffffff;
       border: 1px solid #cbd5e1;
@@ -312,6 +314,51 @@
 <body>
 
   <header>
+    <!-- Inline Lekka Lab Emblem -->
+    <div class="emblem-wrapper">
+      <svg viewBox="0 0 500 500" width="100%" height="100%">
+        <defs>
+          <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#0f172a" />
+            <stop offset="100%" stop-color="#0a0f1d" />
+          </linearGradient>
+          <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#fde047" />
+            <stop offset="50%" stop-color="#f59e0b" />
+            <stop offset="100%" stop-color="#d97706" />
+          </linearGradient>
+          <linearGradient id="liquidGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.9" />
+            <stop offset="100%" stop-color="#1d4ed8" />
+          </linearGradient>
+          <path id="textArcTop" d="M 75, 250 A 175, 175 0 1, 1 425, 250" fill="none" />
+          <path id="textArcBottom" d="M 420, 250 A 170, 170 0 0, 1 80, 250" fill="none" />
+        </defs>
+
+        <circle cx="250" cy="250" r="230" fill="url(#bgGrad)" stroke="url(#goldGrad)" stroke-width="8" />
+        <circle cx="250" cy="250" r="182" fill="none" stroke="#38bdf8" stroke-width="3" stroke-dasharray="6, 4" />
+        <circle cx="250" cy="250" r="172" fill="#091120" />
+
+        <text fill="url(#goldGrad)" font-size="34" font-weight="900" letter-spacing="8">
+          <textPath href="#textArcTop" startOffset="50%" text-anchor="middle">LEKKA LAB</textPath>
+        </text>
+        <text fill="#e2e8f0" font-size="14.5" font-weight="700" letter-spacing="4">
+          <textPath href="#textArcBottom" startOffset="50%" text-anchor="middle">EXPLORE • DISCOVER • EXCEL</textPath>
+        </text>
+
+        <g transform="translate(0, 10)">
+          <path d="M 216,242 L 172,320 A 22,22 0 0,0 191,352 L 309,352 A 22,22 0 0,0 328,320 L 284,242 Z" fill="url(#liquidGrad)" />
+          <path d="M 232,150 L 268,150 M 236,150 L 236,204 L 165,324 A 24,24 0 0,0 186,360 L 314,360 A 24,24 0 0,0 335,324 L 264,204 L 264,150 M 230,146 L 270,146" fill="none" stroke="#f8fafc" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+          <text x="250" y="325" fill="#ffffff" font-size="38" font-family="'Times New Roman', serif" font-weight="bold" text-anchor="middle">π</text>
+          <text x="282" y="280" fill="#fde047" font-size="16" font-family="serif" font-weight="bold">√x</text>
+          <text x="202" y="295" fill="#bae6fd" font-size="18" font-family="serif" font-weight="bold">∑</text>
+          <!-- Graduation Cap -->
+          <path d="M 250,118 L 290,132 L 250,146 L 210,132 Z" fill="url(#goldGrad)" stroke="#b45309" stroke-width="1.5" />
+          <path d="M 226,138 L 226,154 Q 250,164 274,154 L 274,138" fill="none" stroke="url(#goldGrad)" stroke-width="2" />
+        </g>
+      </svg>
+    </div>
+
     <h1>Lekka Lab: Educational Portal</h1>
     <div class="motto-tag">“Explore Maths, Discover Your Potential!”</div>
     <p class="subtext">Official Textbooks & Assessments</p>
@@ -319,7 +366,6 @@
 
   <div class="container">
 
-    <!-- Official Textbooks Section -->
     <div class="card card-scert">
       <div class="info">
         <h2>SCERT Textbooks</h2>
@@ -338,15 +384,13 @@
 
     <h2 class="section-title">Assessments</h2>
 
-    <!-- ================= CLASS 8 ================= -->
+    <!-- Class 8 -->
     <details class="class-box">
       <summary>Class 8</summary>
       <div class="class-content">
         <details class="fa-wrapper" open>
           <summary>Formative Assessment</summary>
           <div class="fa-container">
-
-            <!-- Class 8 FA 1 Accordion -->
             <details class="fa-accordion">
               <summary>FA 1 (Tap to View Files)</summary>
               <div class="file-list">
@@ -364,8 +408,6 @@
                 </a>
               </div>
             </details>
-
-            <!-- Class 8 FA 2 Accordion -->
             <details class="fa-accordion">
               <summary>FA 2 (Tap to View Files)</summary>
               <div class="file-list">
@@ -383,27 +425,22 @@
                 </a>
               </div>
             </details>
-
-            <!-- Remaining FA Buttons for Class 8 -->
             <div class="fa-grid-2">
               <a href="#" class="fa-grid-btn">FA 3</a>
               <a href="#" class="fa-grid-btn">FA 4</a>
             </div>
-
           </div>
         </details>
       </div>
     </details>
 
-    <!-- ================= CLASS 9 ================= -->
-    <details class="class-box">
+    <!-- Class 9 -->
+    <details class="class-box" open>
       <summary>Class 9</summary>
       <div class="class-content">
         <details class="fa-wrapper" open>
           <summary>Formative Assessment</summary>
           <div class="fa-container">
-
-            <!-- Class 9 FA 1 Accordion -->
             <details class="fa-accordion">
               <summary>FA 1 (Tap to View Files)</summary>
               <div class="file-list">
@@ -421,8 +458,6 @@
                 </a>
               </div>
             </details>
-
-            <!-- Class 9 FA 2 Accordion -->
             <details class="fa-accordion">
               <summary>FA 2 (Tap to View Files)</summary>
               <div class="file-list">
@@ -440,8 +475,6 @@
                 </a>
               </div>
             </details>
-
-            <!-- Class 9 FA 3 Accordion -->
             <details class="fa-accordion">
               <summary>FA 3 (Tap to View Files)</summary>
               <div class="file-list">
@@ -459,8 +492,6 @@
                 </a>
               </div>
             </details>
-
-            <!-- Class 9 FA 4 Accordion -->
             <details class="fa-accordion">
               <summary>FA 4 (Tap to View Files)</summary>
               <div class="file-list">
@@ -478,13 +509,12 @@
                 </a>
               </div>
             </details>
-
           </div>
         </details>
       </div>
     </details>
 
-    <!-- ================= CLASS 10 ================= -->
+    <!-- Class 10 -->
     <details class="class-box">
       <summary>Class 10</summary>
       <div class="class-content">
