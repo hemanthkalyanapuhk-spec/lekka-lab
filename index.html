@@ -5,22 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lekka Lab: Educational Portal</title>
   
-  <!-- Premium Google Fonts: Playfair Display & Plus Jakarta Sans -->
+  <!-- Premium Fonts: Outfit & Cinzel -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
   <style>
     :root {
       --bg-page: #f8fafc;
-      --header-bg: linear-gradient(135deg, #050b18 0%, #0d1e3d 50%, #041029 100%);
+      --header-bg: linear-gradient(135deg, #040915 0%, #0d1e3d 50%, #030a1c 100%);
       --gold-primary: #d97706;
-      --gold-gradient: linear-gradient(135deg, #fde047 0%, #f59e0b 50%, #b45309 100%);
-      --gold-border: rgba(245, 158, 11, 0.35);
+      --gold-gradient: linear-gradient(135deg, #fff176 0%, #f59e0b 50%, #d97706 100%);
+      --gold-border: rgba(245, 158, 11, 0.4);
       --card-bg: #ffffff;
       --card-border: #e2e8f0;
-      --card-shadow: 0 4px 18px -2px rgba(13, 30, 61, 0.07);
-      --text-heading: #060d1b;
+      --card-shadow: 0 4px 18px -2px rgba(13, 30, 61, 0.08);
+      --text-heading: #0f172a;
       --text-muted: #64748b;
       --class-header-bg: linear-gradient(135deg, #091326 0%, #112246 100%);
       --class-header-border: #f59e0b;
@@ -32,54 +32,12 @@
       --badge-text: #050b18;
     }
 
-    [data-theme="emerald"] {
-      --bg-page: #f0fdf4;
-      --header-bg: linear-gradient(135deg, #022c22 0%, #064e3b 50%, #022c22 100%);
-      --gold-primary: #10b981;
-      --gold-gradient: linear-gradient(135deg, #a7f3d0 0%, #34d399 50%, #059669 100%);
-      --gold-border: rgba(16, 185, 129, 0.35);
-      --card-bg: #ffffff;
-      --card-border: #d1fae5;
-      --card-shadow: 0 4px 18px -2px rgba(6, 78, 59, 0.07);
-      --text-heading: #022c22;
-      --text-muted: #4b5563;
-      --class-header-bg: linear-gradient(135deg, #064e3b 0%, #047857 100%);
-      --class-header-border: #10b981;
-      --fa-btn-bg: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
-      --fa-active-bg: linear-gradient(135deg, #0f766e 0%, #115e59 100%);
-      --file-btn-border: #a7f3d0;
-      --file-btn-hover: #ecfdf5;
-      --badge-bg: linear-gradient(135deg, #34d399 0%, #059669 100%);
-      --badge-text: #ffffff;
-    }
-
-    [data-theme="obsidian"] {
-      --bg-page: #090d16;
-      --header-bg: linear-gradient(135deg, #05070c 0%, #0f1422 50%, #05070c 100%);
-      --gold-primary: #fbbf24;
-      --gold-gradient: linear-gradient(135deg, #fef08a 0%, #f59e0b 50%, #b45309 100%);
-      --gold-border: rgba(251, 191, 36, 0.3);
-      --card-bg: #0f1626;
-      --card-border: #1e293b;
-      --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
-      --text-heading: #f8fafc;
-      --text-muted: #94a3b8;
-      --class-header-bg: linear-gradient(135deg, #131c31 0%, #1b2642 100%);
-      --class-header-border: #fbbf24;
-      --fa-btn-bg: linear-gradient(135deg, #0369a1 0%, #075985 100%);
-      --fa-active-bg: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
-      --file-btn-border: #1e293b;
-      --file-btn-hover: #162035;
-      --badge-bg: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
-      --badge-text: #05070c;
-    }
-
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-      transition: background 0.25s ease, border-color 0.25s ease, color 0.2s ease;
+      font-family: 'Outfit', system-ui, sans-serif;
+      transition: background 0.2s ease, border-color 0.2s ease;
     }
 
     body {
@@ -92,9 +50,9 @@
     header {
       background: var(--header-bg);
       color: white;
-      padding: 24px 16px 18px;
+      padding: 26px 16px 22px;
       border-bottom: 2px solid var(--gold-border);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
     }
 
     .header-content {
@@ -107,10 +65,10 @@
     }
 
     .emblem-wrapper {
-      width: 76px;
-      height: 76px;
+      width: 80px;
+      height: 80px;
       flex-shrink: 0;
-      filter: drop-shadow(0 4px 10px rgba(245, 158, 11, 0.35));
+      filter: drop-shadow(0 4px 12px rgba(245, 158, 11, 0.4));
     }
 
     .header-text {
@@ -120,90 +78,56 @@
       flex-grow: 1;
     }
 
-    header h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 22px;
-      font-weight: 700;
-      letter-spacing: 0.3px;
+    .brand-super-title {
+      font-family: 'Cinzel', serif;
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      line-height: 1.15;
       margin-bottom: 2px;
-      line-height: 1.25;
       background: var(--gold-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      text-shadow: 0 2px 10px rgba(245, 158, 11, 0.3);
+    }
+
+    .brand-portal-tag {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #f8fafc;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+      text-transform: uppercase;
     }
 
     header .motto-tag {
-      font-size: 13px;
-      font-weight: 600;
-      color: #bae6fd;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: #93c5fd;
       letter-spacing: 0.2px;
       margin-bottom: 3px;
       font-style: italic;
     }
 
     header p.subtext {
-      font-size: 11.5px;
-      color: #94a3b8;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      font-weight: 600;
-    }
-
-    /* Theme Switcher Bar */
-    .skin-bar {
-      max-width: 640px;
-      margin: 14px auto 0;
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .skin-bar span {
       font-size: 11px;
       color: #94a3b8;
-      font-weight: 600;
+      letter-spacing: 0.8px;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .skin-pill {
-      border: 1px solid var(--gold-border);
-      background: rgba(255, 255, 255, 0.08);
-      color: #ffffff;
-      padding: 5px 12px;
-      border-radius: 20px;
-      font-size: 11px;
-      cursor: pointer;
-      font-weight: 600;
-      backdrop-filter: blur(4px);
-      transition: all 0.2s ease;
-    }
-
-    .skin-pill:hover {
-      background: rgba(255, 255, 255, 0.18);
-      border-color: #f59e0b;
-    }
-
-    .skin-pill.active {
-      background: var(--gold-gradient);
-      color: #050b18;
-      border-color: #fde047;
       font-weight: 700;
-      box-shadow: 0 2px 8px rgba(245, 158, 11, 0.4);
     }
 
     /* Container */
     .container {
       max-width: 640px;
-      margin: 16px auto 0;
+      margin: 18px auto 0;
       padding: 0 16px;
       display: flex;
       flex-direction: column;
       gap: 14px;
     }
 
-    /* Textbook Cards */
+    /* Compact Textbook Cards */
     .textbooks-wrapper {
       display: grid;
       grid-template-columns: 1fr;
@@ -243,16 +167,17 @@
     .card-ncert::before { background: linear-gradient(to bottom, #0284c7, #38bdf8); }
 
     .info h2 {
-      font-family: 'Playfair Display', serif;
       font-size: 15px;
+      font-weight: 800;
       color: var(--text-heading);
-      font-weight: 700;
       margin-bottom: 2px;
       line-height: 1.2;
+      letter-spacing: -0.2px;
     }
 
     .info p {
       font-size: 11.5px;
+      font-weight: 500;
       color: var(--text-muted);
       line-height: 1.2;
     }
@@ -268,25 +193,24 @@
       white-space: nowrap;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
       margin-left: 8px;
-      transition: transform 0.15s ease, opacity 0.15s ease;
     }
 
     .btn-download:active {
       transform: scale(0.96);
-      opacity: 0.9;
     }
 
     .btn-scert { background: linear-gradient(135deg, #ea580c, #c2410c); }
     .btn-ncert { background: linear-gradient(135deg, #0284c7, #0369a1); }
 
     .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 17.5px;
-      font-weight: 700;
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
       color: var(--text-heading);
       margin-top: 4px;
       padding-bottom: 6px;
       border-bottom: 2px solid var(--gold-border);
+      text-transform: uppercase;
     }
 
     /* Accordions */
@@ -304,6 +228,7 @@
       padding: 14px 18px;
       font-size: 15.5px;
       font-weight: 700;
+      letter-spacing: 0.2px;
       cursor: pointer;
       user-select: none;
       list-style: none;
@@ -430,10 +355,9 @@
     }
 
     footer .creator-name {
-      font-family: 'Playfair Display', serif;
-      font-weight: 700;
+      font-weight: 800;
       color: var(--gold-primary);
-      letter-spacing: 0.5px;
+      letter-spacing: 0.3px;
     }
   </style>
 </head>
@@ -486,24 +410,17 @@
       </div>
 
       <div class="header-text">
-        <h1>Lekka Lab: Educational Portal</h1>
+        <h1 class="brand-super-title">LEKKA LAB</h1>
+        <div class="brand-portal-tag">Educational Portal</div>
         <div class="motto-tag">“Explore Maths, Discover Your Potential!”</div>
-        <p class="subtext">Official Textbooks & Assessments</p>
+        <p class="subtext">Official Textbooks &amp; Assessments</p>
       </div>
-    </div>
-
-    <!-- Theme Switcher with Active Highlight -->
-    <div class="skin-bar">
-      <span>Theme:</span>
-      <button class="skin-pill active" id="pill-sapphire" onclick="setSkin('sapphire')">Sapphire Gold</button>
-      <button class="skin-pill" id="pill-emerald" onclick="setSkin('emerald')">Emerald</button>
-      <button class="skin-pill" id="pill-obsidian" onclick="setSkin('obsidian')">Obsidian Luxe</button>
     </div>
   </header>
 
   <div class="container">
 
-    <!-- Official Textbooks (Clearer Labels & Direct Action) -->
+    <!-- Official Textbooks -->
     <div class="textbooks-wrapper">
       <div class="card card-scert">
         <div class="info">
@@ -529,7 +446,7 @@
       <summary>Class 10 Mathematics</summary>
       <div class="class-content">
 
-        <!-- Class 10 FA 1 (Open by default) -->
+        <!-- Class 10 FA 1 -->
         <details class="fa-accordion" open>
           <summary>FA 1 (Tap to View Files)</summary>
           <div class="file-list">
@@ -677,36 +594,4 @@
             <a href="class9-fa4-generating-new-problems.pdf" download="Class9_FA4_Generating_Problems.pdf" class="file-btn">
               <span>📄 Generating New Problems</span>
               <span class="dl-badge">Download 📥</span>
-            </a>
-            <a href="class9-fa4-project.pdf" download="Class9_FA4_Project.pdf" class="file-btn">
-              <span>📄 Project Work</span>
-              <span class="dl-badge">Download 📥</span>
-            </a>
-            <a href="class9-fa4-slip-test.pdf" download="Class9_FA4_Slip_Test.pdf" class="file-btn">
-              <span>📄 Slip Test & Solutions</span>
-              <span class="dl-badge">Download 📥</span>
-            </a>
-          </div>
-        </details>
-
-      </div>
-    </details>
-
-    <!-- ================= CLASS 8 ================= -->
-    <details class="class-box">
-      <summary>Class 8 Mathematics</summary>
-      <div class="class-content">
-
-        <!-- Class 8 FA 1 -->
-        <details class="fa-accordion">
-          <summary>FA 1 (Tap to View Files)</summary>
-          <div class="file-list">
-            <a href="FA-1%20Generating%20New%20Problems.pdf" download="Class8_FA1_Generating_Problems.pdf" class="file-btn">
-              <span>📄 Generating New Problems</span>
-              <span class="dl-badge">Download 📥</span>
-            </a>
-            <a href="Class%208%20FA1%20Project.pdf" download="Class8_FA1_Project.pdf" class="file-btn">
-              <span>📄 Project Work</span>
-              <span class="dl-badge">Download 📥</span>
-            </a>
-            <a href="FA-1%20Slip%20Test.pdf" download="Class8_FA1_
+            <
