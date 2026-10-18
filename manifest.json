@@ -1,0 +1,17 @@
+{
+  "name": "Lekka Lab: Educational Portal",
+  "short_name": "Lekka Lab",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#050b18",
+  "theme_color": "#050b18",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/3771/3771278.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
