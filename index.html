@@ -4,28 +4,25 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lekka Lab: Educational Portal</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;800&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
     }
 
     body {
-      background-color: #f1f5f9;
+      background-color: #f8fafc;
       color: #0f172a;
-      padding-bottom: 50px;
+      padding-bottom: 40px;
     }
 
     header {
-      background: linear-gradient(135deg, #091e42, #0284c7);
+      background: linear-gradient(135deg, #1e3a8a, #0284c7);
       color: white;
-      padding: 22px 16px;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+      padding: 20px 16px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       margin-bottom: 24px;
     }
 
@@ -35,25 +32,26 @@
       display: flex;
       align-items: center;
       gap: 16px;
+      text-align: left;
     }
 
     .emblem-wrapper {
-      width: 74px;
-      height: 74px;
+      width: 76px;
+      height: 76px;
       flex-shrink: 0;
-      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+      filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.25));
     }
 
     .header-text {
       display: flex;
       flex-direction: column;
+      justify-content: center;
     }
 
     header h1 {
-      font-family: 'Outfit', sans-serif;
       font-size: 22px;
       font-weight: 800;
-      letter-spacing: -0.3px;
+      letter-spacing: -0.5px;
       margin-bottom: 2px;
       line-height: 1.2;
     }
@@ -69,7 +67,7 @@
 
     header p.subtext {
       font-size: 12px;
-      opacity: 0.85;
+      opacity: 0.9;
     }
 
     .container {
@@ -83,26 +81,25 @@
 
     .card {
       background: white;
-      border-radius: 14px;
-      padding: 16px 20px;
+      border-radius: 12px;
+      padding: 18px 20px;
       border: 1px solid #e2e8f0;
-      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 14px;
     }
 
-    .card-scert { border-left: 6px solid #f97316; }
+    .card-scert { border-left: 6px solid #ea580c; }
     .card-ncert { border-left: 6px solid #0284c7; }
 
     .info h2 {
-      font-family: 'Outfit', sans-serif;
       font-size: 17px;
       color: #0f172a;
       font-weight: 700;
-      margin-bottom: 2px;
+      margin-bottom: 3px;
     }
 
     .info p {
@@ -112,24 +109,23 @@
 
     .btn-download {
       display: inline-block;
-      padding: 9px 18px;
+      padding: 9px 20px;
       color: #ffffff;
       text-decoration: none;
-      border-radius: 8px;
+      border-radius: 6px;
       font-size: 13px;
       font-weight: 700;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      white-space: nowrap;
     }
 
-    .btn-scert { background-color: #f97316; }
+    .btn-scert { background-color: #ea580c; }
     .btn-ncert { background-color: #0284c7; }
 
     .section-title {
-      font-family: 'Outfit', sans-serif;
       font-size: 18px;
       font-weight: 700;
       color: #1e293b;
-      margin-top: 6px;
+      margin-top: 10px;
       padding-bottom: 6px;
       border-bottom: 2px solid #e2e8f0;
     }
@@ -137,16 +133,15 @@
     details.class-box {
       background: white;
       border: 1px solid #cbd5e1;
-      border-radius: 12px;
+      border-radius: 10px;
       overflow: hidden;
-      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.03);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
     }
 
     details.class-box > summary {
-      background: #0f172a;
+      background: #1e293b;
       color: white;
-      padding: 15px 18px;
-      font-family: 'Outfit', sans-serif;
+      padding: 14px 18px;
       font-size: 16px;
       font-weight: 700;
       cursor: pointer;
@@ -179,15 +174,51 @@
       gap: 12px;
     }
 
-    details.fa-accordion {
-      background: #ffffff;
-      border: 1px solid #cbd5e1;
+    details.fa-wrapper {
+      background: white;
+      border: 1px solid #e2e8f0;
       border-radius: 8px;
       overflow: hidden;
     }
 
-    details.fa-accordion > summary {
+    details.fa-wrapper > summary {
       background: #0284c7;
+      color: white;
+      padding: 12px 16px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    details.fa-wrapper > summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details.fa-wrapper[open] > summary::after {
+      transform: rotate(180deg);
+    }
+
+    .fa-container {
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    details.fa-accordion {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    details.fa-accordion > summary {
+      background: #0ea5e9;
       color: white;
       padding: 12px 14px;
       font-size: 14px;
@@ -202,6 +233,10 @@
 
     details.fa-accordion > summary::-webkit-details-marker {
       display: none;
+    }
+
+    details.fa-accordion[open] > summary {
+      background: #0284c7;
     }
 
     details.fa-accordion > summary::after {
@@ -229,9 +264,9 @@
       background: white;
       color: #0f172a;
       text-decoration: none;
-      padding: 11px 14px;
+      padding: 10px 14px;
       border: 1px solid #cbd5e1;
-      border-radius: 8px;
+      border-radius: 6px;
       font-size: 13px;
       font-weight: 600;
       transition: all 0.15s ease;
@@ -246,10 +281,9 @@
     .dl-badge {
       background: #0284c7;
       color: white;
-      padding: 5px 10px;
-      border-radius: 6px;
-      font-size: 12px;
-      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 11px;
     }
 
     .fa-grid-2 {
@@ -269,26 +303,26 @@
       display: block;
       text-align: center;
       background: #f8fafc;
-      color: #64748b;
+      color: #475569;
       text-decoration: none;
       padding: 10px 4px;
-      border: 1px dashed #cbd5e1;
-      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
       font-weight: 600;
       font-size: 13px;
     }
 
     footer {
       text-align: center;
-      margin-top: 40px;
+      margin-top: 36px;
       padding-top: 18px;
-      border-top: 1px solid #cbd5e1;
+      border-top: 1px solid #e2e8f0;
       color: #64748b;
       font-size: 13px;
     }
 
     footer strong {
-      color: #0f172a;
+      color: #1e293b;
     }
   </style>
 </head>
@@ -298,5 +332,229 @@
     <div class="header-content">
       <!-- Left-Aligned Lekka Lab Emblem -->
       <div class="emblem-wrapper">
-        <svg viewBox="0 0
-          
+        <svg viewBox="0 0 500 500" width="100%" height="100%">
+          <defs>
+            <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#0f172a" />
+              <stop offset="100%" stop-color="#0a0f1d" />
+            </linearGradient>
+            <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#fde047" />
+              <stop offset="50%" stop-color="#f59e0b" />
+              <stop offset="100%" stop-color="#d97706" />
+            </linearGradient>
+            <linearGradient id="liquidGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.9" />
+              <stop offset="100%" stop-color="#1d4ed8" />
+            </linearGradient>
+            <path id="textArcTop" d="M 75, 250 A 175, 175 0 1, 1 425, 250" fill="none" />
+            <path id="textArcBottom" d="M 420, 250 A 170, 170 0 0, 1 80, 250" fill="none" />
+          </defs>
+
+          <circle cx="250" cy="250" r="230" fill="url(#bgGrad)" stroke="url(#goldGrad)" stroke-width="8" />
+          <circle cx="250" cy="250" r="182" fill="none" stroke="#38bdf8" stroke-width="3" stroke-dasharray="6, 4" />
+          <circle cx="250" cy="250" r="172" fill="#091120" />
+
+          <text fill="url(#goldGrad)" font-size="34" font-weight="900" letter-spacing="8">
+            <textPath href="#textArcTop" startOffset="50%" text-anchor="middle">LEKKA LAB</textPath>
+          </text>
+          <text fill="#e2e8f0" font-size="14.5" font-weight="700" letter-spacing="4">
+            <textPath href="#textArcBottom" startOffset="50%" text-anchor="middle">EXPLORE • DISCOVER • EXCEL</textPath>
+          </text>
+
+          <g transform="translate(0, 10)">
+            <path d="M 216,242 L 172,320 A 22,22 0 0,0 191,352 L 309,352 A 22,22 0 0,0 328,320 L 284,242 Z" fill="url(#liquidGrad)" />
+            <path d="M 232,150 L 268,150 M 236,150 L 236,204 L 165,324 A 24,24 0 0,0 186,360 L 314,360 A 24,24 0 0,0 335,324 L 264,204 L 264,150 M 230,146 L 270,146" fill="none" stroke="#f8fafc" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+            <text x="250" y="325" fill="#ffffff" font-size="38" font-family="'Times New Roman', serif" font-weight="bold" text-anchor="middle">π</text>
+            <text x="282" y="280" fill="#fde047" font-size="16" font-family="serif" font-weight="bold">√x</text>
+            <text x="202" y="295" fill="#bae6fd" font-size="18" font-family="serif" font-weight="bold">∑</text>
+            <path d="M 250,118 L 290,132 L 250,146 L 210,132 Z" fill="url(#goldGrad)" stroke="#b45309" stroke-width="1.5" />
+            <path d="M 226,138 L 226,154 Q 250,164 274,154 L 274,138" fill="none" stroke="url(#goldGrad)" stroke-width="2" />
+          </g>
+        </svg>
+      </div>
+
+      <!-- Right-Side Titles -->
+      <div class="header-text">
+        <h1>Lekka Lab: Educational Portal</h1>
+        <div class="motto-tag">“Explore Maths, Discover Your Potential!”</div>
+        <p class="subtext">Official Textbooks & Assessments</p>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <div class="card card-scert">
+      <div class="info">
+        <h2>SCERT Textbooks</h2>
+        <p>Official State Board Textbooks</p>
+      </div>
+      <a href="https://scert.telangana.gov.in/" target="_blank" rel="noopener noreferrer" class="btn-download btn-scert">Download ↗</a>
+    </div>
+
+    <div class="card card-ncert">
+      <div class="info">
+        <h2>NCERT Textbooks</h2>
+        <p>Official Central Board Textbooks</p>
+      </div>
+      <a href="https://ncert.nic.in/textbook.php" target="_blank" rel="noopener noreferrer" class="btn-download btn-ncert">Download ↗</a>
+    </div>
+
+    <h2 class="section-title">Assessments</h2>
+
+    <!-- Class 8 -->
+    <details class="class-box">
+      <summary>Class 8</summary>
+      <div class="class-content">
+        <details class="fa-wrapper" open>
+          <summary>Formative Assessment</summary>
+          <div class="fa-container">
+            <details class="fa-accordion">
+              <summary>FA 1 (Tap to View Files)</summary>
+              <div class="file-list">
+                <a href="FA-1%20Generating%20New%20Problems.pdf" download="Class8_FA1_Generating_Problems.pdf" class="file-btn">
+                  <span>📄 Generating New Problems</span>
+                  <span class="dl-badge">Download 📥</span>
+                </a>
+                <a href="Class%208%20FA1%20Project.pdf" download="Class8_FA1_Project.pdf" class="file-btn">
+                  <span>📄 Project Work</span>
+                  <span class="dl-badge">Download 📥</span>
+                </a>
+                <a href="FA-1%20Slip%20Test.pdf" download="Class8_FA1_Slip_Test.pdf" class="file-btn">
+                  <span>📄 Slip Test</span>
+                  <span class="dl-badge">Download 📥</span>
+                </a>
+              </div>
+            </details>
+            <details class="fa-accordion">
+              <summary>FA 2 (Tap to View Files)</summary>
+              <div class="file-list">
+                <a href="class8-fa2-generating-new-problems.pdf" download="Class8_FA2_Generating_Problems.pdf" class="file-btn">
+                  <span>📄 Generating New Problems</span>
+                  <span class="dl-badge">Download 📥</span>
+                </a>
+                <a href="class8-fa2-project.pdf" download="Class8_FA2_Project.pdf" class="file-btn">
+                  <span>📄 Project Work</span>
+                  <span class="dl-badge">Download 📥</span>
+                </a>
+                <a href="class8-fa2-slip-test.pdf" download="Class8_FA2_Slip_Test.pdf" class="file-btn">
+                  <span>📄 Slip Test</span>
+                  <span class="dl-badge">Download 📥</span>
+                </a>
+              </div>
+            </details>
+            <div class="fa-grid-2">
+              <a href="#" class="fa-grid-btn">FA 3</a>
+              <a href="#" class="fa-grid-btn">FA 4</a>
+            </div>
+          </div>
+        </details>
+      </div>
+    </details>
+
+    <!-- Class 9 -->
+    <details class="class-box" open>
+      <summary>Class 9</summary>
+      <div class="class-content">
+        <details class="fa-wrapper" open>
+          <summary>Formative Assessment</summary>
+          <div class="fa-container">
+            <details class="fa-accordion">
+              <summary>FA 1 (Tap to View Files)</summary>
+              <div class="file-list">
+                <a href="class9-fa1-generating-new-problems.pdf" download="Class9_FA1_Generating_Problems.pdf" class="file-btn">
+                  <span>📄 Generating New Problems</span>
+                  <span class="dl-badge">Download 📥</span>
+                </a>
+                <a href="class9-fa1-project.pdf" download="Class9_FA1_Project.pdf" class="file-btn">
+                  <span>📄 Project Work</span>
+                  <span class="dl-badge">Download 📥</span>
+                </a>
+                <a href="class9-fa1-slip-test.pdf" download="Class9_FA1_Slip_Test.pdf" class="file-btn">
+                  <span>📄 Slip Test & Solutions</span>
+                  <span class="dl-badge">Download 📥</span>
+                </a>
+              </div>
+            </details>
+            <details class="fa-accordion">
+              <summary>FA 2 (Tap to View Files)</summary>
+              <div class="file-list">
+                <a href="class9-fa2-generating-new-problems.pdf" download="Class9_FA2_Generating_Problems.pdf" class="file-btn">
+                  <span>📄 Generating New Problems</span>
+                  <span class="dl-badge">Download 📥</span>
+                </a>
+                <a href="class9-fa2-project.pdf" download="Class9_FA2_Project.pdf" class="file-btn">
+                  <span>📄 Project Work</span>
+                  <span class="dl-badge">Download 📥</span>
+                </a>
+                <a href="class9-fa2-slip-test.pdf" download="Class9_FA2_Slip_Test.pdf" class="file-btn">
+                  <span>📄 Slip Test & Solutions</span>
+                  <span class="dl-badge">Download 📥</span>
+                </a>
+              </div>
+            </details>
+            <details class="fa-accordion">
+              <summary>FA 3 (Tap to View Files)</summary>
+              <div class="file-list">
+                <a href="Class9-fa3-generating-new-Problems.pdf" download="Class9_FA3_Generating_Problems.pdf" class="file-btn">
+                  <span>📄 Generating New Problems</span>
+                  <span class="dl-badge">Download 📥</span>
+                </a>
+                <a href="class9-fa3-project.pdf" download="Class9_FA3_Project.pdf" class="file-btn">
+                  <span>📄 Project Work</span>
+                  <span class="dl-badge">Download 📥</span>
+                </a>
+                <a href="class9-fa3-slip-test.pdf" download="Class9_FA3_Slip_Test.pdf" class="file-btn">
+                  <span>📄 Slip Test & Solutions</span>
+                  <span class="dl-badge">Download 📥</span>
+                </a>
+              </div>
+            </details>
+            <details class="fa-accordion">
+              <summary>FA 4 (Tap to View Files)</summary>
+              <div class="file-list">
+                <a href="class9-fa4-generating-new-problems.pdf" download="Class9_FA4_Generating_Problems.pdf" class="file-btn">
+                  <span>📄 Generating New Problems</span>
+                  <span class="dl-badge">Download 📥</span>
+                </a>
+                <a href="class9-fa4-project.pdf" download="Class9_FA4_Project.pdf" class="file-btn">
+                  <span>📄 Project Work</span>
+                  <span class="dl-badge">Download 📥</span>
+                </a>
+                <a href="class9-fa4-slip-test.pdf" download="Class9_FA4_Slip_Test.pdf" class="file-btn">
+                  <span>📄 Slip Test & Solutions</span>
+                  <span class="dl-badge">Download 📥</span>
+                </a>
+              </div>
+            </details>
+          </div>
+        </details>
+      </div>
+    </details>
+
+    <!-- Class 10 -->
+    <details class="class-box">
+      <summary>Class 10</summary>
+      <div class="class-content">
+        <details class="fa-wrapper">
+          <summary>Formative Assessment</summary>
+          <div class="fa-grid-4">
+            <a href="#" class="fa-grid-btn">FA 1</a>
+            <a href="#" class="fa-grid-btn">FA 2</a>
+            <a href="#" class="fa-grid-btn">FA 3</a>
+            <a href="#" class="fa-grid-btn">FA 4</a>
+          </div>
+        </details>
+      </div>
+    </details>
+
+    <footer>
+      <p>Created by <strong>Hemanth Kalyanapu</strong></p>
+      <p style="font-size: 11px; margin-top: 4px; opacity: 0.8;">Lekka Lab &copy; All Rights Reserved</p>
+    </footer>
+
+  </div>
+
+</body>
+</html>
