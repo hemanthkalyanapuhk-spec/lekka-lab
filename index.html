@@ -1,869 +1,688 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>LEKKA LAB &bull; Mathematics Portal</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lekka Lab: Educational Portal</title>
+  
+  <!-- Premium Google Fonts: Playfair Display & Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <style>
     :root {
-      --bg-dark: #0a0f1d;
-      --card-bg: #131b2e;
-      --card-inner: #19243c;
-      --border: #223254;
-      --primary: #2563eb;
-      --primary-hover: #1d4ed8;
-      --accent: #38bdf8;
-      --text: #f8fafc;
-      --muted: #94a3b8;
-      
-      --c-project: #0284c7;
-      --c-problems: #0d9488;
-      --c-slip: #6366f1;
+      --bg-page: #f8fafc;
+      --header-bg: linear-gradient(135deg, #050b18 0%, #0d1e3d 50%, #041029 100%);
+      --gold-primary: #d97706;
+      --gold-gradient: linear-gradient(135deg, #fde047 0%, #f59e0b 50%, #b45309 100%);
+      --gold-border: rgba(245, 158, 11, 0.35);
+      --card-bg: #ffffff;
+      --card-border: #e2e8f0;
+      --card-shadow: 0 4px 18px -2px rgba(13, 30, 61, 0.07);
+      --text-heading: #060d1b;
+      --text-muted: #64748b;
+      --class-header-bg: linear-gradient(135deg, #091326 0%, #112246 100%);
+      --class-header-border: #f59e0b;
+      --fa-btn-bg: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      --fa-active-bg: linear-gradient(135deg, #0369a1 0%, #075985 100%);
+      --file-btn-border: #cbd5e1;
+      --file-btn-hover: #e0f2fe;
+      --badge-bg: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      --badge-text: #050b18;
+    }
+
+    [data-theme="emerald"] {
+      --bg-page: #f0fdf4;
+      --header-bg: linear-gradient(135deg, #022c22 0%, #064e3b 50%, #022c22 100%);
+      --gold-primary: #10b981;
+      --gold-gradient: linear-gradient(135deg, #a7f3d0 0%, #34d399 50%, #059669 100%);
+      --gold-border: rgba(16, 185, 129, 0.35);
+      --card-bg: #ffffff;
+      --card-border: #d1fae5;
+      --card-shadow: 0 4px 18px -2px rgba(6, 78, 59, 0.07);
+      --text-heading: #022c22;
+      --text-muted: #4b5563;
+      --class-header-bg: linear-gradient(135deg, #064e3b 0%, #047857 100%);
+      --class-header-border: #10b981;
+      --fa-btn-bg: linear-gradient(135deg, #0d9488 0%, #0f766e 100%);
+      --fa-active-bg: linear-gradient(135deg, #0f766e 0%, #115e59 100%);
+      --file-btn-border: #a7f3d0;
+      --file-btn-hover: #ecfdf5;
+      --badge-bg: linear-gradient(135deg, #34d399 0%, #059669 100%);
+      --badge-text: #ffffff;
+    }
+
+    [data-theme="obsidian"] {
+      --bg-page: #090d16;
+      --header-bg: linear-gradient(135deg, #05070c 0%, #0f1422 50%, #05070c 100%);
+      --gold-primary: #fbbf24;
+      --gold-gradient: linear-gradient(135deg, #fef08a 0%, #f59e0b 50%, #b45309 100%);
+      --gold-border: rgba(251, 191, 36, 0.3);
+      --card-bg: #0f1626;
+      --card-border: #1e293b;
+      --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+      --text-heading: #f8fafc;
+      --text-muted: #94a3b8;
+      --class-header-bg: linear-gradient(135deg, #131c31 0%, #1b2642 100%);
+      --class-header-border: #fbbf24;
+      --fa-btn-bg: linear-gradient(135deg, #0369a1 0%, #075985 100%);
+      --fa-active-bg: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      --file-btn-border: #1e293b;
+      --file-btn-hover: #162035;
+      --badge-bg: linear-gradient(135deg, #fbbf24 0%, #d97706 100%);
+      --badge-text: #05070c;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      -webkit-tap-highlight-color: transparent;
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      transition: background 0.25s ease, border-color 0.25s ease, color 0.2s ease;
     }
 
     body {
-      background-color: var(--bg-dark);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      background-color: var(--bg-page);
+      color: var(--text-heading);
+      padding-bottom: 50px;
     }
 
-    /* HEADER */
+    /* Header */
     header {
-      background: #101728;
-      border-bottom: 1px solid var(--border);
-      padding: 18px 16px 14px;
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      backdrop-filter: blur(8px);
+      background: var(--header-bg);
+      color: white;
+      padding: 24px 16px 18px;
+      border-bottom: 2px solid var(--gold-border);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      margin-bottom: 14px;
-    }
-
-    .logo-badge {
-      width: 44px;
-      height: 44px;
-      background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-    }
-
-    .logo-badge svg {
-      width: 24px;
-      height: 24px;
-      fill: none;
-      stroke: #ffffff;
-      stroke-width: 2.2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .brand-title h1 {
-      font-size: 1.45rem;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      color: #ffffff;
-      line-height: 1.1;
-    }
-
-    .brand-title p {
-      font-size: 0.72rem;
-      color: var(--accent);
-      font-weight: 700;
-      letter-spacing: 0.6px;
-      text-transform: uppercase;
-    }
-
-    /* TOP MAIN TABS */
-    .top-nav {
-      display: flex;
-      justify-content: center;
-      gap: 6px;
-      background: #090d18;
-      padding: 4px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      max-width: 360px;
+    .header-content {
+      max-width: 640px;
       margin: 0 auto;
-    }
-
-    .main-tab {
-      flex: 1;
-      padding: 9px 12px;
-      font-size: 0.86rem;
-      font-weight: 700;
-      border: none;
-      background: transparent;
-      color: var(--muted);
-      border-radius: 8px;
-      cursor: pointer;
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 7px;
-      transition: all 0.2s ease;
-    }
-
-    .main-tab.active {
-      background: var(--primary);
-      color: #ffffff;
-      box-shadow: 0 2px 8px rgba(37, 99, 235, 0.5);
-    }
-
-    /* CLASS SELECTOR */
-    .class-nav {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      margin: 18px 0 20px;
-    }
-
-    .class-btn {
-      padding: 7px 18px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      background: #131b2e;
-      border: 1px solid var(--border);
-      color: var(--muted);
-      border-radius: 999px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .class-btn.active {
-      background: rgba(37, 99, 235, 0.25);
-      border-color: #3b82f6;
-      color: #60a5fa;
-    }
-
-    /* MAIN CONTAINER */
-    main {
-      flex: 1;
-      max-width: 680px;
-      width: 100%;
-      margin: 0 auto;
-      padding: 0 16px 40px;
-    }
-
-    /* FA ACCORDION */
-    .fa-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .fa-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-    }
-
-    .fa-header {
-      width: 100%;
-      padding: 14px 16px;
-      background: transparent;
-      border: none;
-      color: var(--text);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      cursor: pointer;
+      gap: 16px;
       text-align: left;
     }
 
-    .fa-badge-title {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .fa-tag {
-      font-size: 0.72rem;
-      font-weight: 800;
-      background: rgba(37, 99, 235, 0.2);
-      color: #60a5fa;
-      border: 1px solid rgba(59, 130, 246, 0.4);
-      padding: 3px 8px;
-      border-radius: 6px;
-    }
-
-    .fa-name {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: #f1f5f9;
-    }
-
-    .fa-arrow {
-      width: 20px;
-      height: 20px;
-      color: var(--muted);
-      transition: transform 0.2s ease;
-    }
-
-    .fa-card.active .fa-arrow {
-      transform: rotate(180deg);
-      color: var(--accent);
-    }
-
-    .fa-card.active {
-      border-color: #3b82f6;
-    }
-
-    .fa-body {
-      display: none;
-      padding: 0 16px 16px;
-      flex-direction: column;
-      gap: 10px;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      margin-top: 2px;
-      padding-top: 14px;
-    }
-
-    .fa-card.active .fa-body {
-      display: flex;
-    }
-
-    /* DOWNLOAD BUTTONS */
-    .dl-btn {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 16px;
-      border-radius: 8px;
-      text-decoration: none;
-      color: #ffffff;
-      font-size: 0.88rem;
-      font-weight: 600;
-      transition: transform 0.1s ease, filter 0.15s ease;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
-    }
-
-    .dl-btn:active {
-      transform: scale(0.98);
-    }
-
-    .dl-btn-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .dl-icon {
-      width: 18px;
-      height: 18px;
-      stroke: currentColor;
-      stroke-width: 2.2;
-      fill: none;
-    }
-
-    .dl-badge {
-      font-size: 0.72rem;
-      background: rgba(0, 0, 0, 0.25);
-      padding: 2px 8px;
-      border-radius: 999px;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-
-    .btn-project { background-color: var(--c-project); }
-    .btn-problems { background-color: var(--c-problems); }
-    .btn-slip { background-color: var(--c-slip); }
-
-    /* TEXTBOOK CARDS */
-    .tb-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px;
-      margin-bottom: 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .tb-meta {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .tb-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #ffffff;
+    .emblem-wrapper {
+      width: 76px;
+      height: 76px;
       flex-shrink: 0;
+      filter: drop-shadow(0 4px 10px rgba(245, 158, 11, 0.35));
     }
 
-    .tb-icon-scert {
-      background: linear-gradient(135deg, #0284c7, #0369a1);
+    .header-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex-grow: 1;
     }
 
-    .tb-icon-ncert {
-      background: linear-gradient(135deg, #ea580c, #c2410c);
-    }
-
-    .tb-text h4 {
-      font-size: 0.96rem;
+    header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
       font-weight: 700;
-      color: #f8fafc;
+      letter-spacing: 0.3px;
+      margin-bottom: 2px;
+      line-height: 1.25;
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    .tb-text p {
-      font-size: 0.75rem;
-      color: var(--muted);
-      margin-top: 2px;
+    header .motto-tag {
+      font-size: 13px;
+      font-weight: 600;
+      color: #bae6fd;
+      letter-spacing: 0.2px;
+      margin-bottom: 3px;
+      font-style: italic;
     }
 
-    .tb-btn-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+    header p.subtext {
+      font-size: 11.5px;
+      color: #94a3b8;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    /* Theme Switcher Bar */
+    .skin-bar {
+      max-width: 640px;
+      margin: 14px auto 0;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
       gap: 8px;
     }
 
-    .tb-link {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      padding: 9px 12px;
-      border-radius: 8px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      text-decoration: none;
+    .skin-bar span {
+      font-size: 11px;
+      color: #94a3b8;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .skin-pill {
+      border: 1px solid var(--gold-border);
+      background: rgba(255, 255, 255, 0.08);
       color: #ffffff;
-      background: #19243c;
-      border: 1px solid var(--border);
-      transition: background 0.15s ease;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      cursor: pointer;
+      font-weight: 600;
+      backdrop-filter: blur(4px);
     }
 
-    .tb-link.primary {
-      background: var(--primary);
-      border-color: #3b82f6;
+    .skin-pill:hover {
+      background: rgba(255, 255, 255, 0.18);
+      border-color: #f59e0b;
     }
 
-    .hidden {
-      display: none !important;
+    /* Container */
+    .container {
+      max-width: 640px;
+      margin: 20px auto 0;
+      padding: 0 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
     }
 
-    /* FOOTER */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 20px 16px;
-      text-align: center;
-      font-size: 0.78rem;
-      color: var(--muted);
-      background: #080d19;
-      margin-top: auto;
+    /* Cards */
+    .card {
+      background: var(--card-bg);
+      border-radius: 14px;
+      padding: 18px 20px;
+      border: 1px solid var(--card-border);
+      box-shadow: var(--card-shadow);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      position: relative;
+      overflow: hidden;
     }
 
-    footer span {
-      color: #60a5fa;
+    .card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 5px;
+    }
+
+    .card-scert::before { background: linear-gradient(to bottom, #ea580c, #f97316); }
+    .card-ncert::before { background: linear-gradient(to bottom, #0284c7, #38bdf8); }
+
+    .info h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 17.5px;
+      color: var(--text-heading);
       font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .info p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .btn-download {
+      display: inline-block;
+      padding: 9px 18px;
+      color: #ffffff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+    }
+
+    .btn-scert { background: linear-gradient(135deg, #ea580c, #c2410c); }
+    .btn-ncert { background: linear-gradient(135deg, #0284c7, #0369a1); }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-heading);
+      margin-top: 8px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid var(--gold-border);
+    }
+
+    /* Accordions */
+    details.class-box {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+    }
+
+    details.class-box > summary {
+      background: var(--class-header-bg);
+      color: white;
+      padding: 15px 18px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      user-select: none;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-left: 4px solid var(--class-header-border);
+    }
+
+    details.class-box > summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details.class-box > summary::after {
+      content: "▼";
+      font-size: 11px;
+      color: #f59e0b;
+      transition: transform 0.25s;
+    }
+
+    details.class-box[open] > summary::after {
+      transform: rotate(180deg);
+    }
+
+    .class-content {
+      padding: 14px;
+      background: rgba(0, 0, 0, 0.015);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    details.fa-accordion {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 9px;
+      overflow: hidden;
+    }
+
+    details.fa-accordion > summary {
+      background: var(--fa-btn-bg);
+      color: white;
+      padding: 12px 15px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      user-select: none;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    details.fa-accordion > summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details.fa-accordion[open] > summary {
+      background: var(--fa-active-bg);
+      border-bottom: 1px solid var(--gold-border);
+    }
+
+    details.fa-accordion > summary::after {
+      content: "▼";
+      font-size: 10px;
+      transition: transform 0.2s;
+    }
+
+    details.fa-accordion[open] > summary::after {
+      transform: rotate(180deg);
+    }
+
+    .file-list {
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      background: rgba(0, 0, 0, 0.01);
+    }
+
+    .file-btn {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--card-bg);
+      color: var(--text-heading);
+      text-decoration: none;
+      padding: 11px 14px;
+      border: 1px solid var(--file-btn-border);
+      border-radius: 8px;
+      font-size: 13.5px;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .file-btn:hover {
+      background: var(--file-btn-hover);
+      border-color: var(--gold-primary);
+      transform: translateX(3px);
+    }
+
+    .dl-badge {
+      background: var(--badge-bg);
+      color: var(--badge-text);
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-weight: 800;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .fa-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .fa-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      padding: 10px;
+    }
+
+    .fa-grid-btn {
+      display: block;
+      text-align: center;
+      background: var(--card-bg);
+      color: var(--text-muted);
+      text-decoration: none;
+      padding: 10px 4px;
+      border: 1px dashed var(--file-btn-border);
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid var(--gold-border);
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    footer .creator-name {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      color: var(--gold-primary);
+      letter-spacing: 0.5px;
     }
   </style>
 </head>
 <body>
 
-  <!-- HEADER -->
+  <!-- Header -->
   <header>
-    <div class="brand">
-      <div class="logo-badge">
-        <svg viewBox="0 0 24 24"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"></path><path d="M6 6h10"></path><path d="M6 10h7"></path><path d="m14 15 2 2 4-4"></path></svg>
+    <div class="header-content">
+      <div class="emblem-wrapper">
+        <svg viewBox="0 0 500 500" width="100%" height="100%">
+          <defs>
+            <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#050b18" />
+              <stop offset="100%" stop-color="#0c172e" />
+            </linearGradient>
+            <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#fde047" />
+              <stop offset="50%" stop-color="#f59e0b" />
+              <stop offset="100%" stop-color="#b45309" />
+            </linearGradient>
+            <linearGradient id="liquidGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.95" />
+              <stop offset="100%" stop-color="#1d4ed8" />
+            </linearGradient>
+            <path id="textArcTop" d="M 75, 250 A 175, 175 0 1, 1 425, 250" fill="none" />
+            <path id="textArcBottom" d="M 420, 250 A 170, 170 0 0, 1 80, 250" fill="none" />
+          </defs>
+
+          <circle cx="250" cy="250" r="230" fill="url(#bgGrad)" stroke="url(#goldGrad)" stroke-width="8" />
+          <circle cx="250" cy="250" r="182" fill="none" stroke="#38bdf8" stroke-width="3" stroke-dasharray="6, 4" />
+          <circle cx="250" cy="250" r="172" fill="#040914" />
+
+          <text fill="url(#goldGrad)" font-size="34" font-weight="900" letter-spacing="8">
+            <textPath href="#textArcTop" startOffset="50%" text-anchor="middle">LEKKA LAB</textPath>
+          </text>
+          <text fill="#e2e8f0" font-size="14" font-weight="700" letter-spacing="4">
+            <textPath href="#textArcBottom" startOffset="50%" text-anchor="middle">EXPLORE • DISCOVER • EXCEL</textPath>
+          </text>
+
+          <g transform="translate(0, 10)">
+            <path d="M 216,242 L 172,320 A 22,22 0 0,0 191,352 L 309,352 A 22,22 0 0,0 328,320 L 284,242 Z" fill="url(#liquidGrad)" />
+            <path d="M 232,150 L 268,150 M 236,150 L 236,204 L 165,324 A 24,24 0 0,0 186,360 L 314,360 A 24,24 0 0,0 335,324 L 264,204 L 264,150 M 230,146 L 270,146" fill="none" stroke="#f8fafc" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+            <text x="250" y="325" fill="#ffffff" font-size="38" font-family="'Times New Roman', serif" font-weight="bold" text-anchor="middle">π</text>
+            <text x="282" y="280" fill="#fde047" font-size="16" font-family="serif" font-weight="bold">√x</text>
+            <text x="202" y="295" fill="#bae6fd" font-size="18" font-family="serif" font-weight="bold">∑</text>
+            <path d="M 250,118 L 290,132 L 250,146 L 210,132 Z" fill="url(#goldGrad)" stroke="#b45309" stroke-width="1.5" />
+            <path d="M 226,138 L 226,154 Q 250,164 274,154 L 274,138" fill="none" stroke="url(#goldGrad)" stroke-width="2" />
+          </g>
+        </svg>
       </div>
-      <div class="brand-title">
-        <h1>LEKKA LAB</h1>
-        <p>Mathematics Assessment Portal</p>
+
+      <div class="header-text">
+        <h1>Lekka Lab: Educational Portal</h1>
+        <div class="motto-tag">“Explore Maths, Discover Your Potential!”</div>
+        <p class="subtext">Official Textbooks & Assessments</p>
       </div>
     </div>
 
-    <!-- MAIN TABS -->
-    <div class="top-nav">
-      <button class="main-tab active" id="btn-assessments" onclick="setMainMode('assessments')">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
-        Assessments
-      </button>
-      <button class="main-tab" id="btn-textbooks" onclick="setMainMode('textbooks')">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"></path><path d="M6 6h10"></path><path d="M6 10h10"></path></svg>
-        Textbooks
-      </button>
+    <div class="skin-bar">
+      <span>Theme:</span>
+      <button class="skin-pill" onclick="setSkin('sapphire')">Sapphire Gold</button>
+      <button class="skin-pill" onclick="setSkin('emerald')">Emerald</button>
+      <button class="skin-pill" onclick="setSkin('obsidian')">Obsidian Luxe</button>
     </div>
   </header>
 
-  <main>
-    <!-- CLASS SELECTOR -->
-    <div class="class-nav">
-      <button class="class-btn" id="cbtn-8" onclick="selectClass('8')">Class 8</button>
-      <button class="class-btn" id="cbtn-9" onclick="selectClass('9')">Class 9</button>
-      <button class="class-btn active" id="cbtn-10" onclick="selectClass('10')">Class 10</button>
+  <div class="container">
+
+    <!-- Official Textbooks -->
+    <div class="card card-scert">
+      <div class="info">
+        <h2>SCERT Textbooks</h2>
+        <p>Official State Board Textbooks</p>
+      </div>
+      <a href="https://scert.telangana.gov.in/" target="_blank" rel="noopener noreferrer" class="btn-download btn-scert">Download ↗</a>
     </div>
 
-    <!-- ================= VIEW 1: ASSESSMENTS ================= -->
-    <div id="section-assessments">
-
-      <!-- CLASS 10 ASSESSMENTS -->
-      <div id="c10-fa-wrap" class="class-block">
-        <div class="fa-stack">
-          <!-- FA 1 -->
-          <div class="fa-card active">
-            <button class="fa-header" onclick="toggleCard(this)">
-              <div class="fa-badge-title"><span class="fa-tag">FA - 1</span><span class="fa-name">Formative Assessment 1</span></div>
-              <svg class="fa-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-            </button>
-            <div class="fa-body">
-              <a class="dl-btn btn-project" href="class10-fa1-project.pdf" download="Class10_FA1_Project.pdf">
-                <div class="dl-btn-left"><svg class="dl-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg><span>Project Work</span></div>
-                <span class="dl-badge">PDF</span>
-              </a>
-              <a class="dl-btn btn-problems" href="class10-fa1-generating-new-problems.pdf" download="Class10_FA1_10Problems.pdf">
-                <div class="dl-btn-left"><svg class="dl-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg><span>Generating New Problems</span></div>
-                <span class="dl-badge">10 Qs</span>
-              </a>
-              <a class="dl-btn btn-slip" href="class10-fa1-slip-test.pdf" download="Class10_FA1_SlipTest.pdf">
-                <div class="dl-btn-left"><svg class="dl-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg><span>Slip Test with Solutions</span></div>
-                <span class="dl-badge">20M</span>
-              </a>
-            </div>
-          </div>
-          <!-- FA 2 -->
-          <div class="fa-card">
-            <button class="fa-header" onclick="toggleCard(this)">
-              <div class="fa-badge-title"><span class="fa-tag">FA - 2</span><span class="fa-name">Formative Assessment 2</span></div>
-              <svg class="fa-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-            </button>
-            <div class="fa-body">
-              <a class="dl-btn btn-project" href="class10-fa2-project.pdf" download="Class10_FA2_Project.pdf">
-                <div class="dl-btn-left"><svg class="dl-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg><span>Project Work</span></div>
-                <span class="dl-badge">PDF</span>
-              </a>
-              <a class="dl-btn btn-problems" href="class10-fa2-generating-new-problems.pdf" download="Class10_FA2_10Problems.pdf">
-                <div class="dl-btn-left"><svg class="dl-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg><span>Generating New Problems</span></div>
-                <span class="dl-badge">10 Qs</span>
-              </a>
-              <a class="dl-btn btn-slip" href="class10-fa2-slip-test.pdf" download="Class10_FA2_SlipTest.pdf">
-                <div class="dl-btn-left"><svg class="dl-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg><span>Slip Test with Solutions</span></div>
-                <span class="dl-badge">20M</span>
-              </a>
-            </div>
-          </div>
-          <!-- FA 3 -->
-          <div class="fa-card">
-            <button class="fa-header" onclick="toggleCard(this)">
-              <div class="fa-badge-title"><span class="fa-tag">FA - 3</span><span class="fa-name">Formative Assessment 3</span></div>
-              <svg class="fa-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-            </button>
-            <div class="fa-body">
-              <a class="dl-btn btn-project" href="class10-fa3-project.pdf" download="Class10_FA3_Project.pdf">
-                <div class="dl-btn-left"><svg class="dl-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg><span>Project Work</span></div>
-                <span class="dl-badge">PDF</span>
-              </a>
-              <a class="dl-btn btn-problems" href="class10-fa3-generating-new-problems.pdf" download="Class10_FA3_10Problems.pdf">
-                <div class="dl-btn-left"><svg class="dl-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg><span>Generating New Problems</span></div>
-                <span class="dl-badge">10 Qs</span>
-              </a>
-              <a class="dl-btn btn-slip" href="class10-fa3-slip-test.pdf" download="Class10_FA3_SlipTest.pdf">
-                <div class="dl-btn-left"><svg class="dl-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg><span>Slip Test with Solutions</span></div>
-                <span class="dl-badge">20M</span>
-              </a>
-            </div>
-          </div>
-          <!-- FA 4 -->
-          <div class="fa-card">
-            <button class="fa-header" onclick="toggleCard(this)">
-              <div class="fa-badge-title"><span class="fa-tag">FA - 4</span><span class="fa-name">Formative Assessment 4</span></div>
-              <svg class="fa-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-            </button>
-            <div class="fa-body">
-              <a class="dl-btn btn-project" href="class10-fa4-project.pdf" download="Class10_FA4_Project.pdf">
-                <div class="dl-btn-left"><svg class="dl-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg><span>Project Work</span></div>
-                <span class="dl-badge">PDF</span>
-              </a>
-              <a class="dl-btn btn-problems" href="class10-fa4-generating-new-problems.pdf" download="Class10_FA4_10Problems.pdf">
-                <div class="dl-btn-left"><svg class="dl-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg><span>Generating New Problems</span></div>
-                <span class="dl-badge">10 Qs</span>
-              </a>
-              <a class="dl-btn btn-slip" href="class10-fa4-slip-test.pdf" download="Class10_FA4_SlipTest.pdf">
-                <div class="dl-btn-left"><svg class="dl-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg><span>Slip Test with Solutions</span></div>
-                <span class="dl-badge">20M</span>
-              </a>
-            </div>
-          </div>
-        </div>
+    <div class="card card-ncert">
+      <div class="info">
+        <h2>NCERT Textbooks</h2>
+        <p>Official Central Board Textbooks</p>
       </div>
-
-      <!-- CLASS 9 ASSESSMENTS (UNTOUCHED) -->
-      <div id="c9-fa-wrap" class="class-block hidden">
-        <div class="fa-stack">
-          <!-- FA 1 -->
-          <div class="fa-card active">
-            <button class="fa-header" onclick="toggleCard(this)">
-              <div class="fa-badge-title"><span class="fa-tag">FA - 1</span><span class="fa-name">Formative Assessment 1</span></div>
-              <svg class="fa-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-            </button>
-            <div class="fa-body">
-              <a class="dl-btn btn-project" href="class9-fa1-project.pdf" download>
-                <div class="dl-btn-left"><svg class="dl-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg><span>Project Work</span></div>
-                <span class="dl-badge">PDF</span>
-              </a>
-              <a class="dl-btn btn-problems" href="class9-fa1-generating-new-problems.pdf" download>
-                <div class="dl-btn-left"><svg class="dl-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg><span>Generating New Problems</span></div>
-                <span class="dl-badge">10 Qs</span>
-              </a>
-              <a class="dl-btn btn-slip" href="class9-fa1-slip-test.pdf" download>
-                <div class="dl-btn-left"><svg class="dl-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg><span>Slip Test</span></div>
-                <span class="dl-badge">20M</span>
-              </a>
-            </div>
-          </div>
-          <!-- FA 2 -->
-          <div class="fa-card">
-            <button class="fa-header" onclick="toggleCard(this)">
-              <div class="fa-badge-title"><span class="fa-tag">FA - 2</span><span class="fa-name">Formative Assessment 2</span></div>
-              <svg class="fa-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-            </button>
-            <div class="fa-body">
-              <a class="dl-btn btn-project" href="class9-fa2-project.pdf" download>
-                <div class="dl-btn-left"><svg class="dl-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg><span>Project Work</span></div>
-                <span class="dl-badge">PDF</span>
-              </a>
-              <a class="dl-btn btn-problems" href="class9-fa2-generating-new-problems.pdf" download>
-                <div class="dl-btn-left"><svg class="dl-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg><span>Generating New Problems</span></div>
-                <span class="dl-badge">10 Qs</span>
-              </a>
-              <a class="dl-btn btn-slip" href="class9-fa2-slip-test.pdf" download>
-                <div class="dl-btn-left"><svg class="dl-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg><span>Slip Test</span></div>
-                <span class="dl-badge">20M</span>
-              </a>
-            </div>
-          </div>
-          <!-- FA 3 -->
-          <div class="fa-card">
-            <button class="fa-header" onclick="toggleCard(this)">
-              <div class="fa-badge-title"><span class="fa-tag">FA - 3</span><span class="fa-name">Formative Assessment 3</span></div>
-              <svg class="fa-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-            </button>
-            <div class="fa-body">
-              <a class="dl-btn btn-project" href="class9-fa3-project.pdf" download>
-                <div class="dl-btn-left"><svg class="dl-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg><span>Project Work</span></div>
-                <span class="dl-badge">PDF</span>
-              </a>
-              <a class="dl-btn btn-problems" href="Class9-fa3-generating-new-Problems.pdf" download>
-                <div class="dl-btn-left"><svg class="dl-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg><span>Generating New Problems</span></div>
-                <span class="dl-badge">10 Qs</span>
-              </a>
-              <a class="dl-btn btn-slip" href="class9-fa3-slip-test.pdf" download>
-                <div class="dl-btn-left"><svg class="dl-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg><span>Slip Test</span></div>
-                <span class="dl-badge">20M</span>
-              </a>
-            </div>
-          </div>
-          <!-- FA 4 -->
-          <div class="fa-card">
-            <button class="fa-header" onclick="toggleCard(this)">
-              <div class="fa-badge-title"><span class="fa-tag">FA - 4</span><span class="fa-name">Formative Assessment 4</span></div>
-              <svg class="fa-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-            </button>
-            <div class="fa-body">
-              <a class="dl-btn btn-project" href="class9-fa4-project.pdf" download>
-                <div class="dl-btn-left"><svg class="dl-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg><span>Project Work</span></div>
-                <span class="dl-badge">PDF</span>
-              </a>
-              <a class="dl-btn btn-problems" href="class9-fa4-generating-new-problems.pdf" download>
-                <div class="dl-btn-left"><svg class="dl-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg><span>Generating New Problems</span></div>
-                <span class="dl-badge">10 Qs</span>
-              </a>
-              <a class="dl-btn btn-slip" href="class9-fa4-slip-test.pdf" download>
-                <div class="dl-btn-left"><svg class="dl-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg><span>Slip Test</span></div>
-                <span class="dl-badge">20M</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- CLASS 8 ASSESSMENTS -->
-      <div id="c8-fa-wrap" class="class-block hidden">
-        <div class="fa-stack">
-          <!-- FA 1 -->
-          <div class="fa-card active">
-            <button class="fa-header" onclick="toggleCard(this)">
-              <div class="fa-badge-title"><span class="fa-tag">FA - 1</span><span class="fa-name">Formative Assessment 1</span></div>
-              <svg class="fa-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-            </button>
-            <div class="fa-body">
-              <a class="dl-btn btn-project" href="Class 8 FA1 Project.pdf" download>
-                <div class="dl-btn-left"><svg class="dl-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg><span>Project Work</span></div>
-                <span class="dl-badge">PDF</span>
-              </a>
-              <a class="dl-btn btn-problems" href="FA-1 Generating New Problems.pdf" download>
-                <div class="dl-btn-left"><svg class="dl-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg><span>Generating New Problems</span></div>
-                <span class="dl-badge">10 Qs</span>
-              </a>
-              <a class="dl-btn btn-slip" href="FA-1 Slip Test.pdf" download>
-                <div class="dl-btn-left"><svg class="dl-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg><span>Slip Test</span></div>
-                <span class="dl-badge">20M</span>
-              </a>
-            </div>
-          </div>
-          <!-- FA 2 -->
-          <div class="fa-card">
-            <button class="fa-header" onclick="toggleCard(this)">
-              <div class="fa-badge-title"><span class="fa-tag">FA - 2</span><span class="fa-name">Formative Assessment 2</span></div>
-              <svg class="fa-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-            </button>
-            <div class="fa-body">
-              <a class="dl-btn btn-project" href="class8-fa2-project.pdf" download>
-                <div class="dl-btn-left"><svg class="dl-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg><span>Project Work</span></div>
-                <span class="dl-badge">PDF</span>
-              </a>
-              <a class="dl-btn btn-problems" href="class8-fa2-generating-new-problems.pdf" download>
-                <div class="dl-btn-left"><svg class="dl-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg><span>Generating New Problems</span></div>
-                <span class="dl-badge">10 Qs</span>
-              </a>
-              <a class="dl-btn btn-slip" href="class8-fa2-slip-test.pdf" download>
-                <div class="dl-btn-left"><svg class="dl-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg><span>Slip Test</span></div>
-                <span class="dl-badge">20M</span>
-              </a>
-            </div>
-          </div>
-          <!-- FA 3 -->
-          <div class="fa-card">
-            <button class="fa-header" onclick="toggleCard(this)">
-              <div class="fa-badge-title"><span class="fa-tag">FA - 3</span><span class="fa-name">Formative Assessment 3</span></div>
-              <svg class="fa-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-            </button>
-            <div class="fa-body">
-              <a class="dl-btn btn-project" href="class8-fa3-project.pdf" download>
-                <div class="dl-btn-left"><svg class="dl-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg><span>Project Work</span></div>
-                <span class="dl-badge">PDF</span>
-              </a>
-              <a class="dl-btn btn-problems" href="class8-fa3-generating-new-problems.pdf" download>
-                <div class="dl-btn-left"><svg class="dl-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg><span>Generating New Problems</span></div>
-                <span class="dl-badge">10 Qs</span>
-              </a>
-              <a class="dl-btn btn-slip" href="class8-fa3-slip-test.pdf" download>
-                <div class="dl-btn-left"><svg class="dl-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg><span>Slip Test</span></div>
-                <span class="dl-badge">20M</span>
-              </a>
-            </div>
-          </div>
-          <!-- FA 4 -->
-          <div class="fa-card">
-            <button class="fa-header" onclick="toggleCard(this)">
-              <div class="fa-badge-title"><span class="fa-tag">FA - 4</span><span class="fa-name">Formative Assessment 4</span></div>
-              <svg class="fa-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-            </button>
-            <div class="fa-body">
-              <a class="dl-btn btn-project" href="class8-fa4-project.pdf" download>
-                <div class="dl-btn-left"><svg class="dl-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg><span>Project Work</span></div>
-                <span class="dl-badge">PDF</span>
-              </a>
-              <a class="dl-btn btn-problems" href="class8-fa4-generating-new-problems.pdf" download>
-                <div class="dl-btn-left"><svg class="dl-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg><span>Generating New Problems</span></div>
-                <span class="dl-badge">10 Qs</span>
-              </a>
-              <a class="dl-btn btn-slip" href="class8-fa4-slip-test.pdf" download>
-                <div class="dl-btn-left"><svg class="dl-icon" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg><span>Slip Test</span></div>
-                <span class="dl-badge">20M</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
+      <a href="https://ncert.nic.in/textbook.php" target="_blank" rel="noopener noreferrer" class="btn-download btn-ncert">Download ↗</a>
     </div>
 
-    <!-- ================= VIEW 2: TEXTBOOKS ================= -->
-    <div id="section-textbooks" class="hidden">
+    <h2 class="section-title">Academic Assessments</h2>
 
-      <!-- CLASS 10 TEXTBOOKS -->
-      <div id="c10-tb-wrap" class="class-block">
-        <div class="tb-card">
-          <div class="tb-meta">
-            <div class="tb-icon tb-icon-scert">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"></path></svg>
-            </div>
-            <div class="tb-text">
-              <h4>Telangana SCERT Class 10</h4>
-              <p>State Board Mathematics &bull; Official eTextbooks</p>
-            </div>
+    <!-- ================= CLASS 8 (OPEN BY DEFAULT) ================= -->
+    <details class="class-box" open>
+      <summary>Class 8 Mathematics</summary>
+      <div class="class-content">
+
+        <!-- Class 8 FA 1 (Directly Open) -->
+        <details class="fa-accordion" open>
+          <summary>FA 1 (Tap to View Files)</summary>
+          <div class="file-list">
+            <a href="FA-1%20Generating%20New%20Problems.pdf" download="Class8_FA1_Generating_Problems.pdf" class="file-btn">
+              <span>📄 Generating New Problems</span>
+              <span class="dl-badge">Download 📥</span>
+            </a>
+            <a href="Class%208%20FA1%20Project.pdf" download="Class8_FA1_Project.pdf" class="file-btn">
+              <span>📄 Project Work</span>
+              <span class="dl-badge">Download 📥</span>
+            </a>
+            <a href="FA-1%20Slip%20Test.pdf" download="Class8_FA1_Slip_Test.pdf" class="file-btn">
+              <span>📄 Slip Test</span>
+              <span class="dl-badge">Download 📥</span>
+            </a>
           </div>
-          <div class="tb-btn-row">
-            <a class="tb-link primary" href="https://scert.telangana.gov.in" target="_blank" rel="noopener">SCERT Portal</a>
-            <a class="tb-link" href="https://scert.telangana.gov.in/eTextBooks.html" target="_blank" rel="noopener">All Mediums</a>
+        </details>
+
+        <!-- Class 8 FA 2 (Directly Open) -->
+        <details class="fa-accordion" open>
+          <summary>FA 2 (Tap to View Files)</summary>
+          <div class="file-list">
+            <a href="class8-fa2-generating-new-problems.pdf" download="Class8_FA2_Generating_Problems.pdf" class="file-btn">
+              <span>📄 Generating New Problems</span>
+              <span class="dl-badge">Download 📥</span>
+            </a>
+            <a href="class8-fa2-project.pdf" download="Class8_FA2_Project.pdf" class="file-btn">
+              <span>📄 Project Work</span>
+              <span class="dl-badge">Download 📥</span>
+            </a>
+            <a href="class8-fa2-slip-test.pdf" download="Class8_FA2_Slip_Test.pdf" class="file-btn">
+              <span>📄 Slip Test</span>
+              <span class="dl-badge">Download 📥</span>
+            </a>
           </div>
+        </details>
+
+        <div class="fa-grid-2">
+          <span class="fa-grid-btn">FA 3 (Coming Soon)</span>
+          <span class="fa-grid-btn">FA 4 (Coming Soon)</span>
         </div>
 
-        <div class="tb-card">
-          <div class="tb-meta">
-            <div class="tb-icon tb-icon-ncert">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"></path></svg>
-            </div>
-            <div class="tb-text">
-              <h4>NCERT Class 10 Mathematics</h4>
-              <p>National Council of Educational Research &amp; Training</p>
-            </div>
+      </div>
+    </details>
+
+    <!-- ================= CLASS 9 (OPEN BY DEFAULT) ================= -->
+    <details class="class-box" open>
+      <summary>Class 9 Mathematics</summary>
+      <div class="class-content">
+
+        <!-- Class 9 FA 1 -->
+        <details class="fa-accordion">
+          <summary>FA 1 (Tap to View Files)</summary>
+          <div class="file-list">
+            <a href="class9-fa1-generating-new-problems.pdf" download="Class9_FA1_Generating_Problems.pdf" class="file-btn">
+              <span>📄 Generating New Problems</span>
+              <span class="dl-badge">Download 📥</span>
+            </a>
+            <a href="class9-fa1-project.pdf" download="Class9_FA1_Project.pdf" class="file-btn">
+              <span>📄 Project Work</span>
+              <span class="dl-badge">Download 📥</span>
+            </a>
+            <a href="class9-fa1-slip-test.pdf" download="Class9_FA1_Slip_Test.pdf" class="file-btn">
+              <span>📄 Slip Test & Solutions</span>
+              <span class="dl-badge">Download 📥</span>
+            </a>
           </div>
-          <div class="tb-btn-row">
-            <a class="tb-link primary" href="https://ncert.nic.in/textbook.php" target="_blank" rel="noopener">NCERT Portal</a>
-            <a class="tb-link" href="https://ncert.nic.in/textbook.php?jemh1=0-14" target="_blank" rel="noopener">Class 10 Maths</a>
+        </details>
+
+        <!-- Class 9 FA 2 -->
+        <details class="fa-accordion">
+          <summary>FA 2 (Tap to View Files)</summary>
+          <div class="file-list">
+            <a href="class9-fa2-generating-new-problems.pdf" download="Class9_FA2_Generating_Problems.pdf" class="file-btn">
+              <span>📄 Generating New Problems</span>
+              <span class="dl-badge">Download 📥</span>
+            </a>
+            <a href="class9-fa2-project.pdf" download="Class9_FA2_Project.pdf" class="file-btn">
+              <span>📄 Project Work</span>
+              <span class="dl-badge">Download 📥</span>
+            </a>
+            <a href="class9-fa2-slip-test.pdf" download="Class9_FA2_Slip_Test.pdf" class="file-btn">
+              <span>📄 Slip Test & Solutions</span>
+              <span class="dl-badge">Download 📥</span>
+            </a>
           </div>
+        </details>
+
+        <!-- Class 9 FA 3 (Verified Capitalization) -->
+        <details class="fa-accordion">
+          <summary>FA 3 (Tap to View Files)</summary>
+          <div class="file-list">
+            <a href="Class9-fa3-generating-new-Problems.pdf" download="Class9_FA3_Generating_Problems.pdf" class="file-btn">
+              <span>📄 Generating New Problems</span>
+              <span class="dl-badge">Download 📥</span>
+            </a>
+            <a href="class9-fa3-project.pdf" download="Class9_FA3_Project.pdf" class="file-btn">
+              <span>📄 Project Work</span>
+              <span class="dl-badge">Download 📥</span>
+            </a>
+            <a href="class9-fa3-slip-test.pdf" download="Class9_FA3_Slip_Test.pdf" class="file-btn">
+              <span>📄 Slip Test & Solutions</span>
+              <span class="dl-badge">Download 📥</span>
+            </a>
+          </div>
+        </details>
+
+        <!-- Class 9 FA 4 -->
+        <details class="fa-accordion">
+          <summary>FA 4 (Tap to View Files)</summary>
+          <div class="file-list">
+            <a href="class9-fa4-generating-new-problems.pdf" download="Class9_FA4_Generating_Problems.pdf" class="file-btn">
+              <span>📄 Generating New Problems</span>
+              <span class="dl-badge">Download 📥</span>
+            </a>
+            <a href="class9-fa4-project.pdf" download="Class9_FA4_Project.pdf" class="file-btn">
+              <span>📄 Project Work</span>
+              <span class="dl-badge">Download 📥</span>
+            </a>
+            <a href="class9-fa4-slip-test.pdf" download="Class9_FA4_Slip_Test.pdf" class="file-btn">
+              <span>📄 Slip Test & Solutions</span>
+              <span class="dl-badge">Download 📥</span>
+            </a>
+          </div>
+        </details>
+
+      </div>
+    </details>
+
+    <!-- ================= CLASS 10 ================= -->
+    <details class="class-box">
+      <summary>Class 10 Mathematics</summary>
+      <div class="class-content">
+        <div class="fa-grid-4">
+          <span class="fa-grid-btn">FA 1</span>
+          <span class="fa-grid-btn">FA 2</span>
+          <span class="fa-grid-btn">FA 3</span>
+          <span class="fa-grid-btn">FA 4</span>
         </div>
       </div>
+    </details>
 
-      <!-- CLASS 9 TEXTBOOKS -->
-      <div id="c9-tb-wrap" class="class-block hidden">
-        <div class="tb-card">
-          <div class="tb-meta">
-            <div class="tb-icon tb-icon-scert">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"></path></svg>
-            </div>
-            <div class="tb-text">
-              <h4>Telangana SCERT Class 9</h4>
-              <p>State Board Mathematics &bull; Official eTextbooks</p>
-            </div>
-          </div>
-          <div class="tb-btn-row">
-            <a class="tb-link primary" href="https://scert.telangana.gov.in" target="_blank" rel="noopener">SCERT Portal</a>
-            <a class="tb-link" href="https://scert.telangana.gov.in/eTextBooks.html" target="_blank" rel="noopener">All Mediums</a>
-          </div>
-        </div>
+    <!-- Footer -->
+    <footer>
+      <p>Created by <strong class="creator-name">Hemanth Kalyanapu</strong></p>
+      <p style="font-size: 11px; margin-top: 5px; opacity: 0.75; letter-spacing: 0.5px;">Lekka Lab &copy; All Rights Reserved</p>
+    </footer>
 
-        <div class="tb-card">
-          <div class="tb-meta">
-            <div class="tb-icon tb-icon-ncert">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"></path></svg>
-            </div>
-            <div class="tb-text">
-              <h4>NCERT Class 9 Mathematics</h4>
-              <p>National Council of Educational Research &amp; Training</p>
-            </div>
-          </div>
-          <div class="tb-btn-row">
-            <a class="tb-link primary" href="https://ncert.nic.in/textbook.php" target="_blank" rel="noopener">NCERT Portal</a>
-            <a class="tb-link" href="https://ncert.nic.in/textbook.php?iemh1=0-12" target="_blank" rel="noopener">Class 9 Maths</a>
-          </div>
-        </div>
-      </div>
-
-      <!-- CLASS 8 TEXTBOOKS -->
-      <div id="c8-tb-wrap" class="class-block hidden">
-        <div class="tb-card">
-          <div class="tb-meta">
-            <div class="tb-icon tb-icon-scert">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"></path></svg>
-            </div>
-            <div class="tb-text">
-              <h4>Telangana SCERT Class 8</h4>
-              <p>State Board Mathematics &bull; Official eTextbooks</p>
-            </div>
-          </div>
-          <div class="tb-btn-row">
-            <a class="tb-link primary" href="https://scert.telangana.gov.in" target="_blank" rel="noopener">SCERT Portal</a>
-            <a class="tb-link" href="https://scert.telangana.gov.in/eTextBooks.html" target="_blank" rel="noopener">All Mediums</a>
-          </div>
-        </div>
-
-        <div class="tb-card">
-          <div class="tb-meta">
-            <div class="tb-icon tb-icon-ncert">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"></path></svg>
-            </div>
-            <div class="tb-text">
-              <h4>NCERT Class 8 Mathematics</h4>
-              <p>National Council of Educational Research &amp; Training</p>
-            </div>
-          </div>
-          <div class="tb-btn-row">
-            <a class="tb-link primary" href="https://ncert.nic.in/textbook.php" target="_blank" rel="noopener">NCERT Portal</a>
-            <a class="tb-link" href="https://ncert.nic.in/textbook.php?hemh1=0-13" target="_blank" rel="noopener">Class 8 Maths</a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </main>
-
-  <!-- FOOTER -->
-  <footer>
-    <p>Curated &amp; Maintained by <span>Hemanth Kalyan</span></p>
-    <p style="margin-top: 4px; font-size: 0.72rem; color: #64748b;">LEKKA LAB &bull; High School Mathematics Resource Hub</p>
-  </footer>
+  </div>
 
   <script>
-    var currentMode = 'assessments';
-    var selectedClass = '10';
-
-    function setMainMode(mode) {
-      currentMode = mode;
-      
-      document.getElementById('btn-assessments').classList.toggle('active', mode === 'assessments');
-      document.getElementById('btn-textbooks').classList.toggle('active', mode === 'textbooks');
-
-      if (mode === 'assessments') {
-        document.getElementById('section-assessments').classList.remove('hidden');
-        document.getElementById('section-textbooks').classList.add('hidden');
+    function setSkin(themeName) {
+      if (themeName === 'sapphire') {
+        document.documentElement.removeAttribute('data-theme');
       } else {
-        document.getElementById('section-assessments').classList.add('hidden');
-        document.getElementById('section-textbooks').classList.remove('hidden');
+        document.documentElement.setAttribute('data-theme', themeName);
       }
-
-      renderCurrentClass();
+      localStorage.setItem('lekka_theme', themeName);
     }
 
-    function selectClass(cls) {
-      selectedClass = cls;
-
-      document.getElementById('cbtn-8').classList.toggle('active', cls === '8');
-      document.getElementById('cbtn-9').classList.toggle('active', cls === '9');
-      document.getElementById('cbtn-10').classList.toggle('active', cls === '10');
-
-      renderCurrentClass();
-    }
-
-    function renderCurrentClass() {
-      // Toggle assessment sections
-      document.getElementById('c8-fa-wrap').classList.toggle('hidden', selectedClass !== '8');
-      document.getElementById('c9-fa-wrap').classList.toggle('hidden', selectedClass !== '9');
-      document.getElementById('c10-fa-wrap').classList.toggle('hidden', selectedClass !== '10');
-
-      // Toggle textbook sections
-      document.getElementById('c8-tb-wrap').classList.toggle('hidden', selectedClass !== '8');
-      document.getElementById('c9-tb-wrap').classList.toggle('hidden', selectedClass !== '9');
-      document.getElementById('c10-tb-wrap').classList.toggle('hidden', selectedClass !== '10');
-    }
-
-    function toggleCard(btn) {
-      var card = btn.closest('.fa-card');
-      card.classList.toggle('active');
+    const saved = localStorage.getItem('lekka_theme');
+    if (saved) {
+      setSkin(saved);
     }
   </script>
 </body>
