@@ -3,251 +3,230 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MathSnap - Mathematics Assessment Hub</title>
+  <title>MathSnap</title>
   <style>
-    :root {
-      --primary: #1e3a8a;
-      --secondary: #2563eb;
-      --bg: #f8fafc;
-      --card-bg: #ffffff;
-      --text-main: #0f172a;
-      --text-muted: #475569;
-      --border: #e2e8f0;
-      --btn-project: #0284c7;
-      --btn-problems: #0d9488;
-      --btn-test: #4f46e5;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    }
-
     body {
-      background-color: var(--bg);
-      color: var(--text-main);
-      padding: 24px 16px;
-      line-height: 1.5;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 16px;
+      background-color: #f4f6f9;
+      color: #333;
     }
-
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    header {
+    .header {
       text-align: center;
-      margin-bottom: 32px;
+      margin-bottom: 24px;
     }
-
-    header h1 {
-      font-size: 2.2rem;
-      color: var(--primary);
-      margin-bottom: 8px;
+    .header h1 {
+      margin: 0;
+      color: #1a365d;
+      font-size: 26px;
     }
-
-    header p {
-      color: var(--text-muted);
-      font-size: 1rem;
+    .header p {
+      margin-top: 6px;
+      color: #666;
+      font-size: 14px;
     }
-
-    .class-section {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 24px;
-      margin-bottom: 28px;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-    }
-
-    .class-title {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--primary);
-      border-bottom: 2px solid var(--border);
-      padding-bottom: 10px;
-      margin-bottom: 20px;
-    }
-
-    .fa-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-    }
-
-    .fa-card {
-      border: 1px solid var(--border);
+    .class-container {
+      background: #ffffff;
       border-radius: 8px;
       padding: 16px;
-      background: #fafafa;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+    }
+    .class-header {
+      font-size: 20px;
+      font-weight: bold;
+      color: #2b6cb0;
+      border-bottom: 2px solid #edf2f7;
+      padding-bottom: 8px;
+      margin-bottom: 14px;
+    }
+    .assessment-block {
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 12px;
+      margin-bottom: 12px;
+      background-color: #fafafa;
+    }
+    .assessment-title {
+      font-size: 16px;
+      font-weight: bold;
+      color: #2d3748;
+      margin-bottom: 10px;
+    }
+    .button-group {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
     }
-
-    .fa-card h3 {
-      font-size: 1.15rem;
-      color: #1e293b;
-      margin-bottom: 4px;
+    @media (min-width: 600px) {
+      .button-group {
+        flex-direction: row;
+      }
     }
-
-    .btn {
-      display: inline-block;
-      text-align: center;
-      padding: 8px 12px;
-      font-size: 0.88rem;
-      font-weight: 600;
-      text-decoration: none;
+    .dl-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 9px 14px;
+      background-color: #3182ce;
       color: #ffffff;
-      border-radius: 6px;
-      transition: opacity 0.15s ease;
-    }
-
-    .btn:hover {
-      opacity: 0.9;
-    }
-
-    .btn-project {
-      background-color: var(--btn-project);
-    }
-
-    .btn-problems {
-      background-color: var(--btn-problems);
-    }
-
-    .btn-test {
-      background-color: var(--btn-test);
-    }
-
-    footer {
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 14px;
+      font-weight: 500;
       text-align: center;
-      color: var(--text-muted);
-      font-size: 0.85rem;
-      margin-top: 40px;
+    }
+    .dl-btn:active {
+      background-color: #2b6cb0;
+    }
+    .dl-btn.problems {
+      background-color: #38a169;
+    }
+    .dl-btn.problems:active {
+      background-color: #2f855a;
+    }
+    .dl-btn.test {
+      background-color: #805ad5;
+    }
+    .dl-btn.test:active {
+      background-color: #6b46c1;
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <header>
-      <h1>MathSnap</h1>
-      <p>Mathematics Assessment Hub • Formative Assessment Resources</p>
-    </header>
+  <div class="header">
+    <h1>MathSnap</h1>
+    <p>Formative Assessment Resource Center</p>
+  </div>
 
-    <!-- CLASS 10 -->
-    <section class="class-section">
-      <h2 class="class-title">Class 10</h2>
-      <div class="fa-grid">
-        
-        <div class="fa-card">
-          <h3>FA - 1</h3>
-          <a class="btn btn-project" href="class10-fa1-project.pdf" target="_blank">Project Work</a>
-          <a class="btn btn-problems" href="class10-fa1-generating-new-problems.pdf" target="_blank">New Problems</a>
-          <a class="btn btn-test" href="class10-fa1-slip-test.pdf" target="_blank">Slip Test</a>
-        </div>
+  <!-- CLASS 10 -->
+  <div class="class-container">
+    <div class="class-header">Class 10</div>
 
-        <div class="fa-card">
-          <h3>FA - 2</h3>
-          <a class="btn btn-project" href="class10-fa2-project.pdf" target="_blank">Project Work</a>
-          <a class="btn btn-problems" href="class10-fa2-generating-new-problems.pdf" target="_blank">New Problems</a>
-          <a class="btn btn-test" href="class10-fa2-slip-test.pdf" target="_blank">Slip Test</a>
-        </div>
-
-        <div class="fa-card">
-          <h3>FA - 3</h3>
-          <a class="btn btn-project" href="class10-fa3-project.pdf" target="_blank">Project Work</a>
-          <a class="btn btn-problems" href="class10-fa3-generating-new-problems.pdf" target="_blank">New Problems</a>
-          <a class="btn btn-test" href="class10-fa3-slip-test.pdf" target="_blank">Slip Test</a>
-        </div>
-
-        <div class="fa-card">
-          <h3>FA - 4</h3>
-          <a class="btn btn-project" href="class10-fa4-project.pdf" target="_blank">Project Work</a>
-          <a class="btn btn-problems" href="class10-fa4-generating-new-problems.pdf" target="_blank">New Problems</a>
-          <a class="btn btn-test" href="class10-fa4-slip-test.pdf" target="_blank">Slip Test</a>
-        </div>
-
+    <!-- FA-1 -->
+    <div class="assessment-block">
+      <div class="assessment-title">Formative Assessment - 1</div>
+      <div class="button-group">
+        <a class="dl-btn" href="class10-fa1-project.pdf" download="Class10_FA1_Project.pdf">⬇ Download Project</a>
+        <a class="dl-btn problems" href="class10-fa1-generating-new-problems.pdf" download="Class10_FA1_Problems.pdf">⬇ Download New Problems</a>
+        <a class="dl-btn test" href="class10-fa1-slip-test.pdf" download="Class10_FA1_Slip_Test.pdf">⬇ Download Slip Test</a>
       </div>
-    </section>
+    </div>
 
-    <!-- CLASS 9 (UNTOUCHED) -->
-    <section class="class-section">
-      <h2 class="class-title">Class 9</h2>
-      <div class="fa-grid">
-        
-        <div class="fa-card">
-          <h3>FA - 1</h3>
-          <a class="btn btn-project" href="class9-fa1-project.pdf" target="_blank">Project Work</a>
-          <a class="btn btn-problems" href="class9-fa1-generating-new-problems.pdf" target="_blank">New Problems</a>
-          <a class="btn btn-test" href="class9-fa1-slip-test.pdf" target="_blank">Slip Test</a>
-        </div>
-
-        <div class="fa-card">
-          <h3>FA - 2</h3>
-          <a class="btn btn-project" href="class9-fa2-project.pdf" target="_blank">Project Work</a>
-          <a class="btn btn-problems" href="class9-fa2-generating-new-problems.pdf" target="_blank">New Problems</a>
-          <a class="btn btn-test" href="class9-fa2-slip-test.pdf" target="_blank">Slip Test</a>
-        </div>
-
-        <div class="fa-card">
-          <h3>FA - 3</h3>
-          <a class="btn btn-project" href="class9-fa3-project.pdf" target="_blank">Project Work</a>
-          <a class="btn btn-problems" href="Class9-fa3-generating-new-Problems.pdf" target="_blank">New Problems</a>
-          <a class="btn btn-test" href="class9-fa3-slip-test.pdf" target="_blank">Slip Test</a>
-        </div>
-
-        <div class="fa-card">
-          <h3>FA - 4</h3>
-          <a class="btn btn-project" href="class9-fa4-project.pdf" target="_blank">Project Work</a>
-          <a class="btn btn-problems" href="class9-fa4-generating-new-problems.pdf" target="_blank">New Problems</a>
-          <a class="btn btn-test" href="class9-fa4-slip-test.pdf" target="_blank">Slip Test</a>
-        </div>
-
+    <!-- FA-2 -->
+    <div class="assessment-block">
+      <div class="assessment-title">Formative Assessment - 2</div>
+      <div class="button-group">
+        <a class="dl-btn" href="class10-fa2-project.pdf" download="Class10_FA2_Project.pdf">⬇ Download Project</a>
+        <a class="dl-btn problems" href="class10-fa2-generating-new-problems.pdf" download="Class10_FA2_Problems.pdf">⬇ Download New Problems</a>
+        <a class="dl-btn test" href="class10-fa2-slip-test.pdf" download="Class10_FA2_Slip_Test.pdf">⬇ Download Slip Test</a>
       </div>
-    </section>
+    </div>
 
-    <!-- CLASS 8 -->
-    <section class="class-section">
-      <h2 class="class-title">Class 8</h2>
-      <div class="fa-grid">
-        
-        <div class="fa-card">
-          <h3>FA - 1</h3>
-          <a class="btn btn-project" href="Class 8 FA1 Project.pdf" target="_blank">Project Work</a>
-          <a class="btn btn-problems" href="FA-1 Generating New Problems.pdf" target="_blank">New Problems</a>
-          <a class="btn btn-test" href="FA-1 Slip Test.pdf" target="_blank">Slip Test</a>
-        </div>
-
-        <div class="fa-card">
-          <h3>FA - 2</h3>
-          <a class="btn btn-project" href="class8-fa2-project.pdf" target="_blank">Project Work</a>
-          <a class="btn btn-problems" href="class8-fa2-generating-new-problems.pdf" target="_blank">New Problems</a>
-          <a class="btn btn-test" href="class8-fa2-slip-test.pdf" target="_blank">Slip Test</a>
-        </div>
-
-        <div class="fa-card">
-          <h3>FA - 3</h3>
-          <a class="btn btn-project" href="class8-fa3-project.pdf" target="_blank">Project Work</a>
-          <a class="btn btn-problems" href="class8-fa3-generating-new-problems.pdf" target="_blank">New Problems</a>
-          <a class="btn btn-test" href="class8-fa3-slip-test.pdf" target="_blank">Slip Test</a>
-        </div>
-
-        <div class="fa-card">
-          <h3>FA - 4</h3>
-          <a class="btn btn-project" href="class8-fa4-project.pdf" target="_blank">Project Work</a>
-          <a class="btn btn-problems" href="class8-fa4-generating-new-problems.pdf" target="_blank">New Problems</a>
-          <a class="btn btn-test" href="class8-fa4-slip-test.pdf" target="_blank">Slip Test</a>
-        </div>
-
+    <!-- FA-3 -->
+    <div class="assessment-block">
+      <div class="assessment-title">Formative Assessment - 3</div>
+      <div class="button-group">
+        <a class="dl-btn" href="class10-fa3-project.pdf" download="Class10_FA3_Project.pdf">⬇ Download Project</a>
+        <a class="dl-btn problems" href="class10-fa3-generating-new-problems.pdf" download="Class10_FA3_Problems.pdf">⬇ Download New Problems</a>
+        <a class="dl-btn test" href="class10-fa3-slip-test.pdf" download="Class10_FA3_Slip_Test.pdf">⬇ Download Slip Test</a>
       </div>
-    </section>
+    </div>
 
-    <footer>
-      <p>&copy; MathSnap. All academic materials organized for school evaluations.</p>
-    </footer>
+    <!-- FA-4 -->
+    <div class="assessment-block">
+      <div class="assessment-title">Formative Assessment - 4</div>
+      <div class="button-group">
+        <a class="dl-btn" href="class10-fa4-project.pdf" download="Class10_FA4_Project.pdf">⬇ Download Project</a>
+        <a class="dl-btn problems" href="class10-fa4-generating-new-problems.pdf" download="Class10_FA4_Problems.pdf">⬇ Download New Problems</a>
+        <a class="dl-btn test" href="class10-fa4-slip-test.pdf" download="Class10_FA4_Slip_Test.pdf">⬇ Download Slip Test</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLASS 9 (UNTOUCHED) -->
+  <div class="class-container">
+    <div class="class-header">Class 9</div>
+
+    <div class="assessment-block">
+      <div class="assessment-title">Formative Assessment - 1</div>
+      <div class="button-group">
+        <a class="dl-btn" href="class9-fa1-project.pdf" download>⬇ Download Project</a>
+        <a class="dl-btn problems" href="class9-fa1-generating-new-problems.pdf" download>⬇ Download New Problems</a>
+        <a class="dl-btn test" href="class9-fa1-slip-test.pdf" download>⬇ Download Slip Test</a>
+      </div>
+    </div>
+
+    <div class="assessment-block">
+      <div class="assessment-title">Formative Assessment - 2</div>
+      <div class="button-group">
+        <a class="dl-btn" href="class9-fa2-project.pdf" download>⬇ Download Project</a>
+        <a class="dl-btn problems" href="class9-fa2-generating-new-problems.pdf" download>⬇ Download New Problems</a>
+        <a class="dl-btn test" href="class9-fa2-slip-test.pdf" download>⬇ Download Slip Test</a>
+      </div>
+    </div>
+
+    <div class="assessment-block">
+      <div class="assessment-title">Formative Assessment - 3</div>
+      <div class="button-group">
+        <a class="dl-btn" href="class9-fa3-project.pdf" download>⬇ Download Project</a>
+        <a class="dl-btn problems" href="Class9-fa3-generating-new-Problems.pdf" download>⬇ Download New Problems</a>
+        <a class="dl-btn test" href="class9-fa3-slip-test.pdf" download>⬇ Download Slip Test</a>
+      </div>
+    </div>
+
+    <div class="assessment-block">
+      <div class="assessment-title">Formative Assessment - 4</div>
+      <div class="button-group">
+        <a class="dl-btn" href="class9-fa4-project.pdf" download>⬇ Download Project</a>
+        <a class="dl-btn problems" href="class9-fa4-generating-new-problems.pdf" download>⬇ Download New Problems</a>
+        <a class="dl-btn test" href="class9-fa4-slip-test.pdf" download>⬇ Download Slip Test</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLASS 8 -->
+  <div class="class-container">
+    <div class="class-header">Class 8</div>
+
+    <div class="assessment-block">
+      <div class="assessment-title">Formative Assessment - 1</div>
+      <div class="button-group">
+        <a class="dl-btn" href="Class 8 FA1 Project.pdf" download>⬇ Download Project</a>
+        <a class="dl-btn problems" href="FA-1 Generating New Problems.pdf" download>⬇ Download New Problems</a>
+        <a class="dl-btn test" href="FA-1 Slip Test.pdf" download>⬇ Download Slip Test</a>
+      </div>
+    </div>
+
+    <div class="assessment-block">
+      <div class="assessment-title">Formative Assessment - 2</div>
+      <div class="button-group">
+        <a class="dl-btn" href="class8-fa2-project.pdf" download>⬇ Download Project</a>
+        <a class="dl-btn problems" href="class8-fa2-generating-new-problems.pdf" download>⬇ Download New Problems</a>
+        <a class="dl-btn test" href="class8-fa2-slip-test.pdf" download>⬇ Download Slip Test</a>
+      </div>
+    </div>
+
+    <div class="assessment-block">
+      <div class="assessment-title">Formative Assessment - 3</div>
+      <div class="button-group">
+        <a class="dl-btn" href="class8-fa3-project.pdf" download>⬇ Download Project</a>
+        <a class="dl-btn problems" href="class8-fa3-generating-new-problems.pdf" download>⬇ Download New Problems</a>
+        <a class="dl-btn test" href="class8-fa3-slip-test.pdf" download>⬇ Download Slip Test</a>
+      </div>
+    </div>
+
+    <div class="assessment-block">
+      <div class="assessment-title">Formative Assessment - 4</div>
+      <div class="button-group">
+        <a class="dl-btn" href="class8-fa4-project.pdf" download>⬇ Download Project</a>
+        <a class="dl-btn problems" href="class8-fa4-generating-new-problems.pdf" download>⬇ Download New Problems</a>
+        <a class="dl-btn test" href="class8-fa4-slip-test.pdf" download>⬇ Download Slip Test</a>
+      </div>
+    </div>
   </div>
 
 </body>
