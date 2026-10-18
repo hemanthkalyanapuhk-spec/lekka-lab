@@ -4,238 +4,299 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lekka Lab: Educational Portal</title>
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;800&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    }
+
+    body {
+      background-color: #f1f5f9;
+      color: #0f172a;
+      padding-bottom: 50px;
+    }
+
+    header {
+      background: linear-gradient(135deg, #091e42, #0284c7);
+      color: white;
+      padding: 22px 16px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+      margin-bottom: 24px;
+    }
+
+    .header-content {
+      max-width: 620px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .emblem-wrapper {
+      width: 74px;
+      height: 74px;
+      flex-shrink: 0;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+    }
+
+    .header-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    header h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      margin-bottom: 2px;
+      line-height: 1.2;
+    }
+
+    header .motto-tag {
+      font-size: 13px;
+      font-weight: 600;
+      color: #bae6fd;
+      letter-spacing: 0.2px;
+      margin-bottom: 3px;
+      font-style: italic;
+    }
+
+    header p.subtext {
+      font-size: 12px;
+      opacity: 0.85;
+    }
+
+    .container {
+      max-width: 620px;
+      margin: 0 auto;
+      padding: 0 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 14px;
+      padding: 16px 20px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.04);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .card-scert { border-left: 6px solid #f97316; }
+    .card-ncert { border-left: 6px solid #0284c7; }
+
+    .info h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 17px;
+      color: #0f172a;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .info p {
+      font-size: 13px;
+      color: #64748b;
+    }
+
+    .btn-download {
+      display: inline-block;
+      padding: 9px 18px;
+      color: #ffffff;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .btn-scert { background-color: #f97316; }
+    .btn-ncert { background-color: #0284c7; }
+
+    .section-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #1e293b;
+      margin-top: 6px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    details.class-box {
+      background: white;
+      border: 1px solid #cbd5e1;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.03);
+    }
+
+    details.class-box > summary {
+      background: #0f172a;
+      color: white;
+      padding: 15px 18px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      user-select: none;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    details.class-box > summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details.class-box > summary::after {
+      content: "▼";
+      font-size: 12px;
+      transition: transform 0.2s;
+    }
+
+    details.class-box[open] > summary::after {
+      transform: rotate(180deg);
+    }
+
+    .class-content {
+      padding: 14px;
+      background: #f8fafc;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    details.fa-accordion {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    details.fa-accordion > summary {
+      background: #0284c7;
+      color: white;
+      padding: 12px 14px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      user-select: none;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    details.fa-accordion > summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details.fa-accordion > summary::after {
+      content: "▼";
+      font-size: 11px;
+      transition: transform 0.2s;
+    }
+
+    details.fa-accordion[open] > summary::after {
+      transform: rotate(180deg);
+    }
+
+    .file-list {
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      background: #f1f5f9;
+    }
+
+    .file-btn {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: white;
+      color: #0f172a;
+      text-decoration: none;
+      padding: 11px 14px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      transition: all 0.15s ease;
+    }
+
+    .file-btn:hover {
+      background: #e0f2fe;
+      border-color: #0284c7;
+      color: #0369a1;
+    }
+
+    .dl-badge {
+      background: #0284c7;
+      color: white;
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .fa-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .fa-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      padding: 12px;
+    }
+
+    .fa-grid-btn {
+      display: block;
+      text-align: center;
+      background: #f8fafc;
+      color: #64748b;
+      text-decoration: none;
+      padding: 10px 4px;
+      border: 1px dashed #cbd5e1;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 18px;
+      border-top: 1px solid #cbd5e1;
+      color: #64748b;
+      font-size: 13px;
+    }
+
+    footer strong {
+      color: #0f172a;
+    }
+  </style>
 </head>
-<body class="antialiased">
+<body>
 
-        <div class="bg-[#050b17] min-h-full pb-10 text-slate-100 font-jakarta selection:bg-amber-400 selection:text-slate-950">
-          <!-- Luxury Navy Header -->
-          <header class="bg-gradient-to-b from-[#09152e] via-[#081226] to-[#050b17] border-b border-amber-500/30 p-5 shadow-xl relative overflow-hidden">
-            <div class="absolute -top-12 -right-12 w-40 h-40 bg-amber-500/10 rounded-full blur-2xl pointer-events-none"></div>
-            <div class="flex items-center gap-3.5 relative z-10">
-              <div class="w-16 h-16 shrink-0 drop-shadow-[0_0_15px_rgba(245,158,11,0.35)]">
-    <svg viewBox="0 0 500 500" width="100%" height="100%">
-      <defs>
-        <linearGradient id="emblemBg" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#060d1b"></stop>
-          <stop offset="100%" stop-color="#020617"></stop>
-        </linearGradient>
-        <linearGradient id="emblemGold" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#fef08a"></stop>
-          <stop offset="50%" stop-color="#f59e0b"></stop>
-          <stop offset="100%" stop-color="#d97706"></stop>
-        </linearGradient>
-        <linearGradient id="emblemFluid" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.9"></stop>
-          <stop offset="100%" stop-color="#1d4ed8"></stop>
-        </linearGradient>
-        <path id="txtArcTop" d="M 75, 250 A 175, 175 0 1, 1 425, 250" fill="none"></path>
-        <path id="txtArcBottom" d="M 420, 250 A 170, 170 0 0, 1 80, 250" fill="none"></path>
-      </defs>
-      <circle cx="250" cy="250" r="230" fill="url(#emblemBg)" stroke="url(#emblemGold)" stroke-width="8.5"></circle>
-      <circle cx="250" cy="250" r="182" fill="none" stroke="#38bdf8" stroke-width="3" stroke-dasharray="6, 4"></circle>
-      <circle cx="250" cy="250" r="172" fill="#040814"></circle>
-      <text fill="url(#emblemGold)" font-size="34" font-weight="900" letter-spacing="8" font-family="'Outfit', sans-serif">
-        <textPath href="#txtArcTop" startOffset="50%" text-anchor="middle">LEKKA LAB</textPath>
-      </text>
-      <text fill="#e2e8f0" font-size="14.5" font-weight="700" letter-spacing="4" font-family="'Plus Jakarta Sans', sans-serif">
-        <textPath href="#txtArcBottom" startOffset="50%" text-anchor="middle">EXPLORE • DISCOVER • EXCEL</textPath>
-      </text>
-      <g transform="translate(0, 10)">
-        <path d="M 216,242 L 172,320 A 22,22 0 0,0 191,352 L 309,352 A 22,22 0 0,0 328,320 L 284,242 Z" fill="url(#emblemFluid)"></path>
-        <path d="M 232,150 L 268,150 M 236,150 L 236,204 L 165,324 A 24,24 0 0,0 186,360 L 314,360 A 24,24 0 0,0 335,324 L 264,204 L 264,150 M 230,146 L 270,146" fill="none" stroke="#f8fafc" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path>
-        <text x="250" y="325" fill="#ffffff" font-size="38" font-family="'Times New Roman', serif" font-weight="bold" text-anchor="middle">π</text>
-        <text x="282" y="280" fill="#fde047" font-size="16" font-family="serif" font-weight="bold">√x</text>
-        <text x="202" y="295" fill="#bae6fd" font-size="18" font-family="serif" font-weight="bold">∑</text>
-        <path d="M 250,118 L 290,132 L 250,146 L 210,132 Z" fill="url(#emblemGold)" stroke="#b45309" stroke-width="1.5"></path>
-        <path d="M 226,138 L 226,154 Q 250,164 274,154 L 274,138" fill="none" stroke="url(#emblemGold)" stroke-width="2"></path>
-      </g>
-    </svg>
-  </div>
-              <div>
-                <h1 class="text-lg font-outfit font-black tracking-tight text-white leading-tight">Lekka Lab: Educational Portal</h1>
-                <div class="text-xs text-amber-300 font-outfit font-semibold italic mt-0.5">“Explore Maths, Discover Your Potential!”</div>
-                <p class="text-[11px] text-slate-400 font-medium mt-0.5">Official Textbooks &amp; Assessments</p>
-              </div>
-            </div>
-          </header>
-
-          <div class="p-4 space-y-4 max-w-xl mx-auto">
-            <!-- Textbooks Cards -->
-            <div class="grid grid-cols-1 gap-2.5">
-              <div class="bg-gradient-to-r from-[#0c1933] to-[#0f1f3d] border border-amber-500/30 rounded-2xl p-3.5 shadow-md flex items-center justify-between">
-                <div>
-                  <div class="flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-orange-400"></span>
-                    <h3 class="text-xs font-outfit font-bold text-white uppercase tracking-wider">SCERT Textbooks</h3>
-                  </div>
-                  <p class="text-[11px] text-slate-400 mt-0.5">Official Telangana State Board Resources</p>
-                </div>
-                <a href="https://scert.telangana.gov.in/" target="_blank" class="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-orange-500 to-amber-600 text-white font-outfit text-xs font-bold shadow-md hover:brightness-110 active:scale-95 transition">Download ↗</a>
-              </div>
-
-              <div class="bg-gradient-to-r from-[#0c1933] to-[#0f1f3d] border border-sky-500/30 rounded-2xl p-3.5 shadow-md flex items-center justify-between">
-                <div>
-                  <div class="flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-sky-400"></span>
-                    <h3 class="text-xs font-outfit font-bold text-white uppercase tracking-wider">NCERT Textbooks</h3>
-                  </div>
-                  <p class="text-[11px] text-slate-400 mt-0.5">Central Board Curriculum Textbooks</p>
-                </div>
-                <a href="https://ncert.nic.in/textbook.php" target="_blank" class="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-sky-600 to-blue-700 text-white font-outfit text-xs font-bold shadow-md hover:brightness-110 active:scale-95 transition">Download ↗</a>
-              </div>
-            </div>
-
-            <!-- Assessments Section -->
-            <div class="flex items-center justify-between pt-2 border-b border-amber-500/20 pb-1.5">
-              <h2 class="text-xs font-outfit font-bold text-amber-400 uppercase tracking-widest">Academic Assessments</h2>
-              <span class="text-[10px] text-slate-400 font-mono">Curated Sets</span>
-            </div>
-
-            <!-- Class 8 Drawer -->
-            <details class="group bg-[#091428] border border-slate-800 rounded-2xl overflow-hidden shadow-sm transition">
-              <summary class="bg-[#0b1a33] text-slate-200 px-4 py-3 text-xs font-outfit font-bold cursor-pointer list-none flex justify-between items-center select-none group-open:border-b group-open:border-slate-800">
-                <span class="flex items-center gap-2">
-                  <span class="w-2 h-2 rounded-full bg-amber-400/60"></span> Class 8
-                </span>
-                <span class="text-amber-400 font-mono text-[11px] transition-transform duration-200 group-open:rotate-180">▼</span>
-              </summary>
-              <div class="p-3 bg-[#060e1d] space-y-2">
-                <div class="text-[11px] text-slate-400 font-semibold">Available Formative Assessments:</div>
-                <div class="grid grid-cols-2 gap-2">
-                  <div class="p-2 rounded-xl bg-[#09152a] border border-slate-800 text-[11px] text-slate-300">
-                    <span class="font-bold text-amber-300 block">FA 1</span>
-                    <a href="Class%208%20FA1%20Project.pdf" class="text-[10px] text-sky-400 hover:underline">Download Project 📥</a>
-                  </div>
-                  <div class="p-2 rounded-xl bg-[#09152a] border border-slate-800 text-[11px] text-slate-300">
-                    <span class="font-bold text-amber-300 block">FA 2</span>
-                    <a href="class8-fa2-project.pdf" class="text-[10px] text-sky-400 hover:underline">Download Project 📥</a>
-                  </div>
-                </div>
-              </div>
-            </details>
-
-            <!-- Class 9 Drawer (Default Open) -->
-            <details class="group bg-[#0a162d] border border-amber-500/30 rounded-2xl overflow-hidden shadow-lg shadow-amber-950/20" open>
-              <summary class="bg-gradient-to-r from-[#0d1e3d] to-[#122852] text-white px-4 py-3.5 text-xs font-outfit font-bold cursor-pointer list-none flex justify-between items-center select-none border-b border-amber-500/20">
-                <span class="flex items-center gap-2">
-                  <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span> Class 9 (Formative Assessment 1–4)
-                </span>
-                <span class="text-amber-300 font-mono text-[11px] transition-transform duration-200 group-open:rotate-180">▼</span>
-              </summary>
-              <div class="p-3.5 bg-[#060e1d] space-y-3">
-                
-                <!-- FA 1 Module -->
-                <details class="group/fa bg-[#0a162b] border border-slate-800 rounded-xl overflow-hidden" open>
-                  <summary class="bg-gradient-to-r from-sky-900/60 to-indigo-900/60 text-sky-200 px-3.5 py-2.5 text-xs font-outfit font-bold cursor-pointer list-none flex justify-between items-center select-none">
-                    <span>FA 1 Assessment Suite</span>
-                    <span class="text-xs text-sky-400 group-open/fa:rotate-180 transition">▼</span>
-                  </summary>
-                  <div class="p-2.5 space-y-1.5 bg-[#050b16]">
-                    <a href="class9-fa1-generating-new-problems.pdf" download="Class9_FA1_Generating_Problems.pdf" class="flex justify-between items-center p-2 rounded-lg bg-[#0a1529] border border-slate-800 text-[11px] font-medium text-slate-200 hover:border-amber-400/50 hover:bg-[#0e1d38] transition">
-                      <span>📄 Generating New Problems</span>
-                      <span class="bg-amber-500/20 text-amber-300 font-outfit font-bold px-2 py-0.5 rounded text-[10px] border border-amber-500/30">Download 📥</span>
-                    </a>
-                    <a href="class9-fa1-project.pdf" download="Class9_FA1_Project.pdf" class="flex justify-between items-center p-2 rounded-lg bg-[#0a1529] border border-slate-800 text-[11px] font-medium text-slate-200 hover:border-amber-400/50 hover:bg-[#0e1d38] transition">
-                      <span>📄 Project Work</span>
-                      <span class="bg-amber-500/20 text-amber-300 font-outfit font-bold px-2 py-0.5 rounded text-[10px] border border-amber-500/30">Download 📥</span>
-                    </a>
-                    <a href="class9-fa1-slip-test.pdf" download="Class9_FA1_Slip_Test.pdf" class="flex justify-between items-center p-2 rounded-lg bg-[#0a1529] border border-slate-800 text-[11px] font-medium text-slate-200 hover:border-amber-400/50 hover:bg-[#0e1d38] transition">
-                      <span>📄 Slip Test &amp; Solutions</span>
-                      <span class="bg-amber-500/20 text-amber-300 font-outfit font-bold px-2 py-0.5 rounded text-[10px] border border-amber-500/30">Download 📥</span>
-                    </a>
-                  </div>
-                </details>
-
-                <!-- FA 2 Module -->
-                <details class="group/fa bg-[#0a162b] border border-slate-800 rounded-xl overflow-hidden">
-                  <summary class="bg-gradient-to-r from-sky-900/60 to-indigo-900/60 text-sky-200 px-3.5 py-2.5 text-xs font-outfit font-bold cursor-pointer list-none flex justify-between items-center select-none">
-                    <span>FA 2 Assessment Suite</span>
-                    <span class="text-xs text-sky-400 group-open/fa:rotate-180 transition">▼</span>
-                  </summary>
-                  <div class="p-2.5 space-y-1.5 bg-[#050b16]">
-                    <a href="class9-fa2-generating-new-problems.pdf" class="flex justify-between items-center p-2 rounded-lg bg-[#0a1529] border border-slate-800 text-[11px] text-slate-200 hover:border-amber-400/50 transition">
-                      <span>📄 Generating New Problems</span>
-                      <span class="text-amber-300 text-[10px] font-bold">Download 📥</span>
-                    </a>
-                    <a href="class9-fa2-project.pdf" class="flex justify-between items-center p-2 rounded-lg bg-[#0a1529] border border-slate-800 text-[11px] text-slate-200 hover:border-amber-400/50 transition">
-                      <span>📄 Project Work</span>
-                      <span class="text-amber-300 text-[10px] font-bold">Download 📥</span>
-                    </a>
-                    <a href="class9-fa2-slip-test.pdf" class="flex justify-between items-center p-2 rounded-lg bg-[#0a1529] border border-slate-800 text-[11px] text-slate-200 hover:border-amber-400/50 transition">
-                      <span>📄 Slip Test &amp; Solutions</span>
-                      <span class="text-amber-300 text-[10px] font-bold">Download 📥</span>
-                    </a>
-                  </div>
-                </details>
-
-                <!-- FA 3 Module -->
-                <details class="group/fa bg-[#0a162b] border border-slate-800 rounded-xl overflow-hidden">
-                  <summary class="bg-gradient-to-r from-sky-900/60 to-indigo-900/60 text-sky-200 px-3.5 py-2.5 text-xs font-outfit font-bold cursor-pointer list-none flex justify-between items-center select-none">
-                    <span>FA 3 Assessment Suite</span>
-                    <span class="text-xs text-sky-400 group-open/fa:rotate-180 transition">▼</span>
-                  </summary>
-                  <div class="p-2.5 space-y-1.5 bg-[#050b16]">
-                    <a href="Class9-fa3-generating-new-Problems.pdf" class="flex justify-between items-center p-2 rounded-lg bg-[#0a1529] border border-slate-800 text-[11px] text-slate-200 hover:border-amber-400/50 transition">
-                      <span>📄 Generating New Problems</span>
-                      <span class="text-amber-300 text-[10px] font-bold">Download 📥</span>
-                    </a>
-                    <a href="class9-fa3-project.pdf" class="flex justify-between items-center p-2 rounded-lg bg-[#0a1529] border border-slate-800 text-[11px] text-slate-200 hover:border-amber-400/50 transition">
-                      <span>📄 Project Work</span>
-                      <span class="text-amber-300 text-[10px] font-bold">Download 📥</span>
-                    </a>
-                    <a href="class9-fa3-slip-test.pdf" class="flex justify-between items-center p-2 rounded-lg bg-[#0a1529] border border-slate-800 text-[11px] text-slate-200 hover:border-amber-400/50 transition">
-                      <span>📄 Slip Test &amp; Solutions</span>
-                      <span class="text-amber-300 text-[10px] font-bold">Download 📥</span>
-                    </a>
-                  </div>
-                </details>
-
-                <!-- FA 4 Module -->
-                <details class="group/fa bg-[#0a162b] border border-slate-800 rounded-xl overflow-hidden">
-                  <summary class="bg-gradient-to-r from-sky-900/60 to-indigo-900/60 text-sky-200 px-3.5 py-2.5 text-xs font-outfit font-bold cursor-pointer list-none flex justify-between items-center select-none">
-                    <span>FA 4 Assessment Suite</span>
-                    <span class="text-xs text-sky-400 group-open/fa:rotate-180 transition">▼</span>
-                  </summary>
-                  <div class="p-2.5 space-y-1.5 bg-[#050b16]">
-                    <a href="class9-fa4-generating-new-problems.pdf" class="flex justify-between items-center p-2 rounded-lg bg-[#0a1529] border border-slate-800 text-[11px] text-slate-200 hover:border-amber-400/50 transition">
-                      <span>📄 Generating New Problems</span>
-                      <span class="text-amber-300 text-[10px] font-bold">Download 📥</span>
-                    </a>
-                    <a href="class9-fa4-project.pdf" class="flex justify-between items-center p-2 rounded-lg bg-[#0a1529] border border-slate-800 text-[11px] text-slate-200 hover:border-amber-400/50 transition">
-                      <span>📄 Project Work</span>
-                      <span class="text-amber-300 text-[10px] font-bold">Download 📥</span>
-                    </a>
-                    <a href="class9-fa4-slip-test.pdf" class="flex justify-between items-center p-2 rounded-lg bg-[#0a1529] border border-slate-800 text-[11px] text-slate-200 hover:border-amber-400/50 transition">
-                      <span>📄 Slip Test &amp; Solutions</span>
-                      <span class="text-amber-300 text-[10px] font-bold">Download 📥</span>
-                    </a>
-                  </div>
-                </details>
-
-              </div>
-            </details>
-
-            <!-- Class 10 Drawer -->
-            <details class="group bg-[#091428] border border-slate-800 rounded-2xl overflow-hidden shadow-sm">
-              <summary class="bg-[#0b1a33] text-slate-300 px-4 py-3 text-xs font-outfit font-bold cursor-pointer list-none flex justify-between items-center select-none">
-                <span class="flex items-center gap-2">
-                  <span class="w-2 h-2 rounded-full bg-slate-500"></span> Class 10
-                </span>
-                <span class="text-slate-400 font-mono text-[11px]">▼</span>
-              </summary>
-              <div class="p-4 text-center text-xs text-slate-500 bg-[#060e1d]">Upcoming Academic Resources</div>
-            </details>
-
-            <!-- Luxury Signature Footer -->
-            <footer class="pt-6 pb-2 text-center border-t border-amber-500/20 text-slate-400">
-              <p class="text-xs">Created by <strong class="text-amber-300 font-outfit font-bold">Hemanth Kalyanapu</strong></p>
-              <p class="text-[10px] text-slate-500 mt-0.5 font-mono">Lekka Lab &copy; All Rights Reserved</p>
-            </footer>
-          </div>
-        </div>
-      
-</body>
-</html>
+  <header>
+    <div class="header-content">
+      <!-- Left-Aligned Lekka Lab Emblem -->
+      <div class="emblem-wrapper">
+        <svg viewBox="0 0
+          
