@@ -5,11 +5,17 @@
   <meta name="google-site-verification" content="ZH0hIM6YoIPs1gLm_RlFgMR1C69wGGW8FvEtmjbps2Q" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <meta name="description" content="Lekka Lab: Educational portal by Hemanth Kalyanapu providing Class 8, 9, 10 Mathematics textbooks, FA projects, generating new problems, and slip test papers.">
+  <!-- PWA & Mobile Web App Meta Tags -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#050b18">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Lekka Lab">
+  
+  <meta name="description" content="Lekka Lab: Official educational portal by Hemanth Kalyanapu providing Class 8, 9, 10 Mathematics textbooks, FA projects, generating new problems, and slip test papers.">
   <meta name="keywords" content="Lekka Lab, Hemanth Kalyanapu, Maths FA worksheets, Class 9 Maths FA 1, Class 8 Maths, mathsnap">
   <title>Lekka Lab: Educational Portal</title>
   
-  <!-- Premium Google Fonts: Playfair Display & Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -92,7 +98,6 @@
       padding-bottom: 50px;
     }
 
-    /* Header */
     header {
       background: var(--header-bg);
       color: white;
@@ -392,24 +397,28 @@
       gap: 10px;
     }
 
-    .fa-grid-4 {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      padding: 10px;
-    }
-
     .fa-grid-btn {
       display: block;
       text-align: center;
       background: var(--card-bg);
       color: var(--text-muted);
       text-decoration: none;
-      padding: 10px 4px;
+      padding: 12px 6px;
       border: 1px dashed var(--file-btn-border);
       border-radius: 8px;
       font-weight: 600;
       font-size: 13px;
+    }
+
+    .notice-box {
+      background: rgba(245, 158, 11, 0.08);
+      border: 1px dashed var(--gold-border);
+      border-radius: 8px;
+      padding: 14px;
+      text-align: center;
+      color: var(--text-heading);
+      font-size: 13px;
+      font-weight: 600;
     }
 
     footer {
@@ -522,17 +531,17 @@
         <details class="fa-accordion" open>
           <summary>FA 1 (Tap to View Files)</summary>
           <div class="file-list">
-            <a href="FA-1%20Generating%20New%20Problems.pdf" target="_blank" class="file-btn">
+            <a href="./FA-1%20Generating%20New%20Problems.pdf" target="_blank" download="FA-1 Generating New Problems.pdf" class="file-btn">
               <span>📄 Generating New Problems</span>
-              <span class="dl-badge">Open / Download 📥</span>
+              <span class="dl-badge">Download 📥</span>
             </a>
-            <a href="Class%208%20FA1%20Project.pdf" target="_blank" class="file-btn">
+            <a href="./Class%208%20FA1%20Project.pdf" target="_blank" download="Class 8 FA1 Project.pdf" class="file-btn">
               <span>📄 Project Work</span>
-              <span class="dl-badge">Open / Download 📥</span>
+              <span class="dl-badge">Download 📥</span>
             </a>
-            <a href="FA-1%20Slip%20Test.pdf" target="_blank" class="file-btn">
+            <a href="./FA-1%20Slip%20Test.pdf" target="_blank" download="FA-1 Slip Test.pdf" class="file-btn">
               <span>📄 Slip Test</span>
-              <span class="dl-badge">Open / Download 📥</span>
+              <span class="dl-badge">Download 📥</span>
             </a>
           </div>
         </details>
@@ -541,17 +550,17 @@
         <details class="fa-accordion" open>
           <summary>FA 2 (Tap to View Files)</summary>
           <div class="file-list">
-            <a href="class8-fa2-generating-new-problems.pdf" target="_blank" class="file-btn">
+            <a href="./class8-fa2-generating-new-problems.pdf" target="_blank" download="class8-fa2-generating-new-problems.pdf" class="file-btn">
               <span>📄 Generating New Problems</span>
-              <span class="dl-badge">Open / Download 📥</span>
+              <span class="dl-badge">Download 📥</span>
             </a>
-            <a href="class8-fa2-project.pdf" target="_blank" class="file-btn">
+            <a href="./class8-fa2-project.pdf" target="_blank" download="class8-fa2-project.pdf" class="file-btn">
               <span>📄 Project Work</span>
-              <span class="dl-badge">Open / Download 📥</span>
+              <span class="dl-badge">Download 📥</span>
             </a>
-            <a href="class8-fa2-slip-test.pdf" target="_blank" class="file-btn">
+            <a href="./class8-fa2-slip-test.pdf" target="_blank" download="class8-fa2-slip-test.pdf" class="file-btn">
               <span>📄 Slip Test</span>
-              <span class="dl-badge">Open / Download 📥</span>
+              <span class="dl-badge">Download 📥</span>
             </a>
           </div>
         </details>
@@ -573,17 +582,17 @@
         <details class="fa-accordion">
           <summary>FA 1 (Tap to View Files)</summary>
           <div class="file-list">
-            <a href="class9-fa1-generating-new-problems.pdf" target="_blank" class="file-btn">
+            <a href="./class9-fa1-generating-new-problems.pdf" target="_blank" download="class9-fa1-generating-new-problems.pdf" class="file-btn">
               <span>📄 Generating New Problems</span>
-              <span class="dl-badge">Open / Download 📥</span>
+              <span class="dl-badge">Download 📥</span>
             </a>
-            <a href="class9-fa1-project.pdf" target="_blank" class="file-btn">
+            <a href="./class9-fa1-project.pdf" target="_blank" download="class9-fa1-project.pdf" class="file-btn">
               <span>📄 Project Work</span>
-              <span class="dl-badge">Open / Download 📥</span>
+              <span class="dl-badge">Download 📥</span>
             </a>
-            <a href="class9-fa1-slip-test.pdf" target="_blank" class="file-btn">
+            <a href="./class9-fa1-slip-test.pdf" target="_blank" download="class9-fa1-slip-test.pdf" class="file-btn">
               <span>📄 Slip Test & Solutions</span>
-              <span class="dl-badge">Open / Download 📥</span>
+              <span class="dl-badge">Download 📥</span>
             </a>
           </div>
         </details>
@@ -592,21 +601,120 @@
         <details class="fa-accordion">
           <summary>FA 2 (Tap to View Files)</summary>
           <div class="file-list">
-            <a href="class9-fa2-generating-new-problems.pdf" target="_blank" class="file-btn">
+            <a href="./class9-fa2-generating-new-problems.pdf" target="_blank" download="class9-fa2-generating-new-problems.pdf" class="file-btn">
               <span>📄 Generating New Problems</span>
-              <span class="dl-badge">Open / Download 📥</span>
+              <span class="dl-badge">Download 📥</span>
             </a>
-            <a href="class9-fa2-project.pdf" target="_blank" class="file-btn">
+            <a href="./class9-fa2-project.pdf" target="_blank" download="class9-fa2-project.pdf" class="file-btn">
               <span>📄 Project Work</span>
-              <span class="dl-badge">Open / Download 📥</span>
+              <span class="dl-badge">Download 📥</span>
             </a>
-            <a href="class9-fa2-slip-test.pdf" target="_blank" class="file-btn">
+            <a href="./class9-fa2-slip-test.pdf" target="_blank" download="class9-fa2-slip-test.pdf" class="file-btn">
               <span>📄 Slip Test & Solutions</span>
-              <span class="dl-badge">Open / Download 📥</span>
+              <span class="dl-badge">Download 📥</span>
             </a>
           </div>
         </details>
 
         <!-- Class 9 FA 3 -->
         <details class="fa-accordion">
-          <summary>FA 3 (
+          <summary>FA 3 (Tap to View Files)</summary>
+          <div class="file-list">
+            <a href="./Class9-fa3-generating-new-Problems.pdf" target="_blank" download="Class9-fa3-generating-new-Problems.pdf" class="file-btn">
+              <span>📄 Generating New Problems</span>
+              <span class="dl-badge">Download 📥</span>
+            </a>
+            <a href="./class9-fa3-project.pdf" target="_blank" download="class9-fa3-project.pdf" class="file-btn">
+              <span>📄 Project Work</span>
+              <span class="dl-badge">Download 📥</span>
+            </a>
+            <a href="./class9-fa3-slip-test.pdf" target="_blank" download="class9-fa3-slip-test.pdf" class="file-btn">
+              <span>📄 Slip Test & Solutions</span>
+              <span class="dl-badge">Download 📥</span>
+            </a>
+          </div>
+        </details>
+
+        <!-- Class 9 FA 4 -->
+        <details class="fa-accordion">
+          <summary>FA 4 (Tap to View Files)</summary>
+          <div class="file-list">
+            <a href="./class9-fa4-generating-new-problems.pdf" target="_blank" download="class9-fa4-generating-new-problems.pdf" class="file-btn">
+              <span>📄 Generating New Problems</span>
+              <span class="dl-badge">Download 📥</span>
+            </a>
+            <a href="./class9-fa4-project.pdf" target="_blank" download="class9-fa4-project.pdf" class="file-btn">
+              <span>📄 Project Work</span>
+              <span class="dl-badge">Download 📥</span>
+            </a>
+            <a href="./class9-fa4-slip-test.pdf" target="_blank" download="class9-fa4-slip-test.pdf" class="file-btn">
+              <span>📄 Slip Test & Solutions</span>
+              <span class="dl-badge">Download 📥</span>
+            </a>
+          </div>
+        </details>
+
+      </div>
+    </details>
+
+    <!-- ================= CLASS 10 ================= -->
+    <details class="class-box" open>
+      <summary>Class 10 Mathematics</summary>
+      <div class="class-content">
+        
+        <details class="fa-accordion">
+          <summary>FA 1 (Tap to View Files)</summary>
+          <div class="file-list">
+            <div class="notice-box">Class 10 FA 1 materials will be uploaded soon.</div>
+          </div>
+        </details>
+
+        <details class="fa-accordion">
+          <summary>FA 2 (Tap to View Files)</summary>
+          <div class="file-list">
+            <div class="notice-box">Class 10 FA 2 materials will be uploaded soon.</div>
+          </div>
+        </details>
+
+        <details class="fa-accordion">
+          <summary>FA 3 (Tap to View Files)</summary>
+          <div class="file-list">
+            <div class="notice-box">Class 10 FA 3 materials will be uploaded soon.</div>
+          </div>
+        </details>
+
+        <details class="fa-accordion">
+          <summary>FA 4 (Tap to View Files)</summary>
+          <div class="file-list">
+            <div class="notice-box">Class 10 FA 4 materials will be uploaded soon.</div>
+          </div>
+        </details>
+
+      </div>
+    </details>
+
+    <!-- Footer -->
+    <footer>
+      <p>Created by <strong class="creator-name">Hemanth Kalyanapu</strong></p>
+      <p style="font-size: 11px; margin-top: 5px; opacity: 0.75; letter-spacing: 0.5px;">Lekka Lab &copy; All Rights Reserved</p>
+    </footer>
+
+  </div>
+
+  <script>
+    function setSkin(themeName) {
+      if (themeName === 'sapphire') {
+        document.documentElement.removeAttribute('data-theme');
+      } else {
+        document.documentElement.setAttribute('data-theme', themeName);
+      }
+      localStorage.setItem('lekka_theme', themeName);
+    }
+
+    const saved = localStorage.getItem('lekka_theme');
+    if (saved) {
+      setSkin(saved);
+    }
+  </script>
+</body>
+</html>
