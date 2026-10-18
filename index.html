@@ -2,30 +2,32 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="google-site-verification" content="ZH0hIM6YoIPs1gLm_RlFgMR1C69wGGW8FvEtmjbps2Q" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="description" content="Lekka Lab: Educational portal by Hemanth Kalyanapu providing Class 8, 9, 10 Mathematics textbooks, FA projects, generating new problems, and slip test papers.">
+  <meta name="keywords" content="Lekka Lab, Hemanth Kalyanapu, Maths FA worksheets, Class 9 Maths FA 1, Class 8 Maths, mathsnap">
   <title>Lekka Lab: Educational Portal</title>
   
-  <!-- Premium Google Fonts -->
+  <!-- Premium Google Fonts: Playfair Display & Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Outfit:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <style>
-    /* ================= THEME COLOR VARIABLES ================= */
     :root {
-      /* Theme 1: Sapphire & Imperial Gold (Default) */
-      --bg-page: #f1f5f9;
+      --bg-page: #f8fafc;
       --header-bg: linear-gradient(135deg, #050b18 0%, #0d1e3d 50%, #041029 100%);
       --gold-primary: #d97706;
       --gold-gradient: linear-gradient(135deg, #fde047 0%, #f59e0b 50%, #b45309 100%);
       --gold-border: rgba(245, 158, 11, 0.35);
       --card-bg: #ffffff;
       --card-border: #e2e8f0;
-      --card-shadow: 0 4px 20px -2px rgba(13, 30, 61, 0.08);
+      --card-shadow: 0 4px 18px -2px rgba(13, 30, 61, 0.07);
       --text-heading: #060d1b;
       --text-muted: #64748b;
       --class-header-bg: linear-gradient(135deg, #091326 0%, #112246 100%);
-      --class-header-border: #d97706;
+      --class-header-border: #f59e0b;
       --fa-btn-bg: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
       --fa-active-bg: linear-gradient(135deg, #0369a1 0%, #075985 100%);
       --file-btn-border: #cbd5e1;
@@ -34,7 +36,6 @@
       --badge-text: #050b18;
     }
 
-    /* Theme 2: Emerald & Platinum Luxe */
     [data-theme="emerald"] {
       --bg-page: #f0fdf4;
       --header-bg: linear-gradient(135deg, #022c22 0%, #064e3b 50%, #022c22 100%);
@@ -43,7 +44,7 @@
       --gold-border: rgba(16, 185, 129, 0.35);
       --card-bg: #ffffff;
       --card-border: #d1fae5;
-      --card-shadow: 0 4px 20px -2px rgba(6, 78, 59, 0.08);
+      --card-shadow: 0 4px 18px -2px rgba(6, 78, 59, 0.07);
       --text-heading: #022c22;
       --text-muted: #4b5563;
       --class-header-bg: linear-gradient(135deg, #064e3b 0%, #047857 100%);
@@ -56,7 +57,6 @@
       --badge-text: #ffffff;
     }
 
-    /* Theme 3: Velvet Obsidian Dark Luxe */
     [data-theme="obsidian"] {
       --bg-page: #090d16;
       --header-bg: linear-gradient(135deg, #05070c 0%, #0f1422 50%, #05070c 100%);
@@ -83,7 +83,7 @@
       margin: 0;
       padding: 0;
       font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-      transition: background-color 0.25s ease, border-color 0.25s ease, color 0.2s ease;
+      transition: background 0.25s ease, border-color 0.25s ease, color 0.2s ease;
     }
 
     body {
@@ -92,14 +92,13 @@
       padding-bottom: 50px;
     }
 
-    /* ================= LUXURY HEADER ================= */
+    /* Header */
     header {
       background: var(--header-bg);
       color: white;
-      padding: 24px 16px 20px;
+      padding: 24px 16px 18px;
       border-bottom: 2px solid var(--gold-border);
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-      position: relative;
     }
 
     .header-content {
@@ -115,7 +114,7 @@
       width: 76px;
       height: 76px;
       flex-shrink: 0;
-      filter: drop-shadow(0 4px 10px rgba(245, 158, 11, 0.4));
+      filter: drop-shadow(0 4px 10px rgba(245, 158, 11, 0.35));
     }
 
     .header-text {
@@ -126,12 +125,12 @@
     }
 
     header h1 {
-      font-family: 'Cinzel', serif;
-      font-size: 21px;
-      font-weight: 800;
-      letter-spacing: 0.5px;
-      margin-bottom: 3px;
-      line-height: 1.2;
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      margin-bottom: 2px;
+      line-height: 1.25;
       background: var(--gold-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -154,10 +153,9 @@
       font-weight: 600;
     }
 
-    /* ================= THEME SKIN SWITCHER ================= */
     .skin-bar {
       max-width: 640px;
-      margin: 12px auto 0;
+      margin: 14px auto 0;
       display: flex;
       justify-content: flex-end;
       align-items: center;
@@ -189,7 +187,6 @@
       border-color: #f59e0b;
     }
 
-    /* ================= CONTAINER & CARDS ================= */
     .container {
       max-width: 640px;
       margin: 20px auto 0;
@@ -227,11 +224,11 @@
     .card-ncert::before { background: linear-gradient(to bottom, #0284c7, #38bdf8); }
 
     .info h2 {
-      font-family: 'Outfit', sans-serif;
-      font-size: 17px;
+      font-family: 'Playfair Display', serif;
+      font-size: 17.5px;
       color: var(--text-heading);
       font-weight: 700;
-      margin-bottom: 3px;
+      margin-bottom: 2px;
     }
 
     .info p {
@@ -241,33 +238,29 @@
 
     .btn-download {
       display: inline-block;
-      padding: 9px 20px;
+      padding: 9px 18px;
       color: #ffffff;
       text-decoration: none;
       border-radius: 8px;
       font-size: 13px;
       font-weight: 700;
       white-space: nowrap;
-      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
     }
 
     .btn-scert { background: linear-gradient(135deg, #ea580c, #c2410c); }
     .btn-ncert { background: linear-gradient(135deg, #0284c7, #0369a1); }
 
     .section-title {
-      font-family: 'Cinzel', serif;
-      font-size: 17px;
-      font-weight: 800;
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 700;
       color: var(--text-heading);
       margin-top: 8px;
       padding-bottom: 6px;
       border-bottom: 2px solid var(--gold-border);
-      display: flex;
-      align-items: center;
-      gap: 8px;
     }
 
-    /* ================= ACCORDIONS ================= */
     details.class-box {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
@@ -280,7 +273,6 @@
       background: var(--class-header-bg);
       color: white;
       padding: 15px 18px;
-      font-family: 'Outfit', sans-serif;
       font-size: 16px;
       font-weight: 700;
       cursor: pointer;
@@ -309,13 +301,12 @@
 
     .class-content {
       padding: 14px;
-      background: rgba(0, 0, 0, 0.02);
+      background: rgba(0, 0, 0, 0.015);
       display: flex;
       flex-direction: column;
       gap: 12px;
     }
 
-    /* Formative Assessment Accordions */
     details.fa-accordion {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
@@ -327,7 +318,6 @@
       background: var(--fa-btn-bg);
       color: white;
       padding: 12px 15px;
-      font-family: 'Outfit', sans-serif;
       font-size: 14px;
       font-weight: 700;
       cursor: pointer;
@@ -362,7 +352,7 @@
       display: flex;
       flex-direction: column;
       gap: 8px;
-      background: rgba(0, 0, 0, 0.015);
+      background: rgba(0, 0, 0, 0.01);
     }
 
     .file-btn {
@@ -422,7 +412,6 @@
       font-size: 13px;
     }
 
-    /* ================= LUXURY FOOTER ================= */
     footer {
       text-align: center;
       margin-top: 40px;
@@ -433,7 +422,7 @@
     }
 
     footer .creator-name {
-      font-family: 'Cinzel', serif;
+      font-family: 'Playfair Display', serif;
       font-weight: 700;
       color: var(--gold-primary);
       letter-spacing: 0.5px;
@@ -442,10 +431,9 @@
 </head>
 <body>
 
-  <!-- ================= HEADER ================= -->
+  <!-- Header -->
   <header>
     <div class="header-content">
-      <!-- Left-Aligned Lekka Lab Golden Emblem -->
       <div class="emblem-wrapper">
         <svg viewBox="0 0 500 500" width="100%" height="100%">
           <defs>
@@ -489,7 +477,6 @@
         </svg>
       </div>
 
-      <!-- Right-Side Luxury Titles -->
       <div class="header-text">
         <h1>Lekka Lab: Educational Portal</h1>
         <div class="motto-tag">“Explore Maths, Discover Your Potential!”</div>
@@ -497,7 +484,6 @@
       </div>
     </div>
 
-    <!-- Quick Skin Changer Bar -->
     <div class="skin-bar">
       <span>Theme:</span>
       <button class="skin-pill" onclick="setSkin('sapphire')">Sapphire Gold</button>
@@ -508,7 +494,7 @@
 
   <div class="container">
 
-    <!-- Official Textbooks Section -->
+    <!-- Official Textbooks -->
     <div class="card card-scert">
       <div class="info">
         <h2>SCERT Textbooks</h2>
@@ -527,50 +513,49 @@
 
     <h2 class="section-title">Academic Assessments</h2>
 
-    <!-- ================= CLASS 8 (OPEN BY DEFAULT) ================= -->
+    <!-- ================= CLASS 8 ================= -->
     <details class="class-box" open>
       <summary>Class 8 Mathematics</summary>
       <div class="class-content">
 
-        <!-- Class 8 FA 1 (Directly Open) -->
+        <!-- Class 8 FA 1 -->
         <details class="fa-accordion" open>
           <summary>FA 1 (Tap to View Files)</summary>
           <div class="file-list">
-            <a href="FA-1%20Generating%20New%20Problems.pdf" download="Class8_FA1_Generating_Problems.pdf" class="file-btn">
+            <a href="FA-1%20Generating%20New%20Problems.pdf" target="_blank" class="file-btn">
               <span>📄 Generating New Problems</span>
-              <span class="dl-badge">Download 📥</span>
+              <span class="dl-badge">Open / Download 📥</span>
             </a>
-            <a href="Class%208%20FA1%20Project.pdf" download="Class8_FA1_Project.pdf" class="file-btn">
+            <a href="Class%208%20FA1%20Project.pdf" target="_blank" class="file-btn">
               <span>📄 Project Work</span>
-              <span class="dl-badge">Download 📥</span>
+              <span class="dl-badge">Open / Download 📥</span>
             </a>
-            <a href="FA-1%20Slip%20Test.pdf" download="Class8_FA1_Slip_Test.pdf" class="file-btn">
+            <a href="FA-1%20Slip%20Test.pdf" target="_blank" class="file-btn">
               <span>📄 Slip Test</span>
-              <span class="dl-badge">Download 📥</span>
+              <span class="dl-badge">Open / Download 📥</span>
             </a>
           </div>
         </details>
 
-        <!-- Class 8 FA 2 (Directly Open) -->
+        <!-- Class 8 FA 2 -->
         <details class="fa-accordion" open>
           <summary>FA 2 (Tap to View Files)</summary>
           <div class="file-list">
-            <a href="class8-fa2-generating-new-problems.pdf" download="Class8_FA2_Generating_Problems.pdf" class="file-btn">
+            <a href="class8-fa2-generating-new-problems.pdf" target="_blank" class="file-btn">
               <span>📄 Generating New Problems</span>
-              <span class="dl-badge">Download 📥</span>
+              <span class="dl-badge">Open / Download 📥</span>
             </a>
-            <a href="class8-fa2-project.pdf" download="Class8_FA2_Project.pdf" class="file-btn">
+            <a href="class8-fa2-project.pdf" target="_blank" class="file-btn">
               <span>📄 Project Work</span>
-              <span class="dl-badge">Download 📥</span>
+              <span class="dl-badge">Open / Download 📥</span>
             </a>
-            <a href="class8-fa2-slip-test.pdf" download="Class8_FA2_Slip_Test.pdf" class="file-btn">
+            <a href="class8-fa2-slip-test.pdf" target="_blank" class="file-btn">
               <span>📄 Slip Test</span>
-              <span class="dl-badge">Download 📥</span>
+              <span class="dl-badge">Open / Download 📥</span>
             </a>
           </div>
         </details>
 
-        <!-- Placeholders for Class 8 FA 3 and FA 4 -->
         <div class="fa-grid-2">
           <span class="fa-grid-btn">FA 3 (Coming Soon)</span>
           <span class="fa-grid-btn">FA 4 (Coming Soon)</span>
@@ -579,7 +564,7 @@
       </div>
     </details>
 
-    <!-- ================= CLASS 9 (OPEN BY DEFAULT) ================= -->
+    <!-- ================= CLASS 9 ================= -->
     <details class="class-box" open>
       <summary>Class 9 Mathematics</summary>
       <div class="class-content">
@@ -588,17 +573,17 @@
         <details class="fa-accordion">
           <summary>FA 1 (Tap to View Files)</summary>
           <div class="file-list">
-            <a href="class9-fa1-generating-new-problems.pdf" download="Class9_FA1_Generating_Problems.pdf" class="file-btn">
+            <a href="class9-fa1-generating-new-problems.pdf" target="_blank" class="file-btn">
               <span>📄 Generating New Problems</span>
-              <span class="dl-badge">Download 📥</span>
+              <span class="dl-badge">Open / Download 📥</span>
             </a>
-            <a href="class9-fa1-project.pdf" download="Class9_FA1_Project.pdf" class="file-btn">
+            <a href="class9-fa1-project.pdf" target="_blank" class="file-btn">
               <span>📄 Project Work</span>
-              <span class="dl-badge">Download 📥</span>
+              <span class="dl-badge">Open / Download 📥</span>
             </a>
-            <a href="class9-fa1-slip-test.pdf" download="Class9_FA1_Slip_Test.pdf" class="file-btn">
+            <a href="class9-fa1-slip-test.pdf" target="_blank" class="file-btn">
               <span>📄 Slip Test & Solutions</span>
-              <span class="dl-badge">Download 📥</span>
+              <span class="dl-badge">Open / Download 📥</span>
             </a>
           </div>
         </details>
@@ -607,4 +592,21 @@
         <details class="fa-accordion">
           <summary>FA 2 (Tap to View Files)</summary>
           <div class="file-list">
-            <a href="class9-fa2-generating-new-problems.pdf" download="Class9_FA2_Generating_Problems.pdf" class
+            <a href="class9-fa2-generating-new-problems.pdf" target="_blank" class="file-btn">
+              <span>📄 Generating New Problems</span>
+              <span class="dl-badge">Open / Download 📥</span>
+            </a>
+            <a href="class9-fa2-project.pdf" target="_blank" class="file-btn">
+              <span>📄 Project Work</span>
+              <span class="dl-badge">Open / Download 📥</span>
+            </a>
+            <a href="class9-fa2-slip-test.pdf" target="_blank" class="file-btn">
+              <span>📄 Slip Test & Solutions</span>
+              <span class="dl-badge">Open / Download 📥</span>
+            </a>
+          </div>
+        </details>
+
+        <!-- Class 9 FA 3 -->
+        <details class="fa-accordion">
+          <summary>FA 3 (
