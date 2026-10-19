@@ -321,7 +321,7 @@
       margin-top: 6px;
     }
 
-    /* Output Section */
+    /* Output Section with Smooth Vertical Scrolling */
     #aiSolutionDisplay {
       display: none;
       margin-top: 12px;
@@ -332,6 +332,9 @@
       font-size: 14px;
       line-height: 1.7;
       color: #0f172a;
+      max-height: 560px;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
     #mathRenderedContent {
