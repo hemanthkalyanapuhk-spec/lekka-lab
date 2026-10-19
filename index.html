@@ -6,13 +6,17 @@
   <title>LEKKA LAB - Educational Portal</title>
   <style>
     :root {
-      --primary: #0f172a;
-      --secondary: #1e3a8a;
-      --accent-orange: #ea580c;
-      --accent-blue: #0284c7;
       --bg: #f8fafc;
       --card-bg: #ffffff;
-      --border: #e2e8f0;
+      --navy-dark: #0a192f;
+      --navy-card: #0f172a;
+      --gold: #f59e0b;
+      --gold-dark: #d97706;
+      --blue-accent: #0284c7;
+      --orange-accent: #ea580c;
+      --border-color: #e2e8f0;
+      --text-dark: #0f172a;
+      --text-muted: #64748b;
     }
 
     * {
@@ -24,7 +28,7 @@
 
     body {
       background-color: var(--bg);
-      color: #0f172a;
+      color: var(--text-dark);
       padding: 16px;
       display: flex;
       flex-direction: column;
@@ -33,70 +37,79 @@
 
     .container {
       width: 100%;
-      max-width: 600px;
+      max-width: 580px;
       display: flex;
       flex-direction: column;
       gap: 16px;
     }
 
-    /* Header */
+    /* Original Blue Badge Header */
     .header-card {
-      background: linear-gradient(135deg, #091e3a 0%, #172554 100%);
+      background: #0f1f38;
       color: #ffffff;
-      border-radius: 16px;
-      padding: 20px;
+      border-radius: 20px;
+      padding: 24px 20px;
       display: flex;
       align-items: center;
-      gap: 16px;
-      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.2);
+      gap: 18px;
+      box-shadow: 0 4px 14px rgba(10, 25, 47, 0.2);
     }
 
-    .logo-container {
-      width: 65px;
-      height: 65px;
+    /* Circular Lab Flask Emblem */
+    .logo-badge {
+      width: 72px;
+      height: 72px;
+      background: #0b192c;
+      border: 3px solid #38bdf8;
       border-radius: 50%;
-      background: #0f172a;
-      border: 2px solid #38bdf8;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      font-size: 2rem;
+      box-shadow: 0 0 14px rgba(56, 189, 248, 0.4);
+    }
+
+    .logo-badge svg {
+      width: 40px;
+      height: 40px;
     }
 
     .header-text h1 {
-      font-size: 1.35rem;
+      font-size: 1.45rem;
       font-weight: 900;
-      color: #f59e0b;
+      color: var(--gold);
       letter-spacing: 0.5px;
+      line-height: 1.2;
     }
 
     .header-text h2 {
       font-size: 0.95rem;
-      font-weight: 700;
+      font-weight: 800;
       letter-spacing: 0.5px;
+      margin-top: 2px;
+      color: #ffffff;
     }
 
     .header-text p.quote {
       font-size: 0.8rem;
       font-style: italic;
       color: #93c5fd;
-      margin-top: 2px;
+      margin-top: 4px;
     }
 
     .header-text p.sub {
       font-size: 0.72rem;
-      font-weight: 700;
+      font-weight: 800;
       color: #cbd5e1;
       text-transform: uppercase;
-      margin-top: 4px;
+      margin-top: 5px;
       letter-spacing: 0.5px;
     }
 
     /* Textbook Rows */
     .card-row {
       background: var(--card-bg);
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 16px;
       display: flex;
       justify-content: space-between;
@@ -105,34 +118,39 @@
       border-left: 5px solid;
     }
 
-    .card-scert { border-left-color: var(--accent-orange); }
-    .card-ncert { border-left-color: var(--accent-blue); }
+    .card-scert { border-left-color: var(--orange-accent); }
+    .card-ncert { border-left-color: var(--blue-accent); }
 
     .card-info h3 {
       font-size: 1.05rem;
       font-weight: 800;
+      color: #0f172a;
     }
 
     .card-info p {
-      font-size: 0.8rem;
-      color: #64748b;
+      font-size: 0.82rem;
+      color: var(--text-muted);
       margin-top: 2px;
     }
 
-    .btn-portal {
-      display: inline-flex;
-      align-items: center;
-      background: var(--accent-orange);
+    .btn-portal-orange {
+      background: var(--orange-accent);
       color: #ffffff;
-      padding: 8px 14px;
+      padding: 8px 16px;
       border-radius: 8px;
       text-decoration: none;
       font-weight: 700;
       font-size: 0.85rem;
     }
 
-    .card-ncert .btn-portal {
-      background: var(--accent-blue);
+    .btn-portal-blue {
+      background: var(--blue-accent);
+      color: #ffffff;
+      padding: 8px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.85rem;
     }
 
     /* AI Tutor Card */
@@ -162,299 +180,5 @@
     }
 
     .badge-tag {
-      background: var(--accent-orange);
-      color: #ffffff;
-      font-size: 0.65rem;
-      font-weight: 800;
-      padding: 3px 8px;
-      border-radius: 6px;
-    }
-
-    .problem-input {
-      width: 100%;
-      height: 90px;
-      padding: 12px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      resize: vertical;
-      font-size: 0.9rem;
-      outline: none;
-    }
-
-    .problem-input:focus {
-      border-color: var(--accent-orange);
-    }
-
-    .input-actions {
-      display: flex;
-      gap: 8px;
-    }
-
-    .btn-upload {
-      flex: 1;
-      padding: 9px;
-      border: 1px solid var(--border);
-      background: #f1f5f9;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 0.82rem;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 4px;
-    }
-
-    .btn-solve {
-      width: 100%;
-      background: var(--primary);
-      color: #ffffff;
-      padding: 12px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 700;
-      font-size: 0.95rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-    }
-
-    /* Search bar */
-    .search-input {
-      width: 100%;
-      padding: 12px 14px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: var(--card-bg);
-      font-size: 0.9rem;
-      outline: none;
-    }
-
-    /* Section Title */
-    .section-title {
-      font-size: 1rem;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-top: 4px;
-    }
-
-    /* Class Cards & PDF Buttons Grid */
-    .class-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .class-card {
-      background: var(--primary);
-      color: #ffffff;
-      border-radius: 12px;
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.15);
-    }
-
-    .class-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .class-title {
-      font-size: 1rem;
-      font-weight: 800;
-      color: #ffffff;
-    }
-
-    /* PDF Action Buttons */
-    .pdf-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .pdf-btn {
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: #f59e0b;
-      padding: 7px 12px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-size: 0.8rem;
-      font-weight: 700;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      transition: all 0.2s;
-    }
-
-    .pdf-btn:active, .pdf-btn:hover {
-      background: #f59e0b;
-      color: var(--primary);
-    }
-  </style>
-</head>
-<body>
-
-  <div class="container">
-    
-    <!-- Portal Header -->
-    <div class="header-card">
-      <div class="logo-container">⚗️</div>
-      <div class="header-text">
-        <h1>LEKKA LAB</h1>
-        <h2>EDUCATIONAL PORTAL</h2>
-        <p class="quote">“Explore Maths, Discover Your Potential!”</p>
-        <p class="sub">Official Textbooks & Assessments</p>
-      </div>
-    </div>
-
-    <!-- SCERT Portal -->
-    <div class="card-row card-scert">
-      <div class="card-info">
-        <h3>SCERT Textbooks</h3>
-        <p>State Board eTextbooks</p>
-      </div>
-      <a href="https://scert.telangana.gov.in" target="_blank" class="btn-portal">Open Portal ↗</a>
-    </div>
-
-    <!-- NCERT Portal -->
-    <div class="card-row card-ncert">
-      <div class="card-info">
-        <h3>NCERT Textbooks</h3>
-        <p>Central Board Books</p>
-      </div>
-      <a href="https://ncert.nic.in" target="_blank" class="btn-portal">Open Portal ↗</a>
-    </div>
-
-    <!-- AI Tutor -->
-    <div class="ai-box">
-      <div class="ai-header">
-        <div class="ai-title">✨ Lekka Lab AI Tutor</div>
-        <div class="badge-tag">PHOTO & TEXT</div>
-      </div>
-
-      <textarea id="problem-input" class="problem-input" placeholder="Type maths problem, or capture/attach question photo..."></textarea>
-
-      <input type="file" id="camera-file" accept="image/*" capture="environment" style="display: none;">
-      <input type="file" id="gallery-file" accept="image/*" style="display: none;">
-
-      <div class="input-actions">
-        <button class="btn-upload" onclick="document.getElementById('camera-file').click()">📷 Camera</button>
-        <button class="btn-upload" onclick="document.getElementById('gallery-file').click()">📁 Gallery / File</button>
-      </div>
-
-      <div id="image-status" style="font-size: 0.8rem; color: #16a34a; font-weight: 600; display: none;"></div>
-
-      <button id="solve-button" class="btn-solve">⚡ Solve Problem ↗</button>
-
-      <div id="ai-solution-box" style="display: none; margin-top: 10px; padding: 14px; border-radius: 8px; background: #f8fafc; border: 1px solid #cbd5e1; font-size: 0.9rem; line-height: 1.5;"></div>
-    </div>
-
-    <!-- Search Section -->
-    <input type="text" id="assessment-search" class="search-input" placeholder="🔍 Search by class, FA or topic (e.g. FA 2, Slip Test)" onkeyup="filterAssessments()">
-
-    <!-- Academic Assessments -->
-    <div class="section-title">Academic Assessments</div>
-    
-    <div class="class-grid" id="class-grid">
-      
-      <!-- Class 10 -->
-      <div class="class-card">
-        <div class="class-header">
-          <div class="class-title">Class 10 Mathematics</div>
-        </div>
-        <div class="pdf-buttons">
-          <a href="#" class="pdf-btn">FA 1 Model Papers ↗</a>
-          <a href="#" class="pdf-btn">FA 2 Model Papers ↗</a>
-          <a href="#" class="pdf-btn">SA 1 Question Papers ↗</a>
-          <a href="#" class="pdf-btn">Pre-Final / SA 2 ↗</a>
-          <a href="#" class="pdf-btn">Chapter Worksheets ↗</a>
-        </div>
-      </div>
-
-      <!-- Class 9 -->
-      <div class="class-card">
-        <div class="class-header">
-          <div class="class-title">Class 9 Mathematics</div>
-        </div>
-        <div class="pdf-buttons">
-          <a href="#" class="pdf-btn">FA 1 Papers ↗</a>
-          <a href="#" class="pdf-btn">FA 2 Papers ↗</a>
-          <a href="#" class="pdf-btn">SA 1 Papers ↗</a>
-          <a href="#" class="pdf-btn">Worksheets ↗</a>
-        </div>
-      </div>
-
-      <!-- Class 8 -->
-      <div class="class-card">
-        <div class="class-header">
-          <div class="class-title">Class 8 Mathematics</div>
-        </div>
-        <div class="pdf-buttons">
-          <a href="#" class="pdf-btn">FA 1 & 2 Papers ↗</a>
-          <a href="#" class="pdf-btn">SA 1 & 2 Papers ↗</a>
-          <a href="#" class="pdf-btn">Worksheets ↗</a>
-        </div>
-      </div>
-
-      <!-- Competitive & Foundation -->
-      <div class="class-card">
-        <div class="class-header">
-          <div class="class-title">IIT Foundation & Olympiad</div>
-        </div>
-        <div class="pdf-buttons">
-          <a href="#" class="pdf-btn">Foundation Worksheets ↗</a>
-          <a href="#" class="pdf-btn">Olympiad Practice Tests ↗</a>
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-
-  <!-- Cloudflare Gemini Integration Script -->
-  <script>
-    const WORKER_URL = "https://rapid-glade-dd04.hemanthkalyanapu-hk.workers.dev/";
-    let base64Image = null;
-
-    // Camera and File handling
-    function handleImageSelect(event) {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          base64Image = e.target.result.split(',')[1];
-          const statusDiv = document.getElementById("image-status");
-          if (statusDiv) {
-            statusDiv.style.display = "block";
-            statusDiv.innerText = "✓ Photo attached: " + file.name;
-          }
-        };
-        reader.readAsDataURL(file);
-      }
-    }
-
-    const camInput = document.getElementById("camera-file");
-    const galInput = document.getElementById("gallery-file");
-    if (camInput) camInput.addEventListener("change", handleImageSelect);
-    if (galInput) galInput.addEventListener("change", handleImageSelect);
-
-    // AI Solve Handler
-    async function solveProblem() {
-      const inputField = document.getElementById("problem-input");
-      const questionText = inputField ? inputField.value.trim() : "";
-      const resultBox = document.getElementById("ai-solution-box");
-
-      if (!questionText && !base64Image) {
-        alert("Please enter a question or upload a photo first!");
-        return;
-      }
-
-      resultBox.style.display = "block";
-      resultBox.innerHTML = "<span style='color: #2563eb; font-weight: 600;'>⏳ AI is calculating step-by-step solution... Please wait
+      background: var(--orange-accent);
+      color
