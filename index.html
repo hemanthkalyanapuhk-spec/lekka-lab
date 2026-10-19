@@ -127,7 +127,7 @@
       gap: 14px;
     }
 
-    /* Compact Textbook Cards */
+    /* Textbook Cards */
     .textbooks-wrapper {
       display: grid;
       grid-template-columns: 1fr;
@@ -201,6 +201,115 @@
 
     .btn-scert { background: linear-gradient(135deg, #ea580c, #c2410c); }
     .btn-ncert { background: linear-gradient(135deg, #0284c7, #0369a1); }
+
+    /* AI Problem Solver Box */
+    .ai-solver-card {
+      background: #ffffff;
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: 0 4px 18px -2px rgba(245, 158, 11, 0.12);
+      position: relative;
+    }
+
+    .ai-solver-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .ai-solver-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 15px;
+      font-weight: 800;
+      color: #0f172a;
+    }
+
+    .ai-badge {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      color: #050b18;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .ai-key-btn {
+      background: none;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #64748b;
+      padding: 3px 8px;
+      cursor: pointer;
+    }
+
+    .ai-input-area {
+      width: 100%;
+      min-height: 70px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      font-size: 13.5px;
+      color: #0f172a;
+      outline: none;
+      resize: vertical;
+      font-family: inherit;
+    }
+
+    .ai-input-area:focus {
+      border-color: #f59e0b;
+      box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.12);
+    }
+
+    .ai-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .btn-ai-solve {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #fde047;
+      border: 1px solid rgba(245, 158, 11, 0.5);
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-ai-solve:active {
+      transform: scale(0.97);
+    }
+
+    .btn-ai-solve:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .ai-response-box {
+      margin-top: 14px;
+      padding: 12px;
+      background: #f8fafc;
+      border-radius: 8px;
+      border-left: 3px solid #f59e0b;
+      font-size: 13.5px;
+      line-height: 1.5;
+      color: #1e293b;
+      display: none;
+      white-space: pre-wrap;
+    }
 
     /* Search Bar */
     .search-box-wrap {
@@ -600,6 +709,24 @@
       </div>
     </div>
 
+    <!-- AI Problem Solver Card -->
+    <div class="ai-solver-card">
+      <div class="ai-solver-header">
+        <div class="ai-solver-title">
+          <span>✨ Lekka Lab AI Tutor</span>
+          <span class="ai-badge">AI Assistant</span>
+        </div>
+        <button class="ai-key-btn" onclick="promptApiKey()">🔑 API Key</button>
+      </div>
+      <textarea id="aiProblemInput" class="ai-input-area" placeholder="Type your high school maths problem here... (e.g. Solve 2x + 3 = 11, or Find the area of circle with radius 7cm)"></textarea>
+      <div class="ai-actions">
+        <button id="btnAiSolve" class="btn-ai-solve" onclick="solveMathProblem()">
+          <span>⚡ Solve Step-by-Step</span>
+        </button>
+      </div>
+      <div id="aiResponseBox" class="ai-response-box"></div>
+    </div>
+
     <!-- Search Bar -->
     <div class="search-box-wrap">
       <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
@@ -611,7 +738,7 @@
 
     <h2 class="section-title">Academic Assessments</h2>
 
-    <!-- ================= CLASS 10 ================= -->
+    <!-- ================= CLASS 10 (OPEN FIRST BY DEFAULT) ================= -->
     <details class="class-box" open>
       <summary>Class 10 Mathematics</summary>
       <div class="class-content">
@@ -953,6 +1080,76 @@
       });
     }
 
+    // AI Math Tutor Setup & Engine
+    function promptApiKey() {
+      const current = localStorage.getItem('lekka_gemini_key') || '';
+      const key = prompt("Enter your Google Gemini API Key (saved only in your browser):", current);
+      if (key !== null) {
+        localStorage.setItem('lekka_gemini_key', key.trim());
+        alert("API Key saved successfully!");
+      }
+    }
+
+    async function solveMathProblem() {
+      const problem = document.getElementById('aiProblemInput').value.trim();
+      const resBox = document.getElementById('aiResponseBox');
+      const btn = document.getElementById('btnAiSolve');
+
+      if (!problem) {
+        alert("Please enter a math question first!");
+        return;
+      }
+
+      let apiKey = localStorage.getItem('lekka_gemini_key');
+      if (!apiKey) {
+        apiKey = prompt("Please enter your Google Gemini API Key to enable AI solving:");
+        if (apiKey) {
+          apiKey = apiKey.trim();
+          localStorage.setItem('lekka_gemini_key', apiKey);
+        } else {
+          return;
+        }
+      }
+
+      btn.disabled = true;
+      btn.innerHTML = "<span>⏳ Solving...</span>";
+      resBox.style.display = "block";
+      resBox.innerText = "Analyzing question and preparing step-by-step solution...";
+
+      const promptText = `You are a high school mathematics teacher for Lekka Lab. Solve this question clearly for a Class 8, 9, or 10 student:
+"${problem}"
+
+Structure your response:
+1. Formula / Concept Used
+2. Step-by-Step Calculation
+3. Final Answer
+
+Keep it concise, encouraging, and easy to understand.`;
+
+      try {
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+        const response = await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: promptText }] }]
+          })
+        });
+
+        const data = await response.json();
+        if (data.candidates && data.candidates[0].content.parts[0].text) {
+          resBox.innerText = data.candidates[0].content.parts[0].text;
+        } else {
+          throw new Error(data.error ? data.error.message : "Unable to solve.");
+        }
+      } catch (err) {
+        resBox.innerText = "Error solving the problem. Please check your API key or try again.\n(" + err.message + ")";
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = "<span>⚡ Solve Step-by-Step</span>";
+      }
+    }
+
     // Modal Display Controls
     function openFeedback() {
       document.getElementById('feedbackModal').style.display = 'flex';
@@ -967,7 +1164,7 @@
       if (e.target.id === 'feedbackModal') closeFeedback();
     }
 
-    // Direct Submission via Web3Forms (No Email App Needed)
+    // Direct Submission via Web3Forms
     async function sendFeedback(e) {
       e.preventDefault();
       const btn = document.getElementById('fbSubmitBtn');
