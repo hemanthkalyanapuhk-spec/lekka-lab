@@ -10,6 +10,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
+  <!-- Math Rendering (KaTeX) & Markdown Support -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
   <style>
     :root {
       --bg-page: #f8fafc;
@@ -202,7 +208,7 @@
     .btn-scert { background: linear-gradient(135deg, #ea580c, #c2410c); }
     .btn-ncert { background: linear-gradient(135deg, #0284c7, #0369a1); }
 
-    /* AI Problem Solver Box */
+    /* Ask Lucky Box */
     .ai-solver-card {
       background: #ffffff;
       border: 1px solid rgba(245, 158, 11, 0.4);
@@ -315,17 +321,39 @@
       margin-top: 6px;
     }
 
-    /* AI Solution Output Area */
+    /* Solution Box with LaTeX and Figures Styling */
     #aiSolutionDisplay {
       display: none;
       margin-top: 12px;
-      padding: 14px;
+      padding: 16px;
       border-radius: 10px;
-      background: #f8fafc;
+      background: #ffffff;
       border: 1.5px solid #2563eb;
-      font-size: 13.5px;
-      line-height: 1.6;
+      font-size: 14px;
+      line-height: 1.7;
       color: #0f172a;
+    }
+
+    #mathRenderedContent h1, #mathRenderedContent h2, #mathRenderedContent h3, #mathRenderedContent h4 {
+      color: #1e3a8a;
+      margin-top: 14px;
+      margin-bottom: 6px;
+    }
+
+    #mathRenderedContent ul, #mathRenderedContent ol {
+      margin-left: 20px;
+      margin-bottom: 10px;
+    }
+
+    #mathRenderedContent svg {
+      display: block;
+      margin: 14px auto;
+      max-width: 100%;
+      height: auto;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 8px;
     }
 
     /* Search Bar */
@@ -726,17 +754,16 @@
       </div>
     </div>
 
-    <!-- AI Problem Solver Card (Text + Camera + File Upload) -->
+    <!-- Ask Lucky Box -->
     <div class="ai-solver-card">
       <div class="ai-solver-header">
         <div class="ai-solver-title">
-          <span>✨ Lekka Lab AI Tutor</span>
+          <span>✨ Ask Lucky</span>
           <span class="ai-badge">Photo &amp; Text</span>
         </div>
       </div>
-      <textarea id="aiProblemInput" class="ai-input-area" placeholder="Type maths problem, or capture/attach question photo..."></textarea>
+      <textarea id="aiProblemInput" class="ai-input-area" placeholder="Ask Lucky your maths problem, or capture/attach question photo..."></textarea>
       
-      <!-- Hidden file inputs for Camera and Gallery -->
       <input type="file" id="cameraInput" accept="image/*" capture="environment" style="display:none;" onchange="handleImageSelection(this)">
       <input type="file" id="galleryInput" accept="image/*,.pdf" style="display:none;" onchange="handleImageSelection(this)">
 
@@ -756,8 +783,13 @@
         </button>
       </div>
 
-      <!-- In-Page Solution Result Container -->
-      <div id="aiSolutionDisplay"></div>
+      <!-- LaTeX & Figure Render Area -->
+      <div id="aiSolutionDisplay">
+        <div style="font-weight: 800; color: #1e3a8a; margin-bottom: 8px; font-size: 15px; border-bottom: 1.5px solid #cbd5e1; padding-bottom: 6px;">
+          ✨ Lucky's Solution
+        </div>
+        <div id="mathRenderedContent"></div>
+      </div>
     </div>
 
     <!-- Search Bar -->
@@ -1025,7 +1057,7 @@
 
   </div>
 
-  <!-- Footer with Direct Feedback Trigger -->
+  <!-- Footer -->
   <footer>
     <p>Curated &amp; Designed with Excellence for High School Mathematics</p>
     <p style="margin-top: 6px;">Created by <span class="creator-name">Hemanth Kalyanapu</span> &bull; <strong>LEKKA LAB</strong></p>
@@ -1065,7 +1097,7 @@
   </div>
 
   <script>
-    // Real-Time Search & Highlight for PDF Assessments
+    // Search Filter
     function filterFiles() {
       const q = document.getElementById('searchInput').value.trim().toLowerCase();
       const classBoxes = document.querySelectorAll('.class-box');
@@ -1113,7 +1145,7 @@
       });
     }
 
-    // Image/File Attachment Handler (Converts file to Base64 for Gemini)
+    // Attachment Handler
     let attachedFile = null;
     let base64ImageData = null;
 
@@ -1132,12 +1164,12 @@
       }
     }
 
-    // Direct AI Solver using Cloudflare Worker
     const WORKER_URL = "https://rapid-glade-dd04.hemanthkalyanapu-hk.workers.dev/";
 
     async function solveMathWithLens() {
       const text = document.getElementById('aiProblemInput').value.trim();
       const outputBox = document.getElementById('aiSolutionDisplay');
+      const contentBox = document.getElementById('mathRenderedContent');
 
       if (!text && !base64ImageData) {
         alert("Please enter a question or attach a photo first!");
@@ -1145,12 +1177,12 @@
       }
 
       outputBox.style.display = 'block';
-      outputBox.innerHTML = "<span style='color: #2563eb; font-weight: 700;'>⏳ AI is calculating step-by-step solution... Please wait.</span>";
+      contentBox.innerHTML = "<span style='color: #2563eb; font-weight: 700;'>⏳ Lucky is calculating step-by-step solution... Please wait.</span>";
 
       try {
         const payload = {
-          question: text || "Please solve the question shown in the attached image.",
-          prompt: text || "Please solve the question shown in the attached image."
+          prompt: text || "Please solve the question shown in the attached image.",
+          question: text || "Please solve the question shown in the attached image."
         };
         if (base64ImageData) {
           payload.image = base64ImageData;
@@ -1165,24 +1197,33 @@
         const data = await response.json();
 
         if (data && (data.solution || data.text)) {
-          const solution = data.solution || data.text;
-          outputBox.innerHTML = `
-            <div style="font-weight: 800; color: #1e3a8a; margin-bottom: 8px; font-size: 14px;">
-              ✨ Lekka Lab AI Solution:
-            </div>
-            <div style="white-space: pre-wrap; color: #0f172a;">${solution}</div>
-          `;
+          const rawText = data.solution || data.text;
+          
+          // Markdown to HTML conversion
+          contentBox.innerHTML = marked.parse(rawText);
+
+          // Beautiful Math LaTeX Rendering (Replaces $$and$ with actual formulas)
+          if (window.renderMathInElement) {
+            renderMathInElement(contentBox, {
+              delimiters: [
+                {left: '$$', right: '$$', display: true},
+                {left: '$', right: '$', display: false},
+                {left: '\\(', right: '\\)', display: false},
+                {left: '[', right: ']', display: true}
+              ],
+              throwOnError: false
+            });
+          }
         } else if (data && data.error) {
-          outputBox.innerHTML = `<span style="color: #dc2626; font-weight: bold;">⚠️ Error: ${data.error}</span>`;
+          contentBox.innerHTML = `<span style="color: #dc2626; font-weight: bold;">⚠️ Error: ${data.error}</span>`;
         } else {
-          outputBox.innerHTML = `<pre style="white-space: pre-wrap;">${JSON.stringify(data, null, 2)}</pre>`;
+          contentBox.innerHTML = `<pre style="white-space: pre-wrap;">${JSON.stringify(data, null, 2)}</pre>`;
         }
       } catch (err) {
-        outputBox.innerHTML = `<span style="color: #dc2626; font-weight: bold;">⚠️ Connection failed: ${err.message}</span>`;
+        contentBox.innerHTML = `<span style="color: #dc2626; font-weight: bold;">⚠️ Connection failed: ${err.message}</span>`;
       }
     }
 
-    // Modal Display Controls
     function openFeedback() {
       document.getElementById('feedbackModal').style.display = 'flex';
       document.getElementById('formStatus').style.display = 'none';
@@ -1196,7 +1237,6 @@
       if (e.target.id === 'feedbackModal') closeFeedback();
     }
 
-    // Direct Submission via Web3Forms
     async function sendFeedback(e) {
       e.preventDefault();
       const btn = document.getElementById('fbSubmitBtn');
