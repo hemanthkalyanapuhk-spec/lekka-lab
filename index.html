@@ -127,7 +127,7 @@
       gap: 14px;
     }
 
-    /* Textbook Cards */
+    /* Compact Textbook Cards */
     .textbooks-wrapper {
       display: grid;
       grid-template-columns: 1fr;
@@ -202,21 +202,20 @@
     .btn-scert { background: linear-gradient(135deg, #ea580c, #c2410c); }
     .btn-ncert { background: linear-gradient(135deg, #0284c7, #0369a1); }
 
-    /* AI Problem Solver Box */
+    /* AI Problem Solver Box with Camera & File Upload */
     .ai-solver-card {
       background: #ffffff;
-      border: 1px solid rgba(245, 158, 11, 0.35);
+      border: 1px solid rgba(245, 158, 11, 0.4);
       border-radius: 14px;
       padding: 16px;
       box-shadow: 0 4px 18px -2px rgba(245, 158, 11, 0.12);
-      position: relative;
     }
 
     .ai-solver-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .ai-solver-title {
@@ -239,20 +238,9 @@
       letter-spacing: 0.5px;
     }
 
-    .ai-key-btn {
-      background: none;
-      border: 1px solid #cbd5e1;
-      border-radius: 6px;
-      font-size: 11px;
-      font-weight: 600;
-      color: #64748b;
-      padding: 3px 8px;
-      cursor: pointer;
-    }
-
     .ai-input-area {
       width: 100%;
-      min-height: 70px;
+      min-height: 60px;
       padding: 10px 12px;
       border-radius: 8px;
       border: 1px solid #cbd5e1;
@@ -268,11 +256,37 @@
       box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.12);
     }
 
-    .ai-actions {
+    .ai-toolbar {
       display: flex;
-      justify-content: flex-end;
-      gap: 8px;
+      align-items: center;
+      justify-content: space-between;
       margin-top: 10px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .ai-attach-group {
+      display: flex;
+      gap: 6px;
+    }
+
+    .btn-icon-attach {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #334155;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .btn-icon-attach:hover {
+      background: #e2e8f0;
+      border-color: #94a3b8;
     }
 
     .btn-ai-solve {
@@ -293,22 +307,12 @@
       transform: scale(0.97);
     }
 
-    .btn-ai-solve:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-
-    .ai-response-box {
-      margin-top: 14px;
-      padding: 12px;
-      background: #f8fafc;
-      border-radius: 8px;
-      border-left: 3px solid #f59e0b;
-      font-size: 13.5px;
-      line-height: 1.5;
-      color: #1e293b;
+    .file-preview-indicator {
+      font-size: 11.5px;
+      color: #0284c7;
+      font-weight: 600;
       display: none;
-      white-space: pre-wrap;
+      margin-top: 6px;
     }
 
     /* Search Bar */
@@ -709,22 +713,35 @@
       </div>
     </div>
 
-    <!-- AI Problem Solver Card -->
+    <!-- AI Problem Solver Card (Text + Camera + File Upload) -->
     <div class="ai-solver-card">
       <div class="ai-solver-header">
         <div class="ai-solver-title">
           <span>✨ Lekka Lab AI Tutor</span>
-          <span class="ai-badge">AI Assistant</span>
+          <span class="ai-badge">Photo &amp; Text</span>
         </div>
-        <button class="ai-key-btn" onclick="promptApiKey()">🔑 API Key</button>
       </div>
-      <textarea id="aiProblemInput" class="ai-input-area" placeholder="Type your high school maths problem here... (e.g. Solve 2x + 3 = 11, or Find the area of circle with radius 7cm)"></textarea>
-      <div class="ai-actions">
-        <button id="btnAiSolve" class="btn-ai-solve" onclick="solveMathProblem()">
-          <span>⚡ Solve Step-by-Step</span>
+      <textarea id="aiProblemInput" class="ai-input-area" placeholder="Type maths problem, or capture/attach question photo..."></textarea>
+      
+      <!-- Hidden file inputs for Camera and Gallery -->
+      <input type="file" id="cameraInput" accept="image/*" capture="environment" style="display:none;" onchange="handleImageSelection(this)">
+      <input type="file" id="galleryInput" accept="image/*,.pdf" style="display:none;" onchange="handleImageSelection(this)">
+
+      <div id="filePreviewTag" class="file-preview-indicator"></div>
+
+      <div class="ai-toolbar">
+        <div class="ai-attach-group">
+          <button type="button" class="btn-icon-attach" onclick="document.getElementById('cameraInput').click()">
+            <span>📷 Camera</span>
+          </button>
+          <button type="button" class="btn-icon-attach" onclick="document.getElementById('galleryInput').click()">
+            <span>📁 Gallery / File</span>
+          </button>
+        </div>
+        <button class="btn-ai-solve" onclick="solveMathWithLens()">
+          <span>⚡ Solve Problem ↗</span>
         </button>
       </div>
-      <div id="aiResponseBox" class="ai-response-box"></div>
     </div>
 
     <!-- Search Bar -->
@@ -738,7 +755,7 @@
 
     <h2 class="section-title">Academic Assessments</h2>
 
-    <!-- ================= CLASS 10 (OPEN FIRST BY DEFAULT) ================= -->
+    <!-- ================= CLASS 10 ================= -->
     <details class="class-box" open>
       <summary>Class 10 Mathematics</summary>
       <div class="class-content">
@@ -1032,7 +1049,7 @@
   </div>
 
   <script>
-    // Real-Time Search & Highlight
+    // Real-Time Search & Highlight for PDF Assessments
     function filterFiles() {
       const q = document.getElementById('searchInput').value.trim().toLowerCase();
       const classBoxes = document.querySelectorAll('.class-box');
@@ -1080,73 +1097,30 @@
       });
     }
 
-    // AI Math Tutor Setup & Engine
-    function promptApiKey() {
-      const current = localStorage.getItem('lekka_gemini_key') || '';
-      const key = prompt("Enter your Google Gemini API Key (saved only in your browser):", current);
-      if (key !== null) {
-        localStorage.setItem('lekka_gemini_key', key.trim());
-        alert("API Key saved successfully!");
+    // Image/File Attachment Handler
+    let attachedFile = null;
+    function handleImageSelection(input) {
+      if (input.files && input.files[0]) {
+        attachedFile = input.files[0];
+        const preview = document.getElementById('filePreviewTag');
+        preview.style.display = 'block';
+        preview.innerText = `📎 Selected: ${attachedFile.name} (Ready to solve)`;
       }
     }
 
-    async function solveMathProblem() {
-      const problem = document.getElementById('aiProblemInput').value.trim();
-      const resBox = document.getElementById('aiResponseBox');
-      const btn = document.getElementById('btnAiSolve');
+    // Solve via Visual / Text Lens
+    function solveMathWithLens() {
+      const text = document.getElementById('aiProblemInput').value.trim();
 
-      if (!problem) {
-        alert("Please enter a math question first!");
-        return;
-      }
-
-      let apiKey = localStorage.getItem('lekka_gemini_key');
-      if (!apiKey) {
-        apiKey = prompt("Please enter your Google Gemini API Key to enable AI solving:");
-        if (apiKey) {
-          apiKey = apiKey.trim();
-          localStorage.setItem('lekka_gemini_key', apiKey);
-        } else {
-          return;
-        }
-      }
-
-      btn.disabled = true;
-      btn.innerHTML = "<span>⏳ Solving...</span>";
-      resBox.style.display = "block";
-      resBox.innerText = "Analyzing question and preparing step-by-step solution...";
-
-      const promptText = `You are a high school mathematics teacher for Lekka Lab. Solve this question clearly for a Class 8, 9, or 10 student:
-"${problem}"
-
-Structure your response:
-1. Formula / Concept Used
-2. Step-by-Step Calculation
-3. Final Answer
-
-Keep it concise, encouraging, and easy to understand.`;
-
-      try {
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
-        const response = await fetch(url, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            contents: [{ parts: [{ text: promptText }] }]
-          })
-        });
-
-        const data = await response.json();
-        if (data.candidates && data.candidates[0].content.parts[0].text) {
-          resBox.innerText = data.candidates[0].content.parts[0].text;
-        } else {
-          throw new Error(data.error ? data.error.message : "Unable to solve.");
-        }
-      } catch (err) {
-        resBox.innerText = "Error solving the problem. Please check your API key or try again.\n(" + err.message + ")";
-      } finally {
-        btn.disabled = false;
-        btn.innerHTML = "<span>⚡ Solve Step-by-Step</span>";
+      if (attachedFile) {
+        // If photo/file is attached, opens Google Lens visual search
+        window.open('https://lens.google.com/', '_blank');
+      } else if (text) {
+        // If text is entered, opens AI step-by-step query
+        const query = encodeURIComponent(`You are a high school mathematics teacher for Lekka Lab. Solve this step-by-step for Class 8, 9, or 10:\n\n${text}`);
+        window.open(`https://www.google.com/search?q=${query}`, '_blank');
+      } else {
+        alert("Please enter a question or click Camera/Gallery to take a picture of the problem!");
       }
     }
 
