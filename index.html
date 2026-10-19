@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lekka Lab Educational Portal</title>
+  <title>LEKKA LAB - Educational Portal</title>
   <style>
     :root {
-      --primary: #1e3a8a;
-      --secondary: #d97706;
+      --primary: #0f172a;
+      --secondary: #1e3a8a;
+      --accent-orange: #ea580c;
+      --accent-blue: #0284c7;
       --bg: #f8fafc;
       --card-bg: #ffffff;
-      --text-main: #0f172a;
-      --text-muted: #64748b;
       --border: #e2e8f0;
     }
 
@@ -24,7 +24,7 @@
 
     body {
       background-color: var(--bg);
-      color: var(--text-main);
+      color: #0f172a;
       padding: 16px;
       display: flex;
       flex-direction: column;
@@ -41,65 +41,62 @@
 
     /* Header */
     .header-card {
-      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+      background: linear-gradient(135deg, #091e3a 0%, #172554 100%);
       color: #ffffff;
       border-radius: 16px;
       padding: 20px;
       display: flex;
       align-items: center;
       gap: 16px;
-      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.2);
     }
 
     .logo-container {
-      width: 64px;
-      height: 64px;
-      background: #ffffff;
+      width: 65px;
+      height: 65px;
       border-radius: 50%;
+      background: #0f172a;
+      border: 2px solid #38bdf8;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-    }
-
-    .logo-container span {
       font-size: 2rem;
     }
 
     .header-text h1 {
-      font-size: 1.4rem;
-      letter-spacing: 0.5px;
+      font-size: 1.35rem;
+      font-weight: 900;
       color: #f59e0b;
-      margin-bottom: 4px;
-      font-weight: 800;
+      letter-spacing: 0.5px;
     }
 
     .header-text h2 {
       font-size: 0.95rem;
       font-weight: 700;
       letter-spacing: 0.5px;
-      margin-bottom: 4px;
     }
 
     .header-text p.quote {
       font-size: 0.8rem;
       font-style: italic;
       color: #93c5fd;
-      margin-bottom: 2px;
+      margin-top: 2px;
     }
 
     .header-text p.sub {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+      font-size: 0.72rem;
+      font-weight: 700;
       color: #cbd5e1;
+      text-transform: uppercase;
+      margin-top: 4px;
+      letter-spacing: 0.5px;
     }
 
-    /* Textbook Cards */
+    /* Textbook Rows */
     .card-row {
       background: var(--card-bg);
-      border-radius: 14px;
+      border-radius: 12px;
       padding: 16px;
       display: flex;
       justify-content: space-between;
@@ -108,38 +105,37 @@
       border-left: 5px solid;
     }
 
-    .card-scert { border-left-color: #ea580c; }
-    .card-ncert { border-left-color: #0284c7; }
+    .card-scert { border-left-color: var(--accent-orange); }
+    .card-ncert { border-left-color: var(--accent-blue); }
 
     .card-info h3 {
       font-size: 1.05rem;
-      font-weight: 700;
+      font-weight: 800;
     }
 
     .card-info p {
-      font-size: 0.82rem;
-      color: var(--text-muted);
+      font-size: 0.8rem;
+      color: #64748b;
       margin-top: 2px;
     }
 
     .btn-portal {
       display: inline-flex;
       align-items: center;
-      background: #ea580c;
+      background: var(--accent-orange);
       color: #ffffff;
       padding: 8px 14px;
       border-radius: 8px;
       text-decoration: none;
-      font-weight: 600;
+      font-weight: 700;
       font-size: 0.85rem;
-      gap: 4px;
     }
 
     .card-ncert .btn-portal {
-      background: #0284c7;
+      background: var(--accent-blue);
     }
 
-    /* AI Tutor Box */
+    /* AI Tutor Card */
     .ai-box {
       background: var(--card-bg);
       border: 1.5px solid #fed7aa;
@@ -159,20 +155,19 @@
 
     .ai-title {
       font-size: 1.05rem;
-      font-weight: 700;
+      font-weight: 800;
       display: flex;
       align-items: center;
       gap: 6px;
     }
 
     .badge-tag {
-      background: #ea580c;
+      background: var(--accent-orange);
       color: #ffffff;
       font-size: 0.65rem;
-      font-weight: 700;
-      padding: 2px 8px;
+      font-weight: 800;
+      padding: 3px 8px;
       border-radius: 6px;
-      letter-spacing: 0.5px;
     }
 
     .problem-input {
@@ -187,7 +182,7 @@
     }
 
     .problem-input:focus {
-      border-color: #ea580c;
+      border-color: var(--accent-orange);
     }
 
     .input-actions {
@@ -197,7 +192,7 @@
 
     .btn-upload {
       flex: 1;
-      padding: 8px;
+      padding: 9px;
       border: 1px solid var(--border);
       background: #f1f5f9;
       border-radius: 8px;
@@ -212,7 +207,7 @@
 
     .btn-solve {
       width: 100%;
-      background: #0f172a;
+      background: var(--primary);
       color: #ffffff;
       padding: 12px;
       border: none;
@@ -226,53 +221,81 @@
       gap: 6px;
     }
 
-    .btn-solve:active {
-      transform: scale(0.99);
-    }
-
-    /* Solution Output Box */
-    #ai-solution-box {
-      margin-top: 10px;
-      padding: 14px;
-      border-radius: 8px;
-      background: #f8fafc;
-      border: 1px solid #cbd5e1;
-      font-size: 0.9rem;
-      line-height: 1.5;
-    }
-
-    /* Search & Assessments */
+    /* Search bar */
     .search-input {
       width: 100%;
-      padding: 12px;
-      border-radius: 8px;
+      padding: 12px 14px;
+      border-radius: 10px;
       border: 1px solid var(--border);
+      background: var(--card-bg);
       font-size: 0.9rem;
+      outline: none;
     }
 
+    /* Section Title */
     .section-title {
       font-size: 1rem;
-      font-weight: 800;
+      font-weight: 900;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      margin-top: 6px;
+      margin-top: 4px;
     }
 
-    .assessment-item {
-      background: #0f172a;
+    /* Class Cards & PDF Buttons Grid */
+    .class-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .class-card {
+      background: var(--primary);
       color: #ffffff;
       border-radius: 12px;
-      padding: 14px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.15);
+    }
+
+    .class-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
-    .assessment-item a {
+    .class-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    /* PDF Action Buttons */
+    .pdf-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pdf-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
       color: #f59e0b;
+      padding: 7px 12px;
+      border-radius: 6px;
       text-decoration: none;
+      font-size: 0.8rem;
       font-weight: 700;
-      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s;
+    }
+
+    .pdf-btn:active, .pdf-btn:hover {
+      background: #f59e0b;
+      color: var(--primary);
     }
   </style>
 </head>
@@ -282,9 +305,7 @@
     
     <!-- Portal Header -->
     <div class="header-card">
-      <div class="logo-container">
-        <span>⚗️</span>
-      </div>
+      <div class="logo-container">⚗️</div>
       <div class="header-text">
         <h1>LEKKA LAB</h1>
         <h2>EDUCATIONAL PORTAL</h2>
@@ -293,7 +314,7 @@
       </div>
     </div>
 
-    <!-- SCERT Portal Link -->
+    <!-- SCERT Portal -->
     <div class="card-row card-scert">
       <div class="card-info">
         <h3>SCERT Textbooks</h3>
@@ -302,7 +323,7 @@
       <a href="https://scert.telangana.gov.in" target="_blank" class="btn-portal">Open Portal ↗</a>
     </div>
 
-    <!-- NCERT Portal Link -->
+    <!-- NCERT Portal -->
     <div class="card-row card-ncert">
       <div class="card-info">
         <h3>NCERT Textbooks</h3>
@@ -311,7 +332,7 @@
       <a href="https://ncert.nic.in" target="_blank" class="btn-portal">Open Portal ↗</a>
     </div>
 
-    <!-- Lekka Lab AI Tutor -->
+    <!-- AI Tutor -->
     <div class="ai-box">
       <div class="ai-header">
         <div class="ai-title">✨ Lekka Lab AI Tutor</div>
@@ -320,7 +341,6 @@
 
       <textarea id="problem-input" class="problem-input" placeholder="Type maths problem, or capture/attach question photo..."></textarea>
 
-      <!-- Hidden inputs for file & camera capture -->
       <input type="file" id="camera-file" accept="image/*" capture="environment" style="display: none;">
       <input type="file" id="gallery-file" accept="image/*" style="display: none;">
 
@@ -333,18 +353,67 @@
 
       <button id="solve-button" class="btn-solve">⚡ Solve Problem ↗</button>
 
-      <div id="ai-solution-box" style="display: none;"></div>
+      <div id="ai-solution-box" style="display: none; margin-top: 10px; padding: 14px; border-radius: 8px; background: #f8fafc; border: 1px solid #cbd5e1; font-size: 0.9rem; line-height: 1.5;"></div>
     </div>
 
     <!-- Search Section -->
-    <input type="text" class="search-input" placeholder="🔍 Search by class, FA or topic (e.g. FA 2, Slip Test)">
+    <input type="text" id="assessment-search" class="search-input" placeholder="🔍 Search by class, FA or topic (e.g. FA 2, Slip Test)" onkeyup="filterAssessments()">
 
     <!-- Academic Assessments -->
     <div class="section-title">Academic Assessments</div>
     
-    <div class="assessment-item">
-      <div>Class 10 Mathematics Assessment</div>
-      <a href="#">View PDFs ↗</a>
+    <div class="class-grid" id="class-grid">
+      
+      <!-- Class 10 -->
+      <div class="class-card">
+        <div class="class-header">
+          <div class="class-title">Class 10 Mathematics</div>
+        </div>
+        <div class="pdf-buttons">
+          <a href="#" class="pdf-btn">FA 1 Model Papers ↗</a>
+          <a href="#" class="pdf-btn">FA 2 Model Papers ↗</a>
+          <a href="#" class="pdf-btn">SA 1 Question Papers ↗</a>
+          <a href="#" class="pdf-btn">Pre-Final / SA 2 ↗</a>
+          <a href="#" class="pdf-btn">Chapter Worksheets ↗</a>
+        </div>
+      </div>
+
+      <!-- Class 9 -->
+      <div class="class-card">
+        <div class="class-header">
+          <div class="class-title">Class 9 Mathematics</div>
+        </div>
+        <div class="pdf-buttons">
+          <a href="#" class="pdf-btn">FA 1 Papers ↗</a>
+          <a href="#" class="pdf-btn">FA 2 Papers ↗</a>
+          <a href="#" class="pdf-btn">SA 1 Papers ↗</a>
+          <a href="#" class="pdf-btn">Worksheets ↗</a>
+        </div>
+      </div>
+
+      <!-- Class 8 -->
+      <div class="class-card">
+        <div class="class-header">
+          <div class="class-title">Class 8 Mathematics</div>
+        </div>
+        <div class="pdf-buttons">
+          <a href="#" class="pdf-btn">FA 1 & 2 Papers ↗</a>
+          <a href="#" class="pdf-btn">SA 1 & 2 Papers ↗</a>
+          <a href="#" class="pdf-btn">Worksheets ↗</a>
+        </div>
+      </div>
+
+      <!-- Competitive & Foundation -->
+      <div class="class-card">
+        <div class="class-header">
+          <div class="class-title">IIT Foundation & Olympiad</div>
+        </div>
+        <div class="pdf-buttons">
+          <a href="#" class="pdf-btn">Foundation Worksheets ↗</a>
+          <a href="#" class="pdf-btn">Olympiad Practice Tests ↗</a>
+        </div>
+      </div>
+
     </div>
 
   </div>
@@ -354,7 +423,7 @@
     const WORKER_URL = "https://rapid-glade-dd04.hemanthkalyanapu-hk.workers.dev/";
     let base64Image = null;
 
-    // Camera and Gallery Handlers
+    // Camera and File handling
     function handleImageSelect(event) {
       const file = event.target.files[0];
       if (file) {
@@ -362,68 +431,30 @@
         reader.onload = function(e) {
           base64Image = e.target.result.split(',')[1];
           const statusDiv = document.getElementById("image-status");
-          statusDiv.style.display = "block";
-          statusDiv.innerText = "✓ Photo attached: " + file.name;
+          if (statusDiv) {
+            statusDiv.style.display = "block";
+            statusDiv.innerText = "✓ Photo attached: " + file.name;
+          }
         };
         reader.readAsDataURL(file);
       }
     }
 
-    document.getElementById("camera-file").addEventListener("change", handleImageSelect);
-    document.getElementById("gallery-file").addEventListener("change", handleImageSelect);
+    const camInput = document.getElementById("camera-file");
+    const galInput = document.getElementById("gallery-file");
+    if (camInput) camInput.addEventListener("change", handleImageSelect);
+    if (galInput) galInput.addEventListener("change", handleImageSelect);
 
-    // AI Solve Request
+    // AI Solve Handler
     async function solveProblem() {
       const inputField = document.getElementById("problem-input");
-      const question = inputField.value.trim();
+      const questionText = inputField ? inputField.value.trim() : "";
       const resultBox = document.getElementById("ai-solution-box");
 
-      if (!question && !base64Image) {
+      if (!questionText && !base64Image) {
         alert("Please enter a question or upload a photo first!");
         return;
       }
 
       resultBox.style.display = "block";
-      resultBox.innerHTML = "<span style='color: #2563eb; font-weight: 600;'>⏳ AI is calculating step-by-step solution... Please wait.</span>";
-
-      try {
-        const payload = { prompt: question || "Please solve the question shown in the attached image." };
-        if (base64Image) {
-          payload.image = base64Image;
-        }
-
-        const response = await fetch(WORKER_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload)
-        });
-
-        const data = await response.json();
-
-        if (data && data.solution) {
-          resultBox.innerHTML = `
-            <h4 style="color: #1e3a8a; margin-bottom: 8px;">✨ Lekka Lab AI Solution:</h4>
-            <div style="white-space: pre-wrap; color: #0f172a;">${data.solution}</div>
-          `;
-        } else if (data && data.text) {
-          resultBox.innerHTML = `
-            <h4 style="color: #1e3a8a; margin-bottom: 8px;">✨ Lekka Lab AI Solution:</h4>
-            <div style="white-space: pre-wrap; color: #0f172a;">${data.text}</div>
-          `;
-        } else if (data && data.error) {
-          resultBox.innerHTML = `<span style="color: #dc2626;">⚠️ Error: ${data.error}</span>`;
-        } else {
-          resultBox.innerHTML = `<pre style="white-space: pre-wrap;">${JSON.stringify(data, null, 2)}</pre>`;
-        }
-      } catch (err) {
-        resultBox.innerHTML = `<span style="color: #dc2626;">⚠️ Connection failed: ${err.message}</span>`;
-      }
-    }
-
-    document.getElementById("solve-button").addEventListener("click", function(e) {
-      e.preventDefault();
-      solveProblem();
-    });
-  </script>
-</body>
-</html>
+      resultBox.innerHTML = "<span style='color: #2563eb; font-weight: 600;'>⏳ AI is calculating step-by-step solution... Please wait
