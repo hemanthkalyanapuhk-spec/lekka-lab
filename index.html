@@ -321,7 +321,7 @@
       margin-top: 6px;
     }
 
-    /* Solution Box with LaTeX and Figures Styling */
+    /* Output Section */
     #aiSolutionDisplay {
       display: none;
       margin-top: 12px;
@@ -331,6 +331,14 @@
       border: 1.5px solid #2563eb;
       font-size: 14px;
       line-height: 1.7;
+      color: #0f172a;
+    }
+
+    #mathRenderedContent {
+      overflow-x: auto;
+      word-break: break-word;
+      font-size: 14.5px;
+      line-height: 1.75;
       color: #0f172a;
     }
 
@@ -345,15 +353,46 @@
       margin-bottom: 10px;
     }
 
+    #mathRenderedContent table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    #mathRenderedContent th, #mathRenderedContent td {
+      border: 1px solid #cbd5e1;
+      padding: 9px 12px;
+      text-align: left;
+      font-size: 13px;
+    }
+
+    #mathRenderedContent th {
+      background-color: #f1f5f9;
+      color: #0f172a;
+      font-weight: 700;
+    }
+
     #mathRenderedContent svg {
       display: block;
       margin: 14px auto;
       max-width: 100%;
       height: auto;
-      background: #f8fafc;
+      background: #ffffff;
       border: 1px solid #e2e8f0;
-      border-radius: 8px;
-      padding: 8px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+    }
+
+    .katex-display {
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 6px 0;
+      margin: 8px 0;
+      -webkit-overflow-scrolling: touch;
     }
 
     /* Search Bar */
@@ -728,566 +767,4 @@
         <h1 class="brand-super-title">LEKKA LAB</h1>
         <div class="brand-portal-tag">Educational Portal</div>
         <div class="motto-tag">“Explore Maths, Discover Your Potential!”</div>
-        <p class="subtext">Official Textbooks &amp; Assessments</p>
-      </div>
-    </div>
-  </header>
-
-  <div class="container">
-
-    <!-- Official Textbooks -->
-    <div class="textbooks-wrapper">
-      <div class="card card-scert">
-        <div class="info">
-          <h2>SCERT Textbooks</h2>
-          <p>State Board eTextbooks</p>
-        </div>
-        <a href="https://scert.telangana.gov.in/" target="_blank" rel="noopener noreferrer" class="btn-download btn-scert">Open Portal ↗</a>
-      </div>
-
-      <div class="card card-ncert">
-        <div class="info">
-          <h2>NCERT Textbooks</h2>
-          <p>Central Board Books</p>
-        </div>
-        <a href="https://ncert.nic.in/textbook.php" target="_blank" rel="noopener noreferrer" class="btn-download btn-ncert">Open Portal ↗</a>
-      </div>
-    </div>
-
-    <!-- Ask Lucky Box -->
-    <div class="ai-solver-card">
-      <div class="ai-solver-header">
-        <div class="ai-solver-title">
-          <span>✨ Ask Lucky</span>
-          <span class="ai-badge">Photo &amp; Text</span>
-        </div>
-      </div>
-      <textarea id="aiProblemInput" class="ai-input-area" placeholder="Ask Lucky your maths problem, or capture/attach question photo..."></textarea>
-      
-      <input type="file" id="cameraInput" accept="image/*" capture="environment" style="display:none;" onchange="handleImageSelection(this)">
-      <input type="file" id="galleryInput" accept="image/*,.pdf" style="display:none;" onchange="handleImageSelection(this)">
-
-      <div id="filePreviewTag" class="file-preview-indicator"></div>
-
-      <div class="ai-toolbar">
-        <div class="ai-attach-group">
-          <button type="button" class="btn-icon-attach" onclick="document.getElementById('cameraInput').click()">
-            <span>📷 Camera</span>
-          </button>
-          <button type="button" class="btn-icon-attach" onclick="document.getElementById('galleryInput').click()">
-            <span>📁 Gallery / File</span>
-          </button>
-        </div>
-        <button type="button" class="btn-ai-solve" onclick="solveMathWithLens()">
-          <span>⚡ Solve Problem ↗</span>
-        </button>
-      </div>
-
-      <!-- LaTeX & Figure Render Area -->
-      <div id="aiSolutionDisplay">
-        <div style="font-weight: 800; color: #1e3a8a; margin-bottom: 8px; font-size: 15px; border-bottom: 1.5px solid #cbd5e1; padding-bottom: 6px;">
-          ✨ Lucky's Solution
-        </div>
-        <div id="mathRenderedContent"></div>
-      </div>
-    </div>
-
-    <!-- Search Bar -->
-    <div class="search-box-wrap">
-      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
-        <circle cx="11" cy="11" r="8"></circle>
-        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-      </svg>
-      <input type="text" id="searchInput" class="search-input" placeholder="Search by class, FA or topic (e.g. FA 2, Slip Test)..." oninput="filterFiles()">
-    </div>
-
-    <h2 class="section-title">Academic Assessments</h2>
-
-    <!-- ================= CLASS 10 ================= -->
-    <details class="class-box" open>
-      <summary>Class 10 Mathematics</summary>
-      <div class="class-content">
-
-        <!-- Class 10 FA 1 -->
-        <details class="fa-accordion" open>
-          <summary>FA 1 (Tap to View Files)</summary>
-          <div class="file-list">
-            <a href="class10-fa1-generating-new-problems.pdf" download="Class10_FA1_Generating_Problems.pdf" class="file-btn">
-              <span>📄 Generating New Problems</span>
-              <span class="dl-badge">Download 📥</span>
-            </a>
-            <a href="class10-fa1-project.pdf" download="Class10_FA1_Project.pdf" class="file-btn">
-              <span>📄 Project Work</span>
-              <span class="dl-badge">Download 📥</span>
-            </a>
-            <a href="class10-fa1-slip-test.pdf" download="Class10_FA1_Slip_Test.pdf" class="file-btn">
-              <span>📄 Slip Test & Solutions</span>
-              <span class="dl-badge">Download 📥</span>
-            </a>
-          </div>
-        </details>
-
-        <!-- Class 10 FA 2 -->
-        <details class="fa-accordion">
-          <summary>FA 2 (Tap to View Files)</summary>
-          <div class="file-list">
-            <a href="class10-fa2-generating-new-problems.pdf" download="Class10_FA2_Generating_Problems.pdf" class="file-btn">
-              <span>📄 Generating New Problems</span>
-              <span class="dl-badge">Download 📥</span>
-            </a>
-            <a href="class10-fa2-project.pdf" download="Class10_FA2_Project.pdf" class="file-btn">
-              <span>📄 Project Work</span>
-              <span class="dl-badge">Download 📥</span>
-            </a>
-            <a href="class10-fa2-slip-test.pdf" download="Class10_FA2_Slip_Test.pdf" class="file-btn">
-              <span>📄 Slip Test & Solutions</span>
-              <span class="dl-badge">Download 📥</span>
-            </a>
-          </div>
-        </details>
-
-        <!-- Class 10 FA 3 -->
-        <details class="fa-accordion">
-          <summary>FA 3 (Tap to View Files)</summary>
-          <div class="file-list">
-            <a href="class10-fa3-generating-new-problems.pdf" download="Class10_FA3_Generating_Problems.pdf" class="file-btn">
-              <span>📄 Generating New Problems</span>
-              <span class="dl-badge">Download 📥</span>
-            </a>
-            <a href="class10-fa3-project.pdf" download="Class10_FA3_Project.pdf" class="file-btn">
-              <span>📄 Project Work</span>
-              <span class="dl-badge">Download 📥</span>
-            </a>
-            <a href="class10-fa3-slip-test.pdf" download="Class10_FA3_Slip_Test.pdf" class="file-btn">
-              <span>📄 Slip Test & Solutions</span>
-              <span class="dl-badge">Download 📥</span>
-            </a>
-          </div>
-        </details>
-
-        <!-- Class 10 FA 4 -->
-        <details class="fa-accordion">
-          <summary>FA 4 (Tap to View Files)</summary>
-          <div class="file-list">
-            <a href="class10-fa4-generating-new-problems.pdf" download="Class10_FA4_Generating_Problems.pdf" class="file-btn">
-              <span>📄 Generating New Problems</span>
-              <span class="dl-badge">Download 📥</span>
-            </a>
-            <a href="class10-fa4-project.pdf" download="Class10_FA4_Project.pdf" class="file-btn">
-              <span>📄 Project Work</span>
-              <span class="dl-badge">Download 📥</span>
-            </a>
-            <a href="class10-fa4-slip-test.pdf" download="Class10_FA4_Slip_Test.pdf" class="file-btn">
-              <span>📄 Slip Test & Solutions</span>
-              <span class="dl-badge">Download 📥</span>
-            </a>
-          </div>
-        </details>
-
-      </div>
-    </details>
-
-    <!-- ================= CLASS 9 ================= -->
-    <details class="class-box">
-      <summary>Class 9 Mathematics</summary>
-      <div class="class-content">
-
-        <!-- Class 9 FA 1 -->
-        <details class="fa-accordion">
-          <summary>FA 1 (Tap to View Files)</summary>
-          <div class="file-list">
-            <a href="class9-fa1-generating-new-problems.pdf" download="Class9_FA1_Generating_Problems.pdf" class="file-btn">
-              <span>📄 Generating New Problems</span>
-              <span class="dl-badge">Download 📥</span>
-            </a>
-            <a href="class9-fa1-project.pdf" download="Class9_FA1_Project.pdf" class="file-btn">
-              <span>📄 Project Work</span>
-              <span class="dl-badge">Download 📥</span>
-            </a>
-            <a href="class9-fa1-slip-test.pdf" download="Class9_FA1_Slip_Test.pdf" class="file-btn">
-              <span>📄 Slip Test & Solutions</span>
-              <span class="dl-badge">Download 📥</span>
-            </a>
-          </div>
-        </details>
-
-        <!-- Class 9 FA 2 -->
-        <details class="fa-accordion">
-          <summary>FA 2 (Tap to View Files)</summary>
-          <div class="file-list">
-            <a href="class9-fa2-generating-new-problems.pdf" download="Class9_FA2_Generating_Problems.pdf" class="file-btn">
-              <span>📄 Generating New Problems</span>
-              <span class="dl-badge">Download 📥</span>
-            </a>
-            <a href="class9-fa2-project.pdf" download="Class9_FA2_Project.pdf" class="file-btn">
-              <span>📄 Project Work</span>
-              <span class="dl-badge">Download 📥</span>
-            </a>
-            <a href="class9-fa2-slip-test.pdf" download="Class9_FA2_Slip_Test.pdf" class="file-btn">
-              <span>📄 Slip Test & Solutions</span>
-              <span class="dl-badge">Download 📥</span>
-            </a>
-          </div>
-        </details>
-
-        <!-- Class 9 FA 3 -->
-        <details class="fa-accordion">
-          <summary>FA 3 (Tap to View Files)</summary>
-          <div class="file-list">
-            <a href="Class9-fa3-generating-new-Problems.pdf" download="Class9_FA3_Generating_Problems.pdf" class="file-btn">
-              <span>📄 Generating New Problems</span>
-              <span class="dl-badge">Download 📥</span>
-            </a>
-            <a href="class9-fa3-project.pdf" download="Class9_FA3_Project.pdf" class="file-btn">
-              <span>📄 Project Work</span>
-              <span class="dl-badge">Download 📥</span>
-            </a>
-            <a href="class9-fa3-slip-test.pdf" download="Class9_FA3_Slip_Test.pdf" class="file-btn">
-              <span>📄 Slip Test & Solutions</span>
-              <span class="dl-badge">Download 📥</span>
-            </a>
-          </div>
-        </details>
-
-        <!-- Class 9 FA 4 -->
-        <details class="fa-accordion">
-          <summary>FA 4 (Tap to View Files)</summary>
-          <div class="file-list">
-            <a href="class9-fa4-generating-new-problems.pdf" download="Class9_FA4_Generating_Problems.pdf" class="file-btn">
-              <span>📄 Generating New Problems</span>
-              <span class="dl-badge">Download 📥</span>
-            </a>
-            <a href="class9-fa4-project.pdf" download="Class9_FA4_Project.pdf" class="file-btn">
-              <span>📄 Project Work</span>
-              <span class="dl-badge">Download 📥</span>
-            </a>
-            <a href="class9-fa4-slip-test.pdf" download="Class9_FA4_Slip_Test.pdf" class="file-btn">
-              <span>📄 Slip Test & Solutions</span>
-              <span class="dl-badge">Download 📥</span>
-            </a>
-          </div>
-        </details>
-
-      </div>
-    </details>
-
-    <!-- ================= CLASS 8 ================= -->
-    <details class="class-box">
-      <summary>Class 8 Mathematics</summary>
-      <div class="class-content">
-
-        <!-- Class 8 FA 1 -->
-        <details class="fa-accordion">
-          <summary>FA 1 (Tap to View Files)</summary>
-          <div class="file-list">
-            <a href="FA-1%20Generating%20New%20Problems.pdf" download="Class8_FA1_Generating_Problems.pdf" class="file-btn">
-              <span>📄 Generating New Problems</span>
-              <span class="dl-badge">Download 📥</span>
-            </a>
-            <a href="Class%208%20FA1%20Project.pdf" download="Class8_FA1_Project.pdf" class="file-btn">
-              <span>📄 Project Work</span>
-              <span class="dl-badge">Download 📥</span>
-            </a>
-            <a href="FA-1%20Slip%20Test.pdf" download="Class8_FA1_Slip_Test.pdf" class="file-btn">
-              <span>📄 Slip Test</span>
-              <span class="dl-badge">Download 📥</span>
-            </a>
-          </div>
-        </details>
-
-        <!-- Class 8 FA 2 -->
-        <details class="fa-accordion">
-          <summary>FA 2 (Tap to View Files)</summary>
-          <div class="file-list">
-            <a href="class8-fa2-generating-new-problems.pdf" download="Class8_FA2_Generating_Problems.pdf" class="file-btn">
-              <span>📄 Generating New Problems</span>
-              <span class="dl-badge">Download 📥</span>
-            </a>
-            <a href="class8-fa2-project.pdf" download="Class8_FA2_Project.pdf" class="file-btn">
-              <span>📄 Project Work</span>
-              <span class="dl-badge">Download 📥</span>
-            </a>
-            <a href="class8-fa2-slip-test.pdf" download="Class8_FA2_Slip_Test.pdf" class="file-btn">
-              <span>📄 Slip Test</span>
-              <span class="dl-badge">Download 📥</span>
-            </a>
-          </div>
-        </details>
-
-        <!-- Class 8 FA 3 -->
-        <details class="fa-accordion">
-          <summary>FA 3 (Tap to View Files)</summary>
-          <div class="file-list">
-            <a href="class8-fa3-generating-new-problems.pdf" download="Class8_FA3_Generating_Problems.pdf" class="file-btn">
-              <span>📄 Generating New Problems</span>
-              <span class="dl-badge">Download 📥</span>
-            </a>
-            <a href="class8-fa3-project.pdf" download="Class8_FA3_Project.pdf" class="file-btn">
-              <span>📄 Project Work</span>
-              <span class="dl-badge">Download 📥</span>
-            </a>
-            <a href="class8-fa3-slip-test.pdf" download="Class8_FA3_Slip_Test.pdf" class="file-btn">
-              <span>📄 Slip Test</span>
-              <span class="dl-badge">Download 📥</span>
-            </a>
-          </div>
-        </details>
-
-        <!-- Class 8 FA 4 -->
-        <details class="fa-accordion">
-          <summary>FA 4 (Tap to View Files)</summary>
-          <div class="file-list">
-            <a href="class8-fa4-generating-new-problems.pdf" download="Class8_FA4_Generating_Problems.pdf" class="file-btn">
-              <span>📄 Generating New Problems</span>
-              <span class="dl-badge">Download 📥</span>
-            </a>
-            <a href="class8-fa4-project.pdf" download="Class8_FA4_Project.pdf" class="file-btn">
-              <span>📄 Project Work</span>
-              <span class="dl-badge">Download 📥</span>
-            </a>
-            <a href="class8-fa4-slip-test.pdf" download="Class8_FA4_Slip_Test.pdf" class="file-btn">
-              <span>📄 Slip Test</span>
-              <span class="dl-badge">Download 📥</span>
-            </a>
-          </div>
-        </details>
-
-      </div>
-    </details>
-
-  </div>
-
-  <!-- Footer -->
-  <footer>
-    <p>Curated &amp; Designed with Excellence for High School Mathematics</p>
-    <p style="margin-top: 6px;">Created by <span class="creator-name">Hemanth Kalyanapu</span> &bull; <strong>LEKKA LAB</strong></p>
-    <button class="feedback-btn" onclick="openFeedback()">
-      💬 Send Feedback / Suggestions
-    </button>
-  </footer>
-
-  <!-- Direct In-Page Feedback Modal -->
-  <div class="modal-backdrop" id="feedbackModal" onclick="closeFeedbackOnOut(event)">
-    <div class="modal-card">
-      <div class="modal-head">
-        <h3>Lekka Lab Feedback</h3>
-        <button class="modal-close" onclick="closeFeedback()">&times;</button>
-      </div>
-      <form id="feedbackForm" onsubmit="sendFeedback(event)">
-        <div class="form-group">
-          <label>Your Name</label>
-          <input type="text" id="fbName" name="name" class="form-input" placeholder="e.g. Ramesh" required>
-        </div>
-        <div class="form-group">
-          <label>You are a:</label>
-          <select id="fbRole" name="role" class="form-select">
-            <option value="Student">Student</option>
-            <option value="Teacher">Teacher / Colleague</option>
-            <option value="Parent">Parent</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Message / Suggestion</label>
-          <textarea id="fbMsg" name="message" class="form-textarea" placeholder="Tell us what you liked or any notes/formulas you need..." required></textarea>
-        </div>
-        <button type="submit" id="fbSubmitBtn" class="submit-btn">Submit Feedback</button>
-        <div id="formStatus"></div>
-      </form>
-    </div>
-  </div>
-
-  <script>
-    // Search Filter
-    function filterFiles() {
-      const q = document.getElementById('searchInput').value.trim().toLowerCase();
-      const classBoxes = document.querySelectorAll('.class-box');
-
-      classBoxes.forEach(cb => {
-        let classHasMatch = false;
-        const faAccordions = cb.querySelectorAll('.fa-accordion');
-
-        faAccordions.forEach(fa => {
-          let faHasMatch = false;
-          const fileLinks = fa.querySelectorAll('.file-btn');
-
-          fileLinks.forEach(link => {
-            const text = link.innerText.toLowerCase();
-            const href = link.getAttribute('href').toLowerCase();
-
-            if (!q || text.includes(q) || href.includes(q)) {
-              link.style.display = 'flex';
-              faHasMatch = true;
-            } else {
-              link.style.display = 'none';
-            }
-          });
-
-          if (!q) {
-            fa.style.display = 'block';
-          } else if (faHasMatch || fa.querySelector('summary').innerText.toLowerCase().includes(q)) {
-            fa.style.display = 'block';
-            fa.open = true;
-            classHasMatch = true;
-          } else {
-            fa.style.display = 'none';
-          }
-        });
-
-        if (!q) {
-          cb.style.display = 'block';
-          cb.open = cb.querySelector('summary').innerText.includes('10');
-        } else if (classHasMatch || cb.querySelector('summary').innerText.toLowerCase().includes(q)) {
-          cb.style.display = 'block';
-          cb.open = true;
-        } else {
-          cb.style.display = 'none';
-        }
-      });
-    }
-
-    // Attachment Handler
-    let attachedFile = null;
-    let base64ImageData = null;
-
-    function handleImageSelection(input) {
-      if (input.files && input.files[0]) {
-        attachedFile = input.files[0];
-        const preview = document.getElementById('filePreviewTag');
-        preview.style.display = 'block';
-        preview.innerText = `📎 Selected: ${attachedFile.name} (Ready to solve)`;
-
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          base64ImageData = e.target.result.split(',')[1];
-        };
-        reader.readAsDataURL(attachedFile);
-      }
-    }
-
-    const WORKER_URL = "https://rapid-glade-dd04.hemanthkalyanapu-hk.workers.dev/";
-
-    async function solveMathWithLens() {
-      const text = document.getElementById('aiProblemInput').value.trim();
-      const outputBox = document.getElementById('aiSolutionDisplay');
-      const contentBox = document.getElementById('mathRenderedContent');
-
-      if (!text && !base64ImageData) {
-        alert("Please enter a question or attach a photo first!");
-        return;
-      }
-
-      outputBox.style.display = 'block';
-      contentBox.innerHTML = "<span style='color: #2563eb; font-weight: 700;'>⏳ Lucky is calculating step-by-step solution... Please wait.</span>";
-
-      try {
-        const payload = {
-          prompt: text || "Please solve the question shown in the attached image.",
-          question: text || "Please solve the question shown in the attached image."
-        };
-        if (base64ImageData) {
-          payload.image = base64ImageData;
-        }
-
-        const response = await fetch(WORKER_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload)
-        });
-
-        const data = await response.json();
-
-        if (data && (data.solution || data.text)) {
-          const rawText = data.solution || data.text;
-          
-          // Markdown to HTML conversion
-          contentBox.innerHTML = marked.parse(rawText);
-
-          // Beautiful Math LaTeX Rendering (Replaces $$and$ with actual formulas)
-          if (window.renderMathInElement) {
-            renderMathInElement(contentBox, {
-              delimiters: [
-                {left: '$$', right: '$$', display: true},
-                {left: '$', right: '$', display: false},
-                {left: '\\(', right: '\\)', display: false},
-                {left: '[', right: ']', display: true}
-              ],
-              throwOnError: false
-            });
-          }
-        } else if (data && data.error) {
-          contentBox.innerHTML = `<span style="color: #dc2626; font-weight: bold;">⚠️ Error: ${data.error}</span>`;
-        } else {
-          contentBox.innerHTML = `<pre style="white-space: pre-wrap;">${JSON.stringify(data, null, 2)}</pre>`;
-        }
-      } catch (err) {
-        contentBox.innerHTML = `<span style="color: #dc2626; font-weight: bold;">⚠️ Connection failed: ${err.message}</span>`;
-      }
-    }
-
-    function openFeedback() {
-      document.getElementById('feedbackModal').style.display = 'flex';
-      document.getElementById('formStatus').style.display = 'none';
-    }
-
-    function closeFeedback() {
-      document.getElementById('feedbackModal').style.display = 'none';
-    }
-
-    function closeFeedbackOnOut(e) {
-      if (e.target.id === 'feedbackModal') closeFeedback();
-    }
-
-    async function sendFeedback(e) {
-      e.preventDefault();
-      const btn = document.getElementById('fbSubmitBtn');
-      const status = document.getElementById('formStatus');
-      
-      btn.disabled = true;
-      btn.innerText = "Sending...";
-      status.style.display = "block";
-      status.style.color = "#0369a1";
-      status.innerText = "Submitting your feedback...";
-
-      const payload = {
-        access_key: "6507409f-c6ad-45ce-8c34-eb17a76c8c4a",
-        subject: "New Lekka Lab Feedback from " + document.getElementById('fbName').value,
-        from_name: "Lekka Lab Visitor",
-        name: document.getElementById('fbName').value,
-        role: document.getElementById('fbRole').value,
-        message: document.getElementById('fbMsg').value
-      };
-
-      try {
-        const response = await fetch("https://api.web3forms.com/submit", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-          },
-          body: JSON.stringify(payload)
-        });
-
-        const result = await response.json();
-        if (result.success) {
-          status.style.color = "#15803d";
-          status.innerText = "Thank you! Feedback received successfully.";
-          document.getElementById('feedbackForm').reset();
-          setTimeout(() => {
-            closeFeedback();
-            btn.disabled = false;
-            btn.innerText = "Submit Feedback";
-            status.style.display = "none";
-          }, 2000);
-        } else {
-          throw new Error();
-        }
-      } catch (err) {
-        status.style.color = "#b91c1c";
-        status.innerText = "Submission failed. Please try again later.";
-        btn.disabled = false;
-        btn.innerText = "Submit Feedback";
-      }
-    }
-  </script>
-</body>
-</html>
+     
