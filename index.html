@@ -3,182 +3,734 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LEKKA LAB - Educational Portal</title>
+  <title>Lekka Lab: Educational Portal</title>
+  
+  <!-- Premium Fonts: Outfit & Cinzel -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
   <style>
     :root {
-      --bg: #f8fafc;
+      --bg-page: #f8fafc;
+      --header-bg: linear-gradient(135deg, #040915 0%, #0d1e3d 50%, #030a1c 100%);
+      --gold-primary: #d97706;
+      --gold-gradient: linear-gradient(135deg, #fff176 0%, #f59e0b 50%, #d97706 100%);
+      --gold-border: rgba(245, 158, 11, 0.4);
       --card-bg: #ffffff;
-      --navy-dark: #0a192f;
-      --navy-card: #0f172a;
-      --gold: #f59e0b;
-      --gold-dark: #d97706;
-      --blue-accent: #0284c7;
-      --orange-accent: #ea580c;
-      --border-color: #e2e8f0;
-      --text-dark: #0f172a;
+      --card-border: #e2e8f0;
+      --card-shadow: 0 4px 18px -2px rgba(13, 30, 61, 0.08);
+      --text-heading: #0f172a;
       --text-muted: #64748b;
+      --class-header-bg: linear-gradient(135deg, #091326 0%, #112246 100%);
+      --class-header-border: #f59e0b;
+      --fa-btn-bg: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      --fa-active-bg: linear-gradient(135deg, #0369a1 0%, #075985 100%);
+      --file-btn-border: #cbd5e1;
+      --file-btn-hover: #e0f2fe;
+      --badge-bg: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      --badge-text: #050b18;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: 'Outfit', system-ui, sans-serif;
+      transition: background 0.2s ease, border-color 0.2s ease;
     }
 
     body {
-      background-color: var(--bg);
-      color: var(--text-dark);
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      background-color: var(--bg-page);
+      color: var(--text-heading);
+      padding-bottom: 50px;
     }
 
-    .container {
-      width: 100%;
-      max-width: 580px;
+    /* Header */
+    header {
+      background: var(--header-bg);
+      color: white;
+      padding: 26px 16px 22px;
+      border-bottom: 2px solid var(--gold-border);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    }
+
+    .header-content {
+      max-width: 640px;
+      margin: 0 auto;
       display: flex;
-      flex-direction: column;
+      align-items: center;
       gap: 16px;
+      text-align: left;
     }
 
-    /* Original Blue Badge Header */
-    .header-card {
-      background: #0f1f38;
-      color: #ffffff;
-      border-radius: 20px;
-      padding: 24px 20px;
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      box-shadow: 0 4px 14px rgba(10, 25, 47, 0.2);
-    }
-
-    /* Circular Lab Flask Emblem */
-    .logo-badge {
-      width: 72px;
-      height: 72px;
-      background: #0b192c;
-      border: 3px solid #38bdf8;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .emblem-wrapper {
+      width: 80px;
+      height: 80px;
       flex-shrink: 0;
-      box-shadow: 0 0 14px rgba(56, 189, 248, 0.4);
+      filter: drop-shadow(0 4px 12px rgba(245, 158, 11, 0.4));
     }
 
-    .logo-badge svg {
-      width: 40px;
-      height: 40px;
+    .header-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex-grow: 1;
     }
 
-    .header-text h1 {
-      font-size: 1.45rem;
+    .brand-super-title {
+      font-family: 'Cinzel', serif;
+      font-size: 24px;
       font-weight: 900;
-      color: var(--gold);
+      letter-spacing: 1.5px;
+      line-height: 1.15;
+      margin-bottom: 2px;
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 2px 10px rgba(245, 158, 11, 0.3);
+    }
+
+    .brand-portal-tag {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #f8fafc;
       letter-spacing: 0.5px;
-      line-height: 1.2;
-    }
-
-    .header-text h2 {
-      font-size: 0.95rem;
-      font-weight: 800;
-      letter-spacing: 0.5px;
-      margin-top: 2px;
-      color: #ffffff;
-    }
-
-    .header-text p.quote {
-      font-size: 0.8rem;
-      font-style: italic;
-      color: #93c5fd;
-      margin-top: 4px;
-    }
-
-    .header-text p.sub {
-      font-size: 0.72rem;
-      font-weight: 800;
-      color: #cbd5e1;
+      margin-bottom: 4px;
       text-transform: uppercase;
-      margin-top: 5px;
-      letter-spacing: 0.5px;
     }
 
-    /* Textbook Rows */
-    .card-row {
+    header .motto-tag {
+      font-size: 12.5px;
+      font-weight: 500;
+      color: #93c5fd;
+      letter-spacing: 0.2px;
+      margin-bottom: 3px;
+      font-style: italic;
+    }
+
+    header p.subtext {
+      font-size: 11px;
+      color: #94a3b8;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    /* Container */
+    .container {
+      max-width: 640px;
+      margin: 18px auto 0;
+      padding: 0 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* Compact Textbook Cards */
+    .textbooks-wrapper {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    @media (min-width: 480px) {
+      .textbooks-wrapper {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+    }
+
+    .card {
       background: var(--card-bg);
-      border-radius: 14px;
-      padding: 16px;
+      border-radius: 12px;
+      padding: 12px 14px;
+      border: 1px solid var(--card-border);
+      box-shadow: var(--card-shadow);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
-      border-left: 5px solid;
+      position: relative;
+      overflow: hidden;
     }
 
-    .card-scert { border-left-color: var(--orange-accent); }
-    .card-ncert { border-left-color: var(--blue-accent); }
+    .card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+    }
 
-    .card-info h3 {
-      font-size: 1.05rem;
+    .card-scert::before { background: linear-gradient(to bottom, #ea580c, #f97316); }
+    .card-ncert::before { background: linear-gradient(to bottom, #0284c7, #38bdf8); }
+
+    .info h2 {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--text-heading);
+      margin-bottom: 2px;
+      line-height: 1.2;
+      letter-spacing: -0.2px;
+    }
+
+    .info p {
+      font-size: 11.5px;
+      font-weight: 500;
+      color: var(--text-muted);
+      line-height: 1.2;
+    }
+
+    .btn-download {
+      display: inline-block;
+      padding: 7px 13px;
+      color: #ffffff;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-weight: 700;
+      white-space: nowrap;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+      margin-left: 8px;
+    }
+
+    .btn-download:active {
+      transform: scale(0.96);
+    }
+
+    .btn-scert { background: linear-gradient(135deg, #ea580c, #c2410c); }
+    .btn-ncert { background: linear-gradient(135deg, #0284c7, #0369a1); }
+
+    /* In-Page AI Problem Solver Card */
+    .ai-solver-card {
+      background: #ffffff;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: 0 4px 18px -2px rgba(245, 158, 11, 0.12);
+    }
+
+    .ai-solver-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .ai-solver-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 15px;
       font-weight: 800;
       color: #0f172a;
     }
 
-    .card-info p {
-      font-size: 0.82rem;
-      color: var(--text-muted);
+    .ai-badge {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      color: #050b18;
+      font-size: 10px;
+      font-weight: 800;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .ai-input-area {
+      width: 100%;
+      min-height: 65px;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      font-size: 13.5px;
+      color: #0f172a;
+      outline: none;
+      resize: vertical;
+      font-family: inherit;
+    }
+
+    .ai-input-area:focus {
+      border-color: #f59e0b;
+      box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.12);
+    }
+
+    .ai-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 10px;
+    }
+
+    .btn-ai-solve {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #fde047;
+      border: 1px solid rgba(245, 158, 11, 0.5);
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-ai-solve:active {
+      transform: scale(0.97);
+    }
+
+    .btn-ai-solve:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    /* Single Clean Solution Display Box */
+    .ai-solution-container {
+      margin-top: 14px;
+      padding: 14px;
+      background: #f8fafc;
+      border-radius: 10px;
+      border: 1px solid #e2e8f0;
+      border-left: 4px solid #f59e0b;
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: #1e293b;
+      display: none;
+      white-space: pre-wrap;
+    }
+
+    /* Search Bar */
+    .search-box-wrap {
+      position: relative;
       margin-top: 2px;
     }
 
-    .btn-portal-orange {
-      background: var(--orange-accent);
-      color: #ffffff;
-      padding: 8px 16px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 0.85rem;
+    .search-input {
+      width: 100%;
+      padding: 12px 16px 12px 42px;
+      border-radius: 10px;
+      border: 1px solid var(--card-border);
+      background: #ffffff;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-heading);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
     }
 
-    .btn-portal-blue {
-      background: var(--blue-accent);
-      color: #ffffff;
-      padding: 8px 16px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 0.85rem;
+    .search-input:focus {
+      border-color: #f59e0b;
+      box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
     }
 
-    /* AI Tutor Card */
-    .ai-box {
+    .search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+      color: #94a3b8;
+      pointer-events: none;
+    }
+
+    .section-title {
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      color: var(--text-heading);
+      margin-top: 4px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid var(--gold-border);
+      text-transform: uppercase;
+    }
+
+    /* Accordions */
+    details.class-box {
       background: var(--card-bg);
-      border: 1.5px solid #fed7aa;
-      border-radius: 16px;
-      padding: 16px;
-      box-shadow: 0 4px 12px rgba(234, 88, 12, 0.05);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+    }
+
+    details.class-box > summary {
+      background: var(--class-header-bg);
+      color: white;
+      padding: 14px 18px;
+      font-size: 15.5px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      cursor: pointer;
+      user-select: none;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-left: 4px solid var(--class-header-border);
+    }
+
+    details.class-box > summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details.class-box > summary::after {
+      content: "▼";
+      font-size: 11px;
+      color: #f59e0b;
+      transition: transform 0.25s;
+    }
+
+    details.class-box[open] > summary::after {
+      transform: rotate(180deg);
+    }
+
+    .class-content {
+      padding: 14px;
+      background: rgba(0, 0, 0, 0.015);
       display: flex;
       flex-direction: column;
       gap: 12px;
     }
 
-    .ai-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    details.fa-accordion {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 9px;
+      overflow: hidden;
     }
 
-    .ai-title {
-      font-size: 1.05rem;
-      font-weight: 800;
+    details.fa-accordion > summary {
+      background: var(--fa-btn-bg);
+      color: white;
+      padding: 12px 15px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      user-select: none;
+      list-style: none;
       display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    details.fa-accordion > summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details.fa-accordion[open] > summary {
+      background: var(--fa-active-bg);
+      border-bottom: 1px solid var(--gold-border);
+    }
+
+    details.fa-accordion > summary::after {
+      content: "▼";
+      font-size: 10px;
+      transition: transform 0.2s;
+    }
+
+    details.fa-accordion[open] > summary::after {
+      transform: rotate(180deg);
+    }
+
+    .file-list {
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      background: rgba(0, 0, 0, 0.01);
+    }
+
+    .file-btn {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--card-bg);
+      color: var(--text-heading);
+      text-decoration: none;
+      padding: 11px 14px;
+      border: 1px solid var(--file-btn-border);
+      border-radius: 8px;
+      font-size: 13.5px;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .file-btn:hover {
+      background: var(--file-btn-hover);
+      border-color: var(--gold-primary);
+      transform: translateX(3px);
+    }
+
+    .file-btn:active {
+      transform: scale(0.98);
+    }
+
+    .dl-badge {
+      background: var(--badge-bg);
+      color: var(--badge-text);
+      padding: 5px 10px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-weight: 800;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Feedback Trigger & Modal */
+    .feedback-btn {
+      display: inline-flex;
       align-items: center;
       gap: 6px;
+      background: #0f172a;
+      border: 1px solid var(--gold-border);
+      color: #fde047;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
 
-    .badge-tag {
-      background: var(--orange-accent);
-      color
+    .feedback-btn:active {
+      transform: scale(0.96);
+    }
+
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 9, 21, 0.75);
+      backdrop-filter: blur(4px);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-card {
+      background: #ffffff;
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      max-width: 420px;
+      width: 100%;
+      padding: 22px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      position: relative;
+    }
+
+    .modal-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 8px;
+    }
+
+    .modal-head h3 {
+      font-size: 17px;
+      font-weight: 800;
+      color: #0f172a;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 22px;
+      color: #64748b;
+      cursor: pointer;
+    }
+
+    .form-group {
+      margin-bottom: 12px;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      color: #334155;
+      margin-bottom: 4px;
+    }
+
+    .form-input, .form-textarea, .form-select {
+      width: 100%;
+      padding: 9px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 13px;
+      color: #0f172a;
+      outline: none;
+      font-family: inherit;
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 85px;
+    }
+
+    .form-input:focus, .form-textarea:focus {
+      border-color: #f59e0b;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 11px;
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 13.5px;
+      cursor: pointer;
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    #formStatus {
+      font-size: 12px;
+      font-weight: 600;
+      margin-top: 10px;
+      text-align: center;
+      display: none;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid var(--gold-border);
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    footer .creator-name {
+      font-weight: 800;
+      color: var(--gold-primary);
+      letter-spacing: 0.3px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header-content">
+      <div class="emblem-wrapper">
+        <svg viewBox="0 0 500 500" width="100%" height="100%">
+          <defs>
+            <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#050b18" />
+              <stop offset="100%" stop-color="#0c172e" />
+            </linearGradient>
+            <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#fde047" />
+              <stop offset="50%" stop-color="#f59e0b" />
+              <stop offset="100%" stop-color="#b45309" />
+            </linearGradient>
+            <linearGradient id="liquidGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.95" />
+              <stop offset="100%" stop-color="#1d4ed8" />
+            </linearGradient>
+            <path id="textArcTop" d="M 75, 250 A 175, 175 0 1, 1 425, 250" fill="none" />
+            <path id="textArcBottom" d="M 420, 250 A 170, 170 0 0, 1 80, 250" fill="none" />
+          </defs>
+
+          <circle cx="250" cy="250" r="230" fill="url(#bgGrad)" stroke="url(#goldGrad)" stroke-width="8" />
+          <circle cx="250" cy="250" r="182" fill="none" stroke="#38bdf8" stroke-width="3" stroke-dasharray="6, 4" />
+          <circle cx="250" cy="250" r="172" fill="#040914" />
+
+          <text fill="url(#goldGrad)" font-size="34" font-weight="900" letter-spacing="8">
+            <textPath href="#textArcTop" startOffset="50%" text-anchor="middle">LEKKA LAB</textPath>
+          </text>
+          <text fill="#e2e8f0" font-size="14" font-weight="700" letter-spacing="4">
+            <textPath href="#textArcBottom" startOffset="50%" text-anchor="middle">EXPLORE • DISCOVER • EXCEL</textPath>
+          </text>
+
+          <g transform="translate(0, 10)">
+            <path d="M 216,242 L 172,320 A 22,22 0 0,0 191,352 L 309,352 A 22,22 0 0,0 328,320 L 284,242 Z" fill="url(#liquidGrad)" />
+            <path d="M 232,150 L 268,150 M 236,150 L 236,204 L 165,324 A 24,24 0 0,0 186,360 L 314,360 A 24,24 0 0,0 335,324 L 264,204 L 264,150 M 230,146 L 270,146" fill="none" stroke="#f8fafc" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+            <text x="250" y="325" fill="#ffffff" font-size="38" font-family="'Times New Roman', serif" font-weight="bold" text-anchor="middle">π</text>
+            <text x="282" y="280" fill="#fde047" font-size="16" font-family="serif" font-weight="bold">√x</text>
+            <text x="202" y="295" fill="#bae6fd" font-size="18" font-family="serif" font-weight="bold">∑</text>
+            <path d="M 250,118 L 290,132 L 250,146 L 210,132 Z" fill="url(#goldGrad)" stroke="#b45309" stroke-width="1.5" />
+            <path d="M 226,138 L 226,154 Q 250,164 274,154 L 274,138" fill="none" stroke="url(#goldGrad)" stroke-width="2" />
+          </g>
+        </svg>
+      </div>
+
+      <div class="header-text">
+        <h1 class="brand-super-title">LEKKA LAB</h1>
+        <div class="brand-portal-tag">Educational Portal</div>
+        <div class="motto-tag">“Explore Maths, Discover Your Potential!”</div>
+        <p class="subtext">Official Textbooks &amp; Assessments</p>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- Official Textbooks -->
+    <div class="textbooks-wrapper">
+      <div class="card card-scert">
+        <div class="info">
+          <h2>SCERT Textbooks</h2>
+          <p>State Board eTextbooks</p>
+        </div>
+        <a href="https://scert.telangana.gov.in/" target="_blank" rel="noopener noreferrer" class="btn-download btn-scert">Open Portal ↗</a>
+      </div>
+
+      <div class="card card-ncert">
+        <div class="info">
+          <h2>NCERT Textbooks</h2>
+          <p>Central Board Books</p>
+        </div>
+        <a href="https://ncert.nic.in/textbook.php" target="_blank" rel="noopener noreferrer" class="btn-download btn-ncert">Open Portal ↗</a>
+      </div>
+    </div>
+
+    <!-- In-Page AI Problem Solver Card -->
+    <div class="ai-solver-card">
+      <div class="ai-solver-header">
+        <div class="ai-solver-title">
+          <span>✨ Lekka Lab AI Tutor</span>
+          <span class="ai-badge">Instant Solution</span>
+        </div>
+      </div>
+      <textarea id="aiProblemInput" class="ai-input-area" placeholder="Type your high school maths question here... (e.g. Find roots of x^2 - 5x + 6 = 0)"></textarea>
+      <div class="ai-actions">
+        <button id="btnSolve" class="btn-ai-solve" onclick="solveMathWithWorker()">
+          <span>⚡ Solve Problem</span>
+        </button>
+      </div>
+      <div id="aiSolutionBox" class="ai-solution-container"></div>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="search-box-wrap">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input type="text" id="searchInput" class="search-input" placeholder="Search by class, FA or topic (e.g. FA 2, Slip Test)..." oninput="filterFiles()">
+    </div>
+
+    <h2 class="section-title">Academic Assessments</h2>
+
+    <!-- ================= CLASS 10 ================= -->
+    <details class="class-box" open>
+      <summary>Class 10 Mathematics</summary>
+      <div class="class-content">
+
+        <!-- Class 10 FA 1 -->
+        <details class="fa-accordion" open>
+          <summary>F
