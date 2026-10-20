@@ -5,16 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lekka Lab: Educational Portal</title>
   
-  <!-- Google Search Console Verification -->
   <meta name="google-site-verification" content="ZH0hIM6YoIPs1gLm_RlFgMR1C69wGGW8FvEtmjbps2Q" />
-  <meta name="description" content="Lekka Lab is an educational mathematics portal providing step-by-step AI problem solving and study materials for Class 8, 9, and 10 students.">
+  <meta name="description" content="Lekka Lab Educational Portal - Resources and AI Study Assistant for Classes 8, 9, 10.">
 
-  <!-- Premium Fonts: Outfit & Cinzel -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
-  <!-- Math Rendering (KaTeX) & Markdown Support -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
@@ -22,318 +19,132 @@
 
   <style>
     :root {
-      --bg-page: #f8fafc;
-      --header-bg: linear-gradient(135deg, #040915 0%, #0d1e3d 50%, #030a1c 100%);
-      --gold-primary: #d97706;
-      --gold-gradient: linear-gradient(135deg, #fff176 0%, #f59e0b 50%, #d97706 100%);
-      --gold-border: rgba(245, 158, 11, 0.4);
-      --card-bg: #ffffff;
-      --card-border: #e2e8f0;
-      --card-shadow: 0 4px 18px -2px rgba(13, 30, 61, 0.08);
-      --text-heading: #0f172a;
-      --text-muted: #64748b;
-      --class-header-bg: linear-gradient(135deg, #091326 0%, #112246 100%);
-      --class-header-border: #f59e0b;
-      --fa-btn-bg: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
-      --fa-active-bg: linear-gradient(135deg, #0369a1 0%, #075985 100%);
-      --file-btn-border: #cbd5e1;
-      --badge-bg: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-      --badge-text: #050b18;
+      --bg: #f8fafc;
+      --navy: #091326;
+      --gold: #f59e0b;
+      --card: #ffffff;
+      --border: #e2e8f0;
+      --text: #0f172a;
+      --muted: #64748b;
+      --blue: #0284c7;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Outfit', system-ui, sans-serif;
-      transition: background 0.2s ease, border-color 0.2s ease;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Outfit', sans-serif; }
+    body { background-color: var(--bg); color: var(--text); padding-bottom: 50px; }
 
-    body {
-      background-color: var(--bg-page);
-      color: var(--text-heading);
-      padding-bottom: 50px;
-    }
-
-    /* Header */
     header {
-      background: var(--header-bg);
+      background: linear-gradient(135deg, #040915, #0d1e3d);
       color: white;
-      padding: 26px 16px 22px;
-      border-bottom: 2px solid var(--gold-border);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+      padding: 22px 16px;
+      border-bottom: 2px solid rgba(245, 158, 11, 0.4);
     }
-
     .header-content {
       max-width: 640px;
       margin: 0 auto;
       display: flex;
       align-items: center;
-      gap: 16px;
-      text-align: left;
+      gap: 14px;
     }
-
-    .emblem-wrapper {
-      width: 80px;
-      height: 80px;
-      flex-shrink: 0;
-      filter: drop-shadow(0 4px 12px rgba(245, 158, 11, 0.4));
-    }
-
-    .header-text {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      flex-grow: 1;
-    }
-
-    .brand-super-title {
+    .emblem-wrapper { width: 72px; height: 72px; flex-shrink: 0; }
+    .brand-title {
       font-family: 'Cinzel', serif;
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 900;
-      letter-spacing: 1.5px;
-      line-height: 1.15;
-      margin-bottom: 2px;
-      background: var(--gold-gradient);
+      background: linear-gradient(135deg, #fff176, #f59e0b, #d97706);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-shadow: 0 2px 10px rgba(245, 158, 11, 0.3);
     }
+    .brand-tag { font-size: 13px; font-weight: 700; color: #f8fafc; text-transform: uppercase; }
+    .brand-motto { font-size: 12px; color: #93c5fd; font-style: italic; }
 
-    .brand-portal-tag {
-      font-size: 13.5px;
-      font-weight: 700;
-      color: #f8fafc;
-      letter-spacing: 0.5px;
-      margin-bottom: 4px;
-      text-transform: uppercase;
-    }
-
-    header .motto-tag {
-      font-size: 12.5px;
-      font-weight: 500;
-      color: #93c5fd;
-      letter-spacing: 0.2px;
-      margin-bottom: 3px;
-      font-style: italic;
-    }
-
-    header p.subtext {
-      font-size: 11px;
-      color: #94a3b8;
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
-      font-weight: 700;
-    }
-
-    /* Container */
     .container {
       max-width: 640px;
-      margin: 18px auto 0;
+      margin: 16px auto 0;
       padding: 0 16px;
       display: flex;
       flex-direction: column;
       gap: 16px;
     }
 
-    /* Search Bar */
-    .search-box-wrap {
-      position: relative;
-    }
-
+    .search-box { position: relative; width: 100%; }
     .search-input {
       width: 100%;
-      padding: 13px 16px 13px 44px;
+      padding: 12px 16px 12px 42px;
       border-radius: 12px;
-      border: 1px solid var(--card-border);
-      background: #ffffff;
-      font-size: 14.5px;
+      border: 1px solid var(--border);
+      background: #fff;
+      font-size: 14px;
       font-weight: 600;
-      color: var(--text-heading);
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
       outline: none;
     }
-
-    .search-input:focus {
-      border-color: #f59e0b;
-      box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
-    }
-
     .search-icon {
       position: absolute;
       left: 14px;
       top: 50%;
       transform: translateY(-50%);
-      width: 19px;
-      height: 19px;
-      color: #94a3b8;
+      width: 18px;
+      height: 18px;
+      color: var(--muted);
       pointer-events: none;
     }
 
-    /* Textbooks */
-    .textbooks-wrapper {
+    .books-grid {
       display: grid;
       grid-template-columns: 1fr;
       gap: 10px;
     }
-
-    @media (min-width: 480px) {
-      .textbooks-wrapper {
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-      }
-    }
-
-    .card {
-      background: var(--card-bg);
+    @media (min-width: 480px) { .books-grid { grid-template-columns: 1fr 1fr; } }
+    .book-card {
+      background: #fff;
       border-radius: 12px;
-      padding: 12px 14px;
-      border: 1px solid var(--card-border);
-      box-shadow: var(--card-shadow);
+      padding: 12px;
+      border: 1px solid var(--border);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: relative;
-      overflow: hidden;
+      border-left: 4px solid var(--gold);
     }
-
-    .card::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 4px;
-    }
-
-    .card-scert::before { background: linear-gradient(to bottom, #ea580c, #f97316); }
-    .card-ncert::before { background: linear-gradient(to bottom, #0284c7, #38bdf8); }
-
-    .info h2 {
-      font-size: 15px;
-      font-weight: 800;
-      color: var(--text-heading);
-      margin-bottom: 2px;
-      line-height: 1.2;
-      letter-spacing: -0.2px;
-    }
-
-    .info p {
-      font-size: 11.5px;
-      font-weight: 500;
-      color: var(--text-muted);
-      line-height: 1.2;
-    }
-
-    .btn-download {
-      display: inline-block;
-      padding: 7px 13px;
-      color: #ffffff;
-      text-decoration: none;
+    .book-card h3 { font-size: 14px; font-weight: 800; }
+    .book-card p { font-size: 11px; color: var(--muted); }
+    .btn-book {
+      padding: 6px 12px;
       border-radius: 6px;
-      font-size: 11.5px;
+      color: #fff;
+      text-decoration: none;
+      font-size: 11px;
       font-weight: 700;
-      white-space: nowrap;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
-      margin-left: 8px;
+      background: var(--blue);
     }
 
-    .btn-download:active {
-      transform: scale(0.96);
-    }
-
-    .btn-scert { background: linear-gradient(135deg, #ea580c, #c2410c); }
-    .btn-ncert { background: linear-gradient(135deg, #0284c7, #0369a1); }
-
-    /* Ask Lucky Box */
-    .ai-solver-card {
-      background: #ffffff;
+    .ai-card {
+      background: #fff;
       border: 1px solid rgba(245, 158, 11, 0.4);
       border-radius: 14px;
-      padding: 16px;
-      box-shadow: 0 4px 18px -2px rgba(245, 158, 11, 0.12);
+      padding: 14px;
+      box-shadow: 0 4px 14px rgba(245, 158, 11, 0.08);
     }
-
-    .ai-solver-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 10px;
-    }
-
-    .ai-solver-title {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 15px;
-      font-weight: 800;
-      color: #0f172a;
-    }
-
+    .ai-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
     .ai-badge {
-      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      background: linear-gradient(135deg, #f59e0b, #d97706);
       color: #050b18;
       font-size: 10px;
       font-weight: 800;
       padding: 2px 6px;
       border-radius: 4px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
     }
-
-    .ai-input-area {
+    .ai-textarea {
       width: 100%;
       min-height: 60px;
-      padding: 10px 12px;
+      padding: 10px;
       border-radius: 8px;
       border: 1px solid #cbd5e1;
       font-size: 13.5px;
-      color: #0f172a;
       outline: none;
       resize: vertical;
-      font-family: inherit;
     }
-
-    .ai-input-area:focus {
-      border-color: #f59e0b;
-      box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.12);
-    }
-
-    .ai-toolbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-top: 10px;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .ai-attach-group {
-      display: flex;
-      gap: 6px;
-    }
-
-    .btn-icon-attach {
-      background: #f1f5f9;
-      border: 1px solid #cbd5e1;
-      border-radius: 8px;
-      padding: 6px 10px;
-      font-size: 12px;
-      font-weight: 700;
-      color: #334155;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .btn-icon-attach:hover {
-      background: #e2e8f0;
-      border-color: #94a3b8;
-    }
-
-    .btn-ai-solve {
-      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    .ai-bar { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
+    .btn-ai {
+      background: var(--navy);
       color: #fde047;
       border: 1px solid rgba(245, 158, 11, 0.5);
       border-radius: 8px;
@@ -341,471 +152,335 @@
       font-size: 13px;
       font-weight: 700;
       cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
     }
-
-    .btn-ai-solve:active {
-      transform: scale(0.97);
-    }
-
-    .file-preview-indicator {
-      font-size: 11.5px;
-      color: #0284c7;
-      font-weight: 600;
-      display: none;
-      margin-top: 6px;
-    }
-
-    /* Output Section */
-    #aiSolutionDisplay {
+    #aiDisplay {
       display: none;
       margin-top: 12px;
-      padding: 16px;
+      padding: 14px;
       border-radius: 10px;
-      background: #ffffff;
+      background: #fff;
       border: 1.5px solid #2563eb;
       font-size: 14px;
-      line-height: 1.7;
-      color: #0f172a;
-      max-height: 560px;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
+      line-height: 1.6;
     }
 
-    #mathRenderedContent {
-      overflow-x: auto;
-      word-break: break-word;
-      font-size: 14.5px;
-      line-height: 1.75;
-      color: #0f172a;
-    }
-
-    #mathRenderedContent h1, #mathRenderedContent h2, #mathRenderedContent h3, #mathRenderedContent h4 {
-      color: #1e3a8a;
-      margin-top: 14px;
-      margin-bottom: 6px;
-    }
-
-    #mathRenderedContent ul, #mathRenderedContent ol {
-      margin-left: 20px;
-      margin-bottom: 10px;
-    }
-
-    #mathRenderedContent table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 14px 0;
-      display: block;
-      overflow-x: auto;
-      white-space: nowrap;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    #mathRenderedContent th, #mathRenderedContent td {
-      border: 1px solid #cbd5e1;
-      padding: 9px 12px;
-      text-align: left;
-      font-size: 13px;
-    }
-
-    #mathRenderedContent th {
-      background-color: #f1f5f9;
-      color: #0f172a;
-      font-weight: 700;
-    }
-
-    #mathRenderedContent svg {
-      display: block;
-      margin: 14px auto;
-      max-width: 100%;
-      height: auto;
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
-    }
-
-    .katex-display {
-      overflow-x: auto;
-      overflow-y: hidden;
-      padding: 6px 0;
-      margin: 8px 0;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .section-title {
-      font-size: 17px;
+    .sec-title {
+      font-size: 16px;
       font-weight: 800;
-      letter-spacing: -0.3px;
-      color: var(--text-heading);
-      margin-top: 6px;
       padding-bottom: 6px;
-      border-bottom: 2px solid var(--gold-border);
+      border-bottom: 2px solid var(--gold);
       text-transform: uppercase;
+      margin-top: 6px;
     }
 
-    /* Accordions */
     details.class-box {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
+      background: #fff;
+      border: 1px solid var(--border);
       border-radius: 12px;
       overflow: hidden;
-      box-shadow: var(--card-shadow);
     }
-
     details.class-box > summary {
-      background: var(--class-header-bg);
+      background: linear-gradient(135deg, #091326, #112246);
       color: white;
-      padding: 14px 18px;
-      font-size: 15.5px;
+      padding: 13px 16px;
+      font-size: 15px;
       font-weight: 700;
-      letter-spacing: 0.2px;
       cursor: pointer;
-      user-select: none;
-      list-style: none;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-left: 4px solid var(--class-header-border);
+      border-left: 4px solid var(--gold);
+      list-style: none;
     }
+    details.class-box > summary::-webkit-details-marker { display: none; }
+    details.class-box > summary::after { content: "▼"; font-size: 10px; color: var(--gold); }
+    details.class-box[open] > summary::after { transform: rotate(180deg); }
 
-    details.class-box > summary::-webkit-details-marker {
-      display: none;
-    }
+    .class-body { padding: 12px; display: flex; flex-direction: column; gap: 10px; }
 
-    details.class-box > summary::after {
-      content: "▼";
-      font-size: 11px;
-      color: #f59e0b;
-      transition: transform 0.25s;
-    }
-
-    details.class-box[open] > summary::after {
-      transform: rotate(180deg);
-    }
-
-    .class-content {
-      padding: 14px;
-      background: rgba(0, 0, 0, 0.015);
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    details.fa-accordion {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 9px;
+    details.fa-box {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
       overflow: hidden;
     }
-
-    details.fa-accordion > summary {
-      background: var(--fa-btn-bg);
+    details.fa-box > summary {
+      background: linear-gradient(135deg, #0284c7, #0369a1);
       color: white;
-      padding: 12px 15px;
-      font-size: 14px;
-      font-weight: 700;
-      cursor: pointer;
-      user-select: none;
-      list-style: none;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    details.fa-accordion > summary::-webkit-details-marker {
-      display: none;
-    }
-
-    details.fa-accordion[open] > summary {
-      background: var(--fa-active-bg);
-      border-bottom: 1px solid var(--gold-border);
-    }
-
-    details.fa-accordion > summary::after {
-      content: "▼";
-      font-size: 10px;
-      transition: transform 0.2s;
-    }
-
-    details.fa-accordion[open] > summary::after {
-      transform: rotate(180deg);
-    }
-
-    .file-list {
-      padding: 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      background: rgba(0, 0, 0, 0.01);
-    }
-
-    /* Dual Action Rows (View + Download) */
-    .file-item-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: var(--card-bg);
       padding: 10px 14px;
-      border: 1px solid var(--file-btn-border);
-      border-radius: 9px;
-      gap: 10px;
-    }
-
-    .file-name-title {
       font-size: 13.5px;
       font-weight: 700;
-      color: var(--text-heading);
-      flex-grow: 1;
-    }
-
-    .action-btn-group {
+      cursor: pointer;
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 6px;
-      flex-shrink: 0;
+      list-style: none;
     }
+    details.fa-box > summary::-webkit-details-marker { display: none; }
+    details.fa-box > summary::after { content: "▼"; font-size: 9px; }
+    details.fa-box[open] > summary::after { transform: rotate(180deg); }
 
-    .btn-action {
-      display: inline-flex;
+    .file-list { padding: 8px; display: flex; flex-direction: column; gap: 8px; }
+    .file-row {
+      display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 4px;
+      background: #f8fafc;
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+    .file-title { font-size: 13px; font-weight: 600; }
+    .btn-group { display: flex; gap: 6px; }
+    .btn-act {
       text-decoration: none;
-      padding: 6px 11px;
+      padding: 5px 9px;
       border-radius: 6px;
-      font-size: 11.5px;
+      font-size: 11px;
       font-weight: 700;
-      transition: transform 0.15s ease, opacity 0.15s ease;
     }
+    .btn-view { background: #e2e8f0; color: #0f172a; }
+    .btn-dl { background: var(--blue); color: #fff; }
 
-    .btn-action:active {
-      transform: scale(0.95);
-    }
-
-    .btn-view {
-      background: #f1f5f9;
-      color: #0f172a;
-      border: 1px solid #cbd5e1;
-    }
-
-    .btn-view:hover {
-      background: #e2e8f0;
-      color: #0284c7;
-    }
-
-    .btn-dl {
-      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
-      color: #ffffff;
-      box-shadow: 0 2px 5px rgba(2, 132, 199, 0.25);
-    }
-
-    .btn-dl:hover {
-      opacity: 0.92;
-    }
-
-    /* Feedback Trigger Button */
     .feedback-btn {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: #0f172a;
-      border: 1px solid var(--gold-border);
+      background: var(--navy);
+      border: 1px solid rgba(245, 158, 11, 0.4);
       color: #fde047;
       padding: 9px 18px;
       border-radius: 20px;
       font-size: 13px;
       font-weight: 700;
       cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      margin-top: 8px;
     }
 
-    .feedback-btn:active {
-      transform: scale(0.96);
-    }
+    footer { text-align: center; margin-top: 30px; font-size: 12.5px; color: var(--muted); }
+    .creator { color: #d97706; font-weight: 800; }
 
-    /* Feedback Modal Dialog */
-    .modal-backdrop {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(4, 9, 21, 0.75);
-      backdrop-filter: blur(4px);
-      z-index: 999;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
-    }
-
-    .modal-card {
-      background: #ffffff;
-      border: 1px solid var(--card-border);
-      border-radius: 14px;
-      max-width: 420px;
-      width: 100%;
-      padding: 22px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-      position: relative;
-    }
-
-    .modal-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-      border-bottom: 1px solid #e2e8f0;
-      padding-bottom: 8px;
-    }
-
-    .modal-head h3 {
-      font-size: 17px;
-      font-weight: 800;
-      color: #0f172a;
-    }
-
-    .modal-close {
-      background: none;
-      border: none;
-      font-size: 22px;
-      color: #64748b;
-      cursor: pointer;
-    }
-
-    .form-group {
-      margin-bottom: 12px;
-      text-align: left;
-    }
-
-    .form-group label {
-      display: block;
-      font-size: 12px;
-      font-weight: 700;
-      color: #334155;
-      margin-bottom: 4px;
-    }
-
-    .form-input, .form-textarea, .form-select {
-      width: 100%;
-      padding: 9px 12px;
-      border: 1px solid #cbd5e1;
-      border-radius: 8px;
-      font-size: 13px;
-      color: #0f172a;
-      outline: none;
-      font-family: inherit;
-    }
-
-    .form-textarea {
-      resize: vertical;
-      min-height: 85px;
-    }
-
-    .form-input:focus, .form-textarea:focus {
-      border-color: #f59e0b;
-    }
-
-    .submit-btn {
-      width: 100%;
-      padding: 11px;
-      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 13.5px;
-      cursor: pointer;
-    }
-
-    .submit-btn:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-
-    #formStatus {
-      font-size: 12px;
-      font-weight: 600;
-      margin-top: 10px;
-      text-align: center;
-      display: none;
-    }
-
-    /* Footer */
-    footer {
-      text-align: center;
-      margin-top: 36px;
-      padding-top: 20px;
-      border-top: 1px solid var(--gold-border);
-      color: var(--text-muted);
-      font-size: 13px;
-    }
-
-    footer .creator-name {
-      font-weight: 800;
-      color: var(--gold-primary);
-      letter-spacing: 0.3px;
-    }
-
-    /* Laptop & Desktop Responsive Grid */
     @media (min-width: 900px) {
-      .container {
-        max-width: 1040px;
-        padding: 0 24px;
-      }
-
-      .header-content {
-        max-width: 1040px;
-      }
-
-      .desktop-two-col {
-        display: grid;
-        grid-template-columns: 320px 1fr;
-        gap: 20px;
-        align-items: start;
-      }
-
-      .textbooks-wrapper {
-        grid-template-columns: 1fr;
-      }
+      .container { max-width: 1040px; }
+      .header-content { max-width: 1040px; }
+      .desktop-grid { display: grid; grid-template-columns: 320px 1fr; gap: 20px; align-items: start; }
+      .books-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
   <header>
     <div class="header-content">
       <div class="emblem-wrapper">
         <svg viewBox="0 0 500 500" width="100%" height="100%">
-          <defs>
-            <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#050b18" />
-              <stop offset="100%" stop-color="#0c172e" />
-            </linearGradient>
-            <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#fde047" />
-              <stop offset="50%" stop-color="#f59e0b" />
-              <stop offset="100%" stop-color="#b45309" />
-            </linearGradient>
-            <linearGradient id="liquidGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.95" />
-              <stop offset="100%" stop-color="#1d4ed8" />
-            </linearGradient>
-            <path id="textArcTop" d="M 75, 250 A 175, 175 0 1, 1 425, 250" fill="none" />
-            <path id="textArcBottom" d="M 420, 250 A 170, 170 0 0, 1 80, 250" fill="none" />
-          </defs>
+          <circle cx="250" cy="250" r="230" fill="#050b18" stroke="#f59e0b" stroke-width="8" />
+          <circle cx="250" cy="250" r="182" fill="none" stroke="#38bdf8" stroke-width="3" stroke-dasharray="6,4" />
+          <text x="250" y="325" fill="#ffffff" font-size="64" font-family="'Times New Roman', serif" font-weight="bold" text-anchor="middle">π</text>
+        </svg>
+      </div>
+      <div>
+        <h1 class="brand-title">LEKKA LAB</h1>
+        <div class="brand-tag">Educational Portal</div>
+        <div class="brand-motto">Explore • Discover • Excel</div>
+      </div>
+    </div>
+  </header>
 
-          <circle cx="250" cy="250" r="230" fill="url(#bgGrad)" stroke="url(#goldGrad)" stroke-width="8" />
-          <circle cx="250" cy="250" r="182" fill="none" stroke="#38bdf8" stroke-width="3" stroke-dasharray="6, 4" />
-          <circle cx="250" cy="250" r="172" fill="#040914" />
+  <div class="container">
 
-          <text fill="url(#goldGrad)" font-size="34" font-weight="900" letter-spacing="8">
-            <textPath href="#textArcTop" startOffset="50%" text-anchor="middle">LEKKA LAB</textPath>
-          </text>
-          <text fill="#e2e8f0" font-size="14" font-weight="700" letter-spacing="4">
-            <textPath href="#textArcBottom" startOffset="50%" text-anchor="middle">EXPLORE • DISCOVER • EXCEL</textPath>
-          </text>
+    <!-- Material Live Search -->
+    <div class="search-box">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input type="text" id="searchInput" class="search-input" placeholder="🔍 Search Class 8, 9, 10 PDFs, slip tests, projects..." onkeyup="filterFiles()">
+    </div>
 
-          <g transform="translate(0, 10)">
-            <path d="M 216,242 L 172,320 A 22,22 0 0,0 191,352 L 
+    <!-- Responsive Desktop Row -->
+    <div class="desktop-grid">
+      <div class="books-grid">
+        <div class="book-card" style="border-left-color: #ea580c;">
+          <div>
+            <h3>SCERT Books</h3>
+            <p>Classes 1 - 10</p>
+          </div>
+          <a href="https://scert.telangana.gov.in/e-textbooks" target="_blank" rel="noopener" class="btn-book" style="background: #ea580c;">Visit SCERT</a>
+        </div>
+        <div class="book-card" style="border-left-color: #0284c7;">
+          <div>
+            <h3>NCERT Books</h3>
+            <p>Classes 1 - 12</p>
+          </div>
+          <a href="https://ncert.nic.in/textbook.php" target="_blank" rel="noopener" class="btn-book">Visit NCERT</a>
+        </div>
+      </div>
+
+      <div class="ai-card">
+        <div class="ai-header">
+          <span style="font-weight: 800; font-size: 14.5px;">Ask Lucky (AI Assistant)</span>
+          <span class="ai-badge">Online</span>
+        </div>
+        <textarea id="aiInput" class="ai-textarea" placeholder="Ask anything in Maths, Science, formulas, or concepts..."></textarea>
+        <div class="ai-bar">
+          <input type="file" id="aiImg" accept="image/*" style="display: none;">
+          <button type="button" class="btn-act btn-view" onclick="document.getElementById('aiImg').click()">📷 Add Image</button>
+          <button type="button" id="btnSolve" class="btn-ai" onclick="solveAI()">✨ Ask Lucky</button>
+        </div>
+        <div id="aiDisplay"><div id="aiContent"></div></div>
+      </div>
+    </div>
+
+    <h2 class="sec-title">Assessment & Project Resources</h2>
+
+    <!-- Class 10 -->
+    <details class="class-box" open>
+      <summary>Class 10 Mathematics</summary>
+      <div class="class-body">
+        <details class="fa-box"><summary>FA - 1 Materials</summary><div class="file-list">
+          <div class="file-row"><span class="file-title">Project Work</span><div class="btn-group"><a href="class10-fa1-project.pdf" target="_blank" class="btn-act btn-view">👁️ View</a><a href="class10-fa1-project.pdf" download class="btn-act btn-dl">📥 Download</a></div></div>
+          <div class="file-row"><span class="file-title">Generating New Problems</span><div class="btn-group"><a href="class10-fa1-generating-new-problem.pdf" target="_blank" class="btn-act btn-view">👁️ View</a><a href="class10-fa1-generating-new-problem.pdf" download class="btn-act btn-dl">📥 Download</a></div></div>
+          <div class="file-row"><span class="file-title">Slip Test Paper</span><div class="btn-group"><a href="class10-fa1-slip-test.pdf" target="_blank" class="btn-act btn-view">👁️ View</a><a href="class10-fa1-slip-test.pdf" download class="btn-act btn-dl">📥 Download</a></div></div>
+        </div></details>
+        <details class="fa-box"><summary>FA - 2 Materials</summary><div class="file-list">
+          <div class="file-row"><span class="file-title">Project Work</span><div class="btn-group"><a href="class10-fa2-project.pdf" target="_blank" class="btn-act btn-view">👁️ View</a><a href="class10-fa2-project.pdf" download class="btn-act btn-dl">📥 Download</a></div></div>
+          <div class="file-row"><span class="file-title">Generating New Problems</span><div class="btn-group"><a href="class10-fa2-generating-new-problem.pdf" target="_blank" class="btn-act btn-view">👁️ View</a><a href="class10-fa2-generating-new-problem.pdf" download class="btn-act btn-dl">📥 Download</a></div></div>
+          <div class="file-row"><span class="file-title">Slip Test Paper</span><div class="btn-group"><a href="class10-fa2-slip-test.pdf" target="_blank" class="btn-act btn-view">👁️ View</a><a href="class10-fa2-slip-test.pdf" download class="btn-act btn-dl">📥 Download</a></div></div>
+        </div></details>
+        <details class="fa-box"><summary>FA - 3 Materials</summary><div class="file-list">
+          <div class="file-row"><span class="file-title">Project Work</span><div class="btn-group"><a href="class10-fa3-project.pdf" target="_blank" class="btn-act btn-view">👁️ View</a><a href="class10-fa3-project.pdf" download class="btn-act btn-dl">📥 Download</a></div></div>
+          <div class="file-row"><span class="file-title">Generating New Problems</span><div class="btn-group"><a href="class10-fa3-generating-new-problem.pdf" target="_blank" class="btn-act btn-view">👁️ View</a><a href="class10-fa3-generating-new-problem.pdf" download class="btn-act btn-dl">📥 Download</a></div></div>
+          <div class="file-row"><span class="file-title">Slip Test Paper</span><div class="btn-group"><a href="class10-fa3-slip-test.pdf" target="_blank" class="btn-act btn-view">👁️ View</a><a href="class10-fa3-slip-test.pdf" download class="btn-act btn-dl">📥 Download</a></div></div>
+        </div></details>
+        <details class="fa-box"><summary>FA - 4 Materials</summary><div class="file-list">
+          <div class="file-row"><span class="file-title">Project Work</span><div class="btn-group"><a href="class10-fa4-project.pdf" target="_blank" class="btn-act btn-view">👁️ View</a><a href="class10-fa4-project.pdf" download class="btn-act btn-dl">📥 Download</a></div></div>
+          <div class="file-row"><span class="file-title">Generating New Problems</span><div class="btn-group"><a href="class10-fa4-generating-new-problem.pdf" target="_blank" class="btn-act btn-view">👁️ View</a><a href="class10-fa4-generating-new-problem.pdf" download class="btn-act btn-dl">📥 Download</a></div></div>
+          <div class="file-row"><span class="file-title">Slip Test Paper</span><div class="btn-group"><a href="class10-fa4-slip-test.pdf" target="_blank" class="btn-act btn-view">👁️ View</a><a href="class10-fa4-slip-test.pdf" download class="btn-act btn-dl">📥 Download</a></div></div>
+        </div></details>
+      </div>
+    </details>
+
+    <!-- Class 9 -->
+    <details class="class-box">
+      <summary>Class 9 Mathematics</summary>
+      <div class="class-body">
+        <details class="fa-box"><summary>FA - 1 Materials</summary><div class="file-list">
+          <div class="file-row"><span class="file-title">Project Work</span><div class="btn-group"><a href="class9-fa1-project.pdf" target="_blank" class="btn-act btn-view">👁️ View</a><a href="class9-fa1-project.pdf" download class="btn-act btn-dl">📥 Download</a></div></div>
+          <div class="file-row"><span class="file-title">Generating New Problems</span><div class="btn-group"><a href="class9-fa1-generating-new-problem.pdf" target="_blank" class="btn-act btn-view">👁️ View</a><a href="class9-fa1-generating-new-problem.pdf" download class="btn-act btn-dl">📥 Download</a></div></div>
+          <div class="file-row"><span class="file-title">Slip Test Paper</span><div class="btn-group"><a href="class9-fa1-slip-test.pdf" target="_blank" class="btn-act btn-view">👁️ View</a><a href="class9-fa1-slip-test.pdf" download class="btn-act btn-dl">📥 Download</a></div></div>
+        </div></details>
+        <details class="fa-box"><summary>FA - 2 Materials</summary><div class="file-list">
+          <div class="file-row"><span class="file-title">Project Work</span><div class="btn-group"><a href="class9-fa2-project.pdf" target="_blank" class="btn-act btn-view">👁️ View</a><a href="class9-fa2-project.pdf" download class="btn-act btn-dl">📥 Download</a></div></div>
+          <div class="file-row"><span class="file-title">Generating New Problems</span><div class="btn-group"><a href="class9-fa2-generating-new-problem.pdf" target="_blank" class="btn-act btn-view">👁️ View</a><a href="class9-fa2-generating-new-problem.pdf" download class="btn-act btn-dl">📥 Download</a></div></div>
+          <div class="file-row"><span class="file-title">Slip Test Paper</span><div class="btn-group"><a href="class9-fa2-slip-test.pdf" target="_blank" class="btn-act btn-view">👁️ View</a><a href="class9-fa2-slip-test.pdf" download class="btn-act btn-dl">📥 Download</a></div></div>
+        </div></details>
+        <details class="fa-box"><summary>FA - 3 Materials</summary><div class="file-list">
+          <div class="file-row"><span class="file-title">Project Work</span><div class="btn-group"><a href="class9-fa3-project.pdf" target="_blank" class="btn-act btn-view">👁️ View</a><a href="class9-fa3-project.pdf" download class="btn-act btn-dl">📥 Download</a></div></div>
+          <div class="file-row"><span class="file-title">Slip Test Paper</span><div class="btn-group"><a href="class9-fa3-slip-test.pdf" target="_blank" class="btn-act btn-view">👁️ View</a><a href="class9-fa3-slip-test.pdf" download class="btn-act btn-dl">📥 Download</a></div></div>
+        </div></details>
+        <details class="fa-box"><summary>FA - 4 Materials</summary><div class="file-list">
+          <div class="file-row"><span class="file-title">Project Work</span><div class="btn-group"><a href="class9-fa4-project.pdf" target="_blank" class="btn-act btn-view">👁️ View</a><a href="class9-fa4-project.pdf" download class="btn-act btn-dl">📥 Download</a></div></div>
+          <div class="file-row"><span class="file-title">Slip Test Paper</span><div class="btn-group"><a href="class9-fa4-slip-test.pdf" target="_blank" class="btn-act btn-view">👁️ View</a><a href="class9-fa4-slip-test.pdf" download class="btn-act btn-dl">📥 Download</a></div></div>
+        </div></details>
+      </div>
+    </details>
+
+    <!-- Class 8 -->
+    <details class="class-box">
+      <summary>Class 8 Mathematics</summary>
+      <div class="class-body">
+        <details class="fa-box"><summary>FA - 1 Materials</summary><div class="file-list">
+          <div class="file-row"><span class="file-title">Project Work</span><div class="btn-group"><a href="Class 8 FA1 Project.pdf" target="_blank" class="btn-act btn-view">👁️ View</a><a href="Class 8 FA1 Project.pdf" download class="btn-act btn-dl">📥 Download</a></div></div>
+          <div class="file-row"><span class="file-title">Generating New Problems</span><div class="btn-group"><a href="FA-1 Generating New Problems.pdf" target="_blank" class="btn-act btn-view">👁️ View</a><a href="FA-1 Generating New Problems.pdf" download class="btn-act btn-dl">📥 Download</a></div></div>
+          <div class="file-row"><span class="file-title">Slip Test Paper</span><div class="btn-group"><a href="FA-1 Slip Test.pdf" target="_blank" class="btn-act btn-view">👁️ View</a><a href="FA-1 Slip Test.pdf" download class="btn-act btn-dl">📥 Download</a></div></div>
+        </div></details>
+        <details class="fa-box"><summary>FA - 2 Materials</summary><div class="file-list">
+          <div class="file-row"><span class="file-title">Project Work</span><div class="btn-group"><a href="class8-fa2-project.pdf" target="_blank" class="btn-act btn-view">👁️ View</a><a href="class8-fa2-project.pdf" download class="btn-act btn-dl">📥 Download</a></div></div>
+          <div class="file-row"><span class="file-title">Generating New Problems</span><div class="btn-group"><a href="class8-fa2-generating-new-problem.pdf" target="_blank" class="btn-act btn-view">👁️ View</a><a href="class8-fa2-generating-new-problem.pdf" download class="btn-act btn-dl">📥 Download</a></div></div>
+          <div class="file-row"><span class="file-title">Slip Test Paper</span><div class="btn-group"><a href="class8-fa2-slip-test.pdf" target="_blank" class="btn-act btn-view">👁️ View</a><a href="class8-fa2-slip-test.pdf" download class="btn-act btn-dl">📥 Download</a></div></div>
+        </div></details>
+        <details class="fa-box"><summary>FA - 3 Materials</summary><div class="file-list">
+          <div class="file-row"><span class="file-title">Project Work</span><div class="btn-group"><a href="class8-fa3-project.pdf" target="_blank" class="btn-act btn-view">👁️ View</a><a href="class8-fa3-project.pdf" download class="btn-act btn-dl">📥 Download</a></div></div>
+          <div class="file-row"><span class="file-title">Generating New Problems</span><div class="btn-group"><a href="class8-fa3-generating-new-problem.pdf" target="_blank" class="btn-act btn-view">👁️ View</a><a href="class8-fa3-generating-new-problem.pdf" download class="btn-act btn-dl">📥 Download</a></div></div>
+          <div class="file-row"><span class="file-title">Slip Test Paper</span><div class="btn-group"><a href="class8-fa3-slip-test.pdf" target="_blank" class="btn-act btn-view">👁️ View</a><a href="class8-fa3-slip-test.pdf" download class="btn-act btn-dl">📥 Download</a></div></div>
+        </div></details>
+        <details class="fa-box"><summary>FA - 4 Materials</summary><div class="file-list">
+          <div class="file-row"><span class="file-title">Project Work</span><div class="btn-group"><a href="class8-fa4-project.pdf" target="_blank" class="btn-act btn-view">👁️ View</a><a href="class8-fa4-project.pdf" download class="btn-act btn-dl">📥 Download</a></div></div>
+          <div class="file-row"><span class="file-title">Generating New Problems</span><div class="btn-group"><a href="class8-fa4-generating-new-problem.pdf" target="_blank" class="btn-act btn-view">👁️ View</a><a href="class8-fa4-generating-new-problem.pdf" download class="btn-act btn-dl">📥 Download</a></div></div>
+          <div class="file-row"><span class="file-title">Slip Test Paper</span><div class="btn-group"><a href="class8-fa4-slip-test.pdf" target="_blank" class="btn-act btn-view">👁️ View</a><a href="class8-fa4-slip-test.pdf" download class="btn-act btn-dl">📥 Download</a></div></div>
+        </div></details>
+      </div>
+    </details>
+
+    <div style="text-align: center; margin-top: 6px;">
+      <button type="button" class="feedback-btn" onclick="openFeedback()">💬 Send Feedback / Suggestions</button>
+    </div>
+
+    <footer>
+      <p>&copy; 2026 Lekka Lab. Dedicated to Excellence in Mathematics.</p>
+      <p style="margin-top: 4px;">Crafted by <span class="creator">Hemanth Kalyanapu</span></p>
+    </footer>
+
+  </div>
+
+  <script>
+    function filterFiles() {
+      const q = document.getElementById('searchInput').value.toLowerCase().trim();
+      const rows = document.querySelectorAll('.file-row');
+      rows.forEach(r => {
+        const text = r.querySelector('.file-title').innerText.toLowerCase();
+        if (!q || text.includes(q)) {
+          r.style.display = 'flex';
+          if (q) {
+            let p1 = r.closest('details.fa-box'); if (p1) p1.open = true;
+            let p2 = r.closest('details.class-box'); if (p2) p2.open = true;
+          }
+        } else {
+          r.style.display = 'none';
+        }
+      });
+    }
+
+    function openFeedback() {
+      const msg = prompt('Enter your feedback or suggestions:');
+      if (msg) alert('Thank you! Your feedback has been received.');
+    }
+
+    let b64 = null;
+    document.getElementById('aiImg').addEventListener('change', function() {
+      if (this.files && this.files[0]) {
+        const r = new FileReader();
+        r.onload = e => b64 = e.target.result.split(',')[1];
+        r.readAsDataURL(this.files[0]);
+      }
+    });
+
+    async function solveAI() {
+      const text = document.getElementById('aiInput').value.trim();
+      const btn = document.getElementById('btnSolve');
+      const disp = document.getElementById('aiDisplay');
+      const cnt = document.getElementById('aiContent');
+
+      if (!text && !b64) { alert('Please enter a question or attach an image'); return; }
+
+      disp.style.display = 'block';
+      cnt.innerHTML = '<p style="color: #64748b; font-weight:600;">Thinking...</p>';
+      btn.disabled = true;
+
+      try {
+        const res = await fetch('https://autumn-heart-8840.hemanthkalyanapu.workers.dev', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ prompt: text, imageBase64: b64 })
+        });
+        const data = await res.json();
+        cnt.innerHTML = marked.parse(data.solution || data.text || 'No response.');
+        if (window.renderMathInElement) {
+          renderMathInElement(cnt, { delimiters: [{ left: '$$', right: '$$', display: true }, { left: '$', right: '$', display: false }] });
+        }
+      } catch (err) {
+        cnt.innerHTML = '<p style="color:red; font-weight:700;">Error: Could not connect to AI solver.</p>';
+      } finally {
+        btn.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>
