@@ -274,10 +274,10 @@
         <span class="online-badge">ONLINE</span>
       </div>
       
-      <textarea id="aiProblemInput" placeholder="Ask anything... Science, Math, GK, History, Geography, Essay writing, or translations!"></textarea>
+      <textarea id="aiProblemInput" placeholder="Ask anything... Science, Math, GK, History, Recipes, or General Questions!"></textarea>
       
       <div class="ai-controls">
-        <button class="btn btn-solve" id="btnSolve" onclick="handleSolve()">✨ Ask Lucky</button>
+        <button class="btn btn-solve" id="btnSolve" onclick="handleSolve()">⚡ Ask Lucky (Fast)</button>
         <button class="btn btn-secondary" id="btnVoice" onclick="toggleVoiceSearch()">🎙️ Voice Search</button>
         <label class="btn btn-secondary">
           📷 Image
@@ -456,7 +456,7 @@
 
     // Visitor Counter
     (function initCounter() {
-      let count = parseInt(localStorage.getItem('lekka_visits') || '1855', 10);
+      let count = parseInt(localStorage.getItem('lekka_visits') || '1860', 10);
       count += 1;
       localStorage.setItem('lekka_visits', count);
       document.getElementById('visitorCount').innerText = count.toLocaleString();
@@ -547,7 +547,7 @@
       recognition.start();
     }
 
-    // Direct Universal AI Engine (Interactions API + GenerateContent Dual Protocol)
+    // High-Speed Direct Gemini Solver Engine (<2.5s)
     async function handleSolve() {
       const text = document.getElementById('aiProblemInput').value.trim();
       const btn = document.getElementById('btnSolve');
@@ -560,102 +560,70 @@
       }
 
       display.style.display = 'block';
-      mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">Thinking and calculating response...</p>';
+      mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">⚡ Generating instant answer...</p>';
       btn.disabled = true;
 
+      // Select random key immediately without nested retries
       const shuffledKeys = [...DIRECT_GEMINI_KEYS].sort(() => 0.5 - Math.random());
 
-      const systemInstruction = `You are "Lucky", a universal educational AI assistant for Lekka Lab.
-- Answer questions across Mathematics, Science, Social Studies, General Knowledge, Essay writing, Coding, and Languages.
-- If math or physics formulas are needed, use LaTeX ($..$ inline, $$..$$ standalone).
-- If geometric constructions or diagrams are requested, provide an inline SVG (<svg viewBox="0 0 360 240" ...>).
-- Structure responses cleanly using Markdown headers and bullet points.`;
+      const systemInstruction = `You are "Lucky", a fast, universal educational AI for Lekka Lab.
+- Give direct, structured, and quick answers with bullet points and headings.
+- Math: use standard LaTeX ($..$ inline, $$..$$ standalone).
+- Geometry: concise inline SVG if needed (<svg viewBox="0 0 360 220" ...>).
+- Keep formatting clean and concise for rapid response.`;
 
-      const promptInput = `${systemInstruction}\n\nUser Question: ${text}`;
+      const contents = [{
+        role: "user",
+        parts: [{ text: `${systemInstruction}\n\nUser Question: ${text}` }]
+      }];
+
+      if (base64Image) {
+        contents[0].parts.push({
+          inlineData: {
+            mimeType: "image/jpeg",
+            data: base64Image
+          }
+        });
+      }
+
       let rawAnswer = null;
-      let lastError = "Request failed";
+      let lastError = "Request timed out or failed";
 
-      // Models explicitly recommended by Google
-      const targetModels = [
-        "gemini-3.5-flash-lite",
-        "gemini-3.8-flash"
-      ];
+      // Direct single call to the fastest lightweight model
+      const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent`;
 
-      outerLoop: for (const apiKey of shuffledKeys) {
-        for (const model of targetModels) {
-          
-          // PROTOCOL 1: Google Interactions API (Mandated by Google for new users)
-          try {
-            const interactionsEndpoint = `https://generativelanguage.googleapis.com/v1beta/interactions`;
-            const payload = {
-              model: model,
-              input: promptInput
-            };
+      for (const apiKey of shuffledKeys) {
+        try {
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 8000); // 8s timeout safeguard
 
-            const res = await fetch(interactionsEndpoint, {
-              method: "POST",
-              headers: { 
-                "Content-Type": "application/json",
-                "x-goog-api-key": apiKey
-              },
-              body: JSON.stringify(payload)
-            });
-
-            const data = await res.json();
-            if (data.output_text) {
-              rawAnswer = data.output_text;
-              break outerLoop;
-            } else if (data.steps && data.steps.length > 0) {
-              for (const s of data.steps) {
-                if (s.output_text) { rawAnswer = s.output_text; break outerLoop; }
+          const res = await fetch(endpoint, {
+            method: "POST",
+            signal: controller.signal,
+            headers: { 
+              "Content-Type": "application/json",
+              "x-goog-api-key": apiKey
+            },
+            body: JSON.stringify({
+              contents: contents,
+              generationConfig: {
+                temperature: 0.2,
+                maxOutputTokens: 900 // Fast delivery budget
               }
-            } else if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
-              rawAnswer = data.candidates[0].content.parts[0].text;
-              break outerLoop;
-            } else if (data.error) {
-              lastError = data.error.message || lastError;
-            }
-          } catch (e) {
-            lastError = e.message;
+            })
+          });
+
+          clearTimeout(timeoutId);
+          const data = await res.json();
+
+          if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
+            rawAnswer = data.candidates[0].content.parts[0].text;
+            break; // Stop immediately upon first success
+          } else if (data.error) {
+            lastError = data.error.message || lastError;
           }
-
-          // PROTOCOL 2: GenerateContent API with current 3.x models
-          try {
-            const gcEndpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
-            const contents = [{
-              role: "user",
-              parts: [{ text: promptInput }]
-            }];
-
-            if (base64Image) {
-              contents[0].parts.push({
-                inlineData: {
-                  mimeType: "image/jpeg",
-                  data: base64Image
-                }
-              });
-            }
-
-            const res = await fetch(gcEndpoint, {
-              method: "POST",
-              headers: { 
-                "Content-Type": "application/json",
-                "x-goog-api-key": apiKey
-              },
-              body: JSON.stringify({ contents: contents })
-            });
-
-            const data = await res.json();
-            if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
-              rawAnswer = data.candidates[0].content.parts[0].text;
-              break outerLoop;
-            } else if (data.error) {
-              lastError = data.error.message || lastError;
-            }
-          } catch (e) {
-            lastError = e.message;
-          }
-
+        } catch (e) {
+          lastError = e.message;
         }
       }
 
