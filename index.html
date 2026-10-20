@@ -24,7 +24,6 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     body { background-color: var(--bg); color: var(--text); padding-bottom: 50px; }
 
-    /* Classic Header with Golden Emblem */
     header {
       background: linear-gradient(135deg, #091e42 0%, #002b66 100%);
       color: #fff;
@@ -76,7 +75,6 @@
 
     .container { max-width: 900px; margin: 20px auto; padding: 0 14px; }
 
-    /* Universal AI Card */
     .ai-card {
       background: var(--card-bg);
       border-radius: 14px;
@@ -131,7 +129,6 @@
       font-size: 0.98rem;
     }
 
-    /* 36 PDFs Table Section */
     .section-title {
       font-size: 1.15rem;
       font-weight: 800;
@@ -181,7 +178,6 @@
     }
     th { background: #f8fafc; color: #334155; font-weight: 700; }
     
-    /* View & Download Buttons */
     .btn-action-view, .btn-action-dl {
       display: inline-flex;
       align-items: center;
@@ -207,7 +203,6 @@
     }
     .btn-action-dl:hover { background: #d1fae5; }
 
-    /* Visitor Feedback Section */
     .feedback-box {
       background: var(--card-bg);
       border-radius: 14px;
@@ -291,7 +286,7 @@
       </div>
     </div>
 
-    <!-- 36 Assessment & Project PDF Files (Exact File Paths) -->
+    <!-- 36 Assessment & Project PDF Files -->
     <h3 class="section-title">Assessment & Project Resources (36 PDFs)</h3>
 
     <!-- Class 10 -->
@@ -456,7 +451,7 @@
 
     // Visitor Counter
     (function initCounter() {
-      let count = parseInt(localStorage.getItem('lekka_visits') || '1868', 10);
+      let count = parseInt(localStorage.getItem('lekka_visits') || '1869', 10);
       count += 1;
       localStorage.setItem('lekka_visits', count);
       document.getElementById('visitorCount').innerText = count.toLocaleString();
@@ -547,7 +542,7 @@
       recognition.start();
     }
 
-    // High-Speed Parallel Engine (Fastest Key Wins via Promise.any)
+    // Direct Sequential Solver Engine (Verified Working Protocol)
     async function handleSolve() {
       const text = document.getElementById('aiProblemInput').value.trim();
       const btn = document.getElementById('btnSolve');
@@ -560,78 +555,90 @@
       }
 
       display.style.display = 'block';
-      mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">⚡ Answering instantly...</p>';
+      mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">Thinking...</p>';
       btn.disabled = true;
 
       const systemInstruction = `You are "Lucky", a universal educational AI assistant for Lekka Lab.
-- Give direct, structured, and informative answers with clear headings and bullet points.
-- If math or physics formulas are needed, use LaTeX ($..$ inline, $$..$$ standalone).
-- If geometric constructions or diagrams are requested, provide an inline SVG (<svg viewBox="0 0 360 220" ...>).
-- Keep answers direct and crisp for instant response.`;
+- Provide direct, structured, and informative answers with clear headings and bullet points.
+- If math or physics formulas are needed, use standard LaTeX ($..$ inline, $$..$$ standalone).
+- If geometric diagrams are requested, provide an inline SVG (<svg viewBox="0 0 360 220" ...>).
+- Keep answers direct, accurate, and helpful.`;
 
       const promptInput = `${systemInstruction}\n\nUser Question: ${text}`;
       const endpoint = `https://generativelanguage.googleapis.com/v1beta/interactions`;
 
-      // Parallel race across multiple keys to bypass busy keys instantly
-      const targetKeys = [...DIRECT_GEMINI_KEYS].sort(() => 0.5 - Math.random()).slice(0, 4);
+      let rawAnswer = null;
+      let lastError = "Request failed";
 
-      const requestWithKey = async (apiKey) => {
-        const res = await fetch(endpoint, {
-          method: "POST",
-          headers: { 
-            "Content-Type": "application/json",
-            "x-goog-api-key": apiKey
-          },
-          body: JSON.stringify({
-            model: "gemini-3.5-flash-lite",
-            input: promptInput
-          })
-        });
-
-        const data = await res.json();
-        if (data.output_text) {
-          return data.output_text;
-        } else if (data.steps && data.steps.length > 0) {
-          for (const s of data.steps) {
-            if (s.output_text) return s.output_text;
-          }
-        }
-        throw new Error(data.error?.message || "Invalid response");
-      };
-
-      try {
-        const rawAnswer = await Promise.any(targetKeys.map(k => requestWithKey(k)));
-
-        let cleanOutput = rawAnswer
-          .replace(/\u2260/g, ' \\neq ')
-          .replace(/\u00B1/g, ' \\pm ')
-          .replace(/\u2264/g, ' \\leq ')
-          .replace(/\u2265/g, ' \\geq ')
-          .replace(/\u00D7/g, ' \\times ')
-          .replace(/\u2192/g, ' \\to ')
-          .replace(/\u221E/g, ' \\infty ')
-          .replace(/```(?:xml|html|svg)?\s*(<svg[\s\S]*?<\/svg>)\s*```/gi, '$1')
-          .replace(/(<\/svg>)([\s\S]*?)(?=(?:###|####|\*\*|##|[A-Z][a-z]+:))/i, (m, p1, p2) => {
-            const tr = p2.trim();
-            return (/^[a-zA-Z0-9\s,\\^_\(\)\/\*\+\-=\|]+$/.test(tr) && tr.length < 120) ? p1 + "\n\n" : m;
-          })
-          .replace(/([^\n])(####|###)/g, '$1\n\n$2') .replace(/\$\$\s*([^\$]+)\s*\$\$/g, '\n\n$$$ $1$$$ \n\n');
-
-        mathContent.innerHTML = marked.parse(cleanOutput);
-
-        if (window.renderMathInElement) {
-          renderMathInElement(mathContent, {
-            delimiters: [
-              { left: '$$', right: '$$', display: true },
-              { left: '$', right: '$', display: false },
-              { left: '[', right: ']', display: true },
-              { left: '\\(', right: '\\)', display: false }
-            ],
-            throwOnError: false
+      for (const apiKey of DIRECT_GEMINI_KEYS) {
+        try {
+          const res = await fetch(endpoint, {
+            method: "POST",
+            headers: { 
+              "Content-Type": "application/json",
+              "x-goog-api-key": apiKey
+            },
+            body: JSON.stringify({
+              model: "gemini-3.5-flash-lite",
+              input: promptInput
+            })
           });
+
+          const data = await res.json();
+
+          if (data.output_text) {
+            rawAnswer = data.output_text;
+            break;
+          } else if (data.steps && data.steps.length > 0) {
+            for (const s of data.steps) {
+              if (s.output_text) {
+                rawAnswer = s.output_text;
+                break;
+              }
+            }
+            if (rawAnswer) break;
+          } else if (data.error) {
+            lastError = data.error.message || lastError;
+          }
+        } catch (e) {
+          lastError = e.message;
         }
-      } catch (err) {
-        mathContent.innerHTML = `<p style="color: #ef4444; font-weight: 700;">Error: Connection busy. Please tap Ask Lucky again.</p>`;
+      }
+
+      if (!rawAnswer) {
+        mathContent.innerHTML = `<p style="color: #ef4444; font-weight: 700;">Error: ${lastError}</p>`;
+        btn.disabled = false;
+        return;
+      }
+
+      let cleanOutput = rawAnswer
+        .replace(/\u2260/g, ' \\neq ')
+        .replace(/\u00B1/g, ' \\pm ')
+        .replace(/\u2264/g, ' \\leq ')
+        .replace(/\u2265/g, ' \\geq ')
+        .replace(/\u00D7/g, ' \\times ')
+        .replace(/\u2192/g, ' \\to ')
+        .replace(/\u221E/g, ' \\infty ')
+        .replace(/```(?:xml|html|svg)?\s*(<svg[\s\S]*?<\/svg>)\s*```/gi, '$1')
+        .replace(/(<\/svg>)([\s\S]*?)(?=(?:###|####|\*\*|##|[A-Z][a-z]+:))/i, (m, p1, p2) => {
+          const tr = p2.trim();
+          return (/^[a-zA-Z0-9\s,\\^_\(\)\/\*\+\-=\|]+$/.test(tr) && tr.length < 120) ? p1 + "\n\n" : m;
+        })
+        .replace(/([^\n])(####|###)/g, '$1\n\n$2')
+        .replace(/\$\$\s*([^\$]+)\s*\$\$/g, '\n\n$$$ $1 $$$ \n\n');
+
+      mathContent.innerHTML = marked.parse(cleanOutput);
+
+      if (window.renderMathInElement) {
+        renderMathInElement(mathContent, {
+          delimiters: [
+            { left: '$$', right: '$$', display: true },
+            { left: '$', right: '$', display: false },
+            { left: '\\[', right: '\\]', display: true },
+            { left: '\\(', right: '\\)', display: false }
+          ],
+          throwOnError: false
+        });
       }
 
       btn.disabled = false;
