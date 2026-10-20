@@ -244,6 +244,10 @@
       font-weight: 700;
       color: #334155;
       cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-icon-attach:hover {
+      background: #e2e8f0;
     }
     .btn-ai-solve {
       background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
@@ -527,8 +531,11 @@
         <textarea id="aiProblemInput" class="ai-input-area" placeholder="Ask anything in Maths, Science, formulas, or concepts..."></textarea>
         
         <div class="ai-toolbar">
-          <input type="file" id="aiImageInput" accept="image/*" style="display: none;">
-          <button type="button" class="btn-icon-attach" onclick="document.getElementById('aiImageInput').click()">📷 Add Image</button>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <input type="file" id="aiImageInput" accept="image/*" style="display: none;">
+            <button type="button" class="btn-icon-attach" onclick="document.getElementById('aiImageInput').click()">📷 Add Image</button>
+            <button type="button" class="btn-icon-attach" id="btnVoiceSearch" onclick="startVoiceSearch()">🎙️ Voice Search</button>
+          </div>
           <button type="button" class="btn-ai-solve" id="btnSolve" onclick="handleSolve()">✨ Ask Lucky</button>
         </div>
         <div id="filePreviewIndicator" class="file-preview-indicator"></div>
@@ -597,14 +604,14 @@
           <div class="file-item-row"><span class="file-name-title">Slip Test Paper</span><div class="action-btn-group"><a href="class9-fa2-slip-test.pdf" target="_blank" class="btn-action btn-view">👁️ View</a><a href="class9-fa2-slip-test.pdf" download class="btn-action btn-dl">📥 Download</a></div></div>
         </div></details>
 
-        <!-- FA 3 -->
+        <!-- FA 3 (Verified with Project Work) -->
         <details class="fa-accordion"><summary>FA - 3 Materials</summary><div class="file-list">
           <div class="file-item-row"><span class="file-name-title">Generating New Problems</span><div class="action-btn-group"><a href="class9-fa3-generating-new-problems.pdf" target="_blank" class="btn-action btn-view">👁️ View</a><a href="class9-fa3-generating-new-problems.pdf" download class="btn-action btn-dl">📥 Download</a></div></div>
           <div class="file-item-row"><span class="file-name-title">Project Work</span><div class="action-btn-group"><a href="class9-fa3-project.pdf" target="_blank" class="btn-action btn-view">👁️ View</a><a href="class9-fa3-project.pdf" download class="btn-action btn-dl">📥 Download</a></div></div>
           <div class="file-item-row"><span class="file-name-title">Slip Test Paper</span><div class="action-btn-group"><a href="class9-fa3-slip-test.pdf" target="_blank" class="btn-action btn-view">👁️ View</a><a href="class9-fa3-slip-test.pdf" download class="btn-action btn-dl">📥 Download</a></div></div>
         </div></details>
 
-        <!-- FA 4 -->
+        <!-- FA 4 (Verified with Project Work) -->
         <details class="fa-accordion"><summary>FA - 4 Materials</summary><div class="file-list">
           <div class="file-item-row"><span class="file-name-title">Generating New Problems</span><div class="action-btn-group"><a href="class9-fa4-generating-new-problems.pdf" target="_blank" class="btn-action btn-view">👁️ View</a><a href="class9-fa4-generating-new-problems.pdf" download class="btn-action btn-dl">📥 Download</a></div></div>
           <div class="file-item-row"><span class="file-name-title">Project Work</span><div class="action-btn-group"><a href="class9-fa4-project.pdf" target="_blank" class="btn-action btn-view">👁️ View</a><a href="class9-fa4-project.pdf" download class="btn-action btn-dl">📥 Download</a></div></div>
@@ -706,6 +713,55 @@
         previewInd.style.display = 'none';
       }
     });
+
+    // Voice Search Recognition Function
+    function startVoiceSearch() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      const voiceBtn = document.getElementById('btnVoiceSearch');
+      const inputArea = document.getElementById('aiProblemInput');
+
+      if (!SpeechRecognition) {
+        alert("Voice search is not supported on this browser. Please use Chrome on Android or Windows.");
+        return;
+      }
+
+      const recognition = new SpeechRecognition();
+      recognition.lang = 'en-IN'; // Optimized for Indian English, maths terminology, and local accents
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+
+      voiceBtn.innerText = "🔴 Listening...";
+      voiceBtn.style.borderColor = "#ef4444";
+      voiceBtn.style.color = "#ef4444";
+
+      recognition.start();
+
+      recognition.onresult = function(event) {
+        const transcript = event.results[0][0].transcript;
+        inputArea.value = transcript;
+        voiceBtn.innerText = "🎙️ Voice Search";
+        voiceBtn.style.borderColor = "#cbd5e1";
+        voiceBtn.style.color = "#334155";
+        
+        handleSolve();
+      };
+
+      recognition.onspeechend = function() {
+        recognition.stop();
+        voiceBtn.innerText = "🎙️ Voice Search";
+        voiceBtn.style.borderColor = "#cbd5e1";
+        voiceBtn.style.color = "#334155";
+      };
+
+      recognition.onerror = function(event) {
+        voiceBtn.innerText = "🎙️ Voice Search";
+        voiceBtn.style.borderColor = "#cbd5e1";
+        voiceBtn.style.color = "#334155";
+        if (event.error !== 'no-speech') {
+          alert("Voice input error: " + event.error);
+        }
+      };
+    }
 
     async function handleSolve() {
       const text = document.getElementById('aiProblemInput').value.trim();
