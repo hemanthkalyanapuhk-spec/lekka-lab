@@ -274,10 +274,10 @@
         <span class="online-badge">ONLINE</span>
       </div>
       
-      <textarea id="aiProblemInput" placeholder="Ask anything... Science, Math, GK, History, Recipes, or General Questions!"></textarea>
+      <textarea id="aiProblemInput" placeholder="Ask anything... Science, Math, GK, History, Geography, Essay writing, or translations!"></textarea>
       
       <div class="ai-controls">
-        <button class="btn btn-solve" id="btnSolve" onclick="handleSolve()">⚡ Ask Lucky (Fast)</button>
+        <button class="btn btn-solve" id="btnSolve" onclick="handleSolve()">⚡ Ask Lucky</button>
         <button class="btn btn-secondary" id="btnVoice" onclick="toggleVoiceSearch()">🎙️ Voice Search</button>
         <label class="btn btn-secondary">
           📷 Image
@@ -547,7 +547,7 @@
       recognition.start();
     }
 
-    // High-Speed Direct Gemini Solver Engine (<2.5s)
+    // Direct High-Speed Interactions Engine
     async function handleSolve() {
       const text = document.getElementById('aiProblemInput').value.trim();
       const btn = document.getElementById('btnSolve');
@@ -560,65 +560,47 @@
       }
 
       display.style.display = 'block';
-      mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">⚡ Generating instant answer...</p>';
+      mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">⚡ Generating answer...</p>';
       btn.disabled = true;
 
-      // Select random key immediately without nested retries
       const shuffledKeys = [...DIRECT_GEMINI_KEYS].sort(() => 0.5 - Math.random());
 
-      const systemInstruction = `You are "Lucky", a fast, universal educational AI for Lekka Lab.
-- Give direct, structured, and quick answers with bullet points and headings.
-- Math: use standard LaTeX ($..$ inline, $$..$$ standalone).
-- Geometry: concise inline SVG if needed (<svg viewBox="0 0 360 220" ...>).
-- Keep formatting clean and concise for rapid response.`;
+      const systemInstruction = `You are "Lucky", a fast universal educational AI assistant for Lekka Lab.
+- Provide direct, structured answers with headings and bullet points.
+- If math or physics formulas are needed, use LaTeX ($..$ inline, $$..$$ standalone).
+- If geometric constructions or diagrams are requested, provide an inline SVG (<svg viewBox="0 0 360 220" ...>).
+- Be concise and clear to ensure high-speed delivery.`;
 
-      const contents = [{
-        role: "user",
-        parts: [{ text: `${systemInstruction}\n\nUser Question: ${text}` }]
-      }];
-
-      if (base64Image) {
-        contents[0].parts.push({
-          inlineData: {
-            mimeType: "image/jpeg",
-            data: base64Image
-          }
-        });
-      }
-
+      const promptInput = `${systemInstruction}\n\nUser Question: ${text}`;
       let rawAnswer = null;
-      let lastError = "Request timed out or failed";
+      let lastError = "Request failed";
 
-      // Direct single call to the fastest lightweight model
-      const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent`;
+      // The exact Google Interactions endpoint that succeeded in previous response
+      const endpoint = `https://generativelanguage.googleapis.com/v1beta/interactions`;
 
       for (const apiKey of shuffledKeys) {
         try {
-          const controller = new AbortController();
-          const timeoutId = setTimeout(() => controller.abort(), 8000); // 8s timeout safeguard
-
           const res = await fetch(endpoint, {
             method: "POST",
-            signal: controller.signal,
             headers: { 
               "Content-Type": "application/json",
               "x-goog-api-key": apiKey
             },
             body: JSON.stringify({
-              contents: contents,
-              generationConfig: {
-                temperature: 0.2,
-                maxOutputTokens: 900 // Fast delivery budget
-              }
+              model: "gemini-3.5-flash-lite",
+              input: promptInput
             })
           });
 
-          clearTimeout(timeoutId);
           const data = await res.json();
-
-          if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
-            rawAnswer = data.candidates[0].content.parts[0].text;
-            break; // Stop immediately upon first success
+          if (data.output_text) {
+            rawAnswer = data.output_text;
+            break;
+          } else if (data.steps && data.steps.length > 0) {
+            for (const s of data.steps) {
+              if (s.output_text) { rawAnswer = s.output_text; break; }
+            }
+            if (rawAnswer) break;
           } else if (data.error) {
             lastError = data.error.message || lastError;
           }
