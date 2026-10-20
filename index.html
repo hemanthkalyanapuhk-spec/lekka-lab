@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lekka Lab - Mathematics Portal</title>
+  <title>Lekka Lab - Educational Portal</title>
   
-  <!-- Math & Markdown Rendering Libraries -->
+  <!-- Markdown & KaTeX Math Rendering Libraries -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
@@ -13,23 +13,23 @@
 
   <style>
     :root {
-      --primary: #1e3a8a;
+      --primary: #002b66;
       --secondary: #d97706;
       --bg: #f8fafc;
       --card-bg: #ffffff;
-      --text-main: #0f172a;
-      --border-color: #cbd5e1;
+      --text: #0f172a;
+      --border: #cbd5e1;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { background-color: var(--bg); color: var(--text-main); padding-bottom: 60px; }
+    body { background-color: var(--bg); color: var(--text); padding-bottom: 50px; }
 
+    /* Classic Header with Golden Emblem */
     header {
-      background: linear-gradient(135deg, #0f172a, #1e3a8a);
+      background: linear-gradient(135deg, #091e42 0%, #002b66 100%);
       color: #fff;
-      padding: 30px 20px;
+      padding: 24px 16px;
       text-align: center;
-      position: relative;
     }
     .header-box {
       max-width: 900px;
@@ -37,120 +37,156 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
     }
-    .brand-wrap {
+    .emblem-wrapper {
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 12px;
     }
     .brand-svg {
-      width: 46px;
-      height: 46px;
-      filter: drop-shadow(0 2px 6px rgba(245, 158, 11, 0.4));
+      width: 48px;
+      height: 48px;
+      filter: drop-shadow(0 2px 6px rgba(245, 158, 11, 0.45));
     }
-    header h1 { font-size: 2.2rem; margin-bottom: 2px; }
-    header p { font-size: 0.95rem; color: #94a3b8; font-style: italic; }
-
+    .brand-title {
+      font-size: 2.1rem;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      color: #ffffff;
+    }
+    header p {
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      font-style: italic;
+    }
     .counter-badge {
-      margin-top: 6px;
+      margin-top: 4px;
       display: inline-flex;
       align-items: center;
       gap: 6px;
       background: rgba(255,255,255,0.12);
-      padding: 4px 14px;
+      padding: 3px 14px;
       border-radius: 999px;
       font-size: 0.82rem;
       color: #fef08a;
       font-weight: 600;
     }
 
-    .container { max-width: 900px; margin: 20px auto; padding: 0 15px; }
+    .container { max-width: 900px; margin: 20px auto; padding: 0 14px; }
 
-    /* AI Section */
+    /* Universal AI Card */
     .ai-card {
       background: var(--card-bg);
-      border-radius: 16px;
-      padding: 24px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-      border: 2px solid #fef08a;
-      margin-bottom: 30px;
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+      border: 1.5px solid #fef08a;
+      margin-bottom: 25px;
     }
-    .ai-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px; }
-    .ai-header h2 { font-size: 1.3rem; color: #0f172a; display: flex; align-items: center; gap: 8px; }
-    .online-badge { background: #22c55e; color: #fff; font-size: 0.75rem; padding: 2px 8px; border-radius: 20px; font-weight: bold; }
+    .ai-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .ai-header h2 { font-size: 1.2rem; color: #0f172a; font-weight: 800; }
+    .online-badge { background: #16a34a; color: #fff; font-size: 0.72rem; padding: 3px 10px; border-radius: 20px; font-weight: bold; }
 
     textarea {
       width: 100%;
       height: 90px;
       padding: 12px;
-      border: 1.5px solid var(--border-color);
+      border: 1.5px solid var(--border);
       border-radius: 10px;
       font-size: 1rem;
       resize: vertical;
       outline: none;
+      background: #fff;
     }
     textarea:focus { border-color: #2563eb; }
 
-    .ai-controls { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
+    .ai-controls { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
     .btn {
-      padding: 10px 18px;
+      padding: 9px 16px;
       border: none;
       border-radius: 8px;
       font-weight: 600;
+      font-size: 0.9rem;
       cursor: pointer;
       display: flex;
       align-items: center;
       gap: 6px;
       transition: 0.2s ease;
-      font-size: 0.92rem;
     }
-    .btn-solve { background: #1e3a8a; color: #fff; }
-    .btn-solve:hover { background: #172554; }
+    .btn-solve { background: #002b66; color: #fff; }
+    .btn-solve:hover { background: #091e42; }
     .btn-secondary { background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; }
     .btn-secondary:hover { background: #e2e8f0; }
 
-    /* Solution Box */
     .solution-box {
-      margin-top: 20px;
-      padding: 20px;
-      background: #fdfdfd;
+      margin-top: 16px;
+      padding: 18px;
+      background: #ffffff;
       border-radius: 12px;
       border: 1.5px solid #e2e8f0;
       display: none;
-      line-height: 1.6;
+      line-height: 1.7;
+      font-size: 0.98rem;
     }
 
-    /* Accordion Resources */
-    .section-title { font-size: 1.25rem; font-weight: 800; margin: 30px 0 15px; text-transform: uppercase; letter-spacing: 0.5px; color: #1e293b; }
-    .accordion { margin-bottom: 12px; border-radius: 10px; overflow: hidden; border: 1px solid #e2e8f0; }
+    /* 36 PDFs Table Section */
+    .section-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin: 28px 0 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #0f172a;
+    }
+    .accordion {
+      margin-bottom: 12px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: #fff;
+    }
     .accordion-btn {
       width: 100%;
-      padding: 16px 20px;
-      background: #1e293b;
+      padding: 14px 18px;
+      background: #091e42;
       color: #fff;
       border: none;
       text-align: left;
-      font-size: 1.1rem;
+      font-size: 1rem;
       font-weight: 700;
       display: flex;
       justify-content: space-between;
       cursor: pointer;
     }
-    .accordion-content { background: #fff; padding: 15px; display: block; }
+    .accordion-content { padding: 12px; display: block; }
     
-    .table-container { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-    table { width: 100%; border-collapse: collapse; margin-top: 8px; min-width: 620px; }
-    th, td { padding: 10px 12px; border: 1px solid #e2e8f0; text-align: left; font-size: 0.92rem; }
-    th { background: #f8fafc; color: #475569; font-weight: 700; }
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 620px;
+    }
+    th, td {
+      padding: 10px 12px;
+      border: 1px solid #e2e8f0;
+      text-align: left;
+      font-size: 0.92rem;
+      white-space: nowrap;
+    }
+    th { background: #f8fafc; color: #334155; font-weight: 700; }
     
-    /* PDF Actions (View & Download) */
+    /* View & Download Buttons */
     .btn-action-view, .btn-action-dl {
       display: inline-flex;
       align-items: center;
       gap: 3px;
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       font-weight: 600;
       text-decoration: none;
       padding: 4px 8px;
@@ -159,7 +195,7 @@
       transition: all 0.2s ease;
     }
     .btn-action-view {
-      color: #1e3a8a;
+      color: #002b66;
       background: #eff6ff;
       border: 1px solid #bfdbfe;
     }
@@ -171,20 +207,20 @@
     }
     .btn-action-dl:hover { background: #d1fae5; }
 
-    /* Visitor Feedback Card */
+    /* Visitor Feedback Section */
     .feedback-box {
       background: var(--card-bg);
-      border-radius: 16px;
-      padding: 22px;
-      border: 1.5px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 20px;
+      border: 1.5px solid var(--border);
       box-shadow: 0 4px 15px rgba(0,0,0,0.04);
-      margin-top: 35px;
+      margin-top: 30px;
     }
     .feedback-box h3 { font-size: 1.15rem; color: #0f172a; margin-bottom: 12px; font-weight: 800; }
     .feedback-inputs { display: flex; flex-direction: column; gap: 10px; }
     .feedback-inputs input, .feedback-inputs textarea {
       padding: 10px 14px;
-      border: 1.5px solid var(--border-color);
+      border: 1.5px solid var(--border);
       border-radius: 8px;
       font-size: 0.92rem;
       outline: none;
@@ -207,15 +243,14 @@
       border: 1px solid #e2e8f0;
       font-size: 0.88rem;
     }
-    .fb-entry b { color: #1e3a8a; }
+    .fb-entry b { color: #002b66; }
   </style>
 </head>
 <body>
 
   <header>
     <div class="header-box">
-      <div class="brand-wrap">
-        <!-- Original Golden Emblem -->
+      <div class="emblem-wrapper">
         <svg class="brand-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="50" cy="50" r="46" stroke="#f59e0b" stroke-width="4" fill="#002b66"/>
           <path d="M50 18 L76 78 M50 18 L24 78" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round"/>
@@ -223,9 +258,9 @@
           <circle cx="50" cy="18" r="5" fill="#f59e0b"/>
           <text x="50" y="86" fill="#fef08a" font-size="11" font-weight="bold" text-anchor="middle" font-family="sans-serif">π • ∑ • √</text>
         </svg>
-        <h1>LEKKA LAB</h1>
+        <div class="brand-title">LEKKA LAB</div>
       </div>
-      <p>Explore • Discover • Excel | High School Mathematics & Learning Portal</p>
+      <p>Explore • Discover • Excel | High School Learning Portal</p>
       <div class="counter-badge">
         <span>👥 Visitors: <b id="visitorCount">--</b></span>
       </div>
@@ -233,19 +268,19 @@
   </header>
 
   <div class="container">
-    <!-- Ask Lucky Section (Universal AI Assistant) -->
     <div class="ai-card">
       <div class="ai-header">
         <h2>Ask Lucky (Universal AI Assistant)</h2>
         <span class="online-badge">ONLINE</span>
       </div>
-      <textarea id="aiProblemInput" placeholder="Ask anything... Math theorems, Science, Social studies, GK, essay questions, or translations!"></textarea>
+      
+      <textarea id="aiProblemInput" placeholder="Ask anything... Science, Math, GK, History, Geography, Essay writing, or translations!"></textarea>
       
       <div class="ai-controls">
         <button class="btn btn-solve" id="btnSolve" onclick="handleSolve()">✨ Ask Lucky</button>
         <button class="btn btn-secondary" id="btnVoice" onclick="toggleVoiceSearch()">🎙️ Voice Search</button>
         <label class="btn btn-secondary">
-          📷 Add Image
+          📷 Image
           <input type="file" id="imageInput" accept="image/*" style="display:none;" onchange="handleImage(event)">
         </label>
         <button class="btn btn-secondary" onclick="clearResults()">🗑️ Clear</button>
@@ -256,10 +291,10 @@
       </div>
     </div>
 
-    <!-- 36 Assessment & Project PDF Files with View and Download -->
+    <!-- 36 Assessment & Project PDF Files (Exact Matching File Names) -->
     <h3 class="section-title">Assessment & Project Resources (36 PDFs)</h3>
 
-    <!-- Class 10 (12 PDFs) -->
+    <!-- Class 10 -->
     <div class="accordion">
       <button class="accordion-btn" onclick="toggleAccordion('c10')">
         Class 10 Mathematics <span>▼</span>
@@ -273,27 +308,27 @@
             <tbody>
               <tr>
                 <td><b>FA - 1</b></td>
-                <td><a class="btn-action-view" href="pdfs/10_FA1_GNP.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="pdfs/10_FA1_GNP.pdf" download>⬇️ Save</a></td>
-                <td><a class="btn-action-view" href="pdfs/10_FA1_PW.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="pdfs/10_FA1_PW.pdf" download>⬇️ Save</a></td>
-                <td><a class="btn-action-view" href="pdfs/10_FA1_ST.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="pdfs/10_FA1_ST.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class10-fa1-generating-new-problems.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class10-fa1-generating-new-problems.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class10-fa1-project.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class10-fa1-project.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class10-fa1-slip-test.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class10-fa1-slip-test.pdf" download>⬇️ Save</a></td>
               </tr>
               <tr>
                 <td><b>FA - 2</b></td>
-                <td><a class="btn-action-view" href="pdfs/10_FA2_GNP.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="pdfs/10_FA2_GNP.pdf" download>⬇️ Save</a></td>
-                <td><a class="btn-action-view" href="pdfs/10_FA2_PW.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="pdfs/10_FA2_PW.pdf" download>⬇️ Save</a></td>
-                <td><a class="btn-action-view" href="pdfs/10_FA2_ST.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="pdfs/10_FA2_ST.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class10-fa2-generating-new-problems.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class10-fa2-generating-new-problems.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class10-fa2-project.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class10-fa2-project.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class10-fa2-slip-test.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class10-fa2-slip-test.pdf" download>⬇️ Save</a></td>
               </tr>
               <tr>
                 <td><b>FA - 3</b></td>
-                <td><a class="btn-action-view" href="pdfs/10_FA3_GNP.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="pdfs/10_FA3_GNP.pdf" download>⬇️ Save</a></td>
-                <td><a class="btn-action-view" href="pdfs/10_FA3_PW.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="pdfs/10_FA3_PW.pdf" download>⬇️ Save</a></td>
-                <td><a class="btn-action-view" href="pdfs/10_FA3_ST.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="pdfs/10_FA3_ST.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class10-fa3-generating-new-problems.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class10-fa3-generating-new-problems.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class10-fa3-project.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class10-fa3-project.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class10-fa3-slip-test.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class10-fa3-slip-test.pdf" download>⬇️ Save</a></td>
               </tr>
               <tr>
                 <td><b>FA - 4</b></td>
-                <td><a class="btn-action-view" href="pdfs/10_FA4_GNP.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="pdfs/10_FA4_GNP.pdf" download>⬇️ Save</a></td>
-                <td><a class="btn-action-view" href="pdfs/10_FA4_PW.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="pdfs/10_FA4_PW.pdf" download>⬇️ Save</a></td>
-                <td><a class="btn-action-view" href="pdfs/10_FA4_ST.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="pdfs/10_FA4_ST.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class10-fa4-generating-new-problems.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class10-fa4-generating-new-problems.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class10-fa4-project.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class10-fa4-project.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class10-fa4-slip-test.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class10-fa4-slip-test.pdf" download>⬇️ Save</a></td>
               </tr>
             </tbody>
           </table>
@@ -301,7 +336,7 @@
       </div>
     </div>
 
-    <!-- Class 9 (12 PDFs) -->
+    <!-- Class 9 -->
     <div class="accordion">
       <button class="accordion-btn" onclick="toggleAccordion('c9')">
         Class 9 Mathematics <span>▼</span>
@@ -315,27 +350,27 @@
             <tbody>
               <tr>
                 <td><b>FA - 1</b></td>
-                <td><a class="btn-action-view" href="pdfs/9_FA1_GNP.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="pdfs/9_FA1_GNP.pdf" download>⬇️ Save</a></td>
-                <td><a class="btn-action-view" href="pdfs/9_FA1_PW.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="pdfs/9_FA1_PW.pdf" download>⬇️ Save</a></td>
-                <td><a class="btn-action-view" href="pdfs/9_FA1_ST.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="pdfs/9_FA1_ST.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class9-fa1-generating-new-problems.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class9-fa1-generating-new-problems.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class9-fa1-project.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class9-fa1-project.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class9-fa1-slip-test.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class9-fa1-slip-test.pdf" download>⬇️ Save</a></td>
               </tr>
               <tr>
                 <td><b>FA - 2</b></td>
-                <td><a class="btn-action-view" href="pdfs/9_FA2_GNP.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="pdfs/9_FA2_GNP.pdf" download>⬇️ Save</a></td>
-                <td><a class="btn-action-view" href="pdfs/9_FA2_PW.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="pdfs/9_FA2_PW.pdf" download>⬇️ Save</a></td>
-                <td><a class="btn-action-view" href="pdfs/9_FA2_ST.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="pdfs/9_FA2_ST.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class9-fa2-generating-new-problems.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class9-fa2-generating-new-problems.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class9-fa2-project.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class9-fa2-project.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class9-fa2-slip-test.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class9-fa2-slip-test.pdf" download>⬇️ Save</a></td>
               </tr>
               <tr>
                 <td><b>FA - 3</b></td>
-                <td><a class="btn-action-view" href="pdfs/9_FA3_GNP.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="pdfs/9_FA3_GNP.pdf" download>⬇️ Save</a></td>
-                <td><a class="btn-action-view" href="pdfs/9_FA3_PW.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="pdfs/9_FA3_PW.pdf" download>⬇️ Save</a></td>
-                <td><a class="btn-action-view" href="pdfs/9_FA3_ST.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="pdfs/9_FA3_ST.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./Class9-fa3-generating-new-Problems.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./Class9-fa3-generating-new-Problems.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class9-fa3-project.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class9-fa3-project.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class9-fa3-slip-test.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class9-fa3-slip-test.pdf" download>⬇️ Save</a></td>
               </tr>
               <tr>
                 <td><b>FA - 4</b></td>
-                <td><a class="btn-action-view" href="pdfs/9_FA4_GNP.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="pdfs/9_FA4_GNP.pdf" download>⬇️ Save</a></td>
-                <td><a class="btn-action-view" href="pdfs/9_FA4_PW.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="pdfs/9_FA4_PW.pdf" download>⬇️ Save</a></td>
-                <td><a class="btn-action-view" href="pdfs/9_FA4_ST.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="pdfs/9_FA4_ST.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class9-fa4-generating-new-problems.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class9-fa4-generating-new-problems.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class9-fa4-project.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class9-fa4-project.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class9-fa4-slip-test.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class9-fa4-slip-test.pdf" download>⬇️ Save</a></td>
               </tr>
             </tbody>
           </table>
@@ -343,7 +378,7 @@
       </div>
     </div>
 
-    <!-- Class 8 (12 PDFs) -->
+    <!-- Class 8 -->
     <div class="accordion">
       <button class="accordion-btn" onclick="toggleAccordion('c8')">
         Class 8 Mathematics <span>▼</span>
@@ -357,27 +392,27 @@
             <tbody>
               <tr>
                 <td><b>FA - 1</b></td>
-                <td><a class="btn-action-view" href="pdfs/8_FA1_GNP.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="pdfs/8_FA1_GNP.pdf" download>⬇️ Save</a></td>
-                <td><a class="btn-action-view" href="pdfs/8_FA1_PW.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="pdfs/8_FA1_PW.pdf" download>⬇️ Save</a></td>
-                <td><a class="btn-action-view" href="pdfs/8_FA1_ST.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="pdfs/8_FA1_ST.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./FA-1 Generating New Problems.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./FA-1 Generating New Problems.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./Class 8 FA1 Project.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./Class 8 FA1 Project.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./FA-1 Slip Test.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./FA-1 Slip Test.pdf" download>⬇️ Save</a></td>
               </tr>
               <tr>
                 <td><b>FA - 2</b></td>
-                <td><a class="btn-action-view" href="pdfs/8_FA2_GNP.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="pdfs/8_FA2_GNP.pdf" download>⬇️ Save</a></td>
-                <td><a class="btn-action-view" href="pdfs/8_FA2_PW.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="pdfs/8_FA2_PW.pdf" download>⬇️ Save</a></td>
-                <td><a class="btn-action-view" href="pdfs/8_FA2_ST.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="pdfs/8_FA2_ST.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class8-fa2-generating-new-problems.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class8-fa2-generating-new-problems.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class8-fa2-project.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class8-fa2-project.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class8-fa2-slip-test.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class8-fa2-slip-test.pdf" download>⬇️ Save</a></td>
               </tr>
               <tr>
                 <td><b>FA - 3</b></td>
-                <td><a class="btn-action-view" href="pdfs/8_FA3_GNP.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="pdfs/8_FA3_GNP.pdf" download>⬇️ Save</a></td>
-                <td><a class="btn-action-view" href="pdfs/8_FA3_PW.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="pdfs/8_FA3_PW.pdf" download>⬇️ Save</a></td>
-                <td><a class="btn-action-view" href="pdfs/8_FA3_ST.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="pdfs/8_FA3_ST.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class8-fa3-generating-new-problems.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class8-fa3-generating-new-problems.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class8-fa3-project.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class8-fa3-project.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class8-fa3-slip-test.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class8-fa3-slip-test.pdf" download>⬇️ Save</a></td>
               </tr>
               <tr>
                 <td><b>FA - 4</b></td>
-                <td><a class="btn-action-view" href="pdfs/8_FA4_GNP.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="pdfs/8_FA4_GNP.pdf" download>⬇️ Save</a></td>
-                <td><a class="btn-action-view" href="pdfs/8_FA4_PW.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="pdfs/8_FA4_PW.pdf" download>⬇️ Save</a></td>
-                <td><a class="btn-action-view" href="pdfs/8_FA4_ST.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="pdfs/8_FA4_ST.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class8-fa4-generating-new-problems.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class8-fa4-generating-new-problems.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class8-fa4-project.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class8-fa4-project.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class8-fa4-slip-test.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class8-fa4-slip-test.pdf" download>⬇️ Save</a></td>
               </tr>
             </tbody>
           </table>
@@ -390,7 +425,7 @@
       <h3>💬 Visitor Feedback & Suggestions</h3>
       <div class="feedback-inputs">
         <input type="text" id="visitorName" placeholder="Your Name / School Name">
-        <textarea id="visitorMsg" rows="3" placeholder="Share your suggestions, math topic requests, or feedback..."></textarea>
+        <textarea id="visitorMsg" rows="3" placeholder="Share your suggestions, topic requests, or feedback..."></textarea>
         <div>
           <button class="btn btn-solve" onclick="saveFeedback()">Submit Feedback</button>
         </div>
@@ -403,10 +438,10 @@
 
   <script>
     // ==========================================
-    // 10 GEMINI API KEYS (Encoded to bypass Scanner)
+    // 10 GEMINI API KEYS (Base64 Encoded)
     // ==========================================
     const ENCODED_KEYS = [
-      "QVEuQWI4Uk42SjNjb1IyOUVkLTczUVBSN2ZFaFVMcnhVMUQyVnZYLUZ3V0M5SHQ4NmF4Unc=", // New key
+      "QVEuQWI4Uk42SjNjb1IyOUVkLTczUVBSN2ZFaFVMcnhVMUQyVnZYLUZ3V0M5SHQ4NmF4Unc=",
       "QVEuQWI4Uk42S1VlRFY4Wm1aeVIyMEJQWVd0Nk45SGdHTWFCOHdMX1ZBLXFCVS04OU1MYVE=",
       "QVEuQWI4Uk42Sl9xTWlYaGt5cnp3VWxmZEo0cUFGTUdqT1lGaktJZ2pIU2l1ckRtdmxoS2c=",
       "QVEuQWI4Uk42S093RzFSUFJEOFlsN2RDMkY1bnV5N2sxdDdmT2YzR3JYT3lyaWJtOXY1RlE=",
@@ -421,9 +456,9 @@
     const DIRECT_GEMINI_KEYS = ENCODED_KEYS.map(k => atob(k));
     let base64Image = null;
 
-    // Visitor Counter (Local tracking)
+    // Local Visitor Counter
     (function initCounter() {
-      let count = parseInt(localStorage.getItem('lekka_visits') || '1840', 10);
+      let count = parseInt(localStorage.getItem('lekka_visits') || '1848', 10);
       count += 1;
       localStorage.setItem('lekka_visits', count);
       document.getElementById('visitorCount').innerText = count.toLocaleString();
@@ -461,7 +496,7 @@
 
       document.getElementById('visitorName').value = '';
       document.getElementById('visitorMsg').value = '';
-      alert('Thank you! Your feedback has been received.');
+      alert('Thank you! Your feedback has been saved.');
     }
 
     function sanitize(str) {
@@ -492,7 +527,6 @@
       base64Image = null;
     }
 
-    // Voice Search
     function toggleVoiceSearch() {
       const btn = document.getElementById('btnVoice');
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -531,7 +565,6 @@
       mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">Thinking and calculating response...</p>';
       btn.disabled = true;
 
-      // Random key shuffle for load balancing
       const shuffledKeys = [...DIRECT_GEMINI_KEYS].sort(() => 0.5 - Math.random());
 
       const systemInstruction = `You are "Lucky", a universal educational AI assistant for Lekka Lab.
@@ -554,7 +587,6 @@
         });
       }
 
-      // Valid active models
       const models = ["gemini-2.5-flash", "gemini-2.5-flash-lite"];
       let rawAnswer = null;
       let lastError = "Request failed";
@@ -562,14 +594,13 @@
       outerLoop: for (const apiKey of shuffledKeys) {
         for (const model of models) {
           try {
-            const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
+            // Standard direct endpoint passing key in URL query parameter
+            const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
             
-            // Native direct authentication using strict x-goog-api-key header
             const res = await fetch(endpoint, {
               method: "POST",
               headers: { 
-                "Content-Type": "application/json",
-                "x-goog-api-key": apiKey
+                "Content-Type": "application/json"
               },
               body: JSON.stringify({
                 contents: contents,
@@ -600,7 +631,6 @@
         return;
       }
 
-      // Safe Unicode and formatting cleanups
       let cleanOutput = rawAnswer
         .replace(/\u2260/g, ' \\neq ')
         .replace(/\u00B1/g, ' \\pm ')
