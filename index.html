@@ -277,7 +277,7 @@
       <textarea id="aiProblemInput" placeholder="Ask anything... Science, Math, GK, Current Affairs, History, Recipes, or General Questions!"></textarea>
       
       <div class="ai-controls">
-        <button class="btn btn-solve" id="btnSolve" onclick="handleSolve()">✨ Ask Lucky</button>
+        <button class="btn btn-solve" id="btnSolve" onclick="handleSolve()">⚡ Ask Lucky</button>
         <button class="btn btn-secondary" id="btnVoice" onclick="toggleVoiceSearch()">🎙️ Voice Search</button>
         <label class="btn btn-secondary">
           📷 Image
@@ -547,7 +547,7 @@
       recognition.start();
     }
 
-    // Direct Universal AI Engine (Interactions API - Pure & Uncut)
+    // Direct Instant Interactions Engine (No Timers, Zero Delays)
     async function handleSolve() {
       const text = document.getElementById('aiProblemInput').value.trim();
       const btn = document.getElementById('btnSolve');
@@ -560,16 +560,17 @@
       }
 
       display.style.display = 'block';
-      mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">Thinking and fetching response...</p>';
+      mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">⚡ Fetching answer...</p>';
       btn.disabled = true;
 
-      const shuffledKeys = [...DIRECT_GEMINI_KEYS].sort(() => 0.5 - Math.random());
+      // Select one active key immediately
+      const primaryKey = DIRECT_GEMINI_KEYS[0];
 
-      const systemInstruction = `You are "Lucky", a helpful universal educational AI assistant for Lekka Lab.
-- Provide direct, structured, and informative answers with clear headings and bullet points.
-- If math or physics formulas are needed, use LaTeX ($..$ inline, $$..$$ standalone).
-- If geometric constructions or diagrams are requested, provide an inline SVG (<svg viewBox="0 0 360 220" ...>).
-- Give complete and accurate answers for general queries, recipes, coding, and science.`;
+      const systemInstruction = `You are "Lucky", a fast universal educational AI assistant for Lekka Lab.
+- Give direct, crisp answers with headings and bullet points.
+- LaTeX for math ($..$ inline, $$..$$ display).
+- If diagram is requested, provide concise inline SVG.
+- Keep it concise for high speed.`;
 
       const promptInput = `${systemInstruction}\n\nUser Question: ${text}`;
       let rawAnswer = null;
@@ -577,37 +578,64 @@
 
       const endpoint = `https://generativelanguage.googleapis.com/v1beta/interactions`;
 
-      for (const apiKey of shuffledKeys) {
-        try {
-          const res = await fetch(endpoint, {
-            method: "POST",
-            headers: { 
-              "Content-Type": "application/json",
-              "x-goog-api-key": apiKey
-            },
-            body: JSON.stringify({
-              model: "gemini-3.5-flash-lite",
-              input: promptInput
-            })
-          });
+      try {
+        const res = await fetch(endpoint, {
+          method: "POST",
+          headers: { 
+            "Content-Type": "application/json",
+            "x-goog-api-key": primaryKey
+          },
+          body: JSON.stringify({
+            model: "gemini-3.5-flash-lite",
+            input: promptInput
+          })
+        });
 
-          const data = await res.json();
-          if (data.output_text) {
-            rawAnswer = data.output_text;
-            break;
-          } else if (data.steps && data.steps.length > 0) {
-            for (const s of data.steps) {
-              if (s.output_text) { 
-                rawAnswer = s.output_text; 
-                break; 
-              }
+        const data = await res.json();
+        if (data.output_text) {
+          rawAnswer = data.output_text;
+        } else if (data.steps && data.steps.length > 0) {
+          for (const s of data.steps) {
+            if (s.output_text) { 
+              rawAnswer = s.output_text; 
+              break; 
             }
-            if (rawAnswer) break;
-          } else if (data.error) {
-            lastError = data.error.message || lastError;
           }
-        } catch (e) {
-          lastError = e.message;
+        } else if (data.error) {
+          lastError = data.error.message || lastError;
+        }
+      } catch (e) {
+        lastError = e.message;
+      }
+
+      // If key 1 hits a rate limit, fallback to randomized keys
+      if (!rawAnswer) {
+        const remainingKeys = DIRECT_GEMINI_KEYS.slice(1);
+        for (const k of remainingKeys) {
+          try {
+            const res = await fetch(endpoint, {
+              method: "POST",
+              headers: { 
+                "Content-Type": "application/json",
+                "x-goog-api-key": k
+              },
+              body: JSON.stringify({
+                model: "gemini-3.5-flash-lite",
+                input: promptInput
+              })
+            });
+
+            const data = await res.json();
+            if (data.output_text) {
+              rawAnswer = data.output_text;
+              break;
+            } else if (data.steps && data.steps.length > 0) {
+              for (const s of data.steps) {
+                if (s.output_text) { rawAnswer = s.output_text; break; }
+              }
+              if (rawAnswer) break;
+            }
+          } catch (e) {}
         }
       }
 
