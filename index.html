@@ -291,7 +291,7 @@
       </div>
     </div>
 
-    <!-- 36 Assessment & Project PDF Files -->
+    <!-- 36 Assessment & Project PDF Files (Exact File Paths) -->
     <h3 class="section-title">Assessment & Project Resources (36 PDFs)</h3>
 
     <!-- Class 10 -->
@@ -456,7 +456,7 @@
 
     // Visitor Counter
     (function initCounter() {
-      let count = parseInt(localStorage.getItem('lekka_visits') || '1860', 10);
+      let count = parseInt(localStorage.getItem('lekka_visits') || '1868', 10);
       count += 1;
       localStorage.setItem('lekka_visits', count);
       document.getElementById('visitorCount').innerText = count.toLocaleString();
@@ -547,7 +547,7 @@
       recognition.start();
     }
 
-    // Direct Instant Interactions Engine (No Timers, Zero Delays)
+    // High-Speed Parallel Engine (Fastest Key Wins via Promise.any)
     async function handleSolve() {
       const text = document.getElementById('aiProblemInput').value.trim();
       const btn = document.getElementById('btnSolve');
@@ -560,30 +560,27 @@
       }
 
       display.style.display = 'block';
-      mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">⚡ Fetching answer...</p>';
+      mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">⚡ Answering instantly...</p>';
       btn.disabled = true;
 
-      // Select one active key immediately
-      const primaryKey = DIRECT_GEMINI_KEYS[0];
-
-      const systemInstruction = `You are "Lucky", a fast universal educational AI assistant for Lekka Lab.
-- Give direct, crisp answers with headings and bullet points.
-- LaTeX for math ($..$ inline, $$..$$ display).
-- If diagram is requested, provide concise inline SVG.
-- Keep it concise for high speed.`;
+      const systemInstruction = `You are "Lucky", a universal educational AI assistant for Lekka Lab.
+- Give direct, structured, and informative answers with clear headings and bullet points.
+- If math or physics formulas are needed, use LaTeX ($..$ inline, $$..$$ standalone).
+- If geometric constructions or diagrams are requested, provide an inline SVG (<svg viewBox="0 0 360 220" ...>).
+- Keep answers direct and crisp for instant response.`;
 
       const promptInput = `${systemInstruction}\n\nUser Question: ${text}`;
-      let rawAnswer = null;
-      let lastError = "Request failed";
-
       const endpoint = `https://generativelanguage.googleapis.com/v1beta/interactions`;
 
-      try {
+      // Parallel race across multiple keys to bypass busy keys instantly
+      const targetKeys = [...DIRECT_GEMINI_KEYS].sort(() => 0.5 - Math.random()).slice(0, 4);
+
+      const requestWithKey = async (apiKey) => {
         const res = await fetch(endpoint, {
           method: "POST",
           headers: { 
             "Content-Type": "application/json",
-            "x-goog-api-key": primaryKey
+            "x-goog-api-key": apiKey
           },
           body: JSON.stringify({
             model: "gemini-3.5-flash-lite",
@@ -593,86 +590,48 @@
 
         const data = await res.json();
         if (data.output_text) {
-          rawAnswer = data.output_text;
+          return data.output_text;
         } else if (data.steps && data.steps.length > 0) {
           for (const s of data.steps) {
-            if (s.output_text) { 
-              rawAnswer = s.output_text; 
-              break; 
-            }
+            if (s.output_text) return s.output_text;
           }
-        } else if (data.error) {
-          lastError = data.error.message || lastError;
         }
-      } catch (e) {
-        lastError = e.message;
-      }
+        throw new Error(data.error?.message || "Invalid response");
+      };
 
-      // If key 1 hits a rate limit, fallback to randomized keys
-      if (!rawAnswer) {
-        const remainingKeys = DIRECT_GEMINI_KEYS.slice(1);
-        for (const k of remainingKeys) {
-          try {
-            const res = await fetch(endpoint, {
-              method: "POST",
-              headers: { 
-                "Content-Type": "application/json",
-                "x-goog-api-key": k
-              },
-              body: JSON.stringify({
-                model: "gemini-3.5-flash-lite",
-                input: promptInput
-              })
-            });
+      try {
+        const rawAnswer = await Promise.any(targetKeys.map(k => requestWithKey(k)));
 
-            const data = await res.json();
-            if (data.output_text) {
-              rawAnswer = data.output_text;
-              break;
-            } else if (data.steps && data.steps.length > 0) {
-              for (const s of data.steps) {
-                if (s.output_text) { rawAnswer = s.output_text; break; }
-              }
-              if (rawAnswer) break;
-            }
-          } catch (e) {}
+        let cleanOutput = rawAnswer
+          .replace(/\u2260/g, ' \\neq ')
+          .replace(/\u00B1/g, ' \\pm ')
+          .replace(/\u2264/g, ' \\leq ')
+          .replace(/\u2265/g, ' \\geq ')
+          .replace(/\u00D7/g, ' \\times ')
+          .replace(/\u2192/g, ' \\to ')
+          .replace(/\u221E/g, ' \\infty ')
+          .replace(/```(?:xml|html|svg)?\s*(<svg[\s\S]*?<\/svg>)\s*```/gi, '$1')
+          .replace(/(<\/svg>)([\s\S]*?)(?=(?:###|####|\*\*|##|[A-Z][a-z]+:))/i, (m, p1, p2) => {
+            const tr = p2.trim();
+            return (/^[a-zA-Z0-9\s,\\^_\(\)\/\*\+\-=\|]+$/.test(tr) && tr.length < 120) ? p1 + "\n\n" : m;
+          })
+          .replace(/([^\n])(####|###)/g, '$1\n\n$2') .replace(/\$\$\s*([^\$]+)\s*\$\$/g, '\n\n$$$ $1$$$ \n\n');
+
+        mathContent.innerHTML = marked.parse(cleanOutput);
+
+        if (window.renderMathInElement) {
+          renderMathInElement(mathContent, {
+            delimiters: [
+              { left: '$$', right: '$$', display: true },
+              { left: '$', right: '$', display: false },
+              { left: '[', right: ']', display: true },
+              { left: '\\(', right: '\\)', display: false }
+            ],
+            throwOnError: false
+          });
         }
-      }
-
-      if (!rawAnswer) {
-        mathContent.innerHTML = `<p style="color: #ef4444; font-weight: 700;">Error: ${lastError}</p>`;
-        btn.disabled = false;
-        return;
-      }
-
-      let cleanOutput = rawAnswer
-        .replace(/\u2260/g, ' \\neq ')
-        .replace(/\u00B1/g, ' \\pm ')
-        .replace(/\u2264/g, ' \\leq ')
-        .replace(/\u2265/g, ' \\geq ')
-        .replace(/\u00D7/g, ' \\times ')
-        .replace(/\u2192/g, ' \\to ')
-        .replace(/\u221E/g, ' \\infty ')
-        .replace(/```(?:xml|html|svg)?\s*(<svg[\s\S]*?<\/svg>)\s*```/gi, '$1')
-        .replace(/(<\/svg>)([\s\S]*?)(?=(?:###|####|\*\*|##|[A-Z][a-z]+:))/i, (m, p1, p2) => {
-          const tr = p2.trim();
-          return (/^[a-zA-Z0-9\s,\\^_\(\)\/\*\+\-=\|]+$/.test(tr) && tr.length < 120) ? p1 + "\n\n" : m;
-        })
-        .replace(/([^\n])(####|###)/g, '$1\n\n$2')
-        .replace(/\$\$\s*([^\$]+)\s*\$\$/g, '\n\n$$$ $1 $$$ \n\n');
-
-      mathContent.innerHTML = marked.parse(cleanOutput);
-
-      if (window.renderMathInElement) {
-        renderMathInElement(mathContent, {
-          delimiters: [
-            { left: '$$', right: '$$', display: true },
-            { left: '$', right: '$', display: false },
-            { left: '\\[', right: '\\]', display: true },
-            { left: '\\(', right: '\\)', display: false }
-          ],
-          throwOnError: false
-        });
+      } catch (err) {
+        mathContent.innerHTML = `<p style="color: #ef4444; font-weight: 700;">Error: Connection busy. Please tap Ask Lucky again.</p>`;
       }
 
       btn.disabled = false;
