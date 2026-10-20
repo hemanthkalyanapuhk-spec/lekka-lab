@@ -5,13 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lekka Lab: Educational Portal</title>
   
+  <!-- Google Search Console Verification -->
   <meta name="google-site-verification" content="ZH0hIM6YoIPs1gLm_RlFgMR1C69wGGW8FvEtmjbps2Q" />
   <meta name="description" content="Lekka Lab is an educational mathematics portal providing step-by-step AI problem solving and study materials for Class 8, 9, and 10 students.">
 
+  <!-- Premium Fonts: Outfit & Cinzel -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
+  <!-- Math Rendering (KaTeX) & Markdown Support -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
@@ -43,6 +46,7 @@
       margin: 0;
       padding: 0;
       font-family: 'Outfit', system-ui, sans-serif;
+      transition: background 0.2s ease, border-color 0.2s ease;
     }
 
     body {
@@ -51,10 +55,11 @@
       padding-bottom: 50px;
     }
 
+    /* Header */
     header {
       background: var(--header-bg);
       color: white;
-      padding: 24px 16px;
+      padding: 26px 16px 22px;
       border-bottom: 2px solid var(--gold-border);
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
     }
@@ -65,56 +70,63 @@
       display: flex;
       align-items: center;
       gap: 16px;
+      text-align: left;
     }
 
     .emblem-wrapper {
-      width: 76px;
-      height: 76px;
+      width: 80px;
+      height: 80px;
       flex-shrink: 0;
+      filter: drop-shadow(0 4px 12px rgba(245, 158, 11, 0.4));
     }
 
     .header-text {
       display: flex;
       flex-direction: column;
+      justify-content: center;
       flex-grow: 1;
     }
 
     .brand-super-title {
       font-family: 'Cinzel', serif;
-      font-size: 22px;
+      font-size: 24px;
       font-weight: 900;
       letter-spacing: 1.5px;
-      line-height: 1.2;
+      line-height: 1.15;
+      margin-bottom: 2px;
       background: var(--gold-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      text-shadow: 0 2px 10px rgba(245, 158, 11, 0.3);
     }
 
     .brand-portal-tag {
-      font-size: 13px;
+      font-size: 13.5px;
       font-weight: 700;
       color: #f8fafc;
       letter-spacing: 0.5px;
+      margin-bottom: 4px;
       text-transform: uppercase;
-      margin-top: 2px;
     }
 
-    .motto-tag {
-      font-size: 12px;
+    header .motto-tag {
+      font-size: 12.5px;
       font-weight: 500;
       color: #93c5fd;
+      letter-spacing: 0.2px;
+      margin-bottom: 3px;
       font-style: italic;
     }
 
-    .subtext {
-      font-size: 10.5px;
+    header p.subtext {
+      font-size: 11px;
       color: #94a3b8;
       letter-spacing: 0.8px;
       text-transform: uppercase;
       font-weight: 700;
-      margin-top: 2px;
     }
 
+    /* Container */
     .container {
       max-width: 640px;
       margin: 18px auto 0;
@@ -124,18 +136,18 @@
       gap: 16px;
     }
 
+    /* Search Bar */
     .search-box-wrap {
       position: relative;
-      width: 100%;
     }
 
     .search-input {
       width: 100%;
-      padding: 13px 16px 13px 42px;
+      padding: 13px 16px 13px 44px;
       border-radius: 12px;
       border: 1px solid var(--card-border);
       background: #ffffff;
-      font-size: 14px;
+      font-size: 14.5px;
       font-weight: 600;
       color: var(--text-heading);
       box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
@@ -152,18 +164,13 @@
       left: 14px;
       top: 50%;
       transform: translateY(-50%);
-      width: 18px;
-      height: 18px;
+      width: 19px;
+      height: 19px;
       color: #94a3b8;
       pointer-events: none;
     }
 
-    .desktop-two-col {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
+    /* Textbooks */
     .textbooks-wrapper {
       display: grid;
       grid-template-columns: 1fr;
@@ -173,6 +180,7 @@
     @media (min-width: 480px) {
       .textbooks-wrapper {
         grid-template-columns: 1fr 1fr;
+        gap: 12px;
       }
     }
 
@@ -186,6 +194,7 @@
       justify-content: space-between;
       align-items: center;
       position: relative;
+      overflow: hidden;
     }
 
     .card::before {
@@ -197,33 +206,46 @@
       width: 4px;
     }
 
-    .card-scert::before { background: #ea580c; }
-    .card-ncert::before { background: #0284c7; }
+    .card-scert::before { background: linear-gradient(to bottom, #ea580c, #f97316); }
+    .card-ncert::before { background: linear-gradient(to bottom, #0284c7, #38bdf8); }
 
     .info h2 {
-      font-size: 14.5px;
+      font-size: 15px;
       font-weight: 800;
       color: var(--text-heading);
+      margin-bottom: 2px;
+      line-height: 1.2;
+      letter-spacing: -0.2px;
     }
 
     .info p {
-      font-size: 11px;
+      font-size: 11.5px;
+      font-weight: 500;
       color: var(--text-muted);
+      line-height: 1.2;
     }
 
     .btn-download {
-      padding: 7px 12px;
+      display: inline-block;
+      padding: 7px 13px;
       color: #ffffff;
       text-decoration: none;
       border-radius: 6px;
-      font-size: 11px;
+      font-size: 11.5px;
       font-weight: 700;
       white-space: nowrap;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+      margin-left: 8px;
+    }
+
+    .btn-download:active {
+      transform: scale(0.96);
     }
 
     .btn-scert { background: linear-gradient(135deg, #ea580c, #c2410c); }
     .btn-ncert { background: linear-gradient(135deg, #0284c7, #0369a1); }
 
+    /* Ask Lucky Box */
     .ai-solver-card {
       background: #ffffff;
       border: 1px solid rgba(245, 158, 11, 0.4);
@@ -240,55 +262,78 @@
     }
 
     .ai-solver-title {
-      font-size: 14.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 15px;
       font-weight: 800;
       color: #0f172a;
-      display: flex;
-      gap: 6px;
-      align-items: center;
     }
 
     .ai-badge {
       background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
       color: #050b18;
-      font-size: 9.5px;
+      font-size: 10px;
       font-weight: 800;
       padding: 2px 6px;
       border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .ai-input-area {
       width: 100%;
-      min-height: 65px;
-      padding: 10px;
+      min-height: 60px;
+      padding: 10px 12px;
       border-radius: 8px;
       border: 1px solid #cbd5e1;
       font-size: 13.5px;
+      color: #0f172a;
       outline: none;
       resize: vertical;
       font-family: inherit;
     }
 
+    .ai-input-area:focus {
+      border-color: #f59e0b;
+      box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.12);
+    }
+
     .ai-toolbar {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
       margin-top: 10px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .ai-attach-group {
+      display: flex;
+      gap: 6px;
     }
 
     .btn-icon-attach {
       background: #f1f5f9;
       border: 1px solid #cbd5e1;
       border-radius: 8px;
-      padding: 6px 12px;
+      padding: 6px 10px;
       font-size: 12px;
       font-weight: 700;
       color: #334155;
       cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .btn-icon-attach:hover {
+      background: #e2e8f0;
+      border-color: #94a3b8;
     }
 
     .btn-ai-solve {
-      background: #0f172a;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
       color: #fde047;
       border: 1px solid rgba(245, 158, 11, 0.5);
       border-radius: 8px;
@@ -296,29 +341,112 @@
       font-size: 13px;
       font-weight: 700;
       cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
 
+    .btn-ai-solve:active {
+      transform: scale(0.97);
+    }
+
+    .file-preview-indicator {
+      font-size: 11.5px;
+      color: #0284c7;
+      font-weight: 600;
+      display: none;
+      margin-top: 6px;
+    }
+
+    /* Output Section */
     #aiSolutionDisplay {
       display: none;
       margin-top: 12px;
-      padding: 14px;
+      padding: 16px;
       border-radius: 10px;
       background: #ffffff;
       border: 1.5px solid #2563eb;
       font-size: 14px;
-      line-height: 1.6;
+      line-height: 1.7;
+      color: #0f172a;
+      max-height: 560px;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    #mathRenderedContent {
+      overflow-x: auto;
+      word-break: break-word;
+      font-size: 14.5px;
+      line-height: 1.75;
+      color: #0f172a;
+    }
+
+    #mathRenderedContent h1, #mathRenderedContent h2, #mathRenderedContent h3, #mathRenderedContent h4 {
+      color: #1e3a8a;
+      margin-top: 14px;
+      margin-bottom: 6px;
+    }
+
+    #mathRenderedContent ul, #mathRenderedContent ol {
+      margin-left: 20px;
+      margin-bottom: 10px;
+    }
+
+    #mathRenderedContent table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      display: block;
+      overflow-x: auto;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    #mathRenderedContent th, #mathRenderedContent td {
+      border: 1px solid #cbd5e1;
+      padding: 9px 12px;
+      text-align: left;
+      font-size: 13px;
+    }
+
+    #mathRenderedContent th {
+      background-color: #f1f5f9;
+      color: #0f172a;
+      font-weight: 700;
+    }
+
+    #mathRenderedContent svg {
+      display: block;
+      margin: 14px auto;
+      max-width: 100%;
+      height: auto;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+    }
+
+    .katex-display {
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 6px 0;
+      margin: 8px 0;
+      -webkit-overflow-scrolling: touch;
     }
 
     .section-title {
-      font-size: 16px;
+      font-size: 17px;
       font-weight: 800;
+      letter-spacing: -0.3px;
       color: var(--text-heading);
-      margin-top: 8px;
+      margin-top: 6px;
       padding-bottom: 6px;
       border-bottom: 2px solid var(--gold-border);
       text-transform: uppercase;
     }
 
+    /* Accordions */
     details.class-box {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
@@ -331,14 +459,16 @@
       background: var(--class-header-bg);
       color: white;
       padding: 14px 18px;
-      font-size: 15px;
+      font-size: 15.5px;
       font-weight: 700;
+      letter-spacing: 0.2px;
       cursor: pointer;
+      user-select: none;
+      list-style: none;
       display: flex;
       justify-content: space-between;
       align-items: center;
       border-left: 4px solid var(--class-header-border);
-      list-style: none;
     }
 
     details.class-box > summary::-webkit-details-marker {
@@ -347,8 +477,9 @@
 
     details.class-box > summary::after {
       content: "▼";
-      font-size: 10px;
+      font-size: 11px;
       color: #f59e0b;
+      transition: transform 0.25s;
     }
 
     details.class-box[open] > summary::after {
@@ -356,39 +487,47 @@
     }
 
     .class-content {
-      padding: 12px;
+      padding: 14px;
+      background: rgba(0, 0, 0, 0.015);
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
     }
 
     details.fa-accordion {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
-      border-radius: 8px;
+      border-radius: 9px;
       overflow: hidden;
     }
 
     details.fa-accordion > summary {
       background: var(--fa-btn-bg);
       color: white;
-      padding: 11px 14px;
-      font-size: 13.5px;
+      padding: 12px 15px;
+      font-size: 14px;
       font-weight: 700;
       cursor: pointer;
+      user-select: none;
+      list-style: none;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      list-style: none;
     }
 
     details.fa-accordion > summary::-webkit-details-marker {
       display: none;
     }
 
+    details.fa-accordion[open] > summary {
+      background: var(--fa-active-bg);
+      border-bottom: 1px solid var(--gold-border);
+    }
+
     details.fa-accordion > summary::after {
       content: "▼";
-      font-size: 9px;
+      font-size: 10px;
+      transition: transform 0.2s;
     }
 
     details.fa-accordion[open] > summary::after {
@@ -396,39 +535,53 @@
     }
 
     .file-list {
-      padding: 8px;
+      padding: 10px;
       display: flex;
       flex-direction: column;
       gap: 8px;
+      background: rgba(0, 0, 0, 0.01);
     }
 
+    /* Dual Action Rows (View + Download) */
     .file-item-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: #ffffff;
-      padding: 9px 12px;
+      background: var(--card-bg);
+      padding: 10px 14px;
       border: 1px solid var(--file-btn-border);
-      border-radius: 8px;
+      border-radius: 9px;
+      gap: 10px;
     }
 
     .file-name-title {
-      font-size: 13px;
-      font-weight: 600;
-      color: #0f172a;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--text-heading);
+      flex-grow: 1;
     }
 
     .action-btn-group {
       display: flex;
+      align-items: center;
       gap: 6px;
+      flex-shrink: 0;
     }
 
     .btn-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
       text-decoration: none;
-      padding: 5px 9px;
+      padding: 6px 11px;
       border-radius: 6px;
-      font-size: 11px;
+      font-size: 11.5px;
       font-weight: 700;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    .btn-action:active {
+      transform: scale(0.95);
     }
 
     .btn-view {
@@ -437,11 +590,22 @@
       border: 1px solid #cbd5e1;
     }
 
-    .btn-dl {
-      background: #0284c7;
-      color: white;
+    .btn-view:hover {
+      background: #e2e8f0;
+      color: #0284c7;
     }
 
+    .btn-dl {
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      color: #ffffff;
+      box-shadow: 0 2px 5px rgba(2, 132, 199, 0.25);
+    }
+
+    .btn-dl:hover {
+      opacity: 0.92;
+    }
+
+    /* Feedback Trigger Button */
     .feedback-btn {
       display: inline-flex;
       align-items: center;
@@ -449,20 +613,26 @@
       background: #0f172a;
       border: 1px solid var(--gold-border);
       color: #fde047;
-      padding: 8px 16px;
+      padding: 9px 18px;
       border-radius: 20px;
-      font-size: 12.5px;
+      font-size: 13px;
       font-weight: 700;
       cursor: pointer;
-      margin: 6px auto 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      margin-top: 8px;
     }
 
-    /* Modal Backdrop */
+    .feedback-btn:active {
+      transform: scale(0.96);
+    }
+
+    /* Feedback Modal Dialog */
     .modal-backdrop {
       display: none;
       position: fixed;
       inset: 0;
       background: rgba(4, 9, 21, 0.75);
+      backdrop-filter: blur(4px);
       z-index: 999;
       align-items: center;
       justify-content: center;
@@ -471,82 +641,139 @@
 
     .modal-card {
       background: #ffffff;
-      border-radius: 12px;
-      max-width: 400px;
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      max-width: 420px;
       width: 100%;
-      padding: 20px;
+      padding: 22px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      position: relative;
     }
 
     .modal-head {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       margin-bottom: 12px;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 8px;
+    }
+
+    .modal-head h3 {
+      font-size: 17px;
+      font-weight: 800;
+      color: #0f172a;
     }
 
     .modal-close {
       background: none;
       border: none;
-      font-size: 20px;
+      font-size: 22px;
+      color: #64748b;
       cursor: pointer;
     }
 
     .form-group {
-      margin-bottom: 10px;
+      margin-bottom: 12px;
+      text-align: left;
     }
 
     .form-group label {
       display: block;
-      font-size: 11.5px;
+      font-size: 12px;
       font-weight: 700;
+      color: #334155;
       margin-bottom: 4px;
     }
 
     .form-input, .form-textarea, .form-select {
       width: 100%;
-      padding: 8px;
+      padding: 9px 12px;
       border: 1px solid #cbd5e1;
-      border-radius: 6px;
+      border-radius: 8px;
       font-size: 13px;
+      color: #0f172a;
       outline: none;
+      font-family: inherit;
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 85px;
+    }
+
+    .form-input:focus, .form-textarea:focus {
+      border-color: #f59e0b;
     }
 
     .submit-btn {
       width: 100%;
-      padding: 10px;
-      background: #0284c7;
+      padding: 11px;
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
       color: white;
       border: none;
-      border-radius: 6px;
+      border-radius: 8px;
       font-weight: 700;
+      font-size: 13.5px;
       cursor: pointer;
     }
 
+    .submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    #formStatus {
+      font-size: 12px;
+      font-weight: 600;
+      margin-top: 10px;
+      text-align: center;
+      display: none;
+    }
+
+    /* Footer */
     footer {
       text-align: center;
-      margin-top: 32px;
-      font-size: 12px;
+      margin-top: 36px;
+      padding-top: 20px;
+      border-top: 1px solid var(--gold-border);
       color: var(--text-muted);
+      font-size: 13px;
     }
 
-    .creator-name {
-      color: var(--gold-primary);
+    footer .creator-name {
       font-weight: 800;
+      color: var(--gold-primary);
+      letter-spacing: 0.3px;
     }
 
+    /* Laptop & Desktop Responsive Grid */
     @media (min-width: 900px) {
-      .container { max-width: 1040px; }
-      .header-content { max-width: 1040px; }
+      .container {
+        max-width: 1040px;
+        padding: 0 24px;
+      }
+
+      .header-content {
+        max-width: 1040px;
+      }
+
       .desktop-two-col {
         display: grid;
         grid-template-columns: 320px 1fr;
         gap: 20px;
+        align-items: start;
       }
-      .textbooks-wrapper { grid-template-columns: 1fr; }
+
+      .textbooks-wrapper {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 <body>
 
+  <!-- Header -->
   <header>
     <div class="header-content">
       <div class="emblem-wrapper">
@@ -561,272 +788,24 @@
               <stop offset="50%" stop-color="#f59e0b" />
               <stop offset="100%" stop-color="#b45309" />
             </linearGradient>
+            <linearGradient id="liquidGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.95" />
+              <stop offset="100%" stop-color="#1d4ed8" />
+            </linearGradient>
             <path id="textArcTop" d="M 75, 250 A 175, 175 0 1, 1 425, 250" fill="none" />
             <path id="textArcBottom" d="M 420, 250 A 170, 170 0 0, 1 80, 250" fill="none" />
           </defs>
+
           <circle cx="250" cy="250" r="230" fill="url(#bgGrad)" stroke="url(#goldGrad)" stroke-width="8" />
           <circle cx="250" cy="250" r="182" fill="none" stroke="#38bdf8" stroke-width="3" stroke-dasharray="6, 4" />
           <circle cx="250" cy="250" r="172" fill="#040914" />
+
           <text fill="url(#goldGrad)" font-size="34" font-weight="900" letter-spacing="8">
             <textPath href="#textArcTop" startOffset="50%" text-anchor="middle">LEKKA LAB</textPath>
           </text>
           <text fill="#e2e8f0" font-size="14" font-weight="700" letter-spacing="4">
             <textPath href="#textArcBottom" startOffset="50%" text-anchor="middle">EXPLORE • DISCOVER • EXCEL</textPath>
           </text>
+
           <g transform="translate(0, 10)">
-            <path d="M 232,150 L 268,150 M 236,150 L 236,204 L 165,324 A 24,24 0 0,0 186,360 L 314,360 A 24,24 0 0,0 335,324 L 264,204 L 264,150 M 230,146 L 270,146" fill="none" stroke="#f8fafc" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
-            <text x="250" y="325" fill="#ffffff" font-size="38" font-family="'Times New Roman', serif" font-weight="bold" text-anchor="middle">π</text>
-          </g>
-        </svg>
-      </div>
-
-      <div class="header-text">
-        <h1 class="brand-super-title">LEKKA LAB</h1>
-        <div class="brand-portal-tag">Educational Portal</div>
-        <div class="motto-tag">Explore • Discover • Excel</div>
-        <p class="subtext">Academic Resources & Problem Solver</p>
-      </div>
-    </div>
-  </header>
-
-  <div class="container">
-
-    <!-- Live Search -->
-    <div class="search-box-wrap">
-      <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="11" cy="11" r="8"></circle>
-        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-      </svg>
-      <input type="text" id="liveSearchInput" class="search-input" placeholder="🔍 Search Class 8, 9, 10 PDFs, slip tests, projects..." onkeyup="filterResources()">
-    </div>
-
-    <!-- Responsive Group (Textbooks + Ask Lucky) -->
-    <div class="desktop-two-col">
-      <div class="textbooks-wrapper">
-        <div class="card card-scert">
-          <div class="info">
-            <h2>SCERT Textbooks</h2>
-            <p>Classes 1 - 10 (State Board)</p>
-          </div>
-          <a href="https://scert.telangana.gov.in/e-textbooks" target="_blank" rel="noopener" class="btn-download btn-scert">Visit SCERT</a>
-        </div>
-        <div class="card card-ncert">
-          <div class="info">
-            <h2>NCERT Textbooks</h2>
-            <p>Classes 1 - 12 (CBSE Board)</p>
-          </div>
-          <a href="https://ncert.nic.in/textbook.php" target="_blank" rel="noopener" class="btn-download btn-ncert">Visit NCERT</a>
-        </div>
-      </div>
-
-      <div class="ai-solver-card">
-        <div class="ai-solver-header">
-          <div class="ai-solver-title">
-            <span>Ask Lucky (AI Study Assistant)</span>
-            <span class="ai-badge">Online</span>
-          </div>
-        </div>
-        <textarea id="aiProblemInput" class="ai-input-area" placeholder="Ask anything in Maths, Science, formulas, or concepts..."></textarea>
-        <div class="ai-toolbar">
-          <button type="button" class="btn-icon-attach" onclick="alert('Image upload selected')">📷 Add Image</button>
-          <button type="button" class="btn-ai-solve" onclick="handleSolve()">✨ Ask Lucky</button>
-        </div>
-        <div id="aiSolutionDisplay">
-          <div id="mathRenderedContent"></div>
-        </div>
-      </div>
-    </div>
-
-    <h2 class="section-title">Assessment & Project Resources</h2>
-
-    <!-- Class 10 -->
-    <details class="class-box" open>
-      <summary>Class 10 Mathematics</summary>
-      <div class="class-content">
-        <details class="fa-accordion">
-          <summary>FA - 1 Materials</summary>
-          <div class="file-list">
-            <div class="file-item-row">
-              <span class="file-name-title">Project Work</span>
-              <div class="action-btn-group">
-                <a href="class10-fa1-project.pdf" target="_blank" class="btn-action btn-view">👁️ View</a>
-                <a href="class10-fa1-project.pdf" download class="btn-action btn-dl">📥 Download</a>
-              </div>
-            </div>
-            <div class="file-item-row">
-              <span class="file-name-title">Generating New Problems</span>
-              <div class="action-btn-group">
-                <a href="class10-fa1-generating-new-problem.pdf" target="_blank" class="btn-action btn-view">👁️ View</a>
-                <a href="class10-fa1-generating-new-problem.pdf" download class="btn-action btn-dl">📥 Download</a>
-              </div>
-            </div>
-            <div class="file-item-row">
-              <span class="file-name-title">Slip Test Paper</span>
-              <div class="action-btn-group">
-                <a href="class10-fa1-slip-test.pdf" target="_blank" class="btn-action btn-view">👁️ View</a>
-                <a href="class10-fa1-slip-test.pdf" download class="btn-action btn-dl">📥 Download</a>
-              </div>
-            </div>
-          </div>
-        </details>
-
-        <details class="fa-accordion">
-          <summary>FA - 2 Materials</summary>
-          <div class="file-list">
-            <div class="file-item-row">
-              <span class="file-name-title">Project Work</span>
-              <div class="action-btn-group">
-                <a href="class10-fa2-project.pdf" target="_blank" class="btn-action btn-view">👁️ View</a>
-                <a href="class10-fa2-project.pdf" download class="btn-action btn-dl">📥 Download</a>
-              </div>
-            </div>
-            <div class="file-item-row">
-              <span class="file-name-title">Slip Test Paper</span>
-              <div class="action-btn-group">
-                <a href="class10-fa2-slip-test.pdf" target="_blank" class="btn-action btn-view">👁️ View</a>
-                <a href="class10-fa2-slip-test.pdf" download class="btn-action btn-dl">📥 Download</a>
-              </div>
-            </div>
-          </div>
-        </details>
-      </div>
-    </details>
-
-    <!-- Class 9 -->
-    <details class="class-box">
-      <summary>Class 9 Mathematics</summary>
-      <div class="class-content">
-        <details class="fa-accordion">
-          <summary>FA - 1 Materials</summary>
-          <div class="file-list">
-            <div class="file-item-row">
-              <span class="file-name-title">Project Work</span>
-              <div class="action-btn-group">
-                <a href="class9-fa1-project.pdf" target="_blank" class="btn-action btn-view">👁️ View</a>
-                <a href="class9-fa1-project.pdf" download class="btn-action btn-dl">📥 Download</a>
-              </div>
-            </div>
-            <div class="file-item-row">
-              <span class="file-name-title">Slip Test Paper</span>
-              <div class="action-btn-group">
-                <a href="class9-fa1-slip-test.pdf" target="_blank" class="btn-action btn-view">👁️ View</a>
-                <a href="class9-fa1-slip-test.pdf" download class="btn-action btn-dl">📥 Download</a>
-              </div>
-            </div>
-          </div>
-        </details>
-      </div>
-    </details>
-
-    <!-- Class 8 -->
-    <details class="class-box">
-      <summary>Class 8 Mathematics</summary>
-      <div class="class-content">
-        <details class="fa-accordion">
-          <summary>FA - 1 Materials</summary>
-          <div class="file-list">
-            <div class="file-item-row">
-              <span class="file-name-title">Project Work</span>
-              <div class="action-btn-group">
-                <a href="Class 8 FA1 Project.pdf" target="_blank" class="btn-action btn-view">👁️ View</a>
-                <a href="Class 8 FA1 Project.pdf" download class="btn-action btn-dl">📥 Download</a>
-              </div>
-            </div>
-            <div class="file-item-row">
-              <span class="file-name-title">Slip Test Paper</span>
-              <div class="action-btn-group">
-                <a href="FA-1 Slip Test.pdf" target="_blank" class="btn-action btn-view">👁️ View</a>
-                <a href="FA-1 Slip Test.pdf" download class="btn-action btn-dl">📥 Download</a>
-              </div>
-            </div>
-          </div>
-        </details>
-      </div>
-    </details>
-
-    <!-- Feedback Button -->
-    <div style="text-align: center;">
-      <button type="button" class="feedback-btn" onclick="openFeedbackModal()">💬 Send Feedback / Suggestions</button>
-    </div>
-
-    <!-- Modal -->
-    <div id="feedbackModal" class="modal-backdrop">
-      <div class="modal-card">
-        <div class="modal-head">
-          <h3 style="font-size:16px;">Portal Feedback</h3>
-          <button type="button" class="modal-close" onclick="closeFeedbackModal()">&times;</button>
-        </div>
-        <form onsubmit="handleFeedbackSubmit(event)">
-          <div class="form-group">
-            <label>Your Name</label>
-            <input type="text" class="form-input" required>
-          </div>
-          <div class="form-group">
-            <label>Feedback</label>
-            <textarea class="form-textarea" rows="3" required></textarea>
-          </div>
-          <button type="submit" class="submit-btn">Submit</button>
-        </form>
-      </div>
-    </div>
-
-    <footer>
-      <p>&copy; 2026 Lekka Lab. Dedicated to Excellence in Mathematics.</p>
-      <p style="margin-top: 4px;">Crafted by <span class="creator-name">Hemanth Kalyanapu</span></p>
-    </footer>
-
-  </div>
-
-  <script>
-    function filterResources() {
-      const q = document.getElementById('liveSearchInput').value.toLowerCase().trim();
-      const rows = document.querySelectorAll('.file-item-row');
-      rows.forEach(r => {
-        const title = r.querySelector('.file-name-title').innerText.toLowerCase();
-        if (!q || title.includes(q)) {
-          r.style.display = 'flex';
-          if (q) {
-            let p1 = r.closest('details.fa-accordion'); if(p1) p1.open = true;
-            let p2 = r.closest('details.class-box'); if(p2) p2.open = true;
-          }
-        } else {
-          r.style.display = 'none';
-        }
-      });
-    }
-
-    function openFeedbackModal() { document.getElementById('feedbackModal').style.display = 'flex'; }
-    function closeFeedbackModal() { document.getElementById('feedbackModal').style.display = 'none'; }
-    function handleFeedbackSubmit(e) {
-      e.preventDefault();
-      alert('Thank you for your feedback!');
-      closeFeedbackModal();
-    }
-
-    async function handleSolve() {
-      const text = document.getElementById('aiProblemInput').value.trim();
-      const display = document.getElementById('aiSolutionDisplay');
-      const mathContent = document.getElementById('mathRenderedContent');
-      if (!text) { alert('Please enter a question'); return; }
-
-      display.style.display = 'block';
-      mathContent.innerHTML = '<p style="color: #64748b;">Generating answer...</p>';
-
-      try {
-        const res = await fetch('https://autumn-heart-8840.hemanthkalyanapu.workers.dev', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ prompt: text })
-        });
-        const data = await res.json();
-        mathContent.innerHTML = marked.parse(data.solution || 'No answer');
-        if (window.renderMathInElement) {
-          renderMathInElement(mathContent, { delimiters: [{left: "$", right: "$", display: false}] });
-        }
-      } catch (err) {
-        mathContent.innerHTML = '<p style="color:red;">Error fetching solution.</p>';
-      }
-    }
-  </script>
-</body>
-</html>
+            <path d="M 216,242 L 172,320 A 22,22 0 0,0 191,352 L 
