@@ -547,7 +547,7 @@
       recognition.start();
     }
 
-    // Direct Gemini Universal Solver Engine
+    // Direct Universal AI Engine (Interactions API + GenerateContent Dual Protocol)
     async function handleSolve() {
       const text = document.getElementById('aiProblemInput').value.trim();
       const btn = document.getElementById('btnSolve');
@@ -571,35 +571,72 @@
 - If geometric constructions or diagrams are requested, provide an inline SVG (<svg viewBox="0 0 360 240" ...>).
 - Structure responses cleanly using Markdown headers and bullet points.`;
 
-      const contents = [{
-        role: "user",
-        parts: [{ text: `${systemInstruction}\n\nUser Question: ${text}` }]
-      }];
-
-      if (base64Image) {
-        contents[0].parts.push({
-          inlineData: {
-            mimeType: "image/jpeg",
-            data: base64Image
-          }
-        });
-      }
-
-      // ACTIVE CURRENT GOOGLE MODELS
-      const models = [
-        "gemini-3.5-flash-lite",
-        "gemini-3.8-flash",
-        "gemini-3.5-flash"
-      ];
+      const promptInput = `${systemInstruction}\n\nUser Question: ${text}`;
       let rawAnswer = null;
       let lastError = "Request failed";
 
+      // Models explicitly recommended by Google
+      const targetModels = [
+        "gemini-3.5-flash-lite",
+        "gemini-3.8-flash"
+      ];
+
       outerLoop: for (const apiKey of shuffledKeys) {
-        for (const model of models) {
-          // Method 1: Strict Header Auth (no ?key= in url)
+        for (const model of targetModels) {
+          
+          // PROTOCOL 1: Google Interactions API (Mandated by Google for new users)
           try {
-            const endpointNoKey = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
-            const res = await fetch(endpointNoKey, {
+            const interactionsEndpoint = `https://generativelanguage.googleapis.com/v1beta/interactions`;
+            const payload = {
+              model: model,
+              input: promptInput
+            };
+
+            const res = await fetch(interactionsEndpoint, {
+              method: "POST",
+              headers: { 
+                "Content-Type": "application/json",
+                "x-goog-api-key": apiKey
+              },
+              body: JSON.stringify(payload)
+            });
+
+            const data = await res.json();
+            if (data.output_text) {
+              rawAnswer = data.output_text;
+              break outerLoop;
+            } else if (data.steps && data.steps.length > 0) {
+              for (const s of data.steps) {
+                if (s.output_text) { rawAnswer = s.output_text; break outerLoop; }
+              }
+            } else if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
+              rawAnswer = data.candidates[0].content.parts[0].text;
+              break outerLoop;
+            } else if (data.error) {
+              lastError = data.error.message || lastError;
+            }
+          } catch (e) {
+            lastError = e.message;
+          }
+
+          // PROTOCOL 2: GenerateContent API with current 3.x models
+          try {
+            const gcEndpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
+            const contents = [{
+              role: "user",
+              parts: [{ text: promptInput }]
+            }];
+
+            if (base64Image) {
+              contents[0].parts.push({
+                inlineData: {
+                  mimeType: "image/jpeg",
+                  data: base64Image
+                }
+              });
+            }
+
+            const res = await fetch(gcEndpoint, {
               method: "POST",
               headers: { 
                 "Content-Type": "application/json",
@@ -613,31 +650,12 @@
               rawAnswer = data.candidates[0].content.parts[0].text;
               break outerLoop;
             } else if (data.error) {
-              lastError = data.error.message;
+              lastError = data.error.message || lastError;
             }
-          } catch (err) {
-            lastError = err.message;
+          } catch (e) {
+            lastError = e.message;
           }
 
-          // Method 2: Query param fallback
-          try {
-            const endpointWithKey = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
-            const res = await fetch(endpointWithKey, {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ contents: contents })
-            });
-
-            const data = await res.json();
-            if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
-              rawAnswer = data.candidates[0].content.parts[0].text;
-              break outerLoop;
-            } else if (data.error) {
-              lastError = data.error.message;
-            }
-          } catch (err) {
-            lastError = err.message;
-          }
         }
       }
 
