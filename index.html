@@ -85,7 +85,7 @@
       box-shadow: 0 2px 4px rgba(0,0,0,0.02);
     }
 
-    /* Input area */
+    /* Input Area */
     .input-row {
       display: flex;
       gap: 8px;
@@ -163,7 +163,7 @@
       <!-- Chat History Screen -->
       <div class="chat-container" id="chatContainer">
         <div class="chat-msg assistant">
-          నమస్కారం! నేను <b>Lucky</b>, మీ గణిత సహచరుడిని. సిద్ధాంతాలు, సమస్యలు లేదా రేఖాగణిత పటాల గురించి నన్ను ఏదైనా అడగండి!
+          Hello! I am <b>Lucky</b>, your mathematics learning assistant. Ask me any theorems, problems, proofs, or geometric concepts!
         </div>
       </div>
 
@@ -253,9 +253,7 @@
   </div>
 
   <script>
-    // ========================================================
     // Base64 Encoded Keys (Bypasses GitHub Secret Scanning)
-    // ========================================================
     const ENCODED_KEYS = [
       "QVEuQWI4Uk42S1VlRFY4Wm1aeVIyMEJQWVd0Nk45SGdHTWFCOHdMX1ZBLXFCVS04OU1MYVE=",
       "QVEuQWI4Uk42Sl9xTWlYaGt5cnp3VWxmZEo0cUFGTUdqT1lGaktJZ2pIU2l1ckRtdmxoS2c=",
@@ -268,10 +266,7 @@
       "QVEuQWI4Uk42SmFMbFdZNWxBeVkxckdBdjF0QlJ2b1VYQnhLOTVXZDlVdno5RExuRTdBUVE="
     ];
 
-    // Decode keys at runtime in the browser
     const DIRECT_GEMINI_KEYS = ENCODED_KEYS.map(k => atob(k));
-
-    // Multi-turn conversation history
     let conversationHistory = [];
     let base64Image = null;
 
@@ -303,7 +298,7 @@
       conversationHistory = [];
       document.getElementById('chatContainer').innerHTML = `
         <div class="chat-msg assistant">
-          చాట్ రీసెట్ చేయబడింది. మీరు కొత్త గణిత ప్రశ్నను నన్ను అడగవచ్చు!
+          Chat cleared. You can ask a new mathematics question!
         </div>
       `;
     }
@@ -340,16 +335,14 @@
 
       if (!query && !base64Image) return;
 
-      // User Bubble
       const userBubble = document.createElement('div');
       userBubble.className = "chat-msg user";
       userBubble.innerText = query || "[Uploaded Image]";
       chatContainer.appendChild(userBubble);
 
-      // AI Bubble Placeholder
       const botBubble = document.createElement('div');
       botBubble.className = "chat-msg assistant";
-      botBubble.innerHTML = `<em>ఆలోచిస్తోంది...</em>`;
+      botBubble.innerHTML = `<em>Thinking...</em>`;
       chatContainer.appendChild(botBubble);
       chatContainer.scrollTop = chatContainer.scrollHeight;
 
@@ -395,9 +388,8 @@ CRITICAL INSTRUCTIONS:
    - Use $...$ inline, $$...$$ standalone.
    - Use commands: \\neq, \\pm, \\leq, \\geq, \\times, \\to, \\parallel.
 
-4. MULTI-LANGUAGE:
-   - Telugu queries or "in telugu" -> Respond 100% in pure, concise Telugu.
-   - English topics -> Direct, structured academic English.`;
+4. LANGUAGE:
+   - Provide direct, clear, structured academic English.`;
 
       const contents = [
         { role: "user", parts: [{ text: systemInstruction }] },
@@ -405,7 +397,9 @@ CRITICAL INSTRUCTIONS:
       ];
 
       const shuffledKeys = [...DIRECT_GEMINI_KEYS].sort(() => 0.5 - Math.random());
-      const models = ["gemini-2.5-flash", "gemini-2.0-flash"];
+      
+      // Active Gemini models
+      const models = ["gemini-2.5-flash", "gemini-2.5-pro"];
       let rawAnswer = null;
       let lastError = "Request failed";
 
