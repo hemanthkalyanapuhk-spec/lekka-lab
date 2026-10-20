@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lekka Lab - Mathematics Portal</title>
   
-  <!-- Math & Markdown Rendering Libraries -->
+  <!-- Math & Markdown Libraries -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
@@ -13,313 +13,225 @@
 
   <style>
     :root {
-      --primary: #1e3a8a;
-      --primary-light: #2563eb;
-      --secondary: #f59e0b;
-      --bg: #f1f5f9;
+      --primary: #002b66;
+      --accent: #e65100;
+      --bg: #f4f7fa;
       --card-bg: #ffffff;
-      --text-main: #0f172a;
-      --text-muted: #64748b;
-      --border-color: #e2e8f0;
-      --shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+      --text: #1a202c;
+      --border: #e2e8f0;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    body { background-color: var(--bg); color: var(--text-main); padding-bottom: 60px; line-height: 1.5; }
+    body { background-color: var(--bg); color: var(--text); padding-bottom: 50px; }
 
-    /* Header with SVG Logo */
     header {
-      background: linear-gradient(135deg, #091e42 0%, #1e3a8a 50%, #172554 100%);
+      background: linear-gradient(135deg, #091e42 0%, #002b66 100%);
       color: #fff;
-      padding: 32px 20px;
+      padding: 24px 16px;
       text-align: center;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-      position: relative;
     }
-    .header-content {
+    .header-box {
       max-width: 900px;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 10px;
+      gap: 6px;
     }
-    .brand-logo-wrap {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      justify-content: center;
-    }
-    .brand-svg-icon {
-      width: 44px;
-      height: 44px;
-      filter: drop-shadow(0 2px 8px rgba(245, 158, 11, 0.5));
-    }
-    header h1 {
-      font-size: 2.2rem;
-      font-weight: 900;
-      letter-spacing: 1.5px;
-      background: linear-gradient(to right, #ffffff, #fef08a);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    .brand-title {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: #fff;
     }
     header p {
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       color: #cbd5e1;
-      letter-spacing: 0.5px;
+      font-style: italic;
     }
 
-    .container { max-width: 900px; margin: 24px auto; padding: 0 16px; }
+    .container { max-width: 900px; margin: 18px auto; padding: 0 14px; }
 
-    /* Modern AI Chat Card */
+    /* AI Section - Classic Original Styling */
     .ai-card {
       background: var(--card-bg);
-      border-radius: 20px;
-      padding: 24px;
-      box-shadow: var(--shadow);
-      border: 1px solid #e0e7ff;
-      margin-bottom: 35px;
+      border-radius: 14px;
+      padding: 18px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+      border: 1.5px solid #fef08a;
+      margin-bottom: 24px;
     }
     .ai-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 16px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 12px;
     }
     .ai-header h2 {
-      font-size: 1.25rem;
+      font-size: 1.15rem;
       color: #0f172a;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 800;
+      font-weight: 700;
     }
     .online-badge {
-      background: #10b981;
+      background: #16a34a;
       color: #fff;
-      font-size: 0.75rem;
-      padding: 4px 12px;
-      border-radius: 999px;
+      font-size: 0.72rem;
+      padding: 3px 10px;
+      border-radius: 20px;
       font-weight: 700;
       letter-spacing: 0.5px;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .online-badge::before {
-      content: "";
-      width: 6px;
-      height: 6px;
-      background: #fff;
-      border-radius: 50%;
-      animation: pulse 1.5s infinite;
-    }
-    @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
-
-    /* Chat Messages Box */
-    .chat-container {
-      max-height: 440px;
-      overflow-y: auto;
-      padding: 16px;
-      background: #f8fafc;
-      border: 1.5px solid var(--border-color);
-      border-radius: 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      margin-bottom: 16px;
     }
 
-    .chat-msg {
-      padding: 14px 18px;
-      border-radius: 16px;
-      line-height: 1.6;
-      font-size: 0.95rem;
-      max-width: 88%;
-      word-break: break-word;
-    }
-    .chat-msg.user {
-      align-self: flex-end;
-      background: linear-gradient(135deg, #1e3a8a, #2563eb);
-      color: #ffffff;
-      border-bottom-right-radius: 4px;
-      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
-    }
-    .chat-msg.assistant {
-      align-self: flex-start;
-      background: #ffffff;
-      color: #0f172a;
-      border: 1px solid var(--border-color);
-      border-bottom-left-radius: 4px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-    }
-
-    /* Input area */
-    .input-row { display: flex; gap: 10px; }
     textarea {
-      flex: 1;
-      height: 54px;
-      padding: 14px 16px;
-      border: 1.5px solid var(--border-color);
-      border-radius: 12px;
+      width: 100%;
+      height: 80px;
+      padding: 12px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
       font-size: 0.95rem;
-      resize: none;
+      resize: vertical;
       outline: none;
-      transition: all 0.2s ease;
       background: #fff;
     }
-    textarea:focus {
-      border-color: var(--primary-light);
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
-    }
+    textarea:focus { border-color: #2563eb; }
 
-    .ai-controls { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+    .ai-controls {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
     .btn {
-      padding: 10px 18px;
+      padding: 9px 15px;
       border: none;
-      border-radius: 10px;
+      border-radius: 8px;
       font-weight: 600;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 6px;
-      transition: all 0.2s ease;
+      gap: 5px;
+      transition: 0.2s ease;
     }
-    .btn-solve {
-      background: linear-gradient(135deg, #1e3a8a, #2563eb);
-      color: #fff;
-      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
-    }
-    .btn-solve:hover { background: #172554; }
-    .btn-secondary {
-      background: #fff;
-      color: #334155;
-      border: 1.5px solid var(--border-color);
-    }
-    .btn-secondary:hover { background: #f8fafc; border-color: #cbd5e1; }
+    .btn-solve { background: #002b66; color: #fff; }
+    .btn-solve:hover { background: #001f4d; }
+    .btn-secondary { background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; }
+    .btn-secondary:hover { background: #e2e8f0; }
 
-    /* Accordion Resources */
-    .section-title {
-      font-size: 1.15rem;
-      font-weight: 800;
-      margin: 32px 0 16px;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-      color: #0f172a;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+    .solution-box {
+      margin-top: 16px;
+      padding: 16px;
+      background: #ffffff;
+      border-radius: 10px;
+      border: 1.5px solid #e2e8f0;
+      display: none;
+      line-height: 1.6;
+      font-size: 0.95rem;
     }
-    .accordion { margin-bottom: 14px; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color); background: #fff; }
+
+    /* 36 PDFs Table Section - Safe Responsive Layout */
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      margin: 24px 0 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #0f172a;
+    }
+    .accordion {
+      margin-bottom: 12px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: #fff;
+    }
     .accordion-btn {
       width: 100%;
-      padding: 16px 20px;
-      background: #0f172a;
+      padding: 14px 18px;
+      background: #091e42;
       color: #fff;
       border: none;
       text-align: left;
-      font-size: 1.05rem;
+      font-size: 1rem;
       font-weight: 700;
       display: flex;
       justify-content: space-between;
-      align-items: center;
       cursor: pointer;
-      transition: background 0.2s ease;
     }
-    .accordion-btn:hover { background: #1e293b; }
-    .accordion-content { background: #fff; padding: 18px; display: none; }
+    .accordion-content {
+      padding: 12px;
+      display: block;
+    }
     
-    .table-container { overflow-x: auto; }
-    table { width: 100%; border-collapse: collapse; min-width: 520px; }
-    th, td { padding: 12px 16px; border: 1px solid var(--border-color); text-align: left; font-size: 0.92rem; }
-    th { background: #f8fafc; color: #475569; font-weight: 700; }
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 540px;
+    }
+    th, td {
+      padding: 10px 12px;
+      border: 1px solid #e2e8f0;
+      text-align: left;
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+    th { background: #f8fafc; color: #334155; font-weight: 700; }
     td a {
-      color: #2563eb;
+      color: #002b66;
       text-decoration: none;
       font-weight: 600;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      background: #eff6ff;
-      padding: 6px 12px;
-      border-radius: 6px;
-      border: 1px solid #bfdbfe;
-      transition: all 0.2s ease;
+      display: inline-block;
+      padding: 4px 8px;
+      background: #f1f5f9;
+      border-radius: 4px;
+      border: 1px solid #cbd5e1;
     }
-    td a:hover {
-      background: #dbeafe;
-      border-color: #93c5fd;
-    }
+    td a:hover { background: #e2e8f0; text-decoration: underline; }
   </style>
 </head>
 <body>
 
   <header>
-    <div class="header-content">
-      <div class="brand-logo-wrap">
-        <!-- Mathematics Emblem SVG Logo -->
-        <svg class="brand-svg-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="50" cy="50" r="48" fill="#1e3a8a" stroke="#f59e0b" stroke-width="4"/>
-          <!-- Compass & Math Geometry lines -->
-          <path d="M50 20 L75 80 M50 20 L25 80" stroke="#fef08a" stroke-width="4" stroke-linecap="round"/>
-          <path d="M33 60 L67 60" stroke="#f59e0b" stroke-width="4" stroke-linecap="round"/>
-          <circle cx="50" cy="20" r="5" fill="#f59e0b"/>
-          <text x="50" y="88" fill="#ffffff" font-size="12" font-weight="bold" text-anchor="middle" font-family="sans-serif">π • ∑ • √</text>
-        </svg>
-        <h1>LEKKA LAB</h1>
-      </div>
+    <div class="header-box">
+      <div class="brand-title">LEKKA LAB</div>
       <p>Explore • Discover • Excel | High School Mathematics Portal</p>
     </div>
   </header>
 
   <div class="container">
-    <!-- Interactive Lucky Assistant -->
+    <!-- Classic AI Assistant Card -->
     <div class="ai-card">
       <div class="ai-header">
-        <h2>
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
-          </svg>
-          Ask Lucky (AI Math Tutor)
-        </h2>
+        <h2>Ask Lucky (AI Math Tutor)</h2>
         <span class="online-badge">ONLINE</span>
       </div>
-
-      <!-- Chat History Screen -->
-      <div class="chat-container" id="chatContainer">
-        <div class="chat-msg assistant">
-          Hello! I am <b>Lucky</b>, your mathematics learning assistant. Ask me any theorems, problems, proofs, or geometric concepts!
-        </div>
-      </div>
-
-      <div class="input-row">
-        <textarea id="aiProblemInput" placeholder="Ask math question or theorem (e.g., State and prove BPT, Pythagoras theorem)..." onkeydown="handleEnter(event)"></textarea>
-      </div>
-
+      
+      <textarea id="aiProblemInput" placeholder="Enter math theorem, problem, or topic (e.g., BPT theorem, prove Pythagoras theorem)..."></textarea>
+      
       <div class="ai-controls">
-        <button class="btn btn-solve" id="btnSolve" onclick="sendMessage()">✨ Send</button>
+        <button class="btn btn-solve" id="btnSolve" onclick="handleSolve()">✨ Ask Lucky</button>
         <button class="btn btn-secondary" id="btnVoice" onclick="toggleVoiceSearch()">🎙️ Voice Search</button>
         <label class="btn btn-secondary">
           📷 Image
           <input type="file" id="imageInput" accept="image/*" style="display:none;" onchange="handleImage(event)">
         </label>
-        <button class="btn btn-secondary" onclick="clearChat()">🗑️ Reset Chat</button>
+        <button class="btn btn-secondary" onclick="clearResults()">🗑️ Clear</button>
+      </div>
+
+      <div class="solution-box" id="aiSolutionDisplay">
+        <div id="mathRenderedContent"></div>
       </div>
     </div>
 
     <!-- 36 Assessment & Project PDF Files -->
-    <h3 class="section-title">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1e3a8a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-        <polyline points="14 2 14 8 20 8"></polyline>
-      </svg>
-      Assessment & Project Resources (36 PDFs)
-    </h3>
+    <h3 class="section-title">Assessment & Project Resources (36 PDFs)</h3>
 
-    <!-- Class 10 (12 PDFs) -->
+    <!-- Class 10 -->
     <div class="accordion">
       <button class="accordion-btn" onclick="toggleAccordion('c10')">
         Class 10 Mathematics <span>▼</span>
@@ -341,7 +253,7 @@
       </div>
     </div>
 
-    <!-- Class 9 (12 PDFs) -->
+    <!-- Class 9 -->
     <div class="accordion">
       <button class="accordion-btn" onclick="toggleAccordion('c9')">
         Class 9 Mathematics <span>▼</span>
@@ -363,7 +275,7 @@
       </div>
     </div>
 
-    <!-- Class 8 (12 PDFs) -->
+    <!-- Class 8 -->
     <div class="accordion">
       <button class="accordion-btn" onclick="toggleAccordion('c8')">
         Class 8 Mathematics <span>▼</span>
@@ -401,40 +313,27 @@
     ];
 
     const DIRECT_GEMINI_KEYS = ENCODED_KEYS.map(k => atob(k));
-    let conversationHistory = [];
     let base64Image = null;
-
-    function handleEnter(e) {
-      if (e.key === "Enter" && !e.shiftKey) {
-        e.preventDefault();
-        sendMessage();
-      }
-    }
 
     function handleImage(e) {
       const file = e.target.files[0];
       if (file) {
         const reader = new FileReader();
-        reader.onload = () => { 
-          base64Image = reader.result.split(',')[1]; 
-          alert("Image uploaded! Type your math question and click Send.");
-        };
+        reader.onload = () => { base64Image = reader.result.split(',')[1]; };
         reader.readAsDataURL(file);
       }
     }
 
     function toggleAccordion(id) {
       const el = document.getElementById(id);
-      el.style.display = (el.style.display === "block") ? "none" : "block";
+      el.style.display = (el.style.display === "none") ? "block" : "none";
     }
 
-    function clearChat() {
-      conversationHistory = [];
-      document.getElementById('chatContainer').innerHTML = `
-        <div class="chat-msg assistant">
-          Chat cleared. You can ask a new mathematics question!
-        </div>
-      `;
+    function clearResults() {
+      document.getElementById('aiProblemInput').value = '';
+      document.getElementById('aiSolutionDisplay').style.display = 'none';
+      document.getElementById('mathRenderedContent').innerHTML = '';
+      base64Image = null;
     }
 
     // Voice Search
@@ -453,68 +352,44 @@
       recognition.onresult = (event) => {
         document.getElementById('aiProblemInput').value = event.results[0][0].transcript;
         btn.innerText = "🎙️ Voice Search";
-        sendMessage();
+        handleSolve();
       };
       recognition.onerror = () => { btn.innerText = "🎙️ Voice Search"; };
       recognition.onend = () => { btn.innerText = "🎙️ Voice Search"; };
       recognition.start();
     }
 
-    // Main Chat Execution
-    async function sendMessage() {
-      const input = document.getElementById('aiProblemInput');
-      const query = input.value.trim();
+    // Direct Gemini Solver Engine
+    async function handleSolve() {
+      const text = document.getElementById('aiProblemInput').value.trim();
       const btn = document.getElementById('btnSolve');
-      const chatContainer = document.getElementById('chatContainer');
+      const display = document.getElementById('aiSolutionDisplay');
+      const mathContent = document.getElementById('mathRenderedContent');
 
-      if (!query && !base64Image) return;
-
-      const userBubble = document.createElement('div');
-      userBubble.className = "chat-msg user";
-      userBubble.innerText = query || "[Uploaded Image]";
-      chatContainer.appendChild(userBubble);
-
-      const botBubble = document.createElement('div');
-      botBubble.className = "chat-msg assistant";
-      botBubble.innerHTML = `<em>Thinking...</em>`;
-      chatContainer.appendChild(botBubble);
-      chatContainer.scrollTop = chatContainer.scrollHeight;
-
-      input.value = "";
-      btn.disabled = true;
-
-      const currentParts = [{ text: query }];
-      if (base64Image) {
-        currentParts.push({
-          inlineData: {
-            mimeType: "image/jpeg",
-            data: base64Image
-          }
-        });
-        base64Image = null;
+      if (!text && !base64Image) {
+        alert('Please enter a question or upload an image.');
+        return;
       }
 
-      conversationHistory.push({
-        role: "user",
-        parts: currentParts
-      });
+      display.style.display = 'block';
+      mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">Calculating solution...</p>';
+      btn.disabled = true;
+
+      const shuffledKeys = [...DIRECT_GEMINI_KEYS].sort(() => 0.5 - Math.random());
 
       const systemInstruction = `You are "Lucky", the premier educational AI for Lekka Lab.
+
 CRITICAL INSTRUCTIONS:
 1. START DIRECTLY:
    - Line 1 MUST be: ### **[Topic Title]**
    - Line 2 MUST be the primary formula or law inside $$...$$.
-   - NO introductory chatter, no conversational filler. Direct step-by-step points.
+   - Give direct step-by-step points.
 
-2. COLOURFUL & FULLY LABELED INLINE SVG (MANDATORY FOR GEOMETRY):
+2. COLOURFUL & FULLY LABELED INLINE SVG (FOR GEOMETRY):
    - Whenever drawing geometry or diagrams, generate an inline SVG:
-     <svg viewBox="0 0 360 240" width="100%" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; border-radius:12px; margin:16px 0; border:1.5px solid #cbd5e1; box-shadow:0 4px 12px rgba(0,0,0,0.05);">
-   - Use high-contrast colors:
-     * Main lines: stroke="#2563eb" stroke-width="2.5"
-     * Construction lines: stroke="#ef4444" stroke-dasharray="4,4" stroke-width="2"
-     * Fills/Partitions: fill="#eff6ff" or fill="#fef3c7"
-     * Points: circle r="4" fill="#0f172a"
-   - EVERY vertex (A, B, C, D, E, P, O) and dimension MUST be labeled INSIDE the SVG using:
+     <svg viewBox="0 0 360 240" width="100%" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; border-radius:12px; margin:14px 0; border:1px solid #cbd5e1;">
+   - High-contrast lines: stroke="#002b66" stroke-width="2.5", construction stroke="#ef4444" stroke-dasharray="4,4"
+   - Every vertex (A, B, C) MUST be labeled INSIDE the SVG using:
      <text x=".." y=".." font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">A</text>
    - NEVER output coordinates or labels outside the </svg> block.
 
@@ -525,24 +400,27 @@ CRITICAL INSTRUCTIONS:
 4. LANGUAGE:
    - Provide direct, clear, structured academic English.`;
 
-      const contents = [
-        { role: "user", parts: [{ text: systemInstruction }] },
-        ...conversationHistory
-      ];
+      const contents = [{
+        role: "user",
+        parts: [{ text: `${systemInstruction}\n\nQuery: ${text}` }]
+      }];
 
-      const shuffledKeys = [...DIRECT_GEMINI_KEYS].sort(() => 0.5 - Math.random());
-      
-      // Standard models pool: Primary stable models
-      const models = [
-        "gemini-2.5-flash",
-        "gemini-1.5-flash",
-        "gemini-1.5-pro"
-      ];
+      if (base64Image) {
+        contents[0].parts.push({
+          inlineData: {
+            mimeType: "image/jpeg",
+            data: base64Image
+          }
+        });
+      }
+
+      // Valid current models only
+      const targetModels = ["gemini-2.5-flash", "gemini-2.5-flash-lite"];
       let rawAnswer = null;
       let lastError = "Request failed";
 
       outerLoop: for (const apiKey of shuffledKeys) {
-        for (const model of models) {
+        for (const model of targetModels) {
           try {
             const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
             const res = await fetch(endpoint, {
@@ -572,15 +450,10 @@ CRITICAL INSTRUCTIONS:
       }
 
       if (!rawAnswer) {
-        botBubble.innerHTML = `<p style="color: #ef4444; font-weight: 700;">Error: ${lastError}</p>`;
+        mathContent.innerHTML = `<p style="color: #ef4444; font-weight: 700;">Error: ${lastError}</p>`;
         btn.disabled = false;
         return;
       }
-
-      conversationHistory.push({
-        role: "model",
-        parts: [{ text: rawAnswer }]
-      });
 
       let cleanOutput = rawAnswer
         .replace(/\u2260/g, ' \\neq ')
@@ -598,10 +471,10 @@ CRITICAL INSTRUCTIONS:
         .replace(/([^\n])(####|###)/g, '$1\n\n$2')
         .replace(/\$\$\s*([^\$]+)\s*\$\$/g, '\n\n$$$ $1 $$$ \n\n');
 
-      botBubble.innerHTML = marked.parse(cleanOutput);
+      mathContent.innerHTML = marked.parse(cleanOutput);
 
       if (window.renderMathInElement) {
-        renderMathInElement(botBubble, {
+        renderMathInElement(mathContent, {
           delimiters: [
             { left: '$$', right: '$$', display: true },
             { left: '$', right: '$', display: false },
@@ -612,7 +485,6 @@ CRITICAL INSTRUCTIONS:
         });
       }
 
-      chatContainer.scrollTop = chatContainer.scrollHeight;
       btn.disabled = false;
     }
   </script>
