@@ -291,7 +291,7 @@
       </div>
     </div>
 
-    <!-- 36 Assessment & Project PDF Files (Exact Matching File Names) -->
+    <!-- 36 Assessment & Project PDF Files -->
     <h3 class="section-title">Assessment & Project Resources (36 PDFs)</h3>
 
     <!-- Class 10 -->
@@ -437,9 +437,7 @@
   </div>
 
   <script>
-    // ==========================================
-    // 10 GEMINI API KEYS (Base64 Encoded)
-    // ==========================================
+    // 10 GEMINI API KEYS (Decoded at runtime)
     const ENCODED_KEYS = [
       "QVEuQWI4Uk42SjNjb1IyOUVkLTczUVBSN2ZFaFVMcnhVMUQyVnZYLUZ3V0M5SHQ4NmF4Unc=",
       "QVEuQWI4Uk42S1VlRFY4Wm1aeVIyMEJQWVd0Nk45SGdHTWFCOHdMX1ZBLXFCVS04OU1MYVE=",
@@ -456,9 +454,9 @@
     const DIRECT_GEMINI_KEYS = ENCODED_KEYS.map(k => atob(k));
     let base64Image = null;
 
-    // Local Visitor Counter
+    // Visitor Counter
     (function initCounter() {
-      let count = parseInt(localStorage.getItem('lekka_visits') || '1848', 10);
+      let count = parseInt(localStorage.getItem('lekka_visits') || '1855', 10);
       count += 1;
       localStorage.setItem('lekka_visits', count);
       document.getElementById('visitorCount').innerText = count.toLocaleString();
@@ -587,28 +585,27 @@
         });
       }
 
-      const models = ["gemini-2.5-flash", "gemini-2.5-flash-lite"];
+      // ACTIVE CURRENT GOOGLE MODELS
+      const models = [
+        "gemini-3.5-flash-lite",
+        "gemini-3.8-flash",
+        "gemini-3.5-flash"
+      ];
       let rawAnswer = null;
       let lastError = "Request failed";
 
       outerLoop: for (const apiKey of shuffledKeys) {
         for (const model of models) {
+          // Method 1: Strict Header Auth (no ?key= in url)
           try {
-            // Standard direct endpoint passing key in URL query parameter
-            const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
-            
-            const res = await fetch(endpoint, {
+            const endpointNoKey = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
+            const res = await fetch(endpointNoKey, {
               method: "POST",
               headers: { 
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "x-goog-api-key": apiKey
               },
-              body: JSON.stringify({
-                contents: contents,
-                generationConfig: {
-                  temperature: 0.2,
-                  maxOutputTokens: 2500
-                }
-              })
+              body: JSON.stringify({ contents: contents })
             });
 
             const data = await res.json();
@@ -616,8 +613,27 @@
               rawAnswer = data.candidates[0].content.parts[0].text;
               break outerLoop;
             } else if (data.error) {
-              lastError = data.error.message || "Model error";
-              continue;
+              lastError = data.error.message;
+            }
+          } catch (err) {
+            lastError = err.message;
+          }
+
+          // Method 2: Query param fallback
+          try {
+            const endpointWithKey = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+            const res = await fetch(endpointWithKey, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ contents: contents })
+            });
+
+            const data = await res.json();
+            if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
+              rawAnswer = data.candidates[0].content.parts[0].text;
+              break outerLoop;
+            } else if (data.error) {
+              lastError = data.error.message;
             }
           } catch (err) {
             lastError = err.message;
