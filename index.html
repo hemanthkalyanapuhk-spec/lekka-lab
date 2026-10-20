@@ -274,10 +274,10 @@
         <span class="online-badge">ONLINE</span>
       </div>
       
-      <textarea id="aiProblemInput" placeholder="Ask anything... Science, Math, GK, History, Geography, Essay writing, or translations!"></textarea>
+      <textarea id="aiProblemInput" placeholder="Ask anything... Science, Math, GK, Current Affairs, History, Recipes, or General Questions!"></textarea>
       
       <div class="ai-controls">
-        <button class="btn btn-solve" id="btnSolve" onclick="handleSolve()">⚡ Ask Lucky</button>
+        <button class="btn btn-solve" id="btnSolve" onclick="handleSolve()">✨ Ask Lucky</button>
         <button class="btn btn-secondary" id="btnVoice" onclick="toggleVoiceSearch()">🎙️ Voice Search</button>
         <label class="btn btn-secondary">
           📷 Image
@@ -547,7 +547,7 @@
       recognition.start();
     }
 
-    // Direct High-Speed Interactions Engine
+    // Direct Universal AI Engine (Interactions API - Pure & Uncut)
     async function handleSolve() {
       const text = document.getElementById('aiProblemInput').value.trim();
       const btn = document.getElementById('btnSolve');
@@ -560,22 +560,21 @@
       }
 
       display.style.display = 'block';
-      mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">⚡ Generating answer...</p>';
+      mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">Thinking and fetching response...</p>';
       btn.disabled = true;
 
       const shuffledKeys = [...DIRECT_GEMINI_KEYS].sort(() => 0.5 - Math.random());
 
-      const systemInstruction = `You are "Lucky", a fast universal educational AI assistant for Lekka Lab.
-- Provide direct, structured answers with headings and bullet points.
+      const systemInstruction = `You are "Lucky", a helpful universal educational AI assistant for Lekka Lab.
+- Provide direct, structured, and informative answers with clear headings and bullet points.
 - If math or physics formulas are needed, use LaTeX ($..$ inline, $$..$$ standalone).
 - If geometric constructions or diagrams are requested, provide an inline SVG (<svg viewBox="0 0 360 220" ...>).
-- Be concise and clear to ensure high-speed delivery.`;
+- Give complete and accurate answers for general queries, recipes, coding, and science.`;
 
       const promptInput = `${systemInstruction}\n\nUser Question: ${text}`;
       let rawAnswer = null;
       let lastError = "Request failed";
 
-      // The exact Google Interactions endpoint that succeeded in previous response
       const endpoint = `https://generativelanguage.googleapis.com/v1beta/interactions`;
 
       for (const apiKey of shuffledKeys) {
@@ -598,7 +597,10 @@
             break;
           } else if (data.steps && data.steps.length > 0) {
             for (const s of data.steps) {
-              if (s.output_text) { rawAnswer = s.output_text; break; }
+              if (s.output_text) { 
+                rawAnswer = s.output_text; 
+                break; 
+              }
             }
             if (rawAnswer) break;
           } else if (data.error) {
