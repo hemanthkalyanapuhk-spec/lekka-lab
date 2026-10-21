@@ -157,10 +157,7 @@
       align-items: center;
       gap: 8px;
     }
-    .ai-header h2::before {
-      content: "✦";
-      color: var(--gold-primary);
-    }
+    .ai-header h2::before { content: "✦"; color: var(--gold-primary); }
     .online-badge { 
       background: rgba(22, 163, 74, 0.15); 
       color: #4ade80; 
@@ -191,7 +188,6 @@
     }
     textarea::placeholder { color: #64748b; }
 
-    /* Visual Image Preview */
     .image-preview-container {
       display: none;
       margin-top: 12px;
@@ -244,21 +240,14 @@
       color: #030b17; 
       box-shadow: 0 4px 15px rgba(212, 175, 55, 0.35);
     }
-    .btn-solve:hover { 
-      transform: translateY(-1px);
-      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5);
-    }
+    .btn-solve:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5); }
     .btn-secondary { 
       background: rgba(19, 58, 104, 0.6); 
       color: #f1f5f9; 
       border: 1px solid rgba(212, 175, 55, 0.25); 
     }
-    .btn-secondary:hover { 
-      background: rgba(19, 58, 104, 0.9); 
-      border-color: var(--gold-primary);
-    }
+    .btn-secondary:hover { background: rgba(19, 58, 104, 0.9); border-color: var(--gold-primary); }
 
-    /* Production-Grade Solution Box */
     .solution-box {
       min-width: 0;
       width: 100%;
@@ -578,7 +567,6 @@
     }
     .fb-entry b { color: #fde047; }
 
-    /* Royal Footer with Calligraphy Signature */
     footer {
       margin-top: 45px;
       background: linear-gradient(180deg, rgba(11, 37, 69, 0.85) 0%, #030b17 100%);
@@ -640,7 +628,6 @@
 </head>
 <body>
 
-  <!-- Royal 3D High-Impact Header -->
   <header>
     <div class="header-box">
       <div class="brand-overhead-crest">✦ &nbsp; MATHEMATICS &amp; SCIENCE LEARNING HUB &nbsp; ✦</div>
@@ -657,7 +644,7 @@
         <span class="online-badge">ONLINE</span>
       </div>
       
-      <textarea id="aiProblemInput" placeholder="Ask anything... Photosynthesis equation, Pythagoras, BPT, Periodic Table, MCQs!"></textarea>
+      <textarea id="aiProblemInput" placeholder="Ask anything in English, Telugu (తెలుగు), or any language... Theorems, Equations, Diagrams, or General Topics!"></textarea>
       
       <div class="image-preview-container" id="imagePreviewContainer">
         <img id="imagePreview" src="" alt="Captured problem preview">
@@ -687,7 +674,7 @@
       </div>
     </div>
 
-    <!-- 36 Assessment & Project PDF Files (Exact Unaltered Relative Paths) -->
+    <!-- 36 Assessment & Project PDF Files (100% Unaltered Relative Paths) -->
     <h3 class="section-title">Assessment & Project Resources (36 PDFs)</h3>
 
     <!-- Class 10 -->
@@ -862,15 +849,13 @@
     const DIRECT_GEMINI_KEYS = ENCODED_KEYS.map(k => atob(k));
     let base64Image = null;
 
-    // Visitor Counter
     (function initCounter() {
-      let count = parseInt(localStorage.getItem('lekka_visits') || '2080', 10);
+      let count = parseInt(localStorage.getItem('lekka_visits') || '2090', 10);
       count += 1;
       localStorage.setItem('lekka_visits', count);
       document.getElementById('visitorCount').innerText = count.toLocaleString();
     })();
 
-    // Restore solution when switching between Mobile & Desktop mode
     window.addEventListener('DOMContentLoaded', () => {
       const savedQuery = sessionStorage.getItem('lekka_active_query');
       const savedHTML = sessionStorage.getItem('lekka_rendered_html');
@@ -881,7 +866,6 @@
       }
     });
 
-    // Feedback Management
     (function loadStoredFeedback() {
       const stored = JSON.parse(localStorage.getItem('lekka_user_feedback') || '[]');
       const container = document.getElementById('feedbackContainer');
@@ -920,7 +904,6 @@
       return str.replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[m]);
     }
 
-    // Image Compressor & Preprocessor
     function handleImage(e) {
       const file = e.target.files[0];
       if (!file) return;
@@ -1097,7 +1080,7 @@
       }
     }
 
-    // Master Curated Textbook Vector Assets
+    // High-Resolution Built-in Textbook Graphic Registry
     const CORE_TEXTBOOK_ASSETS = {
       pythagoras: `<div style="margin:16px 0;"><svg viewBox="0 0 420 280" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; font-family:-apple-system, sans-serif;">
         <polygon points="80,50 80,230 350,230" fill="#f8fafc" stroke="#002b66" stroke-width="2.5" stroke-linejoin="round"/>
@@ -1170,6 +1153,43 @@
         <line x1="410" y1="175" x2="310" y2="175" stroke="#0f172a" stroke-width="1.5"/><text x="420" y="179" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="start">Left Atrium (LA)</text>
         <line x1="410" y1="265" x2="285" y2="265" stroke="#0f172a" stroke-width="1.5"/><text x="420" y="269" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="start">Left Ventricle (LV)</text>
         <line x1="410" y1="325" x2="255" y2="325" stroke="#0f172a" stroke-width="1.5"/><text x="420" y="329" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="start">Septum / Apex</text>
+      </svg></div>`,
+
+      brain: `<div style="margin:16px 0;"><svg viewBox="0 0 520 320" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; font-family:-apple-system, sans-serif;">
+        <path d="M 120 180 C 80 140, 100 80, 170 60 C 220 40, 320 40, 380 80 C 430 110, 440 180, 390 210 C 370 220, 330 220, 310 210 C 290 200, 260 210, 240 210 C 180 210, 140 200, 120 180 Z" fill="#fee2e2" stroke="#dc2626" stroke-width="2.5"/>
+        <path d="M 170 60 C 180 100, 240 90, 260 130 C 270 150, 310 130, 350 140" fill="none" stroke="#ef4444" stroke-width="1.8"/>
+        <path d="M 140 120 C 180 130, 200 160, 240 160" fill="none" stroke="#ef4444" stroke-width="1.8"/>
+        <path d="M 280 60 C 300 100, 340 100, 380 120" fill="none" stroke="#ef4444" stroke-width="1.8"/>
+        <ellipse cx="340" cy="235" rx="50" ry="32" fill="#dcfce7" stroke="#16a34a" stroke-width="2.2"/>
+        <path d="M 305 230 C 325 240, 355 230, 380 235 M 315 245 C 335 250, 355 245, 375 245" fill="none" stroke="#16a34a" stroke-width="1.4"/>
+        <path d="M 245 200 C 255 210, 255 250, 245 290 L 220 290 C 225 250, 220 210, 230 200 Z" fill="#fef3c7" stroke="#d97706" stroke-width="2.2"/>
+        <line x1="220" y1="50" x2="160" y2="25" stroke="#0f172a" stroke-width="1.5"/><text x="150" y="24" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="end">Cerebrum (Forebrain)</text>
+        <line x1="370" y1="235" x2="440" y2="235" stroke="#0f172a" stroke-width="1.5"/><text x="448" y="239" font-size="12" font-weight="bold" fill="#16a34a">Cerebellum (Hindbrain)</text>
+        <line x1="245" y1="260" x2="330" y2="295" stroke="#0f172a" stroke-width="1.5"/><text x="338" y="299" font-size="12" font-weight="bold" fill="#d97706">Brainstem / Medulla</text>
+        <text x="260" y="315" font-size="11" fill="#64748b" text-anchor="middle">Sagittal Section: Human Brain Architecture</text>
+      </svg></div>`,
+
+      prism: `<div style="margin:16px 0;"><svg viewBox="0 0 520 270" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; font-family:-apple-system, sans-serif;">
+        <polygon points="260,30 110,230 410,230" fill="rgba(224, 242, 254, 0.5)" stroke="#0284c7" stroke-width="2.5"/>
+        <text x="260" y="24" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">A (Angle of Prism)</text>
+        <text x="100" y="242" font-size="13" font-weight="bold" fill="#0f172a">B</text>
+        <text x="415" y="242" font-size="13" font-weight="bold" fill="#0f172a">C</text>
+        
+        <line x1="20" y1="165" x2="185" y2="130" stroke="#2563eb" stroke-width="2.2"/>
+        <text x="70" y="140" font-size="11" font-weight="bold" fill="#2563eb">Incident Ray</text>
+
+        <line x1="185" y1="130" x2="335" y2="130" stroke="#059669" stroke-width="2.2"/>
+        <text x="260" y="122" font-size="11" font-weight="bold" fill="#059669" text-anchor="middle">Refracted Ray</text>
+
+        <line x1="335" y1="130" x2="490" y2="185" stroke="#dc2626" stroke-width="2.2"/>
+        <text x="440" y="152" font-size="11" font-weight="bold" fill="#dc2626">Emergent Ray</text>
+
+        <line x1="185" y1="130" x2="350" y2="95" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4,4"/>
+        <line x1="270" y1="108" x2="335" y2="130" stroke="#64748b" stroke-width="1.5" stroke-dasharray="4,4"/>
+        <path d="M 320 102 C 328 106, 332 114, 330 120" fill="none" stroke="#d97706" stroke-width="1.6"/>
+        <text x="345" y="112" font-size="12" font-weight="bold" fill="#d97706">Angle of Deviation (δ)</text>
+
+        <text x="260" y="260" font-size="11" fill="#475569" text-anchor="middle">Refraction &amp; Deviation of Light Ray Through a Triangular Glass Prism</text>
       </svg></div>`,
 
       // 4. THE COMPLETE 118-ELEMENT MASTER SUITE WITH TOUCH 18-GROUP DECK
@@ -1334,10 +1354,8 @@
       </svg></div>`
     };
 
-    // Robust Math & KaTeX Protection Engine
     function processMathSafely(text) {
       if (!text) return "";
-      
       const mathBlocks = [];
       
       let sanitized = text
@@ -1384,56 +1402,47 @@
       return html;
     }
 
-    // High-Precision AI Engine
     async function handleSolve() {
-      const text = document.getElementById('aiProblemInput').value.trim();
+      const originalText = document.getElementById('aiProblemInput').value.trim();
       const btn = document.getElementById('btnSolve');
       const display = document.getElementById('aiSolutionDisplay');
       const mathContent = document.getElementById('mathRenderedContent');
 
-      if (!text && !base64Image) {
+      if (!originalText && !base64Image) {
         alert('Please enter a question, speak, or select a photo.');
         return;
       }
 
       display.style.display = 'block';
-      mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">⚡ Calculating textbook solution...</p>';
+      mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">⚡ Analyzing query & retrieving verified textbook figure...</p>';
       btn.disabled = true;
 
-      const systemInstruction = `You are "Lucky", the educational AI for Lekka Lab.
+      const rawLower = originalText.toLowerCase().replace(/\s+/g, '');
 
-CRITICAL INSTRUCTIONS:
-- Directly answer the query with clarity and accuracy matching user intent.
-- NEVER generate raw SVG codes (<svg>...</svg>).
-- If the question is PHOTOSYNTHESIS EQUATION:
-  * Provide the exact chemical equation on its own line:
-    $$ 6\\text{CO}_2 + 6\\text{H}_2\\text{O} \\xrightarrow{\\text{Light, Chlorophyll}} \\text{C}_6\\text{H}_{12}\\text{O}_6 + 6\\text{O}_2 $$
-  * Follow with clear Reactants, Conditions, and Products.
-- If the query is strictly requesting to VIEW the Periodic Table chart:
-  * Insert exactly: [ASSET_PERIODIC]
-- If the query is about MNEMONICS / TRICKS / MEMORIZATION:
-  * DO NOT insert [ASSET_PERIODIC]!
-  * Directly provide clean, easy-to-remember mnemonics in organized bullets.
-- If the question is Pythagoras Theorem:
-  * Provide Statement.
-  * Insert exactly: [ASSET_PYTHAGORAS]
-  * Given, To Prove, Construction, and Step-by-Step Proof.
-- If the question is BPT / Thales theorem:
-  * Provide Statement.
-  * Insert exactly: [ASSET_BPT]
-  * Given, To Prove, Construction, and Step-by-Step Proof.
-- If the question is Human Heart diagram:
-  * Insert exactly: [ASSET_HEART]
-  * Explain Functional Anatomy and Circulation route.
-- If the question is Ray Optics / Concave Mirror:
-  * Insert exactly: [ASSET_OPTICS]
-  * Explain Object position, Image position, Nature, and Ray Rules.
-- If the question is an MCQ (options A, B, C, D):
-  * State the correct option on line 1, then give a 2-line reason.`;
+      const systemInstruction = `You are "Lucky", the universal AI mentor for Lekka Lab.
+
+CRITICAL PROTOCOLS:
+1. LANGUAGE FIDELITY:
+   - If the user asks in Telugu, includes Telugu script, or asks "in telugu" (even in queries without spaces like "ariselumakingintelugu"):
+     * YOU MUST RESPOND FULLY IN FLAWLESS TELUGU (తెలుగు) with perfect grammar.
+   - If the user asks in Hindi or other languages, respond in that language.
+   - Otherwise, answer in clean English.
+
+2. SUBJECT & DIAGRAM ROUTING:
+   - Identify whether the question belongs to MATHEMATICS, PHYSICS, CHEMISTRY, BIOLOGY, or GENERAL/RECIPES.
+   - If question is about HUMAN BRAIN: Insert token [ASSET_BRAIN].
+   - If question is about PRISM / REFRACTION: Insert token [ASSET_PRISM].
+   - If question is about PYTHAGORAS THEOREM: Insert token [ASSET_PYTHAGORAS].
+   - If question is about BPT / THALES THEOREM: Insert token [ASSET_BPT].
+   - If question is about HUMAN HEART: Insert token [ASSET_HEART].
+   - If question is strictly about VIEWING THE PERIODIC TABLE: Insert token [ASSET_PERIODIC].
+   - If question is about PHOTOSYNTHESIS EQUATION:
+     * Provide equation: $$ 6\\text{CO}_2 + 6\\text{H}_2\\text{O} \\xrightarrow{\\text{Light, Chlorophyll}} \\text{C}_6\\text{H}_{12}\\text{O}_6 + 6\\text{O}_2 $$
+   - For GENERAL/RECIPES (e.g. Ariselu): Provide concise, professional culinary steps in the requested language.`;
 
       const contents = [{
         role: "user",
-        parts: [{ text: `${systemInstruction}\n\nUser Question: ${text || "Solve the attached image problem completely."}` }]
+        parts: [{ text: `${systemInstruction}\n\nUser Question: ${originalText || "Solve the attached image problem completely."}` }]
       }];
 
       if (base64Image) {
@@ -1495,46 +1504,44 @@ CRITICAL INSTRUCTIONS:
         return;
       }
 
-      const q = (text || '').toLowerCase();
       let processed = rawAnswer;
+      const q = rawLower;
 
-      // STRICT CONTEXT GUARDS
-      const isOnlyPeriodicTable = (q === "periodic table" || q === "show periodic table" || q === "periodic table chart") && !q.includes("trick") && !q.includes("mnemonic");
-      const isPythagoras = q.includes("pythagor");
-      const isBPT = (q.includes("bpt") || q.includes("thales") || q.includes("proportionality"));
-      const isHeart = q.includes("heart");
-      const isOptics = (q.includes("optics") || q.includes("concave") || q.includes("mirror") || q.includes("ray diagram"));
-
-      if (!isPythagoras) processed = processed.replace(/\[ASSET_PYTHAGORAS\]/g, '');
-      if (!isBPT) processed = processed.replace(/\[ASSET_BPT\]/g, '');
-      if (!isHeart) processed = processed.replace(/\[ASSET_HEART\]/g, '');
-      if (!isOnlyPeriodicTable) processed = processed.replace(/\[ASSET_PERIODIC\]/g, '');
-      if (!isOptics) processed = processed.replace(/\[ASSET_OPTICS\]/g, '');
-
-      if (isPythagoras && !processed.includes("[ASSET_PYTHAGORAS]")) {
+      if (q.includes("brain") && !processed.includes("[ASSET_BRAIN]")) {
+        processed = "[ASSET_BRAIN]\n\n" + processed;
+      }
+      if (q.includes("prism") && !processed.includes("[ASSET_PRISM]")) {
+        processed = "[ASSET_PRISM]\n\n" + processed;
+      }
+      if (q.includes("pythagor") && !processed.includes("[ASSET_PYTHAGORAS]")) {
         processed = processed.replace(/(Diagram:?)/i, `$1\n\n[ASSET_PYTHAGORAS]\n\n`);
         if (!processed.includes("[ASSET_PYTHAGORAS]")) processed = "[ASSET_PYTHAGORAS]\n\n" + processed;
       }
-
-      if (isBPT && !processed.includes("[ASSET_BPT]")) {
+      if ((q.includes("bpt") || q.includes("thales")) && !processed.includes("[ASSET_BPT]")) {
         processed = processed.replace(/(Geometric Diagram:?)/i, `$1\n\n[ASSET_BPT]\n\n`);
         if (!processed.includes("[ASSET_BPT]")) processed = "[ASSET_BPT]\n\n" + processed;
       }
-
-      if (isHeart && !processed.includes("[ASSET_HEART]")) {
+      if (q.includes("heart") && !processed.includes("[ASSET_HEART]")) {
         processed = "[ASSET_HEART]\n\n" + processed;
       }
-
-      if (isOnlyPeriodicTable && !processed.includes("[ASSET_PERIODIC]")) {
+      if ((q === "periodictable" || q === "periodictablechart" || q === "showperiodictable") && !processed.includes("[ASSET_PERIODIC]")) {
         processed = "[ASSET_PERIODIC]\n\n" + processed;
-      }
-
-      if (isOptics && !processed.includes("[ASSET_OPTICS]")) {
-        processed = "[ASSET_OPTICS]\n\n" + processed;
       }
 
       const componentMap = {};
       
+      processed = processed.replace(/\[ASSET_BRAIN\]/g, () => {
+        const id = 'COMP_' + Math.random().toString(36).substr(2, 9);
+        componentMap[id] = CORE_TEXTBOOK_ASSETS.brain;
+        return id;
+      });
+
+      processed = processed.replace(/\[ASSET_PRISM\]/g, () => {
+        const id = 'COMP_' + Math.random().toString(36).substr(2, 9);
+        componentMap[id] = CORE_TEXTBOOK_ASSETS.prism;
+        return id;
+      });
+
       processed = processed.replace(/\[ASSET_PYTHAGORAS\]/g, () => {
         const id = 'COMP_' + Math.random().toString(36).substr(2, 9);
         componentMap[id] = CORE_TEXTBOOK_ASSETS.pythagoras;
@@ -1559,12 +1566,6 @@ CRITICAL INSTRUCTIONS:
         return id;
       });
 
-      processed = processed.replace(/\[ASSET_OPTICS\]/g, () => {
-        const id = 'COMP_' + Math.random().toString(36).substr(2, 9);
-        componentMap[id] = CORE_TEXTBOOK_ASSETS.rayOptics;
-        return id;
-      });
-
       let finalHTML = processMathSafely(processed);
 
       for (const [id, htmlCode] of Object.entries(componentMap)) {
@@ -1573,7 +1574,7 @@ CRITICAL INSTRUCTIONS:
 
       mathContent.innerHTML = finalHTML;
 
-      sessionStorage.setItem('lekka_active_query', text);
+      sessionStorage.setItem('lekka_active_query', originalText);
       sessionStorage.setItem('lekka_rendered_html', mathContent.innerHTML);
 
       btn.disabled = false;
