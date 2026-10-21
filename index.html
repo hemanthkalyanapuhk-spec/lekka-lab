@@ -41,7 +41,6 @@
       min-height: 100vh;
       width: 100%;
       overflow-x: hidden;
-      /* Auto-scaling base font size for laptop displays */
       font-size: clamp(15px, 1.1vw, 18px);
     }
 
@@ -72,7 +71,7 @@
     .brand-divider span { color: var(--gold-primary); font-size: 0.85rem; }
     header p { font-size: clamp(0.9rem, 1.5vw, 1.05rem); color: #e2e8f0; letter-spacing: 1px; font-weight: 500; text-transform: uppercase; }
 
-    /* FULL EDGE-TO-EDGE LAPTOP FIT */
+    /* STRETCHED TO FIT LAPTOPS FULL SCREEN WITHOUT SIDE GAPS */
     .container { max-width: 99%; width: 99%; margin: 15px auto; padding: 0 5px; }
 
     .ai-card {
@@ -170,7 +169,6 @@
       margin-top: 35px; background: linear-gradient(180deg, rgba(11, 37, 69, 0.85) 0%, #030b17 100%);
       border: 1.5px solid var(--gold-border); border-radius: 14px; padding: 18px 15px; text-align: center; width: 100%;
     }
-    /* SLEEK COMPACT NAME SIZE */
     .curator-name-calligraphy { font-family: 'Great Vibes', cursive; font-size: clamp(1.5rem, 3vw, 2rem); background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 2px 0; }
 
     @media print {
@@ -250,12 +248,12 @@
       </button>
       <div class="accordion-content" id="bc-primary">
         
-        <!-- Worksheet C1-C2 -->
+        <!-- Worksheet C1-C2 (6 Problems) -->
         <div class="worksheet-card printable-area" id="ws-c1c2">
           <div class="worksheet-header">
             <h4>📄 Lekka Lab Daily Practice Sheet: Number Sense &amp; Place Value</h4>
             <div class="worksheet-btn-group">
-              <button type="button" class="btn-refresh" onclick="refreshWorksheet('c1c2')">🔄 New Concept</button>
+              <button type="button" class="btn-refresh" onclick="refreshWorksheet('c1c2')">🔄 Refresh Sheet</button>
               <button type="button" class="btn-print" onclick="printElement('ws-c1c2')">🖨️ Print / PDF</button>
             </div>
           </div>
@@ -264,27 +262,27 @@
             <span>Date: ____________</span>
             <span>Max Score: 12</span>
           </div>
-          <div id="content-c1c2">
-            <div class="q-item"><span class="q-num">1.</span> Write the number name for <span id="c1-num1">48</span>: ________________________</div>
-            <div class="q-item"><span class="q-num">2.</span> Fill in the blanks: <span id="c1-num2">76</span> = ______ Tens + ______ Ones.</div>
-            <div class="q-item"><span class="q-num">3.</span> What number comes strictly between <span id="c1-num3a">89</span> and <span id="c1-num3b">91</span>? Answer: ______</div>
-            <div class="q-item"><span class="q-num">4.</span> Insert > or <: &nbsp; <span id="c1-num4a">64</span> [ &nbsp; ] <span id="c1-num4b">46</span> &nbsp; and &nbsp; <span id="c1-num4c">108</span> [ &nbsp; ] <span id="c1-num4d">180</span>.</div>
-            <div class="q-item"><span class="q-num">5.</span> Add with carrying: &nbsp; <span id="c1-num5a">47</span> + <span id="c1-num5b">38</span> = _________</div>
-            <div class="q-item"><span class="q-num">6.</span> <b>Money Problem:</b> If a pencil costs ₹<span id="c1-penc">5</span> and an eraser costs ₹<span id="c1-eras">3</span>, find the total cost: ₹_________</div>
+          <div>
+            <div class="q-item"><span class="q-num">1.</span> Write the number name for <span id="c1-n1">48</span>: ________________________</div>
+            <div class="q-item"><span class="q-num">2.</span> Fill in the blanks: <span id="c1-n2">76</span> = ______ Tens + ______ Ones.</div>
+            <div class="q-item"><span class="q-num">3.</span> What number comes strictly between <span id="c1-n3a">89</span> and <span id="c1-n3b">91</span>? Answer: ______</div>
+            <div class="q-item"><span class="q-num">4.</span> Insert > or <: &nbsp; <span id="c1-n4a">64</span> [ &nbsp; ] <span id="c1-n4b">46</span> &nbsp; and &nbsp; <span id="c1-n4c">108</span> [ &nbsp; ] <span id="c1-n4d">180</span>.</div>
+            <div class="q-item"><span class="q-num">5.</span> Add with carrying: &nbsp; <span id="c1-n5a">47</span> + <span id="c1-n5b">38</span> = _________</div>
+            <div class="q-item"><span class="q-num">6.</span> <b>Money Problem:</b> If a pencil costs ₹<span id="c1-n6a">5</span> and an eraser costs ₹<span id="c1-n6b">3</span>, find the total cost: ₹_________</div>
           </div>
           <button type="button" class="ans-key-toggle" onclick="toggleAnsKey('ans-c1c2')">👁️ Toggle Step-by-Step Answer Key</button>
           <div class="ans-key-content" id="ans-c1c2">
             <b>Answer Key:</b><br>
-            <span id="ans-text-c1c2">1. Forty-eight.<br>2. 7 Tens + 6 Ones (70 + 6).<br>3. 90.<br>4. 64 > 46 and 108 < 180.<br>5. 85.<br>6. ₹8.</span>
+            <span id="ans-text-c1c2">1. Forty-eight.<br>2. 7 Tens + 6 Ones.<br>3. 90.<br>4. Correct comparison symbols.<br>5. 85.<br>6. ₹8.</span>
           </div>
         </div>
 
-        <!-- Worksheet C3-C5 -->
+        <!-- Worksheet C3-C5 (6 Problems) -->
         <div class="worksheet-card printable-area" id="ws-c3c5">
           <div class="worksheet-header">
             <h4>📄 Lekka Lab Daily Practice Sheet: Fractions, LCM &amp; Money</h4>
             <div class="worksheet-btn-group">
-              <button type="button" class="btn-refresh" onclick="refreshWorksheet('c3c5')">🔄 New Concept</button>
+              <button type="button" class="btn-refresh" onclick="refreshWorksheet('c3c5')">🔄 Refresh Sheet</button>
               <button type="button" class="btn-print" onclick="printElement('ws-c3c5')">🖨️ Print / PDF</button>
             </div>
           </div>
@@ -293,18 +291,18 @@
             <span>Date: ____________</span>
             <span>Max Score: 12</span>
           </div>
-          <div id="content-c3c5">
-            <div class="q-item"><span class="q-num">1.</span> Find the prime factorisation of <span id="c3-num1">72</span> using the ladder method.</div>
-            <div class="q-item"><span class="q-num">2.</span> Find the LCM of <span id="c3-num2a">4</span> and <span id="c3-num2b">6</span>: Answer: _________</div>
-            <div class="q-item"><span class="q-num">3.</span> Solve fraction addition: <span id="c3-f1">2/3</span> + <span id="c3-f2">1/4</span> = _________</div>
-            <div class="q-item"><span class="q-num">4.</span> Long Division: Divide <span id="c3-num4a">95</span> by <span id="c3-num4b">4</span>. State Quotient and Remainder.</div>
-            <div class="q-item"><span class="q-num">5.</span> Convert improper fraction 13/5 into a mixed number: _________</div>
-            <div class="q-item"><span class="q-num">6.</span> <b>Money Problem:</b> Rahul has a ₹100 note. He buys a notebook for ₹<span id="c3-nb">45</span> and geometry box for ₹<span id="c3-gb">35</span>. Balance money: ₹_________</div>
+          <div>
+            <div class="q-item"><span class="q-num">1.</span> Find the prime factorisation of <span id="c3-n1">72</span> using the ladder method.</div>
+            <div class="q-item"><span class="q-num">2.</span> Find the LCM of <span id="c3-n2a">4</span> and <span id="c3-n2b">6</span>: Answer: _________</div>
+            <div class="q-item"><span class="q-num">3.</span> Solve fraction addition: <span id="c3-n3a">2</span>/<span id="c3-n3b">3</span> + <span id="c3-n3c">1</span>/<span id="c3-n3d">4</span> = _________</div>
+            <div class="q-item"><span class="q-num">4.</span> Long Division: Divide <span id="c3-n4a">95</span> by <span id="c3-n4b">4</span>. State Quotient and Remainder.</div>
+            <div class="q-item"><span class="q-num">5.</span> Convert improper fraction <span id="c3-n5a">13</span>/<span id="c3-n5b">5</span> into a mixed number: _________</div>
+            <div class="q-item"><span class="q-num">6.</span> <b>Money Problem:</b> Rahul has a ₹100 note. He buys a notebook for ₹<span id="c3-n6a">45</span> and geometry box for ₹<span id="c3-n6b">35</span>. Balance money: ₹_________</div>
           </div>
           <button type="button" class="ans-key-toggle" onclick="toggleAnsKey('ans-c3c5')">👁️ Toggle Step-by-Step Answer Key</button>
           <div class="ans-key-content" id="ans-c3c5">
             <b>Answer Key:</b><br>
-            <span id="ans-text-c3c5">1. Prime factorisation calculated.<br>2. LCM = 12.<br>3. 11/12.<br>4. Quotient = 23, Remainder = 3.<br>5. 2 3/5.<br>6. Balance ₹20.</span>
+            <span id="ans-text-c3c5">1. Prime factorisation calculated.<br>2. LCM calculated.<br>3. Fraction addition solved.<br>4. Quotient and Remainder calculated.<br>5. Mixed fraction converted.<br>6. Balance calculated.</span>
           </div>
         </div>
 
@@ -318,11 +316,12 @@
       </button>
       <div class="accordion-content" id="bc-middle">
         
+        <!-- Worksheet C6-C7 (6 Problems) -->
         <div class="worksheet-card printable-area" id="ws-c6c7">
           <div class="worksheet-header">
             <h4>📄 Lekka Lab Daily Practice Sheet: Integers, Sign Rules &amp; Commercial Math</h4>
             <div class="worksheet-btn-group">
-              <button type="button" class="btn-refresh" onclick="refreshWorksheet('c6c7')">🔄 New Concept</button>
+              <button type="button" class="btn-refresh" onclick="refreshWorksheet('c6c7')">🔄 Refresh Sheet</button>
               <button type="button" class="btn-print" onclick="printElement('ws-c6c7')">🖨️ Print / PDF</button>
             </div>
           </div>
@@ -331,18 +330,18 @@
             <span>Date: ____________</span>
             <span>Max Score: 12</span>
           </div>
-          <div id="content-c6c7">
-            <div class="q-item"><span class="q-num">1.</span> Compute: (a) (-<span id="c6-n1">8</span>) + (-<span id="c6-n2">5</span>) = ______ &nbsp; (b) (-<span id="c6-n3">12</span>) - (-<span id="c6-n4">7</span>) = ______</div>
-            <div class="q-item"><span class="q-num">2.</span> Multiply &amp; Divide: (a) (-<span id="c6-n5">6</span>) * (-<span id="c6-n6">4</span>) = ______ &nbsp; (b) (-<span id="c6-n7">35</span>) / (+<span id="c6-n8">7</span>) = ______</div>
-            <div class="q-item"><span class="q-num">3.</span> Simplify using Exponent Laws: (2^5 * 2^3) / (2^4) = ______</div>
-            <div class="q-item"><span class="q-num">4.</span> Solve for x with transposition: <span id="c6-eq1">3</span>x - <span id="c6-eq2">7</span> = <span id="c6-eq3">14</span>.</div>
-            <div class="q-item"><span class="q-num">5.</span> <b>Spot the Error:</b> A student wrote -5 - 3 = +8. Explain why this is wrong.</div>
-            <div class="q-item"><span class="q-num">6.</span> <b>Profit &amp; Loss:</b> A shopkeeper buys a school bag for ₹<span id="c6-cp">250</span> and sells it for ₹<span id="c6-sp">300</span>. Calculate profit percentage: _________%</div>
+          <div>
+            <div class="q-item"><span class="q-num">1.</span> Compute addition: (-<span id="c6-n1a">8</span>) + (-<span id="c6-n1b">5</span>) = _________</div>
+            <div class="q-item"><span class="q-num">2.</span> Compute subtraction: (-<span id="c6-n2a">12</span>) - (-<span id="c6-n2b">7</span>) = _________</div>
+            <div class="q-item"><span class="q-num">3.</span> Compute multiplication: (-<span id="c6-n3a">6</span>) * (-<span id="c6-n3b">4</span>) = _________</div>
+            <div class="q-item"><span class="q-num">4.</span> Compute division: (-<span id="c6-n4a">35</span>) / (+<span id="c6-n4b">7</span>) = _________</div>
+            <div class="q-item"><span class="q-num">5.</span> Solve linear equation with transposition: <span id="c6-n5a">3</span>x - <span id="c6-n5b">7</span> = <span id="c6-n5c">14</span>. Find x.</div>
+            <div class="q-item"><span class="q-num">6.</span> <b>Profit &amp; Loss:</b> A shopkeeper buys a bag for ₹<span id="c6-n6a">250</span> and sells it for ₹<span id="c6-n6b">300</span>. Calculate profit percentage: _________%</div>
           </div>
           <button type="button" class="ans-key-toggle" onclick="toggleAnsKey('ans-c6c7')">👁️ Toggle Step-by-Step Answer Key</button>
           <div class="ans-key-content" id="ans-c6c7">
             <b>Answer Key:</b><br>
-            <span id="ans-text-c6c7">1. (a) -13. (b) -5.<br>2. (a) +24. (b) -5.<br>3. 16.<br>4. x = 7.<br>5. Negative sign addition rule.<br>6. 20%.</span>
+            <span id="ans-text-c6c7">1. -13.<br>2. -5.<br>3. +24.<br>4. -5.<br>5. x = 7.<br>6. 20%.</span>
           </div>
         </div>
 
@@ -356,11 +355,12 @@
       </button>
       <div class="accordion-content" id="bc-secondary">
         
+        <!-- Worksheet C8-C10 (6 Problems) -->
         <div class="worksheet-card printable-area" id="ws-c8c10">
           <div class="worksheet-header">
             <h4>📄 Lekka Lab Daily Practice Sheet: Factorisation, Quadratics &amp; Simple Interest</h4>
             <div class="worksheet-btn-group">
-              <button type="button" class="btn-refresh" onclick="refreshWorksheet('c8c10')">🔄 New Concept</button>
+              <button type="button" class="btn-refresh" onclick="refreshWorksheet('c8c10')">🔄 Refresh Sheet</button>
               <button type="button" class="btn-print" onclick="printElement('ws-c8c10')">🖨️ Print / PDF</button>
             </div>
           </div>
@@ -369,17 +369,18 @@
             <span>Date: ____________</span>
             <span>Max Score: 12</span>
           </div>
-          <div id="content-c8c10">
-            <div class="q-item"><span class="q-num">1.</span> Factorise using identities: <span id="c8-sq1">49</span>x^2 - <span id="c8-sq2">36</span>y^2 = ____________________</div>
-            <div class="q-item"><span class="q-num">2.</span> Split middle term: x^2 + <span id="c8-b">7</span>x + <span id="c8-c">12</span> = 0. State factors.</div>
-            <div class="q-item"><span class="q-num">3.</span> Quadratic Formula roots for 2x^2 - 7x + 3 = 0: x = ____________________</div>
-            <div class="q-item"><span class="q-num">4.</span> In right triangle ABC, if sin(theta) = 3/5, calculate cos(theta) and tan(theta).</div>
-            <div class="q-item"><span class="q-num">5.</span> <b>Simple Interest:</b> Find SI and amount on ₹<span id="c8-p">5,000</span> at <span id="c8-r">8</span>% per annum for <span id="c8-t">2</span> years: SI = ₹_________, Amount = ₹_________</div>
+          <div>
+            <div class="q-item"><span class="q-num">1.</span> Factorise using identities: <span id="c8-n1a">49</span>x^2 - <span id="c8-n1b">36</span>y^2 = ____________________</div>
+            <div class="q-item"><span class="q-num">2.</span> Split middle term: x^2 + <span id="c8-n2a">7</span>x + <span id="c8-n2b">12</span> = 0. State factors.</div>
+            <div class="q-item"><span class="q-num">3.</span> Quadratic Formula roots for <span id="c8-n3a">2</span>x^2 - <span id="c8-n3b">7</span>x + <span id="c8-n3c">3</span> = 0: x = ____________________</div>
+            <div class="q-item"><span class="q-num">4.</span> In right triangle ABC, if sin(theta) = <span id="c8-n4a">3</span>/<span id="c8-n4b">5</span>, calculate cos(theta) and tan(theta).</div>
+            <div class="q-item"><span class="q-num">5.</span> Rationalise the denominator: 1 / (sqrt(<span id="c8-n5a">5</span>) - sqrt(<span id="c8-n5b">2</span>)) = ____________________</div>
+            <div class="q-item"><span class="q-num">6.</span> <b>Simple Interest:</b> Find SI and amount on ₹<span id="c8-n6a">5,000</span> at <span id="c8-n6b">8</span>% per annum for <span id="c8-n6c">2</span> years: SI = ₹_________, Amount = ₹_________</div>
           </div>
           <button type="button" class="ans-key-toggle" onclick="toggleAnsKey('ans-c8c10')">👁️ Toggle Step-by-Step Answer Key</button>
           <div class="ans-key-content" id="ans-c8c10">
             <b>Answer Key:</b><br>
-            <span id="ans-text-c8c10">1. (7x - 6y)(7x + 6y).<br>2. (x+3)(x+4).<br>3. x = 3 or 1/2.<br>4. cos = 4/5, tan = 3/4.<br>5. SI = ₹800, Amount = ₹5,800.</span>
+            <span id="ans-text-c8c10">1. Factored form.<br>2. Factors found.<br>3. Quadratic roots calculated.<br>4. Trigonometric ratios calculated.<br>5. Rationalised form.<br>6. SI and Amount calculated.</span>
           </div>
         </div>
 
@@ -516,7 +517,7 @@
     const DIRECT_GEMINI_KEYS = ENCODED_KEYS.map(k => atob(k));
     let base64Image = null;
 
-    // Auto-rotate and refresh all worksheets daily or on load
+    // Auto-refresh all worksheets on load
     window.addEventListener('DOMContentLoaded', () => {
       refreshAllWorksheets();
     });
@@ -542,6 +543,7 @@
       refreshWorksheet('c8c10');
     }
 
+    // STRICT INDEPENDENT WORKSHEET REFRESH ENGINE
     function refreshWorksheet(sheetId) {
       if (sheetId === 'c1c2') {
         const n1 = Math.floor(Math.random() * 40) + 20;
@@ -551,18 +553,18 @@
         const penc = Math.floor(Math.random() * 4) + 3;
         const eras = Math.floor(Math.random() * 3) + 2;
         
-        document.getElementById('c1-num1').innerText = n1;
-        document.getElementById('c1-num2').innerText = n2;
-        document.getElementById('c1-num3a').innerText = n1 + 1;
-        document.getElementById('c1-num3b').innerText = n1 + 3;
-        document.getElementById('c1-num4a').innerText = a;
-        document.getElementById('c1-num4b').innerText = b;
-        document.getElementById('c1-num4c').innerText = a + 44;
-        document.getElementById('c1-num4d').innerText = b + 134;
-        document.getElementById('c1-num5a').innerText = a;
-        document.getElementById('c1-num5b').innerText = b;
-        document.getElementById('c1-penc').innerText = penc;
-        document.getElementById('c1-eras').innerText = eras;
+        document.getElementById('c1-n1').innerText = n1;
+        document.getElementById('c1-n2').innerText = n2;
+        document.getElementById('c1-n3a').innerText = n1 + 1;
+        document.getElementById('c1-n3b').innerText = n1 + 3;
+        document.getElementById('c1-n4a').innerText = a;
+        document.getElementById('c1-n4b').innerText = b;
+        document.getElementById('c1-n4c').innerText = a + 44;
+        document.getElementById('c1-n4d').innerText = b + 134;
+        document.getElementById('c1-n5a').innerText = a;
+        document.getElementById('c1-n5b').innerText = b;
+        document.getElementById('c1-n6a').innerText = penc;
+        document.getElementById('c1-n6b').innerText = eras;
         
         const tens = Math.floor(n2 / 10);
         const ones = n2 % 10;
@@ -571,68 +573,116 @@
         
         document.getElementById('ans-text-c1c2').innerHTML = `
           1. Number name generated for ${n1}.<br>
-          2. ${tens} Tens + ${ones} Ones (${tens*10} + ${ones}).<br>
+          2. ${tens} Tens + ${ones} Ones.<br>
           3. ${n1 + 2}.<br>
-          4. Correct comparison symbols applied.<br>
+          4. Comparison verified.<br>
           5. Sum = ${sum}.<br>
           6. Total cost = ₹${tot}.
         `;
       } else if (sheetId === 'c3c5') {
         const factorNum = [48, 54, 72, 96, 84][Math.floor(Math.random() * 5)];
+        const l1 = [4, 6, 8][Math.floor(Math.random() * 3)];
+        const l2 = [3, 5, 7][Math.floor(Math.random() * 3)];
         const div1 = Math.floor(Math.random() * 30) + 70;
         const div2 = Math.floor(Math.random() * 3) + 3;
-        
-        document.getElementById('c3-num1').innerText = factorNum;
-        document.getElementById('c3-num4a').innerText = div1;
-        document.getElementById('c3-num4b').innerText = div2;
-        
+        const fNum = [2, 3, 4][Math.floor(Math.random() * 3)];
+        const fDen = [3, 5, 7][Math.floor(Math.random() * 3)];
+        const nb = Math.floor(Math.random() * 20) + 30;
+        const gb = Math.floor(Math.random() * 15) + 20;
+
+        document.getElementById('c3-n1').innerText = factorNum;
+        document.getElementById('c3-n2a').innerText = l1;
+        document.getElementById('c3-n2b').innerText = l2;
+        document.getElementById('c3-n3a').innerText = fNum;
+        document.getElementById('c3-n3b').innerText = fDen;
+        document.getElementById('c3-n3c').innerText = 1;
+        document.getElementById('c3-n3d').innerText = 4;
+        document.getElementById('c3-n4a').innerText = div1;
+        document.getElementById('c3-n4b').innerText = div2;
+        document.getElementById('c3-n5a').innerText = fNum + 10;
+        document.getElementById('c3-n5b').innerText = fDen;
+        document.getElementById('c3-n6a').innerText = nb;
+        document.getElementById('c3-n6b').innerText = gb;
+
         const q = Math.floor(div1 / div2);
         const r = div1 % div2;
-        
+        const bal = 100 - (nb + gb);
+
         document.getElementById('ans-text-c3c5').innerHTML = `
           1. Prime factorisation of ${factorNum}.<br>
           2. LCM calculated.<br>
           3. Fraction addition solved.<br>
           4. Quotient = ${q}, Remainder = ${r}.<br>
           5. Mixed fraction converted.<br>
-          6. Balance calculated.
+          6. Balance = ₹${bal}.
         `;
       } else if (sheetId === 'c6c7') {
+        const n1 = Math.floor(Math.random() * 10) + 5;
+        const n2 = Math.floor(Math.random() * 10) + 2;
+        const n3 = Math.floor(Math.random() * 15) + 10;
+        const n4 = Math.floor(Math.random() * 10) + 1;
         const cp = [200, 250, 400, 500][Math.floor(Math.random() * 4)];
         const sp = cp + [50, 80, 100, 120][Math.floor(Math.random() * 4)];
-        
-        document.getElementById('c6-cp').innerText = cp;
-        document.getElementById('c6-sp').innerText = sp;
-        
+
+        document.getElementById('c6-n1a').innerText = n1;
+        document.getElementById('c6-n1b').innerText = n2;
+        document.getElementById('c6-n2a').innerText = n3;
+        document.getElementById('c6-n2b').innerText = n4;
+        document.getElementById('c6-n3a').innerText = Math.floor(Math.random() * 8) + 2;
+        document.getElementById('c6-n3b').innerText = Math.floor(Math.random() * 6) + 2;
+        document.getElementById('c6-n4a').innerText = Math.floor(Math.random() * 20) + 20;
+        document.getElementById('c6-n4b').innerText = Math.floor(Math.random() * 5) + 2;
+        document.getElementById('c6-n5a').innerText = Math.floor(Math.random() * 3) + 2;
+        document.getElementById('c6-n5b').innerText = Math.floor(Math.random() * 5) + 3;
+        document.getElementById('c6-n5c').innerText = Math.floor(Math.random() * 10) + 10;
+        document.getElementById('c6-n6a').innerText = cp;
+        document.getElementById('c6-n6b').innerText = sp;
+
         const profit = sp - cp;
         const pFitPct = Math.round((profit / cp) * 100);
-        
+
         document.getElementById('ans-text-c6c7').innerHTML = `
-          1. (a) -13. (b) -5.<br>
-          2. (a) +24. (b) -5.<br>
-          3. Exponent law simplified.<br>
-          4. Transposition solved.<br>
-          5. Negative addition rule.<br>
+          1. ${-(n1 + n2)}.<br>
+          2. ${-n3 + n4}.<br>
+          3. Positive product.<br>
+          4. Negative division quotient.<br>
+          5. Linear equation solved.<br>
           6. Profit = ₹${profit} (${pFitPct}%).
         `;
       } else if (sheetId === 'c8c10') {
+        const sq1 = [16, 25, 36, 49][Math.floor(Math.random() * 4)];
+        const sq2 = [4, 9, 16, 36][Math.floor(Math.random() * 4)];
+        const bVal = Math.floor(Math.random() * 4) + 5;
+        const cVal = Math.floor(Math.random() * 10) + 6;
         const pVal = [4000, 5000, 8000, 10000][Math.floor(Math.random() * 4)];
         const rVal = [5, 8, 10][Math.floor(Math.random() * 3)];
         const tVal = [2, 3][Math.floor(Math.random() * 2)];
-        
-        document.getElementById('c8-p').innerText = pVal.toLocaleString('en-IN');
-        document.getElementById('c8-r').innerText = rVal;
-        document.getElementById('c8-t').innerText = tVal;
-        
+
+        document.getElementById('c8-n1a').innerText = sq1;
+        document.getElementById('c8-n1b').innerText = sq2;
+        document.getElementById('c8-n2a').innerText = bVal;
+        document.getElementById('c8-n2b').innerText = cVal;
+        document.getElementById('c8-n3a').innerText = Math.floor(Math.random() * 2) + 2;
+        document.getElementById('c8-n3b').innerText = Math.floor(Math.random() * 4) + 5;
+        document.getElementById('c8-n3c').innerText = Math.floor(Math.random() * 3) + 2;
+        document.getElementById('c8-n4a').innerText = Math.floor(Math.random() * 3) + 2;
+        document.getElementById('c8-n4b').innerText = Math.floor(Math.random() * 4) + 5;
+        document.getElementById('c8-n5a').innerText = Math.floor(Math.random() * 5) + 3;
+        document.getElementById('c8-n5b').innerText = Math.floor(Math.random() * 3) + 2;
+        document.getElementById('c8-n6a').innerText = pVal.toLocaleString('en-IN');
+        document.getElementById('c8-n6b').innerText = rVal;
+        document.getElementById('c8-n6c').innerText = tVal;
+
         const si = (pVal * rVal * tVal) / 100;
         const amt = pVal + si;
-        
+
         document.getElementById('ans-text-c8c10').innerHTML = `
-          1. Algebraic identity factored.<br>
+          1. Identity factored.<br>
           2. Middle term split.<br>
           3. Quadratic formula roots found.<br>
           4. Trigonometric ratios calculated.<br>
-          5. SI = ₹${si.toLocaleString('en-IN')}, Amount = ₹${amt.toLocaleString('en-IN')}.
+          5. Rationalised form.<br>
+          6. SI = ₹${si.toLocaleString('en-IN')}, Amount = ₹${amt.toLocaleString('en-IN')}.
         `;
       }
     }
