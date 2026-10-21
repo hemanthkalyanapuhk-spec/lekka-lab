@@ -411,10 +411,10 @@
         <button class="btn btn-solve" id="btnSolve" onclick="handleSolve()">⚡ Ask Lucky</button>
         <button class="btn btn-secondary" id="btnVoice" onclick="toggleVoiceSearch()">🎙️ Voice Search</button>
         
-        <!-- Live Camera & Gallery Input -->
+        <!-- Camera & Gallery Choice Enabled -->
         <label class="btn btn-secondary" style="cursor: pointer;">
-          📷 Camera / Image
-          <input type="file" id="imageInput" accept="image/*" capture="environment" style="display:none;" onchange="handleImage(event)">
+          📷 Camera / Gallery
+          <input type="file" id="imageInput" accept="image/*" style="display:none;" onchange="handleImage(event)">
         </label>
         
         <button class="btn btn-secondary" onclick="clearResults()">🗑️ Clear</button>
@@ -425,7 +425,7 @@
       </div>
     </div>
 
-    <!-- 36 Assessment & Project PDF Files (Exact relative paths preserved) -->
+    <!-- 36 Assessment & Project PDF Files -->
     <h3 class="section-title">Assessment & Project Resources (36 PDFs)</h3>
 
     <!-- Class 10 -->
@@ -590,7 +590,7 @@
 
     // Visitor Counter
     (function initCounter() {
-      let count = parseInt(localStorage.getItem('lekka_visits') || '1940', 10);
+      let count = parseInt(localStorage.getItem('lekka_visits') || '1945', 10);
       count += 1;
       localStorage.setItem('lekka_visits', count);
       document.getElementById('visitorCount').innerText = count.toLocaleString();
@@ -635,7 +635,7 @@
       return str.replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[m]);
     }
 
-    // Camera Capture & Image Compressor
+    // Camera & Gallery File Handler with Optimization
     function handleImage(e) {
       const file = e.target.files[0];
       if (!file) return;
@@ -671,7 +671,7 @@
           document.getElementById('imagePreviewContainer').style.display = 'flex';
           
           if (!document.getElementById('aiProblemInput').value.trim()) {
-            document.getElementById('aiProblemInput').value = "Please analyze this image, solve the problem, and explain step by step.";
+            document.getElementById('aiProblemInput').value = "Please analyze this image, solve the problem, and give correct options.";
           }
         };
         img.src = event.target.result;
@@ -728,7 +728,7 @@
       const mathContent = document.getElementById('mathRenderedContent');
 
       if (!text && !base64Image) {
-        alert('Please enter a question, speak, or take a picture using the Camera.');
+        alert('Please enter a question, speak, or select a photo.');
         return;
       }
 
@@ -736,7 +736,6 @@
       mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">⚡ Generating crisp answer...</p>';
       btn.disabled = true;
 
-      // Smart system instruction prioritizing conciseness and clear MCQ answers
       const systemInstruction = `You are "Lucky", a fast and concise educational AI assistant for Lekka Lab.
 
 CRITICAL CONCISENESS RULE:
@@ -805,10 +804,10 @@ DIAGRAMS:
             const data = await res.json();
             if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
               rawAnswer = data.candidates[0].content.parts[0].text;
-              break outerLoop; // Success! Exit immediately
+              break outerLoop;
             } else if (data.error) {
               lastError = data.error.message || JSON.stringify(data.error);
-              continue; // Silently try next key
+              continue;
             }
           } catch (e) {
             lastError = e.message;
