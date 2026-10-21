@@ -26,7 +26,7 @@
       --gold-border: rgba(212, 175, 55, 0.4);
       --gold-glow: 0 4px 20px rgba(212, 175, 55, 0.18);
       --bg-dark: #030b17;
-      --card-bg: rgba(11, 37, 69, 0.8);
+      --card-bg: rgba(11, 37, 69, 0.85);
       --card-border: rgba(212, 175, 55, 0.3);
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
@@ -41,21 +41,23 @@
       min-height: 100vh;
       width: 100%;
       overflow-x: hidden;
+      /* Auto-scaling base font size for laptop displays */
+      font-size: clamp(15px, 1.1vw, 18px);
     }
 
     header {
       background: radial-gradient(circle at 50% 20%, rgba(19, 58, 104, 0.9) 0%, rgba(2, 9, 20, 0.98) 85%);
       border-bottom: 2px solid var(--gold-border);
       box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
-      padding: 35px 15px 24px;
+      padding: 30px 15px 20px;
       text-align: center;
       width: 100%;
     }
     .header-box { max-width: 100%; margin: 0 auto; display: flex; flex-direction: column; align-items: center; width: 100%; }
-    .brand-overhead-crest { font-size: 0.8rem; letter-spacing: 6px; color: var(--gold-primary); text-transform: uppercase; font-weight: 700; margin-bottom: 4px; }
+    .brand-overhead-crest { font-size: 0.85rem; letter-spacing: 6px; color: var(--gold-primary); text-transform: uppercase; font-weight: 700; margin-bottom: 4px; }
     .brand-title {
       font-family: 'Cinzel', 'Montserrat', serif;
-      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-size: clamp(2.6rem, 5vw, 4.2rem);
       font-weight: 900;
       letter-spacing: clamp(4px, 1vw, 8px);
       text-transform: uppercase;
@@ -65,76 +67,76 @@
       line-height: 1.05;
       margin: 2px 0 6px;
     }
-    .brand-divider { display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; max-width: 320px; margin: 2px 0 8px; }
+    .brand-divider { display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; max-width: 320px; margin: 2px 0 6px; }
     .brand-divider::before, .brand-divider::after { content: ""; flex: 1; height: 1.5px; background: linear-gradient(90deg, transparent, var(--gold-primary), transparent); }
     .brand-divider span { color: var(--gold-primary); font-size: 0.85rem; }
-    header p { font-size: clamp(0.85rem, 1.8vw, 0.95rem); color: #e2e8f0; letter-spacing: 1px; font-weight: 500; text-transform: uppercase; }
+    header p { font-size: clamp(0.9rem, 1.5vw, 1.05rem); color: #e2e8f0; letter-spacing: 1px; font-weight: 500; text-transform: uppercase; }
 
-    /* STRETCHED TO FIT LAPTOPS FULL SCREEN WITHOUT SIDE GAPS */
-    .container { max-width: 98%; width: 98%; margin: 20px auto; padding: 0 5px; }
+    /* FULL EDGE-TO-EDGE LAPTOP FIT */
+    .container { max-width: 99%; width: 99%; margin: 15px auto; padding: 0 5px; }
 
     .ai-card {
       background: var(--card-bg);
       backdrop-filter: blur(12px);
       border-radius: 16px;
-      padding: clamp(16px, 2.5vw, 24px);
+      padding: clamp(16px, 2vw, 24px);
       box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4), var(--gold-glow);
       border: 1px solid var(--card-border);
-      margin-bottom: 24px;
+      margin-bottom: 20px;
       width: 100%;
     }
-    .ai-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 10px; }
-    .ai-header h2 { font-size: clamp(1.1rem, 2.5vw, 1.3rem); font-weight: 800; color: #ffffff; display: flex; align-items: center; gap: 8px; }
+    .ai-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; flex-wrap: wrap; gap: 10px; }
+    .ai-header h2 { font-size: clamp(1.2rem, 2vw, 1.4rem); font-weight: 800; color: #ffffff; display: flex; align-items: center; gap: 8px; }
     .ai-header h2::before { content: "✦"; color: var(--gold-primary); }
-    .online-badge { background: rgba(22, 163, 74, 0.15); color: #4ade80; border: 1px solid rgba(74, 222, 128, 0.4); font-size: 0.75rem; padding: 4px 12px; border-radius: 20px; font-weight: 700; }
+    .online-badge { background: rgba(22, 163, 74, 0.15); color: #4ade80; border: 1px solid rgba(74, 222, 128, 0.4); font-size: 0.8rem; padding: 4px 12px; border-radius: 20px; font-weight: 700; }
 
     textarea {
-      width: 100%; height: 85px; padding: 14px;
+      width: 100%; height: 80px; padding: 12px;
       background: rgba(3, 11, 23, 0.85); border: 1px solid rgba(212, 175, 55, 0.35);
       border-radius: 12px; font-size: 1rem; color: #f8fafc; resize: vertical; outline: none;
     }
     textarea:focus { border-color: var(--gold-primary); box-shadow: 0 0 12px rgba(212, 175, 55, 0.35); }
 
     .image-preview-container {
-      display: none; margin-top: 12px; align-items: center; gap: 12px;
+      display: none; margin-top: 10px; align-items: center; gap: 12px;
       background: rgba(3, 11, 23, 0.6); padding: 8px 14px; border-radius: 10px; border: 1px dashed var(--gold-border);
     }
-    .image-preview-container img { width: 50px; height: 50px; object-fit: cover; border-radius: 8px; border: 1px solid var(--gold-primary); }
-    .image-preview-container span { font-size: 0.88rem; color: #e2e8f0; font-weight: 600; flex: 1; }
+    .image-preview-container img { width: 45px; height: 45px; object-fit: cover; border-radius: 8px; border: 1px solid var(--gold-primary); }
+    .image-preview-container span { font-size: 0.9rem; color: #e2e8f0; font-weight: 600; flex: 1; }
     .btn-remove-img { background: rgba(220, 38, 38, 0.2); color: #f87171; border: 1px solid rgba(248, 113, 113, 0.4); padding: 5px 10px; border-radius: 6px; font-size: 0.82rem; cursor: pointer; }
 
-    .ai-controls { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
-    .btn { padding: 9px 15px; border: none; border-radius: 10px; font-weight: 700; font-size: 0.88rem; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+    .ai-controls { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+    .btn { padding: 8px 14px; border: none; border-radius: 10px; font-weight: 700; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; gap: 6px; }
     .btn-solve { background: var(--gold-gradient); color: #030b17; }
     .btn-secondary { background: rgba(19, 58, 104, 0.6); color: #f1f5f9; border: 1px solid rgba(212, 175, 55, 0.25); }
 
-    .foundation-pill-box { margin-top: 16px; padding: 12px 14px; background: rgba(3, 11, 23, 0.65); border: 1px dashed var(--gold-border); border-radius: 10px; width: 100%; }
-    .foundation-title { font-size: 0.84rem; font-weight: 700; color: #fef08a; margin-bottom: 8px; }
+    .foundation-pill-box { margin-top: 14px; padding: 12px; background: rgba(3, 11, 23, 0.65); border: 1px dashed var(--gold-border); border-radius: 10px; width: 100%; }
+    .foundation-title { font-size: 0.9rem; font-weight: 700; color: #fef08a; margin-bottom: 8px; }
     .foundation-btn-group { display: flex; flex-wrap: wrap; gap: 7px; }
     .foundation-btn {
       padding: 6px 12px; border-radius: 20px; border: 1px solid rgba(212, 175, 55, 0.35);
-      background: rgba(19, 58, 104, 0.5); color: #f8fafc; font-size: 0.78rem; font-weight: 600; cursor: pointer;
+      background: rgba(19, 58, 104, 0.5); color: #f8fafc; font-size: 0.82rem; font-weight: 600; cursor: pointer;
     }
     .foundation-btn:hover { background: var(--gold-primary); color: #030b17; }
 
     .solution-box {
-      margin-top: 20px; padding: clamp(14px, 2.5vw, 22px);
+      margin-top: 16px; padding: clamp(14px, 2vw, 20px);
       background: #ffffff; color: #0f172a; border-radius: 14px;
-      border: 1.5px solid var(--gold-primary); display: none; line-height: 1.75; font-size: 1rem; width: 100%;
+      border: 1.5px solid var(--gold-primary); display: none; line-height: 1.7; font-size: 1.05rem; width: 100%;
     }
-    .solution-box svg { width: 100%; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 12px; margin: 16px auto; display: block; }
+    .solution-box svg { width: 100%; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 12px; margin: 14px auto; display: block; }
 
     .section-title {
-      font-size: clamp(1.1rem, 2.2vw, 1.25rem); font-weight: 800; margin: 30px 0 16px;
+      font-size: clamp(1.2rem, 2vw, 1.4rem); font-weight: 800; margin: 25px 0 14px;
       text-transform: uppercase; letter-spacing: 1px; background: var(--gold-gradient);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: flex; align-items: center; gap: 10px; width: 100%;
     }
     .section-title::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, var(--gold-border), transparent); }
 
-    .accordion { margin-bottom: 14px; border-radius: 12px; overflow: hidden; border: 1px solid var(--card-border); background: var(--card-bg); width: 100%; }
+    .accordion { margin-bottom: 12px; border-radius: 12px; overflow: hidden; border: 1px solid var(--card-border); background: var(--card-bg); width: 100%; }
     .accordion-btn {
-      width: 100%; padding: 16px 20px; background: linear-gradient(90deg, #091e42 0%, #0d2c54 100%);
-      color: #fef08a; border: none; text-align: left; font-size: 1.05rem; font-weight: 800;
+      width: 100%; padding: 15px 20px; background: linear-gradient(90deg, #091e42 0%, #0d2c54 100%);
+      color: #fef08a; border: none; text-align: left; font-size: 1.1rem; font-weight: 800;
       display: flex; justify-content: space-between; cursor: pointer;
     }
     .accordion-content { padding: 16px; display: none; background: rgba(3, 11, 23, 0.5); width: 100%; }
@@ -144,32 +146,32 @@
       padding: 18px; margin-bottom: 16px; border: 1.5px solid #cbd5e1; width: 100%;
     }
     .worksheet-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #0b2545; padding-bottom: 8px; margin-bottom: 14px; flex-wrap: wrap; gap: 10px; }
-    .worksheet-header h4 { font-size: 1.05rem; font-weight: 800; color: #0b2545; }
+    .worksheet-header h4 { font-size: 1.1rem; font-weight: 800; color: #0b2545; }
     .worksheet-btn-group { display: flex; gap: 6px; flex-wrap: wrap; }
-    .btn-print { background: #0284c7; color: #ffffff; border: none; padding: 6px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer; }
-    .btn-refresh { background: #d97706; color: #ffffff; border: none; padding: 6px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer; }
+    .btn-print { background: #0284c7; color: #ffffff; border: none; padding: 6px 12px; border-radius: 6px; font-size: 0.85rem; font-weight: 700; cursor: pointer; }
+    .btn-refresh { background: #d97706; color: #ffffff; border: none; padding: 6px 12px; border-radius: 6px; font-size: 0.85rem; font-weight: 700; cursor: pointer; }
     .btn-refresh:hover { background: #b45309; }
 
-    .worksheet-meta { display: flex; justify-content: space-between; font-size: 0.85rem; color: #475569; font-weight: 600; margin-bottom: 12px; border-bottom: 1px dashed #cbd5e1; padding-bottom: 6px; flex-wrap: wrap; gap: 10px; }
-    .q-item { margin-bottom: 12px; font-size: 0.94rem; line-height: 1.6; }
+    .worksheet-meta { display: flex; justify-content: space-between; font-size: 0.9rem; color: #475569; font-weight: 600; margin-bottom: 12px; border-bottom: 1px dashed #cbd5e1; padding-bottom: 6px; flex-wrap: wrap; gap: 10px; }
+    .q-item { margin-bottom: 12px; font-size: 1rem; line-height: 1.6; }
     .q-num { font-weight: 800; color: #0b2545; margin-right: 4px; }
-    .ans-key-toggle { background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; padding: 4px 10px; border-radius: 6px; font-size: 0.78rem; font-weight: 700; cursor: pointer; margin-top: 8px; display: inline-block; }
-    .ans-key-content { display: none; margin-top: 10px; padding: 10px; background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 6px; font-size: 0.88rem; color: #065f46; }
+    .ans-key-toggle { background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; padding: 5px 12px; border-radius: 6px; font-size: 0.82rem; font-weight: 700; cursor: pointer; margin-top: 8px; display: inline-block; }
+    .ans-key-content { display: none; margin-top: 10px; padding: 12px; background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 6px; font-size: 0.92rem; color: #065f46; }
 
     .table-container { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 8px; }
     table { width: 100%; border-collapse: collapse; min-width: 620px; background: #ffffff; color: #0f172a; }
-    th, td { padding: 12px 14px; border: 1px solid #e2e8f0; text-align: left; font-size: 0.94rem; white-space: nowrap; }
+    th, td { padding: 12px 14px; border: 1px solid #e2e8f0; text-align: left; font-size: 0.98rem; white-space: nowrap; }
     th { background: #f8fafc; color: #1e293b; font-weight: 800; }
-    .btn-action-view, .btn-action-dl { font-size: 0.84rem; font-weight: 700; text-decoration: none; padding: 5px 10px; border-radius: 6px; margin-right: 6px; }
+    .btn-action-view, .btn-action-dl { font-size: 0.88rem; font-weight: 700; text-decoration: none; padding: 5px 10px; border-radius: 6px; margin-right: 6px; }
     .btn-action-view { color: #0b2545; background: #e0f2fe; }
     .btn-action-dl { color: #047857; background: #ecfdf5; }
 
     footer {
-      margin-top: 40px; background: linear-gradient(180deg, rgba(11, 37, 69, 0.85) 0%, #030b17 100%);
-      border: 1.5px solid var(--gold-border); border-radius: 16px; padding: 20px 15px; text-align: center; width: 100%;
+      margin-top: 35px; background: linear-gradient(180deg, rgba(11, 37, 69, 0.85) 0%, #030b17 100%);
+      border: 1.5px solid var(--gold-border); border-radius: 14px; padding: 18px 15px; text-align: center; width: 100%;
     }
-    /* SLEEK REDUCED NAME SIZE */
-    .curator-name-calligraphy { font-family: 'Great Vibes', cursive; font-size: clamp(1.6rem, 3.5vw, 2.1rem); background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 2px 0; }
+    /* SLEEK COMPACT NAME SIZE */
+    .curator-name-calligraphy { font-family: 'Great Vibes', cursive; font-size: clamp(1.5rem, 3vw, 2rem); background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 2px 0; }
 
     @media print {
       body * { visibility: hidden; }
@@ -253,7 +255,7 @@
           <div class="worksheet-header">
             <h4>📄 Lekka Lab Daily Practice Sheet: Number Sense &amp; Place Value</h4>
             <div class="worksheet-btn-group">
-              <button type="button" class="btn-refresh" onclick="refreshAllWorksheets()">🔄 New Daily Concept</button>
+              <button type="button" class="btn-refresh" onclick="refreshWorksheet('c1c2')">🔄 New Concept</button>
               <button type="button" class="btn-print" onclick="printElement('ws-c1c2')">🖨️ Print / PDF</button>
             </div>
           </div>
@@ -282,7 +284,7 @@
           <div class="worksheet-header">
             <h4>📄 Lekka Lab Daily Practice Sheet: Fractions, LCM &amp; Money</h4>
             <div class="worksheet-btn-group">
-              <button type="button" class="btn-refresh" onclick="refreshAllWorksheets()">🔄 New Daily Concept</button>
+              <button type="button" class="btn-refresh" onclick="refreshWorksheet('c3c5')">🔄 New Concept</button>
               <button type="button" class="btn-print" onclick="printElement('ws-c3c5')">🖨️ Print / PDF</button>
             </div>
           </div>
@@ -320,7 +322,7 @@
           <div class="worksheet-header">
             <h4>📄 Lekka Lab Daily Practice Sheet: Integers, Sign Rules &amp; Commercial Math</h4>
             <div class="worksheet-btn-group">
-              <button type="button" class="btn-refresh" onclick="refreshAllWorksheets()">🔄 New Daily Concept</button>
+              <button type="button" class="btn-refresh" onclick="refreshWorksheet('c6c7')">🔄 New Concept</button>
               <button type="button" class="btn-print" onclick="printElement('ws-c6c7')">🖨️ Print / PDF</button>
             </div>
           </div>
@@ -358,7 +360,7 @@
           <div class="worksheet-header">
             <h4>📄 Lekka Lab Daily Practice Sheet: Factorisation, Quadratics &amp; Simple Interest</h4>
             <div class="worksheet-btn-group">
-              <button type="button" class="btn-refresh" onclick="refreshAllWorksheets()">🔄 New Daily Concept</button>
+              <button type="button" class="btn-refresh" onclick="refreshWorksheet('c8c10')">🔄 New Concept</button>
               <button type="button" class="btn-print" onclick="printElement('ws-c8c10')">🖨️ Print / PDF</button>
             </div>
           </div>
