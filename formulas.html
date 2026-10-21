@@ -6,371 +6,565 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#10243e">
 <title>Lekka Lab | Mathematics Formula Vault</title>
-<meta name="description" content="Searchable mathematics formulas from foundational school mathematics to postgraduate topics.">
+<meta name="description" content="Searchable mathematics formulas from school to postgraduate level.">
+
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['\\(', '\\)'], ['$','$']],
+    displayMath: [['\\[', '\\]'], ['$$','$$']],
+    processEscapes: true
+  },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  startup: {
+    typeset: false
+  },
+  chtml: {
+    scale: 1.05
+  }
+};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 
 <style>
 :root {
   --navy:#10243e;
   --blue:#2563eb;
-  --bg:#f3f6fb;
-  --border:#dbe3ef;
+  --bg:#f4f7fb;
+  --border:#dce4ef;
+  --text:#172033;
   --muted:#64748b;
 }
 * { box-sizing:border-box; }
 body {
   margin:0;
-  font-family:system-ui,Arial,sans-serif;
-  background:var(--bg);
-  color:#172033;
+  font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
   line-height:1.6;
+  color:var(--text);
+  background:var(--bg);
 }
+button,input,select { font:inherit; }
+button { cursor:pointer; }
 header {
-  background:linear-gradient(130deg,#10243e,#1d4b76);
+  background:var(--navy);
   color:white;
-  padding:25px 18px;
+  padding:18px 5%;
 }
-.container { max-width:1150px; margin:auto; padding:18px; }
-header .container { padding:10px 18px; }
-h1 { margin:8px 0; font-size:clamp(27px,5vw,42px); }
-header p { color:#dbeafe; }
-.stats { display:flex; gap:12px; flex-wrap:wrap; margin-top:20px; }
-.stat { padding:10px 15px; background:#ffffff18; border-radius:9px; }
-.stat strong { display:block; font-size:23px; }
-.panel,.card {
-  background:white; border:1px solid var(--border);
-  border-radius:12px; padding:17px; margin-bottom:14px;
+.brand { font-size:21px; font-weight:850; }
+.brand span { color:#7dd3fc; }
+.hero {
+  background:linear-gradient(125deg,#10243e,#1d4b76);
+  color:white;
+  padding:35px 5%;
 }
-.toolbar {
-  display:grid; grid-template-columns:2fr 1fr 1fr;
+.hero h1 { font-size:clamp(28px,5vw,44px); margin:0 0 10px; }
+.hero p { color:#d7e5f4; max-width:750px; }
+main { max-width:1100px; margin:auto; padding:20px; }
+.panel,.formula-card {
+  background:white;
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:18px;
+  margin-bottom:14px;
+  box-shadow:0 4px 16px #10243e0a;
+}
+.filters {
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
   gap:10px;
 }
-input,select,button {
-  font:inherit; padding:11px; border:1px solid #cbd5e1;
-  border-radius:8px; background:white; color:#172033;
+.field {
+  width:100%;
+  min-width:0;
+  padding:11px;
+  border:1px solid #cbd5e1;
+  border-radius:8px;
+  background:white;
 }
-button { cursor:pointer; font-weight:650; }
-button.primary { background:var(--blue); color:white; border-color:var(--blue); }
-button:hover { filter:brightness(.96); }
-.actions { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
-.levels { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
-.level-button { text-align:left; background:white; padding:13px; }
-.level-button span { display:block; color:var(--muted); font-size:12px; font-weight:400; }
-.results { display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; color:var(--muted); margin:18px 0 10px; }
-.card h3 { margin:8px 0; }
-.meta { display:flex; flex-wrap:wrap; gap:6px; }
-.tag { background:#eaf2ff; color:#1d4ed8; padding:3px 8px; border-radius:5px; font-size:12px; }
+button,.btn {
+  border:0;
+  background:var(--blue);
+  color:white;
+  padding:10px 14px;
+  border-radius:8px;
+  font-weight:700;
+}
+.actions { display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+.secondary { background:#eaf2ff; color:#1d4ed8; }
+.meta { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px; }
+.tag {
+  display:inline-block;
+  padding:3px 8px;
+  background:#edf2f8;
+  border-radius:5px;
+  font-size:12px;
+}
+.tag.level { background:#eaf2ff; color:#1d4ed8; }
 .formula {
-  background:#f1f6fd; border-left:4px solid var(--blue);
-  padding:13px; border-radius:5px; overflow-wrap:anywhere;
-  font-size:18px; color:#10243e;
+  background:#f3f7fc;
+  border-left:4px solid var(--blue);
+  padding:16px 12px;
+  border-radius:6px;
+  margin:12px 0;
+  overflow-x:auto;
+  text-align:center;
+  min-height:55px;
+  font-size:19px;
 }
-.explanation { color:#475569; }
-.example { background:#f0fdf4; color:#166534; padding:10px; border-radius:6px; }
-#pagination { display:flex; justify-content:center; gap:7px; flex-wrap:wrap; margin:20px 0; }
-#pagination button.active { background:var(--blue); color:white; }
-.empty { text-align:center; padding:30px; background:white; border-radius:10px; }
-footer { text-align:center; padding:24px; background:var(--navy); color:white; }
-@media(max-width:700px) {
-  .toolbar { grid-template-columns:1fr; }
-  .levels { grid-template-columns:repeat(2,minmax(0,1fr)); }
-  .container { padding:12px; }
+.formula mjx-container {
+  max-width:100%;
+  overflow-x:auto;
+  overflow-y:hidden;
+}
+.explanation { color:#46566c; }
+.example {
+  padding:10px;
+  border-left:3px solid #16a34a;
+  background:#f0fdf4;
+  color:#166534;
+  border-radius:5px;
+}
+.pagination {
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  flex-wrap:wrap;
+  margin:20px 0;
+}
+.pagination button:disabled { opacity:.45; cursor:not-allowed; }
+footer {
+  text-align:center;
+  padding:24px;
+  background:var(--navy);
+  color:#dbeafe;
+}
+@media(max-width:650px) {
+  main { padding:12px; }
+  .filters { grid-template-columns:1fr; }
+  .panel,.formula-card { padding:13px; }
+  .formula { font-size:16px; }
 }
 @media print {
-  header, .no-print, footer { display:none!important; }
+  header,.hero .actions,.filters,.actions,.pagination,footer,.no-print {
+    display:none!important;
+  }
   body { background:white; }
-  .container { max-width:none; padding:0; }
-  .card { break-inside:avoid; box-shadow:none; }
+  main { padding:0; }
+  .panel,.formula-card { box-shadow:none; break-inside:avoid; }
 }
 </style>
-
-<script>
-window.MathJax = {
-  tex: { inlineMath: [['\\(','\\)'], ['$', '$']] },
-  startup: { typeset: false }
-};
-</script>
-<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
-
 <body>
+
 <header>
-  <div class="container">
-    <strong>LEKKA LAB · MATHEMATICS</strong>
-    <h1>The Mathematics Formula Vault</h1>
-    <p>Explore mathematical formulas from Foundation to Postgraduate level.</p>
-    <div class="stats">
-      <div class="stat"><strong id="total">0</strong>Formula entries</div>
-      <div class="stat"><strong>KG–PG</strong>Learning levels</div>
-      <div class="stat"><strong>24/7</strong>Browser access</div>
-    </div>
-  </div>
+  <div class="brand">LEKKA <span>LAB</span></div>
 </header>
 
-<main class="container">
-  <section>
-    <h2>Choose Your Learning Level</h2>
-    <div class="levels no-print">
-      <button class="level-button" onclick="chooseLevel('Foundation')">🔢 Foundation<span>KG–Class 5</span></button>
-      <button class="level-button" onclick="chooseLevel('Middle School')">📐 Middle School<span>Classes 6–8</span></button>
-      <button class="level-button" onclick="chooseLevel('Secondary')">📘 Secondary<span>Classes 9–10</span></button>
-      <button class="level-button" onclick="chooseLevel('Senior Secondary')">🎓 Senior Secondary<span>Classes 11–12</span></button>
-      <button class="level-button" onclick="chooseLevel('Undergraduate')">📚 Undergraduate<span>UG Mathematics</span></button>
-      <button class="level-button" onclick="chooseLevel('Postgraduate')">🧠 Postgraduate<span>Advanced Mathematics</span></button>
-    </div>
-  </section>
+<section class="hero">
+  <h1>The Mathematics Formula Vault</h1>
+  <p>Explore mathematics formulas from Foundation to Postgraduate level.
+     Search by formula name, topic, class or mathematical expression.</p>
+  <div class="actions">
+    <button onclick="resetFilters()">Explore All Formulas</button>
+    <button class="secondary" onclick="window.print()">Print / Save PDF</button>
+  </div>
+</section>
 
-  <section id="library">
-    <h2>Formula Library</h2>
-    <div class="panel no-print">
-      <div class="toolbar">
-        <input id="search" type="search" placeholder="Search formula, topic or keyword..." aria-label="Search formulas">
-        <select id="level" aria-label="Education level">
-          <option value="">All education levels</option>
-        </select>
-        <select id="category" aria-label="Topic">
-          <option value="">All topics</option>
-        </select>
-      </div>
-      <div class="actions">
-        <button class="primary" onclick="applyFilters()">Search</button>
-        <button onclick="resetFilters()">Reset filters</button>
-        <button onclick="window.print()">Print / Save PDF</button>
-      </div>
-    </div>
-
-    <div class="results">
-      <span id="count" aria-live="polite">Loading formulas...</span>
-      <span id="pageInfo"></span>
-    </div>
-    <div id="list"></div>
-    <div id="pagination" class="no-print"></div>
-  </section>
-
+<main>
   <section class="panel">
-    <h2>About this library</h2>
-    <p>This is an expandable formula reference. The current code includes starter entries; it does not yet contain 3,000 verified formulas. Additional unique formulas can be added to the database below.</p>
-    <p>Check formulas against your school syllabus or university course, especially for advanced topics.</p>
+    <h2>Find a Formula</h2>
+    <div class="filters">
+      <input id="search" class="field" type="search"
+        placeholder="Search: quadratic, area, derivative...">
+      <select id="level" class="field">
+        <option value="">All levels</option>
+        <option>Foundation</option>
+        <option>Middle School</option>
+        <option>Secondary</option>
+        <option>Senior Secondary</option>
+        <option>Undergraduate</option>
+        <option>Postgraduate</option>
+      </select>
+      <select id="category" class="field">
+        <option value="">All topics</option>
+      </select>
+    </div>
+    <div class="actions">
+      <button onclick="applyFilters()">Search</button>
+      <button class="secondary" onclick="resetFilters()">Reset</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>Formula Library</h2>
+    <p id="status" aria-live="polite">Loading formulas...</p>
+    <div id="formulaList"></div>
+    <div id="pagination" class="pagination"></div>
   </section>
 </main>
 
 <footer>
   <strong>Lekka Lab — Educational Portal</strong>
-  <p>Mathematics learning from KG to PG</p>
+  <p>Mathematics reference from KG to PG.</p>
   <small>© 2026 Lekka Lab</small>
 </footer>
 
 <script>
-/*
-Each entry:
-[title, level, category, formula, explanation, example]
-Add more entries to this array to expand the library.
-*/
-
 const formulas = [
-["Addition","Foundation","Arithmetic","\\\\(a+b\\\\)","Combines two quantities.","3 + 4 = 7"],
-["Subtraction","Foundation","Arithmetic","\\\\(a-b\\\\)","Finds the difference between quantities.","9 − 4 = 5"],
-["Multiplication","Foundation","Arithmetic","\\\\(a\\\\times b\\\\)","Repeated addition.","5 × 3 = 15"],
-["Division","Foundation","Arithmetic","\\\\(a\\\\div b\\\\)","Splits a quantity into equal groups; b must not be zero.","12 ÷ 3 = 4"],
-["Perimeter of square","Foundation","Mensuration","\\\\(P=4s\\\\)","s is the side length.","s = 5 cm gives P = 20 cm"],
-["Area of square","Foundation","Mensuration","\\\\(A=s^2\\\\)","s is the side length.","s = 4 cm gives A = 16 cm²"],
-["Perimeter of rectangle","Foundation","Mensuration","\\\\(P=2(l+w)\\\\)","l is length and w is width.","l = 5, w = 3 gives P = 16"],
-["Area of rectangle","Foundation","Mensuration","\\\\(A=lw\\\\)","Multiply length by width.","5 × 3 = 15 cm²"],
-["Area of triangle","Foundation","Geometry","\\\\(A=\\\\frac12 bh\\\\)","b is base and h is perpendicular height.","b = 8, h = 4 gives A = 16"],
-["Average","Foundation","Statistics","\\\\(\\\\bar{x}=\\\\frac{\\\\text{sum}}{n}\\\\)","Divide the sum by the number of values.","2, 4, 6 have average 4"],
-
-["Fraction addition","Middle School","Arithmetic","\\\\(\\\\frac ac+\\\\frac bc=\\\\frac{a+b}{c}\\\\)","For equal denominators, add the numerators.","2/7 + 3/7 = 5/7"],
-["Percentage","Middle School","Arithmetic","\\\\(\\\\frac{\\\\text{part}}{\\\\text{whole}}\\\\times100\\\\%\\\\)","Expresses a ratio per hundred.","20 out of 80 = 25%"],
-["Simple interest","Middle School","Arithmetic","\\\\(SI=\\\\frac{PRT}{100}\\\\)","P is principal, R annual percentage rate, T time in years.","P=1000, R=5, T=2 gives SI=100"],
-["Compound amount","Middle School","Arithmetic","\\\\(A=P(1+\\\\frac r{100})^t\\\\)","Annual compounding; r is the annual percentage rate.","P=1000, r=10, t=2 gives A=1210"],
-["Speed","Middle School","Arithmetic","\\\\(v=\\\\frac dt\\\\)","Distance divided by elapsed time.","120 km in 2 h = 60 km/h"],
-["Distance","Middle School","Arithmetic","\\\\(d=vt\\\\)","For constant speed.","60 km/h for 3 h gives 180 km"],
-["Mean of data","Middle School","Statistics","\\\\(\\\\bar{x}=\\\\frac{\\\\sum x_i}{n}\\\\)","Arithmetic mean of n observations.","1, 2, 6 have mean 3"],
-["Product of powers","Middle School","Algebra","\\\\(a^m a^n=a^{m+n}\\\\)","Same nonzero base: add exponents.","x²x³ = x⁵"],
-["Power of a power","Middle School","Algebra","\\\\((a^m)^n=a^{mn}\\\\)","Multiply exponents.","(x²)³ = x⁶"],
-["Difference of squares","Middle School","Algebra","\\\\(a^2-b^2=(a-b)(a+b)\\\\)","Factorisation identity.","x² − 9 = (x−3)(x+3)"],
-["Square of a sum","Middle School","Algebra","\\\\((a+b)^2=a^2+2ab+b^2\\\\)","Expansion identity.","(x+2)² = x² + 4x + 4"],
-["Square of a difference","Middle School","Algebra","\\\\((a-b)^2=a^2-2ab+b^2\\\\)","Expansion identity.","(x−3)² = x² − 6x + 9"],
-["Volume of cuboid","Middle School","Mensuration","\\\\(V=lwh\\\\)","Length times width times height.","2 × 3 × 4 = 24"],
-["Volume of cube","Middle School","Mensuration","\\\\(V=s^3\\\\)","s is the edge length.","s = 3 gives V = 27"],
-["Area of circle","Middle School","Geometry","\\\\(A=\\\\pi r^2\\\\)","r is the radius.","r = 2 gives A = 4π"],
-["Circumference of circle","Middle School","Geometry","\\\\(C=2\\\\pi r\\\\)","Distance around the circle.","r = 7 gives C = 14π"],
-["Pythagorean theorem","Middle School","Geometry","\\\\(a^2+b^2=c^2\\\\)","For a right triangle; c is the hypotenuse.","3² + 4² = 5²"],
-
-["Linear equation","Secondary","Algebra","\\\\(ax+b=0\\\\Rightarrow x=-\\\\frac ba\\\\)","Assumes a is nonzero.","2x + 6 = 0 gives x = −3"],
-["Quadratic formula","Secondary","Algebra","\\\\(x=\\\\frac{-b\\\\pm\\\\sqrt{b^2-4ac}}{2a}\\\\)","Solves ax² + bx + c = 0, where a ≠ 0.","x² − 5x + 6 = 0 gives 2, 3"],
-["Discriminant","Secondary","Algebra","\\\\(\\\\Delta=b^2-4ac\\\\)","Determines the nature of quadratic roots.","Δ > 0 gives two distinct real roots"],
-["Slope","Secondary","Coordinate Geometry","\\\\(m=\\\\frac{y_2-y_1}{x_2-x_1}\\\\)","For x₂ ≠ x₁.","Points (1,2) and (3,6) give m = 2"],
-["Distance between points","Secondary","Coordinate Geometry","\\\\(d=\\\\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}\\\\)","Euclidean distance in the plane.","(0,0) to (3,4) gives 5"],
-["Midpoint","Secondary","Coordinate Geometry","\\\\(M=(\\\\frac{x_1+x_2}{2},\\\\frac{y_1+y_2}{2})\\\\)","Coordinates of the midpoint.","(0,2) and (4,6) give (2,4)"],
-["Arithmetic progression term","Secondary","Sequences & Series","\\\\(a_n=a+(n-1)d\\\\)","a is first term; d is common difference.","a=3, d=2 gives a₁₀=21"],
-["AP sum","Secondary","Sequences & Series","\\\\(S_n=\\\\frac n2[2a+(n-1)d]\\\\)","Sum of the first n terms.","1 + 3 + 5 + 7 = 16"],
-["Geometric progression term","Secondary","Sequences & Series","\\\\(a_n=ar^{n-1}\\\\)","r is the common ratio.","a=2, r=3 gives a₄=54"],
-["Sine ratio","Secondary","Trigonometry","\\\\(\\\\sin\\\\theta=\\\\frac{\\\\text{opposite}}{\\\\text{hypotenuse}}\\\\)","For a right triangle.","Opposite 3, hypotenuse 5 gives 3/5"],
-["Cosine ratio","Secondary","Trigonometry","\\\\(\\\\cos\\\\theta=\\\\frac{\\\\text{adjacent}}{\\\\text{hypotenuse}}\\\\)","For a right triangle.","Adjacent 4, hypotenuse 5 gives 4/5"],
-["Tangent ratio","Secondary","Trigonometry","\\\\(\\\\tan\\\\theta=\\\\frac{\\\\text{opposite}}{\\\\text{adjacent}}\\\\)","For a right triangle with nonzero adjacent side.","Opposite 3, adjacent 4 gives 3/4"],
-["Pythagorean trigonometric identity","Secondary","Trigonometry","\\\\(\\\\sin^2\\\\theta+\\\\cos^2\\\\theta=1\\\\)","Valid for real angles.","If sin θ = 3/5, cos² θ = 16/25"],
-["Heron's formula","Secondary","Geometry","\\\\(A=\\\\sqrt{s(s-a)(s-b)(s-c)}\\\\)","s = (a+b+c)/2; a, b, c are triangle sides.","Sides 3, 4, 5 give area 6"],
-["Circle equation","Secondary","Coordinate Geometry","\\\\((x-h)^2+(y-k)^2=r^2\\\\)","Circle centre (h,k), radius r.","x² + y² = 25 has radius 5"],
-
-["Binomial theorem","Senior Secondary","Algebra","\\\\((a+b)^n=\\\\sum_{k=0}^n\\\\binom nk a^{n-k}b^k\\\\)","Expansion for a nonnegative integer n.","(a+b)² = a² + 2ab + b²"],
-["Permutation","Senior Secondary","Combinatorics","\\\\({}^nP_r=\\\\frac{n!}{(n-r)!}\\\\)","Ordered selections of r distinct objects.","⁵P₂ = 20"],
-["Combination","Senior Secondary","Combinatorics","\\\\({}^nC_r=\\\\frac{n!}{r!(n-r)!}\\\\)","Unordered selections of r objects.","⁵C₂ = 10"],
-["Probability","Senior Secondary","Probability","\\\\(P(A)=\\\\frac{\\\\text{favourable outcomes}}{\\\\text{equally likely outcomes}}\\\\)","Applies to a finite equally likely sample space.","A fair die shows 6 with probability 1/6"],
-["Conditional probability","Senior Secondary","Probability","\\\\(P(A\\\\mid B)=\\\\frac{P(A\\\\cap B)}{P(B)}\\\\)","Requires P(B) > 0.","Use joint probability divided by P(B)"],
-["Bayes theorem","Senior Secondary","Probability","\\\\(P(A\\\\mid B)=\\\\frac{P(B\\\\mid A)P(A)}{P(B)}\\\\)","Requires P(B) > 0.","Updates a probability using new evidence"],
-["Derivative power rule","Senior Secondary","Calculus","\\\\(\\\\frac{d}{dx}x^n=nx^{n-1}\\\\)","For real x where the power is differentiable.","d(x⁵)/dx = 5x⁴"],
-["Derivative of sine","Senior Secondary","Calculus","\\\\(\\\\frac{d}{dx}\\\\sin x=\\\\cos x\\\\)","Angle measured in radians.","d(sin x)/dx = cos x"],
-["Derivative of cosine","Senior Secondary","Calculus","\\\\(\\\\frac{d}{dx}\\\\cos x=-\\\\sin x\\\\)","Angle measured in radians.","d(cos x)/dx = −sin x"],
-["Product rule","Senior Secondary","Calculus","\\\\((uv)'=u'v+uv'\\\\)","Differentiation of a product.","d(x² sin x)/dx = 2x sin x + x² cos x"],
-["Chain rule","Senior Secondary","Calculus","\\\\(\\\\frac{d}{dx}f(g(x))=f'(g(x))g'(x)\\\\)","Differentiates a composite function.","d(sin x²)/dx = 2x cos(x²)"],
-["Power integral","Senior Secondary","Calculus","\\\\(\\\\int x^n dx=\\\\frac{x^{n+1}}{n+1}+C\\\\)","For n ≠ −1.","∫x² dx = x³/3 + C"],
-["Integral of reciprocal","Senior Secondary","Calculus","\\\\(\\\\int\\\\frac1x dx=\\\\ln|x|+C\\\\)","For x ≠ 0 on the interval.","∫1/x dx = ln|x| + C"],
-["Matrix determinant 2x2","Senior Secondary","Linear Algebra","\\\\(\\\\det A=ad-bc\\\\)","For A = [[a,b],[c,d]].","det [[1,2],[3,4]] = −2"],
-["Arithmetic mean","Senior Secondary","Statistics","\\\\(\\\\bar{x}=\\\\frac1n\\\\sum_{i=1}^n x_i\\\\)","Average of n observations.","2, 4, 6 gives mean 4"],
-["Variance","Senior Secondary","Statistics","\\\\(\\\\sigma^2=\\\\frac1N\\\\sum_{i=1}^N(x_i-\\\\mu)^2\\\\)","Population variance, where μ is the population mean.","Measures spread around the mean"],
-
-["Integration by parts","Undergraduate","Calculus","\\\\(\\\\int u\\\\,dv=uv-\\\\int v\\\\,du\\\\)","Integral form of the product rule.","Use u = x, dv = eˣ dx"],
-["Fundamental theorem of calculus","Undergraduate","Calculus","\\\\(\\\\int_a^b f'(x)dx=f(b)-f(a)\\\\)","For a suitable differentiable function.","∫₀¹ 2x dx = 1"],
-["Taylor series","Undergraduate","Analysis","\\\\(f(x)=\\\\sum_{n=0}^\\\\infty\\\\frac{f^{(n)}(a)}{n!}(x-a)^n\\\\)","Equals the function where the Taylor series converges to it.","eˣ = Σxⁿ/n!"],
-["Euler formula","Undergraduate","Complex Analysis","\\\\(e^{i\\\\theta}=\\\\cos\\\\theta+i\\\\sin\\\\theta\\\\)","Connects complex exponentials and trigonometry.","e^(iπ) = −1"],
-["Eigenvalue equation","Undergraduate","Linear Algebra","\\\\(Av=\\\\lambda v\\\\)","v must be a nonzero eigenvector.","For identity matrix, every nonzero vector has eigenvalue 1"],
-["Rank-nullity theorem","Undergraduate","Linear Algebra","\\\\(\\\\dim V=\\\\operatorname{rank}(T)+\\\\operatorname{nullity}(T)\\\\)","For a linear map from a finite-dimensional vector space V.","Dimension equals rank plus nullity"],
-["Gradient","Undergraduate","Multivariable Calculus","\\\\(\\\\nabla f=(\\\\frac{\\\\partial f}{\\\\partial x_1},\\\\ldots,\\\\frac{\\\\partial f}{\\\\partial x_n})\\\\)","Vector of first partial derivatives.","For f=x²+y², gradient is (2x,2y)"],
-["Divergence","Undergraduate","Vector Calculus","\\\\(\\\\nabla\\\\cdot F=\\\\sum_i\\\\frac{\\\\partial F_i}{\\\\partial x_i}\\\\)","Measures local outward flux density.","For F=(x,y,z), divergence is 3"],
-["Stokes theorem","Undergraduate","Vector Calculus","\\\\(\\\\iint_S(\\\\nabla\\\\times F)\\\\cdot dS=\\\\oint_{\\\\partial S}F\\\\cdot dr\\\\)","Requires a suitably smooth oriented surface and boundary.","Relates curl flux to a boundary integral"],
-["Cauchy-Schwarz inequality","Undergraduate","Analysis","\\\\(|\\\\langle u,v\\\\rangle|\\\\leq\\\\|u\\\\|\\\\|v\\\\|\\\\)","For vectors in an inner product space.","Equality holds for linearly dependent vectors"],
-["First-order linear ODE","Undergraduate","Differential Equations","\\\\(y'+P(x)y=Q(x)\\\\)","Standard first-order linear differential equation.","Solve using an integrating factor"],
-["Geometric series","Undergraduate","Sequences & Series","\\\\(\\\\sum_{k=0}^{\\\\infty}ar^k=\\\\frac{a}{1-r}\\\\)","Converges when |r| < 1.","1 + 1/2 + 1/4 + … = 2"],
-
-["Cauchy-Riemann equations","Postgraduate","Complex Analysis","\\\\(u_x=v_y,\\\\quad u_y=-v_x\\\\)","For f=u+iv; these equations alone require suitable regularity to guarantee analyticity.","Check the partial derivatives of u and v"],
-["Lagrange multipliers","Postgraduate","Optimization","\\\\(\\\\nabla f=\\\\lambda\\\\nabla g\\\\)","Necessary condition at a regular constrained extremum.","Optimize f subject to g = constant"],
-["Divergence theorem","Postgraduate","Vector Calculus","\\\\(\\\\iiint_V\\\\nabla\\\\cdot F\\\\,dV=\\\\iint_{\\\\partial V}F\\\\cdot n\\\\,dS\\\\)","For a sufficiently smooth vector field and region.","Converts volume divergence integral to boundary flux"],
-["Fourier coefficient a0","Postgraduate","Fourier Analysis","\\\\(a_0=\\\\frac1\\\\pi\\\\int_{-\\\\pi}^{\\\\pi}f(x)dx\\\\)","For the conventional 2π-periodic Fourier series; a₀/2 is the constant term.","Compute from a specified periodic function"],
-["Convolution","Postgraduate","Applied Mathematics","\\\\((f*g)(t)=\\\\int_{-\\\\infty}^{\\\\infty}f(\\\\tau)g(t-\\\\tau)d\\\\tau\\\\)","Continuous convolution when the integral exists.","Used in signal processing"],
-["Bayes decision rule","Postgraduate","Statistics","\\\\(\\\\hat{y}=\\\\arg\\\\max_y P(y\\\\mid x)\\\\)","Maximum a posteriori class prediction.","Choose the class with largest posterior probability"]
+  {
+    title:"Perimeter of Rectangle",level:"Foundation",category:"Mensuration",
+    formula:String.raw`P=2(l+b)`,
+    explanation:"The total distance around a rectangle.",
+    example:"If l = 5 cm and b = 3 cm, P = 16 cm."
+  },
+  {
+    title:"Area of Square",level:"Foundation",category:"Mensuration",
+    formula:String.raw`A=s^2`,
+    explanation:"The area enclosed by a square of side s.",
+    example:"If s = 4 cm, A = 16 cm²."
+  },
+  {
+    title:"Area of Rectangle",level:"Foundation",category:"Mensuration",
+    formula:String.raw`A=l\times b`,
+    explanation:"Multiply length by breadth.",
+    example:"Length 5 cm and breadth 3 cm gives 15 cm²."
+  },
+  {
+    title:"Addition of Like Fractions",level:"Foundation",category:"Arithmetic",
+    formula:String.raw`\frac{a}{c}+\frac{b}{c}=\frac{a+b}{c}`,
+    explanation:"Add the numerators when denominators are equal.",
+    example:String.raw`\frac27+\frac37=\frac57`
+  },
+  {
+    title:"Percentage",level:"Foundation",category:"Arithmetic",
+    formula:String.raw`\text{Percentage}=\frac{\text{Part}}{\text{Whole}}\times100`,
+    explanation:"Express a quantity as a fraction of 100.",
+    example:"25 out of 100 equals 25%."
+  },
+  {
+    title:"Average",level:"Foundation",category:"Statistics & Probability",
+    formula:String.raw`\bar{x}=\frac{x_1+x_2+\cdots+x_n}{n}`,
+    explanation:"Add the values and divide by their number.",
+    example:"The average of 2, 4 and 6 is 4."
+  },
+  {
+    title:"Simple Interest",level:"Middle School",category:"Arithmetic",
+    formula:String.raw`SI=\frac{P\times R\times T}{100}`,
+    explanation:"P is principal, R is annual interest rate and T is time in years.",
+    example:"P = 1000, R = 5, T = 2 gives SI = 100."
+  },
+  {
+    title:"Laws of Exponents",level:"Middle School",category:"Algebra",
+    formula:String.raw`a^m\times a^n=a^{m+n}`,
+    explanation:"When multiplying powers with the same base, add the exponents.",
+    example:String.raw`2^3\times2^4=2^7=128`
+  },
+  {
+    title:"Difference of Squares",level:"Middle School",category:"Algebra",
+    formula:String.raw`a^2-b^2=(a-b)(a+b)`,
+    explanation:"Factor the difference between two squares.",
+    example:String.raw`9^2-4^2=(9-4)(9+4)=65`
+  },
+  {
+    title:"Volume of Cuboid",level:"Middle School",category:"Mensuration",
+    formula:String.raw`V=lbh`,
+    explanation:"Multiply length, breadth and height.",
+    example:"4 × 3 × 2 = 24 cubic units."
+  },
+  {
+    title:"Area of Triangle",level:"Middle School",category:"Geometry",
+    formula:String.raw`A=\frac12 bh`,
+    explanation:"b is the base and h is the perpendicular height.",
+    example:"Base 8 and height 5 gives area 20 square units."
+  },
+  {
+    title:"Area of Trapezium",level:"Middle School",category:"Geometry",
+    formula:String.raw`A=\frac12(a+b)h`,
+    explanation:"a and b are the parallel sides; h is their perpendicular separation.",
+    example:"Parallel sides 6 and 4, height 5 gives area 25."
+  },
+  {
+    title:"Quadratic Formula",level:"Secondary",category:"Algebra",
+    formula:String.raw`x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}`,
+    explanation:String.raw`Solves ax^2+bx+c=0, where a\ne0.`,
+    example:String.raw`x^2-5x+6=0\Rightarrow x=2,\;3`
+  },
+  {
+    title:"Distance Formula",level:"Secondary",category:"Coordinate Geometry",
+    formula:String.raw`d=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}`,
+    explanation:"Calculates the distance between two points in a plane.",
+    example:"The distance between (1,2) and (4,6) is 5."
+  },
+  {
+    title:"Midpoint Formula",level:"Secondary",category:"Coordinate Geometry",
+    formula:String.raw`M=\left(\frac{x_1+x_2}{2},\frac{y_1+y_2}{2}\right)`,
+    explanation:"Finds the midpoint of a line segment.",
+    example:"The midpoint of (2,4) and (6,8) is (4,6)."
+  },
+  {
+    title:"Pythagorean Theorem",level:"Secondary",category:"Geometry",
+    formula:String.raw`a^2+b^2=c^2`,
+    explanation:"For a right triangle, c is the hypotenuse.",
+    example:String.raw`3^2+4^2=5^2`
+  },
+  {
+    title:"Trigonometric Identity",level:"Secondary",category:"Trigonometry",
+    formula:String.raw`\sin^2\theta+\cos^2\theta=1`,
+    explanation:"A fundamental trigonometric identity.",
+    example:String.raw`If \sin\theta=\frac35, then \cos\theta=\frac45 for an acute angle.`
+  },
+  {
+    title:"Sine Rule",level:"Secondary",category:"Trigonometry",
+    formula:String.raw`\frac{a}{\sin A}=\frac{b}{\sin B}=\frac{c}{\sin C}`,
+    explanation:"Relates the sides of a triangle to the sines of their opposite angles.",
+    example:"Use when a side and its opposite angle are known."
+  },
+  {
+    title:"Arithmetic Progression: nth Term",level:"Secondary",category:"Sequences & Series",
+    formula:String.raw`a_n=a+(n-1)d`,
+    explanation:"a is the first term and d is the common difference.",
+    example:"a = 3, d = 2 gives a₁₀ = 21."
+  },
+  {
+    title:"Sum of Arithmetic Progression",level:"Secondary",category:"Sequences & Series",
+    formula:String.raw`S_n=\frac n2[2a+(n-1)d]`,
+    explanation:"Calculates the sum of the first n terms of an arithmetic progression.",
+    example:"For 2, 4, 6, 8, the sum is 20."
+  },
+  {
+    title:"Derivative of a Power",level:"Senior Secondary",category:"Calculus",
+    formula:String.raw`\frac{d}{dx}x^n=nx^{n-1}`,
+    explanation:"The power rule for differentiation.",
+    example:String.raw`\frac{d}{dx}x^5=5x^4`
+  },
+  {
+    title:"Derivative of Sine",level:"Senior Secondary",category:"Calculus",
+    formula:String.raw`\frac{d}{dx}\sin x=\cos x`,
+    explanation:"The derivative of sine is cosine.",
+    example:String.raw`\frac{d}{dx}\sin(3x)=3\cos(3x)`
+  },
+  {
+    title:"Power Rule for Integration",level:"Senior Secondary",category:"Calculus",
+    formula:String.raw`\int x^n\,dx=\frac{x^{n+1}}{n+1}+C,\quad n\ne-1`,
+    explanation:"Finds an antiderivative for a power of x.",
+    example:String.raw`\int x^2\,dx=\frac{x^3}{3}+C`
+  },
+  {
+    title:"Binomial Theorem",level:"Senior Secondary",category:"Algebra",
+    formula:String.raw`(a+b)^n=\sum_{k=0}^{n}\binom nk a^{n-k}b^k`,
+    explanation:"Expands a binomial raised to a non-negative integer power.",
+    example:String.raw`(a+b)^2=a^2+2ab+b^2`
+  },
+  {
+    title:"Bayes' Theorem",level:"Senior Secondary",category:"Statistics & Probability",
+    formula:String.raw`P(A\mid B)=\frac{P(B\mid A)P(A)}{P(B)}`,
+    explanation:"Updates a probability using observed evidence, when P(B) is positive.",
+    example:"Used in conditional probability and statistical inference."
+  },
+  {
+    title:"Mean of a Data Set",level:"Senior Secondary",category:"Statistics & Probability",
+    formula:String.raw`\bar{x}=\frac1n\sum_{i=1}^{n}x_i`,
+    explanation:"The arithmetic mean of n observations.",
+    example:"For 1, 2 and 6, the mean is 3."
+  },
+  {
+    title:"Quadratic Discriminant",level:"Senior Secondary",category:"Algebra",
+    formula:String.raw`\Delta=b^2-4ac`,
+    explanation:"Determines the nature of the roots of a real quadratic equation.",
+    example:"Positive: two distinct real roots; zero: equal real roots; negative: no real roots."
+  },
+  {
+    title:"Euler's Formula",level:"Undergraduate",category:"Advanced Mathematics",
+    formula:String.raw`e^{i\theta}=\cos\theta+i\sin\theta`,
+    explanation:"Connects complex exponentials with trigonometric functions.",
+    example:String.raw`e^{i\pi}+1=0`
+  },
+  {
+    title:"Integration by Parts",level:"Undergraduate",category:"Calculus",
+    formula:String.raw`\int u\,dv=uv-\int v\,du`,
+    explanation:"A technique for integrating products of functions.",
+    example:"Often useful for products involving logarithms or polynomials."
+  },
+  {
+    title:"Eigenvalue Equation",level:"Undergraduate",category:"Linear Algebra",
+    formula:String.raw`A\mathbf v=\lambda\mathbf v`,
+    explanation:"A nonzero vector v is an eigenvector of A with eigenvalue lambda.",
+    example:"Used in matrix diagonalization and many applied mathematics methods."
+  },
+  {
+    title:"Matrix Determinant: 2 × 2",level:"Undergraduate",category:"Linear Algebra",
+    formula:String.raw`\det(A)=ad-bc,\quad A=\begin{pmatrix}a&b\\c&d\end{pmatrix}`,
+    explanation:"Computes the determinant of a two-by-two matrix.",
+    example:String.raw`\det\begin{pmatrix}1&2\\3&4\end{pmatrix}=-2`
+  },
+  {
+    title:"Cauchy–Riemann Equations",level:"Postgraduate",category:"Advanced Mathematics",
+    formula:String.raw`\frac{\partial u}{\partial x}=\frac{\partial v}{\partial y},\quad \frac{\partial u}{\partial y}=-\frac{\partial v}{\partial x}`,
+    explanation:"Conditions associated with complex differentiability when the relevant partial derivatives exist.",
+    example:"Used when checking analyticity of complex functions."
+  },
+  {
+    title:"Stokes' Theorem",level:"Postgraduate",category:"Calculus",
+    formula:String.raw`\iint_S(\nabla\times\mathbf F)\cdot d\mathbf S=\oint_{\partial S}\mathbf F\cdot d\mathbf r`,
+    explanation:"Relates a surface integral of curl to a line integral along the oriented boundary.",
+    example:"A central theorem in vector calculus."
+  }
 ];
 
-const PAGE_SIZE = 10;
+const itemsPerPage = 8;
 let filtered = [...formulas];
-let page = 1;
+let currentPage = 1;
 
-const $ = id => document.getElementById(id);
+const list = document.getElementById("formulaList");
+const status = document.getElementById("status");
+const search = document.getElementById("search");
+const level = document.getElementById("level");
+const category = document.getElementById("category");
+const pagination = document.getElementById("pagination");
 
-function init() {
-  $("total").textContent = formulas.length;
+function initialise() {
+  [...new Set(formulas.map(f => f.category))]
+    .sort()
+    .forEach(name => {
+      const option = document.createElement("option");
+      option.value = name;
+      option.textContent = name;
+      category.appendChild(option);
+    });
 
-  const levels = [...new Set(formulas.map(f => f[1]))];
-  const categories = [...new Set(formulas.map(f => f[2]))].sort();
-
-  levels.forEach(v => $("level").add(new Option(v, v)));
-  categories.forEach(v => $("category").add(new Option(v, v)));
-
-  $("search").addEventListener("input", applyFilters);
-  $("level").addEventListener("change", applyFilters);
-  $("category").addEventListener("change", applyFilters);
-
+  search.addEventListener("input", applyFilters);
+  level.addEventListener("change", applyFilters);
+  category.addEventListener("change", applyFilters);
   applyFilters();
-}
-
-function chooseLevel(value) {
-  $("level").value = value;
-  $("search").value = "";
-  applyFilters();
-  $("library").scrollIntoView({behavior:"smooth"});
 }
 
 function applyFilters() {
-  const query = $("search").value.trim().toLowerCase();
-  const level = $("level").value;
-  const category = $("category").value;
+  const query = search.value.trim().toLowerCase();
+  const selectedLevel = level.value;
+  const selectedCategory = category.value;
 
-  filtered = formulas.filter(f =>
-    (!level || f[1] === level) &&
-    (!category || f[2] === category) &&
-    (!query || f.join(" ").toLowerCase().includes(query))
-  );
+  filtered = formulas.filter(f => {
+    const text = [
+      f.title, f.level, f.category, f.formula,
+      f.explanation, f.example
+    ].join(" ").toLowerCase();
 
-  page = 1;
+    return text.includes(query) &&
+      (!selectedLevel || f.level === selectedLevel) &&
+      (!selectedCategory || f.category === selectedCategory);
+  });
+
+  currentPage = 1;
   render();
 }
 
 function resetFilters() {
-  $("search").value = "";
-  $("level").value = "";
-  $("category").value = "";
+  search.value = "";
+  level.value = "";
+  category.value = "";
   applyFilters();
 }
 
+function makeText(tag, text, className) {
+  const element = document.createElement(tag);
+  element.textContent = text;
+  if (className) element.className = className;
+  return element;
+}
+
 function render() {
-  $("count").textContent =
-    `Showing ${filtered.length} of ${formulas.length} formula entries`;
+  list.replaceChildren();
+  pagination.replaceChildren();
 
-  const pages = Math.ceil(filtered.length / PAGE_SIZE);
-  if (page > pages) page = Math.max(1, pages);
-
-  $("pageInfo").textContent =
-    filtered.length ? `Page ${page} of ${pages}` : "";
+  status.textContent = `Showing ${filtered.length} of ${formulas.length} formulas`;
 
   if (!filtered.length) {
-    $("list").innerHTML =
-      '<div class="empty"><h3>No formulas found</h3><p>Try another search or reset the filters.</p></div>';
-    $("pagination").innerHTML = "";
+    list.appendChild(makeText("p",
+      "No matching formulas. Try another search or reset the filters.",
+      "panel"));
     return;
   }
 
-  const start = (page - 1) * PAGE_SIZE;
-  const entries = filtered.slice(start, start + PAGE_SIZE);
+  const totalPages = Math.ceil(filtered.length / itemsPerPage);
+  currentPage = Math.min(currentPage, totalPages);
+  const start = (currentPage - 1) * itemsPerPage;
+  const pageItems = filtered.slice(start, start + itemsPerPage);
 
-  $("list").innerHTML = entries.map(f => `
-    <article class="card">
-      <div class="meta">
-        <span class="tag">${escapeHTML(f[1])}</span>
-        <span class="tag">${escapeHTML(f[2])}</span>
-      </div>
-      <h3>${escapeHTML(f[0])}</h3>
-      <div class="formula">\\(${escapeHTML(f[3].replace(/^\\\\\(|\\\\\)$/g, ""))}\\)</div>
-      <p class="explanation"><strong>Explanation:</strong> ${escapeHTML(f[4])}</p>
-      <p class="example"><strong>Example:</strong> ${escapeHTML(f[5])}</p>
-    </article>
-  `).join("");
+  pageItems.forEach(f => {
+    const card = document.createElement("article");
+    card.className = "formula-card";
 
-  $("pagination").innerHTML = "";
+    const meta = document.createElement("div");
+    meta.className = "meta";
+    meta.appendChild(makeText("span", f.level, "tag level"));
+    meta.appendChild(makeText("span", f.category, "tag"));
 
-  function addButton(label, target, active = false, disabled = false) {
-    const b = document.createElement("button");
-    b.textContent = label;
-    if (active) b.classList.add("active");
-    b.disabled = disabled;
-    b.onclick = () => {
-      page = target;
+    const title = makeText("h3", f.title);
+    const formula = document.createElement("div");
+    formula.className = "formula";
+
+    // Set text safely, then let MathJax render the LaTeX.
+    formula.textContent = "\\[" + f.formula + "\\]";
+
+    const explanation = document.createElement("p");
+    explanation.className = "explanation";
+    explanation.appendChild(makeText("strong", "Explanation: "));
+    explanation.appendChild(document.createTextNode(f.explanation));
+
+    const example = document.createElement("p");
+    example.className = "example";
+    example.appendChild(makeText("strong", "Example: "));
+    example.appendChild(document.createTextNode(f.example));
+
+    card.append(meta, title, formula, explanation, example);
+    list.appendChild(card);
+  });
+
+  const previous = makeText("button", "Previous");
+  previous.disabled = currentPage === 1;
+  previous.onclick = () => {
+    currentPage--;
+    render();
+    document.getElementById("formulaList").scrollIntoView({behavior:"smooth"});
+  };
+  pagination.appendChild(previous);
+
+  for (let p = 1; p <= totalPages; p++) {
+    const button = makeText("button", String(p));
+    button.disabled = p === currentPage;
+    button.setAttribute("aria-label", "Page " + p);
+    button.onclick = () => {
+      currentPage = p;
       render();
-      $("library").scrollIntoView({behavior:"smooth"});
+      document.getElementById("formulaList").scrollIntoView({behavior:"smooth"});
     };
-    $("pagination").appendChild(b);
+    pagination.appendChild(button);
   }
 
-  addButton("Previous", page - 1, false, page === 1);
+  const next = makeText("button", "Next");
+  next.disabled = currentPage === totalPages;
+  next.onclick = () => {
+    currentPage++;
+    render();
+    document.getElementById("formulaList").scrollIntoView({behavior:"smooth"});
+  };
+  pagination.appendChild(next);
 
-  for (let i = 1; i <= pages; i++) {
-    if (pages > 9 && Math.abs(i - page) > 2 && i !== 1 && i !== pages) continue;
-    addButton(String(i), i, i === page);
-  }
-
-  addButton("Next", page + 1, false, page === pages);
-
+  // Typeset after each render, including searches and page changes.
   if (window.MathJax && window.MathJax.typesetPromise) {
-    MathJax.typesetPromise([$ ("list")]).catch(() => {});
+    MathJax.typesetPromise([list]).catch(error => {
+      console.error("MathJax rendering error:", error);
+    });
   }
 }
 
-function escapeHTML(value) {
-  return String(value).replace(/[&<>"']/g, c => ({
-    "&":"&amp;", "<":"&lt;", ">":"&gt;",
-    '"':"&quot;", "'":"&#39;"
-  })[c]);
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initialise);
+} else {
+  initialise();
 }
-
-document.addEventListener("DOMContentLoaded", init);
 </script>
 </body>
 </html>
