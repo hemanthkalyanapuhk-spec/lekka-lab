@@ -8,7 +8,7 @@
   <!-- Markdown & KaTeX Math Rendering Libraries -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInPage()"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
   <!-- Luxury Calligraphy & Cinematic Title Fonts -->
@@ -71,7 +71,6 @@
     .brand-divider span { color: var(--gold-primary); font-size: 0.85rem; }
     header p { font-size: clamp(0.9rem, 1.5vw, 1.05rem); color: #e2e8f0; letter-spacing: 1px; font-weight: 500; text-transform: uppercase; }
 
-    /* FULL EDGE-TO-EDGE LAPTOP FIT */
     .container { max-width: 99%; width: 99%; margin: 15px auto; padding: 0 5px; }
 
     .ai-card {
@@ -331,17 +330,17 @@
             <span>Max Score: 12</span>
           </div>
           <div id="q-box-c6c7">
-            <div class="q-item"><span class="q-num">1.</span> Compute addition: $(-<span id="c6-n1a">8</span>) + (-<span id="c6-n1b">5</span>) =$ _________</div>
-            <div class="q-item"><span class="q-num">2.</span> Compute subtraction: $(-<span id="c6-n2a">12</span>) - (-<span id="c6-n2b">7</span>) =$ _________</div>
-            <div class="q-item"><span class="q-num">3.</span> Compute multiplication: $(-<span id="c6-n3a">6</span>) \times (-<span id="c6-n3b">4</span>) =$ _________</div>
-            <div class="q-item"><span class="q-num">4.</span> Compute division: $(-<span id="c6-n4a">35</span>) \div (+<span id="c6-n4b">7</span>) =$ _________</div>
+            <div class="q-item"><span class="q-num">1.</span> Compute addition: $(-<span id="c6-n1a">13</span>) + (-<span id="c6-n1b">3</span>) =$</div>
+            <div class="q-item"><span class="q-num">2.</span> Compute subtraction: $(-<span id="c6-n2a">24</span>) - (-<span id="c6-n2b">10</span>) =$</div>
+            <div class="q-item"><span class="q-num">3.</span> Compute multiplication: $(-<span id="c6-n3a">6</span>) \times (-<span id="c6-n3b">4</span>) =$</div>
+            <div class="q-item"><span class="q-num">4.</span> Compute division: $(-<span id="c6-n4a">35</span>) \div (+<span id="c6-n4b">7</span>) =$</div>
             <div class="q-item"><span class="q-num">5.</span> Solve linear equation with transposition: <span id="c6-n5a">3</span>x - <span id="c6-n5b">7</span> = <span id="c6-n5c">14</span>. Find x.</div>
-            <div class="q-item"><span class="q-num">6.</span> <b>Profit &amp; Loss:</b> A shopkeeper buys a bag for ₹<span id="c6-n6a">250</span> and sells it for ₹<span id="c6-n6b">300</span>. Calculate profit percentage: _________%</div>
+            <div class="q-item"><span class="q-num">6.</span> <b>Profit &amp; Loss:</b> A shopkeeper buys a bag for ₹<span id="c6-n6a">400</span> and sells it for ₹<span id="c6-n6b">520</span>. Calculate profit percentage: _________%</div>
           </div>
           <button type="button" class="ans-key-toggle" onclick="toggleAnsKey('ans-c6c7')">👁️ Toggle Step-by-Step Answer Key</button>
           <div class="ans-key-content" id="ans-c6c7">
             <b>Answer Key:</b><br>
-            <span id="ans-text-c6c7">1. -13.<br>2. -5.<br>3. +24.<br>4. -5.<br>5. x = 7.<br>6. 20%.</span>
+            <span id="ans-text-c6c7">1. -16.<br>2. -14.<br>3. +24.<br>4. -5.<br>5. x = 7.<br>6. 30%.</span>
           </div>
         </div>
 
@@ -370,17 +369,17 @@
             <span>Max Score: 12</span>
           </div>
           <div id="q-box-c8c10">
-            <div class="q-item"><span class="q-num">1.</span> Factorise using identities: $<span id="c8-n1a">49</span>x^2 - <span id="c8-n1b">16</span>y^2 =$ ____________________</div>
-            <div class="q-item"><span class="q-num">2.</span> Split middle term: $x^2 + <span id="c8-n2a">7</span>x + <span id="c8-n2b">6</span> = 0$. State factors.</div>
-            <div class="q-item"><span class="q-num">3.</span> Quadratic Formula roots for $<span id="c8-n3a">2</span>x^2 - <span id="c8-n3b">5</span>x + <span id="c8-n3c">2</span> = 0$: $x =$ ____________________</div>
+            <div class="q-item"><span class="q-num">1.</span> Factorise using identities: $16x^2 - 16y^2 =$</div>
+            <div class="q-item"><span class="q-num">2.</span> Split middle term: $x^2 + 7x + 13 = 0$. State factors.</div>
+            <div class="q-item"><span class="q-num">3.</span> Quadratic Formula roots for $2x^2 - 5x + 2 = 0$: $x =$</div>
             <div class="q-item"><span class="q-num">4.</span> In right triangle ABC, if $\sin\theta = \frac{3}{5}$, calculate $\cos\theta$ and $\tan\theta$.</div>
-            <div class="q-item"><span class="q-num">5.</span> Rationalise the denominator: $\frac{1}{\sqrt{5} - \sqrt{3}} =$ ____________________</div>
-            <div class="q-item"><span class="q-num">6.</span> <b>Simple Interest:</b> Find SI and amount on ₹<span id="c8-n6a">4,000</span> at <span id="c8-n6b">5</span>% per annum for <span id="c8-n6c">3</span> years: SI = ₹_________, Amount = ₹_________</div>
+            <div class="q-item"><span class="q-num">5.</span> Rationalise the denominator: $\frac{1}{\sqrt{5} - \sqrt{3}} =$</div>
+            <div class="q-item"><span class="q-num">6.</span> <b>Simple Interest:</b> Find SI and amount on ₹<span id="c8-n6a">5,000</span> at <span id="c8-n6b">5</span>% per annum for <span id="c8-n6c">3</span> years: SI = ₹_________, Amount = ₹_________</div>
           </div>
           <button type="button" class="ans-key-toggle" onclick="toggleAnsKey('ans-c8c10')">👁️ Toggle Step-by-Step Answer Key</button>
           <div class="ans-key-content" id="ans-c8c10">
             <b>Answer Key:</b><br>
-            <span id="ans-text-c8c10">1. $(7x - 4y)(7x + 4y)$.<br>2. $(x+1)(x+6)$.<br>3. $x = 2 \text{ or } \frac{1}{2}$.<br>4. $\cos\theta = \frac{4}{5}, \tan\theta = \frac{3}{4}$.<br>5. $\frac{\sqrt{5} + \sqrt{3}}{2}$.<br>6. SI = ₹600, Amount = ₹4,600.</span>
+            <span id="ans-text-c8c10">1. $16(x-y)(x+y)$.<br>2. Non-factorisable over integers.<br>3. $x = 2 \text{ or } \frac{1}{2}$.<br>4. $\cos\theta = \frac{4}{5}, \tan\theta = \frac{3}{4}$.<br>5. $\frac{\sqrt{5} + \sqrt{3}}{2}$.<br>6. SI = ₹750, Amount = ₹5,750.</span>
           </div>
         </div>
 
@@ -517,9 +516,22 @@
     const DIRECT_GEMINI_KEYS = ENCODED_KEYS.map(k => atob(k));
     let base64Image = null;
 
-    // Auto-refresh all worksheets on load and render KaTeX
+    // Render KaTeX globally on page load
+    function renderMathInPage() {
+      if (window.renderMathInElement) {
+        renderMathInElement(document.body, {
+          delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "$", right: "$", display: false}
+          ],
+          throwOnError: false
+        });
+      }
+    }
+
     window.addEventListener('DOMContentLoaded', () => {
       refreshAllWorksheets();
+      renderMathInPage();
     });
 
     function toggleAccordion(id) {
@@ -543,7 +555,6 @@
       refreshWorksheet('c8c10');
     }
 
-    // STRICT INDEPENDENT WORKSHEET REFRESH ENGINE WITH KATEX RENDERING
     function refreshWorksheet(sheetId) {
       if (sheetId === 'c1c2') {
         const n1 = Math.floor(Math.random() * 40) + 20;
@@ -635,18 +646,10 @@
           6. Profit = ₹${profit} (${pFitPct}%).
         `;
       } else if (sheetId === 'c8c10') {
-        const sq1 = [16, 25, 36, 49][Math.floor(Math.random() * 4)];
-        const sq2 = [4, 9, 16, 25][Math.floor(Math.random() * 4)];
-        const bVal = Math.floor(Math.random() * 4) + 5;
-        const cVal = Math.floor(Math.random() * 10) + 6;
         const pVal = [4000, 5000, 8000, 10000][Math.floor(Math.random() * 4)];
         const rVal = [5, 8, 10][Math.floor(Math.random() * 3)];
         const tVal = [2, 3][Math.floor(Math.random() * 2)];
 
-        document.getElementById('c8-n1a').innerText = sq1;
-        document.getElementById('c8-n1b').innerText = sq2;
-        document.getElementById('c8-n2a').innerText = bVal;
-        document.getElementById('c8-n2b').innerText = cVal;
         document.getElementById('c8-n6a').innerText = pVal.toLocaleString('en-IN');
         document.getElementById('c8-n6b').innerText = rVal;
         document.getElementById('c8-n6c').innerText = tVal;
@@ -664,16 +667,8 @@
         `;
       }
 
-      // Re-render KaTeX math formatting across the refreshed worksheet container
-      if (window.renderMathInElement) {
-        renderMathInElement(document.getElementById('ws-' + sheetId), {
-          delimiters: [
-            {left: "$$", right: "$$", display: true},
-            {left: "$", right: "$", display: false}
-          ],
-          throwOnError: false
-        });
-      }
+      // Re-run KaTeX on the refreshed worksheet container
+      renderMathInPage();
     }
 
     function clearResults() {
