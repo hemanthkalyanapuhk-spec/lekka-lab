@@ -316,7 +316,7 @@
         <span class="online-badge">ONLINE</span>
       </div>
       
-      <textarea id="aiProblemInput" placeholder="Ask anything... Math theorems, 2D/3D visual diagrams, Recipes, or GK!"></textarea>
+      <textarea id="aiProblemInput" placeholder="Ask anything... Science, Math theorems, 2D/3D visual diagrams, Recipes, or GK!"></textarea>
       
       <!-- Preview for captured/uploaded photos -->
       <div class="image-preview-container" id="imagePreviewContainer">
@@ -508,7 +508,7 @@
 
     // Visitor Counter
     (function initCounter() {
-      let count = parseInt(localStorage.getItem('lekka_visits') || '1910', 10);
+      let count = parseInt(localStorage.getItem('lekka_visits') || '1915', 10);
       count += 1;
       localStorage.setItem('lekka_visits', count);
       document.getElementById('visitorCount').innerText = count.toLocaleString();
@@ -638,7 +638,7 @@
       recognition.start();
     }
 
-    // High-Precision AI Engine (Pure Safe SVG Extraction)
+    // High-Precision AI Engine (With Bulletproof Auto-Closing SVG Parser)
     async function handleSolve() {
       const text = document.getElementById('aiProblemInput').value.trim();
       const btn = document.getElementById('btnSolve');
@@ -667,11 +667,12 @@ CONTENT RULES:
 2. MATHEMATICS & SCIENCE:
    - Use standard LaTeX ($..$ inline, $$..$$ display) for theorems, derivations, and formulas.
 3. DIAGRAMS & ILLUSTRATIONS (When asked or required):
-   - When drawing geometry or biological anatomy (e.g., Heart, Triangle, Cell):
-     * Output a complete, single inline SVG (<svg viewBox="0 0 540 380" xmlns="http://www.w3.org/2000/svg">...</svg>).
-     * DO NOT wrap the SVG inside markdown backticks (do not use \`\`\`xml or \`\`\`svg).
-     * Place ALL labels directly inside the SVG using pointer lines (<line ...>) and text tags (<text x=".." y=".." font-size="12" font-weight="700" fill="#0f172a">Label</text>).
-     * NEVER print labels as loose text outside the SVG.`;
+   - Output a single, clean inline SVG: <svg viewBox="0 0 540 380" xmlns="http://www.w3.org/2000/svg">...</svg>
+   - DO NOT use markdown code blocks (\`\`\`xml or \`\`\`svg). Output raw <svg> directly.
+   - Keep paths clean and ensure you ALWAYS include the closing </svg> tag.
+   - Place all part names and labels directly INSIDE the SVG using:
+     <text x=".." y=".." font-size="12" font-weight="700" fill="#0f172a">Label</text>
+   - NEVER print labels as loose text outside the SVG.`;
 
       const contents = [{
         role: "user",
@@ -737,26 +738,41 @@ CONTENT RULES:
         return;
       }
 
-      // ISOLATE & PROTECT SVG: Extract SVG completely so Marked/KaTeX will NEVER break or leak it
+      // 1. Strip markdown backticks around SVG if model added them
+      let processed = rawAnswer.replace(/```(?:xml|html|svg)?\s*(<svg[\s\S]*?<\/svg>)\s*```/gi, '$1');
+
+      // 2. BULLETPROOF SVG EXTRACTION: Handles both closed and truncated SVGs
       const svgList = [];
-      let sanitizedText = rawAnswer.replace(/```(?:xml|html|svg)?\s*(<svg[\s\S]*?<\/svg>)\s*```/gi, '$1');
       
-      sanitizedText = sanitizedText.replace(/<svg[\s\S]*?<\/svg>/gi, (match) => {
+      // If SVG tag opened but not closed due to token cut
+      if (processed.includes("<svg") && !processed.includes("</svg>")) {
+        processed = processed + "\n</g>\n</svg>";
+      }
+
+      // Extract every SVG safely
+      processed = processed.replace(/<svg[\s\S]*?<\/svg>/gi, (match) => {
         svgList.push(match);
-        return `\n\n__SVG_PLACEHOLDER_${svgList.length - 1}__\n\n`;
+        return `\n\n__SVG_HOLDER_${svgList.length - 1}__\n\n`;
       });
 
-      // Remove loose orphaned label lists immediately following SVG placeholders
-      sanitizedText = sanitizedText.replace(/(__SVG_PLACEHOLDER_\d+__)([\s\S]*?)(?=(?:###|####|\*\*|##|[A-Z][a-z]+:))/i, (m, p1, p2) => {
-        const tr = p2.trim();
-        return (/^[a-zA-Z0-9\s,\\^_\(\)\/\*\+\-=\|]+$/.test(tr) && tr.length < 160) ? p1 + "\n\n" : m; });        sanitizedText = sanitizedText .replace(/\u2260/g, ' \\neq ') .replace(/\u00B1/g, ' \\pm ') .replace(/\u2264/g, ' \\leq ') .replace(/\u2265/g, ' \\geq ') .replace(/\u00D7/g, ' \\times ') .replace(/\u2192/g, ' \\to ') .replace(/\u221E/g, ' \\infty ') .replace(/\$\$\s*([^\$]+)\s*\$\$/g, '\n\n$$$ $1$$$ \n\n');
+      // 3. Remove loose XML tags, comments, or orphaned label lists that leaked outside
+      processed = processed
+        .replace(/<!--[\s\S]*?-->/g, '') // strip comments
+        .replace(/<\/?[a-zA-Z]+:[^>]+>/g, '') // strip broken xml namespaces
+        .replace(/(<linearGradient[\s\S]*?<\/linearGradient>)/gi, '')
+        .replace(/(<radialGradient[\s\S]*?<\/radialGradient>)/gi, '')
+        .replace(/(<filter[\s\S]*?<\/filter>)/gi, '')
+        .replace(/(<path[^>]*>)/gi, '')
+        .replace(/(__SVG_HOLDER_\d+__)([\s\S]*?)(?=(?:###|####|\*\*|##|[A-Z][a-z]+:))/i, (m, p1, p2) => {
+          const tr = p2.trim();
+          return (/^[a-zA-Z0-9\s,\\^_\(\)\/\*\+\-=\|]+$/.test(tr) && tr.length < 160) ? p1 + "\n\n" : m; });        processed = processed .replace(/\u2260/g, ' \\neq ') .replace(/\u00B1/g, ' \\pm ') .replace(/\u2264/g, ' \\leq ') .replace(/\u2265/g, ' \\geq ') .replace(/\u00D7/g, ' \\times ') .replace(/\u2192/g, ' \\to ') .replace(/\u221E/g, ' \\infty ') .replace(/\$\$\s*([^\$]+)\s*\$\$/g, '\n\n$$$ $1$$$ \n\n');
 
-      // Render Markdown & Math on the clean text
-      let htmlOutput = marked.parse(sanitizedText);
+      // 4. Render clean Markdown & LaTeX
+      let htmlOutput = marked.parse(processed);
 
-      // Re-inject the untouched, pristine SVGs back into their placeholders
+      // 5. Inject the protected SVGs back
       svgList.forEach((svgCode, idx) => {
-        htmlOutput = htmlOutput.replace(`__SVG_PLACEHOLDER_${idx}__`, svgCode);
+        htmlOutput = htmlOutput.replace(`__SVG_HOLDER_${idx}__`, svgCode);
       });
 
       mathContent.innerHTML = htmlOutput;
