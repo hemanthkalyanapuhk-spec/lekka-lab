@@ -211,6 +211,7 @@
       border-color: var(--gold-primary);
     }
 
+    /* Solution Box with Full Horizontal Scrolling Support */
     .solution-box {
       margin-top: 20px;
       padding: 22px;
@@ -222,18 +223,29 @@
       line-height: 1.7;
       font-size: 0.98rem;
       box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
-    /* Diagram Styling */
+    /* Ensure KaTeX long equations scroll gracefully instead of cutting off */
+    .solution-box .katex-display {
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 8px 0;
+      margin: 12px 0;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    /* Professional Scientific Diagram Styling */
     .solution-box svg {
       display: block;
       margin: 18px auto;
       max-width: 100%;
       height: auto;
-      border-radius: 12px;
+      border-radius: 14px;
       background: #ffffff;
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+      border: 1.5px solid #e2e8f0;
+      box-shadow: 0 6px 20px rgba(11, 37, 69, 0.08);
     }
 
     .section-title {
@@ -596,7 +608,7 @@
 
     // Visitor Counter
     (function initCounter() {
-      let count = parseInt(localStorage.getItem('lekka_visits') || '1960', 10);
+      let count = parseInt(localStorage.getItem('lekka_visits') || '1965', 10);
       count += 1;
       localStorage.setItem('lekka_visits', count);
       document.getElementById('visitorCount').innerText = count.toLocaleString();
@@ -727,7 +739,7 @@
       recognition.start();
     }
 
-    // High-Precision AI Engine (Natural Direct Answering)
+    // High-Precision AI Engine with Beautiful Diagrams & Natural Context
     async function handleSolve() {
       const text = document.getElementById('aiProblemInput').value.trim();
       const btn = document.getElementById('btnSolve');
@@ -743,7 +755,6 @@
       mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">⚡ Generating answer...</p>';
       btn.disabled = true;
 
-      // Smart, natural instructions that answer according to question type
       const systemInstruction = `You are "Lucky", a fast universal educational assistant for Lekka Lab.
 
 CRITICAL INSTRUCTIONS:
@@ -751,12 +762,20 @@ CRITICAL INSTRUCTIONS:
 - DO NOT invent multiple-choice options (Option A, Option B) when the user just asks for a theorem, concept, or formula.
 - If the question IS an actual multiple-choice question (has options A, B, C, D in text or image):
   * State the correct option and provide a concise 2-line reason.
-- If the question is a THEOREM (e.g., BPT theorem, Thales, Pythagoras):
-  * Provide Statement, Geometric Diagram (SVG with labeled vertices A, B, C, D, E), Given, To Prove, Construction, and Step-by-Step Proof.
-- If the question is a DIAGRAM request (e.g., Heart, Biology, Optics):
-  * Provide a clean inline SVG (<svg viewBox="0 0 540 380" ...>) with clear pointer lines and labels inside the SVG.
-- If in Telugu or asks "in telugu" / "తెలుగులో", reply 100% in natural Telugu.
-- Use standard LaTeX ($..$ inline, $$..$$ display) for math formulas.`;
+
+THEOREMS & MATHEMATICAL PROOFS (e.g., BPT theorem, Thales, Pythagoras):
+  * Provide Statement, Geometric Diagram (Detailed SVG), Given, To Prove, Construction, and Step-by-Step Proof.
+  * For BPT Theorem, draw a beautiful Triangle ABC with points D on AB, E on AC, red parallel line DE, dashed constructions BE and CD, and perpendicular altitudes EN and DM with clear colored vertex labels.
+
+HIGH QUALITY DIAGRAM INSTRUCTIONS:
+  * Produce clean, high-contrast, professional inline SVG graphics (<svg viewBox="0 0 540 380" ...>).
+  * Use vivid colors, proper stroke-widths, distinct vertex circles, and legible labels placed directly inside the SVG.
+  * If heart diagram is asked: Draw connected anatomical chambers with 3D gradients and clear pointer labels.
+  * Never wrap the SVG in markdown backticks.
+
+LANGUAGE & MATH:
+  * If in Telugu or asks "in telugu" / "తెలుగులో", reply 100% in natural Telugu.
+  * Always use LaTeX ($..$ inline, $$..$$ display) for all formulas.`;
 
       const contents = [{
         role: "user",
