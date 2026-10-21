@@ -551,7 +551,7 @@
       recognition.start();
     }
 
-    // Direct Universal AI Engine (Pure Proven Protocol)
+    // Direct Universal AI Engine with Native Detailed Error Reporting
     async function handleSolve() {
       const text = document.getElementById('aiProblemInput').value.trim();
       const btn = document.getElementById('btnSolve');
@@ -567,46 +567,50 @@
       mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">Thinking...</p>';
       btn.disabled = true;
 
-      // Clean, unpadded system instruction that succeeded before
-      const systemInstruction = `You are Lucky, a universal educational assistant for Lekka Lab.
-- Answer clearly using Markdown headings and bullet points.
-- Use LaTeX ($..$ inline, $$..$$ display) for math and chemical formulas.
-- If diagrams are needed, provide clean inline SVG with labels directly inside the SVG.`;
+      const systemInstruction = `You are Lucky, a universal educational AI assistant for Lekka Lab.
+- Provide direct, structured, and informative answers with clear headings and bullet points.
+- Use standard LaTeX ($..$ inline, $$..$$ display) for math and chemical formulas.
+- If geometric diagrams or anatomy are requested, provide an inline SVG (<svg viewBox="0 0 360 220" ...>) with labels directly inside the SVG.`;
 
       const promptInput = `${systemInstruction}\n\nQuestion: ${text}`;
       let rawAnswer = null;
       let lastError = "Request failed";
 
-      const endpoint = `https://generativelanguage.googleapis.com/v1beta/interactions`;
+      const shuffledKeys = [...DIRECT_GEMINI_KEYS].sort(() => 0.5 - Math.random());
 
-      for (const apiKey of DIRECT_GEMINI_KEYS) {
+      // Protocol: Standard generateContent with direct JSON structure
+      const contents = [{
+        role: "user",
+        parts: [{ text: promptInput }]
+      }];
+
+      if (base64Image) {
+        contents[0].parts.push({
+          inlineData: {
+            mimeType: "image/jpeg",
+            data: base64Image
+          }
+        });
+      }
+
+      for (const apiKey of shuffledKeys) {
         try {
+          const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent`;
           const res = await fetch(endpoint, {
             method: "POST",
             headers: { 
               "Content-Type": "application/json",
               "x-goog-api-key": apiKey
             },
-            body: JSON.stringify({
-              model: "gemini-3.5-flash-lite",
-              input: promptInput
-            })
+            body: JSON.stringify({ contents: contents })
           });
 
           const data = await res.json();
-          if (data.output_text) {
-            rawAnswer = data.output_text;
+          if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
+            rawAnswer = data.candidates[0].content.parts[0].text;
             break;
-          } else if (data.steps && data.steps.length > 0) {
-            for (const s of data.steps) {
-              if (s.output_text) { 
-                rawAnswer = s.output_text; 
-                break; 
-              }
-            }
-            if (rawAnswer) break;
           } else if (data.error) {
-            lastError = data.error.message || lastError;
+            lastError = data.error.message || JSON.stringify(data.error);
           }
         } catch (e) {
           lastError = e.message;
