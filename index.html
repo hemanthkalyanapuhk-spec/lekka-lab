@@ -100,6 +100,41 @@
     }
     textarea:focus { border-color: #2563eb; }
 
+    /* Image Preview Container */
+    .image-preview-container {
+      display: none;
+      margin-top: 10px;
+      align-items: center;
+      gap: 10px;
+      background: #f1f5f9;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px dashed #cbd5e1;
+    }
+    .image-preview-container img {
+      width: 48px;
+      height: 48px;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 1px solid #94a3b8;
+    }
+    .image-preview-container span {
+      font-size: 0.86rem;
+      color: #475569;
+      font-weight: 600;
+      flex: 1;
+    }
+    .btn-remove-img {
+      background: #fee2e2;
+      color: #dc2626;
+      border: 1px solid #fca5a5;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
     .ai-controls { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
     .btn {
       padding: 9px 16px;
@@ -280,15 +315,25 @@
         <span class="online-badge">ONLINE</span>
       </div>
       
-      <textarea id="aiProblemInput" placeholder="Ask anything... Science, Math theorems, 2D/3D visual diagrams, Recipes, or GK!"></textarea>
+      <textarea id="aiProblemInput" placeholder="Type a question, speak, or take a picture of a problem/diagram..."></textarea>
       
+      <!-- Visual preview for uploaded/captured image -->
+      <div class="image-preview-container" id="imagePreviewContainer">
+        <img id="imagePreview" src="" alt="Captured problem preview">
+        <span>📸 Photo attached and ready</span>
+        <button type="button" class="btn-remove-img" onclick="removeImage()">✖ Remove</button>
+      </div>
+
       <div class="ai-controls">
         <button class="btn btn-solve" id="btnSolve" onclick="handleSolve()">⚡ Ask Lucky</button>
         <button class="btn btn-secondary" id="btnVoice" onclick="toggleVoiceSearch()">🎙️ Voice Search</button>
-        <label class="btn btn-secondary">
-          📷 Image
-          <input type="file" id="imageInput" accept="image/*" style="display:none;" onchange="handleImage(event)">
+        
+        <!-- Live Camera & Gallery Input -->
+        <label class="btn btn-secondary" style="cursor: pointer;">
+          📷 Camera / Image
+          <input type="file" id="imageInput" accept="image/*" capture="environment" style="display:none;" onchange="handleImage(event)">
         </label>
+        
         <button class="btn btn-secondary" onclick="clearResults()">🗑️ Clear</button>
       </div>
 
@@ -462,7 +507,7 @@
 
     // Visitor Counter
     (function initCounter() {
-      let count = parseInt(localStorage.getItem('lekka_visits') || '1895', 10);
+      let count = parseInt(localStorage.getItem('lekka_visits') || '1898', 10);
       count += 1;
       localStorage.setItem('lekka_visits', count);
       document.getElementById('visitorCount').innerText = count.toLocaleString();
@@ -507,16 +552,58 @@
       return str.replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[m]);
     }
 
+    // Camera Capture & Image Handler with Compression
     function handleImage(e) {
       const file = e.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = () => { 
-          base64Image = reader.result.split(',')[1]; 
-          alert('Image added! Type your question and click Ask Lucky.');
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const img = new Image();
+        img.onload = () => {
+          // Downscale large camera photos to ensure sub-2-second transmission
+          const canvas = document.createElement('canvas');
+          let width = img.width;
+          let height = img.height;
+          const maxDim = 1000;
+
+          if (width > maxDim || height > maxDim) {
+            if (width > height) {
+              height = Math.round((height * maxDim) / width);
+              width = maxDim;
+            } else {
+              width = Math.round((width * maxDim) / height);
+              height = maxDim;
+            }
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+
+          // Get optimized base64 jpeg
+          const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.82);
+          base64Image = compressedDataUrl.split(',')[1];
+
+          // Show preview
+          document.getElementById('imagePreview').src = compressedDataUrl;
+          document.getElementById('imagePreviewContainer').style.display = 'flex';
+          
+          if (!document.getElementById('aiProblemInput').value.trim()) {
+            document.getElementById('aiProblemInput').value = "Please analyze this image, solve the problem, and explain step by step.";
+          }
         };
-        reader.readAsDataURL(file);
-      }
+        img.src = event.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function removeImage() {
+      base64Image = null;
+      document.getElementById('imageInput').value = '';
+      document.getElementById('imagePreviewContainer').style.display = 'none';
+      document.getElementById('imagePreview').src = '';
     }
 
     function toggleAccordion(id) {
@@ -528,7 +615,7 @@
       document.getElementById('aiProblemInput').value = '';
       document.getElementById('aiSolutionDisplay').style.display = 'none';
       document.getElementById('mathRenderedContent').innerHTML = '';
-      base64Image = null;
+      removeImage();
     }
 
     function toggleVoiceSearch() {
@@ -553,7 +640,7 @@
       recognition.start();
     }
 
-    // High-Precision Educational AI Engine
+    // High-Precision Multimodal Educational Engine (<2.5s)
     async function handleSolve() {
       const text = document.getElementById('aiProblemInput').value.trim();
       const btn = document.getElementById('btnSolve');
@@ -561,7 +648,7 @@
       const mathContent = document.getElementById('mathRenderedContent');
 
       if (!text && !base64Image) {
-        alert('Please enter a question or upload an image.');
+        alert('Please enter a question, speak, or take a picture using the Camera.');
         return;
       }
 
@@ -586,11 +673,13 @@ CONTENT RULES:
      * Output a complete, closed inline SVG (<svg viewBox="0 0 380 240" xmlns="http://www.w3.org/2000/svg">...</svg>).
      * EVERY vertex, point (A, B, C, D, E), and anatomical part (Right Atrium, Left Ventricle, Aorta) MUST be written DIRECTLY INSIDE the SVG using:
        <text x="..." y="..." font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">Label</text>
-     * NEVER print labels as loose text outside the SVG.`;
+     * NEVER print labels as loose text outside the SVG.
+4. IMAGE / CAMERA INPUT:
+   - If an image is provided, extract the question/diagram completely, solve it step-by-step, and state the final result clearly.`;
 
       const contents = [{
         role: "user",
-        parts: [{ text: `${systemInstruction}\n\nUser Question: ${text}` }]
+        parts: [{ text: `${systemInstruction}\n\nUser Question: ${text || "Solve the attached image problem completely."}` }]
       }];
 
       if (base64Image) {
@@ -605,7 +694,7 @@ CONTENT RULES:
       let rawAnswer = null;
       let lastError = "Request failed";
 
-      // Lightweight high-quota models first to prevent hitting the 20-request daily limit
+      // Lightweight high-quota models
       const models = [
         "gemini-3.5-flash-lite",
         "gemini-3.8-flash"
