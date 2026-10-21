@@ -336,7 +336,7 @@
         <!-- Worksheet C8-C10 -->
         <div class="worksheet-card printable-area" id="ws-c8c10">
           <div class="worksheet-header">
-            <h4>📄 Lekka Lab Daily Practice Sheet: Factorisation, Quadratics &amp; Simple Interest</h4>
+            <h4>📄 Lekka Lab Daily Practice Sheet: Exponents, Quadratics &amp; Simple Interest</h4>
             <div class="worksheet-btn-group">
               <button type="button" class="btn-refresh" onclick="refreshWorksheet('c8c10')">🔄 Refresh Sheet</button>
               <button type="button" class="btn-print" onclick="printElement('ws-c8c10')">🖨️ Print / PDF</button>
@@ -527,7 +527,7 @@
       refreshWorksheet('c8c10');
     }
 
-    // FULLY DYNAMIC WORKSHEET GENERATOR WITH INSTANT RENDERING
+    // FULLY DYNAMIC WORKSHEET GENERATOR WITH EXPONENTS & INSTANT RENDERING
     function refreshWorksheet(sheetId) {
       if (sheetId === 'c1c2') {
         const n1 = Math.floor(Math.random() * 40) + 20;
@@ -642,6 +642,10 @@
           6. Profit = ₹${profit} (${pFitPct}%).
         `;
       } else if (sheetId === 'c8c10') {
+        const baseExp = [2, 3, 5][Math.floor(Math.random() * 3)];
+        const pow1 = Math.floor(Math.random() * 3) + 2;
+        const pow2 = Math.floor(Math.random() * 3) + 2;
+        
         const sq1 = [9, 16, 25, 36][Math.floor(Math.random() * 4)];
         const sq2 = [4, 9, 16, 25][Math.floor(Math.random() * 4)];
         const r1 = Math.sqrt(sq1);
@@ -656,15 +660,6 @@
         const quadB = quadA * 2 + 1;
         const quadC = quadA;
 
-        const sinNum = [3, 5, 8][Math.floor(Math.random() * 3)];
-        const sinDen = sinNum + 2;
-
-        const sqrtList = [
-          {a: 5, b: 3},
-          {a: 7, b: 2},
-          {a: 6, b: 2}
-        ][Math.floor(Math.random() * 3)];
-
         const pVal = [4000, 5000, 8000, 10000][Math.floor(Math.random() * 4)];
         const rVal = [5, 8, 10][Math.floor(Math.random() * 3)];
         const tVal = [2, 3][Math.floor(Math.random() * 2)];
@@ -673,21 +668,19 @@
         const amt = pVal + si;
 
         document.getElementById('q-box-c8c10').innerHTML = `
-          <div class="q-item"><span class="q-num">1.</span> Factorise using identities: ${sq1}x^2 - ${sq2}y^2 = ____________________</div>
-          <div class="q-item"><span class="q-num">2.</span> Split middle term: $x^2 + ${sumRoots}x + ${prodRoots} = 0$. State factors.</div>
-          <div class="q-item"><span class="q-num">3.</span> Quadratic Formula roots for ${quadA}x^2 - ${quadB}x + ${quadC} = 0$: $x =$ ____________________</div>
-          <div class="q-item"><span class="q-num">4.</span> In right triangle ABC, if $\\sin\\theta = \\frac{${sinNum}}{${sinDen}}$, calculate $\\cos\\theta$ and $\\tan\\theta$.</div>
-          <div class="q-item"><span class="q-num">5.</span> Rationalise the denominator: $\\frac{1}{\\sqrt{${sqrtList.a}} - \\sqrt{${sqrtList.b}}} =$ ____________________</div>
-          <div class="q-item"><span class="q-num">6.</span> <b>Simple Interest:</b> Find SI and amount on ₹${pVal.toLocaleString('en-IN')} at ${rVal}% per annum for ${tVal} years: SI = ₹_________, Amount = ₹_________</div>
+          <div class="q-item"><span class="q-num">1.</span> Simplify using exponent laws: $${baseExp}^{${pow1}} \\times ${baseExp}^{${pow2}} =$ ____________________</div>
+          <div class="q-item"><span class="q-num">2.</span> Factorise using identities: ${sq1}x^2 - ${sq2}y^2 = ____________________</div>
+          <div class="q-item"><span class="q-num">3.</span> Split middle term: $x^2 + ${sumRoots}x + ${prodRoots} = 0$. State factors.</div>
+          <div class="q-item"><span class="q-num">4.</span> Quadratic Formula roots for ${quadA}x^2 - ${quadB}x + ${quadC} = 0$: $x =$ ____________________</div>
+          <div class="q-item"><span class="q-num">5.</span> <b>Simple Interest:</b> Find SI and amount on ₹${pVal.toLocaleString('en-IN')} at ${rVal}% per annum for ${tVal} years: SI = ₹_________, Amount = ₹_________</div>
         `;
 
         document.getElementById('ans-text-c8c10').innerHTML = `
-          1. $(${r1}x - ${r2}y)(${r1}x + ${r2}y)$.<br>
-          2. $(x + ${rootA})(x + ${rootB})$.<br>
-          3. Quadratic formula roots calculated.<br>
-          4. Trigonometric ratios calculated.<br>
-          5. $\\frac{\\sqrt{${sqrtList.a}} + \\sqrt{${sqrtList.b}}}{${sqrtList.a - sqrtList.b}}$.<br>
-          6. SI = ₹${si.toLocaleString('en-IN')}, Amount = ₹${amt.toLocaleString('en-IN')}.
+          1. $${baseExp}^{${pow1 + pow2}}$.<br>
+          2. $(${r1}x - ${r2}y)(${r1}x + ${r2}y)$.<br>
+          3. $(x + ${rootA})(x + ${rootB})$.<br>
+          4. Quadratic formula roots calculated.<br>
+          5. SI = ₹${si.toLocaleString('en-IN')}, Amount = ₹${amt.toLocaleString('en-IN')}.
         `;
       }
 
