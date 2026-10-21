@@ -280,7 +280,7 @@
         <span class="online-badge">ONLINE</span>
       </div>
       
-      <textarea id="aiProblemInput" placeholder="Ask anything... Science, Math, GK, Recipes, or Diagrams (e.g., 'రవ్వ లడ్డు తయారీ' or 'BPT Theorem')"></textarea>
+      <textarea id="aiProblemInput" placeholder="Ask anything... Math theorems, Science diagrams, Chemistry, Recipes, or GK (e.g., 'BPT Theorem' or 'Heart 3D design')"></textarea>
       
       <div class="ai-controls">
         <button class="btn btn-solve" id="btnSolve" onclick="handleSolve()">✨ Ask Lucky</button>
@@ -445,7 +445,7 @@
   <script>
     // 10 GEMINI API KEYS (Decoded at runtime)
     const ENCODED_KEYS = [
-      "QVEuQWI4Uk42SjNjb1IyOUVkLTczUVBSN2ZFaFVMcnhVMUQyVnZYLUZ3V0M5SHQ4NmF4Unc=",
+      "QVEuQWI4Uk42SjNjb1IyOUVkLTczUVBSN2ZFaFVMcnhVMUQyVnZYLUZ3V0M5SHQ4NmF4Unc=", // Valid primary key
       "QVEuQWI4Uk42S1VlRFY4Wm1aeVIyMEJQWVd0Nk45SGdHTWFCOHdMX1ZBLXFCVS04OU1MYVE=",
       "QVEuQWI4Uk42Sl9xTWlYaGt5cnp3VWxmZEo0cUFGTUdqT1lGaktJZ2pIU2l1ckRtdmxoS2c=",
       "QVEuQWI4Uk42S093RzFSUFJEOFlsN2RDMkY1bnV5N2sxdDdmT2YzR3JYT3lyaWJtOXY1RlE=",
@@ -462,7 +462,7 @@
 
     // Visitor Counter
     (function initCounter() {
-      let count = parseInt(localStorage.getItem('lekka_visits') || '1885', 10);
+      let count = parseInt(localStorage.getItem('lekka_visits') || '1888', 10);
       count += 1;
       localStorage.setItem('lekka_visits', count);
       document.getElementById('visitorCount').innerText = count.toLocaleString();
@@ -553,7 +553,7 @@
       recognition.start();
     }
 
-    // Direct Universal AI Engine (Context Aware, Multi-Language & Stable Diagrams)
+    // Direct Universal AI Engine (Fault-Tolerant Key Iterator)
     async function handleSolve() {
       const text = document.getElementById('aiProblemInput').value.trim();
       const btn = document.getElementById('btnSolve');
@@ -566,27 +566,26 @@
       }
 
       display.style.display = 'block';
-      mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">Thinking and preparing answer...</p>';
+      mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">Thinking and calculating solution...</p>';
       btn.disabled = true;
 
-      // Smart system instruction: Language-adaptive, context-aware, and avoids forcing math on non-math topics
-      const systemInstruction = `You are "Lucky", a helpful universal AI assistant for Lekka Lab.
+      const systemInstruction = `You are "Lucky", a helpful universal educational AI for Lekka Lab.
 
 LANGUAGE DIRECTIVE:
-- If the question contains Telugu words, Telugu script, or phrases like "in telugu" / "తెలుగులో", YOU MUST RESPOND 100% IN NATURAL TELUGU.
-- If in English, respond in clear English.
+- If the question is in Telugu or asks "in telugu" / "తెలుగులో", reply 100% in natural Telugu.
+- Otherwise, answer in clear English.
 
-CONTENT GUIDELINES:
-1. NON-MATH TOPICS (Recipes, General Knowledge, History, Everyday Advice):
-   - Answer directly, practically, and naturally.
-   - DO NOT force mathematical equations, chemical formulas, or unnecessary diagrams on cooking recipes or simple facts!
-2. MATHEMATICS & FORMULAS:
-   - For mathematical or scientific calculations, use standard LaTeX ($..$ inline, $$..$$ display).
-3. DIAGRAMS & ILLUSTRATIONS (Only when genuinely needed or requested):
-   - If drawing a diagram (geometry, heart/organ, physics), output a single VALID, SELF-CONTAINED inline SVG:
-     <svg viewBox="0 0 380 240" xmlns="http://www.w3.org/2000/svg">...</svg>
-   - Keep the SVG clean, well-proportioned, and lightweight so it renders completely.
-   - Place all labels directly INSIDE the SVG using <text> tags at proper coordinates. Do not leave the SVG open or incomplete.`;
+CONTENT RULES:
+1. NON-MATH TOPICS (Cooking, Daily Life, General Knowledge):
+   - Answer directly and naturally.
+   - DO NOT add formulas, math equations, or forced diagrams to cooking recipes or ordinary facts.
+2. MATHEMATICS & SCIENCE:
+   - Use standard LaTeX ($..$ inline, $$..$$ display) for theorems, derivations, and formulas.
+3. DIAGRAMS & ANATOMY (When asked or required):
+   - Provide a single, complete inline SVG (<svg viewBox="0 0 400 280" xmlns="http://www.w3.org/2000/svg">...</svg>).
+   - If drawing an anatomical organ like a Heart: Use simple, clear chambers (RA, LA, RV, LV) and blood vessels (Aorta, Vena Cava) with distinct colors.
+   - Place all labels directly inside the SVG using <text x=".." y=".." font-size="12" fill="#0f172a" text-anchor="middle">Label</text>.
+   - Ensure the SVG is completely closed and lightweight.`;
 
       const contents = [{
         role: "user",
@@ -605,12 +604,12 @@ CONTENT GUIDELINES:
       let rawAnswer = null;
       let lastError = "Request failed";
 
-      const shuffledKeys = [...DIRECT_GEMINI_KEYS].sort(() => 0.5 - Math.random());
       const targetModel = "gemini-3.8-flash";
+      const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${targetModel}:generateContent`;
 
-      for (const apiKey of shuffledKeys) {
+      // Seamless loop over keys: if any key hits quota/invalid, immediately proceeds to the next valid key
+      for (const apiKey of DIRECT_GEMINI_KEYS) {
         try {
-          const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${targetModel}:generateContent`;
           const res = await fetch(endpoint, {
             method: "POST",
             headers: { 
@@ -629,9 +628,10 @@ CONTENT GUIDELINES:
           const data = await res.json();
           if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
             rawAnswer = data.candidates[0].content.parts[0].text;
-            break;
+            break; // Success: exit loop immediately
           } else if (data.error) {
-            lastError = data.error.message || JSON.stringify(data.error);
+            lastError = data.error.message || "Key rejected";
+            // Continue to next key silently
           }
         } catch (e) {
           lastError = e.message;
@@ -644,7 +644,7 @@ CONTENT GUIDELINES:
         return;
       }
 
-      // Clean Markdown code blocks wrapping SVGs so they render as clean graphics
+      // Safe extraction of inline SVG to prevent code block leakage
       let cleanOutput = rawAnswer
         .replace(/```(?:xml|html|svg)?\s*(<svg[\s\S]*?<\/svg>)\s*```/gi, '$1')
         .replace(/\u2260/g, ' \\neq ')
