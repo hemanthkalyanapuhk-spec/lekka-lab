@@ -294,16 +294,17 @@
       box-shadow: 0 6px 20px rgba(11, 37, 69, 0.08);
     }
 
+    /* KaTeX Clean Styling */
     .solution-box .katex-display {
       max-width: 100%;
       overflow-x: auto;
       overflow-y: hidden;
-      padding: 6px 0;
-      margin: 10px 0;
+      padding: 8px 0;
+      margin: 12px 0;
       -webkit-overflow-scrolling: touch;
     }
     .solution-box .katex {
-      font-size: 1.05em;
+      font-size: 1.08em;
     }
     .solution-box .katex-error {
       color: inherit !important;
@@ -311,36 +312,76 @@
       background: none !important;
     }
 
-    /* Ultra-Responsive Table Wrapper (Zero Cutoffs) */
-    .table-responsive-wrapper {
-      width: 100%;
+    /* Lekka Lab Signature Interactive Periodic Element Card */
+    .lekka-periodic-card {
+      background: #06152d;
+      border: 1.5px solid var(--gold-primary);
+      border-radius: 14px;
+      padding: 16px;
       margin: 16px 0;
-      border-radius: 12px;
-      border: 1px solid #e2e8f0;
-      background: #ffffff;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.04);
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.35);
+      color: #ffffff;
     }
-    .table-responsive-wrapper table {
+    .lekka-periodic-card h3 {
+      color: #fef08a;
+      font-size: 1.15rem;
+      text-align: center;
+      margin-bottom: 4px;
+      font-weight: 800;
+    }
+    .lekka-periodic-card p {
+      color: #94a3b8;
+      font-size: 0.85rem;
+      text-align: center;
+      margin-bottom: 14px;
+    }
+    .element-search-input {
       width: 100%;
-      min-width: 320px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      background: rgba(3, 11, 23, 0.9);
+      color: #ffffff;
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+      outline: none;
+    }
+    .element-search-input:focus {
+      border-color: var(--gold-primary);
+    }
+    .element-table-container {
+      max-height: 380px;
+      overflow-y: auto;
+      border-radius: 8px;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+    }
+    .element-table {
+      width: 100%;
       border-collapse: collapse;
       table-layout: fixed;
-    }
-    .table-responsive-wrapper th,
-    .table-responsive-wrapper td {
-      padding: 10px 12px;
+      font-size: 0.86rem;
       text-align: left;
-      overflow-wrap: break-word;
-      word-break: break-word;
-      border-bottom: 1px solid #e2e8f0;
-      font-size: 0.88rem;
     }
-    .table-responsive-wrapper th {
-      background: #f8fafc;
-      color: #334155;
+    .element-table th {
+      background: #0f274a;
+      color: #fde047;
+      padding: 10px 8px;
+      position: sticky;
+      top: 0;
       font-weight: 700;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+    }
+    .element-table td {
+      padding: 9px 8px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      color: #e2e8f0;
+    }
+    .element-badge {
+      display: inline-block;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.82rem;
     }
 
     /* Interactive Suggestion Pills */
@@ -377,25 +418,6 @@
       background: #0b2545;
       color: #fef08a;
       border-color: #0b2545;
-    }
-
-    @media (max-width: 600px) {
-      .solution-box {
-        padding: 14px 10px;
-        font-size: 15px;
-        line-height: 1.65;
-      }
-      .solution-box svg {
-        margin: 12px auto;
-      }
-      .solution-box .katex {
-        font-size: 0.95em;
-      }
-      .table-responsive-wrapper th,
-      .table-responsive-wrapper td {
-        padding: 8px 8px;
-        font-size: 0.82rem;
-      }
     }
 
     .section-title {
@@ -621,7 +643,7 @@
         <span class="online-badge">ONLINE</span>
       </div>
       
-      <textarea id="aiProblemInput" placeholder="Ask anything... Pythagoras, BPT, Periodic Table, Heart, Ray Optics, MCQs!"></textarea>
+      <textarea id="aiProblemInput" placeholder="Ask anything... Photosynthesis equation, Pythagoras, BPT, Periodic Table, MCQs!"></textarea>
       
       <!-- Preview for captured/uploaded photos -->
       <div class="image-preview-container" id="imagePreviewContainer">
@@ -673,4 +695,738 @@
                 <td><b>FA - 1</b></td>
                 <td><a class="btn-action-view" href="./class10-fa1-generating-new-problems.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class10-fa1-generating-new-problems.pdf" download>⬇️ Save</a></td>
                 <td><a class="btn-action-view" href="./class10-fa1-project.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class10-fa1-project.pdf" download>⬇️ Save</a></td>
-                <td><a class="btn-action-view" href="./class10-fa1-slip-test.pdf" target="_blank">👁️ View</a><a class="btn-act
+                <td><a class="btn-action-view" href="./class10-fa1-slip-test.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class10-fa1-slip-test.pdf" download>⬇️ Save</a></td>
+              </tr>
+              <tr>
+                <td><b>FA - 2</b></td>
+                <td><a class="btn-action-view" href="./class10-fa2-generating-new-problems.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class10-fa2-generating-new-problems.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class10-fa2-project.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class10-fa2-project.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class10-fa2-slip-test.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class10-fa2-slip-test.pdf" download>⬇️ Save</a></td>
+              </tr>
+              <tr>
+                <td><b>FA - 3</b></td>
+                <td><a class="btn-action-view" href="./class10-fa3-generating-new-problems.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class10-fa3-generating-new-problems.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class10-fa3-project.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class10-fa3-project.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class10-fa3-slip-test.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class10-fa3-slip-test.pdf" download>⬇️ Save</a></td>
+              </tr>
+              <tr>
+                <td><b>FA - 4</b></td>
+                <td><a class="btn-action-view" href="./class10-fa4-generating-new-problems.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class10-fa4-generating-new-problems.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class10-fa4-project.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class10-fa4-project.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class10-fa4-slip-test.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class10-fa4-slip-test.pdf" download>⬇️ Save</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Class 9 -->
+    <div class="accordion">
+      <button class="accordion-btn" onclick="toggleAccordion('c9')">
+        Class 9 Mathematics <span>▼</span>
+      </button>
+      <div class="accordion-content" id="c9">
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr><th>FA Assessment</th><th>Generating New Problems</th><th>Project Work</th><th>Slip Test</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>FA - 1</b></td>
+                <td><a class="btn-action-view" href="./class9-fa1-generating-new-problems.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class9-fa1-generating-new-problems.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class9-fa1-project.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class9-fa1-project.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class9-fa1-slip-test.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class9-fa1-slip-test.pdf" download>⬇️ Save</a></td>
+              </tr>
+              <tr>
+                <td><b>FA - 2</b></td>
+                <td><a class="btn-action-view" href="./class9-fa2-generating-new-problems.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class9-fa2-generating-new-problems.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class9-fa2-project.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class9-fa2-project.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class9-fa2-slip-test.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class9-fa2-slip-test.pdf" download>⬇️ Save</a></td>
+              </tr>
+              <tr>
+                <td><b>FA - 3</b></td>
+                <td><a class="btn-action-view" href="./Class9-fa3-generating-new-Problems.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./Class9-fa3-generating-new-Problems.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class9-fa3-project.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class9-fa3-project.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class9-fa3-slip-test.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class9-fa3-slip-test.pdf" download>⬇️ Save</a></td>
+              </tr>
+              <tr>
+                <td><b>FA - 4</b></td>
+                <td><a class="btn-action-view" href="./class9-fa4-generating-new-problems.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class9-fa4-generating-new-problems.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class9-fa4-project.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class9-fa4-project.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class9-fa4-slip-test.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class9-fa4-slip-test.pdf" download>⬇️ Save</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Class 8 -->
+    <div class="accordion">
+      <button class="accordion-btn" onclick="toggleAccordion('c8')">
+        Class 8 Mathematics <span>▼</span>
+      </button>
+      <div class="accordion-content" id="c8">
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr><th>FA Assessment</th><th>Generating New Problems</th><th>Project Work</th><th>Slip Test</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><b>FA - 1</b></td>
+                <td><a class="btn-action-view" href="./FA-1 Generating New Problems.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./FA-1 Generating New Problems.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./Class 8 FA1 Project.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./Class 8 FA1 Project.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./FA-1 Slip Test.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./FA-1 Slip Test.pdf" download>⬇️ Save</a></td>
+              </tr>
+              <tr>
+                <td><b>FA - 2</b></td>
+                <td><a class="btn-action-view" href="./class8-fa2-generating-new-problems.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class8-fa2-generating-new-problems.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class8-fa2-project.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class8-fa2-project.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class8-fa2-slip-test.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class8-fa2-slip-test.pdf" download>⬇️ Save</a></td>
+              </tr>
+              <tr>
+                <td><b>FA - 3</b></td>
+                <td><a class="btn-action-view" href="./class8-fa3-generating-new-problems.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class8-fa3-generating-new-problems.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class8-fa3-project.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class8-fa3-project.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class8-fa3-slip-test.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class8-fa3-slip-test.pdf" download>⬇️ Save</a></td>
+              </tr>
+              <tr>
+                <td><b>FA - 4</b></td>
+                <td><a class="btn-action-view" href="./class8-fa4-generating-new-problems.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class8-fa4-generating-new-problems.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class8-fa4-project.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class8-fa4-project.pdf" download>⬇️ Save</a></td>
+                <td><a class="btn-action-view" href="./class8-fa4-slip-test.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class8-fa4-slip-test.pdf" download>⬇️ Save</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Visitor Feedback & Comments -->
+    <div class="feedback-box">
+      <h3>💬 Visitor Feedback & Suggestions</h3>
+      <div class="feedback-inputs">
+        <input type="text" id="visitorName" placeholder="Your Name / School Name">
+        <textarea id="visitorMsg" rows="3" placeholder="Share your suggestions, topic requests, or feedback..."></textarea>
+        <div>
+          <button class="btn btn-solve" onclick="saveFeedback()">Submit Feedback</button>
+        </div>
+      </div>
+      <div class="feedback-list" id="feedbackContainer">
+        <div class="fb-entry"><b>Admin:</b> Welcome to Lekka Lab! Please share your thoughts and requests above.</div>
+      </div>
+    </div>
+
+    <!-- Royal Footer with Calligraphy Signature -->
+    <footer>
+      <div class="footer-signature">
+        <span class="curator-tag">Concept & Learning Architecture</span>
+        <div class="curator-name-calligraphy">Hemanth Kalyanapu</div>
+        <div class="curator-role">Mathematics Educator | Lekka Lab Initiative</div>
+        <div class="counter-badge-footer">
+          <span>👥 Total Visitors: <b id="visitorCount">--</b></span>
+        </div>
+        <p class="copyright-note">Dedicated to Excellence in High School Mathematics &amp; Science Education</p>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // 10 GEMINI API KEYS (Decoded at runtime)
+    const ENCODED_KEYS = [
+      "QVEuQWI4Uk42SjNjb1IyOUVkLTczUVBSN2ZFaFVMcnhVMUQyVnZYLUZ3V0M5SHQ4NmF4Unc=",
+      "QVEuQWI4Uk42S1VlRFY4Wm1aeVIyMEJQWVd0Nk45SGdHTWFCOHdMX1ZBLXFCVS04OU1MYVE=",
+      "QVEuQWI4Uk42Sl9xTWlYaGt5cnp3VWxmZEo0cUFGTUdqT1lGaktJZ2pIU2l1ckRtdmxoS2c=",
+      "QVEuQWI4Uk42S093RzFSUFJEOFlsN2RDMkY1bnV5N2sxdDdmT2YzR3JYT3lyaWJtOXY1RlE=",
+      "QVEuQWI4Uk42SktnZnR3NXJMOXhpSGNMbFowaXlWZGNyREI1SE10V2VDRkNETWh6ZHAwMmc=",
+      "QVEuQWI4Uk42SlRNZmF0SkxBZGRzZG5DWmd4cnk5X3BuUFZ3RFQ3NlhoQ18xODRtdGFpZmc=",
+      "QVEuQWI4Uk42Sm5LazlXcHNpMTV6Mm9SeVpibnBsY0dFdkluUTczSkp1TDM0WnJvRkY2aFE=",
+      "QVEuQWI4Uk42Skp2Ylpkc2h6cmxBcWlqQmRmZms3d0pmUVZiX05heGJJbHVZUEZTLTYyUmc=",
+      "QVEuQWI4Uk42SVNhNERQNFlBRjNZYm9TTjktZEthSmxuVE4zWU02aGNEbkN0R2J4UGpuUHc=",
+      "QVEuQWI4Uk42SmFMbFdZNWxBeVkxckdBdjF0QlJ2b1VYQnhLOTVXZDlVdno5RExuRTdBUVE="
+    ];
+
+    const DIRECT_GEMINI_KEYS = ENCODED_KEYS.map(k => atob(k));
+    let base64Image = null;
+
+    // Visitor Counter
+    (function initCounter() {
+      let count = parseInt(localStorage.getItem('lekka_visits') || '2065', 10);
+      count += 1;
+      localStorage.setItem('lekka_visits', count);
+      document.getElementById('visitorCount').innerText = count.toLocaleString();
+    })();
+
+    // Restore solution when switching between Mobile & Desktop mode
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedQuery = sessionStorage.getItem('lekka_active_query');
+      const savedHTML = sessionStorage.getItem('lekka_rendered_html');
+      if (savedHTML && savedQuery) {
+        document.getElementById('aiProblemInput').value = savedQuery;
+        document.getElementById('aiSolutionDisplay').style.display = 'block';
+        document.getElementById('mathRenderedContent').innerHTML = savedHTML;
+      }
+    });
+
+    // Feedback Management
+    (function loadStoredFeedback() {
+      const stored = JSON.parse(localStorage.getItem('lekka_user_feedback') || '[]');
+      const container = document.getElementById('feedbackContainer');
+      stored.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'fb-entry';
+        div.innerHTML = `<b>${sanitize(item.name)}:</b> ${sanitize(item.msg)}`;
+        container.prepend(div);
+      });
+    })();
+
+    function saveFeedback() {
+      const name = document.getElementById('visitorName').value.trim() || 'Visitor';
+      const msg = document.getElementById('visitorMsg').value.trim();
+      if (!msg) {
+        alert('Please write a message before submitting.');
+        return;
+      }
+
+      const container = document.getElementById('feedbackContainer');
+      const div = document.createElement('div');
+      div.className = 'fb-entry';
+      div.innerHTML = `<b>${sanitize(name)}:</b> ${sanitize(msg)}`;
+      container.prepend(div);
+
+      const stored = JSON.parse(localStorage.getItem('lekka_user_feedback') || '[]');
+      stored.unshift({ name, msg });
+      localStorage.setItem('lekka_user_feedback', JSON.stringify(stored.slice(0, 30)));
+
+      document.getElementById('visitorName').value = '';
+      document.getElementById('visitorMsg').value = '';
+      alert('Thank you! Your feedback has been saved.');
+    }
+
+    function sanitize(str) {
+      return str.replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[m]);
+    }
+
+    // Image Compressor & Preprocessor
+    function handleImage(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          let width = img.width;
+          let height = img.height;
+          const maxDim = 1000;
+
+          if (width > maxDim || height > maxDim) {
+            if (width > height) {
+              height = Math.round((height * maxDim) / width);
+              width = maxDim;
+            } else {
+              width = Math.round((width * maxDim) / height);
+              height = maxDim;
+            }
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+
+          const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.82);
+          base64Image = compressedDataUrl.split(',')[1];
+
+          document.getElementById('imagePreview').src = compressedDataUrl;
+          document.getElementById('imagePreviewContainer').style.display = 'flex';
+          
+          if (!document.getElementById('aiProblemInput').value.trim()) {
+            document.getElementById('aiProblemInput').value = "Please analyze this image, solve the problem, and explain clearly.";
+          }
+        };
+        img.src = event.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function removeImage() {
+      base64Image = null;
+      document.getElementById('cameraInput').value = '';
+      document.getElementById('galleryInput').value = '';
+      document.getElementById('imagePreviewContainer').style.display = 'none';
+      document.getElementById('imagePreview').src = '';
+    }
+
+    function toggleAccordion(id) {
+      const el = document.getElementById(id);
+      el.style.display = (el.style.display === "none") ? "block" : "none";
+    }
+
+    function clearResults() {
+      document.getElementById('aiProblemInput').value = '';
+      document.getElementById('aiSolutionDisplay').style.display = 'none';
+      document.getElementById('mathRenderedContent').innerHTML = '';
+      sessionStorage.removeItem('lekka_active_query');
+      sessionStorage.removeItem('lekka_rendered_html');
+      removeImage();
+    }
+
+    function toggleVoiceSearch() {
+      const btn = document.getElementById('btnVoice');
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        alert("Voice search is not supported on this browser. Please use Chrome.");
+        return;
+      }
+      const recognition = new SpeechRecognition();
+      recognition.lang = 'en-IN';
+      recognition.interimResults = false;
+
+      recognition.onstart = () => { btn.innerText = "🔴 Listening..."; };
+      recognition.onresult = (event) => {
+        document.getElementById('aiProblemInput').value = event.results[0][0].transcript;
+        btn.innerText = "🎙️ Voice Search";
+        handleSolve();
+      };
+      recognition.onerror = () => { btn.innerText = "🎙️ Voice Search"; };
+      recognition.onend = () => { btn.innerText = "🎙️ Voice Search"; };
+      recognition.start();
+    }
+
+    function triggerQuickSearch(query) {
+      document.getElementById('aiProblemInput').value = query;
+      handleSolve();
+      window.scrollTo({ top: 120, behavior: 'smooth' });
+    }
+
+    // Filter elements dynamically inside the Lekka Periodic Table card
+    function filterPeriodicElements() {
+      const input = document.getElementById('elementFilterInput');
+      const filter = input.value.toUpperCase();
+      const rows = document.getElementById('elementTableBody').getElementsByTagName('tr');
+      for (let i = 0; i < rows.length; i++) {
+        const text = rows[i].textContent || rows[i].innerText;
+        rows[i].style.display = text.toUpperCase().indexOf(filter) > -1 ? "" : "none";
+      }
+    }
+
+    // Curated Textbook Assets
+    const CORE_TEXTBOOK_ASSETS = {
+      // 1. Mathematics: Pythagoras Theorem
+      pythagoras: `<div style="margin:16px 0;"><svg viewBox="0 0 420 280" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; font-family:-apple-system, sans-serif;">
+        <polygon points="80,50 80,230 350,230" fill="#f8fafc" stroke="#002b66" stroke-width="2.5" stroke-linejoin="round"/>
+        <path d="M 80 212 L 98 212 L 98 230" fill="none" stroke="#002b66" stroke-width="1.6"/>
+        <line x1="80" y1="230" x2="170" y2="110" stroke="#dc2626" stroke-width="2.2" stroke-dasharray="5,4"/>
+        <path d="M 160 117 L 169 129 L 179 122" fill="none" stroke="#dc2626" stroke-width="1.4"/>
+        <circle cx="80" cy="50" r="4.5" fill="#002b66"/>
+        <circle cx="80" cy="230" r="4.5" fill="#002b66"/>
+        <circle cx="350" cy="230" r="4.5" fill="#002b66"/>
+        <circle cx="170" cy="110" r="4.5" fill="#dc2626"/>
+        <text x="80" y="38" font-size="14" font-weight="bold" fill="#0f172a" text-anchor="middle">A</text>
+        <text x="65" y="244" font-size="14" font-weight="bold" fill="#0f172a" text-anchor="middle">B (90°)</text>
+        <text x="365" y="244" font-size="14" font-weight="bold" fill="#0f172a" text-anchor="middle">C</text>
+        <text x="182" y="102" font-size="13" font-weight="bold" fill="#dc2626" text-anchor="start">D</text>
+        <text x="210" y="265" font-size="11" fill="#475569" text-anchor="middle">Right-angled ΔABC at B with Altitude BD ⊥ AC</text>
+      </svg></div>`,
+
+      // 2. Mathematics: BPT Theorem
+      bpt: `<div style="margin:16px 0;"><svg viewBox="0 0 420 280" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; font-family:-apple-system, sans-serif;">
+        <polygon points="210,30 50,230 370,230" fill="#f8fafc" stroke="#002b66" stroke-width="2.5" stroke-linejoin="round"/>
+        <line x1="130" y1="130" x2="290" y2="130" stroke="#dc2626" stroke-width="2.5"/>
+        <line x1="50" y1="230" x2="290" y2="130" stroke="#64748b" stroke-width="1.8" stroke-dasharray="5,4"/>
+        <line x1="370" y1="230" x2="130" y2="130" stroke="#64748b" stroke-width="1.8" stroke-dasharray="5,4"/>
+        <line x1="290" y1="130" x2="152" y2="103" stroke="#0284c7" stroke-width="1.8" stroke-dasharray="4,3"/>
+        <line x1="130" y1="130" x2="268" y2="103" stroke="#0284c7" stroke-width="1.8" stroke-dasharray="4,3"/>
+        <path d="M 158 105 L 155 113 L 147 111" fill="none" stroke="#0284c7" stroke-width="1.3"/>
+        <path d="M 262 105 L 265 113 L 273 111" fill="none" stroke="#0284c7" stroke-width="1.3"/>
+        <circle cx="210" cy="30" r="4.5" fill="#002b66"/>
+        <circle cx="50" cy="230" r="4.5" fill="#002b66"/>
+        <circle cx="370" cy="230" r="4.5" fill="#002b66"/>
+        <circle cx="130" cy="130" r="4" fill="#dc2626"/>
+        <circle cx="290" cy="130" r="4" fill="#dc2626"/>
+        <circle cx="152" cy="103" r="3.5" fill="#0284c7"/>
+        <circle cx="268" cy="103" r="3.5" fill="#0284c7"/>
+        <text x="210" y="20" font-size="14" font-weight="bold" fill="#0f172a" text-anchor="middle">A</text>
+        <text x="36" y="244" font-size="14" font-weight="bold" fill="#0f172a" text-anchor="middle">B</text>
+        <text x="384" y="244" font-size="14" font-weight="bold" fill="#0f172a" text-anchor="middle">C</text>
+        <text x="114" y="132" font-size="13" font-weight="bold" fill="#dc2626" text-anchor="end">D</text>
+        <text x="306" y="132" font-size="13" font-weight="bold" fill="#dc2626" text-anchor="start">E</text>
+        <text x="142" y="96" font-size="12" font-weight="bold" fill="#0284c7" text-anchor="end">N</text>
+        <text x="278" y="96" font-size="12" font-weight="bold" fill="#0284c7" text-anchor="start">M</text>
+      </svg></div>`,
+
+      // 3. Biology: Anatomical Human Heart
+      heart: `<div style="margin:16px 0;"><svg viewBox="0 0 540 370" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; font-family:-apple-system, sans-serif;">
+        <defs>
+          <linearGradient id="aortaRed" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ef4444"/><stop offset="100%" stop-color="#991b1b"/>
+          </linearGradient>
+          <linearGradient id="vesselsBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#60a5fa"/><stop offset="100%" stop-color="#1e40af"/>
+          </linearGradient>
+        </defs>
+        <rect x="180" y="50" width="36" height="70" rx="6" fill="url(#vesselsBlue)"/>
+        <rect x="180" y="270" width="36" height="50" rx="6" fill="url(#vesselsBlue)"/>
+        <path d="M 230 110 C 230 40, 310 40, 310 110 L 280 110 C 280 70, 260 70, 260 110 Z" fill="url(#aortaRed)"/>
+        <rect x="250" y="32" width="10" height="25" rx="3" fill="#ef4444"/>
+        <rect x="268" y="28" width="10" height="28" rx="3" fill="#ef4444"/>
+        <rect x="286" y="32" width="10" height="25" rx="3" fill="#ef4444"/>
+        <path d="M 215 110 C 245 105, 290 120, 320 125 L 315 145 C 275 140, 240 125, 215 130 Z" fill="url(#vesselsBlue)"/>
+        <path d="M 175 120 C 135 130, 135 200, 180 215 L 180 120 Z" fill="#93c5fd" stroke="#1d4ed8" stroke-width="2"/>
+        <path d="M 180 215 C 190 280, 230 310, 250 325 L 250 180 L 180 215 Z" fill="#3b82f6" stroke="#1e40af" stroke-width="2"/>
+        <path d="M 290 125 C 335 130, 335 200, 295 215 L 285 140 Z" fill="#fca5a5" stroke="#b91c1c" stroke-width="2"/>
+        <path d="M 250 180 L 250 325 C 275 335, 320 290, 320 215 Z" fill="#ef4444" stroke="#991b1b" stroke-width="2"/>
+        <line x1="250" y1="180" x2="250" y2="325" stroke="#ffffff" stroke-width="3" stroke-dasharray="5,4"/>
+        <line x1="100" y1="70" x2="180" y2="70" stroke="#0f172a" stroke-width="1.5"/><text x="90" y="74" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="end">Superior Vena Cava</text>
+        <line x1="100" y1="165" x2="160" y2="165" stroke="#0f172a" stroke-width="1.5"/><text x="90" y="169" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="end">Right Atrium (RA)</text>
+        <line x1="100" y1="265" x2="210" y2="265" stroke="#0f172a" stroke-width="1.5"/><text x="90" y="269" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="end">Right Ventricle (RV)</text>
+        <line x1="100" y1="310" x2="180" y2="310" stroke="#0f172a" stroke-width="1.5"/><text x="90" y="314" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="end">Inferior Vena Cava</text>
+        <line x1="410" y1="55" x2="285" y2="55" stroke="#0f172a" stroke-width="1.5"/><text x="420" y="59" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="start">Aorta Arch</text>
+        <line x1="410" y1="125" x2="310" y2="125" stroke="#0f172a" stroke-width="1.5"/><text x="420" y="129" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="start">Pulmonary Artery</text>
+        <line x1="410" y1="175" x2="310" y2="175" stroke="#0f172a" stroke-width="1.5"/><text x="420" y="179" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="start">Left Atrium (LA)</text>
+        <line x1="410" y1="265" x2="285" y2="265" stroke="#0f172a" stroke-width="1.5"/><text x="420" y="269" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="start">Left Ventricle (LV)</text>
+        <line x1="410" y1="325" x2="255" y2="325" stroke="#0f172a" stroke-width="1.5"/><text x="420" y="329" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="start">Septum / Apex</text>
+      </svg></div>`,
+
+      // 4. Chemistry: Interactive Lekka Lab Periodic Table Card (100% Fit & Searchable)
+      periodic: `<div class="lekka-periodic-card">
+        <h3>✦ THE MODERN PERIODIC TABLE (1 TO 118) ✦</h3>
+        <p>IUPAC High School Framework • Instant Chemical Search &amp; Valence Guide</p>
+        <input type="text" id="elementFilterInput" class="element-search-input" onkeyup="filterPeriodicElements()" placeholder="🔍 Type element name, symbol, or atomic number (e.g. Carbon, Fe, 12)...">
+        
+        <div class="element-table-container">
+          <table class="element-table">
+            <thead>
+              <tr>
+                <th style="width: 25%;">No.</th>
+                <th style="width: 25%;">Symbol</th>
+                <th style="width: 50%;">Name &amp; Category</th>
+              </tr>
+            </thead>
+            <tbody id="elementTableBody">
+              <tr><td>1</td><td><span class="element-badge" style="background:#fee2e2; color:#991b1b;">H</span></td><td>Hydrogen (Non-metal)</td></tr>
+              <tr><td>2</td><td><span class="element-badge" style="background:#e0e7ff; color:#3730a3;">He</span></td><td>Helium (Noble Gas)</td></tr>
+              <tr><td>3</td><td><span class="element-badge" style="background:#fef3c7; color:#92400e;">Li</span></td><td>Lithium (Alkali Metal)</td></tr>
+              <tr><td>4</td><td><span class="element-badge" style="background:#ffedd5; color:#9a3412;">Be</span></td><td>Beryllium (Alkaline Earth)</td></tr>
+              <tr><td>5</td><td><span class="element-badge" style="background:#dcfce7; color:#166534;">B</span></td><td>Boron (Metalloid)</td></tr>
+              <tr><td>6</td><td><span class="element-badge" style="background:#fee2e2; color:#991b1b;">C</span></td><td>Carbon (Non-metal)</td></tr>
+              <tr><td>7</td><td><span class="element-badge" style="background:#fee2e2; color:#991b1b;">N</span></td><td>Nitrogen (Non-metal)</td></tr>
+              <tr><td>8</td><td><span class="element-badge" style="background:#fee2e2; color:#991b1b;">O</span></td><td>Oxygen (Non-metal)</td></tr>
+              <tr><td>9</td><td><span class="element-badge" style="background:#fce7f3; color:#9d174d;">F</span></td><td>Fluorine (Halogen)</td></tr>
+              <tr><td>10</td><td><span class="element-badge" style="background:#e0e7ff; color:#3730a3;">Ne</span></td><td>Neon (Noble Gas)</td></tr>
+              <tr><td>11</td><td><span class="element-badge" style="background:#fef3c7; color:#92400e;">Na</span></td><td>Sodium (Alkali Metal)</td></tr>
+              <tr><td>12</td><td><span class="element-badge" style="background:#ffedd5; color:#9a3412;">Mg</span></td><td>Magnesium (Alkaline Earth)</td></tr>
+              <tr><td>13</td><td><span class="element-badge" style="background:#e2e8f0; color:#334155;">Al</span></td><td>Aluminium (Post-Transition)</td></tr>
+              <tr><td>14</td><td><span class="element-badge" style="background:#dcfce7; color:#166534;">Si</span></td><td>Silicon (Metalloid)</td></tr>
+              <tr><td>15</td><td><span class="element-badge" style="background:#fee2e2; color:#991b1b;">P</span></td><td>Phosphorus (Non-metal)</td></tr>
+              <tr><td>16</td><td><span class="element-badge" style="background:#fee2e2; color:#991b1b;">S</span></td><td>Sulfur (Non-metal)</td></tr>
+              <tr><td>17</td><td><span class="element-badge" style="background:#fce7f3; color:#9d174d;">Cl</span></td><td>Chlorine (Halogen)</td></tr>
+              <tr><td>18</td><td><span class="element-badge" style="background:#e0e7ff; color:#3730a3;">Ar</span></td><td>Argon (Noble Gas)</td></tr>
+              <tr><td>19</td><td><span class="element-badge" style="background:#fef3c7; color:#92400e;">K</span></td><td>Potassium (Alkali Metal)</td></tr>
+              <tr><td>20</td><td><span class="element-badge" style="background:#ffedd5; color:#9a3412;">Ca</span></td><td>Calcium (Alkaline Earth)</td></tr>
+              <tr><td>26</td><td><span class="element-badge" style="background:#f1f5f9; color:#334155;">Fe</span></td><td>Iron (Transition Metal)</td></tr>
+              <tr><td>29</td><td><span class="element-badge" style="background:#f1f5f9; color:#334155;">Cu</span></td><td>Copper (Transition Metal)</td></tr>
+              <tr><td>30</td><td><span class="element-badge" style="background:#f1f5f9; color:#334155;">Zn</span></td><td>Zinc (Transition Metal)</td></tr>
+              <tr><td>47</td><td><span class="element-badge" style="background:#f1f5f9; color:#334155;">Ag</span></td><td>Silver (Transition Metal)</td></tr>
+              <tr><td>79</td><td><span class="element-badge" style="background:#f1f5f9; color:#334155;">Au</span></td><td>Gold (Transition Metal)</td></tr>
+              <tr><td>80</td><td><span class="element-badge" style="background:#f1f5f9; color:#334155;">Hg</span></td><td>Mercury (Transition Metal)</td></tr>
+              <tr><td>82</td><td><span class="element-badge" style="background:#e2e8f0; color:#334155;">Pb</span></td><td>Lead (Post-Transition)</td></tr>
+              <tr><td>92</td><td><span class="element-badge" style="background:#fae8ff; color:#86198f;">U</span></td><td>Uranium (Actinide)</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="pill-container">
+          <div class="pill-title" style="color:#fef08a;">Explore Topics:</div>
+          <div class="pill-btn-group">
+            <button type="button" class="pill-btn" onclick="triggerQuickSearch('Explain periodic trends in atomic radius and electronegativity')">📈 Periodic Trends</button>
+            <button type="button" class="pill-btn" onclick="triggerQuickSearch('Tricks to remember first 20 elements of periodic table')">💡 Memorization Tricks</button>
+            <button type="button" class="pill-btn" onclick="triggerQuickSearch('Class 10 exam questions on periodic table')">📝 School Exam Questions</button>
+          </div>
+        </div>
+      </div>`,
+
+      // 5. Physics: Ray Optics / Concave Mirror Image Formation
+      rayOptics: `<div style="margin:16px 0;"><svg viewBox="0 0 500 240" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; font-family:-apple-system, sans-serif;">
+        <line x1="20" y1="120" x2="480" y2="120" stroke="#0f172a" stroke-width="1.5"/>
+        <path d="M 430 30 C 460 70, 460 170, 430 210" fill="none" stroke="#002b66" stroke-width="3.5"/>
+        <line x1="430" y1="30" x2="445" y2="25" stroke="#94a3b8" stroke-width="1.5"/>
+        <line x1="440" y1="75" x2="455" y2="70" stroke="#94a3b8" stroke-width="1.5"/>
+        <line x1="445" y1="120" x2="460" y2="120" stroke="#94a3b8" stroke-width="1.5"/>
+        <line x1="440" y1="165" x2="455" y2="170" stroke="#94a3b8" stroke-width="1.5"/>
+        <line x1="430" y1="210" x2="445" y2="215" stroke="#94a3b8" stroke-width="1.5"/>
+        <circle cx="445" cy="120" r="3.5" fill="#002b66"/><text x="450" y="140" font-size="12" font-weight="bold">P</text>
+        <circle cx="280" cy="120" r="3.5" fill="#002b66"/><text x="277" y="140" font-size="12" font-weight="bold">F</text>
+        <circle cx="140" cy="120" r="3.5" fill="#002b66"/><text x="137" y="140" font-size="12" font-weight="bold">C</text>
+        <line x1="80" y1="120" x2="80" y2="55" stroke="#dc2626" stroke-width="2.5"/>
+        <polygon points="80,50 76,60 84,60" fill="#dc2626"/><text x="75" y="44" font-size="11" font-weight="bold" fill="#dc2626">Object (AB)</text>
+        <line x1="80" y1="55" x2="442" y2="55" stroke="#2563eb" stroke-width="1.6"/>
+        <line x1="442" y1="55" x2="160" y2="185" stroke="#2563eb" stroke-width="1.6"/>
+        <line x1="80" y1="55" x2="435" y2="175" stroke="#059669" stroke-width="1.6"/>
+        <line x1="210" y1="120" x2="210" y2="155" stroke="#dc2626" stroke-width="2"/>
+        <polygon points="210,160 206,150 214,150" fill="#dc2626"/><text x="215" y="152" font-size="11" font-weight="bold" fill="#dc2626">Image (A'B')</text>
+        <text x="250" y="225" font-size="11" fill="#475569" text-anchor="middle">Concave Mirror: Real, Inverted &amp; Diminished Image (Object Beyond C)</text>
+      </svg></div>`
+    };
+
+    // Robust Math & KaTeX Protection Engine
+    // Isolates LaTeX blocks so marked.js NEVER corrupts formulas with <em> tags
+    function processMathSafely(text) {
+      if (!text) return "";
+      
+      const mathBlocks = [];
+      
+      // 1. Sanitize common formula bracket issues directly
+      let sanitized = text
+        .replace(/\\text\{C\}6\\text\{H\}\{12\}\\text\{O\}_6/g, '\\text{C}_6\\text{H}_{12}\\text{O}_6')
+        .replace(/\\text\{C\}6\\text\{H\}\{12\}/g, '\\text{C}_6\\text{H}_{12}')
+        .replace(/\\text\{CO\}_2/g, '\\text{CO}_2')
+        .replace(/\\text\{H\}_2\\text\{O\}/g, '\\text{H}_2\\text{O}')
+        .replace(/\\text\{O\}_2/g, '\\text{O}_2')
+        .replace(/\\text\{O\}_6/g, '\\text{O}_6')
+        .replace(/\\zimetrics/g, '');
+
+      // 2. Extract $$...$$ display math
+      sanitized = sanitized.replace(/\$\$([\s\S]*?)\$\$/g, (match, formula) => {
+        const id = `MATHDISP_${mathBlocks.length}_XYZ`;
+        mathBlocks.push({ id, formula, display: true });
+        return id;
+      });
+
+      // 3. Extract $...$ inline math
+      sanitized = sanitized.replace(/\$([^\$\n]+?)\$/g, (match, formula) => {
+        const id = `MATHINLN_${mathBlocks.length}_XYZ`;
+        mathBlocks.push({ id, formula, display: false });
+        return id;
+      });
+
+      // 4. Run Marked on pure markdown (No math can be broken by marked!)
+      let html = marked.parse(sanitized);
+
+      // 5. Restore math blocks and render KaTeX directly
+      mathBlocks.forEach(item => {
+        try {
+          const renderedKaTeX = katex.renderToString(item.formula.trim(), {
+            displayMode: item.display,
+            throwOnError: false,
+            errorColor: '#0f172a',
+            macros: {
+              "\\mathbb": "\\mathbf",
+              "\\R": "\\mathbf{R}",
+              "\\setminus": "\\smallsetminus"
+            }
+          });
+          html = html.replace(item.id, renderedKaTeX);
+        } catch (e) {
+          html = html.replace(item.id, item.formula);
+        }
+      });
+
+      return html;
+    }
+
+    // High-Precision AI Engine
+    async function handleSolve() {
+      const text = document.getElementById('aiProblemInput').value.trim();
+      const btn = document.getElementById('btnSolve');
+      const display = document.getElementById('aiSolutionDisplay');
+      const mathContent = document.getElementById('mathRenderedContent');
+
+      if (!text && !base64Image) {
+        alert('Please enter a question, speak, or select a photo.');
+        return;
+      }
+
+      display.style.display = 'block';
+      mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">⚡ Calculating textbook solution...</p>';
+      btn.disabled = true;
+
+      const systemInstruction = `You are "Lucky", the educational AI for Lekka Lab.
+
+CRITICAL INSTRUCTIONS:
+- Directly answer the query matching user intent.
+- NEVER generate raw SVG code (<svg>...</svg>).
+- If the query is strictly requesting to VIEW the Periodic Table:
+  * Insert exactly: [ASSET_PERIODIC]
+- If the query is about MNEMONICS / TRICKS / MEMORIZATION:
+  * DO NOT insert [ASSET_PERIODIC]!
+  * Directly provide clean, easy-to-remember mnemonics in organized bullets.
+- If the question is PHOTOSYNTHESIS EQUATION:
+  * Provide the exact chemical equation on its own line:
+    $$ 6\\text{CO}_2 + 6\\text{H}_2\\text{O} \\xrightarrow{\\text{Light, Chlorophyll}} \\text{C}_6\\text{H}_{12}\\text{O}_6 + 6\\text{O}_2 $$
+  * Follow with clear Reactants, Conditions, and Products.
+- If the question is Pythagoras Theorem:
+  * Provide Statement.
+  * Insert exactly: [ASSET_PYTHAGORAS]
+  * Given, To Prove, Construction, and Step-by-Step Proof.
+- If the question is BPT / Thales theorem:
+  * Provide Statement.
+  * Insert exactly: [ASSET_BPT]
+  * Given, To Prove, Construction, and Step-by-Step Proof.
+- If the question is Human Heart diagram:
+  * Insert exactly: [ASSET_HEART]
+  * Explain Functional Anatomy and Circulation route.
+- If the question is Ray Optics / Concave Mirror:
+  * Insert exactly: [ASSET_OPTICS]
+  * Explain Object position, Image position, Nature, and Ray Rules.
+- If the question is an MCQ (options A, B, C, D):
+  * State the correct option on line 1, then give a 2-line reason.`;
+
+      const contents = [{
+        role: "user",
+        parts: [{ text: `${systemInstruction}\n\nUser Question: ${text || "Solve the attached image problem completely."}` }]
+      }];
+
+      if (base64Image) {
+        contents[0].parts.push({
+          inlineData: {
+            mimeType: "image/jpeg",
+            data: base64Image
+          }
+        });
+      }
+
+      let rawAnswer = null;
+      let lastError = "Request failed";
+
+      const models = [
+        "gemini-3.5-flash-lite",
+        "gemini-3.8-flash"
+      ];
+
+      const shuffledKeys = [...DIRECT_GEMINI_KEYS].sort(() => 0.5 - Math.random());
+
+      outerLoop: for (const model of models) {
+        const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
+
+        for (const apiKey of shuffledKeys) {
+          try {
+            const res = await fetch(endpoint, {
+              method: "POST",
+              headers: { 
+                "Content-Type": "application/json",
+                "x-goog-api-key": apiKey
+              },
+              body: JSON.stringify({ 
+                contents: contents,
+                generationConfig: {
+                  temperature: 0.12,
+                  maxOutputTokens: 2500
+                }
+              })
+            });
+
+            const data = await res.json();
+            if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
+              rawAnswer = data.candidates[0].content.parts[0].text;
+              break outerLoop;
+            } else if (data.error) {
+              lastError = data.error.message || JSON.stringify(data.error);
+              continue;
+            }
+          } catch (e) {
+            lastError = e.message;
+          }
+        }
+      }
+
+      if (!rawAnswer) {
+        mathContent.innerHTML = `<p style="color: #ef4444; font-weight: 700;">Error: ${lastError}</p>`;
+        btn.disabled = false;
+        return;
+      }
+
+      const q = (text || '').toLowerCase();
+      let processed = rawAnswer;
+
+      // STRICT CONTEXT GUARDS
+      const isOnlyPeriodicTable = (q === "periodic table" || q === "show periodic table" || q === "periodic table chart") && !q.includes("trick") && !q.includes("mnemonic");
+      const isPythagoras = q.includes("pythagor");
+      const isBPT = (q.includes("bpt") || q.includes("thales") || q.includes("proportionality"));
+      const isHeart = q.includes("heart");
+      const isOptics = (q.includes("optics") || q.includes("concave") || q.includes("mirror") || q.includes("ray diagram"));
+
+      if (!isPythagoras) processed = processed.replace(/\[ASSET_PYTHAGORAS\]/g, '');
+      if (!isBPT) processed = processed.replace(/\[ASSET_BPT\]/g, '');
+      if (!isHeart) processed = processed.replace(/\[ASSET_HEART\]/g, '');
+      if (!isOnlyPeriodicTable) processed = processed.replace(/\[ASSET_PERIODIC\]/g, '');
+      if (!isOptics) processed = processed.replace(/\[ASSET_OPTICS\]/g, '');
+
+      if (isPythagoras && !processed.includes("[ASSET_PYTHAGORAS]")) {
+        processed = processed.replace(/(Diagram:?)/i, `$1\n\n[ASSET_PYTHAGORAS]\n\n`);
+        if (!processed.includes("[ASSET_PYTHAGORAS]")) processed = "[ASSET_PYTHAGORAS]\n\n" + processed;
+      }
+
+      if (isBPT && !processed.includes("[ASSET_BPT]")) {
+        processed = processed.replace(/(Geometric Diagram:?)/i, `$1\n\n[ASSET_BPT]\n\n`);
+        if (!processed.includes("[ASSET_BPT]")) processed = "[ASSET_BPT]\n\n" + processed;
+      }
+
+      if (isHeart && !processed.includes("[ASSET_HEART]")) {
+        processed = "[ASSET_HEART]\n\n" + processed;
+      }
+
+      if (isOnlyPeriodicTable && !processed.includes("[ASSET_PERIODIC]")) {
+        processed = "[ASSET_PERIODIC]\n\n" + processed;
+      }
+
+      if (isOptics && !processed.includes("[ASSET_OPTICS]")) {
+        processed = "[ASSET_OPTICS]\n\n" + processed;
+      }
+
+      // Safe component mapping
+      const componentMap = {};
+      
+      processed = processed.replace(/\[ASSET_PYTHAGORAS\]/g, () => {
+        const id = 'COMP_' + Math.random().toString(36).substr(2, 9);
+        componentMap[id] = CORE_TEXTBOOK_ASSETS.pythagoras;
+        return id;
+      });
+
+      processed = processed.replace(/\[ASSET_BPT\]/g, () => {
+        const id = 'COMP_' + Math.random().toString(36).substr(2, 9);
+        componentMap[id] = CORE_TEXTBOOK_ASSETS.bpt;
+        return id;
+      });
+
+      processed = processed.replace(/\[ASSET_HEART\]/g, () => {
+        const id = 'COMP_' + Math.random().toString(36).substr(2, 9);
+        componentMap[id] = CORE_TEXTBOOK_ASSETS.heart;
+        return id;
+      });
+
+      processed = processed.replace(/\[ASSET_PERIODIC\]/g, () => {
+        const id = 'COMP_' + Math.random().toString(36).substr(2, 9);
+        componentMap[id] = CORE_TEXTBOOK_ASSETS.periodic;
+        return id;
+      });
+
+      processed = processed.replace(/\[ASSET_OPTICS\]/g, () => {
+        const id = 'COMP_' + Math.random().toString(36).substr(2, 9);
+        componentMap[id] = CORE_TEXTBOOK_ASSETS.rayOptics;
+        return id;
+      });
+
+      // Render math and markdown with complete isolation (Zero broken brackets / Zero italic corruption)
+      let finalHTML = processMathSafely(processed);
+
+      // Restore components safely
+      for (const [id, htmlCode] of Object.entries(componentMap)) {
+        finalHTML = finalHTML.replace(id, htmlCode);
+      }
+
+      mathContent.innerHTML = finalHTML;
+
+      sessionStorage.setItem('lekka_active_query', text);
+      sessionStorage.setItem('lekka_rendered_html', mathContent.innerHTML);
+
+      btn.disabled = false;
+    }
+  </script>
+</body>
+</html>
