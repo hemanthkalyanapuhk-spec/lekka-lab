@@ -129,6 +129,18 @@
       font-size: 0.98rem;
     }
 
+    /* Diagram Styling */
+    .solution-box svg {
+      display: block;
+      margin: 14px auto;
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+    }
+
     .section-title {
       font-size: 1.15rem;
       font-weight: 800;
@@ -269,10 +281,10 @@
         <span class="online-badge">ONLINE</span>
       </div>
       
-      <textarea id="aiProblemInput" placeholder="Ask anything... Science, Math, GK, Current Affairs, History, Recipes, or General Questions!"></textarea>
+      <textarea id="aiProblemInput" placeholder="Ask anything... Science, 2D/3D Math diagrams, Chemical reactions, GK, or Recipes!"></textarea>
       
       <div class="ai-controls">
-        <button class="btn btn-solve" id="btnSolve" onclick="handleSolve()">⚡ Ask Lucky</button>
+        <button class="btn btn-solve" id="btnSolve" onclick="handleSolve()">✨ Ask Lucky</button>
         <button class="btn btn-secondary" id="btnVoice" onclick="toggleVoiceSearch()">🎙️ Voice Search</button>
         <label class="btn btn-secondary">
           📷 Image
@@ -451,7 +463,7 @@
 
     // Visitor Counter
     (function initCounter() {
-      let count = parseInt(localStorage.getItem('lekka_visits') || '1870', 10);
+      let count = parseInt(localStorage.getItem('lekka_visits') || '1875', 10);
       count += 1;
       localStorage.setItem('lekka_visits', count);
       document.getElementById('visitorCount').innerText = count.toLocaleString();
@@ -542,7 +554,7 @@
       recognition.start();
     }
 
-    // High-Performance Dual-Protocol Engine
+    // High-Resolution Educational AI Engine
     async function handleSolve() {
       const text = document.getElementById('aiProblemInput').value.trim();
       const btn = document.getElementById('btnSolve');
@@ -555,23 +567,39 @@
       }
 
       display.style.display = 'block';
-      mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">Thinking...</p>';
+      mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">Analyzing and generating diagrams...</p>';
       btn.disabled = true;
 
-      const systemInstruction = `You are "Lucky", a universal educational AI assistant for Lekka Lab.
-- Provide direct, structured, and informative answers with clear headings and bullet points.
-- If math or physics formulas are needed, use standard LaTeX ($..$ inline, $$..$$ standalone).
-- If geometric diagrams are requested, provide an inline SVG (<svg viewBox="0 0 360 220" ...>).
-- Keep answers direct, accurate, and helpful.`;
+      const systemInstruction = `You are "Lucky", the premier visual educational AI assistant for Lekka Lab.
+
+MANDATORY OUTPUT FORMAT & QUALITY RULES:
+1. MATHEMATICS & FORMULAS:
+   - Use standard LaTeX: $...$ for inline, and $$...$$ for display equations.
+   - For chemical reactions, output balanced equations with physical states:
+     $$\\text{6CO}_2(g) + \\text{6H}_2\\text{O}(l) \\xrightarrow{\\text{Light, Chlorophyll}} \\text{C}_6\\text{H}_{12}\\text{O}_6(s) + \\text{6O}_2(g)$$
+
+2. DIAGRAMS & 2D/3D VISUALIZATIONS (STRICT REQUIREMENTS):
+   - Whenever geometry, science concepts, plant/cell anatomy, or graphs are discussed, generate a comprehensive INLINE SVG (<svg viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg">).
+   - USE MODERN 2.5D / 3D GRADIENT STYLING:
+     * Add <defs> with linearGradient / radialGradient and drop-shadow filter.
+     * Use vibrant palette: #3b82f6, #10b981, #f59e0b, #ef4444, #8b5cf6.
+   - STRICT INLINE LABELLING:
+     * EVERY dimension, region, side, angle, organelle (e.g., Grana, Stroma, Thylakoid, Outer/Inner Membrane), and vertex MUST be labeled DIRECTLY INSIDE the SVG using:
+       <text x="..." y="..." font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">Label</text>
+     * NEVER print labels as floating text outside the </svg> tag.
+
+3. STRUCTURE:
+   - Clear Markdown headers (###), bold key terms, and bullet points.`;
 
       const promptInput = `${systemInstruction}\n\nUser Question: ${text}`;
       let rawAnswer = null;
       let lastError = "Request failed";
 
-      // 1. Try Interactions API first (which succeeded for Circle & Recipes)
+      const endpoint = `https://generativelanguage.googleapis.com/v1beta/interactions`;
+
       for (const apiKey of DIRECT_GEMINI_KEYS) {
         try {
-          const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/interactions`, {
+          const res = await fetch(endpoint, {
             method: "POST",
             headers: { 
               "Content-Type": "application/json",
@@ -600,45 +628,13 @@
         }
       }
 
-      // 2. Direct GenerateContent Fallback
-      if (!rawAnswer) {
-        const contents = [{ role: "user", parts: [{ text: promptInput }] }];
-        if (base64Image) {
-          contents[0].parts.push({
-            inlineData: { mimeType: "image/jpeg", data: base64Image }
-          });
-        }
-
-        for (const apiKey of DIRECT_GEMINI_KEYS) {
-          try {
-            const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent`, {
-              method: "POST",
-              headers: { 
-                "Content-Type": "application/json",
-                "x-goog-api-key": apiKey
-              },
-              body: JSON.stringify({ contents: contents })
-            });
-
-            const data = await res.json();
-            if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
-              rawAnswer = data.candidates[0].content.parts[0].text;
-              break;
-            } else if (data.error) {
-              lastError = data.error.message;
-            }
-          } catch (e) {
-            lastError = e.message;
-          }
-        }
-      }
-
       if (!rawAnswer) {
         mathContent.innerHTML = `<p style="color: #ef4444; font-weight: 700;">Error: ${lastError}</p>`;
         btn.disabled = false;
         return;
       }
 
+      // Format & sanitize output
       let cleanOutput = rawAnswer
         .replace(/\u2260/g, ' \\neq ')
         .replace(/\u00B1/g, ' \\pm ')
