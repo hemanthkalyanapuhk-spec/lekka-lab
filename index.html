@@ -26,7 +26,7 @@
       --gold-border: rgba(212, 175, 55, 0.4);
       --gold-glow: 0 4px 20px rgba(212, 175, 55, 0.18);
       --bg-dark: #030b17;
-      --card-bg: rgba(11, 37, 69, 0.7);
+      --card-bg: rgba(11, 37, 69, 0.75);
       --card-border: rgba(212, 175, 55, 0.28);
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
@@ -37,26 +37,27 @@
     body { 
       background: radial-gradient(circle at 50% 0%, #0d2c54 0%, var(--bg-dark) 80%);
       color: var(--text-main); 
-      padding-bottom: 30px; 
+      padding-bottom: 40px; 
       min-height: 100vh;
       overflow-x: hidden;
+      width: 100%;
     }
 
     header {
       background: radial-gradient(circle at 50% 20%, rgba(19, 58, 104, 0.9) 0%, rgba(2, 9, 20, 0.98) 85%);
       border-bottom: 2px solid var(--gold-border);
       box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
-      padding: 40px 16px 28px;
+      padding: 35px 20px 24px;
       text-align: center;
-      position: relative;
+      width: 100%;
     }
-    .header-box { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
+    .header-box { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; width: 100%; }
     .brand-overhead-crest { font-size: 0.8rem; letter-spacing: 6px; color: var(--gold-primary); text-transform: uppercase; font-weight: 700; margin-bottom: 4px; }
     .brand-title {
       font-family: 'Cinzel', 'Montserrat', serif;
-      font-size: clamp(2.6rem, 8vw, 4.2rem);
+      font-size: clamp(2.4rem, 6vw, 3.8rem);
       font-weight: 900;
-      letter-spacing: clamp(4px, 1.5vw, 8px);
+      letter-spacing: clamp(4px, 1.2vw, 8px);
       text-transform: uppercase;
       background: linear-gradient(180deg, #ffffff 0%, #ffd700 48%, #d4af37 72%, #8c6218 100%);
       -webkit-background-clip: text;
@@ -64,30 +65,31 @@
       line-height: 1.05;
       margin: 2px 0 6px;
     }
-    .brand-divider { display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; max-width: 360px; margin: 2px 0 10px; }
+    .brand-divider { display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; max-width: 320px; margin: 2px 0 8px; }
     .brand-divider::before, .brand-divider::after { content: ""; flex: 1; height: 1.5px; background: linear-gradient(90deg, transparent, var(--gold-primary), transparent); }
     .brand-divider span { color: var(--gold-primary); font-size: 0.85rem; }
-    header p { font-size: clamp(0.85rem, 2.5vw, 0.98rem); color: #e2e8f0; letter-spacing: 1px; font-weight: 500; text-transform: uppercase; }
+    header p { font-size: clamp(0.85rem, 2vw, 0.95rem); color: #e2e8f0; letter-spacing: 1px; font-weight: 500; text-transform: uppercase; }
 
-    .container { max-width: 920px; margin: 24px auto; padding: 0 14px; width: 100%; }
+    /* Fluid full-width scaling for laptops and mobile */
+    .container { max-width: 1280px; width: 95%; margin: 24px auto; padding: 0 10px; }
 
     .ai-card {
       background: var(--card-bg);
       backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
       border-radius: 16px;
-      padding: clamp(16px, 4vw, 24px);
+      padding: clamp(16px, 3vw, 24px);
       box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4), var(--gold-glow);
       border: 1px solid var(--card-border);
       margin-bottom: 28px;
+      width: 100%;
     }
-    .ai-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
-    .ai-header h2 { font-size: clamp(1.1rem, 3.5vw, 1.35rem); font-weight: 800; color: #ffffff; display: flex; align-items: center; gap: 8px; }
+    .ai-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 10px; }
+    .ai-header h2 { font-size: clamp(1.1rem, 3vw, 1.3rem); font-weight: 800; color: #ffffff; display: flex; align-items: center; gap: 8px; }
     .ai-header h2::before { content: "✦"; color: var(--gold-primary); }
     .online-badge { background: rgba(22, 163, 74, 0.15); color: #4ade80; border: 1px solid rgba(74, 222, 128, 0.4); font-size: 0.75rem; padding: 4px 12px; border-radius: 20px; font-weight: 700; }
 
     textarea {
-      width: 100%; height: 95px; padding: 14px;
+      width: 100%; height: 90px; padding: 14px;
       background: rgba(3, 11, 23, 0.85); border: 1px solid rgba(212, 175, 55, 0.35);
       border-radius: 12px; font-size: 1rem; color: #f8fafc; resize: vertical; outline: none;
     }
@@ -106,7 +108,7 @@
     .btn-solve { background: var(--gold-gradient); color: #030b17; }
     .btn-secondary { background: rgba(19, 58, 104, 0.6); color: #f1f5f9; border: 1px solid rgba(212, 175, 55, 0.25); }
 
-    .foundation-pill-box { margin-top: 16px; padding: 12px 14px; background: rgba(3, 11, 23, 0.65); border: 1px dashed var(--gold-border); border-radius: 10px; }
+    .foundation-pill-box { margin-top: 16px; padding: 12px 14px; background: rgba(3, 11, 23, 0.65); border: 1px dashed var(--gold-border); border-radius: 10px; width: 100%; }
     .foundation-title { font-size: 0.84rem; font-weight: 700; color: #fef08a; margin-bottom: 8px; }
     .foundation-btn-group { display: flex; flex-wrap: wrap; gap: 7px; }
     .foundation-btn {
@@ -116,30 +118,30 @@
     .foundation-btn:hover { background: var(--gold-primary); color: #030b17; }
 
     .solution-box {
-      margin-top: 20px; padding: clamp(14px, 3.5vw, 22px);
+      margin-top: 20px; padding: clamp(14px, 3vw, 22px);
       background: #ffffff; color: #0f172a; border-radius: 14px;
-      border: 1.5px solid var(--gold-primary); display: none; line-height: 1.75; font-size: 1rem;
+      border: 1.5px solid var(--gold-primary); display: none; line-height: 1.75; font-size: 1rem; width: 100%;
     }
     .solution-box svg { width: 100%; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 12px; margin: 16px auto; display: block; }
 
     .section-title {
-      font-size: clamp(1.1rem, 3vw, 1.25rem); font-weight: 800; margin: 35px 0 16px;
+      font-size: clamp(1.1rem, 2.5vw, 1.25rem); font-weight: 800; margin: 35px 0 16px;
       text-transform: uppercase; letter-spacing: 1px; background: var(--gold-gradient);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: flex; align-items: center; gap: 10px;
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: flex; align-items: center; gap: 10px; width: 100%;
     }
     .section-title::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, var(--gold-border), transparent); }
 
-    .accordion { margin-bottom: 14px; border-radius: 12px; overflow: hidden; border: 1px solid var(--card-border); background: var(--card-bg); }
+    .accordion { margin-bottom: 14px; border-radius: 12px; overflow: hidden; border: 1px solid var(--card-border); background: var(--card-bg); width: 100%; }
     .accordion-btn {
       width: 100%; padding: 16px 20px; background: linear-gradient(90deg, #091e42 0%, #0d2c54 100%);
       color: #fef08a; border: none; text-align: left; font-size: 1.05rem; font-weight: 800;
       display: flex; justify-content: space-between; cursor: pointer;
     }
-    .accordion-content { padding: 16px; display: none; background: rgba(3, 11, 23, 0.5); }
+    .accordion-content { padding: 16px; display: none; background: rgba(3, 11, 23, 0.5); width: 100%; }
     
     .worksheet-card {
       background: #ffffff; color: #0f172a; border-radius: 10px;
-      padding: 18px; margin-bottom: 16px; border: 1.5px solid #cbd5e1;
+      padding: 18px; margin-bottom: 16px; border: 1.5px solid #cbd5e1; width: 100%;
     }
     .worksheet-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #0b2545; padding-bottom: 8px; margin-bottom: 14px; flex-wrap: wrap; gap: 10px; }
     .worksheet-header h4 { font-size: 1.05rem; font-weight: 800; color: #0b2545; }
@@ -148,7 +150,7 @@
     .btn-refresh { background: #d97706; color: #ffffff; border: none; padding: 6px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer; }
     .btn-refresh:hover { background: #b45309; }
 
-    .worksheet-meta { display: flex; justify-content: space-between; font-size: 0.85rem; color: #475569; font-weight: 600; margin-bottom: 12px; border-bottom: 1px dashed #cbd5e1; padding-bottom: 6px; }
+    .worksheet-meta { display: flex; justify-content: space-between; font-size: 0.85rem; color: #475569; font-weight: 600; margin-bottom: 12px; border-bottom: 1px dashed #cbd5e1; padding-bottom: 6px; flex-wrap: wrap; gap: 10px; }
     .q-item { margin-bottom: 12px; font-size: 0.94rem; line-height: 1.6; }
     .q-num { font-weight: 800; color: #0b2545; margin-right: 4px; }
     .ans-key-toggle { background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; padding: 4px 10px; border-radius: 6px; font-size: 0.78rem; font-weight: 700; cursor: pointer; margin-top: 8px; display: inline-block; }
@@ -164,9 +166,10 @@
 
     footer {
       margin-top: 45px; background: linear-gradient(180deg, rgba(11, 37, 69, 0.85) 0%, #030b17 100%);
-      border: 1.5px solid var(--gold-border); border-radius: 18px; padding: 28px 18px 24px; text-align: center;
+      border: 1.5px solid var(--gold-border); border-radius: 18px; padding: 24px 18px; text-align: center; width: 100%;
     }
-    .curator-name-calligraphy { font-family: 'Great Vibes', cursive; font-size: clamp(2.4rem, 7vw, 3.2rem); background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    /* Balanced name sizing */
+    .curator-name-calligraphy { font-family: 'Great Vibes', cursive; font-size: clamp(1.8rem, 4vw, 2.4rem); background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
     @media print {
       body * { visibility: hidden; }
@@ -236,7 +239,7 @@
     </div>
 
     <!-- Math Bridge Course & Worksheets -->
-    <h3 class="section-title">📚 Math Bridge Course &amp; Printable Worksheets (Classes 1–10)</h3>
+    <h3 class="section-title">📚 Daily Concept Rotator &amp; Printable Worksheets (Classes 1–10)</h3>
 
     <!-- Classes 1 to 5 -->
     <div class="accordion">
@@ -248,9 +251,9 @@
         <!-- Worksheet C1-C2 -->
         <div class="worksheet-card printable-area" id="ws-c1c2">
           <div class="worksheet-header">
-            <h4>📄 Lekka Lab Practice Sheet: Number Sense &amp; Place Value (Classes 1 &amp; 2)</h4>
+            <h4 id="title-c1c2">📄 Lekka Lab Daily Practice Sheet: Number Sense &amp; Place Value</h4>
             <div class="worksheet-btn-group">
-              <button type="button" class="btn-refresh" onclick="refreshWorksheet('c1c2')">🔄 New Problems</button>
+              <button type="button" class="btn-refresh" onclick="refreshWorksheet('c1c2')">🔄 New Daily Concept</button>
               <button type="button" class="btn-print" onclick="printElement('ws-c1c2')">🖨️ Print / PDF</button>
             </div>
           </div>
@@ -261,9 +264,9 @@
           </div>
           <div id="content-c1c2">
             <div class="q-item"><span class="q-num">1.</span> Write the number name for <span id="c1-num1">48</span>: ________________________</div>
-            <div class="q-item"><span class="q-num">2.</span> Fill in the blanks: <span id="c1-num2">76</span> = ______ Tens $+$ ______ Ones.</div>
+            <div class="q-item"><span class="q-num">2.</span> Fill in the blanks: <span id="c1-num2">76</span> = ______ Tens + ______ Ones.</div>
             <div class="q-item"><span class="q-num">3.</span> What number comes strictly between <span id="c1-num3a">89</span> and <span id="c1-num3b">91</span>? Answer: ______</div>
-            <div class="q-item"><span class="q-num">4.</span> Insert $>$ or $<$: &nbsp; <span id="c1-num4a">64</span> [ &nbsp; ] <span id="c1-num4b">46</span> &nbsp; and &nbsp; <span id="c1-num4c">108</span> [ &nbsp; ] <span id="c1-num4d">180</span>.</div>
+            <div class="q-item"><span class="q-num">4.</span> Insert > or <: &nbsp; <span id="c1-num4a">64</span> [ &nbsp; ] <span id="c1-num4b">46</span> &nbsp; and &nbsp; <span id="c1-num4c">108</span> [ &nbsp; ] <span id="c1-num4d">180</span>.</div>
             <div class="q-item"><span class="q-num">5.</span> Add with carrying: &nbsp; <span id="c1-num5a">47</span> + <span id="c1-num5b">38</span> = _________</div>
             <div class="q-item"><span class="q-num">6.</span> <b>Money Problem:</b> If a pencil costs ₹<span id="c1-penc">5</span> and an eraser costs ₹<span id="c1-eras">3</span>, find the total cost: ₹_________</div>
           </div>
@@ -277,9 +280,9 @@
         <!-- Worksheet C3-C5 -->
         <div class="worksheet-card printable-area" id="ws-c3c5">
           <div class="worksheet-header">
-            <h4>📄 Lekka Lab Practice Sheet: Fractions, LCM &amp; Money (Classes 3, 4 &amp; 5)</h4>
+            <h4 id="title-c3c5">📄 Lekka Lab Daily Practice Sheet: Fractions, LCM &amp; Money</h4>
             <div class="worksheet-btn-group">
-              <button type="button" class="btn-refresh" onclick="refreshWorksheet('c3c5')">🔄 New Problems</button>
+              <button type="button" class="btn-refresh" onclick="refreshWorksheet('c3c5')">🔄 New Daily Concept</button>
               <button type="button" class="btn-print" onclick="printElement('ws-c3c5')">🖨️ Print / PDF</button>
             </div>
           </div>
@@ -291,15 +294,15 @@
           <div id="content-c3c5">
             <div class="q-item"><span class="q-num">1.</span> Find the prime factorisation of <span id="c3-num1">72</span> using the ladder method.</div>
             <div class="q-item"><span class="q-num">2.</span> Find the LCM of <span id="c3-num2a">4</span> and <span id="c3-num2b">6</span>: Answer: _________</div>
-            <div class="q-item"><span class="q-num">3.</span> Solve the unlike fraction addition: $\frac{2}{3} + \frac{1}{4} = $ _________</div>
-            <div class="q-item"><span class="q-num">4.</span> Long Division: Divide <span id="c3-num4a">95</span> $\div$ <span id="c3-num4b">4</span>. State Quotient and Remainder.</div>
-            <div class="q-item"><span class="q-num">5.</span> Convert improper fraction $\frac{13}{5}$ into a mixed number: _________</div>
+            <div class="q-item"><span class="q-num">3.</span> Solve fraction addition: 2/3 + 1/4 = _________</div>
+            <div class="q-item"><span class="q-num">4.</span> Long Division: Divide <span id="c3-num4a">95</span> by <span id="c3-num4b">4</span>. State Quotient and Remainder.</div>
+            <div class="q-item"><span class="q-num">5.</span> Convert improper fraction 13/5 into a mixed number: _________</div>
             <div class="q-item"><span class="q-num">6.</span> <b>Money Problem:</b> Rahul has a ₹100 note. He buys a notebook for ₹<span id="c3-nb">45</span> and geometry box for ₹<span id="c3-gb">35</span>. Balance money: ₹_________</div>
           </div>
           <button type="button" class="ans-key-toggle" onclick="toggleAnsKey('ans-c3c5')">👁️ Toggle Step-by-Step Answer Key</button>
           <div class="ans-key-content" id="ans-c3c5" style="display:none;">
             <b>Answer Key:</b><br>
-            <span id="ans-text-c3c5">1. $72 = 2^3 \times 3^2$.<br>2. LCM = 12.<br>3. 11/12.<br>4. Quotient = 23, Remainder = 3.<br>5. $2\frac{3}{5}$.<br>6. ₹20.</span>
+            <span id="ans-text-c3c5">1. Prime factorisation generated.<br>2. LCM calculated.<br>3. 11/12.<br>4. Quotient and Remainder calculated.<br>5. 2 3/5.<br>6. Balance ₹20.</span>
           </div>
         </div>
 
@@ -315,9 +318,9 @@
         
         <div class="worksheet-card printable-area" id="ws-c6c7">
           <div class="worksheet-header">
-            <h4>📄 Lekka Lab Practice Sheet: Integers, Sign Rules &amp; Commercial Math (Classes 6 &amp; 7)</h4>
+            <h4>📄 Lekka Lab Daily Practice Sheet: Integers, Sign Rules &amp; Commercial Math</h4>
             <div class="worksheet-btn-group">
-              <button type="button" class="btn-refresh" onclick="refreshWorksheet('c6c7')">🔄 New Problems</button>
+              <button type="button" class="btn-refresh" onclick="refreshWorksheet('c6c7')">🔄 New Daily Concept</button>
               <button type="button" class="btn-print" onclick="printElement('ws-c6c7')">🖨️ Print / PDF</button>
             </div>
           </div>
@@ -327,17 +330,17 @@
             <span>Max Score: 12</span>
           </div>
           <div id="content-c6c7">
-            <div class="q-item"><span class="q-num">1.</span> Compute: (a) $(-<span id="c6-n1">8</span>) + (-<span id="c6-n2">5</span>) = $ ______ &nbsp; (b) $(-<span id="c6-n3">12</span>) - (-<span id="c6-n4">7</span>) = $ ______</div>
-            <div class="q-item"><span class="q-num">2.</span> Multiply &amp; Divide: (a) $(-<span id="c6-n5">6</span>) \times (-<span id="c6-n6">4</span>) = $ ______ &nbsp; (b) $(-<span id="c6-n7">35</span>) \div (+<span id="c6-n8">7</span>) = $ ______</div>
-            <div class="q-item"><span class="q-num">3.</span> Simplify using Exponent Laws: $\frac{2^5 \times 2^3}{2^4} = $ ______</div>
-            <div class="q-item"><span class="q-num">4.</span> Solve for $x$ with transposition: $<span id="c6-eq1">3</span>x - <span id="c6-eq2">7</span> = <span id="c6-eq3">14</span>$.</div>
-            <div class="q-item"><span class="q-num">5.</span> <b>Spot the Error:</b> A student wrote $-5 - 3 = +8$. Explain why this is wrong.</div>
+            <div class="q-item"><span class="q-num">1.</span> Compute: (a) (-<span id="c6-n1">8</span>) + (-<span id="c6-n2">5</span>) = ______ &nbsp; (b) (-<span id="c6-n3">12</span>) - (-<span id="c6-n4">7</span>) = ______</div>
+            <div class="q-item"><span class="q-num">2.</span> Multiply &amp; Divide: (a) (-<span id="c6-n5">6</span>) * (-<span id="c6-n6">4</span>) = ______ &nbsp; (b) (-<span id="c6-n7">35</span>) / (+<span id="c6-n8">7</span>) = ______</div>
+            <div class="q-item"><span class="q-num">3.</span> Simplify using Exponent Laws: (2^5 * 2^3) / (2^4) = ______</div>
+            <div class="q-item"><span class="q-num">4.</span> Solve for x with transposition: <span id="c6-eq1">3</span>x - <span id="c6-eq2">7</span> = <span id="c6-eq3">14</span>.</div>
+            <div class="q-item"><span class="q-num">5.</span> <b>Spot the Error:</b> A student wrote -5 - 3 = +8. Explain why this is wrong.</div>
             <div class="q-item"><span class="q-num">6.</span> <b>Profit &amp; Loss:</b> A shopkeeper buys a school bag for ₹<span id="c6-cp">250</span> and sells it for ₹<span id="c6-sp">300</span>. Calculate profit percentage: _________%</div>
           </div>
           <button type="button" class="ans-key-toggle" onclick="toggleAnsKey('ans-c6c7')">👁️ Toggle Step-by-Step Answer Key</button>
           <div class="ans-key-content" id="ans-c6c7" style="display:none;">
             <b>Answer Key:</b><br>
-            <span id="ans-text-c6c7">1. (a) -13. (b) -5.<br>2. (a) +24. (b) -5.<br>3. 16.<br>4. x = 7.<br>5. In addition of negative numbers, values add and keep negative sign.<br>6. 20%.</span>
+            <span id="ans-text-c6c7">1. (a) -13. (b) -5.<br>2. (a) +24. (b) -5.<br>3. 16.<br>4. x = 7.<br>5. Negative sign addition rule.<br>6. 20%.</span>
           </div>
         </div>
 
@@ -353,9 +356,9 @@
         
         <div class="worksheet-card printable-area" id="ws-c8c10">
           <div class="worksheet-header">
-            <h4>📄 Lekka Lab Practice Sheet: Factorisation, Quadratics &amp; Simple Interest (Classes 8, 9 &amp; 10)</h4>
+            <h4>📄 Lekka Lab Daily Practice Sheet: Factorisation, Quadratics &amp; Simple Interest</h4>
             <div class="worksheet-btn-group">
-              <button type="button" class="btn-refresh" onclick="refreshWorksheet('c8c10')">🔄 New Problems</button>
+              <button type="button" class="btn-refresh" onclick="refreshWorksheet('c8c10')">🔄 New Daily Concept</button>
               <button type="button" class="btn-print" onclick="printElement('ws-c8c10')">🖨️ Print / PDF</button>
             </div>
           </div>
@@ -365,17 +368,16 @@
             <span>Max Score: 12</span>
           </div>
           <div id="content-c8c10">
-            <div class="q-item"><span class="q-num">1.</span> Factorise using identities: $<span id="c8-sq1">49</span>x^2 - <span id="c8-sq2">36</span>y^2 = $ ____________________</div>
-            <div class="q-item"><span class="q-num">2.</span> Split middle term: $x^2 + <span id="c8-b">7</span>x + <span id="c8-c">12</span>$. State $p$ and $q$.</div>
-            <div class="q-item"><span class="q-num">3.</span> Rationalise denominator: $\frac{1}{\sqrt{5} - \sqrt{2}} = $ ____________________</div>
-            <div class="q-item"><span class="q-num">4.</span> Quadratic Formula roots for $2x^2 - 7x + 3 = 0$: $x =$ ____________________</div>
-            <div class="q-item"><span class="q-num">5.</span> In right triangle $\triangle ABC$, if $\sin\theta = \frac{3}{5}$, calculate $\cos\theta$ and $\tan\theta$.</div>
-            <div class="q-item"><span class="q-num">6.</span> <b>Simple Interest:</b> Find SI and amount on ₹<span id="c8-p">5,000</span> at <span id="c8-r">8</span>% per annum for <span id="c8-t">2</span> years: SI = ₹_________, Amount = ₹_________</div>
+            <div class="q-item"><span class="q-num">1.</span> Factorise using identities: <span id="c8-sq1">49</span>x^2 - <span id="c8-sq2">36</span>y^2 = ____________________</div>
+            <div class="q-item"><span class="q-num">2.</span> Split middle term: x^2 + <span id="c8-b">7</span>x + <span id="c8-c">12</span> = 0. State factors.</div>
+            <div class="q-item"><span class="q-num">3.</span> Quadratic Formula roots for 2x^2 - 7x + 3 = 0: x = ____________________</div>
+            <div class="q-item"><span class="q-num">4.</span> In right triangle ABC, if sin(theta) = 3/5, calculate cos(theta) and tan(theta).</div>
+            <div class="q-item"><span class="q-num">5.</span> <b>Simple Interest:</b> Find SI and amount on ₹<span id="c8-p">5,000</span> at <span id="c8-r">8</span>% per annum for <span id="c8-t">2</span> years: SI = ₹_________, Amount = ₹_________</div>
           </div>
           <button type="button" class="ans-key-toggle" onclick="toggleAnsKey('ans-c8c10')">👁️ Toggle Step-by-Step Answer Key</button>
           <div class="ans-key-content" id="ans-c8c10" style="display:none;">
             <b>Answer Key:</b><br>
-            <span id="ans-text-c8c10">1. $(7x - 6y)(7x + 6y)$.<br>2. $p=3, q=4 \implies (x+3)(x+4)$.<br>3. $\frac{\sqrt{5}+\sqrt{2}}{3}$.<br>4. $x = 3 \text{ or } \frac{1}{2}$.<br>5. $\cos\theta = 4/5, \tan\theta = 3/4$.<br>6. SI = ₹800, Amount = ₹5,800.</span>
+            <span id="ans-text-c8c10">1. (7x - 6y)(7x + 6y).<br>2. (x+3)(x+4).<br>3. x = 3 or 1/2.<br>4. cos = 4/5, tan = 3/4.<br>5. SI = ₹800, Amount = ₹5,800.</span>
           </div>
         </div>
 
@@ -489,9 +491,9 @@
 
     <footer>
       <div class="footer-signature">
-        <span style="font-size: 0.78rem; text-transform: uppercase; letter-spacing: 3px; color: #cbd5e1; font-weight: 600;">Concept &amp; Learning Architecture</span>
+        <span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: #cbd5e1; font-weight: 600;">Concept &amp; Learning Architecture</span>
         <div class="curator-name-calligraphy">Hemanth Kalyanapu</div>
-        <div style="font-size: 0.92rem; color: #cbd5e1;">Mathematics Educator | Lekka Lab Initiative</div>
+        <div style="font-size: 0.85rem; color: #cbd5e1;">Mathematics Educator | Lekka Lab Initiative</div>
       </div>
     </footer>
   </div>
@@ -512,15 +514,20 @@
     const DIRECT_GEMINI_KEYS = ENCODED_KEYS.map(k => atob(k));
     let base64Image = null;
 
+    // Daily Concept Rotator: automatically seeds different daily concepts based on day of year
     window.addEventListener('DOMContentLoaded', () => {
-      if (window.renderMathInElement) {
-        renderMathInElement(document.body, {
-          delimiters: [
-            {left: "$$", right: "$$", display: true},
-            {left: "$", right: "$", display: false}
-          ],
-          throwOnError: false
-        });
+      const now = new Date();
+      const dayOfYear = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
+      const conceptSeed = dayOfYear % 4;
+      
+      if (conceptSeed === 0) {
+        refreshWorksheet('c1c2');
+      } else if (conceptSeed === 1) {
+        refreshWorksheet('c3c5');
+      } else if (conceptSeed === 2) {
+        refreshWorksheet('c6c7');
+      } else {
+        refreshWorksheet('c8c10');
       }
     });
 
@@ -538,7 +545,6 @@
       window.print();
     }
 
-    // Dynamic Problem Refresh Engine (Like a Captcha / Fresh Seed)
     function refreshWorksheet(sheetId) {
       if (sheetId === 'c1c2') {
         const n1 = Math.floor(Math.random() * 40) + 20;
@@ -589,8 +595,8 @@
           2. LCM = 12.<br>
           3. 11/12.<br>
           4. Quotient = ${q}, Remainder = ${r}.<br>
-          5. $2\\frac{3}{5}$.<br>
-          6. Balance calculation updated.
+          5. 2 3/5.<br>
+          6. Balance calculated.
         `;
       } else if (sheetId === 'c6c7') {
         const cp = [200, 250, 400, 500][Math.floor(Math.random() * 4)];
@@ -608,7 +614,7 @@
           3. 16.<br>
           4. x = 7.<br>
           5. Negative sign addition rule.<br>
-          6. Profit = ₹${profit} $\\implies$ ${pFitPct}%.
+          6. Profit = ₹${profit} (${pFitPct}%).
         `;
       } else if (sheetId === 'c8c10') {
         const pVal = [4000, 5000, 8000, 10000][Math.floor(Math.random() * 4)];
@@ -623,21 +629,12 @@
         const amt = pVal + si;
         
         document.getElementById('ans-text-c8c10').innerHTML = `
-          1. $(7x - 6y)(7x + 6y)$.<br>
+          1. (7x - 6y)(7x + 6y).<br>
           2. Factored form.<br>
-          3. Rationalised form.<br>
-          4. Quadratic roots.<br>
-          5. Trigonometry ratios.<br>
-          6. SI = ₹${si.toLocaleString('en-IN')}, Amount = ₹${amt.toLocaleString('en-IN')}.
+          3. x = 3 or 1/2.<br>
+          4. cos = 4/5, tan = 3/4.<br>
+          5. SI = ₹${si.toLocaleString('en-IN')}, Amount = ₹${amt.toLocaleString('en-IN')}.
         `;
-      }
-      
-      // Re-render KaTeX on updated elements
-      if (window.renderMathInElement) {
-        renderMathInElement(document.getElementById('content-' + sheetId), {
-          delimiters: [{left: "$$", right: "$$", display: true}, {left: "$", right: "$", display: false}],
-          throwOnError: false
-        });
       }
     }
 
