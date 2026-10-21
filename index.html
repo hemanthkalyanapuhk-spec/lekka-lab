@@ -398,7 +398,7 @@
         <span class="online-badge">ONLINE</span>
       </div>
       
-      <textarea id="aiProblemInput" placeholder="Ask anything... MCQs, Math problems, Science diagrams, Recipes, or GK!"></textarea>
+      <textarea id="aiProblemInput" placeholder="Ask anything... Theorems, Problems, Diagrams, Recipes, or GK!"></textarea>
       
       <!-- Preview for captured/uploaded photos -->
       <div class="image-preview-container" id="imagePreviewContainer">
@@ -411,13 +411,13 @@
         <button class="btn btn-solve" id="btnSolve" onclick="handleSolve()">⚡ Ask Lucky</button>
         <button class="btn btn-secondary" id="btnVoice" onclick="toggleVoiceSearch()">🎙️ Voice Search</button>
         
-        <!-- Direct Live Camera Button -->
+        <!-- Camera Button -->
         <label class="btn btn-secondary" style="cursor: pointer;">
           📷 Camera
           <input type="file" id="cameraInput" accept="image/*" capture="environment" style="display:none;" onchange="handleImage(event)">
         </label>
 
-        <!-- Direct Gallery / Files Button -->
+        <!-- Gallery Button -->
         <label class="btn btn-secondary" style="cursor: pointer;">
           🖼️ Gallery
           <input type="file" id="galleryInput" accept="image/*" style="display:none;" onchange="handleImage(event)">
@@ -596,7 +596,7 @@
 
     // Visitor Counter
     (function initCounter() {
-      let count = parseInt(localStorage.getItem('lekka_visits') || '1950', 10);
+      let count = parseInt(localStorage.getItem('lekka_visits') || '1960', 10);
       count += 1;
       localStorage.setItem('lekka_visits', count);
       document.getElementById('visitorCount').innerText = count.toLocaleString();
@@ -677,7 +677,7 @@
           document.getElementById('imagePreviewContainer').style.display = 'flex';
           
           if (!document.getElementById('aiProblemInput').value.trim()) {
-            document.getElementById('aiProblemInput').value = "Please analyze this image, solve the problem, and give correct options.";
+            document.getElementById('aiProblemInput').value = "Please analyze this image, solve the problem, and explain clearly.";
           }
         };
         img.src = event.target.result;
@@ -727,7 +727,7 @@
       recognition.start();
     }
 
-    // High-Precision AI Engine (Crisp, Concise Answers with Direct Options)
+    // High-Precision AI Engine (Natural Direct Answering)
     async function handleSolve() {
       const text = document.getElementById('aiProblemInput').value.trim();
       const btn = document.getElementById('btnSolve');
@@ -740,29 +740,23 @@
       }
 
       display.style.display = 'block';
-      mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">⚡ Generating crisp answer...</p>';
+      mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">⚡ Generating answer...</p>';
       btn.disabled = true;
 
-      const systemInstruction = `You are "Lucky", a fast and concise educational AI assistant for Lekka Lab.
+      // Smart, natural instructions that answer according to question type
+      const systemInstruction = `You are "Lucky", a fast universal educational assistant for Lekka Lab.
 
-CRITICAL CONCISENESS RULE:
-- KEEP SOLUTIONS SHORT, CRISP, AND TO THE POINT. Avoid lengthy essays, unwanted textbook theory, or repetitive introductions.
-
-MCQ / OBJECTIVE QUESTIONS:
-- If the question is an MCQ (or has options A, B, C, D):
-  1. State the correct answer IMMEDIATELY on the very first line:
-     **Correct Option: <Option Letter>) <Option Value>**
-  2. Follow with a brief "Key Reason / Steps" in just 2 to 3 concise bullet points or 2-3 lines max. Do not write full-page derivations.
-
-MATH & FORMULAS:
-- Use standard LaTeX ($..$ inline, $$..$$ display) for formulas and numbers.
-
-LANGUAGE DIRECTIVE:
-- If asked in Telugu or with "in telugu" / "తెలుగులో", respond 100% in natural Telugu.
-- Otherwise, answer in clear English.
-
-DIAGRAMS:
-- If an anatomical or geometric diagram is requested, provide a single clean inline SVG (<svg viewBox="0 0 540 380" ...>) with labels inside.`;
+CRITICAL INSTRUCTIONS:
+- Directly answer the user's question matching its true intent and format.
+- DO NOT invent multiple-choice options (Option A, Option B) when the user just asks for a theorem, concept, or formula.
+- If the question IS an actual multiple-choice question (has options A, B, C, D in text or image):
+  * State the correct option and provide a concise 2-line reason.
+- If the question is a THEOREM (e.g., BPT theorem, Thales, Pythagoras):
+  * Provide Statement, Geometric Diagram (SVG with labeled vertices A, B, C, D, E), Given, To Prove, Construction, and Step-by-Step Proof.
+- If the question is a DIAGRAM request (e.g., Heart, Biology, Optics):
+  * Provide a clean inline SVG (<svg viewBox="0 0 540 380" ...>) with clear pointer lines and labels inside the SVG.
+- If in Telugu or asks "in telugu" / "తెలుగులో", reply 100% in natural Telugu.
+- Use standard LaTeX ($..$ inline, $$..$$ display) for math formulas.`;
 
       const contents = [{
         role: "user",
@@ -802,8 +796,8 @@ DIAGRAMS:
               body: JSON.stringify({ 
                 contents: contents,
                 generationConfig: {
-                  temperature: 0.15,
-                  maxOutputTokens: 1200
+                  temperature: 0.2,
+                  maxOutputTokens: 2500
                 }
               })
             });
