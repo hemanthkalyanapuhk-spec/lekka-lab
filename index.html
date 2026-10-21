@@ -45,92 +45,32 @@
     header {
       background: radial-gradient(circle at 50% 20%, rgba(19, 58, 104, 0.9) 0%, rgba(2, 9, 20, 0.98) 85%);
       border-bottom: 2px solid var(--gold-border);
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7), inset 0 -1px 0 rgba(212, 175, 55, 0.3);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
       padding: 40px 16px 28px;
       text-align: center;
       position: relative;
-      overflow: hidden;
     }
-    header::before {
-      content: "";
-      position: absolute;
-      top: -30%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 480px;
-      height: 250px;
-      background: radial-gradient(circle, rgba(212, 175, 55, 0.18) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .header-box {
-      max-width: 900px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
-      z-index: 2;
-    }
-    .brand-overhead-crest {
-      font-size: 0.8rem;
-      letter-spacing: 6px;
-      color: var(--gold-primary);
-      text-transform: uppercase;
-      font-weight: 700;
-      opacity: 0.95;
-      margin-bottom: 4px;
-      text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
-    }
+    .header-box { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
+    .brand-overhead-crest { font-size: 0.8rem; letter-spacing: 6px; color: var(--gold-primary); text-transform: uppercase; font-weight: 700; margin-bottom: 4px; }
     .brand-title {
       font-family: 'Cinzel', 'Montserrat', serif;
       font-size: clamp(2.6rem, 8vw, 4.2rem);
       font-weight: 900;
       letter-spacing: clamp(4px, 1.5vw, 8px);
       text-transform: uppercase;
-      background: linear-gradient(180deg, #ffffff 0%, #fff4cc 18%, #ffd700 48%, #d4af37 72%, #8c6218 100%);
+      background: linear-gradient(180deg, #ffffff 0%, #ffd700 48%, #d4af37 72%, #8c6218 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.85)) drop-shadow(0 0 25px rgba(212, 175, 55, 0.45));
       line-height: 1.05;
       margin: 2px 0 6px;
     }
-    .brand-divider {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      width: 100%;
-      max-width: 360px;
-      margin: 2px 0 10px;
-    }
-    .brand-divider::before, .brand-divider::after {
-      content: "";
-      flex: 1;
-      height: 1.5px;
-      background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
-    }
-    .brand-divider span {
-      color: var(--gold-primary);
-      font-size: 0.85rem;
-      text-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
-    }
-    header p {
-      font-size: clamp(0.85rem, 2.5vw, 0.98rem);
-      color: #e2e8f0;
-      letter-spacing: 1px;
-      font-weight: 500;
-      text-transform: uppercase;
-      opacity: 0.95;
-    }
+    .brand-divider { display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; max-width: 360px; margin: 2px 0 10px; }
+    .brand-divider::before, .brand-divider::after { content: ""; flex: 1; height: 1.5px; background: linear-gradient(90deg, transparent, var(--gold-primary), transparent); }
+    .brand-divider span { color: var(--gold-primary); font-size: 0.85rem; }
+    header p { font-size: clamp(0.85rem, 2.5vw, 0.98rem); color: #e2e8f0; letter-spacing: 1px; font-weight: 500; text-transform: uppercase; }
 
-    .container { 
-      max-width: 920px; 
-      margin: 24px auto; 
-      padding: 0 14px; 
-      width: 100%;
-    }
+    .container { max-width: 920px; margin: 24px auto; padding: 0 14px; width: 100%; }
 
-    /* AI Card */
     .ai-card {
       background: var(--card-bg);
       backdrop-filter: blur(12px);
@@ -140,360 +80,87 @@
       box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4), var(--gold-glow);
       border: 1px solid var(--card-border);
       margin-bottom: 28px;
-      width: 100%;
     }
-    .ai-header { 
-      display: flex; 
-      align-items: center; 
-      justify-content: space-between; 
-      margin-bottom: 16px; 
-    }
-    .ai-header h2 { 
-      font-size: clamp(1.1rem, 3.5vw, 1.35rem); 
-      font-weight: 800; 
-      color: #ffffff;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
+    .ai-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+    .ai-header h2 { font-size: clamp(1.1rem, 3.5vw, 1.35rem); font-weight: 800; color: #ffffff; display: flex; align-items: center; gap: 8px; }
     .ai-header h2::before { content: "✦"; color: var(--gold-primary); }
-    .online-badge { 
-      background: rgba(22, 163, 74, 0.15); 
-      color: #4ade80; 
-      border: 1px solid rgba(74, 222, 128, 0.4);
-      font-size: 0.75rem; 
-      padding: 4px 12px; 
-      border-radius: 20px; 
-      font-weight: 700; 
-      letter-spacing: 0.5px;
-    }
+    .online-badge { background: rgba(22, 163, 74, 0.15); color: #4ade80; border: 1px solid rgba(74, 222, 128, 0.4); font-size: 0.75rem; padding: 4px 12px; border-radius: 20px; font-weight: 700; }
 
     textarea {
-      width: 100%;
-      height: 95px;
-      padding: 14px;
-      background: rgba(3, 11, 23, 0.85);
-      border: 1px solid rgba(212, 175, 55, 0.35);
-      border-radius: 12px;
-      font-size: 1rem;
-      color: #f8fafc;
-      resize: vertical;
-      outline: none;
-      transition: all 0.25s ease;
+      width: 100%; height: 95px; padding: 14px;
+      background: rgba(3, 11, 23, 0.85); border: 1px solid rgba(212, 175, 55, 0.35);
+      border-radius: 12px; font-size: 1rem; color: #f8fafc; resize: vertical; outline: none;
     }
-    textarea:focus { 
-      border-color: var(--gold-primary); 
-      box-shadow: 0 0 12px rgba(212, 175, 55, 0.35);
-    }
-    textarea::placeholder { color: #64748b; }
+    textarea:focus { border-color: var(--gold-primary); box-shadow: 0 0 12px rgba(212, 175, 55, 0.35); }
 
     .ai-controls { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
-    .btn {
-      padding: 9px 15px;
-      border: none;
-      border-radius: 10px;
-      font-weight: 700;
-      font-size: 0.88rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: all 0.2s ease;
-    }
-    .btn-solve { 
-      background: var(--gold-gradient); 
-      color: #030b17; 
-      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.35);
-    }
-    .btn-solve:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5); }
-    .btn-secondary { 
-      background: rgba(19, 58, 104, 0.6); 
-      color: #f1f5f9; 
-      border: 1px solid rgba(212, 175, 55, 0.25); 
-    }
-    .btn-secondary:hover { background: rgba(19, 58, 104, 0.9); border-color: var(--gold-primary); }
+    .btn { padding: 9px 15px; border: none; border-radius: 10px; font-weight: 700; font-size: 0.88rem; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+    .btn-solve { background: var(--gold-gradient); color: #030b17; }
+    .btn-secondary { background: rgba(19, 58, 104, 0.6); color: #f1f5f9; border: 1px solid rgba(212, 175, 55, 0.25); }
 
-    /* Universal Foundation Booster Panel */
-    .foundation-pill-box {
-      margin-top: 16px;
-      padding: 12px 14px;
-      background: rgba(3, 11, 23, 0.65);
-      border: 1px dashed var(--gold-border);
-      border-radius: 10px;
-    }
-    .foundation-title {
-      font-size: 0.84rem;
-      font-weight: 700;
-      color: #fef08a;
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .foundation-btn-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-    }
+    .foundation-pill-box { margin-top: 16px; padding: 12px 14px; background: rgba(3, 11, 23, 0.65); border: 1px dashed var(--gold-border); border-radius: 10px; }
+    .foundation-title { font-size: 0.84rem; font-weight: 700; color: #fef08a; margin-bottom: 8px; }
+    .foundation-btn-group { display: flex; flex-wrap: wrap; gap: 7px; }
     .foundation-btn {
-      padding: 6px 12px;
-      border-radius: 20px;
-      border: 1px solid rgba(212, 175, 55, 0.35);
-      background: rgba(19, 58, 104, 0.5);
-      color: #f8fafc;
-      font-size: 0.78rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease;
+      padding: 6px 12px; border-radius: 20px; border: 1px solid rgba(212, 175, 55, 0.35);
+      background: rgba(19, 58, 104, 0.5); color: #f8fafc; font-size: 0.78rem; font-weight: 600; cursor: pointer;
     }
-    .foundation-btn:hover {
-      background: var(--gold-primary);
-      color: #030b17;
-      border-color: var(--gold-primary);
-    }
+    .foundation-btn:hover { background: var(--gold-primary); color: #030b17; }
 
     .solution-box {
-      min-width: 0;
-      width: 100%;
-      overflow-wrap: anywhere;
-      word-break: normal;
-      box-sizing: border-box;
-      margin-top: 20px;
-      padding: clamp(14px, 3.5vw, 22px);
-      background: #ffffff;
-      color: #0f172a;
-      border-radius: 14px;
-      border: 1.5px solid var(--gold-primary);
-      display: none;
-      line-height: 1.75;
-      font-size: clamp(0.92rem, 2.5vw, 1rem);
-      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+      margin-top: 20px; padding: clamp(14px, 3.5vw, 22px);
+      background: #ffffff; color: #0f172a; border-radius: 14px;
+      border: 1.5px solid var(--gold-primary); display: none; line-height: 1.75; font-size: 1rem;
     }
-    .solution-box svg {
-      width: 100%;
-      background: #ffffff;
-      border: 1.5px solid #cbd5e1;
-      border-radius: 12px;
-      margin: 16px auto;
-      display: block;
-    }
+    .solution-box svg { width: 100%; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 12px; margin: 16px auto; display: block; }
 
     .section-title {
-      font-size: clamp(1.1rem, 3vw, 1.25rem);
-      font-weight: 800;
-      margin: 35px 0 16px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      background: var(--gold-gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      font-size: clamp(1.1rem, 3vw, 1.25rem); font-weight: 800; margin: 35px 0 16px;
+      text-transform: uppercase; letter-spacing: 1px; background: var(--gold-gradient);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: flex; align-items: center; gap: 10px;
     }
-    .section-title::after {
-      content: "";
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(90deg, var(--gold-border), transparent);
-    }
+    .section-title::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, var(--gold-border), transparent); }
 
-    .accordion {
-      margin-bottom: 14px;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid var(--card-border);
-      background: var(--card-bg);
-      backdrop-filter: blur(8px);
-    }
+    .accordion { margin-bottom: 14px; border-radius: 12px; overflow: hidden; border: 1px solid var(--card-border); background: var(--card-bg); }
     .accordion-btn {
-      width: 100%;
-      padding: 16px 20px;
-      background: linear-gradient(90deg, #091e42 0%, #0d2c54 100%);
-      color: #fef08a;
-      border: none;
-      text-align: left;
-      font-size: 1.05rem;
-      font-weight: 800;
-      letter-spacing: 0.5px;
-      display: flex;
-      justify-content: space-between;
-      cursor: pointer;
-      transition: background 0.2s;
+      width: 100%; padding: 16px 20px; background: linear-gradient(90deg, #091e42 0%, #0d2c54 100%);
+      color: #fef08a; border: none; text-align: left; font-size: 1.05rem; font-weight: 800;
+      display: flex; justify-content: space-between; cursor: pointer;
     }
-    .accordion-btn:hover { background: linear-gradient(90deg, #0c2754 0%, #11386b 100%); }
     .accordion-content { padding: 16px; display: none; background: rgba(3, 11, 23, 0.5); }
     
-    /* Printable Worksheets Specific Styling */
     .worksheet-card {
-      background: #ffffff;
-      color: #0f172a;
-      border-radius: 10px;
-      padding: 18px;
-      margin-bottom: 16px;
-      border: 1.5px solid #cbd5e1;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      background: #ffffff; color: #0f172a; border-radius: 10px;
+      padding: 18px; margin-bottom: 16px; border: 1.5px solid #cbd5e1;
     }
-    .worksheet-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 2px solid #0b2545;
-      padding-bottom: 8px;
-      margin-bottom: 14px;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-    .worksheet-header h4 {
-      font-size: 1.05rem;
-      font-weight: 800;
-      color: #0b2545;
-    }
-    .btn-print {
-      background: #0284c7;
-      color: #ffffff;
-      border: none;
-      padding: 6px 14px;
-      border-radius: 6px;
-      font-size: 0.82rem;
-      font-weight: 700;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .btn-print:hover { background: #0369a1; }
-    .worksheet-meta {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.85rem;
-      color: #475569;
-      font-weight: 600;
-      margin-bottom: 12px;
-      border-bottom: 1px dashed #cbd5e1;
-      padding-bottom: 6px;
-    }
-    .q-item {
-      margin-bottom: 12px;
-      font-size: 0.94rem;
-      line-height: 1.6;
-    }
-    .q-num {
-      font-weight: 800;
-      color: #0b2545;
-      margin-right: 4px;
-    }
-    .ans-key-toggle {
-      background: #f1f5f9;
-      color: #334155;
-      border: 1px solid #cbd5e1;
-      padding: 4px 10px;
-      border-radius: 6px;
-      font-size: 0.78rem;
-      font-weight: 700;
-      cursor: pointer;
-      margin-top: 8px;
-      display: inline-block;
-    }
-    .ans-key-content {
-      display: none;
-      margin-top: 10px;
-      padding: 10px;
-      background: #ecfdf5;
-      border: 1px solid #a7f3d0;
-      border-radius: 6px;
-      font-size: 0.88rem;
-      color: #065f46;
-    }
+    .worksheet-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #0b2545; padding-bottom: 8px; margin-bottom: 14px; flex-wrap: wrap; gap: 10px; }
+    .worksheet-header h4 { font-size: 1.05rem; font-weight: 800; color: #0b2545; }
+    .btn-print { background: #0284c7; color: #ffffff; border: none; padding: 6px 14px; border-radius: 6px; font-size: 0.82rem; font-weight: 700; cursor: pointer; }
+    .worksheet-meta { display: flex; justify-content: space-between; font-size: 0.85rem; color: #475569; font-weight: 600; margin-bottom: 12px; border-bottom: 1px dashed #cbd5e1; padding-bottom: 6px; }
+    .q-item { margin-bottom: 12px; font-size: 0.94rem; line-height: 1.6; }
+    .q-num { font-weight: 800; color: #0b2545; margin-right: 4px; }
+    .ans-key-toggle { background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; padding: 4px 10px; border-radius: 6px; font-size: 0.78rem; font-weight: 700; cursor: pointer; margin-top: 8px; display: inline-block; }
+    .ans-key-content { display: none; margin-top: 10px; padding: 10px; background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 6px; font-size: 0.88rem; color: #065f46; }
 
-    /* Standard PDF Table Styling */
-    .table-container {
-      width: 100%;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      border-radius: 8px;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 620px;
-      background: #ffffff;
-      color: #0f172a;
-    }
-    th, td {
-      padding: 12px 14px;
-      border: 1px solid #e2e8f0;
-      text-align: left;
-      font-size: 0.94rem;
-      white-space: nowrap;
-    }
-    th { background: #f8fafc; color: #1e293b; font-weight: 800; border-bottom: 2px solid #cbd5e1; }
-    
-    .btn-action-view, .btn-action-dl {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 0.84rem;
-      font-weight: 700;
-      text-decoration: none;
-      padding: 5px 10px;
-      border-radius: 6px;
-      margin-right: 6px;
-    }
-    .btn-action-view { color: #0b2545; background: #e0f2fe; border: 1px solid #7dd3fc; }
-    .btn-action-dl { color: #047857; background: #ecfdf5; border: 1px solid #6ee7b7; }
+    .table-container { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 8px; }
+    table { width: 100%; border-collapse: collapse; min-width: 620px; background: #ffffff; color: #0f172a; }
+    th, td { padding: 12px 14px; border: 1px solid #e2e8f0; text-align: left; font-size: 0.94rem; white-space: nowrap; }
+    th { background: #f8fafc; color: #1e293b; font-weight: 800; }
+    .btn-action-view, .btn-action-dl { font-size: 0.84rem; font-weight: 700; text-decoration: none; padding: 5px 10px; border-radius: 6px; margin-right: 6px; }
+    .btn-action-view { color: #0b2545; background: #e0f2fe; }
+    .btn-action-dl { color: #047857; background: #ecfdf5; }
 
     footer {
-      margin-top: 45px;
-      background: linear-gradient(180deg, rgba(11, 37, 69, 0.85) 0%, #030b17 100%);
-      border: 1.5px solid var(--gold-border);
-      border-radius: 18px;
-      padding: 28px 18px 24px;
-      text-align: center;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5), var(--gold-glow);
+      margin-top: 45px; background: linear-gradient(180deg, rgba(11, 37, 69, 0.85) 0%, #030b17 100%);
+      border: 1.5px solid var(--gold-border); border-radius: 18px; padding: 28px 18px 24px; text-align: center;
     }
-    .footer-signature { display: flex; flex-direction: column; align-items: center; gap: 6px; }
-    .curator-tag { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 3px; color: #cbd5e1; font-weight: 600; }
-    .curator-name-calligraphy {
-      font-family: 'Great Vibes', cursive;
-      font-size: clamp(2.4rem, 7vw, 3.2rem);
-      font-weight: 400;
-      line-height: 1.2;
-      background: var(--gold-gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin: 4px 0 2px;
-    }
-    .curator-role { font-size: 0.92rem; color: #cbd5e1; }
-    .counter-badge-footer {
-      margin-top: 16px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(3, 11, 23, 0.85);
-      border: 1px solid var(--gold-border);
-      padding: 6px 22px;
-      border-radius: 999px;
-      font-size: 0.88rem;
-      color: #fef08a;
-    }
+    .curator-name-calligraphy { font-family: 'Great Vibes', cursive; font-size: clamp(2.4rem, 7vw, 3.2rem); background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-    /* Print & PDF Isolation Engine */
     @media print {
       body * { visibility: hidden; }
       header, .ai-card, .section-title, footer, .btn-print, .ans-key-toggle { display: none !important; }
       .printable-area, .printable-area * { visibility: visible; }
-      .printable-area {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        background: #ffffff !important;
-        color: #000000 !important;
-        border: none !important;
-        box-shadow: none !important;
-        padding: 0 !important;
-      }
+      .printable-area { position: absolute; left: 0; top: 0; width: 100%; background: #ffffff !important; color: #000000 !important; border: none !important; }
     }
   </style>
 </head>
@@ -509,23 +176,21 @@
   </header>
 
   <div class="container">
-    <!-- Lucky AI Mentor Card -->
     <div class="ai-card">
       <div class="ai-header">
         <h2>Ask Lucky (Universal AI Assistant)</h2>
         <span class="online-badge">ONLINE</span>
       </div>
       
-      <textarea id="aiProblemInput" placeholder="Ask anything in English or Telugu (తెలుగు)... Algebraic identities, Step-by-step problem solver, Science diagrams, etc."></textarea>
+      <textarea id="aiProblemInput" placeholder="Ask in English or Telugu (తెలుగు)... e.g. Fractions LCM step by step, Quadratic equations, etc."></textarea>
       
       <div class="ai-controls">
         <button class="btn btn-solve" id="btnSolve" onclick="handleSolve()">⚡ Ask Lucky</button>
         <button class="btn btn-secondary" onclick="clearResults()">🗑️ Clear</button>
       </div>
 
-      <!-- Universal Math Foundation Boosters -->
       <div class="foundation-pill-box">
-        <div class="foundation-title">🎯 Universal Math Foundation Boosters (అన్ని తరగతులకు ప్రాథమికాంశాలు):</div>
+        <div class="foundation-title">🎯 Universal Math Foundation Boosters:</div>
         <div class="foundation-btn-group">
           <button type="button" class="foundation-btn" onclick="triggerQuickSearch('Explain Integer sign rules addition subtraction multiplication with simple examples in Telugu')">➕ గుర్తుల నియమాలు (Signs)</button>
           <button type="button" class="foundation-btn" onclick="triggerQuickSearch('How to add and subtract fractions using LCM step by step with examples in Telugu')">➗ భిన్నాలు & ల.సా.గు (LCM)</button>
@@ -540,19 +205,17 @@
       </div>
     </div>
 
-    <!-- ========================================================
-         UNIVERSAL MATHEMATICS BRIDGE COURSE & WORKSHEETS (CLASSES 1 - 10)
-         ======================================================== -->
+    <!-- Math Bridge Course & Worksheets -->
     <h3 class="section-title">📚 Math Bridge Course &amp; Printable Worksheets (Classes 1–10)</h3>
 
-    <!-- Group 1: Primary Foundations (Classes 1 - 5) -->
+    <!-- Classes 1 to 5 -->
     <div class="accordion">
       <button class="accordion-btn" onclick="toggleAccordion('bc-primary')">
         🌱 Primary Foundations &amp; Arithmetic (Classes 1 to 5) <span>▼</span>
       </button>
       <div class="accordion-content" id="bc-primary">
         
-        <!-- Worksheet Class 1 & 2 -->
+        <!-- Worksheet C1-C2 -->
         <div class="worksheet-card printable-area" id="ws-c1c2">
           <div class="worksheet-header">
             <h4>📄 Lekka Lab Practice Sheet: Number Sense &amp; Place Value (Classes 1 &amp; 2)</h4>
@@ -561,91 +224,97 @@
           <div class="worksheet-meta">
             <span>Student Name: _______________________</span>
             <span>Date: ____________</span>
-            <span>Max Score: 10</span>
+            <span>Max Score: 12</span>
           </div>
           <div class="q-item"><span class="q-num">1.</span> Write the number name for $48$: ________________________</div>
           <div class="q-item"><span class="q-num">2.</span> Fill in the blanks: $76 = $ ______ Tens $+$ ______ Ones.</div>
-          <div class="q-item"><span class="q-num">3.</span> What comes strictly between $89$ and $91$? Answer: ______</div>
+          <div class="q-item"><span class="q-num">3.</span> What number comes strictly between $89$ and $91$? Answer: ______</div>
           <div class="q-item"><span class="q-num">4.</span> Insert $>$ or $<$: &nbsp; $64$ [ &nbsp; ] $46$ &nbsp; and &nbsp; $108$ [ &nbsp; ] $180$.</div>
           <div class="q-item"><span class="q-num">5.</span> Add with carrying: &nbsp; $47 + 38 = $ _________</div>
+          <div class="q-item"><span class="q-num">6.</span> <b>Money Problem:</b> If a pencil costs ₹5 and an eraser costs ₹3, find the total cost: ₹_________</div>
           <button type="button" class="ans-key-toggle" onclick="toggleAnsKey('ans-c1c2')">👁️ Toggle Step-by-Step Answer Key</button>
           <div class="ans-key-content" id="ans-c1c2">
             <b>Answer Key:</b><br>
-            1. Forty-eight (Note: spelling is 'Forty', not 'Fourty').<br>
+            1. Forty-eight.<br>
             2. $7$ Tens $+$ $6$ Ones ($70 + 6$).<br>
             3. $90$.<br>
             4. $64 > 46$ and $108 < 180$.<br>
-            5. Ones: $7 + 8 = 15$ (write $5$, carry $1$). Tens: $4 + 3 + 1 = 8$. Total $= 85$.
+            5. Ones: $7 + 8 = 15$ (write $5$, carry $1$). Tens: $4 + 3 + 1 = 8 \implies 85$.<br>
+            6. Total cost $= \text{₹}5 + \text{₹}3 = \text{₹}8$.
           </div>
         </div>
 
-        <!-- Worksheet Class 3, 4 & 5 -->
+        <!-- Worksheet C3-C5 -->
         <div class="worksheet-card printable-area" id="ws-c3c5">
           <div class="worksheet-header">
-            <h4>📄 Lekka Lab Practice Sheet: Fractions, LCM &amp; Long Division (Classes 3, 4 &amp; 5)</h4>
+            <h4>📄 Lekka Lab Practice Sheet: Fractions, LCM &amp; Money (Classes 3, 4 &amp; 5)</h4>
             <button type="button" class="btn-print" onclick="printElement('ws-c3c5')">🖨️ Print / Save as PDF</button>
           </div>
           <div class="worksheet-meta">
             <span>Student Name: _______________________</span>
             <span>Date: ____________</span>
-            <span>Max Score: 10</span>
+            <span>Max Score: 12</span>
           </div>
           <div class="q-item"><span class="q-num">1.</span> Find the prime factorisation of $72$ using the ladder method.</div>
           <div class="q-item"><span class="q-num">2.</span> Find the LCM of $4$ and $6$: Answer: _________</div>
-          <div class="q-item"><span class="q-num">3.</span> Solve the unlike fraction addition step-by-step: $\frac{2}{3} + \frac{1}{4} = $ _________</div>
+          <div class="q-item"><span class="q-num">3.</span> Solve the unlike fraction addition: $\frac{2}{3} + \frac{1}{4} = $ _________</div>
           <div class="q-item"><span class="q-num">4.</span> Long Division: Divide $95 \div 4$. State the Quotient and Remainder.</div>
           <div class="q-item"><span class="q-num">5.</span> Convert the improper fraction $\frac{13}{5}$ into a mixed number: _________</div>
+          <div class="q-item"><span class="q-num">6.</span> <b>Money Problem:</b> Rahul has a ₹100 note. He buys a notebook for ₹45 and a geometry box for ₹35. How much balance money does he receive back? Answer: ₹_________</div>
           <button type="button" class="ans-key-toggle" onclick="toggleAnsKey('ans-c3c5')">👁️ Toggle Step-by-Step Answer Key</button>
           <div class="ans-key-content" id="ans-c3c5">
             <b>Answer Key:</b><br>
             1. $72 = 2 \times 2 \times 2 \times 3 \times 3 = 2^3 \times 3^2$.<br>
-            2. Multiples of $4: 4, 8, 12...$; Multiples of $6: 6, 12... \implies \text{LCM} = 12$.<br>
-            3. Common denominator $= 12 \implies \frac{8}{12} + \frac{3}{12} = \frac{11}{12}$.<br>
-            4. $4 \times 23 = 92$; $95 - 92 = 3 \implies \text{Quotient} = 23, \text{Remainder} = 3$.<br>
-            5. $13 \div 5 = 2$ with remainder $3 \implies 2\frac{3}{5}$.
+            2. Multiples of $4: 4, 8, 12\dots$; Multiples of $6: 6, 12\dots \implies \text{LCM} = 12$.<br>
+            3. $\frac{8}{12} + \frac{3}{12} = \frac{11}{12}$.<br>
+            4. $4 \times 23 = 92$; Remainder $= 3 \implies \text{Quotient} = 23, \text{Remainder} = 3$.<br>
+            5. $13 \div 5 = 2$ with remainder $3 \implies 2\frac{3}{5}$.<br>
+            6. Total spent $= \text{₹}45 + \text{₹}35 = \text{₹}80$. Balance $= \text{₹}100 - \text{₹}80 = \text{₹}20$.
           </div>
         </div>
 
       </div>
     </div>
 
-    <!-- Group 2: Middle School Transition (Classes 6 & 7) -->
+    <!-- Classes 6 & 7 -->
     <div class="accordion">
       <button class="accordion-btn" onclick="toggleAccordion('bc-middle')">
-        🌿 Middle School Core: Integers &amp; Linear Equations (Classes 6 &amp; 7) <span>▼</span>
+        🌿 Middle School Core: Integers, Equations &amp; Percentages (Classes 6 &amp; 7) <span>▼</span>
       </button>
       <div class="accordion-content" id="bc-middle">
         
         <div class="worksheet-card printable-area" id="ws-c6c7">
           <div class="worksheet-header">
-            <h4>📄 Lekka Lab Practice Sheet: Integers, Sign Rules &amp; Equations (Classes 6 &amp; 7)</h4>
+            <h4>📄 Lekka Lab Practice Sheet: Integers, Sign Rules &amp; Commercial Math (Classes 6 &amp; 7)</h4>
             <button type="button" class="btn-print" onclick="printElement('ws-c6c7')">🖨️ Print / Save as PDF</button>
           </div>
           <div class="worksheet-meta">
             <span>Student Name: _______________________</span>
             <span>Date: ____________</span>
-            <span>Max Score: 10</span>
+            <span>Max Score: 12</span>
           </div>
           <div class="q-item"><span class="q-num">1.</span> Compute: (a) $(-8) + (-5) = $ ______ &nbsp; (b) $(-12) - (-7) = $ ______</div>
           <div class="q-item"><span class="q-num">2.</span> Multiply &amp; Divide: (a) $(-6) \times (-4) = $ ______ &nbsp; (b) $(-35) \div (+7) = $ ______</div>
           <div class="q-item"><span class="q-num">3.</span> Simplify using Exponent Laws: $\frac{2^5 \times 2^3}{2^4} = $ ______</div>
-          <div class="q-item"><span class="q-num">4.</span> Solve for $x$ with transposition: $3x - 7 = 14$. Show all steps.</div>
+          <div class="q-item"><span class="q-num">4.</span> Solve for $x$ with transposition: $3x - 7 = 14$.</div>
           <div class="q-item"><span class="q-num">5.</span> <b>Spot the Error:</b> A student wrote $-5 - 3 = +8$. Explain why this is wrong.</div>
+          <div class="q-item"><span class="q-num">6.</span> <b>Profit &amp; Loss:</b> A shopkeeper buys a school bag for ₹250 and sells it for ₹300. Calculate his profit percentage: _________%</div>
           <button type="button" class="ans-key-toggle" onclick="toggleAnsKey('ans-c6c7')">👁️ Toggle Step-by-Step Answer Key</button>
           <div class="ans-key-content" id="ans-c6c7">
             <b>Answer Key:</b><br>
-            1. (a) Both negative $\implies -(8 + 5) = -13$. (b) $-12 + 7 = -5$.<br>
-            2. (a) $(-)\times(-) = (+) \implies +24$. (b) $(-) \div (+) = (-) \implies -5$.<br>
-            3. Numerator: $2^{5+3} = 2^8$; Division: $2^{8-4} = 2^4 = 16$.<br>
-            4. Step 1: $3x = 14 + 7 \implies 3x = 21$. Step 2: $x = \frac{21}{3} \implies x = 7$.<br>
-            5. The student applied multiplication rules to addition. In addition of two negative numbers, the magnitudes add and retain the negative sign: $-5 - 3 = -8$.
+            1. (a) $-13$. (b) $-12 + 7 = -5$.<br>
+            2. (a) $+24$. (b) $-5$.<br>
+            3. $2^{5+3-4} = 2^4 = 16$.<br>
+            4. $3x = 14 + 7 = 21 \implies x = \frac{21}{3} = 7$.<br>
+            5. In addition of negative numbers, values add and keep negative sign: $-5 - 3 = -8$.<br>
+            6. $\text{Profit} = \text{₹}300 - \text{₹}250 = \text{₹}50$. $\text{Profit } \% = \left(\frac{50}{250}\right) \times 100 = 20\%$.
           </div>
         </div>
 
       </div>
     </div>
 
-    <!-- Group 3: Secondary & Board Core (Classes 8, 9 & 10) -->
+    <!-- Classes 8, 9 & 10 -->
     <div class="accordion">
       <button class="accordion-btn" onclick="toggleAccordion('bc-secondary')">
         🌲 Secondary &amp; Board Examination Mastery (Classes 8, 9 &amp; 10) <span>▼</span>
@@ -654,68 +323,62 @@
         
         <div class="worksheet-card printable-area" id="ws-c8c10">
           <div class="worksheet-header">
-            <h4>📄 Lekka Lab Practice Sheet: Factorisation &amp; Quadratic Equations (Classes 8, 9 &amp; 10)</h4>
+            <h4>📄 Lekka Lab Practice Sheet: Factorisation, Quadratics &amp; Simple Interest (Classes 8, 9 &amp; 10)</h4>
             <button type="button" class="btn-print" onclick="printElement('ws-c8c10')">🖨️ Print / Save as PDF</button>
           </div>
           <div class="worksheet-meta">
             <span>Student Name: _______________________</span>
             <span>Date: ____________</span>
-            <span>Max Score: 10</span>
+            <span>Max Score: 12</span>
           </div>
           <div class="q-item"><span class="q-num">1.</span> Factorise using algebraic identities: $49x^2 - 36y^2 = $ ____________________</div>
           <div class="q-item"><span class="q-num">2.</span> Split the middle term to factorise: $x^2 + 7x + 12$. State $p$ and $q$.</div>
           <div class="q-item"><span class="q-num">3.</span> Rationalise the denominator: $\frac{1}{\sqrt{5} - \sqrt{2}} = $ ____________________</div>
           <div class="q-item"><span class="q-num">4.</span> Find the roots of $2x^2 - 7x + 3 = 0$ using the Quadratic Formula: $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$.</div>
           <div class="q-item"><span class="q-num">5.</span> In right triangle $\triangle ABC$, if $\sin\theta = \frac{3}{5}$, calculate $\cos\theta$ and $\tan\theta$.</div>
+          <div class="q-item"><span class="q-num">6.</span> <b>Simple Interest:</b> Find the Simple Interest (SI) and total amount on a sum of ₹5,000 at $8\%$ per annum for $2$ years: $\text{SI} = $ ₹_________, $\text{Amount} = $ ₹_________</div>
           <button type="button" class="ans-key-toggle" onclick="toggleAnsKey('ans-c8c10')">👁️ Toggle Step-by-Step Answer Key</button>
           <div class="ans-key-content" id="ans-c8c10">
             <b>Answer Key:</b><br>
-            1. $(7x)^2 - (6y)^2 = (7x - 6y)(7x + 6y)$.<br>
-            2. $p + q = 7$ and $p \times q = 12 \implies p=3, q=4$. Expression: $(x + 3)(x + 4)$.<br>
-            3. Multiply top/bottom by $(\sqrt{5} + \sqrt{2}) \implies \frac{\sqrt{5} + \sqrt{2}}{5 - 2} = \frac{\sqrt{5} + \sqrt{2}}{3}$.<br>
-            4. $a=2, b=-7, c=3$. $D = (-7)^2 - 4(2)(3) = 49 - 24 = 25$. $x = \frac{7 \pm 5}{4} \implies x = 3$ or $x = \frac{1}{2}$.<br>
-            5. Opposite $= 3$, Hypotenuse $= 5 \implies \text{Adjacent} = \sqrt{5^2 - 3^2} = 4$. $\cos\theta = \frac{4}{5}$, $\tan\theta = \frac{3}{4}$.
+            1. $(7x - 6y)(7x + 6y)$.<br>
+            2. $p=3, q=4 \implies (x + 3)(x + 4)$.<br>
+            3. $\frac{\sqrt{5} + \sqrt{2}}{5 - 2} = \frac{\sqrt{5} + \sqrt{2}}{3}$.<br>
+            4. $D = 49 - 24 = 25 \implies x = \frac{7 \pm 5}{4} \implies x = 3 \text{ or } x = \frac{1}{2}$.<br>
+            5. $\cos\theta = \frac{4}{5}, \tan\theta = \frac{3}{4}$.<br>
+            6. $\text{SI} = \frac{5000 \times 8 \times 2}{100} = \text{₹}800$. Total Amount $= \text{₹}5000 + \text{₹}800 = \text{₹}5,800$.
           </div>
         </div>
 
       </div>
     </div>
 
-    <!-- 36 Assessment & Project PDF Files (100% Intact) -->
+    <!-- 36 Assessment & Project PDF Files -->
     <h3 class="section-title">Assessment &amp; Project Resources (36 PDFs)</h3>
 
     <!-- Class 10 -->
     <div class="accordion">
-      <button class="accordion-btn" onclick="toggleAccordion('c10')">
-        Class 10 Mathematics <span>▼</span>
-      </button>
+      <button class="accordion-btn" onclick="toggleAccordion('c10')">Class 10 Mathematics <span>▼</span></button>
       <div class="accordion-content" id="c10" style="display:block;">
         <div class="table-container">
           <table>
-            <thead>
-              <tr><th>FA Assessment</th><th>Generating New Problems</th><th>Project Work</th><th>Slip Test</th></tr>
-            </thead>
+            <thead><tr><th>FA Assessment</th><th>Generating New Problems</th><th>Project Work</th><th>Slip Test</th></tr></thead>
             <tbody>
-              <tr>
-                <td><b>FA - 1</b></td>
+              <tr><td><b>FA - 1</b></td>
                 <td><a class="btn-action-view" href="./class10-fa1-generating-new-problems.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class10-fa1-generating-new-problems.pdf" download>⬇️ Save</a></td>
                 <td><a class="btn-action-view" href="./class10-fa1-project.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class10-fa1-project.pdf" download>⬇️ Save</a></td>
                 <td><a class="btn-action-view" href="./class10-fa1-slip-test.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class10-fa1-slip-test.pdf" download>⬇️ Save</a></td>
               </tr>
-              <tr>
-                <td><b>FA - 2</b></td>
+              <tr><td><b>FA - 2</b></td>
                 <td><a class="btn-action-view" href="./class10-fa2-generating-new-problems.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class10-fa2-generating-new-problems.pdf" download>⬇️ Save</a></td>
                 <td><a class="btn-action-view" href="./class10-fa2-project.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class10-fa2-project.pdf" download>⬇️ Save</a></td>
                 <td><a class="btn-action-view" href="./class10-fa2-slip-test.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class10-fa2-slip-test.pdf" download>⬇️ Save</a></td>
               </tr>
-              <tr>
-                <td><b>FA - 3</b></td>
+              <tr><td><b>FA - 3</b></td>
                 <td><a class="btn-action-view" href="./class10-fa3-generating-new-problems.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class10-fa3-generating-new-problems.pdf" download>⬇️ Save</a></td>
                 <td><a class="btn-action-view" href="./class10-fa3-project.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class10-fa3-project.pdf" download>⬇️ Save</a></td>
                 <td><a class="btn-action-view" href="./class10-fa3-slip-test.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class10-fa3-slip-test.pdf" download>⬇️ Save</a></td>
               </tr>
-              <tr>
-                <td><b>FA - 4</b></td>
+              <tr><td><b>FA - 4</b></td>
                 <td><a class="btn-action-view" href="./class10-fa4-generating-new-problems.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class10-fa4-generating-new-problems.pdf" download>⬇️ Save</a></td>
                 <td><a class="btn-action-view" href="./class10-fa4-project.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class10-fa4-project.pdf" download>⬇️ Save</a></td>
                 <td><a class="btn-action-view" href="./class10-fa4-slip-test.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class10-fa4-slip-test.pdf" download>⬇️ Save</a></td>
@@ -728,36 +391,28 @@
 
     <!-- Class 9 -->
     <div class="accordion">
-      <button class="accordion-btn" onclick="toggleAccordion('c9')">
-        Class 9 Mathematics <span>▼</span>
-      </button>
+      <button class="accordion-btn" onclick="toggleAccordion('c9')">Class 9 Mathematics <span>▼</span></button>
       <div class="accordion-content" id="c9">
         <div class="table-container">
           <table>
-            <thead>
-              <tr><th>FA Assessment</th><th>Generating New Problems</th><th>Project Work</th><th>Slip Test</th></tr>
-            </thead>
+            <thead><tr><th>FA Assessment</th><th>Generating New Problems</th><th>Project Work</th><th>Slip Test</th></tr></thead>
             <tbody>
-              <tr>
-                <td><b>FA - 1</b></td>
+              <tr><td><b>FA - 1</b></td>
                 <td><a class="btn-action-view" href="./class9-fa1-generating-new-problems.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class9-fa1-generating-new-problems.pdf" download>⬇️ Save</a></td>
                 <td><a class="btn-action-view" href="./class9-fa1-project.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class9-fa1-project.pdf" download>⬇️ Save</a></td>
                 <td><a class="btn-action-view" href="./class9-fa1-slip-test.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class9-fa1-slip-test.pdf" download>⬇️ Save</a></td>
               </tr>
-              <tr>
-                <td><b>FA - 2</b></td>
+              <tr><td><b>FA - 2</b></td>
                 <td><a class="btn-action-view" href="./class9-fa2-generating-new-problems.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class9-fa2-generating-new-problems.pdf" download>⬇️ Save</a></td>
                 <td><a class="btn-action-view" href="./class9-fa2-project.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class9-fa2-project.pdf" download>⬇️ Save</a></td>
                 <td><a class="btn-action-view" href="./class9-fa2-slip-test.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class9-fa2-slip-test.pdf" download>⬇️ Save</a></td>
               </tr>
-              <tr>
-                <td><b>FA - 3</b></td>
+              <tr><td><b>FA - 3</b></td>
                 <td><a class="btn-action-view" href="./Class9-fa3-generating-new-Problems.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./Class9-fa3-generating-new-Problems.pdf" download>⬇️ Save</a></td>
                 <td><a class="btn-action-view" href="./class9-fa3-project.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class9-fa3-project.pdf" download>⬇️ Save</a></td>
                 <td><a class="btn-action-view" href="./class9-fa3-slip-test.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class9-fa3-slip-test.pdf" download>⬇️ Save</a></td>
               </tr>
-              <tr>
-                <td><b>FA - 4</b></td>
+              <tr><td><b>FA - 4</b></td>
                 <td><a class="btn-action-view" href="./class9-fa4-generating-new-problems.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class9-fa4-generating-new-problems.pdf" download>⬇️ Save</a></td>
                 <td><a class="btn-action-view" href="./class9-fa4-project.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class9-fa4-project.pdf" download>⬇️ Save</a></td>
                 <td><a class="btn-action-view" href="./class9-fa4-slip-test.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class9-fa4-slip-test.pdf" download>⬇️ Save</a></td>
@@ -770,36 +425,28 @@
 
     <!-- Class 8 -->
     <div class="accordion">
-      <button class="accordion-btn" onclick="toggleAccordion('c8')">
-        Class 8 Mathematics <span>▼</span>
-      </button>
+      <button class="accordion-btn" onclick="toggleAccordion('c8')">Class 8 Mathematics <span>▼</span></button>
       <div class="accordion-content" id="c8">
         <div class="table-container">
           <table>
-            <thead>
-              <tr><th>FA Assessment</th><th>Generating New Problems</th><th>Project Work</th><th>Slip Test</th></tr>
-            </thead>
+            <thead><tr><th>FA Assessment</th><th>Generating New Problems</th><th>Project Work</th><th>Slip Test</th></tr></thead>
             <tbody>
-              <tr>
-                <td><b>FA - 1</b></td>
+              <tr><td><b>FA - 1</b></td>
                 <td><a class="btn-action-view" href="./FA-1 Generating New Problems.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./FA-1 Generating New Problems.pdf" download>⬇️ Save</a></td>
                 <td><a class="btn-action-view" href="./Class 8 FA1 Project.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./Class 8 FA1 Project.pdf" download>⬇️ Save</a></td>
                 <td><a class="btn-action-view" href="./FA-1 Slip Test.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./FA-1 Slip Test.pdf" download>⬇️ Save</a></td>
               </tr>
-              <tr>
-                <td><b>FA - 2</b></td>
+              <tr><td><b>FA - 2</b></td>
                 <td><a class="btn-action-view" href="./class8-fa2-generating-new-problems.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class8-fa2-generating-new-problems.pdf" download>⬇️ Save</a></td>
                 <td><a class="btn-action-view" href="./class8-fa2-project.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class8-fa2-project.pdf" download>⬇️ Save</a></td>
                 <td><a class="btn-action-view" href="./class8-fa2-slip-test.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class8-fa2-slip-test.pdf" download>⬇️ Save</a></td>
               </tr>
-              <tr>
-                <td><b>FA - 3</b></td>
+              <tr><td><b>FA - 3</b></td>
                 <td><a class="btn-action-view" href="./class8-fa3-generating-new-problems.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class8-fa3-generating-new-problems.pdf" download>⬇️ Save</a></td>
                 <td><a class="btn-action-view" href="./class8-fa3-project.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class8-fa3-project.pdf" download>⬇️ Save</a></td>
                 <td><a class="btn-action-view" href="./class8-fa3-slip-test.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class8-fa3-slip-test.pdf" download>⬇️ Save</a></td>
               </tr>
-              <tr>
-                <td><b>FA - 4</b></td>
+              <tr><td><b>FA - 4</b></td>
                 <td><a class="btn-action-view" href="./class8-fa4-generating-new-problems.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class8-fa4-generating-new-problems.pdf" download>⬇️ Save</a></td>
                 <td><a class="btn-action-view" href="./class8-fa4-project.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class8-fa4-project.pdf" download>⬇️ Save</a></td>
                 <td><a class="btn-action-view" href="./class8-fa4-slip-test.pdf" target="_blank">👁️ View</a><a class="btn-action-dl" href="./class8-fa4-slip-test.pdf" download>⬇️ Save</a></td>
@@ -810,16 +457,12 @@
       </div>
     </div>
 
-    <!-- Royal Footer with Calligraphy Signature -->
+    <!-- Footer -->
     <footer>
       <div class="footer-signature">
-        <span class="curator-tag">Concept &amp; Learning Architecture</span>
+        <span style="font-size: 0.78rem; text-transform: uppercase; letter-spacing: 3px; color: #cbd5e1; font-weight: 600;">Concept &amp; Learning Architecture</span>
         <div class="curator-name-calligraphy">Hemanth Kalyanapu</div>
-        <div class="curator-role">Mathematics Educator | Lekka Lab Initiative</div>
-        <div class="counter-badge-footer">
-          <span>👥 Total Visitors: <b id="visitorCount">--</b></span>
-        </div>
-        <p style="margin-top: 14px; font-size: 0.78rem; color: #64748b;">Dedicated to Excellence in High School Mathematics &amp; Science Education</p>
+        <div style="font-size: 0.92rem; color: #cbd5e1;">Mathematics Educator | Lekka Lab Initiative</div>
       </div>
     </footer>
   </div>
@@ -837,15 +480,20 @@
       "QVEuQWI4Uk42SVNhNERQNFlBRjNZYm9TTjktZEthSmxuVE4zWU02aGNEbkN0R2J4UGpuUHc=",
       "QVEuQWI4Uk42SmFMbFdZNWxBeVkxckdBdjF0QlJ2b1VYQnhLOTVXZDlVdno5RExuRTdBUVE="
     ];
-
     const DIRECT_GEMINI_KEYS = ENCODED_KEYS.map(k => atob(k));
 
-    (function initCounter() {
-      let count = parseInt(localStorage.getItem('lekka_visits') || '2125', 10);
-      count += 1;
-      localStorage.setItem('lekka_visits', count);
-      document.getElementById('visitorCount').innerText = count.toLocaleString();
-    })();
+    // Render Math on page load across all worksheets
+    window.addEventListener('DOMContentLoaded', () => {
+      if (window.renderMathInElement) {
+        renderMathInElement(document.body, {
+          delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "$", right: "$", display: false}
+          ],
+          throwOnError: false
+        });
+      }
+    });
 
     function toggleAccordion(id) {
       const el = document.getElementById(id);
@@ -873,7 +521,6 @@
       window.scrollTo({ top: 120, behavior: 'smooth' });
     }
 
-    // High-Precision Curated Vector Registry
     const CORE_TEXTBOOK_ASSETS = {
       algebraTrio: () => `
         <div style="margin:16px 0;"><svg viewBox="0 0 460 360" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; font-family:-apple-system, sans-serif;">
@@ -892,27 +539,9 @@
             <text x="-12" y="95" font-size="13" font-weight="bold" fill="#2563eb" text-anchor="middle">a</text>
             <text x="-12" y="230" font-size="13" font-weight="bold" fill="#d97706" text-anchor="middle">b</text>
           </g>
-          <text x="230" y="340" font-size="12" fill="#475569" text-anchor="middle">Square Area: (a + b)² = a² + ab + ab + b² = a² + 2ab + b²</text>
+          <text x="230" y="340" font-size="12" fill="#475569" text-anchor="middle">Square Area: (a + b)² = a² + 2ab + b²</text>
         </svg></div>
       `,
-      brain: `<div style="margin:16px 0;"><svg viewBox="0 0 620 380" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; font-family:-apple-system, sans-serif;">
-        <defs>
-          <linearGradient id="cortexGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#fecaca"/><stop offset="100%" stop-color="#f87171"/></linearGradient>
-          <linearGradient id="cerebellumGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#bbf7d0"/><stop offset="100%" stop-color="#4ade80"/></linearGradient>
-        </defs>
-        <g transform="translate(40, 20)">
-          <path d="M 140 200 C 100 170, 95 120, 130 80 C 170 35, 260 30, 340 50 C 420 70, 450 140, 430 190 C 410 230, 360 230, 330 220 C 310 200, 260 215, 230 215 C 190 215, 160 210, 140 200 Z" fill="url(#cortexGrad)" stroke="#b91c1c" stroke-width="2.5"/>
-          <path d="M 130 80 C 160 110, 200 80, 240 120 C 270 140, 320 100, 360 110 C 390 120, 410 150, 430 190" fill="none" stroke="#991b1b" stroke-width="2"/>
-          <path d="M 210 160 C 210 125, 300 125, 320 165 C 310 175, 230 175, 210 160 Z" fill="#ffffff" stroke="#64748b" stroke-width="1.5"/>
-          <ellipse cx="265" cy="180" rx="18" ry="12" fill="#fed7aa" stroke="#ea580c" stroke-width="1.5"/>
-          <ellipse cx="355" cy="245" rx="55" ry="36" fill="url(#cerebellumGrad)" stroke="#15803d" stroke-width="2.2"/>
-          <path d="M 255 195 C 275 210, 275 250, 260 300 L 235 300 C 240 250, 235 210, 245 195 Z" fill="#fef08a" stroke="#ca8a04" stroke-width="2.2"/>
-          <line x1="240" y1="40" x2="150" y2="18" stroke="#0f172a" stroke-width="1.5"/><text x="140" y="20" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="end">Cerebrum (Thinking & Sensory)</text>
-          <line x1="390" y1="245" x2="435" y2="245" stroke="#0f172a" stroke-width="1.5"/><text x="445" y="249" font-size="12" font-weight="bold" fill="#15803d">Cerebellum (Balance & Posture)</text>
-          <line x1="260" y1="270" x2="350" y2="295" stroke="#0f172a" stroke-width="1.5"/><text x="360" y="299" font-size="12" font-weight="bold" fill="#a16207">Brainstem / Medulla</text>
-        </g>
-        <text x="310" y="365" font-size="11" font-weight="600" fill="#64748b" text-anchor="middle">Standard High School Biology: Human Brain (Sagittal Section)</text>
-      </svg></div>`,
       prism: `<div style="margin:16px 0;"><svg viewBox="0 0 520 270" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; font-family:-apple-system, sans-serif;">
         <polygon points="260,30 110,230 410,230" fill="rgba(224, 242, 254, 0.5)" stroke="#0284c7" stroke-width="2.5"/>
         <text x="260" y="24" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">A (Angle of Prism)</text>
@@ -955,17 +584,21 @@
       if (!originalText) { alert('Please enter a question or formula.'); return; }
 
       display.style.display = 'block';
-      mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">⚡ Retrieving step-by-step breakdown & verified figures...</p>';
+      mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">⚡ Retrieving step-by-step breakdown...</p>';
       btn.disabled = true;
 
-      const rawLower = originalText.toLowerCase().replace(/\s+/g, '');
+      const qRaw = originalText.toLowerCase();
+
+      // STRICT DIAGRAM MATCHING: Only insert diagrams if user explicitly asked for them
+      const wantsAlgebraProof = (qRaw.includes("geometrical proof") || qRaw.includes("identity proof") || qRaw.includes("algebraic identities proof"));
+      const wantsPrism = (qRaw.includes("prism") || qRaw.includes("angle of deviation") || qRaw.includes("dispersion of light"));
+
       const systemInstruction = `You are "Lucky", the educational AI mentor for Lekka Lab.
-CRITICAL INSTRUCTIONS:
-1. For mathematics queries: Provide step-by-step solutions without conversational fluff. Break down all elementary operations (transposition, sign rules, LCM).
+INSTRUCTIONS:
+1. Provide step-by-step solutions without conversational filler. Break down all elementary operations (transposition, sign rules, LCM).
 2. If question is in Telugu or requested in Telugu, respond 100% in grammatically accurate Telugu.
-3. If question is about geometrical proof of algebraic identities: Insert token [ASSET_ALGEBRA_TRIO]
-4. If question is about human brain: Insert token [ASSET_BRAIN]
-5. If question is about prism: Insert token [ASSET_PRISM]`;
+3. Use Indian Rupee (₹) for all currency problems.
+4. DO NOT mention or insert any diagrams unless the user explicitly requested a diagram.`;
 
       const contents = [{ role: "user", parts: [{ text: `${systemInstruction}\n\nQuestion: ${originalText}` }] }];
       let rawAnswer = null;
@@ -976,7 +609,7 @@ CRITICAL INSTRUCTIONS:
           const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent`, {
             method: "POST",
             headers: { "Content-Type": "application/json", "x-goog-api-key": apiKey },
-            body: JSON.stringify({ contents, generationConfig: { temperature: 0.12, maxOutputTokens: 2500 } })
+            body: JSON.stringify({ contents, generationConfig: { temperature: 0.1, maxOutputTokens: 2500 } })
           });
           const data = await res.json();
           if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
@@ -993,32 +626,21 @@ CRITICAL INSTRUCTIONS:
       }
 
       let processed = rawAnswer;
-      const q = rawLower;
-      if ((q.includes("algebra") || q.includes("identity") || q.includes("(a+b)^2")) && !processed.includes("[ASSET_ALGEBRA_TRIO]")) {
-        processed = "[ASSET_ALGEBRA_TRIO]\n\n" + processed;
-      }
-      if (q.includes("brain") && !processed.includes("[ASSET_BRAIN]")) processed = "[ASSET_BRAIN]\n\n" + processed;
-      if (q.includes("prism") && !processed.includes("[ASSET_PRISM]")) processed = "[ASSET_PRISM]\n\n" + processed;
-
       const compMap = {};
-      processed = processed.replace(/\[ASSET_ALGEBRA_TRIO\]/g, () => {
-        const id = 'COMP_' + Math.random().toString(36).substr(2, 9);
-        compMap[id] = CORE_TEXTBOOK_ASSETS.algebraTrio();
-        return id;
-      }).replace(/\[ASSET_BRAIN\]/g, () => {
-        const id = 'COMP_' + Math.random().toString(36).substr(2, 9);
-        compMap[id] = CORE_TEXTBOOK_ASSETS.brain;
-        return id;
-      }).replace(/\[ASSET_PRISM\]/g, () => {
-        const id = 'COMP_' + Math.random().toString(36).substr(2, 9);
-        compMap[id] = CORE_TEXTBOOK_ASSETS.prism;
-        return id;
-      });
+
+      if (wantsAlgebraProof) {
+        processed = "[ASSET_ALGEBRA_TRIO]\n\n" + processed;
+        compMap["[ASSET_ALGEBRA_TRIO]"] = CORE_TEXTBOOK_ASSETS.algebraTrio();
+      } else if (wantsPrism) {
+        processed = "[ASSET_PRISM]\n\n" + processed;
+        compMap["[ASSET_PRISM]"] = CORE_TEXTBOOK_ASSETS.prism;
+      }
 
       let finalHTML = processMathSafely(processed);
-      for (const [id, code] of Object.entries(compMap)) {
-        finalHTML = finalHTML.replace(id, code);
+      for (const [token, svgCode] of Object.entries(compMap)) {
+        finalHTML = finalHTML.replace(token, svgCode);
       }
+      
       mathContent.innerHTML = finalHTML;
       btn.disabled = false;
     }
