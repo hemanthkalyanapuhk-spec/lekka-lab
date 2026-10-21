@@ -35,7 +35,7 @@
       min-height: 100vh;
     }
 
-    /* Royal Sapphire & Gold Header (Clean Minimal Text Branding) */
+    /* Royal Sapphire & Gold Header */
     header {
       background: linear-gradient(180deg, #020914 0%, rgba(11, 37, 69, 0.95) 100%);
       border-bottom: 1.5px solid var(--gold-border);
@@ -219,8 +219,8 @@
       border-radius: 14px;
       border: 1.5px solid var(--gold-primary);
       display: none;
-      line-height: 1.75;
-      font-size: 1rem;
+      line-height: 1.7;
+      font-size: 0.98rem;
       box-shadow: 0 8px 30px rgba(0,0,0,0.4);
     }
 
@@ -398,7 +398,7 @@
         <span class="online-badge">ONLINE</span>
       </div>
       
-      <textarea id="aiProblemInput" placeholder="Ask anything... Science, Math theorems, 2D/3D visual diagrams, Recipes, or GK!"></textarea>
+      <textarea id="aiProblemInput" placeholder="Ask anything... MCQs, Math problems, Science diagrams, Recipes, or GK!"></textarea>
       
       <!-- Preview for captured/uploaded photos -->
       <div class="image-preview-container" id="imagePreviewContainer">
@@ -590,7 +590,7 @@
 
     // Visitor Counter
     (function initCounter() {
-      let count = parseInt(localStorage.getItem('lekka_visits') || '1935', 10);
+      let count = parseInt(localStorage.getItem('lekka_visits') || '1940', 10);
       count += 1;
       localStorage.setItem('lekka_visits', count);
       document.getElementById('visitorCount').innerText = count.toLocaleString();
@@ -720,7 +720,7 @@
       recognition.start();
     }
 
-    // High-Precision AI Engine (Pure DOM SVG Injection)
+    // High-Precision AI Engine (Crisp, Concise Answers with Direct Options)
     async function handleSolve() {
       const text = document.getElementById('aiProblemInput').value.trim();
       const btn = document.getElementById('btnSolve');
@@ -733,29 +733,30 @@
       }
 
       display.style.display = 'block';
-      mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">⚡ Generating instant answer...</p>';
+      mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">⚡ Generating crisp answer...</p>';
       btn.disabled = true;
 
-      const systemInstruction = `You are "Lucky", a fast universal educational AI assistant for Lekka Lab.
+      // Smart system instruction prioritizing conciseness and clear MCQ answers
+      const systemInstruction = `You are "Lucky", a fast and concise educational AI assistant for Lekka Lab.
+
+CRITICAL CONCISENESS RULE:
+- KEEP SOLUTIONS SHORT, CRISP, AND TO THE POINT. Avoid lengthy essays, unwanted textbook theory, or repetitive introductions.
+
+MCQ / OBJECTIVE QUESTIONS:
+- If the question is an MCQ (or has options A, B, C, D):
+  1. State the correct answer IMMEDIATELY on the very first line:
+     **Correct Option: <Option Letter>) <Option Value>**
+  2. Follow with a brief "Key Reason / Steps" in just 2 to 3 concise bullet points or 2-3 lines max. Do not write full-page derivations.
+
+MATH & FORMULAS:
+- Use standard LaTeX ($..$ inline, $$..$$ display) for formulas and numbers.
 
 LANGUAGE DIRECTIVE:
 - If asked in Telugu or with "in telugu" / "తెలుగులో", respond 100% in natural Telugu.
 - Otherwise, answer in clear English.
 
-CONTENT RULES:
-1. NON-MATH TOPICS (Cooking recipes, Daily Life, History, General Knowledge):
-   - Answer directly and practically with clean bullet points.
-   - DO NOT attach math equations, chemical formulas, or forced diagrams to cooking recipes or ordinary facts.
-2. MATHEMATICS & SCIENCE:
-   - Use standard LaTeX ($..$ inline, $$..$$ display) for theorems, derivations, and formulas.
-3. MANDATORY 3D ANATOMICAL & GEOMETRIC DIAGRAMS:
-   - When asked for human heart diagram:
-     * Draw a connected, natural 3D anatomical organ (viewBox 0 0 540 380) with curved muscular chambers meeting at the apex, not separated blocks.
-     * Include curved aortic arch with three branching arteries, pulmonary artery, vena cava, atria, and ventricles with smooth gradients and highlights.
-     * Place clear pointer lines and write every single label INSIDE the SVG using <text> tags.
-     * Output clean raw <svg>...</svg> without markdown code blocks.
-   - For geometric diagrams:
-     * Write vertex labels (A, B, C, D, E) directly next to the points inside the SVG.`;
+DIAGRAMS:
+- If an anatomical or geometric diagram is requested, provide a single clean inline SVG (<svg viewBox="0 0 540 380" ...>) with labels inside.`;
 
       const contents = [{
         role: "user",
@@ -795,8 +796,8 @@ CONTENT RULES:
               body: JSON.stringify({ 
                 contents: contents,
                 generationConfig: {
-                  temperature: 0.2,
-                  maxOutputTokens: 2500
+                  temperature: 0.15,
+                  maxOutputTokens: 1200
                 }
               })
             });
