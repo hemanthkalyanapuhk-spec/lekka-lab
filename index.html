@@ -343,7 +343,7 @@
       </div>
     </div>
 
-    <!-- 36 Assessment & Project PDF Files (Exact relative paths preserved) -->
+    <!-- 36 Assessment & Project PDF Files -->
     <h3 class="section-title">Assessment & Project Resources (36 PDFs)</h3>
 
     <!-- Class 10 -->
@@ -508,7 +508,7 @@
 
     // Visitor Counter
     (function initCounter() {
-      let count = parseInt(localStorage.getItem('lekka_visits') || '1915', 10);
+      let count = parseInt(localStorage.getItem('lekka_visits') || '1920', 10);
       count += 1;
       localStorage.setItem('lekka_visits', count);
       document.getElementById('visitorCount').innerText = count.toLocaleString();
@@ -638,7 +638,7 @@
       recognition.start();
     }
 
-    // High-Precision AI Engine (With Bulletproof Auto-Closing SVG Parser)
+    // High-Precision AI Engine (Pure DOM SVG Injection)
     async function handleSolve() {
       const text = document.getElementById('aiProblemInput').value.trim();
       const btn = document.getElementById('btnSolve');
@@ -666,13 +666,14 @@ CONTENT RULES:
    - DO NOT attach math equations, chemical formulas, or forced diagrams to cooking recipes or ordinary facts.
 2. MATHEMATICS & SCIENCE:
    - Use standard LaTeX ($..$ inline, $$..$$ display) for theorems, derivations, and formulas.
-3. DIAGRAMS & ILLUSTRATIONS (When asked or required):
-   - Output a single, clean inline SVG: <svg viewBox="0 0 540 380" xmlns="http://www.w3.org/2000/svg">...</svg>
-   - DO NOT use markdown code blocks (\`\`\`xml or \`\`\`svg). Output raw <svg> directly.
-   - Keep paths clean and ensure you ALWAYS include the closing </svg> tag.
-   - Place all part names and labels directly INSIDE the SVG using:
-     <text x=".." y=".." font-size="12" font-weight="700" fill="#0f172a">Label</text>
-   - NEVER print labels as loose text outside the SVG.`;
+3. MANDATORY 3D SVG DIAGRAMS:
+   - When drawing geometry or biological anatomy (e.g., Heart, Triangle, Cell):
+     * Output a complete, single inline SVG: <svg viewBox="0 0 540 380" xmlns="http://www.w3.org/2000/svg">...</svg>
+     * DO NOT wrap the SVG inside markdown backticks (do not use \`\`\`xml or \`\`\`svg). Output raw <svg> directly.
+     * Always ensure the closing </svg> tag is present.
+     * Place all part names and labels directly INSIDE the SVG using:
+       <text x=".." y=".." font-size="12" font-weight="700" fill="#0f172a">Label</text>
+     * NEVER print labels as loose text outside the SVG.`;
 
       const contents = [{
         role: "user",
@@ -738,44 +739,42 @@ CONTENT RULES:
         return;
       }
 
-      // 1. Strip markdown backticks around SVG if model added them
+      // 1. Clean Markdown backticks
       let processed = rawAnswer.replace(/```(?:xml|html|svg)?\s*(<svg[\s\S]*?<\/svg>)\s*```/gi, '$1');
 
-      // 2. BULLETPROOF SVG EXTRACTION: Handles both closed and truncated SVGs
-      const svgList = [];
-      
-      // If SVG tag opened but not closed due to token cut
+      // 2. Safe Auto-closing SVG guard
       if (processed.includes("<svg") && !processed.includes("</svg>")) {
         processed = processed + "\n</g>\n</svg>";
       }
 
-      // Extract every SVG safely
+      // 3. Extract SVG safely into HTML DIV placeholders that Marked.js will NEVER alter
+      const svgMap = [];
       processed = processed.replace(/<svg[\s\S]*?<\/svg>/gi, (match) => {
-        svgList.push(match);
-        return `\n\n__SVG_HOLDER_${svgList.length - 1}__\n\n`;
+        const slotId = `svg-render-slot-${svgMap.length}`;
+        svgMap.push({ id: slotId, content: match });
+        return `\n\n<div id="${slotId}"></div>\n\n`;
       });
 
-      // 3. Remove loose XML tags, comments, or orphaned label lists that leaked outside
+      // 4. Strip stray XML artifacts and orphaned label dumps
       processed = processed
-        .replace(/<!--[\s\S]*?-->/g, '') // strip comments
-        .replace(/<\/?[a-zA-Z]+:[^>]+>/g, '') // strip broken xml namespaces
+        .replace(/<!--[\s\S]*?-->/g, '')
         .replace(/(<linearGradient[\s\S]*?<\/linearGradient>)/gi, '')
         .replace(/(<radialGradient[\s\S]*?<\/radialGradient>)/gi, '')
-        .replace(/(<filter[\s\S]*?<\/filter>)/gi, '')
         .replace(/(<path[^>]*>)/gi, '')
-        .replace(/(__SVG_HOLDER_\d+__)([\s\S]*?)(?=(?:###|####|\*\*|##|[A-Z][a-z]+:))/i, (m, p1, p2) => {
+        .replace(/(<div id="svg-render-slot-\d+"><\/div>)([\s\S]*?)(?=(?:###|####|\*\*|##|[A-Z][a-z]+:))/i, (m, p1, p2) => {
           const tr = p2.trim();
           return (/^[a-zA-Z0-9\s,\\^_\(\)\/\*\+\-=\|]+$/.test(tr) && tr.length < 160) ? p1 + "\n\n" : m; });        processed = processed .replace(/\u2260/g, ' \\neq ') .replace(/\u00B1/g, ' \\pm ') .replace(/\u2264/g, ' \\leq ') .replace(/\u2265/g, ' \\geq ') .replace(/\u00D7/g, ' \\times ') .replace(/\u2192/g, ' \\to ') .replace(/\u221E/g, ' \\infty ') .replace(/\$\$\s*([^\$]+)\s*\$\$/g, '\n\n$$$ $1$$$ \n\n');
 
-      // 4. Render clean Markdown & LaTeX
-      let htmlOutput = marked.parse(processed);
+      // 5. Parse Markdown & Math
+      mathContent.innerHTML = marked.parse(processed);
 
-      // 5. Inject the protected SVGs back
-      svgList.forEach((svgCode, idx) => {
-        htmlOutput = htmlOutput.replace(`__SVG_HOLDER_${idx}__`, svgCode);
+      // 6. Direct DOM Injection: Place untouched SVG directly into its slot
+      svgMap.forEach(item => {
+        const slotEl = document.getElementById(item.id);
+        if (slotEl) {
+          slotEl.innerHTML = item.content;
+        }
       });
-
-      mathContent.innerHTML = htmlOutput;
 
       if (window.renderMathInElement) {
         renderMathInElement(mathContent, {
