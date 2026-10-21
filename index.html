@@ -263,7 +263,7 @@
           </div>
           <div id="q-box-c1c2">
             <div class="q-item"><span class="q-num">1.</span> Write the number name for <span id="c1-n1">48</span>: ________________________</div>
-            <div class="q-item"><span class="q-num">2.</span> Fill in the blanks: <span id="c1-n2">76</span> = ______ Tens + ______ Ones.</div>
+            <div class="q-item"><span class="q-num">2.</span> Fill in the blanks: <span id="c1-n2">76</span> = <span id="c1-n2-tens">7</span> Tens + <span id="c1-n2-ones">6</span> Ones.</div>
             <div class="q-item"><span class="q-num">3.</span> What number comes strictly between <span id="c1-n3a">89</span> and <span id="c1-n3b">91</span>? Answer: ______</div>
             <div class="q-item"><span class="q-num">4.</span> Insert > or <: &nbsp; <span id="c1-n4a">64</span> [ &nbsp; ] <span id="c1-n4b">46</span> &nbsp; and &nbsp; <span id="c1-n4c">108</span> [ &nbsp; ] <span id="c1-n4d">180</span>.</div>
             <div class="q-item"><span class="q-num">5.</span> Add with carrying: &nbsp; <span id="c1-n5a">47</span> + <span id="c1-n5b">38</span> = _________</div>
@@ -293,9 +293,9 @@
           <div id="q-box-c3c5">
             <div class="q-item"><span class="q-num">1.</span> Find the prime factorisation of <span id="c3-n1">72</span> using the ladder method.</div>
             <div class="q-item"><span class="q-num">2.</span> Find the LCM of <span id="c3-n2a">4</span> and <span id="c3-n2b">6</span>: Answer: _________</div>
-            <div class="q-item"><span class="q-num">3.</span> Solve fraction addition: $\frac{2}{3} + \frac{1}{4} =$ _________</div>
+            <div class="q-item"><span class="q-num">3.</span> Solve fraction addition: $\frac{<span id="c3-n3a">2</span>}{<span id="c3-n3b">3</span>} + \frac{<span id="c3-n3c">1</span>}{<span id="c3-n3d">4</span>} =$ _________</div>
             <div class="q-item"><span class="q-num">4.</span> Long Division: Divide <span id="c3-n4a">95</span> by <span id="c3-n4b">4</span>. State Quotient and Remainder.</div>
-            <div class="q-item"><span class="q-num">5.</span> Convert improper fraction $\frac{13}{5}$ into a mixed number: _________</div>
+            <div class="q-item"><span class="q-num">5.</span> Convert improper fraction $\frac{<span id="c3-n5a">13</span>}{<span id="c3-n5b">5</span>}$ into a mixed number: _________</div>
             <div class="q-item"><span class="q-num">6.</span> <b>Money Problem:</b> Rahul has a ₹100 note. He buys a notebook for ₹<span id="c3-n6a">45</span> and geometry box for ₹<span id="c3-n6b">35</span>. Balance money: ₹_________</div>
           </div>
           <button type="button" class="ans-key-toggle" onclick="toggleAnsKey('ans-c3c5')">👁️ Toggle Step-by-Step Answer Key</button>
@@ -369,11 +369,11 @@
             <span>Max Score: 12</span>
           </div>
           <div id="q-box-c8c10">
-            <div class="q-item"><span class="q-num">1.</span> Factorise using identities: $16x^2 - 16y^2 =$</div>
-            <div class="q-item"><span class="q-num">2.</span> Split middle term: $x^2 + 7x + 13 = 0$. State factors.</div>
-            <div class="q-item"><span class="q-num">3.</span> Quadratic Formula roots for $2x^2 - 5x + 2 = 0$: $x =$</div>
-            <div class="q-item"><span class="q-num">4.</span> In right triangle ABC, if $\sin\theta = \frac{3}{5}$, calculate $\cos\theta$ and $\tan\theta$.</div>
-            <div class="q-item"><span class="q-num">5.</span> Rationalise the denominator: $\frac{1}{\sqrt{5} - \sqrt{3}} =$</div>
+            <div class="q-item"><span class="q-num">1.</span> Factorise using identities: $<span id="c8-n1a">16</span>x^2 - <span id="c8-n1b">16</span>y^2 =$</div>
+            <div class="q-item"><span class="q-num">2.</span> Split middle term: $x^2 + <span id="c8-n2a">7</span>x + <span id="c8-n2b">13</span> = 0$. State factors.</div>
+            <div class="q-item"><span class="q-num">3.</span> Quadratic Formula roots for $<span id="c8-n3a">2</span>x^2 - <span id="c8-n3b">5</span>x + <span id="c8-n3c">2</span> = 0$: $x =$</div>
+            <div class="q-item"><span class="q-num">4.</span> In right triangle ABC, if $\sin\theta = \frac{<span id="c8-n4a">3</span>}{<span id="c8-n4b">5</span>}$, calculate $\cos\theta$ and $\tan\theta$.</div>
+            <div class="q-item"><span class="q-num">5.</span> Rationalise the denominator: $\frac{1}{\sqrt{<span id="c8-n5a">5</span>} - \sqrt{<span id="c8-n5b">3</span>}} =$</div>
             <div class="q-item"><span class="q-num">6.</span> <b>Simple Interest:</b> Find SI and amount on ₹<span id="c8-n6a">5,000</span> at <span id="c8-n6b">5</span>% per annum for <span id="c8-n6c">3</span> years: SI = ₹_________, Amount = ₹_________</div>
           </div>
           <button type="button" class="ans-key-toggle" onclick="toggleAnsKey('ans-c8c10')">👁️ Toggle Step-by-Step Answer Key</button>
@@ -555,10 +555,11 @@
       refreshWorksheet('c8c10');
     }
 
+    // ROBUST INDEPENDENT WORKSHEET REFRESH ENGINE WITH FULL DYNAMIC RANDOMIZATION
     function refreshWorksheet(sheetId) {
       if (sheetId === 'c1c2') {
         const n1 = Math.floor(Math.random() * 40) + 20;
-        const n2 = Math.floor(Math.random() * 50) + 30;
+        const n2 = Math.floor(Math.random() * 50) + 30; // Random two-digit number for Q2
         const a = Math.floor(Math.random() * 50) + 10;
         const b = Math.floor(Math.random() * 40) + 10;
         const penc = Math.floor(Math.random() * 4) + 3;
@@ -566,6 +567,11 @@
         
         document.getElementById('c1-n1').innerText = n1;
         document.getElementById('c1-n2').innerText = n2;
+        const tens = Math.floor(n2 / 10);
+        const ones = n2 % 10;
+        document.getElementById('c1-n2-tens').innerText = tens;
+        document.getElementById('c1-n2-ones').innerText = ones;
+
         document.getElementById('c1-n3a').innerText = n1 + 1;
         document.getElementById('c1-n3b').innerText = n1 + 3;
         document.getElementById('c1-n4a').innerText = a;
@@ -577,8 +583,6 @@
         document.getElementById('c1-n6a').innerText = penc;
         document.getElementById('c1-n6b').innerText = eras;
         
-        const tens = Math.floor(n2 / 10);
-        const ones = n2 % 10;
         const sum = a + b;
         const tot = penc + eras;
         
@@ -591,32 +595,50 @@
           6. Total cost = ₹${tot}.
         `;
       } else if (sheetId === 'c3c5') {
-        const factorNum = [48, 54, 72, 96, 84][Math.floor(Math.random() * 5)];
-        const l1 = [4, 6, 8][Math.floor(Math.random() * 3)];
-        const l2 = [3, 5, 7][Math.floor(Math.random() * 3)];
+        const factorNum = [48, 54, 72, 96, 84, 60, 90][Math.floor(Math.random() * 7)];
+        const l1 = [4, 6, 8, 3, 5][Math.floor(Math.random() * 5)];
+        const l2 = [3, 5, 7, 9, 4][Math.floor(Math.random() * 5)];
+        const fNum1 = Math.floor(Math.random() * 3) + 1;
+        const fDen1 = fNum1 + Math.floor(Math.random() * 2) + 1;
+        const fNum2 = Math.floor(Math.random() * 3) + 1;
+        const fDen2 = fDen1; // Same denominator for easy primary addition
         const div1 = Math.floor(Math.random() * 30) + 70;
         const div2 = Math.floor(Math.random() * 3) + 3;
+        const mixNum = Math.floor(Math.random() * 6) + 11;
+        const mixDen = Math.floor(Math.random() * 3) + 3;
         const nb = Math.floor(Math.random() * 20) + 30;
         const gb = Math.floor(Math.random() * 15) + 20;
 
         document.getElementById('c3-n1').innerText = factorNum;
         document.getElementById('c3-n2a').innerText = l1;
         document.getElementById('c3-n2b').innerText = l2;
+        
+        document.getElementById('c3-n3a').innerText = fNum1;
+        document.getElementById('c3-n3b').innerText = fDen1;
+        document.getElementById('c3-n3c').innerText = fNum2;
+        document.getElementById('c3-n3d').innerText = fDen2;
+
         document.getElementById('c3-n4a').innerText = div1;
         document.getElementById('c3-n4b').innerText = div2;
+
+        document.getElementById('c3-n5a').innerText = mixNum;
+        document.getElementById('c3-n5b').innerText = mixDen;
+
         document.getElementById('c3-n6a').innerText = nb;
         document.getElementById('c3-n6b').innerText = gb;
 
         const q = Math.floor(div1 / div2);
         const r = div1 % div2;
+        const wholePart = Math.floor(mixNum / mixDen);
+        const remPart = mixNum % mixDen;
         const bal = 100 - (nb + gb);
 
         document.getElementById('ans-text-c3c5').innerHTML = `
           1. Prime factorisation of ${factorNum}.<br>
-          2. LCM calculated.<br>
+          2. LCM of ${l1} and ${l2} calculated.<br>
           3. Fraction addition solved.<br>
           4. Quotient = ${q}, Remainder = ${r}.<br>
-          5. Mixed fraction converted.<br>
+          5. Mixed fraction = $${wholePart}\\frac{${remPart}}{${mixDen}}$.<br>
           6. Balance = ₹${bal}.
         `;
       } else if (sheetId === 'c6c7') {
@@ -624,6 +646,13 @@
         const n2 = Math.floor(Math.random() * 10) + 2;
         const n3 = Math.floor(Math.random() * 15) + 10;
         const n4 = Math.floor(Math.random() * 10) + 1;
+        const m1 = Math.floor(Math.random() * 5) + 3;
+        const m2 = Math.floor(Math.random() * 5) + 2;
+        const d1 = [24, 35, 48, 56][Math.floor(Math.random() * 4)];
+        const d2 = [4, 7, 6, 8][Math.floor(Math.random() * 4)];
+        const eqA = Math.floor(Math.random() * 3) + 2;
+        const eqB = Math.floor(Math.random() * 8) + 3;
+        const eqC = eqA * (Math.floor(Math.random() * 4) + 3) + eqB;
         const cp = [200, 250, 400, 500][Math.floor(Math.random() * 4)];
         const sp = cp + [50, 80, 100, 120][Math.floor(Math.random() * 4)];
 
@@ -631,24 +660,79 @@
         document.getElementById('c6-n1b').innerText = n2;
         document.getElementById('c6-n2a').innerText = n3;
         document.getElementById('c6-n2b').innerText = n4;
+        
+        document.getElementById('c6-n3a').innerText = m1;
+        document.getElementById('c6-n3b').innerText = m2;
+
+        document.getElementById('c6-n4a').innerText = d1;
+        document.getElementById('c6-n4b').innerText = d2;
+
+        document.getElementById('c6-n5a').innerText = eqA;
+        document.getElementById('c6-n5b').innerText = eqB;
+        document.getElementById('c6-n5c').innerText = eqC;
+
         document.getElementById('c6-n6a').innerText = cp;
         document.getElementById('c6-n6b').innerText = sp;
 
+        const sumAns = -(n1 + n2);
+        const subAns = -n3 + n4;
+        const multAns = m1 * m2; // negative * negative = positive
+        const divAns = -(d1 / d2);
+        const xAns = (eqC + eqB) / eqA;
         const profit = sp - cp;
         const pFitPct = Math.round((profit / cp) * 100);
 
         document.getElementById('ans-text-c6c7').innerHTML = `
-          1. ${-(n1 + n2)}.<br>
-          2. ${-n3 + n4}.<br>
-          3. Positive product.<br>
-          4. Negative division quotient.<br>
-          5. Linear equation solved.<br>
+          1. ${sumAns}.<br>
+          2. ${subAns}.<br>
+          3. +${multAns}.<br>
+          4. ${divAns}.<br>
+          5. x = ${xAns}.<br>
           6. Profit = ₹${profit} (${pFitPct}%).
         `;
       } else if (sheetId === 'c8c10') {
+        const sq1 = [9, 16, 25, 36][Math.floor(Math.random() * 4)];
+        const sq2 = [4, 9, 16, 25][Math.floor(Math.random() * 4)];
+        const r1 = Math.sqrt(sq1);
+        const r2 = Math.sqrt(sq2);
+        
+        const rootA = Math.floor(Math.random() * 3) + 1;
+        const rootB = Math.floor(Math.random() * 3) + 2;
+        const sumRoots = rootA + rootB;
+        const prodRoots = rootA * rootB;
+
+        const quadA = [1, 2][Math.floor(Math.random() * 2)];
+        const quadB = quadA * 2 + 1;
+        const quadC = quadA;
+
+        const sinNum = [3, 5, 8][Math.floor(Math.random() * 3)];
+        const sinDen = sinNum + 2;
+
+        const sqrtList = [
+          {a: 5, b: 3},
+          {a: 7, b: 2},
+          {a: 6, b: 2}
+        ][Math.floor(Math.random() * 3)];
+
         const pVal = [4000, 5000, 8000, 10000][Math.floor(Math.random() * 4)];
         const rVal = [5, 8, 10][Math.floor(Math.random() * 3)];
         const tVal = [2, 3][Math.floor(Math.random() * 2)];
+
+        document.getElementById('c8-n1a').innerText = sq1;
+        document.getElementById('c8-n1b').innerText = sq2;
+
+        document.getElementById('c8-n2a').innerText = sumRoots;
+        document.getElementById('c8-n2b').innerText = prodRoots;
+
+        document.getElementById('c8-n3a').innerText = quadA;
+        document.getElementById('c8-n3b').innerText = quadB;
+        document.getElementById('c8-n3c').innerText = quadC;
+
+        document.getElementById('c8-n4a').innerText = sinNum;
+        document.getElementById('c8-n4b').innerText = sinDen;
+
+        document.getElementById('c8-n5a').innerText = sqrtList.a;
+        document.getElementById('c8-n5b').innerText = sqrtList.b;
 
         document.getElementById('c8-n6a').innerText = pVal.toLocaleString('en-IN');
         document.getElementById('c8-n6b').innerText = rVal;
@@ -658,11 +742,11 @@
         const amt = pVal + si;
 
         document.getElementById('ans-text-c8c10').innerHTML = `
-          1. Identity factored.<br>
-          2. Middle term split.<br>
-          3. Quadratic formula roots found.<br>
+          1. $(${r1}x - ${r2}y)(${r1}x + ${r2}y)$.<br>
+          2. $(x + ${rootA})(x + ${rootB})$.<br>
+          3. Quadratic formula roots calculated.<br>
           4. Trigonometric ratios calculated.<br>
-          5. Rationalised form.<br>
+          5. $\\frac{\\sqrt{${sqrtList.a}} + \\sqrt{${sqrtList.b}}}{${sqrtList.a - sqrtList.b}}$.<br>
           6. SI = ₹${si.toLocaleString('en-IN')}, Amount = ₹${amt.toLocaleString('en-IN')}.
         `;
       }
