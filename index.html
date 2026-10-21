@@ -527,7 +527,7 @@
       refreshWorksheet('c8c10');
     }
 
-    // FULLY DYNAMIC WORKSHEET GENERATOR WITH EXPONENTS & INSTANT RENDERING
+    // FULLY DYNAMIC WORKSHEET GENERATOR WITH CLEAN KATEX HTML
     function refreshWorksheet(sheetId) {
       if (sheetId === 'c1c2') {
         const n1 = Math.floor(Math.random() * 40) + 20;
@@ -646,10 +646,10 @@
         const pow1 = Math.floor(Math.random() * 3) + 2;
         const pow2 = Math.floor(Math.random() * 3) + 2;
         
-        const sq1 = [9, 16, 25, 36][Math.floor(Math.random() * 4)];
-        const sq2 = [4, 9, 16, 25][Math.floor(Math.random() * 4)];
-        const r1 = Math.sqrt(sq1);
-        const r2 = Math.sqrt(sq2);
+        const coef1 = [4, 9, 16, 36][Math.floor(Math.random() * 4)];
+        const coef2 = [4, 9, 16, 25][Math.floor(Math.random() * 4)];
+        const r1 = Math.sqrt(coef1);
+        const r2 = Math.sqrt(coef2);
         
         const rootA = Math.floor(Math.random() * 3) + 1;
         const rootB = Math.floor(Math.random() * 3) + 2;
@@ -669,9 +669,9 @@
 
         document.getElementById('q-box-c8c10').innerHTML = `
           <div class="q-item"><span class="q-num">1.</span> Simplify using exponent laws: $${baseExp}^{${pow1}} \\times ${baseExp}^{${pow2}} =$ ____________________</div>
-          <div class="q-item"><span class="q-num">2.</span> Factorise using identities: ${sq1}x^2 - ${sq2}y^2 = ____________________</div>
+          <div class="q-item"><span class="q-num">2.</span> Factorise using identities: $${coef1}x^2 - ${coef2}y^2 =$ ____________________</div>
           <div class="q-item"><span class="q-num">3.</span> Split middle term: $x^2 + ${sumRoots}x + ${prodRoots} = 0$. State factors.</div>
-          <div class="q-item"><span class="q-num">4.</span> Quadratic Formula roots for ${quadA}x^2 - ${quadB}x + ${quadC} = 0$: $x =$ ____________________</div>
+          <div class="q-item"><span class="q-num">4.</span> Quadratic Formula roots for $${quadA}x^2 - ${quadB}x + ${quadC} = 0$: $x =$ ____________________</div>
           <div class="q-item"><span class="q-num">5.</span> <b>Simple Interest:</b> Find SI and amount on ₹${pVal.toLocaleString('en-IN')} at ${rVal}% per annum for ${tVal} years: SI = ₹_________, Amount = ₹_________</div>
         `;
 
