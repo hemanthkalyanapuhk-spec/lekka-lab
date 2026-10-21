@@ -343,7 +343,7 @@
       </div>
     </div>
 
-    <!-- 36 Assessment & Project PDF Files -->
+    <!-- 36 Assessment & Project PDF Files (Exact relative paths preserved) -->
     <h3 class="section-title">Assessment & Project Resources (36 PDFs)</h3>
 
     <!-- Class 10 -->
@@ -508,7 +508,7 @@
 
     // Visitor Counter
     (function initCounter() {
-      let count = parseInt(localStorage.getItem('lekka_visits') || '1920', 10);
+      let count = parseInt(localStorage.getItem('lekka_visits') || '1925', 10);
       count += 1;
       localStorage.setItem('lekka_visits', count);
       document.getElementById('visitorCount').innerText = count.toLocaleString();
@@ -666,14 +666,14 @@ CONTENT RULES:
    - DO NOT attach math equations, chemical formulas, or forced diagrams to cooking recipes or ordinary facts.
 2. MATHEMATICS & SCIENCE:
    - Use standard LaTeX ($..$ inline, $$..$$ display) for theorems, derivations, and formulas.
-3. MANDATORY 3D SVG DIAGRAMS:
-   - When drawing geometry or biological anatomy (e.g., Heart, Triangle, Cell):
-     * Output a complete, single inline SVG: <svg viewBox="0 0 540 380" xmlns="http://www.w3.org/2000/svg">...</svg>
-     * DO NOT wrap the SVG inside markdown backticks (do not use \`\`\`xml or \`\`\`svg). Output raw <svg> directly.
-     * Always ensure the closing </svg> tag is present.
-     * Place all part names and labels directly INSIDE the SVG using:
-       <text x=".." y=".." font-size="12" font-weight="700" fill="#0f172a">Label</text>
-     * NEVER print labels as loose text outside the SVG.`;
+3. MANDATORY 3D ANATOMICAL DIAGRAMS:
+   - When asked for human heart diagram:
+     * Draw a connected, natural 3D anatomical organ (viewBox 0 0 540 380) with curved muscular chambers meeting at the apex, not separated blocks.
+     * Use curved aortic arch with three branching arteries, pulmonary artery, vena cava, atria, and ventricles with smooth gradients and highlights.
+     * Place clear pointer lines and write every single label INSIDE the SVG using <text> tags.
+     * Output clean raw <svg>...</svg> without markdown code blocks.
+   - For geometric diagrams:
+     * Write vertex labels (A, B, C, D, E) directly next to the points inside the SVG.`;
 
       const contents = [{
         role: "user",
