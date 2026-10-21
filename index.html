@@ -258,8 +258,13 @@
       border-color: var(--gold-primary);
     }
 
-    /* Solution Box with Mobile Fit & Touch Scroll */
+    /* Production-Grade Solution Box */
     .solution-box {
+      min-width: 0;
+      width: 100%;
+      overflow-wrap: anywhere;
+      word-break: normal;
+      box-sizing: border-box;
       margin-top: 20px;
       padding: clamp(14px, 3.5vw, 22px);
       background: #ffffff;
@@ -270,17 +275,32 @@
       line-height: 1.75;
       font-size: clamp(0.92rem, 2.5vw, 1rem);
       box-shadow: 0 8px 30px rgba(0,0,0,0.4);
-      width: 100%;
-      word-wrap: break-word;
-      overflow-wrap: anywhere;
     }
 
-    /* KaTeX Clean Styling - Zero Glitches */
+    /* Diagrams & SVGs */
+    .solution-box img,
+    .solution-box svg {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 16px auto;
+      box-sizing: border-box;
+    }
+
+    .solution-box svg {
+      width: 100%;
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(11, 37, 69, 0.08);
+    }
+
+    /* Smooth KaTeX Math Formula Scrolling */
     .solution-box .katex-display {
       max-width: 100%;
       overflow-x: auto;
       overflow-y: hidden;
-      padding: 8px 0;
+      padding: 6px 0;
       margin: 10px 0;
       -webkit-overflow-scrolling: touch;
     }
@@ -293,19 +313,19 @@
       background: none !important;
     }
 
-    /* Perfectly Scaled Vector Graphics */
-    .solution-box svg {
-      display: block;
-      margin: 16px auto;
+    /* Clean Tables */
+    .solution-box table {
       width: 100%;
-      height: auto;
-      border-radius: 12px;
-      background: #ffffff;
-      border: 1.5px solid #cbd5e1;
-      box-shadow: 0 6px 20px rgba(11, 37, 69, 0.08);
+      border-collapse: collapse;
+      margin: 12px 0;
+    }
+    .solution-box th,
+    .solution-box td {
+      padding: 8px 10px;
+      overflow-wrap: anywhere;
     }
 
-    /* Interactive Suggestion Pills (Better than ChatGPT) */
+    /* Interactive Suggestion Pills */
     .pill-container {
       margin-top: 18px;
       padding-top: 14px;
@@ -339,6 +359,25 @@
       background: #0b2545;
       color: #fef08a;
       border-color: #0b2545;
+    }
+
+    /* Narrow Device Optimization */
+    @media (max-width: 600px) {
+      .solution-box {
+        padding: 14px 12px;
+        font-size: 15px;
+        line-height: 1.65;
+      }
+      .solution-box svg {
+        margin: 12px auto;
+      }
+      .solution-box .katex {
+        font-size: 0.95em;
+      }
+      .solution-box .katex-display {
+        padding: 4px 0;
+        margin: 8px 0;
+      }
     }
 
     .section-title {
@@ -564,7 +603,7 @@
         <span class="online-badge">ONLINE</span>
       </div>
       
-      <textarea id="aiProblemInput" placeholder="Ask anything... Periodic Table, Heart, Pythagoras, BPT, Ray Optics, MCQs!"></textarea>
+      <textarea id="aiProblemInput" placeholder="Ask anything... Pythagoras, BPT, Periodic Table, Heart, Ray Optics, MCQs!"></textarea>
       
       <!-- Preview for captured/uploaded photos -->
       <div class="image-preview-container" id="imagePreviewContainer">
@@ -597,7 +636,7 @@
       </div>
     </div>
 
-    <!-- 36 Assessment & Project PDF Files -->
+    <!-- 36 Assessment & Project PDF Files (Exact Unaltered Relative Paths) -->
     <h3 class="section-title">Assessment & Project Resources (36 PDFs)</h3>
 
     <!-- Class 10 -->
@@ -775,7 +814,7 @@
 
     // Visitor Counter
     (function initCounter() {
-      let count = parseInt(localStorage.getItem('lekka_visits') || '2040', 10);
+      let count = parseInt(localStorage.getItem('lekka_visits') || '2045', 10);
       count += 1;
       localStorage.setItem('lekka_visits', count);
       document.getElementById('visitorCount').innerText = count.toLocaleString();
@@ -1005,7 +1044,6 @@
 
       // 4. Chemistry: Complete 3-in-1 Modern Periodic Table Architecture (Poster + Pastel Grid + Element Table)
       periodic: `<div style="margin:16px 0;">
-        <!-- Card 1: Beautiful Mobile-Fit Pastel Element Blocks (As seen in ChatGPT Image 74074) -->
         <div style="background:#0b1b36; border:1.5px solid rgba(212,175,55,0.4); border-radius:14px; padding:16px; margin-bottom:18px; box-shadow:0 8px 25px rgba(0,0,0,0.4);">
           <div style="color:#fef08a; font-weight:800; font-size:1.15rem; margin-bottom:4px; text-align:center;">The Periodic Table of Elements</div>
           <div style="color:#94a3b8; font-size:0.86rem; margin-bottom:12px; text-align:center;">Organized by atomic number, properties, and electron configurations</div>
@@ -1044,10 +1082,9 @@
             <div style="background:#fed7aa; border:1px solid #fdba74; border-radius:8px; padding:8px 2px; text-align:center;"><div style="font-size:0.68rem; color:#9a3412;">82</div><div style="font-size:1.15rem; font-weight:800; color:#0f172a;">Pb</div></div>
             <div style="background:#e9d5ff; border:1px solid #d8b4fe; border-radius:8px; padding:8px 2px; text-align:center;"><div style="font-size:0.68rem; color:#6b21a8;">92</div><div style="font-size:1.15rem; font-weight:800; color:#0f172a;">U</div></div>
           </div>
-          <div style="font-size:0.75rem; color:#94a3b8; text-align:center; margin-top:10px;">Showing primary high-school elements with official valence color codes</div>
+          <div style="font-size:0.75rem; color:#94a3b8; text-align:center; margin-top:10px;">Primary high-school elements with official valence color codes</div>
         </div>
 
-        <!-- Card 2: Common Chemical Elements Table (As seen in ChatGPT Image 74075) -->
         <div style="background:#ffffff; border:1px solid #e2e8f0; border-radius:12px; padding:16px; margin-bottom:16px; box-shadow:0 4px 14px rgba(0,0,0,0.05);">
           <div style="font-weight:800; font-size:1.05rem; color:#0f172a; margin-bottom:10px;">Common Chemical Elements (Exam Focus)</div>
           <table style="width:100%; min-width:auto; font-size:0.88rem; border-collapse:collapse;">
@@ -1080,7 +1117,6 @@
           </table>
         </div>
 
-        <!-- Card 3: Interactive Quick Jump Buttons (As seen in ChatGPT Image 74077) -->
         <div class="pill-container">
           <div class="pill-title">What would you like next?</div>
           <div class="pill-btn-group">
