@@ -524,7 +524,7 @@
         <span class="online-badge">ONLINE</span>
       </div>
       
-      <textarea id="aiProblemInput" placeholder="Ask anything... Periodic Table, Heart, Theorems, MCQs, or Recipes!"></textarea>
+      <textarea id="aiProblemInput" placeholder="Ask anything... Periodic Table, Heart, Ray Optics, BPT, MCQs, or Formulas!"></textarea>
       
       <!-- Preview for captured/uploaded photos -->
       <div class="image-preview-container" id="imagePreviewContainer">
@@ -710,7 +710,7 @@
         <div class="counter-badge-footer">
           <span>👥 Total Visitors: <b id="visitorCount">--</b></span>
         </div>
-        <p class="copyright-note">Dedicated to Excellence in High School Mathematics Education</p>
+        <p class="copyright-note">Dedicated to Excellence in High School Mathematics &amp; Science Education</p>
       </div>
     </footer>
   </div>
@@ -735,7 +735,7 @@
 
     // Visitor Counter
     (function initCounter() {
-      let count = parseInt(localStorage.getItem('lekka_visits') || '2005', 10);
+      let count = parseInt(localStorage.getItem('lekka_visits') || '2015', 10);
       count += 1;
       localStorage.setItem('lekka_visits', count);
       document.getElementById('visitorCount').innerText = count.toLocaleString();
@@ -791,7 +791,7 @@
       return str.replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[m]);
     }
 
-    // Image Compressor & Preprocessor (Works for both Camera and Gallery)
+    // Image Compressor & Preprocessor
     function handleImage(e) {
       const file = e.target.files[0];
       if (!file) return;
@@ -879,9 +879,9 @@
       recognition.start();
     }
 
-    // 100% Guaranteed Self-Contained Textbook Graphics (Zero Leaks / Zero Truncations)
+    // 100% Guaranteed High-School Core Textbook Visual Assets (Zero External Links / Zero Leaks)
     const CORE_TEXTBOOK_ASSETS = {
-      // 1. Mathematically Accurate BPT Theorem Diagram
+      // 1. Mathematics: BPT Theorem
       bpt: `<div style="margin:16px 0;"><svg viewBox="0 0 420 280" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; font-family:-apple-system, sans-serif;">
         <polygon points="210,30 50,230 370,230" fill="#f8fafc" stroke="#002b66" stroke-width="2.5" stroke-linejoin="round"/>
         <line x1="130" y1="130" x2="290" y2="130" stroke="#dc2626" stroke-width="2.5"/>
@@ -907,7 +907,7 @@
         <text x="278" y="96" font-size="12" font-weight="bold" fill="#0284c7" text-anchor="start">M</text>
       </svg></div>`,
 
-      // 2. Anatomical Human Heart Vector Diagram (100% Offline Vector)
+      // 2. Biology: Anatomical Human Heart
       heart: `<div style="margin:16px 0;"><svg viewBox="0 0 540 370" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; font-family:-apple-system, sans-serif;">
         <defs>
           <linearGradient id="aortaRed" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -940,32 +940,23 @@
         <line x1="410" y1="325" x2="255" y2="325" stroke="#0f172a" stroke-width="1.5"/><text x="420" y="329" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="start">Septum / Apex</text>
       </svg></div>`,
 
-      // 3. Fully-Fitted Vector Responsive Periodic Table (Fits 100% in Mobile, Never Cuts off)
+      // 3. Chemistry: Periodic Table Responsive Vector
       periodic: `<div style="margin:16px 0;"><svg viewBox="0 0 540 230" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; font-family:-apple-system, sans-serif;">
-        <!-- Title Banner -->
         <rect x="0" y="0" width="540" height="28" fill="#0f172a" rx="6"/>
         <text x="270" y="19" font-size="12" font-weight="bold" fill="#fef08a" text-anchor="middle">MODERN PERIODIC TABLE OF ELEMENTS</text>
-        
-        <!-- Period 1 -->
         <g transform="translate(15, 38)">
           <rect x="0" y="0" width="28" height="34" fill="#fee2e2" stroke="#ef4444" rx="4"/>
           <text x="14" y="18" font-size="11" font-weight="bold" fill="#991b1b" text-anchor="middle">H</text>
           <text x="14" y="29" font-size="8" fill="#991b1b" text-anchor="middle">1</text>
-          
           <rect x="482" y="0" width="28" height="34" fill="#e0e7ff" stroke="#6366f1" rx="4"/>
           <text x="496" y="18" font-size="11" font-weight="bold" fill="#3730a3" text-anchor="middle">He</text>
           <text x="496" y="29" font-size="8" fill="#3730a3" text-anchor="middle">2</text>
         </g>
-
-        <!-- Period 2 -->
         <g transform="translate(15, 78)">
           <rect x="0" y="0" width="28" height="34" fill="#fef3c7" stroke="#f59e0b" rx="4"/><text x="14" y="18" font-size="10" font-weight="bold" fill="#92400e" text-anchor="middle">Li</text><text x="14" y="29" font-size="8" fill="#92400e" text-anchor="middle">3</text>
           <rect x="32" y="0" width="28" height="34" fill="#fef3c7" stroke="#f59e0b" rx="4"/><text x="46" y="18" font-size="10" font-weight="bold" fill="#92400e" text-anchor="middle">Be</text><text x="46" y="29" font-size="8" fill="#92400e" text-anchor="middle">4</text>
-          
-          <!-- Transition gap visual indicator -->
           <rect x="68" y="6" width="248" height="22" fill="#f1f5f9" stroke="#cbd5e1" rx="4"/>
           <text x="192" y="21" font-size="9" font-weight="600" fill="#64748b" text-anchor="middle">Transition Metals (Groups 3-12)</text>
-
           <rect x="322" y="0" width="28" height="34" fill="#dcfce7" stroke="#22c55e" rx="4"/><text x="336" y="18" font-size="10" font-weight="bold" fill="#166534" text-anchor="middle">B</text><text x="336" y="29" font-size="8" fill="#166534" text-anchor="middle">5</text>
           <rect x="354" y="0" width="28" height="34" fill="#dcfce7" stroke="#22c55e" rx="4"/><text x="368" y="18" font-size="10" font-weight="bold" fill="#166534" text-anchor="middle">C</text><text x="368" y="29" font-size="8" fill="#166534" text-anchor="middle">6</text>
           <rect x="386" y="0" width="28" height="34" fill="#fee2e2" stroke="#ef4444" rx="4"/><text x="400" y="18" font-size="10" font-weight="bold" fill="#991b1b" text-anchor="middle">N</text><text x="400" y="29" font-size="8" fill="#991b1b" text-anchor="middle">7</text>
@@ -973,15 +964,11 @@
           <rect x="450" y="0" width="28" height="34" fill="#fee2e2" stroke="#ef4444" rx="4"/><text x="464" y="18" font-size="10" font-weight="bold" fill="#991b1b" text-anchor="middle">F</text><text x="464" y="29" font-size="8" fill="#991b1b" text-anchor="middle">9</text>
           <rect x="482" y="0" width="28" height="34" fill="#e0e7ff" stroke="#6366f1" rx="4"/><text x="496" y="18" font-size="10" font-weight="bold" fill="#3730a3" text-anchor="middle">Ne</text><text x="496" y="29" font-size="8" fill="#3730a3" text-anchor="middle">10</text>
         </g>
-
-        <!-- Period 3 -->
         <g transform="translate(15, 118)">
           <rect x="0" y="0" width="28" height="34" fill="#fef3c7" stroke="#f59e0b" rx="4"/><text x="14" y="18" font-size="9" font-weight="bold" fill="#92400e" text-anchor="middle">Na</text><text x="14" y="29" font-size="8" fill="#92400e" text-anchor="middle">11</text>
           <rect x="32" y="0" width="28" height="34" fill="#fef3c7" stroke="#f59e0b" rx="4"/><text x="46" y="18" font-size="9" font-weight="bold" fill="#92400e" text-anchor="middle">Mg</text><text x="46" y="29" font-size="8" fill="#92400e" text-anchor="middle">12</text>
-          
           <rect x="68" y="6" width="248" height="22" fill="#f1f5f9" stroke="#cbd5e1" rx="4"/>
           <text x="192" y="21" font-size="9" font-weight="600" fill="#64748b" text-anchor="middle">d-block &amp; f-block Heavy Elements</text>
-
           <rect x="322" y="0" width="28" height="34" fill="#dcfce7" stroke="#22c55e" rx="4"/><text x="336" y="18" font-size="10" font-weight="bold" fill="#166534" text-anchor="middle">Al</text><text x="336" y="29" font-size="8" fill="#166534" text-anchor="middle">13</text>
           <rect x="354" y="0" width="28" height="34" fill="#dcfce7" stroke="#22c55e" rx="4"/><text x="368" y="18" font-size="10" font-weight="bold" fill="#166534" text-anchor="middle">Si</text><text x="368" y="29" font-size="8" fill="#166534" text-anchor="middle">14</text>
           <rect x="386" y="0" width="28" height="34" fill="#fee2e2" stroke="#ef4444" rx="4"/><text x="400" y="18" font-size="10" font-weight="bold" fill="#991b1b" text-anchor="middle">P</text><text x="400" y="29" font-size="8" fill="#991b1b" text-anchor="middle">15</text>
@@ -989,21 +976,47 @@
           <rect x="450" y="0" width="28" height="34" fill="#fee2e2" stroke="#ef4444" rx="4"/><text x="464" y="18" font-size="10" font-weight="bold" fill="#991b1b" text-anchor="middle">Cl</text><text x="464" y="29" font-size="8" fill="#991b1b" text-anchor="middle">17</text>
           <rect x="482" y="0" width="28" height="34" fill="#e0e7ff" stroke="#6366f1" rx="4"/><text x="496" y="18" font-size="10" font-weight="bold" fill="#3730a3" text-anchor="middle">Ar</text><text x="496" y="29" font-size="8" fill="#3730a3" text-anchor="middle">18</text>
         </g>
-
-        <!-- Color Legend Key -->
         <g transform="translate(20, 175)" font-size="9" font-weight="600">
-          <rect x="0" y="0" width="12" height="12" fill="#fef3c7" stroke="#f59e0b" rx="2"/>
-          <text x="18" y="10" fill="#475569">Alkali / Alkaline Earth</text>
-          
-          <rect x="135" y="0" width="12" height="12" fill="#dcfce7" stroke="#22c55e" rx="2"/>
-          <text x="153" y="10" fill="#475569">Metalloids / Post-Transition</text>
-          
-          <rect x="290" y="0" width="12" height="12" fill="#fee2e2" stroke="#ef4444" rx="2"/>
-          <text x="308" y="10" fill="#475569">Reactive Non-metals</text>
-          
-          <rect x="420" y="0" width="12" height="12" fill="#e0e7ff" stroke="#6366f1" rx="2"/>
-          <text x="438" y="10" fill="#475569">Noble Gases</text>
+          <rect x="0" y="0" width="12" height="12" fill="#fef3c7" stroke="#f59e0b" rx="2"/><text x="18" y="10" fill="#475569">Alkali / Alkaline Earth</text>
+          <rect x="135" y="0" width="12" height="12" fill="#dcfce7" stroke="#22c55e" rx="2"/><text x="153" y="10" fill="#475569">Metalloids / Post-Transition</text>
+          <rect x="290" y="0" width="12" height="12" fill="#fee2e2" stroke="#ef4444" rx="2"/><text x="308" y="10" fill="#475569">Reactive Non-metals</text>
+          <rect x="420" y="0" width="12" height="12" fill="#e0e7ff" stroke="#6366f1" rx="2"/><text x="438" y="10" fill="#475569">Noble Gases</text>
         </g>
+      </svg></div>`,
+
+      // 4. Physics: Ray Optics / Concave Mirror Image Formation
+      rayOptics: `<div style="margin:16px 0;"><svg viewBox="0 0 500 240" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; font-family:-apple-system, sans-serif;">
+        <!-- Principal Axis -->
+        <line x1="20" y1="120" x2="480" y2="120" stroke="#0f172a" stroke-width="1.5"/>
+        <!-- Concave Mirror Curve -->
+        <path d="M 430 30 C 460 70, 460 170, 430 210" fill="none" stroke="#002b66" stroke-width="3.5"/>
+        <line x1="430" y1="30" x2="445" y2="25" stroke="#94a3b8" stroke-width="1.5"/>
+        <line x1="440" y1="75" x2="455" y2="70" stroke="#94a3b8" stroke-width="1.5"/>
+        <line x1="445" y1="120" x2="460" y2="120" stroke="#94a3b8" stroke-width="1.5"/>
+        <line x1="440" y1="165" x2="455" y2="170" stroke="#94a3b8" stroke-width="1.5"/>
+        <line x1="430" y1="210" x2="445" y2="215" stroke="#94a3b8" stroke-width="1.5"/>
+        
+        <!-- Pole, Focus, Center of Curvature -->
+        <circle cx="445" cy="120" r="3.5" fill="#002b66"/><text x="450" y="140" font-size="12" font-weight="bold">P</text>
+        <circle cx="280" cy="120" r="3.5" fill="#002b66"/><text x="277" y="140" font-size="12" font-weight="bold">F</text>
+        <circle cx="140" cy="120" r="3.5" fill="#002b66"/><text x="137" y="140" font-size="12" font-weight="bold">C</text>
+        
+        <!-- Object (Beyond C) -->
+        <line x1="80" y1="120" x2="80" y2="55" stroke="#dc2626" stroke-width="2.5" marker-end="url(#arrow)"/>
+        <polygon points="80,50 76,60 84,60" fill="#dc2626"/><text x="75" y="44" font-size="11" font-weight="bold" fill="#dc2626">Object (AB)</text>
+        
+        <!-- Parallel Ray striking mirror & passing through F -->
+        <line x1="80" y1="55" x2="442" y2="55" stroke="#2563eb" stroke-width="1.6"/>
+        <line x1="442" y1="55" x2="160" y2="185" stroke="#2563eb" stroke-width="1.6"/>
+        
+        <!-- Ray passing through C striking normally -->
+        <line x1="80" y1="55" x2="435" y2="175" stroke="#059669" stroke-width="1.6"/>
+        
+        <!-- Real Inverted Image Between C and F -->
+        <line x1="210" y1="120" x2="210" y2="155" stroke="#dc2626" stroke-width="2"/>
+        <polygon points="210,160 206,150 214,150" fill="#dc2626"/><text x="215" y="152" font-size="11" font-weight="bold" fill="#dc2626">Image (A'B')</text>
+        
+        <text x="250" y="225" font-size="11" fill="#475569" text-anchor="middle">Concave Mirror: Real, Inverted &amp; Diminished Image (Object Beyond C)</text>
       </svg></div>`
     };
 
@@ -1038,9 +1051,15 @@ CRITICAL INSTRUCTIONS:
 - If the question is Periodic Table:
   * Insert exactly: [ASSET_PERIODIC]
   * Explain Key Groups, Periods, and Periodic Trends (Radius, Electronegativity).
+- If the question is Ray Optics / Concave Mirror / Image Formation:
+  * Insert exactly: [ASSET_OPTICS]
+  * Explain Object position, Image position, Nature, and Ray Rules.
 - If the question is an MCQ (options A, B, C, D):
   * State the correct option on line 1, then give a 2-line reason.
-- Use standard LaTeX ($..$ inline, $$..$$ display) for math.`;
+- For CHEMICAL EQUATIONS (like Photosynthesis, Respiration):
+  * Write clean balanced equations using standard LaTeX:
+    $$ 6\\text{CO}_2 + 6\\text{H}_2\\text{O} \\xrightarrow{\\text{Light, Chlorophyll}} \\text{C}_6\\text{H}_{12}\\text{O}_6 + 6\\text{O}_2 $$
+  * DO NOT nest broken brackets like \\text{C}6\\text{H}{12}. Keep subscripts clean.`;
 
       const contents = [{
         role: "user",
@@ -1123,7 +1142,20 @@ CRITICAL INSTRUCTIONS:
         processed = "[ASSET_PERIODIC]\n\n" + processed;
       }
 
-      // Safe placeholder mappings to prevent Marked.js code-block corruptions
+      if ((q.includes("optics") || q.includes("concave") || q.includes("ray diagram") || q.includes("mirror")) && !processed.includes("[ASSET_OPTICS]")) {
+        processed = "[ASSET_OPTICS]\n\n" + processed;
+      }
+
+      // Fix Broken Chemical Formula Brackets from LLMs
+      processed = processed
+        .replace(/\\text\{C\}6\\text\{H\}\{12\}\\text\{O\}_6/g, '\\text{C}_6\\text{H}_{12}\\text{O}_6')
+        .replace(/\\text\{C\}6\\text\{H\}\{12\}/g, '\\text{C}_6\\text{H}_{12}')
+        .replace(/\\text\{CO\}_2/g, '\\text{CO}_2')
+        .replace(/\\text\{H\}_2\\text\{O\}/g, '\\text{H}_2\\text{O}')
+        .replace(/\\text\{O\}_2/g, '\\text{O}_2')
+        .replace(/\\zimetrics/g, '');
+
+      // Safe unique token mapping
       const componentMap = {};
       
       processed = processed.replace(/\[ASSET_BPT\]/g, () => {
@@ -1141,6 +1173,12 @@ CRITICAL INSTRUCTIONS:
       processed = processed.replace(/\[ASSET_PERIODIC\]/g, () => {
         const id = 'COMP_' + Math.random().toString(36).substr(2, 9);
         componentMap[id] = CORE_TEXTBOOK_ASSETS.periodic;
+        return id;
+      });
+
+      processed = processed.replace(/\[ASSET_OPTICS\]/g, () => {
+        const id = 'COMP_' + Math.random().toString(36).substr(2, 9);
+        componentMap[id] = CORE_TEXTBOOK_ASSETS.rayOptics;
         return id;
       });
 
