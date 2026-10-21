@@ -26,8 +26,8 @@
       --gold-border: rgba(212, 175, 55, 0.4);
       --gold-glow: 0 4px 20px rgba(212, 175, 55, 0.18);
       --bg-dark: #030b17;
-      --card-bg: rgba(11, 37, 69, 0.75);
-      --card-border: rgba(212, 175, 55, 0.28);
+      --card-bg: rgba(11, 37, 69, 0.8);
+      --card-border: rgba(212, 175, 55, 0.3);
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
     }
@@ -39,25 +39,25 @@
       color: var(--text-main); 
       padding-bottom: 40px; 
       min-height: 100vh;
-      overflow-x: hidden;
       width: 100%;
+      overflow-x: hidden;
     }
 
     header {
       background: radial-gradient(circle at 50% 20%, rgba(19, 58, 104, 0.9) 0%, rgba(2, 9, 20, 0.98) 85%);
       border-bottom: 2px solid var(--gold-border);
       box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
-      padding: 35px 20px 24px;
+      padding: 35px 15px 24px;
       text-align: center;
       width: 100%;
     }
-    .header-box { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; width: 100%; }
+    .header-box { max-width: 100%; margin: 0 auto; display: flex; flex-direction: column; align-items: center; width: 100%; }
     .brand-overhead-crest { font-size: 0.8rem; letter-spacing: 6px; color: var(--gold-primary); text-transform: uppercase; font-weight: 700; margin-bottom: 4px; }
     .brand-title {
       font-family: 'Cinzel', 'Montserrat', serif;
-      font-size: clamp(2.4rem, 6vw, 3.8rem);
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
       font-weight: 900;
-      letter-spacing: clamp(4px, 1.2vw, 8px);
+      letter-spacing: clamp(4px, 1vw, 8px);
       text-transform: uppercase;
       background: linear-gradient(180deg, #ffffff 0%, #ffd700 48%, #d4af37 72%, #8c6218 100%);
       -webkit-background-clip: text;
@@ -68,28 +68,28 @@
     .brand-divider { display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; max-width: 320px; margin: 2px 0 8px; }
     .brand-divider::before, .brand-divider::after { content: ""; flex: 1; height: 1.5px; background: linear-gradient(90deg, transparent, var(--gold-primary), transparent); }
     .brand-divider span { color: var(--gold-primary); font-size: 0.85rem; }
-    header p { font-size: clamp(0.85rem, 2vw, 0.95rem); color: #e2e8f0; letter-spacing: 1px; font-weight: 500; text-transform: uppercase; }
+    header p { font-size: clamp(0.85rem, 1.8vw, 0.95rem); color: #e2e8f0; letter-spacing: 1px; font-weight: 500; text-transform: uppercase; }
 
-    /* Fluid full-width scaling for laptops and mobile */
-    .container { max-width: 1280px; width: 95%; margin: 24px auto; padding: 0 10px; }
+    /* STRETCHED TO FIT LAPTOPS FULL SCREEN WITHOUT SIDE GAPS */
+    .container { max-width: 98%; width: 98%; margin: 20px auto; padding: 0 5px; }
 
     .ai-card {
       background: var(--card-bg);
       backdrop-filter: blur(12px);
       border-radius: 16px;
-      padding: clamp(16px, 3vw, 24px);
+      padding: clamp(16px, 2.5vw, 24px);
       box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4), var(--gold-glow);
       border: 1px solid var(--card-border);
-      margin-bottom: 28px;
+      margin-bottom: 24px;
       width: 100%;
     }
     .ai-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 10px; }
-    .ai-header h2 { font-size: clamp(1.1rem, 3vw, 1.3rem); font-weight: 800; color: #ffffff; display: flex; align-items: center; gap: 8px; }
+    .ai-header h2 { font-size: clamp(1.1rem, 2.5vw, 1.3rem); font-weight: 800; color: #ffffff; display: flex; align-items: center; gap: 8px; }
     .ai-header h2::before { content: "✦"; color: var(--gold-primary); }
     .online-badge { background: rgba(22, 163, 74, 0.15); color: #4ade80; border: 1px solid rgba(74, 222, 128, 0.4); font-size: 0.75rem; padding: 4px 12px; border-radius: 20px; font-weight: 700; }
 
     textarea {
-      width: 100%; height: 90px; padding: 14px;
+      width: 100%; height: 85px; padding: 14px;
       background: rgba(3, 11, 23, 0.85); border: 1px solid rgba(212, 175, 55, 0.35);
       border-radius: 12px; font-size: 1rem; color: #f8fafc; resize: vertical; outline: none;
     }
@@ -118,14 +118,14 @@
     .foundation-btn:hover { background: var(--gold-primary); color: #030b17; }
 
     .solution-box {
-      margin-top: 20px; padding: clamp(14px, 3vw, 22px);
+      margin-top: 20px; padding: clamp(14px, 2.5vw, 22px);
       background: #ffffff; color: #0f172a; border-radius: 14px;
       border: 1.5px solid var(--gold-primary); display: none; line-height: 1.75; font-size: 1rem; width: 100%;
     }
     .solution-box svg { width: 100%; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 12px; margin: 16px auto; display: block; }
 
     .section-title {
-      font-size: clamp(1.1rem, 2.5vw, 1.25rem); font-weight: 800; margin: 35px 0 16px;
+      font-size: clamp(1.1rem, 2.2vw, 1.25rem); font-weight: 800; margin: 30px 0 16px;
       text-transform: uppercase; letter-spacing: 1px; background: var(--gold-gradient);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: flex; align-items: center; gap: 10px; width: 100%;
     }
@@ -165,11 +165,11 @@
     .btn-action-dl { color: #047857; background: #ecfdf5; }
 
     footer {
-      margin-top: 45px; background: linear-gradient(180deg, rgba(11, 37, 69, 0.85) 0%, #030b17 100%);
-      border: 1.5px solid var(--gold-border); border-radius: 18px; padding: 24px 18px; text-align: center; width: 100%;
+      margin-top: 40px; background: linear-gradient(180deg, rgba(11, 37, 69, 0.85) 0%, #030b17 100%);
+      border: 1.5px solid var(--gold-border); border-radius: 16px; padding: 20px 15px; text-align: center; width: 100%;
     }
-    /* Balanced name sizing */
-    .curator-name-calligraphy { font-family: 'Great Vibes', cursive; font-size: clamp(1.8rem, 4vw, 2.4rem); background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    /* SLEEK REDUCED NAME SIZE */
+    .curator-name-calligraphy { font-family: 'Great Vibes', cursive; font-size: clamp(1.6rem, 3.5vw, 2.1rem); background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 2px 0; }
 
     @media print {
       body * { visibility: hidden; }
@@ -251,9 +251,9 @@
         <!-- Worksheet C1-C2 -->
         <div class="worksheet-card printable-area" id="ws-c1c2">
           <div class="worksheet-header">
-            <h4 id="title-c1c2">📄 Lekka Lab Daily Practice Sheet: Number Sense &amp; Place Value</h4>
+            <h4>📄 Lekka Lab Daily Practice Sheet: Number Sense &amp; Place Value</h4>
             <div class="worksheet-btn-group">
-              <button type="button" class="btn-refresh" onclick="refreshWorksheet('c1c2')">🔄 New Daily Concept</button>
+              <button type="button" class="btn-refresh" onclick="refreshAllWorksheets()">🔄 New Daily Concept</button>
               <button type="button" class="btn-print" onclick="printElement('ws-c1c2')">🖨️ Print / PDF</button>
             </div>
           </div>
@@ -271,7 +271,7 @@
             <div class="q-item"><span class="q-num">6.</span> <b>Money Problem:</b> If a pencil costs ₹<span id="c1-penc">5</span> and an eraser costs ₹<span id="c1-eras">3</span>, find the total cost: ₹_________</div>
           </div>
           <button type="button" class="ans-key-toggle" onclick="toggleAnsKey('ans-c1c2')">👁️ Toggle Step-by-Step Answer Key</button>
-          <div class="ans-key-content" id="ans-c1c2" style="display:none;">
+          <div class="ans-key-content" id="ans-c1c2">
             <b>Answer Key:</b><br>
             <span id="ans-text-c1c2">1. Forty-eight.<br>2. 7 Tens + 6 Ones (70 + 6).<br>3. 90.<br>4. 64 > 46 and 108 < 180.<br>5. 85.<br>6. ₹8.</span>
           </div>
@@ -280,9 +280,9 @@
         <!-- Worksheet C3-C5 -->
         <div class="worksheet-card printable-area" id="ws-c3c5">
           <div class="worksheet-header">
-            <h4 id="title-c3c5">📄 Lekka Lab Daily Practice Sheet: Fractions, LCM &amp; Money</h4>
+            <h4>📄 Lekka Lab Daily Practice Sheet: Fractions, LCM &amp; Money</h4>
             <div class="worksheet-btn-group">
-              <button type="button" class="btn-refresh" onclick="refreshWorksheet('c3c5')">🔄 New Daily Concept</button>
+              <button type="button" class="btn-refresh" onclick="refreshAllWorksheets()">🔄 New Daily Concept</button>
               <button type="button" class="btn-print" onclick="printElement('ws-c3c5')">🖨️ Print / PDF</button>
             </div>
           </div>
@@ -294,15 +294,15 @@
           <div id="content-c3c5">
             <div class="q-item"><span class="q-num">1.</span> Find the prime factorisation of <span id="c3-num1">72</span> using the ladder method.</div>
             <div class="q-item"><span class="q-num">2.</span> Find the LCM of <span id="c3-num2a">4</span> and <span id="c3-num2b">6</span>: Answer: _________</div>
-            <div class="q-item"><span class="q-num">3.</span> Solve fraction addition: 2/3 + 1/4 = _________</div>
+            <div class="q-item"><span class="q-num">3.</span> Solve fraction addition: <span id="c3-f1">2/3</span> + <span id="c3-f2">1/4</span> = _________</div>
             <div class="q-item"><span class="q-num">4.</span> Long Division: Divide <span id="c3-num4a">95</span> by <span id="c3-num4b">4</span>. State Quotient and Remainder.</div>
             <div class="q-item"><span class="q-num">5.</span> Convert improper fraction 13/5 into a mixed number: _________</div>
             <div class="q-item"><span class="q-num">6.</span> <b>Money Problem:</b> Rahul has a ₹100 note. He buys a notebook for ₹<span id="c3-nb">45</span> and geometry box for ₹<span id="c3-gb">35</span>. Balance money: ₹_________</div>
           </div>
           <button type="button" class="ans-key-toggle" onclick="toggleAnsKey('ans-c3c5')">👁️ Toggle Step-by-Step Answer Key</button>
-          <div class="ans-key-content" id="ans-c3c5" style="display:none;">
+          <div class="ans-key-content" id="ans-c3c5">
             <b>Answer Key:</b><br>
-            <span id="ans-text-c3c5">1. Prime factorisation generated.<br>2. LCM calculated.<br>3. 11/12.<br>4. Quotient and Remainder calculated.<br>5. 2 3/5.<br>6. Balance ₹20.</span>
+            <span id="ans-text-c3c5">1. Prime factorisation calculated.<br>2. LCM = 12.<br>3. 11/12.<br>4. Quotient = 23, Remainder = 3.<br>5. 2 3/5.<br>6. Balance ₹20.</span>
           </div>
         </div>
 
@@ -320,7 +320,7 @@
           <div class="worksheet-header">
             <h4>📄 Lekka Lab Daily Practice Sheet: Integers, Sign Rules &amp; Commercial Math</h4>
             <div class="worksheet-btn-group">
-              <button type="button" class="btn-refresh" onclick="refreshWorksheet('c6c7')">🔄 New Daily Concept</button>
+              <button type="button" class="btn-refresh" onclick="refreshAllWorksheets()">🔄 New Daily Concept</button>
               <button type="button" class="btn-print" onclick="printElement('ws-c6c7')">🖨️ Print / PDF</button>
             </div>
           </div>
@@ -338,7 +338,7 @@
             <div class="q-item"><span class="q-num">6.</span> <b>Profit &amp; Loss:</b> A shopkeeper buys a school bag for ₹<span id="c6-cp">250</span> and sells it for ₹<span id="c6-sp">300</span>. Calculate profit percentage: _________%</div>
           </div>
           <button type="button" class="ans-key-toggle" onclick="toggleAnsKey('ans-c6c7')">👁️ Toggle Step-by-Step Answer Key</button>
-          <div class="ans-key-content" id="ans-c6c7" style="display:none;">
+          <div class="ans-key-content" id="ans-c6c7">
             <b>Answer Key:</b><br>
             <span id="ans-text-c6c7">1. (a) -13. (b) -5.<br>2. (a) +24. (b) -5.<br>3. 16.<br>4. x = 7.<br>5. Negative sign addition rule.<br>6. 20%.</span>
           </div>
@@ -358,7 +358,7 @@
           <div class="worksheet-header">
             <h4>📄 Lekka Lab Daily Practice Sheet: Factorisation, Quadratics &amp; Simple Interest</h4>
             <div class="worksheet-btn-group">
-              <button type="button" class="btn-refresh" onclick="refreshWorksheet('c8c10')">🔄 New Daily Concept</button>
+              <button type="button" class="btn-refresh" onclick="refreshAllWorksheets()">🔄 New Daily Concept</button>
               <button type="button" class="btn-print" onclick="printElement('ws-c8c10')">🖨️ Print / PDF</button>
             </div>
           </div>
@@ -375,7 +375,7 @@
             <div class="q-item"><span class="q-num">5.</span> <b>Simple Interest:</b> Find SI and amount on ₹<span id="c8-p">5,000</span> at <span id="c8-r">8</span>% per annum for <span id="c8-t">2</span> years: SI = ₹_________, Amount = ₹_________</div>
           </div>
           <button type="button" class="ans-key-toggle" onclick="toggleAnsKey('ans-c8c10')">👁️ Toggle Step-by-Step Answer Key</button>
-          <div class="ans-key-content" id="ans-c8c10" style="display:none;">
+          <div class="ans-key-content" id="ans-c8c10">
             <b>Answer Key:</b><br>
             <span id="ans-text-c8c10">1. (7x - 6y)(7x + 6y).<br>2. (x+3)(x+4).<br>3. x = 3 or 1/2.<br>4. cos = 4/5, tan = 3/4.<br>5. SI = ₹800, Amount = ₹5,800.</span>
           </div>
@@ -514,21 +514,9 @@
     const DIRECT_GEMINI_KEYS = ENCODED_KEYS.map(k => atob(k));
     let base64Image = null;
 
-    // Daily Concept Rotator: automatically seeds different daily concepts based on day of year
+    // Auto-rotate and refresh all worksheets daily or on load
     window.addEventListener('DOMContentLoaded', () => {
-      const now = new Date();
-      const dayOfYear = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
-      const conceptSeed = dayOfYear % 4;
-      
-      if (conceptSeed === 0) {
-        refreshWorksheet('c1c2');
-      } else if (conceptSeed === 1) {
-        refreshWorksheet('c3c5');
-      } else if (conceptSeed === 2) {
-        refreshWorksheet('c6c7');
-      } else {
-        refreshWorksheet('c8c10');
-      }
+      refreshAllWorksheets();
     });
 
     function toggleAccordion(id) {
@@ -543,6 +531,13 @@
 
     function printElement(id) {
       window.print();
+    }
+
+    function refreshAllWorksheets() {
+      refreshWorksheet('c1c2');
+      refreshWorksheet('c3c5');
+      refreshWorksheet('c6c7');
+      refreshWorksheet('c8c10');
     }
 
     function refreshWorksheet(sheetId) {
@@ -560,6 +555,8 @@
         document.getElementById('c1-num3b').innerText = n1 + 3;
         document.getElementById('c1-num4a').innerText = a;
         document.getElementById('c1-num4b').innerText = b;
+        document.getElementById('c1-num4c').innerText = a + 44;
+        document.getElementById('c1-num4d').innerText = b + 134;
         document.getElementById('c1-num5a').innerText = a;
         document.getElementById('c1-num5b').innerText = b;
         document.getElementById('c1-penc').innerText = penc;
@@ -574,12 +571,12 @@
           1. Number name generated for ${n1}.<br>
           2. ${tens} Tens + ${ones} Ones (${tens*10} + ${ones}).<br>
           3. ${n1 + 2}.<br>
-          4. ${a} vs ${b} comparison.<br>
+          4. Correct comparison symbols applied.<br>
           5. Sum = ${sum}.<br>
           6. Total cost = ₹${tot}.
         `;
       } else if (sheetId === 'c3c5') {
-        const factorNum = [48, 54, 72, 96][Math.floor(Math.random() * 4)];
+        const factorNum = [48, 54, 72, 96, 84][Math.floor(Math.random() * 5)];
         const div1 = Math.floor(Math.random() * 30) + 70;
         const div2 = Math.floor(Math.random() * 3) + 3;
         
@@ -591,11 +588,11 @@
         const r = div1 % div2;
         
         document.getElementById('ans-text-c3c5').innerHTML = `
-          1. Factorisation of ${factorNum}.<br>
-          2. LCM = 12.<br>
-          3. 11/12.<br>
+          1. Prime factorisation of ${factorNum}.<br>
+          2. LCM calculated.<br>
+          3. Fraction addition solved.<br>
           4. Quotient = ${q}, Remainder = ${r}.<br>
-          5. 2 3/5.<br>
+          5. Mixed fraction converted.<br>
           6. Balance calculated.
         `;
       } else if (sheetId === 'c6c7') {
@@ -611,9 +608,9 @@
         document.getElementById('ans-text-c6c7').innerHTML = `
           1. (a) -13. (b) -5.<br>
           2. (a) +24. (b) -5.<br>
-          3. 16.<br>
-          4. x = 7.<br>
-          5. Negative sign addition rule.<br>
+          3. Exponent law simplified.<br>
+          4. Transposition solved.<br>
+          5. Negative addition rule.<br>
           6. Profit = ₹${profit} (${pFitPct}%).
         `;
       } else if (sheetId === 'c8c10') {
@@ -629,10 +626,10 @@
         const amt = pVal + si;
         
         document.getElementById('ans-text-c8c10').innerHTML = `
-          1. (7x - 6y)(7x + 6y).<br>
-          2. Factored form.<br>
-          3. x = 3 or 1/2.<br>
-          4. cos = 4/5, tan = 3/4.<br>
+          1. Algebraic identity factored.<br>
+          2. Middle term split.<br>
+          3. Quadratic formula roots found.<br>
+          4. Trigonometric ratios calculated.<br>
           5. SI = ₹${si.toLocaleString('en-IN')}, Amount = ₹${amt.toLocaleString('en-IN')}.
         `;
       }
