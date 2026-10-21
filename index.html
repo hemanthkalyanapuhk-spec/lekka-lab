@@ -100,7 +100,7 @@
     }
     textarea:focus { border-color: #2563eb; }
 
-    /* Image Preview Container */
+    /* Visual Image Preview */
     .image-preview-container {
       display: none;
       margin-top: 10px;
@@ -170,9 +170,9 @@
       max-width: 100%;
       height: auto;
       border-radius: 12px;
-      background: #f8fafc;
+      background: #ffffff;
       border: 1.5px solid #e2e8f0;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.06);
     }
 
     .section-title {
@@ -315,9 +315,9 @@
         <span class="online-badge">ONLINE</span>
       </div>
       
-      <textarea id="aiProblemInput" placeholder="Type a question, speak, or take a picture of a problem/diagram..."></textarea>
+      <textarea id="aiProblemInput" placeholder="Ask anything... Science, Math theorems, 2D/3D visual diagrams, Recipes, or GK!"></textarea>
       
-      <!-- Visual preview for uploaded/captured image -->
+      <!-- Preview for captured/uploaded photos -->
       <div class="image-preview-container" id="imagePreviewContainer">
         <img id="imagePreview" src="" alt="Captured problem preview">
         <span>📸 Photo attached and ready</span>
@@ -342,7 +342,7 @@
       </div>
     </div>
 
-    <!-- 36 Assessment & Project PDF Files -->
+    <!-- 36 Assessment & Project PDF Files (Exact relative paths preserved) -->
     <h3 class="section-title">Assessment & Project Resources (36 PDFs)</h3>
 
     <!-- Class 10 -->
@@ -507,7 +507,7 @@
 
     // Visitor Counter
     (function initCounter() {
-      let count = parseInt(localStorage.getItem('lekka_visits') || '1898', 10);
+      let count = parseInt(localStorage.getItem('lekka_visits') || '1905', 10);
       count += 1;
       localStorage.setItem('lekka_visits', count);
       document.getElementById('visitorCount').innerText = count.toLocaleString();
@@ -552,7 +552,7 @@
       return str.replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[m]);
     }
 
-    // Camera Capture & Image Handler with Compression
+    // Camera Capture & Image Compressor
     function handleImage(e) {
       const file = e.target.files[0];
       if (!file) return;
@@ -561,7 +561,6 @@
       reader.onload = (event) => {
         const img = new Image();
         img.onload = () => {
-          // Downscale large camera photos to ensure sub-2-second transmission
           const canvas = document.createElement('canvas');
           let width = img.width;
           let height = img.height;
@@ -582,11 +581,9 @@
           const ctx = canvas.getContext('2d');
           ctx.drawImage(img, 0, 0, width, height);
 
-          // Get optimized base64 jpeg
           const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.82);
           base64Image = compressedDataUrl.split(',')[1];
 
-          // Show preview
           document.getElementById('imagePreview').src = compressedDataUrl;
           document.getElementById('imagePreviewContainer').style.display = 'flex';
           
@@ -653,7 +650,7 @@
       }
 
       display.style.display = 'block';
-      mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">⚡ Answering instantly...</p>';
+      mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">⚡ Generating instant answer...</p>';
       btn.disabled = true;
 
       const systemInstruction = `You are "Lucky", a fast universal educational AI assistant for Lekka Lab.
@@ -664,16 +661,18 @@ LANGUAGE DIRECTIVE:
 
 CONTENT RULES:
 1. NON-MATH TOPICS (Cooking recipes, Daily Life, History, General Knowledge):
-   - Answer directly and practically.
+   - Answer directly and practically with clean bullet points.
    - DO NOT attach math equations, chemical formulas, or forced diagrams to cooking recipes or ordinary facts.
 2. MATHEMATICS & SCIENCE:
    - Use standard LaTeX ($..$ inline, $$..$$ display) for theorems, derivations, and formulas.
-3. MANDATORY IN-DIAGRAM SVG LABELLING:
-   - When drawing geometry, physics, or anatomical diagrams (e.g., Triangle, Heart, Optics):
-     * Output a complete, closed inline SVG (<svg viewBox="0 0 380 240" xmlns="http://www.w3.org/2000/svg">...</svg>).
-     * EVERY vertex, point (A, B, C, D, E), and anatomical part (Right Atrium, Left Ventricle, Aorta) MUST be written DIRECTLY INSIDE the SVG using:
-       <text x="..." y="..." font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">Label</text>
-     * NEVER print labels as loose text outside the SVG.
+3. MANDATORY REALISTIC 3D SVG DIAGRAMS:
+   - If drawing an anatomical organ like a HEART:
+     * Output a complete, single inline SVG (<svg viewBox="0 0 540 380" xmlns="http://www.w3.org/2000/svg">...</svg>) with defs (radial gradients, highlights, 3D elevation drop shadow).
+     * Render realistic anatomical chambers: Superior/Inferior Vena Cava, Aorta Arch with 3 branches, Pulmonary Artery, Left/Right Atrium, Left/Right Ventricle, and Apex.
+     * EVERY label MUST be written INSIDE the SVG using pointer lines (<line ...>) and text elements (<text x=".." y=".." font-size="12" font-weight="700" fill="#0f172a">Label</text>).
+     * NEVER output labels as text outside the </svg> tag.
+   - For geometry (like BPT Theorem triangle):
+     * Label points A, B, C, D, E directly inside the SVG with <text> tags next to the vertices.
 4. IMAGE / CAMERA INPUT:
    - If an image is provided, extract the question/diagram completely, solve it step-by-step, and state the final result clearly.`;
 
@@ -694,7 +693,7 @@ CONTENT RULES:
       let rawAnswer = null;
       let lastError = "Request failed";
 
-      // Lightweight high-quota models
+      // Models ordered by highest speed and quota allowance
       const models = [
         "gemini-3.5-flash-lite",
         "gemini-3.8-flash"
@@ -717,7 +716,7 @@ CONTENT RULES:
                 contents: contents,
                 generationConfig: {
                   temperature: 0.2,
-                  maxOutputTokens: 1800
+                  maxOutputTokens: 2500
                 }
               })
             });
@@ -725,7 +724,7 @@ CONTENT RULES:
             const data = await res.json();
             if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
               rawAnswer = data.candidates[0].content.parts[0].text;
-              break outerLoop; // Success! Exit immediately
+              break outerLoop; // Success: exit immediately
             } else if (data.error) {
               lastError = data.error.message || JSON.stringify(data.error);
               continue; // Silently try next key
@@ -747,7 +746,7 @@ CONTENT RULES:
         .replace(/```(?:xml|html|svg)?\s*(<svg[\s\S]*?<\/svg>)\s*```/gi, '$1')
         .replace(/(<\/svg>)([\s\S]*?)(?=(?:###|####|\*\*|##|[A-Z][a-z]+:))/i, (m, p1, p2) => {
           const tr = p2.trim();
-          return (/^[a-zA-Z0-9\s,\\^_\(\)\/\*\+\-=\|]+$/.test(tr) && tr.length < 120) ? p1 + "\n\n" : m;
+          return (/^[a-zA-Z0-9\s,\\^_\(\)\/\*\+\-=\|]+$/.test(tr) && tr.length < 140) ? p1 + "\n\n" : m;
         })
         .replace(/\u2260/g, ' \\neq ')
         .replace(/\u00B1/g, ' \\pm ')
