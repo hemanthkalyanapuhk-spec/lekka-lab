@@ -164,6 +164,7 @@
       font-size: 0.98rem;
     }
 
+    /* Diagram Styling */
     .solution-box svg {
       display: block;
       margin: 16px auto;
@@ -315,7 +316,7 @@
         <span class="online-badge">ONLINE</span>
       </div>
       
-      <textarea id="aiProblemInput" placeholder="Ask anything... Science, Math theorems, 2D/3D visual diagrams, Recipes, or GK!"></textarea>
+      <textarea id="aiProblemInput" placeholder="Ask anything... Math theorems, 2D/3D visual diagrams, Recipes, or GK!"></textarea>
       
       <!-- Preview for captured/uploaded photos -->
       <div class="image-preview-container" id="imagePreviewContainer">
@@ -507,7 +508,7 @@
 
     // Visitor Counter
     (function initCounter() {
-      let count = parseInt(localStorage.getItem('lekka_visits') || '1905', 10);
+      let count = parseInt(localStorage.getItem('lekka_visits') || '1910', 10);
       count += 1;
       localStorage.setItem('lekka_visits', count);
       document.getElementById('visitorCount').innerText = count.toLocaleString();
@@ -637,7 +638,7 @@
       recognition.start();
     }
 
-    // High-Precision Multimodal Educational Engine (<2.5s)
+    // High-Precision AI Engine (Pure Safe SVG Extraction)
     async function handleSolve() {
       const text = document.getElementById('aiProblemInput').value.trim();
       const btn = document.getElementById('btnSolve');
@@ -665,16 +666,12 @@ CONTENT RULES:
    - DO NOT attach math equations, chemical formulas, or forced diagrams to cooking recipes or ordinary facts.
 2. MATHEMATICS & SCIENCE:
    - Use standard LaTeX ($..$ inline, $$..$$ display) for theorems, derivations, and formulas.
-3. MANDATORY REALISTIC 3D SVG DIAGRAMS:
-   - If drawing an anatomical organ like a HEART:
-     * Output a complete, single inline SVG (<svg viewBox="0 0 540 380" xmlns="http://www.w3.org/2000/svg">...</svg>) with defs (radial gradients, highlights, 3D elevation drop shadow).
-     * Render realistic anatomical chambers: Superior/Inferior Vena Cava, Aorta Arch with 3 branches, Pulmonary Artery, Left/Right Atrium, Left/Right Ventricle, and Apex.
-     * EVERY label MUST be written INSIDE the SVG using pointer lines (<line ...>) and text elements (<text x=".." y=".." font-size="12" font-weight="700" fill="#0f172a">Label</text>).
-     * NEVER output labels as text outside the </svg> tag.
-   - For geometry (like BPT Theorem triangle):
-     * Label points A, B, C, D, E directly inside the SVG with <text> tags next to the vertices.
-4. IMAGE / CAMERA INPUT:
-   - If an image is provided, extract the question/diagram completely, solve it step-by-step, and state the final result clearly.`;
+3. DIAGRAMS & ILLUSTRATIONS (When asked or required):
+   - When drawing geometry or biological anatomy (e.g., Heart, Triangle, Cell):
+     * Output a complete, single inline SVG (<svg viewBox="0 0 540 380" xmlns="http://www.w3.org/2000/svg">...</svg>).
+     * DO NOT wrap the SVG inside markdown backticks (do not use \`\`\`xml or \`\`\`svg).
+     * Place ALL labels directly inside the SVG using pointer lines (<line ...>) and text tags (<text x=".." y=".." font-size="12" font-weight="700" fill="#0f172a">Label</text>).
+     * NEVER print labels as loose text outside the SVG.`;
 
       const contents = [{
         role: "user",
@@ -693,7 +690,6 @@ CONTENT RULES:
       let rawAnswer = null;
       let lastError = "Request failed";
 
-      // Models ordered by highest speed and quota allowance
       const models = [
         "gemini-3.5-flash-lite",
         "gemini-3.8-flash"
@@ -724,7 +720,7 @@ CONTENT RULES:
             const data = await res.json();
             if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
               rawAnswer = data.candidates[0].content.parts[0].text;
-              break outerLoop; // Success: exit immediately
+              break outerLoop; // Success! Exit immediately
             } else if (data.error) {
               lastError = data.error.message || JSON.stringify(data.error);
               continue; // Silently try next key
@@ -741,30 +737,36 @@ CONTENT RULES:
         return;
       }
 
-      // Safe extraction of inline SVG to prevent code block leakage and clean loose external labels
-      let cleanOutput = rawAnswer
-        .replace(/```(?:xml|html|svg)?\s*(<svg[\s\S]*?<\/svg>)\s*```/gi, '$1')
-        .replace(/(<\/svg>)([\s\S]*?)(?=(?:###|####|\*\*|##|[A-Z][a-z]+:))/i, (m, p1, p2) => {
-          const tr = p2.trim();
-          return (/^[a-zA-Z0-9\s,\\^_\(\)\/\*\+\-=\|]+$/.test(tr) && tr.length < 140) ? p1 + "\n\n" : m;
-        })
-        .replace(/\u2260/g, ' \\neq ')
-        .replace(/\u00B1/g, ' \\pm ')
-        .replace(/\u2264/g, ' \\leq ')
-        .replace(/\u2265/g, ' \\geq ')
-        .replace(/\u00D7/g, ' \\times ')
-        .replace(/\u2192/g, ' \\to ')
-        .replace(/\u221E/g, ' \\infty ')
-        .replace(/\$\$\s*([^\$]+)\s*\$\$/g, '\n\n$$$ $1 $$$ \n\n');
+      // ISOLATE & PROTECT SVG: Extract SVG completely so Marked/KaTeX will NEVER break or leak it
+      const svgList = [];
+      let sanitizedText = rawAnswer.replace(/```(?:xml|html|svg)?\s*(<svg[\s\S]*?<\/svg>)\s*```/gi, '$1');
+      
+      sanitizedText = sanitizedText.replace(/<svg[\s\S]*?<\/svg>/gi, (match) => {
+        svgList.push(match);
+        return `\n\n__SVG_PLACEHOLDER_${svgList.length - 1}__\n\n`;
+      });
 
-      mathContent.innerHTML = marked.parse(cleanOutput);
+      // Remove loose orphaned label lists immediately following SVG placeholders
+      sanitizedText = sanitizedText.replace(/(__SVG_PLACEHOLDER_\d+__)([\s\S]*?)(?=(?:###|####|\*\*|##|[A-Z][a-z]+:))/i, (m, p1, p2) => {
+        const tr = p2.trim();
+        return (/^[a-zA-Z0-9\s,\\^_\(\)\/\*\+\-=\|]+$/.test(tr) && tr.length < 160) ? p1 + "\n\n" : m; });        sanitizedText = sanitizedText .replace(/\u2260/g, ' \\neq ') .replace(/\u00B1/g, ' \\pm ') .replace(/\u2264/g, ' \\leq ') .replace(/\u2265/g, ' \\geq ') .replace(/\u00D7/g, ' \\times ') .replace(/\u2192/g, ' \\to ') .replace(/\u221E/g, ' \\infty ') .replace(/\$\$\s*([^\$]+)\s*\$\$/g, '\n\n$$$ $1$$$ \n\n');
+
+      // Render Markdown & Math on the clean text
+      let htmlOutput = marked.parse(sanitizedText);
+
+      // Re-inject the untouched, pristine SVGs back into their placeholders
+      svgList.forEach((svgCode, idx) => {
+        htmlOutput = htmlOutput.replace(`__SVG_PLACEHOLDER_${idx}__`, svgCode);
+      });
+
+      mathContent.innerHTML = htmlOutput;
 
       if (window.renderMathInElement) {
         renderMathInElement(mathContent, {
           delimiters: [
             { left: '$$', right: '$$', display: true },
             { left: '$', right: '$', display: false },
-            { left: '\\[', right: '\\]', display: true },
+            { left: '[', right: ']', display: true },
             { left: '\\(', right: '\\)', display: false }
           ],
           throwOnError: false
