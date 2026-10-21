@@ -136,6 +136,7 @@
       height: auto;
       border-radius: 10px;
       background: #ffffff;
+      border: 1px solid #e2e8f0;
     }
 
     .section-title {
@@ -278,7 +279,7 @@
         <span class="online-badge">ONLINE</span>
       </div>
       
-      <textarea id="aiProblemInput" placeholder="Ask anything... Math theorems, Science, Chemistry, GK, Current Affairs, or Recipes!"></textarea>
+      <textarea id="aiProblemInput" placeholder="Ask anything... Math theorems, Science, Chemistry, Biology, GK, or Recipes!"></textarea>
       
       <div class="ai-controls">
         <button class="btn btn-solve" id="btnSolve" onclick="handleSolve()">✨ Ask Lucky</button>
@@ -551,7 +552,7 @@
       recognition.start();
     }
 
-    // Direct Universal AI Engine with Native Detailed Error Reporting
+    // Direct Universal AI Engine (Strictly Gemini-3.8-Flash + x-goog-api-key)
     async function handleSolve() {
       const text = document.getElementById('aiProblemInput').value.trim();
       const btn = document.getElementById('btnSolve');
@@ -567,10 +568,10 @@
       mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">Thinking...</p>';
       btn.disabled = true;
 
-      const systemInstruction = `You are Lucky, a universal educational AI assistant for Lekka Lab.
-- Provide direct, structured, and informative answers with clear headings and bullet points.
-- Use standard LaTeX ($..$ inline, $$..$$ display) for math and chemical formulas.
-- If geometric diagrams or anatomy are requested, provide an inline SVG (<svg viewBox="0 0 360 220" ...>) with labels directly inside the SVG.`;
+      const systemInstruction = `You are Lucky, a universal educational assistant for Lekka Lab.
+- Answer clearly using Markdown headings and bullet points.
+- Use LaTeX ($..$ inline, $$..$$ display) for math and chemical formulas.
+- If diagrams or anatomical structures are needed, provide clean inline SVG with labels directly inside the SVG.`;
 
       const promptInput = `${systemInstruction}\n\nQuestion: ${text}`;
       let rawAnswer = null;
@@ -578,7 +579,6 @@
 
       const shuffledKeys = [...DIRECT_GEMINI_KEYS].sort(() => 0.5 - Math.random());
 
-      // Protocol: Standard generateContent with direct JSON structure
       const contents = [{
         role: "user",
         parts: [{ text: promptInput }]
@@ -593,9 +593,12 @@
         });
       }
 
+      // Mandatory Model recommended by Google
+      const targetModel = "gemini-3.8-flash";
+
       for (const apiKey of shuffledKeys) {
         try {
-          const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent`;
+          const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${targetModel}:generateContent`;
           const res = await fetch(endpoint, {
             method: "POST",
             headers: { 
