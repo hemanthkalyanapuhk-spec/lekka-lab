@@ -136,7 +136,7 @@
       height: auto;
       border-radius: 12px;
       background: #ffffff;
-      border: 1px solid #e2e8f0;
+      border: 1.5px solid #e2e8f0;
       box-shadow: 0 4px 14px rgba(0,0,0,0.05);
     }
 
@@ -280,7 +280,7 @@
         <span class="online-badge">ONLINE</span>
       </div>
       
-      <textarea id="aiProblemInput" placeholder="Ask anything... Math theorems, 2D/3D Diagrams, Science, Chemistry, or General Knowledge!"></textarea>
+      <textarea id="aiProblemInput" placeholder="Ask anything... Science, Math, GK, Recipes, or Diagrams (e.g., 'రవ్వ లడ్డు తయారీ' or 'BPT Theorem')"></textarea>
       
       <div class="ai-controls">
         <button class="btn btn-solve" id="btnSolve" onclick="handleSolve()">✨ Ask Lucky</button>
@@ -462,7 +462,7 @@
 
     // Visitor Counter
     (function initCounter() {
-      let count = parseInt(localStorage.getItem('lekka_visits') || '1879', 10);
+      let count = parseInt(localStorage.getItem('lekka_visits') || '1885', 10);
       count += 1;
       localStorage.setItem('lekka_visits', count);
       document.getElementById('visitorCount').innerText = count.toLocaleString();
@@ -553,7 +553,7 @@
       recognition.start();
     }
 
-    // Direct Universal AI Engine (Google Recommended gemini-3.8-flash Architecture)
+    // Direct Universal AI Engine (Context Aware, Multi-Language & Stable Diagrams)
     async function handleSolve() {
       const text = document.getElementById('aiProblemInput').value.trim();
       const btn = document.getElementById('btnSolve');
@@ -566,18 +566,31 @@
       }
 
       display.style.display = 'block';
-      mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">Thinking and calculating solution...</p>';
+      mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">Thinking and preparing answer...</p>';
       btn.disabled = true;
 
-      const systemInstruction = `You are Lucky, the visual educational AI for Lekka Lab.
-- Provide direct, structured, and informative answers with clear headings and bullet points.
-- Use standard LaTeX ($..$ inline, $$..$$ display) for all mathematical and chemical formulas.
-- If drawing a diagram, geometry, or biological structure, provide a single COMPLETE inline SVG (<svg viewBox="0 0 380 240" xmlns="http://www.w3.org/2000/svg">...</svg>).
-- CRITICAL: Place ALL vertex labels, part names, and values directly INSIDE the SVG using <text> tags. Never print labels as text outside the SVG.`;
+      // Smart system instruction: Language-adaptive, context-aware, and avoids forcing math on non-math topics
+      const systemInstruction = `You are "Lucky", a helpful universal AI assistant for Lekka Lab.
+
+LANGUAGE DIRECTIVE:
+- If the question contains Telugu words, Telugu script, or phrases like "in telugu" / "తెలుగులో", YOU MUST RESPOND 100% IN NATURAL TELUGU.
+- If in English, respond in clear English.
+
+CONTENT GUIDELINES:
+1. NON-MATH TOPICS (Recipes, General Knowledge, History, Everyday Advice):
+   - Answer directly, practically, and naturally.
+   - DO NOT force mathematical equations, chemical formulas, or unnecessary diagrams on cooking recipes or simple facts!
+2. MATHEMATICS & FORMULAS:
+   - For mathematical or scientific calculations, use standard LaTeX ($..$ inline, $$..$$ display).
+3. DIAGRAMS & ILLUSTRATIONS (Only when genuinely needed or requested):
+   - If drawing a diagram (geometry, heart/organ, physics), output a single VALID, SELF-CONTAINED inline SVG:
+     <svg viewBox="0 0 380 240" xmlns="http://www.w3.org/2000/svg">...</svg>
+   - Keep the SVG clean, well-proportioned, and lightweight so it renders completely.
+   - Place all labels directly INSIDE the SVG using <text> tags at proper coordinates. Do not leave the SVG open or incomplete.`;
 
       const contents = [{
         role: "user",
-        parts: [{ text: `${systemInstruction}\n\nQuestion: ${text}` }]
+        parts: [{ text: `${systemInstruction}\n\nUser Question: ${text}` }]
       }];
 
       if (base64Image) {
@@ -592,33 +605,36 @@
       let rawAnswer = null;
       let lastError = "Request failed";
 
-      // Models recommended by Google
-      const models = ["gemini-3.8-flash", "gemini-3.5-flash-lite"];
       const shuffledKeys = [...DIRECT_GEMINI_KEYS].sort(() => 0.5 - Math.random());
+      const targetModel = "gemini-3.8-flash";
 
-      outerLoop: for (const apiKey of shuffledKeys) {
-        for (const model of models) {
-          try {
-            const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
-            const res = await fetch(endpoint, {
-              method: "POST",
-              headers: { 
-                "Content-Type": "application/json",
-                "x-goog-api-key": apiKey
-              },
-              body: JSON.stringify({ contents: contents })
-            });
+      for (const apiKey of shuffledKeys) {
+        try {
+          const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${targetModel}:generateContent`;
+          const res = await fetch(endpoint, {
+            method: "POST",
+            headers: { 
+              "Content-Type": "application/json",
+              "x-goog-api-key": apiKey
+            },
+            body: JSON.stringify({ 
+              contents: contents,
+              generationConfig: {
+                temperature: 0.2,
+                maxOutputTokens: 2500
+              }
+            })
+          });
 
-            const data = await res.json();
-            if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
-              rawAnswer = data.candidates[0].content.parts[0].text;
-              break outerLoop;
-            } else if (data.error) {
-              lastError = data.error.message || lastError;
-            }
-          } catch (e) {
-            lastError = e.message;
+          const data = await res.json();
+          if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
+            rawAnswer = data.candidates[0].content.parts[0].text;
+            break;
+          } else if (data.error) {
+            lastError = data.error.message || JSON.stringify(data.error);
           }
+        } catch (e) {
+          lastError = e.message;
         }
       }
 
@@ -628,7 +644,7 @@
         return;
       }
 
-      // Safe extraction of inline SVG to prevent code block leakage
+      // Clean Markdown code blocks wrapping SVGs so they render as clean graphics
       let cleanOutput = rawAnswer
         .replace(/```(?:xml|html|svg)?\s*(<svg[\s\S]*?<\/svg>)\s*```/gi, '$1')
         .replace(/\u2260/g, ' \\neq ')
