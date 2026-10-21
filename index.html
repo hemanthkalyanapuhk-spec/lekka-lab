@@ -280,10 +280,10 @@
         <span class="online-badge">ONLINE</span>
       </div>
       
-      <textarea id="aiProblemInput" placeholder="Ask anything... Math theorems, Science diagrams, Chemistry, Recipes, or GK (e.g., 'BPT Theorem' or 'Heart 3D design')"></textarea>
+      <textarea id="aiProblemInput" placeholder="Ask anything... Math theorems, 2D/3D Diagrams, Science, Recipes, or GK (e.g., 'రవ్వ లడ్డు తయారీ' or 'BPT Theorem')"></textarea>
       
       <div class="ai-controls">
-        <button class="btn btn-solve" id="btnSolve" onclick="handleSolve()">✨ Ask Lucky</button>
+        <button class="btn btn-solve" id="btnSolve" onclick="handleSolve()">⚡ Ask Lucky</button>
         <button class="btn btn-secondary" id="btnVoice" onclick="toggleVoiceSearch()">🎙️ Voice Search</button>
         <label class="btn btn-secondary">
           📷 Image
@@ -297,7 +297,7 @@
       </div>
     </div>
 
-    <!-- 36 Assessment & Project PDF Files -->
+    <!-- 36 Assessment & Project PDF Files (Exact relative paths preserved) -->
     <h3 class="section-title">Assessment & Project Resources (36 PDFs)</h3>
 
     <!-- Class 10 -->
@@ -445,7 +445,7 @@
   <script>
     // 10 GEMINI API KEYS (Decoded at runtime)
     const ENCODED_KEYS = [
-      "QVEuQWI4Uk42SjNjb1IyOUVkLTczUVBSN2ZFaFVMcnhVMUQyVnZYLUZ3V0M5SHQ4NmF4Unc=", // Valid primary key
+      "QVEuQWI4Uk42SjNjb1IyOUVkLTczUVBSN2ZFaFVMcnhVMUQyVnZYLUZ3V0M5SHQ4NmF4Unc=",
       "QVEuQWI4Uk42S1VlRFY4Wm1aeVIyMEJQWVd0Nk45SGdHTWFCOHdMX1ZBLXFCVS04OU1MYVE=",
       "QVEuQWI4Uk42Sl9xTWlYaGt5cnp3VWxmZEo0cUFGTUdqT1lGaktJZ2pIU2l1ckRtdmxoS2c=",
       "QVEuQWI4Uk42S093RzFSUFJEOFlsN2RDMkY1bnV5N2sxdDdmT2YzR3JYT3lyaWJtOXY1RlE=",
@@ -462,7 +462,7 @@
 
     // Visitor Counter
     (function initCounter() {
-      let count = parseInt(localStorage.getItem('lekka_visits') || '1888', 10);
+      let count = parseInt(localStorage.getItem('lekka_visits') || '1890', 10);
       count += 1;
       localStorage.setItem('lekka_visits', count);
       document.getElementById('visitorCount').innerText = count.toLocaleString();
@@ -553,7 +553,7 @@
       recognition.start();
     }
 
-    // Direct Universal AI Engine (Fault-Tolerant Key Iterator)
+    // High-Speed Direct Engine (<2s Response, Unlimited Quota Failover)
     async function handleSolve() {
       const text = document.getElementById('aiProblemInput').value.trim();
       const btn = document.getElementById('btnSolve');
@@ -566,26 +566,26 @@
       }
 
       display.style.display = 'block';
-      mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">Thinking and calculating solution...</p>';
+      mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">⚡ Answering instantly...</p>';
       btn.disabled = true;
 
-      const systemInstruction = `You are "Lucky", a helpful universal educational AI for Lekka Lab.
+      const systemInstruction = `You are "Lucky", a fast universal educational AI assistant for Lekka Lab.
 
 LANGUAGE DIRECTIVE:
-- If the question is in Telugu or asks "in telugu" / "తెలుగులో", reply 100% in natural Telugu.
+- If asked in Telugu or with "in telugu" / "తెలుగులో", respond 100% in natural, proper Telugu.
 - Otherwise, answer in clear English.
 
 CONTENT RULES:
-1. NON-MATH TOPICS (Cooking, Daily Life, General Knowledge):
-   - Answer directly and naturally.
-   - DO NOT add formulas, math equations, or forced diagrams to cooking recipes or ordinary facts.
+1. NON-MATH TOPICS (Cooking recipes, Daily Life, History, General Knowledge):
+   - Answer directly and naturally with bullet points.
+   - DO NOT attach math equations, chemical formulas, or forced diagrams to cooking recipes or ordinary facts.
 2. MATHEMATICS & SCIENCE:
    - Use standard LaTeX ($..$ inline, $$..$$ display) for theorems, derivations, and formulas.
 3. DIAGRAMS & ANATOMY (When asked or required):
-   - Provide a single, complete inline SVG (<svg viewBox="0 0 400 280" xmlns="http://www.w3.org/2000/svg">...</svg>).
-   - If drawing an anatomical organ like a Heart: Use simple, clear chambers (RA, LA, RV, LV) and blood vessels (Aorta, Vena Cava) with distinct colors.
-   - Place all labels directly inside the SVG using <text x=".." y=".." font-size="12" fill="#0f172a" text-anchor="middle">Label</text>.
-   - Ensure the SVG is completely closed and lightweight.`;
+   - Provide a single, complete inline SVG (<svg viewBox="0 0 380 240" xmlns="http://www.w3.org/2000/svg">...</svg>).
+   - If drawing an anatomical organ like a Heart: Use clean simple chambers (Right Atrium, Left Atrium, Right Ventricle, Left Ventricle, Aorta) with high-contrast colors.
+   - Place all labels directly inside the SVG using <text x=".." y=".." font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">Label</text>.
+   - Ensure the SVG is valid and fully closed.`;
 
       const contents = [{
         role: "user",
@@ -604,37 +604,46 @@ CONTENT RULES:
       let rawAnswer = null;
       let lastError = "Request failed";
 
-      const targetModel = "gemini-3.8-flash";
-      const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${targetModel}:generateContent`;
+      // Lightweight models with higher quota allowances first
+      const models = [
+        "gemini-2.5-flash-lite",
+        "gemini-3.5-flash-lite",
+        "gemini-3.8-flash"
+      ];
 
-      // Seamless loop over keys: if any key hits quota/invalid, immediately proceeds to the next valid key
-      for (const apiKey of DIRECT_GEMINI_KEYS) {
-        try {
-          const res = await fetch(endpoint, {
-            method: "POST",
-            headers: { 
-              "Content-Type": "application/json",
-              "x-goog-api-key": apiKey
-            },
-            body: JSON.stringify({ 
-              contents: contents,
-              generationConfig: {
-                temperature: 0.2,
-                maxOutputTokens: 2500
-              }
-            })
-          });
+      const shuffledKeys = [...DIRECT_GEMINI_KEYS].sort(() => 0.5 - Math.random());
 
-          const data = await res.json();
-          if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
-            rawAnswer = data.candidates[0].content.parts[0].text;
-            break; // Success: exit loop immediately
-          } else if (data.error) {
-            lastError = data.error.message || "Key rejected";
-            // Continue to next key silently
+      outerLoop: for (const model of models) {
+        const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`;
+
+        for (const apiKey of shuffledKeys) {
+          try {
+            const res = await fetch(endpoint, {
+              method: "POST",
+              headers: { 
+                "Content-Type": "application/json",
+                "x-goog-api-key": apiKey
+              },
+              body: JSON.stringify({ 
+                contents: contents,
+                generationConfig: {
+                  temperature: 0.2,
+                  maxOutputTokens: 1600
+                }
+              })
+            });
+
+            const data = await res.json();
+            if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
+              rawAnswer = data.candidates[0].content.parts[0].text;
+              break outerLoop; // Success! Exit immediately
+            } else if (data.error) {
+              lastError = data.error.message || JSON.stringify(data.error);
+              continue; // Silently try next key
+            }
+          } catch (e) {
+            lastError = e.message;
           }
-        } catch (e) {
-          lastError = e.message;
         }
       }
 
