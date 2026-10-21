@@ -302,17 +302,11 @@
       margin: 12px 0;
       -webkit-overflow-scrolling: touch;
     }
-    .solution-box .katex {
-      font-size: 1.08em;
-    }
-    .solution-box .katex-error {
-      color: inherit !important;
-      border: none !important;
-      background: none !important;
-    }
+    .solution-box .katex { font-size: 1.08em; }
+    .solution-box .katex-error { color: inherit !important; border: none !important; background: none !important; }
 
-    /* Lekka Lab Signature Interactive Periodic Deck */
-    .lekka-periodic-suite {
+    /* Complete 118 Elements Chemistry Suite */
+    .lekka-chem-card {
       background: #06152d;
       border: 1.5px solid var(--gold-primary);
       border-radius: 14px;
@@ -321,29 +315,17 @@
       box-shadow: 0 8px 30px rgba(0,0,0,0.4);
       color: #ffffff;
     }
-    .suite-header {
-      text-align: center;
-      margin-bottom: 12px;
-    }
-    .suite-header h3 {
-      font-size: clamp(1.05rem, 3vw, 1.25rem);
-      color: #fef08a;
-      font-weight: 800;
-      letter-spacing: 0.5px;
-    }
-    .suite-header p {
-      font-size: 0.82rem;
-      color: #94a3b8;
-      margin-top: 2px;
-    }
+    .chem-head { text-align: center; margin-bottom: 12px; }
+    .chem-head h3 { font-size: clamp(1.05rem, 3vw, 1.25rem); color: #fef08a; font-weight: 800; }
+    .chem-head p { font-size: 0.82rem; color: #94a3b8; margin-top: 2px; }
 
-    /* Horizontal Touch Pan 18-Group Visual Deck */
+    /* Touch-Pan 18-Group Visual Deck */
     .deck-scroll-container {
       width: 100%;
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
       border-radius: 10px;
-      background: rgba(3, 11, 23, 0.85);
+      background: rgba(3, 11, 23, 0.95);
       border: 1px solid rgba(212, 175, 55, 0.3);
       padding: 12px;
       margin-bottom: 14px;
@@ -369,7 +351,6 @@
     .el-num { font-size: 0.65rem; opacity: 0.85; }
     .el-sym { font-size: 1rem; line-height: 1.1; }
 
-    /* Category Colors */
     .c-nonmetal { background: #fee2e2; color: #991b1b; }
     .c-noble { background: #e0e7ff; color: #3730a3; }
     .c-alkali { background: #fef3c7; color: #92400e; }
@@ -378,10 +359,7 @@
     .c-halogen { background: #fce7f3; color: #9d174d; }
     .c-transition { background: #f1f5f9; color: #1e293b; }
     .c-posttrans { background: #e2e8f0; color: #334155; }
-    .c-lanthanide { background: #ede9fe; color: #5b21b6; }
-    .c-actinide { background: #fae8ff; color: #86198f; }
 
-    /* Filter & Table Area (High-Contrast Guaranteed Readability) */
     .element-search-bar {
       width: 100%;
       padding: 10px 14px;
@@ -395,23 +373,22 @@
     }
     .element-search-bar:focus { border-color: var(--gold-primary); }
 
-    .high-contrast-table-box {
+    .all-118-table-box {
       background: #ffffff;
       border-radius: 8px;
       border: 1.5px solid #cbd5e1;
-      max-height: 320px;
+      max-height: 380px;
       overflow-y: auto;
-      overflow-x: hidden;
       width: 100%;
     }
-    .hc-table {
+    .all-118-table {
       width: 100%;
       border-collapse: collapse;
       table-layout: fixed;
       font-size: 0.88rem;
       text-align: left;
     }
-    .hc-table th {
+    .all-118-table th {
       background: #0b2545;
       color: #fef08a;
       padding: 10px 12px;
@@ -420,13 +397,13 @@
       font-weight: 800;
       border-bottom: 2px solid var(--gold-primary);
     }
-    .hc-table td {
+    .all-118-table td {
       padding: 9px 12px;
       border-bottom: 1px solid #e2e8f0;
-      color: #0f172a !important; /* Forces rich dark color, never invisible white */
+      color: #0f172a !important; /* Crystal clear dark font */
       font-weight: 600;
     }
-    .hc-table tr:nth-child(even) { background: #f8fafc; }
+    .all-118-table tr:nth-child(even) { background: #f8fafc; }
     .badge-pill {
       display: inline-block;
       padding: 2px 7px;
@@ -435,25 +412,16 @@
       font-size: 0.82rem;
     }
 
-    /* Interactive Suggestion Pills */
     .pill-container {
       margin-top: 18px;
       padding-top: 14px;
-      border-top: 1px solid #e2e8f0;
+      border-top: 1px solid rgba(212, 175, 55, 0.25);
       display: flex;
       flex-direction: column;
       gap: 8px;
     }
-    .pill-title {
-      font-size: 0.88rem;
-      font-weight: 700;
-      color: #475569;
-    }
-    .pill-btn-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
+    .pill-title { font-size: 0.88rem; font-weight: 700; color: #fef08a; }
+    .pill-btn-group { display: flex; flex-wrap: wrap; gap: 8px; }
     .pill-btn {
       padding: 7px 14px;
       border-radius: 20px;
@@ -465,28 +433,13 @@
       cursor: pointer;
       transition: all 0.2s ease;
     }
-    .pill-btn:hover {
-      background: #0b2545;
-      color: #fef08a;
-      border-color: #0b2545;
-    }
+    .pill-btn:hover { background: #0b2545; color: #fef08a; border-color: #0b2545; }
 
     @media (max-width: 600px) {
-      .solution-box {
-        padding: 14px 10px;
-        font-size: 15px;
-        line-height: 1.65;
-      }
-      .solution-box svg {
-        margin: 12px auto;
-      }
-      .solution-box .katex {
-        font-size: 0.95em;
-      }
-      .hc-table th, .hc-table td {
-        padding: 8px 8px;
-        font-size: 0.82rem;
-      }
+      .solution-box { padding: 14px 10px; font-size: 15px; line-height: 1.65; }
+      .solution-box svg { margin: 12px auto; }
+      .solution-box .katex { font-size: 0.95em; }
+      .all-118-table th, .all-118-table td { padding: 8px 8px; font-size: 0.82rem; }
     }
 
     .section-title {
@@ -569,17 +522,9 @@
       margin-right: 6px;
       transition: all 0.2s ease;
     }
-    .btn-action-view {
-      color: #0b2545;
-      background: #e0f2fe;
-      border: 1px solid #7dd3fc;
-    }
+    .btn-action-view { color: #0b2545; background: #e0f2fe; border: 1px solid #7dd3fc; }
     .btn-action-view:hover { background: #bae6fd; }
-    .btn-action-dl {
-      color: #047857;
-      background: #ecfdf5;
-      border: 1px solid #6ee7b7;
-    }
+    .btn-action-dl { color: #047857; background: #ecfdf5; border: 1px solid #6ee7b7; }
     .btn-action-dl:hover { background: #d1fae5; }
 
     .feedback-box {
@@ -698,9 +643,7 @@
     <div class="header-box">
       <div class="brand-overhead-crest">✦ &nbsp; MATHEMATICS &amp; SCIENCE LEARNING HUB &nbsp; ✦</div>
       <div class="brand-title">LEKKA LAB</div>
-      <div class="brand-divider">
-        <span>❖</span>
-      </div>
+      <div class="brand-divider"><span>❖</span></div>
       <p>Explore • Discover • Excel | High School Learning Portal</p>
     </div>
   </header>
@@ -714,7 +657,6 @@
       
       <textarea id="aiProblemInput" placeholder="Ask anything... Photosynthesis equation, Pythagoras, BPT, Periodic Table, MCQs!"></textarea>
       
-      <!-- Preview for captured/uploaded photos -->
       <div class="image-preview-container" id="imagePreviewContainer">
         <img id="imagePreview" src="" alt="Captured problem preview">
         <span>📸 Photo attached and ready</span>
@@ -725,13 +667,11 @@
         <button class="btn btn-solve" id="btnSolve" onclick="handleSolve()">⚡ Ask Lucky</button>
         <button class="btn btn-secondary" id="btnVoice" onclick="toggleVoiceSearch()">🎙️ Voice Search</button>
         
-        <!-- Camera Button -->
         <label class="btn btn-secondary" style="cursor: pointer;">
           📷 Camera
           <input type="file" id="cameraInput" accept="image/*" capture="environment" style="display:none;" onchange="handleImage(event)">
         </label>
 
-        <!-- Gallery Button -->
         <label class="btn btn-secondary" style="cursor: pointer;">
           🖼️ Gallery
           <input type="file" id="galleryInput" accept="image/*" style="display:none;" onchange="handleImage(event)">
@@ -745,7 +685,7 @@
       </div>
     </div>
 
-    <!-- 36 Assessment & Project PDF Files (Exact Unaltered Relative Paths) -->
+    <!-- 36 Assessment & Project PDF Files (Exact Relative Paths) -->
     <h3 class="section-title">Assessment & Project Resources (36 PDFs)</h3>
 
     <!-- Class 10 -->
@@ -904,7 +844,6 @@
   </div>
 
   <script>
-    // 10 GEMINI API KEYS (Decoded at runtime)
     const ENCODED_KEYS = [
       "QVEuQWI4Uk42SjNjb1IyOUVkLTczUVBSN2ZFaFVMcnhVMUQyVnZYLUZ3V0M5SHQ4NmF4Unc=",
       "QVEuQWI4Uk42S1VlRFY4Wm1aeVIyMEJQWVd0Nk45SGdHTWFCOHdMX1ZBLXFCVS04OU1MYVE=",
@@ -923,7 +862,7 @@
 
     // Visitor Counter
     (function initCounter() {
-      let count = parseInt(localStorage.getItem('lekka_visits') || '2070', 10);
+      let count = parseInt(localStorage.getItem('lekka_visits') || '2075', 10);
       count += 1;
       localStorage.setItem('lekka_visits', count);
       document.getElementById('visitorCount').innerText = count.toLocaleString();
@@ -1073,11 +1012,83 @@
       window.scrollTo({ top: 120, behavior: 'smooth' });
     }
 
-    // Dynamic Filter for Elements
-    function filterElements() {
-      const input = document.getElementById('hcElementFilter');
+    // 100% COMPLETE 118 CHEMICAL ELEMENTS DATA (Official IUPAC)
+    const RAW_118_ELEMENTS = [
+      [1,"H","Hydrogen","Non-metal","c-nonmetal"],[2,"He","Helium","Noble Gas","c-noble"],
+      [3,"Li","Lithium","Alkali Metal","c-alkali"],[4,"Be","Beryllium","Alkaline Earth","c-alkaline"],
+      [5,"B","Boron","Metalloid","c-metalloid"],[6,"C","Carbon","Non-metal","c-nonmetal"],
+      [7,"N","Nitrogen","Non-metal","c-nonmetal"],[8,"O","Oxygen","Non-metal","c-nonmetal"],
+      [9,"F","Fluorine","Halogen","c-halogen"],[10,"Ne","Neon","Noble Gas","c-noble"],
+      [11,"Na","Sodium","Alkali Metal","c-alkali"],[12,"Mg","Magnesium","Alkaline Earth","c-alkaline"],
+      [13,"Al","Aluminium","Post-Transition","c-posttrans"],[14,"Si","Silicon","Metalloid","c-metalloid"],
+      [15,"P","Phosphorus","Non-metal","c-nonmetal"],[16,"S","Sulfur","Non-metal","c-nonmetal"],
+      [17,"Cl","Chlorine","Halogen","c-halogen"],[18,"Ar","Argon","Noble Gas","c-noble"],
+      [19,"K","Potassium","Alkali Metal","c-alkali"],[20,"Ca","Calcium","Alkaline Earth","c-alkaline"],
+      [21,"Sc","Scandium","Transition Metal","c-transition"],[22,"Ti","Titanium","Transition Metal","c-transition"],
+      [23,"V","Vanadium","Transition Metal","c-transition"],[24,"Cr","Chromium","Transition Metal","c-transition"],
+      [25,"Mn","Manganese","Transition Metal","c-transition"],[26,"Fe","Iron","Transition Metal","c-transition"],
+      [27,"Co","Cobalt","Transition Metal","c-transition"],[28,"Ni","Nickel","Transition Metal","c-transition"],
+      [29,"Cu","Copper","Transition Metal","c-transition"],[30,"Zn","Zinc","Transition Metal","c-transition"],
+      [31,"Ga","Gallium","Post-Transition","c-posttrans"],[32,"Ge","Germanium","Metalloid","c-metalloid"],
+      [33,"As","Arsenic","Metalloid","c-metalloid"],[34,"Se","Selenium","Non-metal","c-nonmetal"],
+      [35,"Br","Bromine","Halogen","c-halogen"],[36,"Kr","Krypton","Noble Gas","c-noble"],
+      [37,"Rb","Rubidium","Alkali Metal","c-alkali"],[38,"Sr","Strontium","Alkaline Earth","c-alkaline"],
+      [39,"Y","Yttrium","Transition Metal","c-transition"],[40,"Zr","Zirconium","Transition Metal","c-transition"],
+      [41,"Nb","Niobium","Transition Metal","c-transition"],[42,"Mo","Molybdenum","Transition Metal","c-transition"],
+      [43,"Tc","Technetium","Transition Metal","c-transition"],[44,"Ru","Ruthenium","Transition Metal","c-transition"],
+      [45,"Rh","Rhodium","Transition Metal","c-transition"],[46,"Pd","Palladium","Transition Metal","c-transition"],
+      [47,"Ag","Silver","Transition Metal","c-transition"],[48,"Cd","Cadmium","Transition Metal","c-transition"],
+      [49,"In","Indium","Post-Transition","c-posttrans"],[50,"Sn","Tin","Post-Transition","c-posttrans"],
+      [51,"Sb","Antimony","Metalloid","c-metalloid"],[52,"Te","Tellurium","Metalloid","c-metalloid"],
+      [53,"I","Iodine","Halogen","c-halogen"],[54,"Xe","Xenon","Noble Gas","c-noble"],
+      [55,"Cs","Cesium","Alkali Metal","c-alkali"],[56,"Ba","Barium","Alkaline Earth","c-alkaline"],
+      [57,"La","Lanthanum","Lanthanide","c-posttrans"],[58,"Ce","Cerium","Lanthanide","c-posttrans"],
+      [59,"Pr","Praseodymium","Lanthanide","c-posttrans"],[60,"Nd","Neodymium","Lanthanide","c-posttrans"],
+      [61,"Pm","Promethium","Lanthanide","c-posttrans"],[62,"Sm","Samarium","Lanthanide","c-posttrans"],
+      [63,"Eu","Europium","Lanthanide","c-posttrans"],[64,"Gd","Gadolinium","Lanthanide","c-posttrans"],
+      [65,"Tb","Terbium","Lanthanide","c-posttrans"],[66,"Dy","Dysprosium","Lanthanide","c-posttrans"],
+      [67,"Ho","Holmium","Lanthanide","c-posttrans"],[68,"Er","Erbium","Lanthanide","c-posttrans"],
+      [69,"Tm","Thulium","Lanthanide","c-posttrans"],[70,"Yb","Ytterbium","Lanthanide","c-posttrans"],
+      [71,"Lu","Lutetium","Lanthanide","c-posttrans"],[72,"Hf","Hafnium","Transition Metal","c-transition"],
+      [73,"Ta","Tantalum","Transition Metal","c-transition"],[74,"W","Tungsten","Transition Metal","c-transition"],
+      [75,"Re","Rhenium","Transition Metal","c-transition"],[76,"Os","Osmium","Transition Metal","c-transition"],
+      [77,"Ir","Iridium","Transition Metal","c-transition"],[78,"Pt","Platinum","Transition Metal","c-transition"],
+      [79,"Au","Gold","Transition Metal","c-transition"],[80,"Hg","Mercury","Transition Metal","c-transition"],
+      [81,"Tl","Thallium","Post-Transition","c-posttrans"],[82,"Pb","Lead","Post-Transition","c-posttrans"],
+      [83,"Bi","Bismuth","Post-Transition","c-posttrans"],[84,"Po","Polonium","Post-Transition","c-posttrans"],
+      [85,"At","Astatine","Halogen","c-halogen"],[86,"Rn","Radon","Noble Gas","c-noble"],
+      [87,"Fr","Francium","Alkali Metal","c-alkali"],[88,"Ra","Radium","Alkaline Earth","c-alkaline"],
+      [89,"Ac","Actinium","Actinide","c-posttrans"],[90,"Th","Thorium","Actinide","c-posttrans"],
+      [91,"Pa","Protactinium","Actinide","c-posttrans"],[92,"U","Uranium","Actinide","c-posttrans"],
+      [93,"Np","Neptunium","Actinide","c-posttrans"],[94,"Pu","Plutonium","Actinide","c-posttrans"],
+      [95,"Am","Americium","Actinide","c-posttrans"],[96,"Cm","Curium","Actinide","c-posttrans"],
+      [97,"Bk","Berkelium","Actinide","c-posttrans"],[98,"Cf","Californium","Actinide","c-posttrans"],
+      [99,"Es","Einsteinium","Actinide","c-posttrans"],[100,"Fm","Fermium","Actinide","c-posttrans"],
+      [101,"Md","Mendelevium","Actinide","c-posttrans"],[102,"No","Nobelium","Actinide","c-posttrans"],
+      [103,"Lr","Lawrencium","Actinide","c-posttrans"],[104,"Rf","Rutherfordium","Transition Metal","c-transition"],
+      [105,"Db","Dubnium","Transition Metal","c-transition"],[106,"Sg","Seaborgium","Transition Metal","c-transition"],
+      [107,"Bh","Bohrium","Transition Metal","c-transition"],[108,"Hs","Hassium","Transition Metal","c-transition"],
+      [109,"Mt","Meitnerium","Transition Metal","c-transition"],[110,"Ds","Darmstadtium","Transition Metal","c-transition"],
+      [111,"Rg","Roentgenium","Transition Metal","c-transition"],[112,"Cn","Copernicium","Transition Metal","c-transition"],
+      [113,"Nh","Nihonium","Post-Transition","c-posttrans"],[114,"Fl","Flerovium","Post-Transition","c-posttrans"],
+      [115,"Mc","Moscovium","Post-Transition","c-posttrans"],[116,"Lv","Livermorium","Post-Transition","c-posttrans"],
+      [117,"Ts","Tennessine","Halogen","c-halogen"],[118,"Og","Oganesson","Noble Gas","c-noble"]
+    ];
+
+    function build118TableRows() {
+      return RAW_118_ELEMENTS.map(el => `
+        <tr>
+          <td>${el[0]}</td>
+          <td><span class="badge-pill ${el[4]}">${el[1]}</span></td>
+          <td><b>${el[2]}</b> <span style="font-size:0.78rem; opacity:0.8;">(${el[3]})</span></td>
+        </tr>
+      `).join('');
+    }
+
+    function filter118Elements() {
+      const input = document.getElementById('search118Input');
       const filter = input.value.toUpperCase();
-      const rows = document.getElementById('hcTableBody').getElementsByTagName('tr');
+      const rows = document.getElementById('tableBody118').getElementsByTagName('tr');
       for (let i = 0; i < rows.length; i++) {
         const text = rows[i].textContent || rows[i].innerText;
         rows[i].style.display = text.toUpperCase().indexOf(filter) > -1 ? "" : "none";
@@ -1159,21 +1170,19 @@
         <line x1="410" y1="325" x2="255" y2="325" stroke="#0f172a" stroke-width="1.5"/><text x="420" y="329" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="start">Septum / Apex</text>
       </svg></div>`,
 
-      // 4. LEKKA LAB SIGNATURE PERIODIC SUITE (Deck + High-Contrast Table)
-      periodic: `<div class="lekka-periodic-suite">
-        <div class="suite-header">
-          <h3>✦ THE MODERN PERIODIC TABLE (GROUPS 1 TO 18) ✦</h3>
-          <p>IUPAC Standard Framework • Swipe horizontally to view all 18 columns</p>
+      // 4. THE COMPLETE 118-ELEMENT MASTER SUITE WITH TOUCH 18-GROUP DECK
+      periodic: () => `<div class="lekka-chem-card">
+        <div class="chem-head">
+          <h3>✦ THE MODERN PERIODIC TABLE OF ELEMENTS ✦</h3>
+          <p>Official IUPAC High School Suite • Complete 1 to 118 Elements Guide</p>
         </div>
 
-        <!-- 18-Group Touch Deck (Never Distorts) -->
+        <!-- 18-Group Touch Deck (All Groups 1-18 visible by swiping) -->
         <div class="deck-scroll-container">
           <div class="deck-grid">
-            <!-- Period 1 -->
             <div class="el-box c-nonmetal" style="grid-column: 1; grid-row: 1;"><span class="el-num">1</span><span class="el-sym">H</span></div>
             <div class="el-box c-noble" style="grid-column: 18; grid-row: 1;"><span class="el-num">2</span><span class="el-sym">He</span></div>
 
-            <!-- Period 2 -->
             <div class="el-box c-alkali" style="grid-column: 1; grid-row: 2;"><span class="el-num">3</span><span class="el-sym">Li</span></div>
             <div class="el-box c-alkaline" style="grid-column: 2; grid-row: 2;"><span class="el-num">4</span><span class="el-sym">Be</span></div>
             <div class="el-box c-metalloid" style="grid-column: 13; grid-row: 2;"><span class="el-num">5</span><span class="el-sym">B</span></div>
@@ -1183,7 +1192,6 @@
             <div class="el-box c-halogen" style="grid-column: 17; grid-row: 2;"><span class="el-num">9</span><span class="el-sym">F</span></div>
             <div class="el-box c-noble" style="grid-column: 18; grid-row: 2;"><span class="el-num">10</span><span class="el-sym">Ne</span></div>
 
-            <!-- Period 3 -->
             <div class="el-box c-alkali" style="grid-column: 1; grid-row: 3;"><span class="el-num">11</span><span class="el-sym">Na</span></div>
             <div class="el-box c-alkaline" style="grid-column: 2; grid-row: 3;"><span class="el-num">12</span><span class="el-sym">Mg</span></div>
             <div class="el-box c-posttrans" style="grid-column: 13; grid-row: 3;"><span class="el-num">13</span><span class="el-sym">Al</span></div>
@@ -1193,7 +1201,6 @@
             <div class="el-box c-halogen" style="grid-column: 17; grid-row: 3;"><span class="el-num">17</span><span class="el-sym">Cl</span></div>
             <div class="el-box c-noble" style="grid-column: 18; grid-row: 3;"><span class="el-num">18</span><span class="el-sym">Ar</span></div>
 
-            <!-- Period 4 (Full 18 Columns) -->
             <div class="el-box c-alkali" style="grid-column: 1; grid-row: 4;"><span class="el-num">19</span><span class="el-sym">K</span></div>
             <div class="el-box c-alkaline" style="grid-column: 2; grid-row: 4;"><span class="el-num">20</span><span class="el-sym">Ca</span></div>
             <div class="el-box c-transition" style="grid-column: 3; grid-row: 4;"><span class="el-num">21</span><span class="el-sym">Sc</span></div>
@@ -1213,7 +1220,6 @@
             <div class="el-box c-halogen" style="grid-column: 17; grid-row: 4;"><span class="el-num">35</span><span class="el-sym">Br</span></div>
             <div class="el-box c-noble" style="grid-column: 18; grid-row: 4;"><span class="el-num">36</span><span class="el-sym">Kr</span></div>
 
-            <!-- Period 5 to 7 Overview -->
             <div class="el-box c-alkali" style="grid-column: 1; grid-row: 5;"><span class="el-num">37</span><span class="el-sym">Rb</span></div>
             <div class="el-box c-alkaline" style="grid-column: 2; grid-row: 5;"><span class="el-num">38</span><span class="el-sym">Sr</span></div>
             <div class="el-box c-transition" style="grid-column: 3; grid-row: 5;"><span class="el-num">39</span><span class="el-sym">Y</span></div>
@@ -1227,7 +1233,7 @@
 
             <div class="el-box c-alkali" style="grid-column: 1; grid-row: 6;"><span class="el-num">55</span><span class="el-sym">Cs</span></div>
             <div class="el-box c-alkaline" style="grid-column: 2; grid-row: 6;"><span class="el-num">56</span><span class="el-sym">Ba</span></div>
-            <div style="grid-column: 3 / 13; grid-row: 6; background:rgba(255,255,255,0.06); border:1px dashed rgba(212,175,55,0.4); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:0.75rem; color:#fef08a;">57-71(La-Lu)* | 72(Hf) to 80(Hg) Heavy Metals</div>
+            <div style="grid-column: 3 / 13; grid-row: 6; background:rgba(255,255,255,0.06); border:1px dashed rgba(212,175,55,0.4); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:0.75rem; color:#fef08a;">57-71(La-Lu)* | 72(Hf) to 80(Hg) Heavy Transition Metals</div>
             <div class="el-box c-posttrans" style="grid-column: 13; grid-row: 6;"><span class="el-num">81</span><span class="el-sym">Tl</span></div>
             <div class="el-box c-posttrans" style="grid-column: 14; grid-row: 6;"><span class="el-num">82</span><span class="el-sym">Pb</span></div>
             <div class="el-box c-posttrans" style="grid-column: 15; grid-row: 6;"><span class="el-num">83</span><span class="el-sym">Bi</span></div>
@@ -1237,7 +1243,7 @@
 
             <div class="el-box c-alkali" style="grid-column: 1; grid-row: 7;"><span class="el-num">87</span><span class="el-sym">Fr</span></div>
             <div class="el-box c-alkaline" style="grid-column: 2; grid-row: 7;"><span class="el-num">88</span><span class="el-sym">Ra</span></div>
-            <div style="grid-column: 3 / 13; grid-row: 7; background:rgba(255,255,255,0.06); border:1px dashed rgba(212,175,55,0.4); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:0.75rem; color:#fef08a;">89-103(Ac-Lr)** | 104(Rf) to 118(Og) Transactinides</div>
+            <div style="grid-column: 3 / 13; grid-row: 7; background:rgba(255,255,255,0.06); border:1px dashed rgba(212,175,55,0.4); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:0.75rem; color:#fef08a;">89-103(Ac-Lr)** | 104(Rf) to 118(Og) Superheavy Elements</div>
             <div class="el-box c-posttrans" style="grid-column: 13; grid-row: 7;"><span class="el-num">113</span><span class="el-sym">Nh</span></div>
             <div class="el-box c-posttrans" style="grid-column: 14; grid-row: 7;"><span class="el-num">114</span><span class="el-sym">Fl</span></div>
             <div class="el-box c-posttrans" style="grid-column: 15; grid-row: 7;"><span class="el-num">115</span><span class="el-sym">Mc</span></div>
@@ -1247,53 +1253,26 @@
           </div>
         </div>
 
-        <!-- High-Contrast Search & Reference Table (100% Readable) -->
-        <input type="text" id="hcElementFilter" class="element-search-bar" onkeyup="filterElements()" placeholder="🔍 Type element name or symbol (e.g., Sodium, Fe, Gold, 26)...">
+        <!-- 100% Complete 118-Element Search & Full Table -->
+        <input type="text" id="search118Input" class="element-search-bar" onkeyup="filter118Elements()" placeholder="🔍 Search any of the 118 elements (e.g., Scandium, Sc, 21, Gold, Fe)...">
         
-        <div class="high-contrast-table-box">
-          <table class="hc-table">
+        <div class="all-118-table-box">
+          <table class="all-118-table">
             <thead>
               <tr>
-                <th style="width: 25%;">No.</th>
+                <th style="width: 20%;">No.</th>
                 <th style="width: 25%;">Symbol</th>
-                <th style="width: 50%;">Name &amp; Category</th>
+                <th style="width: 55%;">Element Name &amp; Category</th>
               </tr>
             </thead>
-            <tbody id="hcTableBody">
-              <tr><td>1</td><td><span class="badge-pill c-nonmetal">H</span></td><td>Hydrogen (Non-metal)</td></tr>
-              <tr><td>2</td><td><span class="badge-pill c-noble">He</span></td><td>Helium (Noble Gas)</td></tr>
-              <tr><td>3</td><td><span class="badge-pill c-alkali">Li</span></td><td>Lithium (Alkali Metal)</td></tr>
-              <tr><td>4</td><td><span class="badge-pill c-alkaline">Be</span></td><td>Beryllium (Alkaline Earth)</td></tr>
-              <tr><td>5</td><td><span class="badge-pill c-metalloid">B</span></td><td>Boron (Metalloid)</td></tr>
-              <tr><td>6</td><td><span class="badge-pill c-nonmetal">C</span></td><td>Carbon (Non-metal)</td></tr>
-              <tr><td>7</td><td><span class="badge-pill c-nonmetal">N</span></td><td>Nitrogen (Non-metal)</td></tr>
-              <tr><td>8</td><td><span class="badge-pill c-nonmetal">O</span></td><td>Oxygen (Non-metal)</td></tr>
-              <tr><td>9</td><td><span class="badge-pill c-halogen">F</span></td><td>Fluorine (Halogen)</td></tr>
-              <tr><td>10</td><td><span class="badge-pill c-noble">Ne</span></td><td>Neon (Noble Gas)</td></tr>
-              <tr><td>11</td><td><span class="badge-pill c-alkali">Na</span></td><td>Sodium (Alkali Metal)</td></tr>
-              <tr><td>12</td><td><span class="badge-pill c-alkaline">Mg</span></td><td>Magnesium (Alkaline Earth)</td></tr>
-              <tr><td>13</td><td><span class="badge-pill c-posttrans">Al</span></td><td>Aluminium (Post-Transition)</td></tr>
-              <tr><td>14</td><td><span class="badge-pill c-metalloid">Si</span></td><td>Silicon (Metalloid)</td></tr>
-              <tr><td>15</td><td><span class="badge-pill c-nonmetal">P</span></td><td>Phosphorus (Non-metal)</td></tr>
-              <tr><td>16</td><td><span class="badge-pill c-nonmetal">S</span></td><td>Sulfur (Non-metal)</td></tr>
-              <tr><td>17</td><td><span class="badge-pill c-halogen">Cl</span></td><td>Chlorine (Halogen)</td></tr>
-              <tr><td>18</td><td><span class="badge-pill c-noble">Ar</span></td><td>Argon (Noble Gas)</td></tr>
-              <tr><td>19</td><td><span class="badge-pill c-alkali">K</span></td><td>Potassium (Alkali Metal)</td></tr>
-              <tr><td>20</td><td><span class="badge-pill c-alkaline">Ca</span></td><td>Calcium (Alkaline Earth)</td></tr>
-              <tr><td>26</td><td><span class="badge-pill c-transition">Fe</span></td><td>Iron (Transition Metal)</td></tr>
-              <tr><td>29</td><td><span class="badge-pill c-transition">Cu</span></td><td>Copper (Transition Metal)</td></tr>
-              <tr><td>30</td><td><span class="badge-pill c-transition">Zn</span></td><td>Zinc (Transition Metal)</td></tr>
-              <tr><td>47</td><td><span class="badge-pill c-transition">Ag</span></td><td>Silver (Transition Metal)</td></tr>
-              <tr><td>79</td><td><span class="badge-pill c-transition">Au</span></td><td>Gold (Transition Metal)</td></tr>
-              <tr><td>80</td><td><span class="badge-pill c-transition">Hg</span></td><td>Mercury (Transition Metal)</td></tr>
-              <tr><td>82</td><td><span class="badge-pill c-posttrans">Pb</span></td><td>Lead (Post-Transition)</td></tr>
-              <tr><td>92</td><td><span class="badge-pill c-actinide">U</span></td><td>Uranium (Actinide)</td></tr>
+            <tbody id="tableBody118">
+              ${build118TableRows()}
             </tbody>
           </table>
         </div>
 
-        <div class="pill-container" style="border-color: rgba(212,175,55,0.25);">
-          <div class="pill-title" style="color:#fef08a;">Related Chemistry Topics:</div>
+        <div class="pill-container">
+          <div class="pill-title">Suggested Inquiries:</div>
           <div class="pill-btn-group">
             <button type="button" class="pill-btn" onclick="triggerQuickSearch('Explain periodic trends in atomic radius and electronegativity')">📈 Periodic Trends</button>
             <button type="button" class="pill-btn" onclick="triggerQuickSearch('Tricks to remember first 20 elements of periodic table')">💡 Memorization Tricks</button>
@@ -1325,13 +1304,11 @@
     };
 
     // Robust Math & KaTeX Protection Engine
-    // Isolates LaTeX blocks so marked.js NEVER corrupts formulas with <em> tags
     function processMathSafely(text) {
       if (!text) return "";
       
       const mathBlocks = [];
       
-      // 1. Sanitize common formula bracket issues directly
       let sanitized = text
         .replace(/\\text\{C\}6\\text\{H\}\{12\}\\text\{O\}_6/g, '\\text{C}_6\\text{H}_{12}\\text{O}_6')
         .replace(/\\text\{C\}6\\text\{H\}\{12\}/g, '\\text{C}_6\\text{H}_{12}')
@@ -1341,24 +1318,20 @@
         .replace(/\\text\{O\}_6/g, '\\text{O}_6')
         .replace(/\\zimetrics/g, '');
 
-      // 2. Extract $$...$$ display math
       sanitized = sanitized.replace(/\$\$([\s\S]*?)\$\$/g, (match, formula) => {
         const id = `MATHDISP_${mathBlocks.length}_XYZ`;
         mathBlocks.push({ id, formula, display: true });
         return id;
       });
 
-      // 3. Extract $...$ inline math
       sanitized = sanitized.replace(/\$([^\$\n]+?)\$/g, (match, formula) => {
         const id = `MATHINLN_${mathBlocks.length}_XYZ`;
         mathBlocks.push({ id, formula, display: false });
         return id;
       });
 
-      // 4. Run Marked on pure markdown (No math can be broken by marked!)
       let html = marked.parse(sanitized);
 
-      // 5. Restore math blocks and render KaTeX directly
       mathBlocks.forEach(item => {
         try {
           const renderedKaTeX = katex.renderToString(item.formula.trim(), {
@@ -1551,7 +1524,7 @@ CRITICAL INSTRUCTIONS:
 
       processed = processed.replace(/\[ASSET_PERIODIC\]/g, () => {
         const id = 'COMP_' + Math.random().toString(36).substr(2, 9);
-        componentMap[id] = CORE_TEXTBOOK_ASSETS.periodic;
+        componentMap[id] = CORE_TEXTBOOK_ASSETS.periodic();
         return id;
       });
 
@@ -1561,10 +1534,8 @@ CRITICAL INSTRUCTIONS:
         return id;
       });
 
-      // Render math and markdown with complete isolation (Zero broken brackets / Zero italic corruption)
       let finalHTML = processMathSafely(processed);
 
-      // Restore components safely
       for (const [id, htmlCode] of Object.entries(componentMap)) {
         finalHTML = finalHTML.replace(id, htmlCode);
       }
