@@ -14,7 +14,7 @@
   <!-- Luxury Calligraphy Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
 
   <style>
     :root {
@@ -240,11 +240,12 @@
       max-width: 100%;
     }
 
-    .solution-box svg {
+    /* Diagram & Image Visual Container */
+    .solution-box svg, .solution-box .textbook-image {
       display: block;
       margin: 16px auto;
       width: 100%;
-      max-width: 480px;
+      max-width: 540px;
       height: auto;
       border-radius: 12px;
       background: #ffffff;
@@ -418,7 +419,6 @@
       font-weight: 600;
     }
     
-    /* Authentic Luxury Calligraphy Style */
     .curator-name-calligraphy {
       font-family: 'Great Vibes', cursive;
       font-size: clamp(2.4rem, 7vw, 3.2rem);
@@ -474,7 +474,7 @@
         <span class="online-badge">ONLINE</span>
       </div>
       
-      <textarea id="aiProblemInput" placeholder="Ask anything... Theorems, Problems, Diagrams, Recipes, or GK!"></textarea>
+      <textarea id="aiProblemInput" placeholder="Ask anything... Periodic Table, Heart, Theorems, MCQs, or Recipes!"></textarea>
       
       <!-- Preview for captured/uploaded photos -->
       <div class="image-preview-container" id="imagePreviewContainer">
@@ -685,7 +685,7 @@
 
     // Visitor Counter
     (function initCounter() {
-      let count = parseInt(localStorage.getItem('lekka_visits') || '1985', 10);
+      let count = parseInt(localStorage.getItem('lekka_visits') || '1990', 10);
       count += 1;
       localStorage.setItem('lekka_visits', count);
       document.getElementById('visitorCount').innerText = count.toLocaleString();
@@ -829,10 +829,9 @@
       recognition.start();
     }
 
-    // High-Precision Mathematical Diagram Generator (Pre-computed Geometry Blueprint)
+    // High-Precision Textbook Vector Assets
     function getStandardBPTDiagramSVG() {
       return `<svg viewBox="0 0 420 280" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; font-family:-apple-system, sans-serif;">
-        <!-- Drop Shadow Filter -->
         <defs>
           <filter id="bptShadow" x="-10%" y="-10%" width="125%" height="125%">
             <feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.08" />
@@ -840,45 +839,49 @@
         </defs>
 
         <g filter="url(#bptShadow)">
-          <!-- Main Triangle ABC -->
           <polygon points="210,30 50,230 370,230" fill="#f8fafc" stroke="#002b66" stroke-width="2.5" stroke-linejoin="round"/>
-          
-          <!-- Parallel Line DE (red) -->
           <line x1="130" y1="130" x2="290" y2="130" stroke="#dc2626" stroke-width="2.5"/>
 
-          <!-- Constructions: BE and CD (dashed grey) -->
           <line x1="50" y1="230" x2="290" y2="130" stroke="#64748b" stroke-width="1.8" stroke-dasharray="5,4"/>
           <line x1="370" y1="230" x2="130" y2="130" stroke="#64748b" stroke-width="1.8" stroke-dasharray="5,4"/>
 
-          <!-- Altitudes: EN perpendicular to AB, and DM perpendicular to AC -->
-          <!-- N is on AB: (147, 109). M is on AC: (273, 109) -->
-          <line x1="290" y1="130" x2="147" y2="109" stroke="#0284c7" stroke-width="1.8" stroke-dasharray="4,3"/>
-          <line x1="130" y1="130" x2="273" y2="109" stroke="#0284c7" stroke-width="1.8" stroke-dasharray="4,3"/>
+          <!-- Altitudes EN on AB and DM on AC -->
+          <line x1="290" y1="130" x2="152" y2="103" stroke="#0284c7" stroke-width="1.8" stroke-dasharray="4,3"/>
+          <line x1="130" y1="130" x2="268" y2="103" stroke="#0284c7" stroke-width="1.8" stroke-dasharray="4,3"/>
 
-          <!-- Right Angle Marks at N and M -->
-          <path d="M 152 110 L 150 118 L 142 117" fill="none" stroke="#0284c7" stroke-width="1.3"/>
-          <path d="M 268 110 L 270 118 L 278 117" fill="none" stroke="#0284c7" stroke-width="1.3"/>
+          <path d="M 158 105 L 155 113 L 147 111" fill="none" stroke="#0284c7" stroke-width="1.3"/>
+          <path d="M 262 105 L 265 113 L 273 111" fill="none" stroke="#0284c7" stroke-width="1.3"/>
 
-          <!-- Vertex Circles -->
           <circle cx="210" cy="30" r="4.5" fill="#002b66"/>
           <circle cx="50" cy="230" r="4.5" fill="#002b66"/>
           <circle cx="370" cy="230" r="4.5" fill="#002b66"/>
           <circle cx="130" cy="130" r="4" fill="#dc2626"/>
           <circle cx="290" cy="130" r="4" fill="#dc2626"/>
-          <circle cx="147" cy="109" r="3.5" fill="#0284c7"/>
-          <circle cx="273" cy="109" r="3.5" fill="#0284c7"/>
+          <circle cx="152" cy="103" r="3.5" fill="#0284c7"/>
+          <circle cx="268" cy="103" r="3.5" fill="#0284c7"/>
         </g>
 
-        <!-- Labels Placed Clearly and Precisely -->
         <text x="210" y="20" font-size="14" font-weight="bold" fill="#0f172a" text-anchor="middle">A</text>
-        <text x="38" y="244" font-size="14" font-weight="bold" fill="#0f172a" text-anchor="middle">B</text>
+        <text x="36" y="244" font-size="14" font-weight="bold" fill="#0f172a" text-anchor="middle">B</text>
         <text x="384" y="244" font-size="14" font-weight="bold" fill="#0f172a" text-anchor="middle">C</text>
         <text x="114" y="132" font-size="13" font-weight="bold" fill="#dc2626" text-anchor="end">D</text>
         <text x="306" y="132" font-size="13" font-weight="bold" fill="#dc2626" text-anchor="start">E</text>
-        <text x="140" y="100" font-size="12" font-weight="bold" fill="#0284c7" text-anchor="end">N</text>
-        <text x="280" y="100" font-size="12" font-weight="bold" fill="#0284c7" text-anchor="start">M</text>
+        <text x="142" y="96" font-size="12" font-weight="bold" fill="#0284c7" text-anchor="end">N</text>
+        <text x="278" y="96" font-size="12" font-weight="bold" fill="#0284c7" text-anchor="start">M</text>
       </svg>`;
     }
+
+    // High-Resolution Verified Educational Visual Assets (Textbook Grade)
+    const VERIFIED_TEXTBOOK_ASSETS = {
+      periodicTable: `<div style="text-align:center; margin:16px 0;">
+        <img class="textbook-image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Simple_Periodic_Table_Chart-en.svg/1280px-Simple_Periodic_Table_Chart-en.svg.png" alt="Standard High School Periodic Table of Elements" loading="lazy">
+        <p style="font-size:0.82rem; color:#64748b; margin-top:6px;">Standard Modern Periodic Table (IUPAC Aligned)</p>
+      </div>`,
+      heartDiagram: `<div style="text-align:center; margin:16px 0;">
+        <img class="textbook-image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Diagram_of_the_human_heart_%28cropped%29.svg/1024px-Diagram_of_the_human_heart_%28cropped%29.svg.png" alt="Labeled Anatomical Diagram of Human Heart" loading="lazy">
+        <p style="font-size:0.82rem; color:#64748b; margin-top:6px;">Anatomical Diagram of the Human Heart (Chambers, Valves & Vessels)</p>
+      </div>`
+    };
 
     // High-Precision AI Engine
     async function handleSolve() {
@@ -893,7 +896,7 @@
       }
 
       display.style.display = 'block';
-      mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">⚡ Calculating solution...</p>';
+      mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">⚡ Retrieving textbook lesson & verified visual...</p>';
       btn.disabled = true;
 
       const systemInstruction = `You are "Lucky", the expert educational AI for Lekka Lab.
@@ -907,11 +910,14 @@ CRITICAL INSTRUCTIONS:
 GEOMETRIC PROOFS & BPT THEOREM:
 - If BPT / Thales theorem is asked:
   1. Statement
-  2. Geometric Diagram (Provide clean SVG triangle where EN is strictly perpendicular to side AB, and DM is strictly perpendicular to side AC).
+  2. State "[BPT_DIAGRAM_PLACEHOLDER]" where the diagram belongs.
   3. Given, To Prove, Construction, and clean step-by-step ratio proof.
 
-ANATOMICAL DIAGRAMS:
-- If Heart is asked: Draw realistic connected 3D chambers with aorta, vena cava, atria, ventricles, and labeled pointer lines directly inside the SVG.
+PERIODIC TABLE & ANATOMY:
+- If Periodic Table is asked:
+  * Provide key features, blocks (s, p, d, f), periodic trends, and state "[PERIODIC_TABLE_PLACEHOLDER]".
+- If Human Heart diagram is asked:
+  * Provide functional anatomy (RA, RV, LA, LV, Septum), circulation route, and state "[HEART_DIAGRAM_PLACEHOLDER]".
 
 FORMATTING:
 - Keep the math clean and concise. Use standard LaTeX ($..$ inline, $$..$$ display).`;
@@ -980,44 +986,40 @@ FORMATTING:
         return;
       }
 
-      // If BPT theorem query is detected, ensure the diagram is mathematically textbook-perfect
-      const isBptQuery = /bpt|thales|basic proportionality/i.test(text || '');
+      const q = (text || '').toLowerCase();
+      let processed = rawAnswer;
 
-      let processed = rawAnswer.replace(/```(?:xml|html|svg)?\s*(<svg[\s\S]*?<\/svg>)\s*```/gi, '$1');
-
-      if (processed.includes("<svg") && !processed.includes("</svg>")) {
-        processed = processed + "\n</g>\n</svg>";
+      // 1. Enforce High-Precision Verified Textbook Assets (No broken token cutoffs)
+      if (q.includes("periodic table") || processed.includes("[PERIODIC_TABLE_PLACEHOLDER]")) {
+        processed = processed.replace(/\[PERIODIC_TABLE_PLACEHOLDER\]/g, VERIFIED_TEXTBOOK_ASSETS.periodicTable);
+        if (!processed.includes(VERIFIED_TEXTBOOK_ASSETS.periodicTable)) {
+          processed = VERIFIED_TEXTBOOK_ASSETS.periodicTable + "\n\n" + processed;
+        }
       }
 
-      // Intercept and enforce perfect BPT diagram if requested
-      if (isBptQuery) {
-        if (processed.includes("<svg")) {
-          processed = processed.replace(/<svg[\s\S]*?<\/svg>/i, getStandardBPTDiagramSVG());
-        } else {
+      if (q.includes("heart") || processed.includes("[HEART_DIAGRAM_PLACEHOLDER]")) {
+        processed = processed.replace(/\[HEART_DIAGRAM_PLACEHOLDER\]/g, VERIFIED_TEXTBOOK_ASSETS.heartDiagram);
+        if (!processed.includes(VERIFIED_TEXTBOOK_ASSETS.heartDiagram)) {
+          processed = VERIFIED_TEXTBOOK_ASSETS.heartDiagram + "\n\n" + processed;
+        }
+      }
+
+      if (q.includes("bpt") || q.includes("thales") || q.includes("proportionality") || processed.includes("[BPT_DIAGRAM_PLACEHOLDER]")) {
+        processed = processed.replace(/\[BPT_DIAGRAM_PLACEHOLDER\]/g, getStandardBPTDiagramSVG());
+        if (!processed.includes(getStandardBPTDiagramSVG())) {
           processed = processed.replace(/(Geometric Diagram:?)/i, `$1\n\n${getStandardBPTDiagramSVG()}\n\n`);
         }
       }
 
-      // Extract SVGs safely into slots
-      const svgMap = [];
-      processed = processed.replace(/<svg[\s\S]*?<\/svg>/gi, (match) => {
-        const slotId = `svg-render-slot-${svgMap.length}`;
-        svgMap.push({ id: slotId, content: match });
-        return `\n\n<div id="${slotId}"></div>\n\n`;
-      });
+      // 2. Clean Markdown backticks and safely handle any remaining inline SVGs
+      processed = processed.replace(/```(?:xml|html|svg)?\s*(<svg[\s\S]*?<\/svg>)\s*```/gi, '$1');
 
-      // Clean loose stray tags
+      // Strip any broken raw svg slots or truncated xml tags
       processed = processed
+        .replace(/<div id="svg-render-slot-\d+"><\/div>/gi, '')
         .replace(/<!--[\s\S]*?-->/g, '')
         .replace(/(<linearGradient[\s\S]*?<\/linearGradient>)/gi, '')
         .replace(/(<radialGradient[\s\S]*?<\/radialGradient>)/gi, '')
-        .replace(/(<path[^>]*>)/gi, '')
-        .replace(/(<div id="svg-render-slot-\d+"><\/div>)([\s\S]*?)(?=(?:###|####|\*\*|##|[A-Z][a-z]+:))/i, (m, p1, p2) => {
-          const tr = p2.trim();
-          return (/^[a-zA-Z0-9\s,\\^_\(\)\/\*\+\-=\|]+$/.test(tr) && tr.length < 160) ? p1 + "\n\n" : m;
-        });
-
-      processed = processed
         .replace(/\u2260/g, ' \\neq ')
         .replace(/\u00B1/g, ' \\pm ')
         .replace(/\u2264/g, ' \\leq ')
@@ -1028,13 +1030,6 @@ FORMATTING:
         .replace(/\$\$\s*([^\$]+)\s*\$\$/g, '\n\n$$$ $1 $$$ \n\n');
 
       mathContent.innerHTML = marked.parse(processed);
-
-      svgMap.forEach(item => {
-        const slotEl = document.getElementById(item.id);
-        if (slotEl) {
-          slotEl.innerHTML = item.content;
-        }
-      });
 
       if (window.renderMathInElement) {
         renderMathInElement(mathContent, {
