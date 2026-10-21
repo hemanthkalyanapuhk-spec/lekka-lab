@@ -135,7 +135,7 @@
       max-width: 100%;
       height: auto;
       border-radius: 12px;
-      background: #ffffff;
+      background: #f8fafc;
       border: 1.5px solid #e2e8f0;
       box-shadow: 0 4px 14px rgba(0,0,0,0.05);
     }
@@ -280,7 +280,7 @@
         <span class="online-badge">ONLINE</span>
       </div>
       
-      <textarea id="aiProblemInput" placeholder="Ask anything... Math theorems, 2D/3D Diagrams, Science, Recipes, or GK (e.g., 'రవ్వ లడ్డు తయారీ' or 'BPT Theorem')"></textarea>
+      <textarea id="aiProblemInput" placeholder="Ask anything... Science, Math theorems, 2D/3D visual diagrams, Recipes, or GK!"></textarea>
       
       <div class="ai-controls">
         <button class="btn btn-solve" id="btnSolve" onclick="handleSolve()">⚡ Ask Lucky</button>
@@ -297,7 +297,7 @@
       </div>
     </div>
 
-    <!-- 36 Assessment & Project PDF Files (Exact relative paths preserved) -->
+    <!-- 36 Assessment & Project PDF Files -->
     <h3 class="section-title">Assessment & Project Resources (36 PDFs)</h3>
 
     <!-- Class 10 -->
@@ -462,7 +462,7 @@
 
     // Visitor Counter
     (function initCounter() {
-      let count = parseInt(localStorage.getItem('lekka_visits') || '1890', 10);
+      let count = parseInt(localStorage.getItem('lekka_visits') || '1895', 10);
       count += 1;
       localStorage.setItem('lekka_visits', count);
       document.getElementById('visitorCount').innerText = count.toLocaleString();
@@ -553,7 +553,7 @@
       recognition.start();
     }
 
-    // High-Speed Direct Engine (<2s Response, Unlimited Quota Failover)
+    // High-Precision Educational AI Engine
     async function handleSolve() {
       const text = document.getElementById('aiProblemInput').value.trim();
       const btn = document.getElementById('btnSolve');
@@ -572,20 +572,21 @@
       const systemInstruction = `You are "Lucky", a fast universal educational AI assistant for Lekka Lab.
 
 LANGUAGE DIRECTIVE:
-- If asked in Telugu or with "in telugu" / "తెలుగులో", respond 100% in natural, proper Telugu.
+- If asked in Telugu or with "in telugu" / "తెలుగులో", respond 100% in natural Telugu.
 - Otherwise, answer in clear English.
 
 CONTENT RULES:
 1. NON-MATH TOPICS (Cooking recipes, Daily Life, History, General Knowledge):
-   - Answer directly and naturally with bullet points.
+   - Answer directly and practically.
    - DO NOT attach math equations, chemical formulas, or forced diagrams to cooking recipes or ordinary facts.
 2. MATHEMATICS & SCIENCE:
    - Use standard LaTeX ($..$ inline, $$..$$ display) for theorems, derivations, and formulas.
-3. DIAGRAMS & ANATOMY (When asked or required):
-   - Provide a single, complete inline SVG (<svg viewBox="0 0 380 240" xmlns="http://www.w3.org/2000/svg">...</svg>).
-   - If drawing an anatomical organ like a Heart: Use clean simple chambers (Right Atrium, Left Atrium, Right Ventricle, Left Ventricle, Aorta) with high-contrast colors.
-   - Place all labels directly inside the SVG using <text x=".." y=".." font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">Label</text>.
-   - Ensure the SVG is valid and fully closed.`;
+3. MANDATORY IN-DIAGRAM SVG LABELLING:
+   - When drawing geometry, physics, or anatomical diagrams (e.g., Triangle, Heart, Optics):
+     * Output a complete, closed inline SVG (<svg viewBox="0 0 380 240" xmlns="http://www.w3.org/2000/svg">...</svg>).
+     * EVERY vertex, point (A, B, C, D, E), and anatomical part (Right Atrium, Left Ventricle, Aorta) MUST be written DIRECTLY INSIDE the SVG using:
+       <text x="..." y="..." font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">Label</text>
+     * NEVER print labels as loose text outside the SVG.`;
 
       const contents = [{
         role: "user",
@@ -604,9 +605,8 @@ CONTENT RULES:
       let rawAnswer = null;
       let lastError = "Request failed";
 
-      // Lightweight models with higher quota allowances first
+      // Lightweight high-quota models first to prevent hitting the 20-request daily limit
       const models = [
-        "gemini-2.5-flash-lite",
         "gemini-3.5-flash-lite",
         "gemini-3.8-flash"
       ];
@@ -628,7 +628,7 @@ CONTENT RULES:
                 contents: contents,
                 generationConfig: {
                   temperature: 0.2,
-                  maxOutputTokens: 1600
+                  maxOutputTokens: 1800
                 }
               })
             });
@@ -653,9 +653,13 @@ CONTENT RULES:
         return;
       }
 
-      // Safe extraction of inline SVG to prevent code block leakage
+      // Safe extraction of inline SVG to prevent code block leakage and clean loose external labels
       let cleanOutput = rawAnswer
         .replace(/```(?:xml|html|svg)?\s*(<svg[\s\S]*?<\/svg>)\s*```/gi, '$1')
+        .replace(/(<\/svg>)([\s\S]*?)(?=(?:###|####|\*\*|##|[A-Z][a-z]+:))/i, (m, p1, p2) => {
+          const tr = p2.trim();
+          return (/^[a-zA-Z0-9\s,\\^_\(\)\/\*\+\-=\|]+$/.test(tr) && tr.length < 120) ? p1 + "\n\n" : m;
+        })
         .replace(/\u2260/g, ' \\neq ')
         .replace(/\u00B1/g, ' \\pm ')
         .replace(/\u2264/g, ' \\leq ')
