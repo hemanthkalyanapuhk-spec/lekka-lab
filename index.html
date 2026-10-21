@@ -305,7 +305,7 @@
     .solution-box .katex { font-size: 1.08em; }
     .solution-box .katex-error { color: inherit !important; border: none !important; background: none !important; }
 
-    /* Complete 118 Elements Chemistry Suite */
+    /* Lekka Lab Signature Interactive Periodic Suite */
     .lekka-chem-card {
       background: #06152d;
       border: 1.5px solid var(--gold-primary);
@@ -333,11 +333,11 @@
     .deck-grid {
       display: grid;
       grid-template-columns: repeat(18, 52px);
-      grid-template-rows: repeat(7, 50px);
       gap: 4px;
       min-width: 980px;
     }
     .el-box {
+      height: 48px;
       border-radius: 6px;
       display: flex;
       flex-direction: column;
@@ -349,7 +349,7 @@
       box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
     .el-num { font-size: 0.65rem; opacity: 0.85; }
-    .el-sym { font-size: 1rem; line-height: 1.1; }
+    .el-sym { font-size: 0.95rem; line-height: 1.1; }
 
     .c-nonmetal { background: #fee2e2; color: #991b1b; }
     .c-noble { background: #e0e7ff; color: #3730a3; }
@@ -359,6 +359,8 @@
     .c-halogen { background: #fce7f3; color: #9d174d; }
     .c-transition { background: #f1f5f9; color: #1e293b; }
     .c-posttrans { background: #e2e8f0; color: #334155; }
+    .c-lanthanide { background: #ede9fe; color: #5b21b6; }
+    .c-actinide { background: #fae8ff; color: #86198f; }
 
     .element-search-bar {
       width: 100%;
@@ -400,7 +402,7 @@
     .all-118-table td {
       padding: 9px 12px;
       border-bottom: 1px solid #e2e8f0;
-      color: #0f172a !important; /* Crystal clear dark font */
+      color: #0f172a !important;
       font-weight: 600;
     }
     .all-118-table tr:nth-child(even) { background: #f8fafc; }
@@ -685,7 +687,7 @@
       </div>
     </div>
 
-    <!-- 36 Assessment & Project PDF Files (Exact Relative Paths) -->
+    <!-- 36 Assessment & Project PDF Files (Exact Unaltered Relative Paths) -->
     <h3 class="section-title">Assessment & Project Resources (36 PDFs)</h3>
 
     <!-- Class 10 -->
@@ -862,7 +864,7 @@
 
     // Visitor Counter
     (function initCounter() {
-      let count = parseInt(localStorage.getItem('lekka_visits') || '2075', 10);
+      let count = parseInt(localStorage.getItem('lekka_visits') || '2080', 10);
       count += 1;
       localStorage.setItem('lekka_visits', count);
       document.getElementById('visitorCount').innerText = count.toLocaleString();
@@ -1042,14 +1044,14 @@
       [51,"Sb","Antimony","Metalloid","c-metalloid"],[52,"Te","Tellurium","Metalloid","c-metalloid"],
       [53,"I","Iodine","Halogen","c-halogen"],[54,"Xe","Xenon","Noble Gas","c-noble"],
       [55,"Cs","Cesium","Alkali Metal","c-alkali"],[56,"Ba","Barium","Alkaline Earth","c-alkaline"],
-      [57,"La","Lanthanum","Lanthanide","c-posttrans"],[58,"Ce","Cerium","Lanthanide","c-posttrans"],
-      [59,"Pr","Praseodymium","Lanthanide","c-posttrans"],[60,"Nd","Neodymium","Lanthanide","c-posttrans"],
-      [61,"Pm","Promethium","Lanthanide","c-posttrans"],[62,"Sm","Samarium","Lanthanide","c-posttrans"],
-      [63,"Eu","Europium","Lanthanide","c-posttrans"],[64,"Gd","Gadolinium","Lanthanide","c-posttrans"],
-      [65,"Tb","Terbium","Lanthanide","c-posttrans"],[66,"Dy","Dysprosium","Lanthanide","c-posttrans"],
-      [67,"Ho","Holmium","Lanthanide","c-posttrans"],[68,"Er","Erbium","Lanthanide","c-posttrans"],
-      [69,"Tm","Thulium","Lanthanide","c-posttrans"],[70,"Yb","Ytterbium","Lanthanide","c-posttrans"],
-      [71,"Lu","Lutetium","Lanthanide","c-posttrans"],[72,"Hf","Hafnium","Transition Metal","c-transition"],
+      [57,"La","Lanthanum","Lanthanide","c-lanthanide"],[58,"Ce","Cerium","Lanthanide","c-lanthanide"],
+      [59,"Pr","Praseodymium","Lanthanide","c-lanthanide"],[60,"Nd","Neodymium","Lanthanide","c-lanthanide"],
+      [61,"Pm","Promethium","Lanthanide","c-lanthanide"],[62,"Sm","Samarium","Lanthanide","c-lanthanide"],
+      [63,"Eu","Europium","Lanthanide","c-lanthanide"],[64,"Gd","Gadolinium","Lanthanide","c-lanthanide"],
+      [65,"Tb","Terbium","Lanthanide","c-lanthanide"],[66,"Dy","Dysprosium","Lanthanide","c-lanthanide"],
+      [67,"Ho","Holmium","Lanthanide","c-lanthanide"],[68,"Er","Erbium","Lanthanide","c-lanthanide"],
+      [69,"Tm","Thulium","Lanthanide","c-lanthanide"],[70,"Yb","Ytterbium","Lanthanide","c-lanthanide"],
+      [71,"Lu","Lutetium","Lanthanide","c-lanthanide"],[72,"Hf","Hafnium","Transition Metal","c-transition"],
       [73,"Ta","Tantalum","Transition Metal","c-transition"],[74,"W","Tungsten","Transition Metal","c-transition"],
       [75,"Re","Rhenium","Transition Metal","c-transition"],[76,"Os","Osmium","Transition Metal","c-transition"],
       [77,"Ir","Iridium","Transition Metal","c-transition"],[78,"Pt","Platinum","Transition Metal","c-transition"],
@@ -1058,14 +1060,14 @@
       [83,"Bi","Bismuth","Post-Transition","c-posttrans"],[84,"Po","Polonium","Post-Transition","c-posttrans"],
       [85,"At","Astatine","Halogen","c-halogen"],[86,"Rn","Radon","Noble Gas","c-noble"],
       [87,"Fr","Francium","Alkali Metal","c-alkali"],[88,"Ra","Radium","Alkaline Earth","c-alkaline"],
-      [89,"Ac","Actinium","Actinide","c-posttrans"],[90,"Th","Thorium","Actinide","c-posttrans"],
-      [91,"Pa","Protactinium","Actinide","c-posttrans"],[92,"U","Uranium","Actinide","c-posttrans"],
-      [93,"Np","Neptunium","Actinide","c-posttrans"],[94,"Pu","Plutonium","Actinide","c-posttrans"],
-      [95,"Am","Americium","Actinide","c-posttrans"],[96,"Cm","Curium","Actinide","c-posttrans"],
-      [97,"Bk","Berkelium","Actinide","c-posttrans"],[98,"Cf","Californium","Actinide","c-posttrans"],
-      [99,"Es","Einsteinium","Actinide","c-posttrans"],[100,"Fm","Fermium","Actinide","c-posttrans"],
-      [101,"Md","Mendelevium","Actinide","c-posttrans"],[102,"No","Nobelium","Actinide","c-posttrans"],
-      [103,"Lr","Lawrencium","Actinide","c-posttrans"],[104,"Rf","Rutherfordium","Transition Metal","c-transition"],
+      [89,"Ac","Actinium","Actinide","c-actinide"],[90,"Th","Thorium","Actinide","c-actinide"],
+      [91,"Pa","Protactinium","Actinide","c-actinide"],[92,"U","Uranium","Actinide","c-actinide"],
+      [93,"Np","Neptunium","Actinide","c-actinide"],[94,"Pu","Plutonium","Actinide","c-actinide"],
+      [95,"Am","Americium","Actinide","c-actinide"],[96,"Cm","Curium","Actinide","c-actinide"],
+      [97,"Bk","Berkelium","Actinide","c-actinide"],[98,"Cf","Californium","Actinide","c-actinide"],
+      [99,"Es","Einsteinium","Actinide","c-actinide"],[100,"Fm","Fermium","Actinide","c-actinide"],
+      [101,"Md","Mendelevium","Actinide","c-actinide"],[102,"No","Nobelium","Actinide","c-actinide"],
+      [103,"Lr","Lawrencium","Actinide","c-actinide"],[104,"Rf","Rutherfordium","Transition Metal","c-transition"],
       [105,"Db","Dubnium","Transition Metal","c-transition"],[106,"Sg","Seaborgium","Transition Metal","c-transition"],
       [107,"Bh","Bohrium","Transition Metal","c-transition"],[108,"Hs","Hassium","Transition Metal","c-transition"],
       [109,"Mt","Meitnerium","Transition Metal","c-transition"],[110,"Ds","Darmstadtium","Transition Metal","c-transition"],
@@ -1220,10 +1222,19 @@
             <div class="el-box c-halogen" style="grid-column: 17; grid-row: 4;"><span class="el-num">35</span><span class="el-sym">Br</span></div>
             <div class="el-box c-noble" style="grid-column: 18; grid-row: 4;"><span class="el-num">36</span><span class="el-sym">Kr</span></div>
 
+            <!-- Period 5 -->
             <div class="el-box c-alkali" style="grid-column: 1; grid-row: 5;"><span class="el-num">37</span><span class="el-sym">Rb</span></div>
             <div class="el-box c-alkaline" style="grid-column: 2; grid-row: 5;"><span class="el-num">38</span><span class="el-sym">Sr</span></div>
             <div class="el-box c-transition" style="grid-column: 3; grid-row: 5;"><span class="el-num">39</span><span class="el-sym">Y</span></div>
-            <div style="grid-column: 4 / 13; grid-row: 5; background:rgba(255,255,255,0.06); border:1px dashed rgba(212,175,55,0.4); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:0.75rem; color:#fef08a;">40(Zr) to 48(Cd) Transition Metals</div>
+            <div class="el-box c-transition" style="grid-column: 4; grid-row: 5;"><span class="el-num">40</span><span class="el-sym">Zr</span></div>
+            <div class="el-box c-transition" style="grid-column: 5; grid-row: 5;"><span class="el-num">41</span><span class="el-sym">Nb</span></div>
+            <div class="el-box c-transition" style="grid-column: 6; grid-row: 5;"><span class="el-num">42</span><span class="el-sym">Mo</span></div>
+            <div class="el-box c-transition" style="grid-column: 7; grid-row: 5;"><span class="el-num">43</span><span class="el-sym">Tc</span></div>
+            <div class="el-box c-transition" style="grid-column: 8; grid-row: 5;"><span class="el-num">44</span><span class="el-sym">Ru</span></div>
+            <div class="el-box c-transition" style="grid-column: 9; grid-row: 5;"><span class="el-num">45</span><span class="el-sym">Rh</span></div>
+            <div class="el-box c-transition" style="grid-column: 10; grid-row: 5;"><span class="el-num">46</span><span class="el-sym">Pd</span></div>
+            <div class="el-box c-transition" style="grid-column: 11; grid-row: 5;"><span class="el-num">47</span><span class="el-sym">Ag</span></div>
+            <div class="el-box c-transition" style="grid-column: 12; grid-row: 5;"><span class="el-num">48</span><span class="el-sym">Cd</span></div>
             <div class="el-box c-posttrans" style="grid-column: 13; grid-row: 5;"><span class="el-num">49</span><span class="el-sym">In</span></div>
             <div class="el-box c-posttrans" style="grid-column: 14; grid-row: 5;"><span class="el-num">50</span><span class="el-sym">Sn</span></div>
             <div class="el-box c-metalloid" style="grid-column: 15; grid-row: 5;"><span class="el-num">51</span><span class="el-sym">Sb</span></div>
@@ -1231,19 +1242,39 @@
             <div class="el-box c-halogen" style="grid-column: 17; grid-row: 5;"><span class="el-num">53</span><span class="el-sym">I</span></div>
             <div class="el-box c-noble" style="grid-column: 18; grid-row: 5;"><span class="el-num">54</span><span class="el-sym">Xe</span></div>
 
+            <!-- Period 6 -->
             <div class="el-box c-alkali" style="grid-column: 1; grid-row: 6;"><span class="el-num">55</span><span class="el-sym">Cs</span></div>
             <div class="el-box c-alkaline" style="grid-column: 2; grid-row: 6;"><span class="el-num">56</span><span class="el-sym">Ba</span></div>
-            <div style="grid-column: 3 / 13; grid-row: 6; background:rgba(255,255,255,0.06); border:1px dashed rgba(212,175,55,0.4); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:0.75rem; color:#fef08a;">57-71(La-Lu)* | 72(Hf) to 80(Hg) Heavy Transition Metals</div>
+            <div class="el-box c-lanthanide" style="grid-column: 3; grid-row: 6;"><span class="el-num">57-71</span><span class="el-sym">La*</span></div>
+            <div class="el-box c-transition" style="grid-column: 4; grid-row: 6;"><span class="el-num">72</span><span class="el-sym">Hf</span></div>
+            <div class="el-box c-transition" style="grid-column: 5; grid-row: 6;"><span class="el-num">73</span><span class="el-sym">Ta</span></div>
+            <div class="el-box c-transition" style="grid-column: 6; grid-row: 6;"><span class="el-num">74</span><span class="el-sym">W</span></div>
+            <div class="el-box c-transition" style="grid-column: 7; grid-row: 6;"><span class="el-num">75</span><span class="el-sym">Re</span></div>
+            <div class="el-box c-transition" style="grid-column: 8; grid-row: 6;"><span class="el-num">76</span><span class="el-sym">Os</span></div>
+            <div class="el-box c-transition" style="grid-column: 9; grid-row: 6;"><span class="el-num">77</span><span class="el-sym">Ir</span></div>
+            <div class="el-box c-transition" style="grid-column: 10; grid-row: 6;"><span class="el-num">78</span><span class="el-sym">Pt</span></div>
+            <div class="el-box c-transition" style="grid-column: 11; grid-row: 6;"><span class="el-num">79</span><span class="el-sym">Au</span></div>
+            <div class="el-box c-transition" style="grid-column: 12; grid-row: 6;"><span class="el-num">80</span><span class="el-sym">Hg</span></div>
             <div class="el-box c-posttrans" style="grid-column: 13; grid-row: 6;"><span class="el-num">81</span><span class="el-sym">Tl</span></div>
             <div class="el-box c-posttrans" style="grid-column: 14; grid-row: 6;"><span class="el-num">82</span><span class="el-sym">Pb</span></div>
             <div class="el-box c-posttrans" style="grid-column: 15; grid-row: 6;"><span class="el-num">83</span><span class="el-sym">Bi</span></div>
-            <div class="el-box c-metalloid" style="grid-column: 16; grid-row: 6;"><span class="el-num">84</span><span class="el-sym">Po</span></div>
+            <div class="el-box c-posttrans" style="grid-column: 16; grid-row: 6;"><span class="el-num">84</span><span class="el-sym">Po</span></div>
             <div class="el-box c-halogen" style="grid-column: 17; grid-row: 6;"><span class="el-num">85</span><span class="el-sym">At</span></div>
             <div class="el-box c-noble" style="grid-column: 18; grid-row: 6;"><span class="el-num">86</span><span class="el-sym">Rn</span></div>
 
+            <!-- Period 7 -->
             <div class="el-box c-alkali" style="grid-column: 1; grid-row: 7;"><span class="el-num">87</span><span class="el-sym">Fr</span></div>
             <div class="el-box c-alkaline" style="grid-column: 2; grid-row: 7;"><span class="el-num">88</span><span class="el-sym">Ra</span></div>
-            <div style="grid-column: 3 / 13; grid-row: 7; background:rgba(255,255,255,0.06); border:1px dashed rgba(212,175,55,0.4); border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:0.75rem; color:#fef08a;">89-103(Ac-Lr)** | 104(Rf) to 118(Og) Superheavy Elements</div>
+            <div class="el-box c-actinide" style="grid-column: 3; grid-row: 7;"><span class="el-num">89-103</span><span class="el-sym">Ac**</span></div>
+            <div class="el-box c-transition" style="grid-column: 4; grid-row: 7;"><span class="el-num">104</span><span class="el-sym">Rf</span></div>
+            <div class="el-box c-transition" style="grid-column: 5; grid-row: 7;"><span class="el-num">105</span><span class="el-sym">Db</span></div>
+            <div class="el-box c-transition" style="grid-column: 6; grid-row: 7;"><span class="el-num">106</span><span class="el-sym">Sg</span></div>
+            <div class="el-box c-transition" style="grid-column: 7; grid-row: 7;"><span class="el-num">107</span><span class="el-sym">Bh</span></div>
+            <div class="el-box c-transition" style="grid-column: 8; grid-row: 7;"><span class="el-num">108</span><span class="el-sym">Hs</span></div>
+            <div class="el-box c-transition" style="grid-column: 9; grid-row: 7;"><span class="el-num">109</span><span class="el-sym">Mt</span></div>
+            <div class="el-box c-transition" style="grid-column: 10; grid-row: 7;"><span class="el-num">110</span><span class="el-sym">Ds</span></div>
+            <div class="el-box c-transition" style="grid-column: 11; grid-row: 7;"><span class="el-num">111</span><span class="el-sym">Rg</span></div>
+            <div class="el-box c-transition" style="grid-column: 12; grid-row: 7;"><span class="el-num">112</span><span class="el-sym">Cn</span></div>
             <div class="el-box c-posttrans" style="grid-column: 13; grid-row: 7;"><span class="el-num">113</span><span class="el-sym">Nh</span></div>
             <div class="el-box c-posttrans" style="grid-column: 14; grid-row: 7;"><span class="el-num">114</span><span class="el-sym">Fl</span></div>
             <div class="el-box c-posttrans" style="grid-column: 15; grid-row: 7;"><span class="el-num">115</span><span class="el-sym">Mc</span></div>
@@ -1254,7 +1285,7 @@
         </div>
 
         <!-- 100% Complete 118-Element Search & Full Table -->
-        <input type="text" id="search118Input" class="element-search-bar" onkeyup="filter118Elements()" placeholder="🔍 Search any of the 118 elements (e.g., Scandium, Sc, 21, Gold, Fe)...">
+        <input type="text" id="search118Input" class="element-search-bar" onkeyup="filter118Elements()" placeholder="🔍 Search any element (e.g., Scandium, 21, Gold, Fe)...">
         
         <div class="all-118-table-box">
           <table class="all-118-table">
