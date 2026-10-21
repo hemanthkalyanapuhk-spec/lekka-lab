@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>Lekka Lab - Educational Portal</title>
   
   <!-- Markdown & KaTeX Math Rendering Libraries -->
@@ -28,11 +28,13 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    
     body { 
       background: radial-gradient(circle at 50% 0%, #0d2c54 0%, var(--bg-dark) 80%);
       color: var(--text-main); 
-      padding-bottom: 60px; 
+      padding-bottom: 30px; 
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
     /* Royal Sapphire & Gold Header */
@@ -40,7 +42,7 @@
       background: linear-gradient(180deg, #020914 0%, rgba(11, 37, 69, 0.95) 100%);
       border-bottom: 1.5px solid var(--gold-border);
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
-      padding: 32px 16px 26px;
+      padding: 34px 16px 26px;
       text-align: center;
     }
     .header-box {
@@ -49,10 +51,10 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
     .brand-title {
-      font-size: 2.6rem;
+      font-size: clamp(2.1rem, 6vw, 2.8rem);
       font-weight: 900;
       letter-spacing: 3px;
       background: var(--gold-gradient);
@@ -62,28 +64,19 @@
       line-height: 1.1;
     }
     header p {
-      font-size: 0.95rem;
+      font-size: clamp(0.85rem, 2.5vw, 0.95rem);
       color: #cbd5e1;
       letter-spacing: 0.5px;
       font-weight: 400;
-      margin-top: 2px;
-    }
-    .counter-badge {
-      margin-top: 10px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(3, 11, 23, 0.75);
-      border: 1px solid var(--gold-border);
-      padding: 6px 20px;
-      border-radius: 999px;
-      font-size: 0.88rem;
-      color: #fef08a;
-      box-shadow: inset 0 1px 5px rgba(0,0,0,0.6), 0 2px 8px rgba(0,0,0,0.3);
-      letter-spacing: 0.5px;
+      margin-top: 4px;
     }
 
-    .container { max-width: 920px; margin: 28px auto; padding: 0 16px; }
+    .container { 
+      max-width: 920px; 
+      margin: 24px auto; 
+      padding: 0 14px; 
+      width: 100%;
+    }
 
     /* Luxury Glassmorphism AI Card */
     .ai-card {
@@ -91,10 +84,11 @@
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border-radius: 16px;
-      padding: 24px;
+      padding: clamp(16px, 4vw, 24px);
       box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4), var(--gold-glow);
       border: 1px solid var(--card-border);
-      margin-bottom: 30px;
+      margin-bottom: 28px;
+      width: 100%;
     }
     .ai-header { 
       display: flex; 
@@ -103,7 +97,7 @@
       margin-bottom: 16px; 
     }
     .ai-header h2 { 
-      font-size: 1.35rem; 
+      font-size: clamp(1.1rem, 3.5vw, 1.35rem); 
       font-weight: 800; 
       color: #ffffff;
       display: flex;
@@ -211,45 +205,50 @@
       border-color: var(--gold-primary);
     }
 
-    /* Solution Box with Full Horizontal Scrolling Support */
+    /* Solution Box with Mobile Fit and Horizontal Scroll Protection */
     .solution-box {
       margin-top: 20px;
-      padding: 22px;
+      padding: clamp(14px, 3.5vw, 22px);
       background: #ffffff;
       color: #0f172a;
       border-radius: 14px;
       border: 1.5px solid var(--gold-primary);
       display: none;
       line-height: 1.7;
-      font-size: 0.98rem;
+      font-size: clamp(0.92rem, 2.5vw, 1rem);
       box-shadow: 0 8px 30px rgba(0,0,0,0.4);
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
+      width: 100%;
+      word-wrap: break-word;
+      overflow-wrap: anywhere;
     }
 
-    /* Ensure KaTeX long equations scroll gracefully instead of cutting off */
     .solution-box .katex-display {
+      max-width: 100%;
       overflow-x: auto;
       overflow-y: hidden;
-      padding: 8px 0;
-      margin: 12px 0;
+      padding: 6px 0;
+      margin: 10px 0;
       -webkit-overflow-scrolling: touch;
     }
+    .solution-box .katex {
+      font-size: 1.05em;
+      max-width: 100%;
+    }
 
-    /* Professional Scientific Diagram Styling */
     .solution-box svg {
       display: block;
-      margin: 18px auto;
-      max-width: 100%;
+      margin: 16px auto;
+      width: 100%;
+      max-width: 500px;
       height: auto;
-      border-radius: 14px;
+      border-radius: 12px;
       background: #ffffff;
       border: 1.5px solid #e2e8f0;
-      box-shadow: 0 6px 20px rgba(11, 37, 69, 0.08);
+      box-shadow: 0 4px 14px rgba(11, 37, 69, 0.08);
     }
 
     .section-title {
-      font-size: 1.25rem;
+      font-size: clamp(1.1rem, 3vw, 1.25rem);
       font-weight: 800;
       margin: 35px 0 16px;
       text-transform: uppercase;
@@ -303,7 +302,7 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      min-width: 640px;
+      min-width: 620px;
       background: #ffffff;
       color: #0f172a;
     }
@@ -389,17 +388,69 @@
       color: #e2e8f0;
     }
     .fb-entry b { color: #fde047; }
+
+    /* Royal Footer with Creator Signature (Degrees Removed) */
+    footer {
+      margin-top: 45px;
+      background: linear-gradient(180deg, rgba(11, 37, 69, 0.8) 0%, #030b17 100%);
+      border: 1px solid var(--gold-border);
+      border-radius: 16px;
+      padding: 26px 18px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    .footer-signature {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .curator-tag {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #cbd5e1;
+    }
+    .curator-name {
+      font-size: 1.45rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .curator-role {
+      font-size: 0.9rem;
+      color: #94a3b8;
+    }
+    .counter-badge-footer {
+      margin-top: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(3, 11, 23, 0.85);
+      border: 1px solid var(--gold-border);
+      padding: 6px 20px;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      color: #fef08a;
+      box-shadow: inset 0 1px 5px rgba(0,0,0,0.6), 0 2px 8px rgba(0,0,0,0.3);
+      letter-spacing: 0.5px;
+    }
+    .copyright-note {
+      margin-top: 14px;
+      font-size: 0.78rem;
+      color: #64748b;
+    }
   </style>
 </head>
 <body>
 
+  <!-- Royal Header -->
   <header>
     <div class="header-box">
       <div class="brand-title">LEKKA LAB</div>
       <p>Explore • Discover • Excel | High School Learning Portal</p>
-      <div class="counter-badge">
-        <span>👥 Visitors: <b id="visitorCount">--</b></span>
-      </div>
     </div>
   </header>
 
@@ -586,6 +637,19 @@
         <div class="fb-entry"><b>Admin:</b> Welcome to Lekka Lab! Please share your thoughts and requests above.</div>
       </div>
     </div>
+
+    <!-- Royal Footer with Creator Signature -->
+    <footer>
+      <div class="footer-signature">
+        <span class="curator-tag">Concept & Learning Architecture</span>
+        <div class="curator-name">Hemanth Kalyanapu</div>
+        <div class="curator-role">Mathematics Educator | Lekka Lab Initiative</div>
+        <div class="counter-badge-footer">
+          <span>👥 Total Visitors: <b id="visitorCount">--</b></span>
+        </div>
+        <p class="copyright-note">Dedicated to Excellence in High School Mathematics Education</p>
+      </div>
+    </footer>
   </div>
 
   <script>
@@ -608,11 +672,22 @@
 
     // Visitor Counter
     (function initCounter() {
-      let count = parseInt(localStorage.getItem('lekka_visits') || '1965', 10);
+      let count = parseInt(localStorage.getItem('lekka_visits') || '1980', 10);
       count += 1;
       localStorage.setItem('lekka_visits', count);
       document.getElementById('visitorCount').innerText = count.toLocaleString();
     })();
+
+    // Restore solution when switching between Mobile & Desktop mode
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedQuery = sessionStorage.getItem('lekka_active_query');
+      const savedHTML = sessionStorage.getItem('lekka_rendered_html');
+      if (savedHTML && savedQuery) {
+        document.getElementById('aiProblemInput').value = savedQuery;
+        document.getElementById('aiSolutionDisplay').style.display = 'block';
+        document.getElementById('mathRenderedContent').innerHTML = savedHTML;
+      }
+    });
 
     // Feedback Management
     (function loadStoredFeedback() {
@@ -714,6 +789,8 @@
       document.getElementById('aiProblemInput').value = '';
       document.getElementById('aiSolutionDisplay').style.display = 'none';
       document.getElementById('mathRenderedContent').innerHTML = '';
+      sessionStorage.removeItem('lekka_active_query');
+      sessionStorage.removeItem('lekka_rendered_html');
       removeImage();
     }
 
@@ -739,7 +816,7 @@
       recognition.start();
     }
 
-    // High-Precision AI Engine with Beautiful Diagrams & Natural Context
+    // High-Precision AI Engine
     async function handleSolve() {
       const text = document.getElementById('aiProblemInput').value.trim();
       const btn = document.getElementById('btnSolve');
@@ -752,30 +829,36 @@
       }
 
       display.style.display = 'block';
-      mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">⚡ Generating answer...</p>';
+      mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">⚡ Calculating solution...</p>';
       btn.disabled = true;
 
-      const systemInstruction = `You are "Lucky", a fast universal educational assistant for Lekka Lab.
+      const systemInstruction = `You are "Lucky", the expert educational AI for Lekka Lab.
 
 CRITICAL INSTRUCTIONS:
-- Directly answer the user's question matching its true intent and format.
-- DO NOT invent multiple-choice options (Option A, Option B) when the user just asks for a theorem, concept, or formula.
-- If the question IS an actual multiple-choice question (has options A, B, C, D in text or image):
+- Directly answer matching the user query format.
+- DO NOT invent multiple-choice options (Option A, Option B) when the user asks for theorems or concepts.
+- If the question is an MCQ (options A,B,C,D in text or photo):
   * State the correct option and provide a concise 2-line reason.
 
-THEOREMS & MATHEMATICAL PROOFS (e.g., BPT theorem, Thales, Pythagoras):
-  * Provide Statement, Geometric Diagram (Detailed SVG), Given, To Prove, Construction, and Step-by-Step Proof.
-  * For BPT Theorem, draw a beautiful Triangle ABC with points D on AB, E on AC, red parallel line DE, dashed constructions BE and CD, and perpendicular altitudes EN and DM with clear colored vertex labels.
+GEOMETRIC PROOFS & BPT THEOREM:
+- If BPT / Thales theorem is asked:
+  1. Statement
+  2. A MATHEMATICALLY ACCURATE SVG TRIANGLE (<svg viewBox="0 0 420 280" ...>):
+     * Triangle ABC: A=(210, 30), B=(60, 240), C=(360, 240).
+     * Line DE parallel to BC: D on AB at (135, 135), E on AC at (285, 135). Color DE red.
+     * Construction lines: Dashed grey lines connecting B to E, and C to D.
+     * Perpendicular altitudes: 
+       - DM perpendicular to AC (from D=(135,135) to M on AC).
+       - EN perpendicular to AB (from E=(285,135) to N on AB).
+       - Show small 90° right-angle squares at M and N.
+     * Place clear vertex labels A, B, C, D, E, M, N directly inside the SVG with <text> tags.
+  3. Given, To Prove, Construction, and clean step-by-step ratio proof.
 
-HIGH QUALITY DIAGRAM INSTRUCTIONS:
-  * Produce clean, high-contrast, professional inline SVG graphics (<svg viewBox="0 0 540 380" ...>).
-  * Use vivid colors, proper stroke-widths, distinct vertex circles, and legible labels placed directly inside the SVG.
-  * If heart diagram is asked: Draw connected anatomical chambers with 3D gradients and clear pointer labels.
-  * Never wrap the SVG in markdown backticks.
+ANATOMICAL DIAGRAMS:
+- If Heart is asked: Draw realistic connected 3D chambers with aorta, vena cava, atria, ventricles, and labeled pointer lines directly inside the SVG.
 
-LANGUAGE & MATH:
-  * If in Telugu or asks "in telugu" / "తెలుగులో", reply 100% in natural Telugu.
-  * Always use LaTeX ($..$ inline, $$..$$ display) for all formulas.`;
+FORMATTING:
+- Keep the math clean and concise. Use standard LaTeX ($..$ inline, $$..$$ display).`;
 
       const contents = [{
         role: "user",
@@ -815,7 +898,7 @@ LANGUAGE & MATH:
               body: JSON.stringify({ 
                 contents: contents,
                 generationConfig: {
-                  temperature: 0.2,
+                  temperature: 0.15,
                   maxOutputTokens: 2500
                 }
               })
@@ -889,6 +972,10 @@ LANGUAGE & MATH:
           throwOnError: false
         });
       }
+
+      // Persist result into SessionStorage so switching to Desktop mode won't wipe the screen
+      sessionStorage.setItem('lekka_active_query', text);
+      sessionStorage.setItem('lekka_rendered_html', mathContent.innerHTML);
 
       btn.disabled = false;
     }
