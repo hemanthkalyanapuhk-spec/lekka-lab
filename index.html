@@ -179,17 +179,17 @@
       font-weight: 700;
     }
 
-    .ai-controls { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+    .ai-controls { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
     .btn {
-      padding: 10px 18px;
+      padding: 9px 15px;
       border: none;
       border-radius: 10px;
       font-weight: 700;
-      font-size: 0.92rem;
+      font-size: 0.88rem;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 7px;
+      gap: 6px;
       transition: all 0.2s ease;
     }
     .btn-solve { 
@@ -411,10 +411,16 @@
         <button class="btn btn-solve" id="btnSolve" onclick="handleSolve()">⚡ Ask Lucky</button>
         <button class="btn btn-secondary" id="btnVoice" onclick="toggleVoiceSearch()">🎙️ Voice Search</button>
         
-        <!-- Camera & Gallery Choice Enabled -->
+        <!-- Direct Live Camera Button -->
         <label class="btn btn-secondary" style="cursor: pointer;">
-          📷 Camera / Gallery
-          <input type="file" id="imageInput" accept="image/*" style="display:none;" onchange="handleImage(event)">
+          📷 Camera
+          <input type="file" id="cameraInput" accept="image/*" capture="environment" style="display:none;" onchange="handleImage(event)">
+        </label>
+
+        <!-- Direct Gallery / Files Button -->
+        <label class="btn btn-secondary" style="cursor: pointer;">
+          🖼️ Gallery
+          <input type="file" id="galleryInput" accept="image/*" style="display:none;" onchange="handleImage(event)">
         </label>
         
         <button class="btn btn-secondary" onclick="clearResults()">🗑️ Clear</button>
@@ -590,7 +596,7 @@
 
     // Visitor Counter
     (function initCounter() {
-      let count = parseInt(localStorage.getItem('lekka_visits') || '1945', 10);
+      let count = parseInt(localStorage.getItem('lekka_visits') || '1950', 10);
       count += 1;
       localStorage.setItem('lekka_visits', count);
       document.getElementById('visitorCount').innerText = count.toLocaleString();
@@ -635,7 +641,7 @@
       return str.replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[m]);
     }
 
-    // Camera & Gallery File Handler with Optimization
+    // Image Compressor & Preprocessor (Works for both Camera and Gallery)
     function handleImage(e) {
       const file = e.target.files[0];
       if (!file) return;
@@ -681,7 +687,8 @@
 
     function removeImage() {
       base64Image = null;
-      document.getElementById('imageInput').value = '';
+      document.getElementById('cameraInput').value = '';
+      document.getElementById('galleryInput').value = '';
       document.getElementById('imagePreviewContainer').style.display = 'none';
       document.getElementById('imagePreview').src = '';
     }
