@@ -93,6 +93,14 @@
     }
     textarea:focus { border-color: var(--gold-primary); box-shadow: 0 0 12px rgba(212, 175, 55, 0.35); }
 
+    .image-preview-container {
+      display: none; margin-top: 12px; align-items: center; gap: 12px;
+      background: rgba(3, 11, 23, 0.6); padding: 8px 14px; border-radius: 10px; border: 1px dashed var(--gold-border);
+    }
+    .image-preview-container img { width: 50px; height: 50px; object-fit: cover; border-radius: 8px; border: 1px solid var(--gold-primary); }
+    .image-preview-container span { font-size: 0.88rem; color: #e2e8f0; font-weight: 600; flex: 1; }
+    .btn-remove-img { background: rgba(220, 38, 38, 0.2); color: #f87171; border: 1px solid rgba(248, 113, 113, 0.4); padding: 5px 10px; border-radius: 6px; font-size: 0.82rem; cursor: pointer; }
+
     .ai-controls { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
     .btn { padding: 9px 15px; border: none; border-radius: 10px; font-weight: 700; font-size: 0.88rem; cursor: pointer; display: flex; align-items: center; gap: 6px; }
     .btn-solve { background: var(--gold-gradient); color: #030b17; }
@@ -135,7 +143,11 @@
     }
     .worksheet-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #0b2545; padding-bottom: 8px; margin-bottom: 14px; flex-wrap: wrap; gap: 10px; }
     .worksheet-header h4 { font-size: 1.05rem; font-weight: 800; color: #0b2545; }
-    .btn-print { background: #0284c7; color: #ffffff; border: none; padding: 6px 14px; border-radius: 6px; font-size: 0.82rem; font-weight: 700; cursor: pointer; }
+    .worksheet-btn-group { display: flex; gap: 6px; flex-wrap: wrap; }
+    .btn-print { background: #0284c7; color: #ffffff; border: none; padding: 6px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer; }
+    .btn-refresh { background: #d97706; color: #ffffff; border: none; padding: 6px 12px; border-radius: 6px; font-size: 0.8rem; font-weight: 700; cursor: pointer; }
+    .btn-refresh:hover { background: #b45309; }
+
     .worksheet-meta { display: flex; justify-content: space-between; font-size: 0.85rem; color: #475569; font-weight: 600; margin-bottom: 12px; border-bottom: 1px dashed #cbd5e1; padding-bottom: 6px; }
     .q-item { margin-bottom: 12px; font-size: 0.94rem; line-height: 1.6; }
     .q-num { font-weight: 800; color: #0b2545; margin-right: 4px; }
@@ -158,7 +170,7 @@
 
     @media print {
       body * { visibility: hidden; }
-      header, .ai-card, .section-title, footer, .btn-print, .ans-key-toggle { display: none !important; }
+      header, .ai-card, .section-title, footer, .btn-print, .btn-refresh, .ans-key-toggle { display: none !important; }
       .printable-area, .printable-area * { visibility: visible; }
       .printable-area { position: absolute; left: 0; top: 0; width: 100%; background: #ffffff !important; color: #000000 !important; border: none !important; }
     }
@@ -182,21 +194,39 @@
         <span class="online-badge">ONLINE</span>
       </div>
       
-      <textarea id="aiProblemInput" placeholder="Ask in English or Telugu (తెలుగు)... e.g. Fractions LCM step by step, Quadratic equations, etc."></textarea>
+      <textarea id="aiProblemInput" placeholder="Ask anything in English... Algebraic identities, step-by-step problem solver, formulas, etc."></textarea>
       
+      <div class="image-preview-container" id="imagePreviewContainer">
+        <img id="imagePreview" src="" alt="Captured problem preview">
+        <span>📸 Photo attached and ready</span>
+        <button type="button" class="btn-remove-img" onclick="removeImage()">✖ Remove</button>
+      </div>
+
       <div class="ai-controls">
         <button class="btn btn-solve" id="btnSolve" onclick="handleSolve()">⚡ Ask Lucky</button>
+        <button class="btn btn-secondary" id="btnVoice" onclick="toggleVoiceSearch()">🎙️ Voice Search</button>
+        
+        <label class="btn btn-secondary" style="cursor: pointer;">
+          📷 Camera
+          <input type="file" id="cameraInput" accept="image/*" capture="environment" style="display:none;" onchange="handleImage(event)">
+        </label>
+
+        <label class="btn btn-secondary" style="cursor: pointer;">
+          🖼️ Gallery
+          <input type="file" id="galleryInput" accept="image/*" style="display:none;" onchange="handleImage(event)">
+        </label>
+        
         <button class="btn btn-secondary" onclick="clearResults()">🗑️ Clear</button>
       </div>
 
       <div class="foundation-pill-box">
-        <div class="foundation-title">🎯 Universal Math Foundation Boosters:</div>
+        <div class="foundation-title">🎯 Universal Math Foundation Boosters (English Notes):</div>
         <div class="foundation-btn-group">
-          <button type="button" class="foundation-btn" onclick="triggerQuickSearch('Explain Integer sign rules addition subtraction multiplication with simple examples in Telugu')">➕ గుర్తుల నియమాలు (Signs)</button>
-          <button type="button" class="foundation-btn" onclick="triggerQuickSearch('How to add and subtract fractions using LCM step by step with examples in Telugu')">➗ భిన్నాలు & ల.సా.గు (LCM)</button>
-          <button type="button" class="foundation-btn" onclick="triggerQuickSearch('Rules for shifting numbers and variables across equals sign transposition in Telugu')">🔄 పక్షాంతరం నియమాలు (Transposition)</button>
-          <button type="button" class="foundation-btn" onclick="triggerQuickSearch('How to split middle term in quadratic equations step by step in Telugu')">📐 మధ్య పదం విడగొట్టడం (Factoring)</button>
-          <button type="button" class="foundation-btn" onclick="triggerQuickSearch('How to simplify square roots with examples for Class 10 in Telugu')">√ వర్గమూలాలు (Square Roots)</button>
+          <button type="button" class="foundation-btn" onclick="triggerQuickSearch('Explain Integer sign rules addition subtraction multiplication with 5 simple examples in English')">➕ Integer Sign Rules</button>
+          <button type="button" class="foundation-btn" onclick="triggerQuickSearch('How to add and subtract fractions using LCM step by step with examples in English')">➗ Fractions & LCM</button>
+          <button type="button" class="foundation-btn" onclick="triggerQuickSearch('Rules for shifting variables and numbers across equals sign transposition with examples in English')">🔄 Transposition Rules</button>
+          <button type="button" class="foundation-btn" onclick="triggerQuickSearch('How to split the middle term in quadratic equations step by step for beginners in English')">📐 Splitting Middle Term</button>
+          <button type="button" class="foundation-btn" onclick="triggerQuickSearch('How to simplify square roots with examples for Class 10 in English')">√ Square Roots</button>
         </div>
       </div>
 
@@ -219,28 +249,28 @@
         <div class="worksheet-card printable-area" id="ws-c1c2">
           <div class="worksheet-header">
             <h4>📄 Lekka Lab Practice Sheet: Number Sense &amp; Place Value (Classes 1 &amp; 2)</h4>
-            <button type="button" class="btn-print" onclick="printElement('ws-c1c2')">🖨️ Print / Save as PDF</button>
+            <div class="worksheet-btn-group">
+              <button type="button" class="btn-refresh" onclick="refreshWorksheet('c1c2')">🔄 New Problems</button>
+              <button type="button" class="btn-print" onclick="printElement('ws-c1c2')">🖨️ Print / PDF</button>
+            </div>
           </div>
           <div class="worksheet-meta">
             <span>Student Name: _______________________</span>
             <span>Date: ____________</span>
             <span>Max Score: 12</span>
           </div>
-          <div class="q-item"><span class="q-num">1.</span> Write the number name for $48$: ________________________</div>
-          <div class="q-item"><span class="q-num">2.</span> Fill in the blanks: $76 = $ ______ Tens $+$ ______ Ones.</div>
-          <div class="q-item"><span class="q-num">3.</span> What number comes strictly between $89$ and $91$? Answer: ______</div>
-          <div class="q-item"><span class="q-num">4.</span> Insert $>$ or $<$: &nbsp; $64$ [ &nbsp; ] $46$ &nbsp; and &nbsp; $108$ [ &nbsp; ] $180$.</div>
-          <div class="q-item"><span class="q-num">5.</span> Add with carrying: &nbsp; $47 + 38 = $ _________</div>
-          <div class="q-item"><span class="q-num">6.</span> <b>Money Problem:</b> If a pencil costs ₹5 and an eraser costs ₹3, find the total cost: ₹_________</div>
+          <div id="content-c1c2">
+            <div class="q-item"><span class="q-num">1.</span> Write the number name for <span id="c1-num1">48</span>: ________________________</div>
+            <div class="q-item"><span class="q-num">2.</span> Fill in the blanks: <span id="c1-num2">76</span> = ______ Tens $+$ ______ Ones.</div>
+            <div class="q-item"><span class="q-num">3.</span> What number comes strictly between <span id="c1-num3a">89</span> and <span id="c1-num3b">91</span>? Answer: ______</div>
+            <div class="q-item"><span class="q-num">4.</span> Insert $>$ or $<$: &nbsp; <span id="c1-num4a">64</span> [ &nbsp; ] <span id="c1-num4b">46</span> &nbsp; and &nbsp; <span id="c1-num4c">108</span> [ &nbsp; ] <span id="c1-num4d">180</span>.</div>
+            <div class="q-item"><span class="q-num">5.</span> Add with carrying: &nbsp; <span id="c1-num5a">47</span> + <span id="c1-num5b">38</span> = _________</div>
+            <div class="q-item"><span class="q-num">6.</span> <b>Money Problem:</b> If a pencil costs ₹<span id="c1-penc">5</span> and an eraser costs ₹<span id="c1-eras">3</span>, find the total cost: ₹_________</div>
+          </div>
           <button type="button" class="ans-key-toggle" onclick="toggleAnsKey('ans-c1c2')">👁️ Toggle Step-by-Step Answer Key</button>
-          <div class="ans-key-content" id="ans-c1c2">
+          <div class="ans-key-content" id="ans-c1c2" style="display:none;">
             <b>Answer Key:</b><br>
-            1. Forty-eight.<br>
-            2. $7$ Tens $+$ $6$ Ones ($70 + 6$).<br>
-            3. $90$.<br>
-            4. $64 > 46$ and $108 < 180$.<br>
-            5. Ones: $7 + 8 = 15$ (write $5$, carry $1$). Tens: $4 + 3 + 1 = 8 \implies 85$.<br>
-            6. Total cost $= \text{₹}5 + \text{₹}3 = \text{₹}8$.
+            <span id="ans-text-c1c2">1. Forty-eight.<br>2. 7 Tens + 6 Ones (70 + 6).<br>3. 90.<br>4. 64 > 46 and 108 < 180.<br>5. 85.<br>6. ₹8.</span>
           </div>
         </div>
 
@@ -248,28 +278,28 @@
         <div class="worksheet-card printable-area" id="ws-c3c5">
           <div class="worksheet-header">
             <h4>📄 Lekka Lab Practice Sheet: Fractions, LCM &amp; Money (Classes 3, 4 &amp; 5)</h4>
-            <button type="button" class="btn-print" onclick="printElement('ws-c3c5')">🖨️ Print / Save as PDF</button>
+            <div class="worksheet-btn-group">
+              <button type="button" class="btn-refresh" onclick="refreshWorksheet('c3c5')">🔄 New Problems</button>
+              <button type="button" class="btn-print" onclick="printElement('ws-c3c5')">🖨️ Print / PDF</button>
+            </div>
           </div>
           <div class="worksheet-meta">
             <span>Student Name: _______________________</span>
             <span>Date: ____________</span>
             <span>Max Score: 12</span>
           </div>
-          <div class="q-item"><span class="q-num">1.</span> Find the prime factorisation of $72$ using the ladder method.</div>
-          <div class="q-item"><span class="q-num">2.</span> Find the LCM of $4$ and $6$: Answer: _________</div>
-          <div class="q-item"><span class="q-num">3.</span> Solve the unlike fraction addition: $\frac{2}{3} + \frac{1}{4} = $ _________</div>
-          <div class="q-item"><span class="q-num">4.</span> Long Division: Divide $95 \div 4$. State the Quotient and Remainder.</div>
-          <div class="q-item"><span class="q-num">5.</span> Convert the improper fraction $\frac{13}{5}$ into a mixed number: _________</div>
-          <div class="q-item"><span class="q-num">6.</span> <b>Money Problem:</b> Rahul has a ₹100 note. He buys a notebook for ₹45 and a geometry box for ₹35. How much balance money does he receive back? Answer: ₹_________</div>
+          <div id="content-c3c5">
+            <div class="q-item"><span class="q-num">1.</span> Find the prime factorisation of <span id="c3-num1">72</span> using the ladder method.</div>
+            <div class="q-item"><span class="q-num">2.</span> Find the LCM of <span id="c3-num2a">4</span> and <span id="c3-num2b">6</span>: Answer: _________</div>
+            <div class="q-item"><span class="q-num">3.</span> Solve the unlike fraction addition: $\frac{2}{3} + \frac{1}{4} = $ _________</div>
+            <div class="q-item"><span class="q-num">4.</span> Long Division: Divide <span id="c3-num4a">95</span> $\div$ <span id="c3-num4b">4</span>. State Quotient and Remainder.</div>
+            <div class="q-item"><span class="q-num">5.</span> Convert improper fraction $\frac{13}{5}$ into a mixed number: _________</div>
+            <div class="q-item"><span class="q-num">6.</span> <b>Money Problem:</b> Rahul has a ₹100 note. He buys a notebook for ₹<span id="c3-nb">45</span> and geometry box for ₹<span id="c3-gb">35</span>. Balance money: ₹_________</div>
+          </div>
           <button type="button" class="ans-key-toggle" onclick="toggleAnsKey('ans-c3c5')">👁️ Toggle Step-by-Step Answer Key</button>
-          <div class="ans-key-content" id="ans-c3c5">
+          <div class="ans-key-content" id="ans-c3c5" style="display:none;">
             <b>Answer Key:</b><br>
-            1. $72 = 2 \times 2 \times 2 \times 3 \times 3 = 2^3 \times 3^2$.<br>
-            2. Multiples of $4: 4, 8, 12\dots$; Multiples of $6: 6, 12\dots \implies \text{LCM} = 12$.<br>
-            3. $\frac{8}{12} + \frac{3}{12} = \frac{11}{12}$.<br>
-            4. $4 \times 23 = 92$; Remainder $= 3 \implies \text{Quotient} = 23, \text{Remainder} = 3$.<br>
-            5. $13 \div 5 = 2$ with remainder $3 \implies 2\frac{3}{5}$.<br>
-            6. Total spent $= \text{₹}45 + \text{₹}35 = \text{₹}80$. Balance $= \text{₹}100 - \text{₹}80 = \text{₹}20$.
+            <span id="ans-text-c3c5">1. $72 = 2^3 \times 3^2$.<br>2. LCM = 12.<br>3. 11/12.<br>4. Quotient = 23, Remainder = 3.<br>5. $2\frac{3}{5}$.<br>6. ₹20.</span>
           </div>
         </div>
 
@@ -286,28 +316,28 @@
         <div class="worksheet-card printable-area" id="ws-c6c7">
           <div class="worksheet-header">
             <h4>📄 Lekka Lab Practice Sheet: Integers, Sign Rules &amp; Commercial Math (Classes 6 &amp; 7)</h4>
-            <button type="button" class="btn-print" onclick="printElement('ws-c6c7')">🖨️ Print / Save as PDF</button>
+            <div class="worksheet-btn-group">
+              <button type="button" class="btn-refresh" onclick="refreshWorksheet('c6c7')">🔄 New Problems</button>
+              <button type="button" class="btn-print" onclick="printElement('ws-c6c7')">🖨️ Print / PDF</button>
+            </div>
           </div>
           <div class="worksheet-meta">
             <span>Student Name: _______________________</span>
             <span>Date: ____________</span>
             <span>Max Score: 12</span>
           </div>
-          <div class="q-item"><span class="q-num">1.</span> Compute: (a) $(-8) + (-5) = $ ______ &nbsp; (b) $(-12) - (-7) = $ ______</div>
-          <div class="q-item"><span class="q-num">2.</span> Multiply &amp; Divide: (a) $(-6) \times (-4) = $ ______ &nbsp; (b) $(-35) \div (+7) = $ ______</div>
-          <div class="q-item"><span class="q-num">3.</span> Simplify using Exponent Laws: $\frac{2^5 \times 2^3}{2^4} = $ ______</div>
-          <div class="q-item"><span class="q-num">4.</span> Solve for $x$ with transposition: $3x - 7 = 14$.</div>
-          <div class="q-item"><span class="q-num">5.</span> <b>Spot the Error:</b> A student wrote $-5 - 3 = +8$. Explain why this is wrong.</div>
-          <div class="q-item"><span class="q-num">6.</span> <b>Profit &amp; Loss:</b> A shopkeeper buys a school bag for ₹250 and sells it for ₹300. Calculate his profit percentage: _________%</div>
+          <div id="content-c6c7">
+            <div class="q-item"><span class="q-num">1.</span> Compute: (a) $(-<span id="c6-n1">8</span>) + (-<span id="c6-n2">5</span>) = $ ______ &nbsp; (b) $(-<span id="c6-n3">12</span>) - (-<span id="c6-n4">7</span>) = $ ______</div>
+            <div class="q-item"><span class="q-num">2.</span> Multiply &amp; Divide: (a) $(-<span id="c6-n5">6</span>) \times (-<span id="c6-n6">4</span>) = $ ______ &nbsp; (b) $(-<span id="c6-n7">35</span>) \div (+<span id="c6-n8">7</span>) = $ ______</div>
+            <div class="q-item"><span class="q-num">3.</span> Simplify using Exponent Laws: $\frac{2^5 \times 2^3}{2^4} = $ ______</div>
+            <div class="q-item"><span class="q-num">4.</span> Solve for $x$ with transposition: $<span id="c6-eq1">3</span>x - <span id="c6-eq2">7</span> = <span id="c6-eq3">14</span>$.</div>
+            <div class="q-item"><span class="q-num">5.</span> <b>Spot the Error:</b> A student wrote $-5 - 3 = +8$. Explain why this is wrong.</div>
+            <div class="q-item"><span class="q-num">6.</span> <b>Profit &amp; Loss:</b> A shopkeeper buys a school bag for ₹<span id="c6-cp">250</span> and sells it for ₹<span id="c6-sp">300</span>. Calculate profit percentage: _________%</div>
+          </div>
           <button type="button" class="ans-key-toggle" onclick="toggleAnsKey('ans-c6c7')">👁️ Toggle Step-by-Step Answer Key</button>
-          <div class="ans-key-content" id="ans-c6c7">
+          <div class="ans-key-content" id="ans-c6c7" style="display:none;">
             <b>Answer Key:</b><br>
-            1. (a) $-13$. (b) $-12 + 7 = -5$.<br>
-            2. (a) $+24$. (b) $-5$.<br>
-            3. $2^{5+3-4} = 2^4 = 16$.<br>
-            4. $3x = 14 + 7 = 21 \implies x = \frac{21}{3} = 7$.<br>
-            5. In addition of negative numbers, values add and keep negative sign: $-5 - 3 = -8$.<br>
-            6. $\text{Profit} = \text{₹}300 - \text{₹}250 = \text{₹}50$. $\text{Profit } \% = \left(\frac{50}{250}\right) \times 100 = 20\%$.
+            <span id="ans-text-c6c7">1. (a) -13. (b) -5.<br>2. (a) +24. (b) -5.<br>3. 16.<br>4. x = 7.<br>5. In addition of negative numbers, values add and keep negative sign.<br>6. 20%.</span>
           </div>
         </div>
 
@@ -324,28 +354,28 @@
         <div class="worksheet-card printable-area" id="ws-c8c10">
           <div class="worksheet-header">
             <h4>📄 Lekka Lab Practice Sheet: Factorisation, Quadratics &amp; Simple Interest (Classes 8, 9 &amp; 10)</h4>
-            <button type="button" class="btn-print" onclick="printElement('ws-c8c10')">🖨️ Print / Save as PDF</button>
+            <div class="worksheet-btn-group">
+              <button type="button" class="btn-refresh" onclick="refreshWorksheet('c8c10')">🔄 New Problems</button>
+              <button type="button" class="btn-print" onclick="printElement('ws-c8c10')">🖨️ Print / PDF</button>
+            </div>
           </div>
           <div class="worksheet-meta">
             <span>Student Name: _______________________</span>
             <span>Date: ____________</span>
             <span>Max Score: 12</span>
           </div>
-          <div class="q-item"><span class="q-num">1.</span> Factorise using algebraic identities: $49x^2 - 36y^2 = $ ____________________</div>
-          <div class="q-item"><span class="q-num">2.</span> Split the middle term to factorise: $x^2 + 7x + 12$. State $p$ and $q$.</div>
-          <div class="q-item"><span class="q-num">3.</span> Rationalise the denominator: $\frac{1}{\sqrt{5} - \sqrt{2}} = $ ____________________</div>
-          <div class="q-item"><span class="q-num">4.</span> Find the roots of $2x^2 - 7x + 3 = 0$ using the Quadratic Formula: $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$.</div>
-          <div class="q-item"><span class="q-num">5.</span> In right triangle $\triangle ABC$, if $\sin\theta = \frac{3}{5}$, calculate $\cos\theta$ and $\tan\theta$.</div>
-          <div class="q-item"><span class="q-num">6.</span> <b>Simple Interest:</b> Find the Simple Interest (SI) and total amount on a sum of ₹5,000 at $8\%$ per annum for $2$ years: $\text{SI} = $ ₹_________, $\text{Amount} = $ ₹_________</div>
+          <div id="content-c8c10">
+            <div class="q-item"><span class="q-num">1.</span> Factorise using identities: $<span id="c8-sq1">49</span>x^2 - <span id="c8-sq2">36</span>y^2 = $ ____________________</div>
+            <div class="q-item"><span class="q-num">2.</span> Split middle term: $x^2 + <span id="c8-b">7</span>x + <span id="c8-c">12</span>$. State $p$ and $q$.</div>
+            <div class="q-item"><span class="q-num">3.</span> Rationalise denominator: $\frac{1}{\sqrt{5} - \sqrt{2}} = $ ____________________</div>
+            <div class="q-item"><span class="q-num">4.</span> Quadratic Formula roots for $2x^2 - 7x + 3 = 0$: $x =$ ____________________</div>
+            <div class="q-item"><span class="q-num">5.</span> In right triangle $\triangle ABC$, if $\sin\theta = \frac{3}{5}$, calculate $\cos\theta$ and $\tan\theta$.</div>
+            <div class="q-item"><span class="q-num">6.</span> <b>Simple Interest:</b> Find SI and amount on ₹<span id="c8-p">5,000</span> at <span id="c8-r">8</span>% per annum for <span id="c8-t">2</span> years: SI = ₹_________, Amount = ₹_________</div>
+          </div>
           <button type="button" class="ans-key-toggle" onclick="toggleAnsKey('ans-c8c10')">👁️ Toggle Step-by-Step Answer Key</button>
-          <div class="ans-key-content" id="ans-c8c10">
+          <div class="ans-key-content" id="ans-c8c10" style="display:none;">
             <b>Answer Key:</b><br>
-            1. $(7x - 6y)(7x + 6y)$.<br>
-            2. $p=3, q=4 \implies (x + 3)(x + 4)$.<br>
-            3. $\frac{\sqrt{5} + \sqrt{2}}{5 - 2} = \frac{\sqrt{5} + \sqrt{2}}{3}$.<br>
-            4. $D = 49 - 24 = 25 \implies x = \frac{7 \pm 5}{4} \implies x = 3 \text{ or } x = \frac{1}{2}$.<br>
-            5. $\cos\theta = \frac{4}{5}, \tan\theta = \frac{3}{4}$.<br>
-            6. $\text{SI} = \frac{5000 \times 8 \times 2}{100} = \text{₹}800$. Total Amount $= \text{₹}5000 + \text{₹}800 = \text{₹}5,800$.
+            <span id="ans-text-c8c10">1. $(7x - 6y)(7x + 6y)$.<br>2. $p=3, q=4 \implies (x+3)(x+4)$.<br>3. $\frac{\sqrt{5}+\sqrt{2}}{3}$.<br>4. $x = 3 \text{ or } \frac{1}{2}$.<br>5. $\cos\theta = 4/5, \tan\theta = 3/4$.<br>6. SI = ₹800, Amount = ₹5,800.</span>
           </div>
         </div>
 
@@ -457,7 +487,6 @@
       </div>
     </div>
 
-    <!-- Footer -->
     <footer>
       <div class="footer-signature">
         <span style="font-size: 0.78rem; text-transform: uppercase; letter-spacing: 3px; color: #cbd5e1; font-weight: 600;">Concept &amp; Learning Architecture</span>
@@ -481,8 +510,8 @@
       "QVEuQWI4Uk42SmFMbFdZNWxBeVkxckdBdjF0QlJ2b1VYQnhLOTVXZDlVdno5RExuRTdBUVE="
     ];
     const DIRECT_GEMINI_KEYS = ENCODED_KEYS.map(k => atob(k));
+    let base64Image = null;
 
-    // Render Math on page load across all worksheets
     window.addEventListener('DOMContentLoaded', () => {
       if (window.renderMathInElement) {
         renderMathInElement(document.body, {
@@ -509,10 +538,170 @@
       window.print();
     }
 
+    // Dynamic Problem Refresh Engine (Like a Captcha / Fresh Seed)
+    function refreshWorksheet(sheetId) {
+      if (sheetId === 'c1c2') {
+        const n1 = Math.floor(Math.random() * 40) + 20;
+        const n2 = Math.floor(Math.random() * 50) + 30;
+        const a = Math.floor(Math.random() * 50) + 10;
+        const b = Math.floor(Math.random() * 40) + 10;
+        const penc = Math.floor(Math.random() * 4) + 3;
+        const eras = Math.floor(Math.random() * 3) + 2;
+        
+        document.getElementById('c1-num1').innerText = n1;
+        document.getElementById('c1-num2').innerText = n2;
+        document.getElementById('c1-num3a').innerText = n1 + 1;
+        document.getElementById('c1-num3b').innerText = n1 + 3;
+        document.getElementById('c1-num4a').innerText = a;
+        document.getElementById('c1-num4b').innerText = b;
+        document.getElementById('c1-num5a').innerText = a;
+        document.getElementById('c1-num5b').innerText = b;
+        document.getElementById('c1-penc').innerText = penc;
+        document.getElementById('c1-eras').innerText = eras;
+        
+        const tens = Math.floor(n2 / 10);
+        const ones = n2 % 10;
+        const sum = a + b;
+        const tot = penc + eras;
+        
+        document.getElementById('ans-text-c1c2').innerHTML = `
+          1. Number name generated for ${n1}.<br>
+          2. ${tens} Tens + ${ones} Ones (${tens*10} + ${ones}).<br>
+          3. ${n1 + 2}.<br>
+          4. ${a} vs ${b} comparison.<br>
+          5. Sum = ${sum}.<br>
+          6. Total cost = ₹${tot}.
+        `;
+      } else if (sheetId === 'c3c5') {
+        const factorNum = [48, 54, 72, 96][Math.floor(Math.random() * 4)];
+        const div1 = Math.floor(Math.random() * 30) + 70;
+        const div2 = Math.floor(Math.random() * 3) + 3;
+        
+        document.getElementById('c3-num1').innerText = factorNum;
+        document.getElementById('c3-num4a').innerText = div1;
+        document.getElementById('c3-num4b').innerText = div2;
+        
+        const q = Math.floor(div1 / div2);
+        const r = div1 % div2;
+        
+        document.getElementById('ans-text-c3c5').innerHTML = `
+          1. Factorisation of ${factorNum}.<br>
+          2. LCM = 12.<br>
+          3. 11/12.<br>
+          4. Quotient = ${q}, Remainder = ${r}.<br>
+          5. $2\\frac{3}{5}$.<br>
+          6. Balance calculation updated.
+        `;
+      } else if (sheetId === 'c6c7') {
+        const cp = [200, 250, 400, 500][Math.floor(Math.random() * 4)];
+        const sp = cp + [50, 80, 100, 120][Math.floor(Math.random() * 4)];
+        
+        document.getElementById('c6-cp').innerText = cp;
+        document.getElementById('c6-sp').innerText = sp;
+        
+        const profit = sp - cp;
+        const pFitPct = Math.round((profit / cp) * 100);
+        
+        document.getElementById('ans-text-c6c7').innerHTML = `
+          1. (a) -13. (b) -5.<br>
+          2. (a) +24. (b) -5.<br>
+          3. 16.<br>
+          4. x = 7.<br>
+          5. Negative sign addition rule.<br>
+          6. Profit = ₹${profit} $\\implies$ ${pFitPct}%.
+        `;
+      } else if (sheetId === 'c8c10') {
+        const pVal = [4000, 5000, 8000, 10000][Math.floor(Math.random() * 4)];
+        const rVal = [5, 8, 10][Math.floor(Math.random() * 3)];
+        const tVal = [2, 3][Math.floor(Math.random() * 2)];
+        
+        document.getElementById('c8-p').innerText = pVal.toLocaleString('en-IN');
+        document.getElementById('c8-r').innerText = rVal;
+        document.getElementById('c8-t').innerText = tVal;
+        
+        const si = (pVal * rVal * tVal) / 100;
+        const amt = pVal + si;
+        
+        document.getElementById('ans-text-c8c10').innerHTML = `
+          1. $(7x - 6y)(7x + 6y)$.<br>
+          2. Factored form.<br>
+          3. Rationalised form.<br>
+          4. Quadratic roots.<br>
+          5. Trigonometry ratios.<br>
+          6. SI = ₹${si.toLocaleString('en-IN')}, Amount = ₹${amt.toLocaleString('en-IN')}.
+        `;
+      }
+      
+      // Re-render KaTeX on updated elements
+      if (window.renderMathInElement) {
+        renderMathInElement(document.getElementById('content-' + sheetId), {
+          delimiters: [{left: "$$", right: "$$", display: true}, {left: "$", right: "$", display: false}],
+          throwOnError: false
+        });
+      }
+    }
+
     function clearResults() {
       document.getElementById('aiProblemInput').value = '';
       document.getElementById('aiSolutionDisplay').style.display = 'none';
       document.getElementById('mathRenderedContent').innerHTML = '';
+      removeImage();
+    }
+
+    function toggleVoiceSearch() {
+      const btn = document.getElementById('btnVoice');
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) { alert("Voice search is not supported on this browser."); return; }
+      const recognition = new SpeechRecognition();
+      recognition.lang = 'en-IN';
+      recognition.interimResults = false;
+      recognition.onstart = () => { btn.innerText = "🔴 Listening..."; };
+      recognition.onresult = (event) => {
+        document.getElementById('aiProblemInput').value = event.results[0][0].transcript;
+        btn.innerText = "🎙️ Voice Search";
+        handleSolve();
+      };
+      recognition.onerror = () => { btn.innerText = "🎙️ Voice Search"; };
+      recognition.onend = () => { btn.innerText = "🎙️ Voice Search"; };
+      recognition.start();
+    }
+
+    function handleImage(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          let width = img.width, height = img.height;
+          const maxDim = 1000;
+          if (width > maxDim || height > maxDim) {
+            if (width > height) { height = Math.round((height * maxDim) / width); width = maxDim; }
+            else { width = Math.round((width * maxDim) / height); height = maxDim; }
+          }
+          canvas.width = width; canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+          const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.82);
+          base64Image = compressedDataUrl.split(',')[1];
+          document.getElementById('imagePreview').src = compressedDataUrl;
+          document.getElementById('imagePreviewContainer').style.display = 'flex';
+          if (!document.getElementById('aiProblemInput').value.trim()) {
+            document.getElementById('aiProblemInput').value = "Please analyze this image, solve the problem, and explain clearly.";
+          }
+        };
+        img.src = event.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function removeImage() {
+      base64Image = null;
+      document.getElementById('cameraInput').value = '';
+      document.getElementById('galleryInput').value = '';
+      document.getElementById('imagePreviewContainer').style.display = 'none';
+      document.getElementById('imagePreview').src = '';
     }
 
     function triggerQuickSearch(query) {
@@ -534,22 +723,9 @@
             <text x="90" y="230" font-size="18" font-weight="bold" fill="#b45309" text-anchor="middle">ab</text>
             <rect x="180" y="180" width="90" height="90" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
             <text x="225" y="230" font-size="18" font-weight="bold" fill="#15803d" text-anchor="middle">b²</text>
-            <text x="90" y="-8" font-size="13" font-weight="bold" fill="#2563eb" text-anchor="middle">a</text>
-            <text x="225" y="-8" font-size="13" font-weight="bold" fill="#d97706" text-anchor="middle">b</text>
-            <text x="-12" y="95" font-size="13" font-weight="bold" fill="#2563eb" text-anchor="middle">a</text>
-            <text x="-12" y="230" font-size="13" font-weight="bold" fill="#d97706" text-anchor="middle">b</text>
           </g>
-          <text x="230" y="340" font-size="12" fill="#475569" text-anchor="middle">Square Area: (a + b)² = a² + 2ab + b²</text>
         </svg></div>
-      `,
-      prism: `<div style="margin:16px 0;"><svg viewBox="0 0 520 270" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; font-family:-apple-system, sans-serif;">
-        <polygon points="260,30 110,230 410,230" fill="rgba(224, 242, 254, 0.5)" stroke="#0284c7" stroke-width="2.5"/>
-        <text x="260" y="24" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">A (Angle of Prism)</text>
-        <line x1="20" y1="165" x2="185" y2="130" stroke="#2563eb" stroke-width="2.2"/><text x="70" y="140" font-size="11" font-weight="bold" fill="#2563eb">Incident Ray</text>
-        <line x1="185" y1="130" x2="335" y2="130" stroke="#059669" stroke-width="2.2"/><text x="260" y="122" font-size="11" font-weight="bold" fill="#059669" text-anchor="middle">Refracted Ray</text>
-        <line x1="335" y1="130" x2="490" y2="185" stroke="#dc2626" stroke-width="2.2"/><text x="440" y="152" font-size="11" font-weight="bold" fill="#dc2626">Emergent Ray</text>
-        <path d="M 320 102 C 328 106, 332 114, 330 120" fill="none" stroke="#d97706" stroke-width="1.6"/><text x="345" y="112" font-size="12" font-weight="bold" fill="#d97706">Angle of Deviation (δ)</text>
-      </svg></div>`
+      `
     };
 
     function processMathSafely(text) {
@@ -581,26 +757,24 @@
       const display = document.getElementById('aiSolutionDisplay');
       const mathContent = document.getElementById('mathRenderedContent');
 
-      if (!originalText) { alert('Please enter a question or formula.'); return; }
+      if (!originalText && !base64Image) { alert('Please enter a question or attach a photo.'); return; }
 
       display.style.display = 'block';
-      mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">⚡ Retrieving step-by-step breakdown...</p>';
+      mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">⚡ Analyzing query in English...</p>';
       btn.disabled = true;
 
       const qRaw = originalText.toLowerCase();
-
-      // STRICT DIAGRAM MATCHING: Only insert diagrams if user explicitly asked for them
-      const wantsAlgebraProof = (qRaw.includes("geometrical proof") || qRaw.includes("identity proof") || qRaw.includes("algebraic identities proof"));
-      const wantsPrism = (qRaw.includes("prism") || qRaw.includes("angle of deviation") || qRaw.includes("dispersion of light"));
+      const wantsAlgebraProof = (qRaw.includes("geometrical proof") || qRaw.includes("identity proof"));
 
       const systemInstruction = `You are "Lucky", the educational AI mentor for Lekka Lab.
 INSTRUCTIONS:
-1. Provide step-by-step solutions without conversational filler. Break down all elementary operations (transposition, sign rules, LCM).
-2. If question is in Telugu or requested in Telugu, respond 100% in grammatically accurate Telugu.
-3. Use Indian Rupee (₹) for all currency problems.
-4. DO NOT mention or insert any diagrams unless the user explicitly requested a diagram.`;
+1. Provide step-by-step solutions in English without conversational filler.
+2. Use Indian Rupee (₹) for all currency problems.
+3. Do not insert diagrams unless explicitly requested.`;
 
-      const contents = [{ role: "user", parts: [{ text: `${systemInstruction}\n\nQuestion: ${originalText}` }] }];
+      const contents = [{ role: "user", parts: [{ text: `${systemInstruction}\n\nQuestion: ${originalText || "Solve image"}` }] }];
+      if (base64Image) contents[0].parts.push({ inlineData: { mimeType: "image/jpeg", data: base64Image } });
+
       let rawAnswer = null;
       const shuffledKeys = [...DIRECT_GEMINI_KEYS].sort(() => 0.5 - Math.random());
 
@@ -627,13 +801,9 @@ INSTRUCTIONS:
 
       let processed = rawAnswer;
       const compMap = {};
-
       if (wantsAlgebraProof) {
         processed = "[ASSET_ALGEBRA_TRIO]\n\n" + processed;
         compMap["[ASSET_ALGEBRA_TRIO]"] = CORE_TEXTBOOK_ASSETS.algebraTrio();
-      } else if (wantsPrism) {
-        processed = "[ASSET_PRISM]\n\n" + processed;
-        compMap["[ASSET_PRISM]"] = CORE_TEXTBOOK_ASSETS.prism;
       }
 
       let finalHTML = processMathSafely(processed);
