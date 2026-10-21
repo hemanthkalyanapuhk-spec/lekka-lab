@@ -129,16 +129,13 @@
       font-size: 0.98rem;
     }
 
-    /* Diagram Styling */
     .solution-box svg {
       display: block;
       margin: 14px auto;
       max-width: 100%;
       height: auto;
       border-radius: 10px;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.06);
       background: #ffffff;
-      border: 1px solid #e2e8f0;
     }
 
     .section-title {
@@ -281,7 +278,7 @@
         <span class="online-badge">ONLINE</span>
       </div>
       
-      <textarea id="aiProblemInput" placeholder="Ask anything... Science, 2D/3D Math diagrams, Chemical reactions, GK, or Recipes!"></textarea>
+      <textarea id="aiProblemInput" placeholder="Ask anything... Math theorems, Science, Chemistry, GK, Current Affairs, or Recipes!"></textarea>
       
       <div class="ai-controls">
         <button class="btn btn-solve" id="btnSolve" onclick="handleSolve()">✨ Ask Lucky</button>
@@ -554,7 +551,7 @@
       recognition.start();
     }
 
-    // High-Resolution Educational AI Engine
+    // Direct Universal AI Engine (Pure Proven Protocol)
     async function handleSolve() {
       const text = document.getElementById('aiProblemInput').value.trim();
       const btn = document.getElementById('btnSolve');
@@ -567,31 +564,16 @@
       }
 
       display.style.display = 'block';
-      mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">Analyzing and generating diagrams...</p>';
+      mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">Thinking...</p>';
       btn.disabled = true;
 
-      const systemInstruction = `You are "Lucky", the premier visual educational AI assistant for Lekka Lab.
+      // Clean, unpadded system instruction that succeeded before
+      const systemInstruction = `You are Lucky, a universal educational assistant for Lekka Lab.
+- Answer clearly using Markdown headings and bullet points.
+- Use LaTeX ($..$ inline, $$..$$ display) for math and chemical formulas.
+- If diagrams are needed, provide clean inline SVG with labels directly inside the SVG.`;
 
-MANDATORY OUTPUT FORMAT & QUALITY RULES:
-1. MATHEMATICS & FORMULAS:
-   - Use standard LaTeX: $...$ for inline, and $$...$$ for display equations.
-   - For chemical reactions, output balanced equations with physical states:
-     $$\\text{6CO}_2(g) + \\text{6H}_2\\text{O}(l) \\xrightarrow{\\text{Light, Chlorophyll}} \\text{C}_6\\text{H}_{12}\\text{O}_6(s) + \\text{6O}_2(g)$$
-
-2. DIAGRAMS & 2D/3D VISUALIZATIONS (STRICT REQUIREMENTS):
-   - Whenever geometry, science concepts, plant/cell anatomy, or graphs are discussed, generate a comprehensive INLINE SVG (<svg viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg">).
-   - USE MODERN 2.5D / 3D GRADIENT STYLING:
-     * Add <defs> with linearGradient / radialGradient and drop-shadow filter.
-     * Use vibrant palette: #3b82f6, #10b981, #f59e0b, #ef4444, #8b5cf6.
-   - STRICT INLINE LABELLING:
-     * EVERY dimension, region, side, angle, organelle (e.g., Grana, Stroma, Thylakoid, Outer/Inner Membrane), and vertex MUST be labeled DIRECTLY INSIDE the SVG using:
-       <text x="..." y="..." font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">Label</text>
-     * NEVER print labels as floating text outside the </svg> tag.
-
-3. STRUCTURE:
-   - Clear Markdown headers (###), bold key terms, and bullet points.`;
-
-      const promptInput = `${systemInstruction}\n\nUser Question: ${text}`;
+      const promptInput = `${systemInstruction}\n\nQuestion: ${text}`;
       let rawAnswer = null;
       let lastError = "Request failed";
 
@@ -617,11 +599,14 @@ MANDATORY OUTPUT FORMAT & QUALITY RULES:
             break;
           } else if (data.steps && data.steps.length > 0) {
             for (const s of data.steps) {
-              if (s.output_text) { rawAnswer = s.output_text; break; }
+              if (s.output_text) { 
+                rawAnswer = s.output_text; 
+                break; 
+              }
             }
             if (rawAnswer) break;
           } else if (data.error) {
-            lastError = data.error.message;
+            lastError = data.error.message || lastError;
           }
         } catch (e) {
           lastError = e.message;
@@ -634,7 +619,6 @@ MANDATORY OUTPUT FORMAT & QUALITY RULES:
         return;
       }
 
-      // Format & sanitize output
       let cleanOutput = rawAnswer
         .replace(/\u2260/g, ' \\neq ')
         .replace(/\u00B1/g, ' \\pm ')
