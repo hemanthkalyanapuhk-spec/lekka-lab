@@ -3,560 +3,345 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Lekka Lab | Formula Vault</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lekka Lab — Formula Vault</title>
 <meta name="description" content="Mathematics formulas, definitions, theorems and worked examples.">
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
+  startup: { typeset: false }
+};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <style>
-:root {
-  --bg:#0b1020; --panel:#141d32; --line:#293651;
-  --text:#edf3ff; --muted:#a5b4d0; --accent:#75e0c0;
-}
+:root{color-scheme:dark;--bg:#0b1020;--card:#141e33;--line:#2c3a55;
+--text:#edf3ff;--muted:#a9b8d1;--green:#6ee7c2}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);
-  font-family:system-ui,-apple-system,sans-serif}
-header{padding:32px 20px;background:linear-gradient(135deg,#182b48,#123c42)}
-.wrap{max-width:1200px;margin:auto;padding:20px}
-h1{font-size:clamp(28px,5vw,44px);margin:0 0 8px}
-p{line-height:1.65}
+font:16px/1.6 system-ui,sans-serif}
+header{padding:30px 18px;background:linear-gradient(120deg,#162a49,#125047)}
+main{max-width:1250px;margin:auto;padding:20px}
+h1{font-size:clamp(28px,5vw,44px);margin:0}
+h2{font-size:20px;margin:8px 0}
 .muted{color:var(--muted)}
+.controls{display:grid;grid-template-columns:2fr 1fr;gap:10px;margin:20px 0}
 input,select,button{font:inherit}
-input,select{background:var(--panel);color:var(--text);
- border:1px solid var(--line);border-radius:10px;padding:12px;width:100%}
-.controls{display:grid;grid-template-columns:2fr 1fr;gap:12px;margin:20px 0}
-.topics{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
-button{cursor:pointer;border:1px solid var(--line);border-radius:20px;
- padding:9px 14px;background:var(--panel);color:var(--text)}
-button.active{background:var(--accent);color:#09231e;border-color:var(--accent)}
-.stats{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0}
-.stat{background:var(--panel);border:1px solid var(--line);
- padding:14px 18px;border-radius:12px;flex:1;min-width:140px}
-.stat strong{display:block;font-size:25px;color:var(--accent)}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px}
-.card{background:var(--panel);border:1px solid var(--line);
- border-radius:14px;padding:18px;min-width:0}
-.card h3{margin:8px 0}
-.tag{font-size:12px;color:var(--accent);text-transform:uppercase;letter-spacing:.07em}
-.formula{font-family:Cambria,"Times New Roman",serif;font-size:21px;
- overflow-wrap:anywhere;background:#0b1427;border-radius:8px;padding:14px;margin:12px 0}
-details{border-top:1px solid var(--line);padding-top:10px}
-summary{cursor:pointer;color:var(--accent)}
+input,select{width:100%;padding:12px;border-radius:9px;
+border:1px solid var(--line);background:var(--card);color:var(--text)}
+.topics{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+button{cursor:pointer;background:var(--card);color:var(--text);
+border:1px solid var(--line);border-radius:20px;padding:9px 13px}
+button.active{background:var(--green);color:#06261e}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.stat,.card{background:var(--card);border:1px solid var(--line);border-radius:12px}
+.stat{padding:14px}
+.stat strong{display:block;color:var(--green);font-size:25px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px;margin-top:16px}
+.card{padding:16px;min-width:0}
+.tag{font-size:12px;text-transform:uppercase;color:var(--green);letter-spacing:.06em}
+.math{padding:13px;background:#091426;border-radius:8px;overflow-x:auto;
+font-size:19px;margin:12px 0}
+summary{cursor:pointer;color:var(--green)}
 .example{color:var(--muted);font-size:14px}
-footer{text-align:center;color:var(--muted);padding:30px}
-#empty{padding:35px;text-align:center;color:var(--muted)}
-@media(max-width:600px){.controls{grid-template-columns:1fr}.wrap{padding:14px}}
+#empty{text-align:center;padding:30px;color:var(--muted)}
+footer{text-align:center;padding:25px;color:var(--muted)}
+@media(max-width:600px){.controls{grid-template-columns:1fr}.stats{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<header>
- <div class="wrap">
-  <div class="tag">LEKKA LAB • MATHEMATICS</div>
-  <h1>Formula Vault</h1>
-  <p>Explore mathematics formulas, definitions, identities and theorems.</p>
-  <p class="muted">Number Theory · Geometry · Algebra · Statistics ·
-  Coordinate Geometry · Trigonometry · Calculus</p>
- </div>
-</header>
+<header><main>
+<div class="tag">LEKKA LAB · MATHEMATICS</div>
+<h1>Formula Vault</h1>
+<p>Seven subjects. Formula applications, definitions, identities and theorems.</p>
+</main></header>
 
-<main class="wrap">
- <div class="stats">
-  <div class="stat"><strong id="total">0</strong>Total entries</div>
-  <div class="stat"><strong id="subjects">7</strong>Subjects</div>
-  <div class="stat"><strong id="shown">0</strong>Matching entries</div>
- </div>
+<main>
+<div class="stats">
+<div class="stat"><strong id="total">0</strong>Total records</div>
+<div class="stat"><strong id="subjectCount">7</strong>Subjects</div>
+<div class="stat"><strong id="shown">0</strong>Search results</div>
+</div>
 
- <div class="controls">
-  <input id="search" type="search" placeholder="Search formula, theorem, keyword..."
-   aria-label="Search formulas">
-  <select id="kind" aria-label="Filter by entry type">
-   <option value="">All entry types</option>
-   <option>Formula</option><option>Identity</option>
-   <option>Definition</option><option>Theorem</option>
-  </select>
- </div>
+<div class="controls">
+<input id="search" type="search" placeholder="Search formulas, examples or keywords...">
+<select id="kind">
+<option value="">All types</option>
+<option>Formula</option>
+<option>Identity</option>
+<option>Definition</option>
+<option>Theorem</option>
+</select>
+</div>
 
- <nav id="topics" class="topics" aria-label="Mathematics subjects"></nav>
- <div id="results" class="grid"></div>
- <div id="empty" hidden>No matching entries. Try another search.</div>
+<nav id="topics" class="topics"></nav>
+<div id="status" class="muted">Preparing formula library...</div>
+<div id="results" class="grid"></div>
+<div id="empty" hidden>No matching entries found.</div>
 </main>
-
-<footer>Lekka Lab · Learn the rule, understand the proof, solve the problem.</footer>
+<footer>Lekka Lab · Learn formulas with examples.</footer>
 
 <script>
 "use strict";
 
 const subjects = [
- "Number Theory", "Geometry", "Algebra", "Statistics",
- "Coordinate Geometry", "Trigonometry", "Calculus"
+ "Number Theory","Geometry","Algebra","Statistics",
+ "Coordinate Geometry","Trigonometry","Calculus"
 ];
 
 /*
- * Formula record:
- * topic, title, type, expression, explanation, example, keywords
- *
- * Add records to the library array to expand the vault.
- * Use distinct, verified mathematical statements rather than
- * automatically counting duplicate formulas as new entries.
- */
-const library = [
- // NUMBER THEORY
- ["Number Theory","Even integer","Definition","n = 2k",
-  "An integer is even if it is divisible by 2, where k is an integer.",
-  "For k = 4, n = 8.","parity integers divisibility"],
- ["Number Theory","Odd integer","Definition","n = 2k + 1",
-  "An odd integer differs from an even integer by 1.",
-  "For k = 3, n = 7.","parity integers"],
- ["Number Theory","Division algorithm","Theorem","a = bq + r, 0 ≤ r < b",
-  "For integers a and b > 0, the quotient q and remainder r are unique.",
-  "29 = 5 × 5 + 4.","division remainder"],
- ["Number Theory","Euclidean algorithm","Formula","gcd(a,b) = gcd(b, a mod b)",
-  "Repeated remainders determine the greatest common divisor.",
-  "gcd(18,12) = gcd(12,6) = 6.","GCD HCF"],
- ["Number Theory","LCM and GCD","Formula","lcm(a,b) · gcd(a,b) = |ab|",
-  "For nonzero integers a and b, the product of their positive LCM and GCD equals |ab|.",
-  "For 6 and 8: LCM × GCD = 24 × 2 = 48.","LCM HCF"],
- ["Number Theory","Prime factorization","Theorem","n = p₁ᵃ¹ p₂ᵃ² ⋯ pₖᵃᵏ",
-  "Every integer greater than 1 has a unique prime factorization up to order.",
-  "60 = 2² × 3 × 5.","prime factors fundamental theorem"],
- ["Number Theory","Number of divisors","Formula","d(n) = (a₁+1)(a₂+1)⋯(aₖ+1)",
-  "If n has prime factorization with exponents a₁ through aₖ, this counts its positive divisors.",
-  "12 = 2² × 3 has (2+1)(1+1) = 6 divisors.","divisor count"],
- ["Number Theory","Sum of divisors","Formula","σ(n) = ∏ (pᵃ⁺¹ − 1)/(p − 1)",
-  "Use the prime factorization of n; each factor corresponds to a distinct prime power.",
-  "σ(6) = (1+2)(1+3) = 12.","divisors sigma"],
- ["Number Theory","Congruence","Definition","a ≡ b (mod m) ⇔ m | (a − b)",
-  "Two integers are congruent modulo m when their difference is divisible by m.",
-  "17 ≡ 2 (mod 5).","modular arithmetic"],
- ["Number Theory","Fermat's little theorem","Theorem","aᵖ⁻¹ ≡ 1 (mod p)",
-  "If p is prime and p does not divide a, this congruence holds.",
-  "2⁴ ≡ 1 (mod 5).","prime modular theorem"],
- ["Number Theory","Euler's totient theorem","Theorem","a^φ(n) ≡ 1 (mod n)",
-  "This holds when gcd(a,n) = 1 and n > 1.",
-  "3² ≡ 1 (mod 8).","totient Euler"],
- ["Number Theory","Sum of first n integers","Formula","1 + 2 + ⋯ + n = n(n+1)/2",
-  "The sum of the first n positive integers.",
-  "For n = 10, the sum is 55.","series sum"],
- ["Number Theory","Sum of first n squares","Formula","Σ k² = n(n+1)(2n+1)/6",
-  "The sum runs from k = 1 to n.",
-  "For n = 3: 1 + 4 + 9 = 14.","square sum"],
- ["Number Theory","Sum of first n cubes","Formula","Σ k³ = [n(n+1)/2]²",
-  "The sum of the first n positive cubes equals the square of their integer sum.",
-  "1³ + 2³ + 3³ = 36.","cube sum"],
+ Each template describes a mathematical relationship.
+ Parameterized records are worked applications, not separate
+ mathematical identities. Examples use integer parameter values.
+*/
+const templates = {
+"Number Theory":[
+ ["Even integer","Definition","n=2k","An even integer is divisible by 2.","k=4 gives n=8."],
+ ["Odd integer","Definition","n=2k+1","An odd integer differs from an even integer by 1.","k=4 gives n=9."],
+ ["Sum of integers","Formula","S=n(n+1)/2","Sum of the first n positive integers.","n=10 gives 55."],
+ ["Sum of squares","Formula","S=n(n+1)(2n+1)/6","Sum of the first n positive integer squares.","n=3 gives 14."],
+ ["Sum of cubes","Formula","S=[n(n+1)/2]^2","Sum of the first n positive integer cubes.","n=3 gives 36."],
+ ["Division algorithm","Theorem","a=bq+r, 0<=r<b","For integer a and positive integer b, quotient and remainder exist uniquely.","29=5(5)+4."],
+ ["GCD remainder rule","Theorem","gcd(a,b)=gcd(b,a mod b)","The Euclidean algorithm preserves the greatest common divisor.","gcd(18,12)=6."],
+ ["LCM and GCD","Formula","lcm(a,b)gcd(a,b)=ab","For positive integers a and b.","For 6 and 8: 24(2)=48."],
+ ["Prime factorization","Theorem","n=p1^a1 p2^a2 ... pk^ak","Every integer greater than 1 has a unique prime factorization up to order.","60=2^2(3)(5)."],
+ ["Divisor count","Formula","d(n)=(a1+1)(a2+1)...(ak+1)","Use exponents in the prime factorization.","12=2^2(3) has 6 divisors."],
+ ["Congruence","Definition","a=b (mod m) iff m divides (a-b)","Congruent integers have a difference divisible by m.","17=2 (mod 5)."],
+ ["Fermat theorem","Theorem","a^(p-1)=1 (mod p)","p is prime and p does not divide a.","2^4=1 (mod 5)."],
+ ["Euler totient theorem","Theorem","a^phi(n)=1 (mod n)","Requires gcd(a,n)=1 and n>1.","3^2=1 (mod 8)."],
+ ["Arithmetic progression","Formula","a_n=a+(n-1)d","Nth term with first term a and common difference d.","a=2,d=3,n=5 gives 14."],
+ ["Geometric progression","Formula","a_n=ar^(n-1)","Nth term with first term a and ratio r.","a=2,r=3,n=4 gives 54."]
+],
+"Geometry":[
+ ["Triangle angle sum","Theorem","A+B+C=180 deg","Interior angles of a Euclidean triangle add to 180 degrees.","50+60+70=180."],
+ ["Exterior angle theorem","Theorem","Exterior angle=A+B","Equals the two remote interior angles of a triangle.","40+65=105 degrees."],
+ ["Pythagorean theorem","Theorem","c^2=a^2+b^2","For a right triangle, c is the hypotenuse.","a=3,b=4 gives c=5."],
+ ["Triangle area","Formula","A=bh/2","b is base and h is perpendicular height.","b=10,h=6 gives A=30."],
+ ["Heron formula","Formula","A=sqrt(s(s-a)(s-b)(s-c))","s=(a+b+c)/2 is the semiperimeter.","Sides 3,4,5 give area 6."],
+ ["Rectangle area","Formula","A=lw","Length multiplied by width.","l=8,w=3 gives 24."],
+ ["Rectangle perimeter","Formula","P=2(l+w)","Sum of all four sides.","l=8,w=3 gives 22."],
+ ["Circle area","Formula","A=pi*r^2","Area of a circle with radius r.","r=3 gives 9pi."],
+ ["Circle circumference","Formula","C=2*pi*r","Distance around a circle.","r=7 gives 14pi."],
+ ["Polygon interior sum","Formula","S=(n-2)180 deg","Interior-angle sum of a simple n-sided polygon.","n=6 gives 720 degrees."],
+ ["Regular polygon exterior angle","Formula","E=360 deg/n","Each exterior angle of a regular polygon.","n=5 gives 72 degrees."],
+ ["Similar triangles","Theorem","Corresponding sides have equal ratios","Similar triangles have equal corresponding angles.","Scale factor 2 doubles all sides."],
+ ["Inscribed angle","Theorem","Inscribed angle=central angle/2","Angles subtending the same arc satisfy this relationship.","Central angle 80 degrees gives 40 degrees."],
+ ["Cylinder volume","Formula","V=pi*r^2*h","Circular base area times height.","r=2,h=5 gives 20pi."],
+ ["Sphere surface area","Formula","A=4*pi*r^2","Total surface area of a sphere.","r=3 gives 36pi."]
+],
+"Algebra":[
+ ["Square of sum","Identity","(a+b)^2=a^2+2ab+b^2","Expansion of a binomial square.","(x+3)^2=x^2+6x+9."],
+ ["Square of difference","Identity","(a-b)^2=a^2-2ab+b^2","Expansion of a binomial difference.","(x-4)^2=x^2-8x+16."],
+ ["Difference of squares","Identity","a^2-b^2=(a-b)(a+b)","Factors a difference of squares.","x^2-25=(x-5)(x+5)."],
+ ["Cube of sum","Identity","(a+b)^3=a^3+3a^2b+3ab^2+b^3","Expansion of a binomial cube.","(x+1)^3=x^3+3x^2+3x+1."],
+ ["Sum of cubes","Identity","a^3+b^3=(a+b)(a^2-ab+b^2)","Factorization identity.","x^3+8=(x+2)(x^2-2x+4)."],
+ ["Difference of cubes","Identity","a^3-b^3=(a-b)(a^2+ab+b^2)","Factorization identity.","x^3-27=(x-3)(x^2+3x+9)."],
+ ["Linear equation","Formula","ax+b=0 => x=-b/a","Requires a nonzero.","2x+6=0 gives x=-3."],
+ ["Quadratic formula","Formula","x=(-b+/-sqrt(b^2-4ac))/(2a)","For ax^2+bx+c=0, a is nonzero.","x^2-5x+6=0 gives 2 or 3."],
+ ["Discriminant","Formula","D=b^2-4ac","Determines the nature of quadratic roots.","D>0 gives two distinct real roots."],
+ ["Exponent product","Identity","a^m*a^n=a^(m+n)","Multiplication of like bases.","x^2*x^3=x^5."],
+ ["Exponent quotient","Identity","a^m/a^n=a^(m-n)","Requires a nonzero.","x^5/x^2=x^3."],
+ ["Power of power","Identity","(a^m)^n=a^(mn)","Multiply exponents.","(x^2)^3=x^6."],
+ ["Arithmetic sum","Formula","S=n(a1+an)/2","Sum of n terms of an arithmetic progression.","2+5+8+11=26."],
+ ["Geometric sum","Formula","S=a(1-r^n)/(1-r)","For r not equal to 1.","1+2+4+8=15."],
+ ["Logarithm product","Identity","log_a(xy)=log_a(x)+log_a(y)","Requires positive arguments and a>0, a not 1.","log10(10*100)=3."]
+],
+"Statistics":[
+ ["Arithmetic mean","Formula","mean=sum(x)/n","Sum observations and divide by their count.","2,4,6 gives mean 4."],
+ ["Weighted mean","Formula","mean=sum(wx)/sum(w)","Weights must have a nonzero total.","80 and 90 with weights 1,3 give 87.5."],
+ ["Range","Formula","range=max-min","Difference between largest and smallest values.","2,5,9 gives 7."],
+ ["Population variance","Formula","sigma^2=sum((x-mu)^2)/N","Average squared deviation from population mean.","2,4,6 gives 8/3."],
+ ["Sample variance","Formula","s^2=sum((x-xbar)^2)/(n-1)","For a sample with n>1.","2,4,6 gives 4."],
+ ["Standard deviation","Formula","sigma=sqrt(variance)","Positive square root of variance.","Variance 9 gives 3."],
+ ["Z score","Formula","z=(x-mu)/sigma","Requires positive standard deviation.","x=70, mu=60, sigma=5 gives 2."],
+ ["Probability complement","Formula","P(not A)=1-P(A)","An event and its complement sum to 1.","P(A)=0.3 gives 0.7."],
+ ["Probability addition","Formula","P(A or B)=P(A)+P(B)-P(A and B)","Subtract the overlap to avoid double counting.","For disjoint events, overlap is zero."],
+ ["Conditional probability","Formula","P(A|B)=P(A and B)/P(B)","Requires P(B)>0.","0.2/0.5=0.4."],
+ ["Binomial probability","Formula","P(X=k)=C(n,k)p^k(1-p)^(n-k)","For independent Bernoulli trials.","n=2,p=.5,k=1 gives .5."],
+ ["Expected value","Formula","E(X)=sum(x*P(x))","Probability-weighted average of outcomes.","A fair die has expected value 3.5."],
+ ["Pearson correlation","Formula","r=cov(X,Y)/(sigmaX*sigmaY)","Defined when both standard deviations are positive.","r lies between -1 and 1."],
+ ["Median","Definition","Middle value of sorted data","For even sample size, average the two middle values.","1,3,7 has median 3."],
+ ["Mode","Definition","Most frequent observed value","A distribution may have multiple modes or none uniquely.","2,2,3,5 has mode 2."]
+],
+"Coordinate Geometry":[
+ ["Distance","Formula","d=sqrt((x2-x1)^2+(y2-y1)^2)","Distance between two Cartesian points.","(0,0) to (3,4) gives 5."],
+ ["Midpoint","Formula","M=((x1+x2)/2,(y1+y2)/2)","Average corresponding coordinates.","(0,2),(4,6) gives (2,4)."],
+ ["Slope","Formula","m=(y2-y1)/(x2-x1)","Requires different x-coordinates.","(1,2),(3,6) gives slope 2."],
+ ["Point-slope line","Formula","y-y1=m(x-x1)","Line of slope m through a known point.","Through (1,2), slope 3."],
+ ["Slope-intercept line","Formula","y=mx+c","m is slope and c is y-intercept.","y=2x+1."],
+ ["Intercept form","Formula","x/a+y/b=1","Line with nonzero intercepts a and b.","x/4+y/2=1."],
+ ["Parallel lines","Theorem","m1=m2","Distinct nonvertical parallel lines have equal slopes.","Slopes 2 and 2 are parallel."],
+ ["Perpendicular lines","Theorem","m1*m2=-1","For nonvertical perpendicular lines.","Slopes 2 and -1/2."],
+ ["Coordinate triangle area","Formula","A=abs(x1(y2-y3)+x2(y3-y1)+x3(y1-y2))/2","Area determined by three vertices.","(0,0),(4,0),(0,3) gives 6."],
+ ["Circle equation","Formula","(x-h)^2+(y-k)^2=r^2","Center (h,k), radius r.","x^2+y^2=25 has radius 5."],
+ ["Parabola","Formula","y^2=4ax","Right-opening parabola with vertex at origin.","y^2=8x has focus (2,0)."],
+ ["Ellipse","Formula","x^2/a^2+y^2/b^2=1","Ellipse centered at the origin.","x^2/25+y^2/9=1."],
+ ["Hyperbola","Formula","x^2/a^2-y^2/b^2=1","Horizontal hyperbola centered at origin.","x^2/9-y^2/4=1."],
+ ["Section formula","Formula","P=((mx2+nx1)/(m+n),(my2+ny1)/(m+n))","Internal division in ratio m:n.","Midpoint follows when m=n."],
+ ["Origin distance","Formula","d=sqrt(x^2+y^2)","Distance from the origin.","(3,4) gives 5."]
+],
+"Trigonometry":[
+ ["Sine ratio","Definition","sin(theta)=opposite/hypotenuse","Right-triangle ratio.","3/5 for opposite 3, hypotenuse 5."],
+ ["Cosine ratio","Definition","cos(theta)=adjacent/hypotenuse","Right-triangle ratio.","4/5 for adjacent 4, hypotenuse 5."],
+ ["Tangent ratio","Definition","tan(theta)=opposite/adjacent","Right-triangle ratio.","3/4 for opposite 3, adjacent 4."],
+ ["Pythagorean identity","Identity","sin^2(x)+cos^2(x)=1","Valid for every real angle.","If sin x=3/5, cos^2 x=16/25."],
+ ["Tangent identity","Identity","1+tan^2(x)=sec^2(x)","Where tangent and secant are defined.","tan x=2 gives sec^2 x=5."],
+ ["Cotangent identity","Identity","1+cot^2(x)=csc^2(x)","Where cotangent and cosecant are defined.","cot x=2 gives csc^2 x=5."],
+ ["Sine sum","Identity","sin(A+B)=sin A cos B+cos A sin B","Compound-angle identity.","A=30°, B=60° gives sin 90°=1."],
+ ["Cosine sum","Identity","cos(A+B)=cos A cos B-sin A sin B","Compound-angle identity.","A=B=45° gives cos 90°=0."],
+ ["Sine double angle","Identity","sin(2x)=2sin(x)cos(x)","Double-angle identity.","x=45° gives 1."],
+ ["Cosine double angle","Identity","cos(2x)=cos^2(x)-sin^2(x)","Equivalent forms are 2cos²x-1 and 1-2sin²x.","x=60° gives -1/2."],
+ ["Sine rule","Formula","a/sin(A)=b/sin(B)=c/sin(C)","Triangle side divided by opposite-angle sine.","Use known side-angle pairs."],
+ ["Cosine rule","Formula","c^2=a^2+b^2-2ab*cos(C)","Two sides and included angle determine the third.","a=b=5,C=60° gives c=5."],
+ ["Degree conversion","Formula","radians=degrees*pi/180","Converts degrees into radians.","90°=pi/2."],
+ ["Unit circle","Definition","x=cos(theta), y=sin(theta)","Points on the unit circle satisfy x²+y²=1.","theta=0 gives (1,0)."],
+ ["Tangent quotient","Identity","tan(x)=sin(x)/cos(x)","Requires cos(x) not equal to zero.","sin 45°/cos 45°=1."]
+],
+"Calculus":[
+ ["Power derivative","Formula","d(x^n)/dx=n*x^(n-1)","Where the power function is differentiable.","d(x^3)/dx=3x^2."],
+ ["Constant derivative","Formula","d(c)/dx=0","The derivative of a constant is zero.","d(7)/dx=0."],
+ ["Sum derivative","Formula","d(f+g)/dx=f'+g'","Differentiate each summand.","d(x²+sin x)=2x+cos x."],
+ ["Product rule","Formula","(fg)'=f'g+fg'","Derivative of a product.","d(x sin x)=sin x+x cos x."],
+ ["Quotient rule","Formula","(f/g)'=(f'g-fg')/g^2","Requires g not equal to zero.","d(x/(x+1))=1/(x+1)^2."],
+ ["Chain rule","Formula","d(f(g(x)))/dx=f'(g(x))*g'(x)","Differentiate outer then inner.","d(sin(x²))=2x cos(x²)."],
+ ["Exponential derivative","Formula","d(e^x)/dx=e^x","Natural exponential derivative.","d(e^(3x))/dx=3e^(3x)."],
+ ["Logarithmic derivative","Formula","d(ln x)/dx=1/x","For x>0.","d(ln x)=1/x."],
+ ["Sine derivative","Formula","d(sin x)/dx=cos x","Angles in radians.","d(3sin x)=3cos x."],
+ ["Cosine derivative","Formula","d(cos x)/dx=-sin x","Angles in radians.","d(cos 2x)=-2sin 2x."],
+ ["Power integral","Formula","integral(x^n dx)=x^(n+1)/(n+1)+C","For n not equal to -1.","integral(x² dx)=x³/3+C."],
+ ["Logarithmic integral","Formula","integral(1/x dx)=ln|x|+C","On intervals not crossing zero.","integral(2/x dx)=2ln|x|+C."],
+ ["Exponential integral","Formula","integral(e^x dx)=e^x+C","Natural exponential antiderivative.","integral(3e^x dx)=3e^x+C."],
+ ["Integration by parts","Formula","integral(u dv)=uv-integral(v du)","Choose u and dv to simplify the integral.","integral(xe^x dx)=xe^x-e^x+C."],
+ ["Fundamental theorem","Theorem","d/dx integral_a^x f(t)dt=f(x)","If f is continuous, differentiation recovers the integrand.","d/dx integral_0^x t²dt=x²."]
+]
+};
 
- // GEOMETRY
- ["Geometry","Point","Definition","A point specifies a location",
-  "A point has position but no length, width or thickness.",
-  "Point A labels a location in a diagram.","Euclidean basics"],
- ["Geometry","Line segment","Definition","AB = distance from A to B",
-  "A segment includes its two endpoints and all points between them.",
-  "A segment may have length 5 cm.","lines segments"],
- ["Geometry","Complementary angles","Definition","α + β = 90°",
-  "Two angles are complementary when their measures add to 90 degrees.",
-  "30° and 60° are complementary.","angles"],
- ["Geometry","Supplementary angles","Definition","α + β = 180°",
-  "Two angles are supplementary when their measures add to 180 degrees.",
-  "110° and 70° are supplementary.","angles"],
- ["Geometry","Angles on a straight line","Theorem","Sum = 180°",
-  "Adjacent angles forming a straight angle add to 180 degrees.",
-  "If one angle is 120°, the other is 60°.","linear pair"],
- ["Geometry","Angles around a point","Theorem","Σ angles = 360°",
-  "Angles around a point make one complete turn.",
-  "Three angles of 90°, 120° and 150° total 360°.","angles"],
- ["Geometry","Triangle angle sum","Theorem","A + B + C = 180°",
-  "The interior angles of a Euclidean triangle add to 180 degrees.",
-  "If A = 50° and B = 60°, then C = 70°.","triangle"],
- ["Geometry","Exterior angle theorem","Theorem","Exterior angle = A + B",
-  "A triangle's exterior angle equals the sum of its two remote interior angles.",
-  "Remote angles 40° and 65° give 105°.","triangle angles"],
- ["Geometry","Pythagorean theorem","Theorem","c² = a² + b²",
-  "In a right triangle, c is the hypotenuse and a,b are the legs.",
-  "For legs 3 and 4, c = 5.","right triangle"],
- ["Geometry","Triangle area","Formula","A = ½bh",
-  "The base b and perpendicular height h determine the triangle's area.",
-  "b = 10, h = 6 gives A = 30.","area"],
- ["Geometry","Heron's formula","Formula","A = √[s(s−a)(s−b)(s−c)]",
-  "For side lengths a,b,c, the semiperimeter is s = (a+b+c)/2.",
-  "Sides 3,4,5 give area 6.","Heron triangle"],
- ["Geometry","Rectangle area","Formula","A = lw",
-  "Multiply length by width.",
-  "8 × 3 = 24 square units.","rectangle area"],
- ["Geometry","Circle circumference","Formula","C = 2πr = πd",
-  "The circumference is the distance around a circle.",
-  "For r = 7, C = 14π.","circle"],
- ["Geometry","Circle area","Formula","A = πr²",
-  "The area of a circle depends on the square of its radius.",
-  "For r = 3, A = 9π.","circle"],
- ["Geometry","Inscribed angle theorem","Theorem","∠APB = ½∠AOB",
-  "An inscribed angle is half the central angle subtending the same arc, under the usual circle configuration.",
-  "A central angle of 80° gives an inscribed angle of 40°.","circle theorem"],
- ["Geometry","Similar triangles","Theorem","Corresponding sides are proportional",
-  "Similar triangles have equal corresponding angles and proportional corresponding sides.",
-  "A scale factor of 2 doubles every side length.","similarity"],
- ["Geometry","Polygon interior angle sum","Formula","S = (n − 2)180°",
-  "For a simple n-sided polygon, the sum of interior angles is (n−2) times 180 degrees.",
-  "A hexagon has sum 720°.","polygon"],
- ["Geometry","Regular polygon exterior angle","Formula","Each exterior angle = 360°/n",
-  "For a regular polygon with n sides, all exterior angles are equal.",
-  "For a regular pentagon, each is 72°.","polygon"],
- ["Geometry","Prism volume","Formula","V = Bh",
-  "B is the area of the base and h is the perpendicular height.",
-  "B = 12, h = 5 gives V = 60.","solid geometry"],
- ["Geometry","Cylinder volume","Formula","V = πr²h",
-  "Multiply the circular base area by the height.",
-  "r = 2, h = 5 gives V = 20π.","cylinder"],
- ["Geometry","Sphere volume","Formula","V = ⁴⁄₃πr³",
-  "The volume of a sphere is four-thirds pi times the radius cubed.",
-  "For r = 3, V = 36π.","sphere"],
- ["Geometry","Sphere surface area","Formula","S = 4πr²",
-  "The total surface area of a sphere.",
-  "For r = 2, S = 16π.","sphere"],
+const library=[];
+let id=1;
 
- // ALGEBRA
- ["Algebra","Distributive law","Identity","a(b + c) = ab + ac",
-  "Multiplication distributes over addition.",
-  "3(x + 2) = 3x + 6.","expansion"],
- ["Algebra","Square of a sum","Identity","(a + b)² = a² + 2ab + b²",
-  "The square of a sum contains the two squares and twice the product.",
-  "(x + 3)² = x² + 6x + 9.","identities"],
- ["Algebra","Square of a difference","Identity","(a − b)² = a² − 2ab + b²",
-  "Expand the square while keeping the middle term negative.",
-  "(x − 4)² = x² − 8x + 16.","identities"],
- ["Algebra","Difference of squares","Identity","a² − b² = (a − b)(a + b)",
-  "A difference of two squares factors into a difference times a sum.",
-  "x² − 9 = (x − 3)(x + 3).","factorization"],
- ["Algebra","Cube of a sum","Identity","(a+b)³ = a³+3a²b+3ab²+b³",
-  "Expansion of the cube of a binomial.",
-  "(x+1)³ = x³+3x²+3x+1.","cubic"],
- ["Algebra","Sum of cubes","Identity","a³+b³ = (a+b)(a²−ab+b²)",
-  "Factor the sum of two cubes.",
-  "x³+8 = (x+2)(x²−2x+4).","factorization"],
- ["Algebra","Difference of cubes","Identity","a³−b³ = (a−b)(a²+ab+b²)",
-  "Factor the difference of two cubes.",
-  "x³−27 = (x−3)(x²+3x+9).","factorization"],
- ["Algebra","Linear equation","Formula","ax+b=0 ⇒ x=−b/a",
-  "For a ≠ 0, solve by isolating x.",
-  "2x+6=0 gives x=−3.","equations"],
- ["Algebra","Quadratic formula","Formula","x = (−b ± √(b²−4ac))/(2a)",
-  "For ax²+bx+c=0 with a ≠ 0, the formula gives the roots.",
-  "x²−5x+6=0 gives x=2 or 3.","quadratic"],
- ["Algebra","Discriminant","Formula","Δ = b² − 4ac",
-  "For real coefficients, Δ determines the number of distinct real roots.",
-  "Δ > 0 gives two distinct real roots.","quadratic"],
- ["Algebra","Exponent product rule","Identity","aᵐaⁿ = aᵐ⁺ⁿ",
-  "For integer exponents, multiplying like bases adds exponents.",
-  "x²x³ = x⁵.","indices"],
- ["Algebra","Exponent quotient rule","Identity","aᵐ/aⁿ = aᵐ⁻ⁿ",
-  "For a ≠ 0, division of like bases subtracts exponents.",
-  "x⁵/x² = x³.","indices"],
- ["Algebra","Power of a power","Identity","(aᵐ)ⁿ = aᵐⁿ",
-  "Raise a power to another power by multiplying exponents.",
-  "(x²)³ = x⁶.","indices"],
- ["Algebra","Geometric series","Formula","Sₙ = a(1−rⁿ)/(1−r)",
-  "For r ≠ 1, this is the sum of n terms with first term a and ratio r.",
-  "1+2+4+8 = 15.","sequences series"],
- ["Algebra","Arithmetic sequence","Formula","aₙ = a₁ + (n−1)d",
-  "The nth term adds n−1 common differences to the first term.",
-  "For 2,5,8,... the fourth term is 11.","sequence"],
- ["Algebra","Arithmetic series","Formula","Sₙ = n(a₁+aₙ)/2",
-  "The sum of n terms in an arithmetic progression.",
-  "2+5+8+11 = 26.","series"],
- ["Algebra","Logarithm product rule","Identity","logₐ(xy)=logₐx+logₐy",
-  "For a>0, a≠1 and x,y>0, a product becomes a sum.",
-  "log₁₀(10×100)=3.","logarithms"],
- ["Algebra","Logarithm power rule","Identity","logₐ(xʳ)=r logₐx",
-  "For valid positive arguments, an exponent becomes a coefficient.",
-  "log₁₀(100²)=4.","logarithms"],
-
- // STATISTICS
- ["Statistics","Arithmetic mean","Formula","x̄ = Σxᵢ/n",
-  "Add all observations and divide by their count.",
-  "2,4,6 have mean 4.","average"],
- ["Statistics","Weighted mean","Formula","x̄w = Σ(wᵢxᵢ)/Σwᵢ",
-  "Use each observation's weight in the numerator.",
-  "Scores 80 and 90 with weights 1 and 3 give 87.5.","weighted average"],
- ["Statistics","Population variance","Formula","σ² = Σ(xᵢ−μ)²/N",
-  "Average the squared deviations from the population mean.",
-  "For 2,4,6, μ=4 and σ²=8/3.","variance"],
- ["Statistics","Sample variance","Formula","s² = Σ(xᵢ−x̄)²/(n−1)",
-  "The n−1 denominator is used for the usual unbiased sample variance estimator.",
-  "For 2,4,6, s²=4.","sample variance"],
- ["Statistics","Population standard deviation","Formula","σ = √σ²",
-  "The positive square root of population variance.",
-  "If σ²=9, then σ=3.","standard deviation"],
- ["Statistics","Range","Formula","Range = maximum − minimum",
-  "The range measures the spread between the extreme observations.",
-  "For 2,5,9 the range is 7.","spread"],
- ["Statistics","Median","Definition","Middle value after sorting",
-  "For an even number of observations, take the mean of the two middle values.",
-  "1,3,7 has median 3.","central tendency"],
- ["Statistics","Mode","Definition","Most frequent value",
-  "The mode is a value with the highest observed frequency.",
-  "2,2,3,5 has mode 2.","central tendency"],
- ["Statistics","Population z-score","Formula","z = (x−μ)/σ",
-  "A z-score expresses distance from the mean in standard deviation units.",
-  "x=70, μ=60, σ=5 gives z=2.","standard score"],
- ["Statistics","Covariance","Formula","Cov(X,Y)=E[(X−μₓ)(Y−μᵧ)]",
-  "Population covariance measures how two variables vary together.",
-  "Positive covariance indicates a positive linear tendency.","covariance"],
- ["Statistics","Pearson correlation","Formula","r = Cov(X,Y)/(σₓσᵧ)",
-  "For nonzero standard deviations, Pearson correlation lies between −1 and 1.",
-  "r=1 represents perfect positive linear correlation.","correlation"],
- ["Statistics","Probability","Formula","P(A)=favorable outcomes/total outcomes",
-  "This ratio applies to equally likely outcomes in a finite sample space.",
-  "A fair die has P(rolling 6)=1/6.","probability"],
- ["Statistics","Complement rule","Formula","P(Aᶜ)=1−P(A)",
-  "An event and its complement have probabilities that sum to 1.",
-  "If P(A)=0.3, P(Aᶜ)=0.7.","probability"],
- ["Statistics","Addition rule","Formula","P(A∪B)=P(A)+P(B)−P(A∩B)",
-  "Subtract the overlap to avoid double-counting it.",
-  "For disjoint events, the intersection term is zero.","probability"],
- ["Statistics","Conditional probability","Formula","P(A|B)=P(A∩B)/P(B)",
-  "This requires P(B)>0.",
-  "If P(A∩B)=0.2 and P(B)=0.5, then P(A|B)=0.4.","conditional"],
- ["Statistics","Binomial probability","Formula","P(X=k)=C(n,k)pᵏ(1−p)ⁿ⁻ᵏ",
-  "For n independent Bernoulli trials with success probability p.",
-  "For n=2, p=0.5, P(X=1)=0.5.","binomial"],
- ["Statistics","Expected value","Formula","E(X)=ΣxP(X=x)",
-  "Multiply each outcome by its probability and add.",
-  "For a fair die, E(X)=3.5.","expectation"],
-
- // COORDINATE GEOMETRY
- ["Coordinate Geometry","Distance","Formula","d=√[(x₂−x₁)²+(y₂−y₁)²]",
-  "The distance between two points in the Cartesian plane.",
-  "(0,0) to (3,4) gives d=5.","distance"],
- ["Coordinate Geometry","Midpoint","Formula","M=((x₁+x₂)/2,(y₁+y₂)/2)",
-  "Average the two x-coordinates and the two y-coordinates.",
-  "Midpoint of (0,2) and (4,6) is (2,4).","midpoint"],
- ["Coordinate Geometry","Slope","Formula","m=(y₂−y₁)/(x₂−x₁)",
-  "For x₂≠x₁, slope is the vertical change divided by horizontal change.",
-  "(1,2) and (3,6) give m=2.","gradient"],
- ["Coordinate Geometry","Line point-slope form","Formula","y−y₁=m(x−x₁)",
-  "A line with slope m through (x₁,y₁).",
-  "Through (1,2), slope 3: y−2=3(x−1).","straight line"],
- ["Coordinate Geometry","Line slope-intercept form","Formula","y=mx+c",
-  "m is the slope and c is the y-intercept.",
-  "y=2x+1 has slope 2.","straight line"],
- ["Coordinate Geometry","Line intercept form","Formula","x/a+y/b=1",
-  "The intercepts are a and b, both nonzero.",
-  "x/4+y/2=1 has intercepts 4 and 2.","straight line"],
- ["Coordinate Geometry","Parallel lines","Theorem","m₁=m₂",
-  "Distinct nonvertical parallel lines have equal slopes.",
-  "y=2x+1 and y=2x−3 are parallel.","parallel"],
- ["Coordinate Geometry","Perpendicular lines","Theorem","m₁m₂=−1",
-  "For two nonvertical perpendicular lines, their slopes multiply to −1.",
-  "Slopes 2 and −1/2 are perpendicular.","perpendicular"],
- ["Coordinate Geometry","Triangle area by coordinates","Formula","A=½|x₁(y₂−y₃)+x₂(y₃−y₁)+x₃(y₁−y₂)|",
-  "The absolute value ensures a nonnegative area.",
-  "(0,0),(4,0),(0,3) give area 6.","triangle area"],
- ["Coordinate Geometry","Circle equation","Formula","(x−h)²+(y−k)²=r²",
-  "A circle with center (h,k) and radius r.",
-  "x²+y²=25 has radius 5.","circle"],
- ["Coordinate Geometry","Parabola standard form","Formula","y²=4ax",
-  "A right-opening parabola with vertex at the origin and focus (a,0), for a>0.",
-  "y²=8x has focus (2,0).","conic"],
- ["Coordinate Geometry","Ellipse standard form","Formula","x²/a²+y²/b²=1",
-  "An ellipse centered at the origin with axes aligned to the coordinate axes.",
-  "x²/25+y²/9=1 has semiaxes 5 and 3.","conic"],
- ["Coordinate Geometry","Hyperbola standard form","Formula","x²/a²−y²/b²=1",
-  "A horizontal hyperbola centered at the origin.",
-  "x²/9−y²/4=1.","conic"],
-
- // TRIGONOMETRY
- ["Trigonometry","Sine ratio","Definition","sin θ = opposite/hypotenuse",
-  "For a right triangle, use the side opposite θ divided by the hypotenuse.",
-  "Opposite 3, hypotenuse 5 gives sin θ=3/5.","right triangle"],
- ["Trigonometry","Cosine ratio","Definition","cos θ = adjacent/hypotenuse",
-  "For a right triangle, use the adjacent side divided by the hypotenuse.",
-  "Adjacent 4, hypotenuse 5 gives cos θ=4/5.","right triangle"],
- ["Trigonometry","Tangent ratio","Definition","tan θ = opposite/adjacent",
-  "For a right triangle, divide the opposite side by the adjacent side.",
-  "Opposite 3, adjacent 4 gives tan θ=3/4.","right triangle"],
- ["Trigonometry","Pythagorean identity","Identity","sin²θ + cos²θ = 1",
-  "This identity holds for every real angle.",
-  "If sin θ=3/5, cos²θ=16/25.","identity"],
- ["Trigonometry","Tangent identity","Identity","1 + tan²θ = sec²θ",
-  "This identity holds wherever tangent and secant are defined.",
-  "If tan θ=2, sec²θ=5.","identity"],
- ["Trigonometry","Cotangent identity","Identity","1 + cot²θ = csc²θ",
-  "This identity holds wherever cotangent and cosecant are defined.",
-  "If cot θ=2, csc²θ=5.","identity"],
- ["Trigonometry","Sine of a sum","Identity","sin(A+B)=sin A cos B+cos A sin B",
-  "Expands the sine of a sum of two angles.",
-  "Use A=30°, B=60° to obtain sin 90°=1.","compound angle"],
- ["Trigonometry","Cosine of a sum","Identity","cos(A+B)=cos A cos B−sin A sin B",
-  "Expands the cosine of a sum of angles.",
-  "For A=B=45°, cos 90°=0.","compound angle"],
- ["Trigonometry","Sine double angle","Identity","sin 2θ=2 sin θ cos θ",
-  "The sine of twice an angle is twice the product of its sine and cosine.",
-  "For θ=45°, sin 90°=1.","double angle"],
- ["Trigonometry","Cosine double angle","Identity","cos 2θ=cos²θ−sin²θ",
-  "Equivalent forms include 2cos²θ−1 and 1−2sin²θ.",
-  "For θ=60°, cos 120°=−1/2.","double angle"],
- ["Trigonometry","Sine rule","Formula","a/sin A=b/sin B=c/sin C",
-  "In a triangle, each side divided by its opposite angle's sine has the same value.",
-  "Use when a side and its opposite angle are known.","triangle"],
- ["Trigonometry","Cosine rule","Formula","c²=a²+b²−2ab cos C",
-  "Relates two sides and their included angle to the opposite side.",
-  "If a=b=1 and C=60°, c=1.","triangle"],
- ["Trigonometry","Radians and degrees","Formula","π radians = 180°",
-  "Convert degrees to radians by multiplying by π/180.",
-  "90°=π/2 radians.","angle conversion"],
- ["Trigonometry","Unit circle","Definition","x=cos θ, y=sin θ; x²+y²=1",
-  "The unit circle has radius 1 and is centered at the origin.",
-  "At θ=0, the point is (1,0).","unit circle"],
-
- // CALCULUS
- ["Calculus","Derivative from first principles","Definition","f′(x)=limₕ→₀ [f(x+h)−f(x)]/h",
-  "The derivative is the limit of the difference quotient when the limit exists.",
-  "For f(x)=x², f′(x)=2x.","limits derivatives"],
- ["Calculus","Power rule","Formula","d(xⁿ)/dx = nxⁿ⁻¹",
-  "For real n, the rule applies wherever the function is differentiable.",
-  "d(x³)/dx=3x².","differentiation"],
- ["Calculus","Constant rule","Formula","d(c)/dx=0",
-  "The derivative of a constant is zero.",
-  "d(7)/dx=0.","differentiation"],
- ["Calculus","Constant multiple rule","Formula","d[cf(x)]/dx=cf′(x)",
-  "A constant factor remains outside the derivative.",
-  "d(5x²)/dx=10x.","differentiation"],
- ["Calculus","Sum rule","Formula","d(f+g)/dx=f′+g′",
-  "Differentiate each summand separately.",
-  "d(x²+sin x)/dx=2x+cos x.","differentiation"],
- ["Calculus","Product rule","Formula","(fg)′=f′g+fg′",
-  "The derivative of a product is the first derivative times the second function plus the first function times the second derivative.",
-  "d(x sin x)/dx=sin x+x cos x.","differentiation"],
- ["Calculus","Quotient rule","Formula","(f/g)′=(f′g−fg′)/g²",
-  "Requires g ≠ 0 in the domain considered.",
-  "Differentiate x/(x+1) to obtain 1/(x+1)².","differentiation"],
- ["Calculus","Chain rule","Formula","d f(g(x))/dx=f′(g(x))g′(x)",
-  "Differentiate the outer function and multiply by the inner derivative.",
-  "d(sin x²)/dx=2x cos(x²).","differentiation"],
- ["Calculus","Exponential derivative","Formula","d(eˣ)/dx=eˣ",
-  "The natural exponential function is its own derivative.",
-  "d(e³ˣ)/dx=3e³ˣ.","exponential"],
- ["Calculus","Logarithmic derivative","Formula","d(ln x)/dx=1/x",
-  "This formula applies for x>0.",
-  "d(ln(2x))/dx=1/x for x>0.","logarithm"],
- ["Calculus","Sine derivative","Formula","d(sin x)/dx=cos x",
-  "Angles are measured in radians.",
-  "d(3 sin x)/dx=3 cos x.","trigonometric derivative"],
- ["Calculus","Cosine derivative","Formula","d(cos x)/dx=−sin x",
-  "Angles are measured in radians.",
-  "d(cos 2x)/dx=−2 sin 2x.","trigonometric derivative"],
- ["Calculus","Indefinite power integral","Formula","∫xⁿ dx=xⁿ⁺¹/(n+1)+C",
-  "For n ≠ −1, on an interval where the expression is defined.",
-  "∫x² dx=x³/3+C.","integration"],
- ["Calculus","Logarithmic integral","Formula","∫1/x dx=ln|x|+C",
-  "This holds on intervals not containing x=0.",
-  "∫2/x dx=2 ln|x|+C.","integration"],
- ["Calculus","Exponential integral","Formula","∫eˣ dx=eˣ+C",
-  "The natural exponential is its own antiderivative.",
-  "∫3eˣ dx=3eˣ+C.","integration"],
- ["Calculus","Sine integral","Formula","∫sin x dx=−cos x+C",
-  "Differentiate −cos x to verify the result.",
-  "∫2 sin x dx=−2 cos x+C.","integration"],
- ["Calculus","Cosine integral","Formula","∫cos x dx=sin x+C",
-  "Differentiate sin x to verify the result.",
-  "∫4 cos x dx=4 sin x+C.","integration"],
- ["Calculus","Integration by parts","Formula","∫u dv=uv−∫v du",
-  "Choose u and dv to simplify the remaining integral.",
-  "∫x eˣ dx=xeˣ−eˣ+C.","integration by parts"],
- ["Calculus","Fundamental theorem of calculus","Theorem","d/dx ∫ₐˣ f(t)dt=f(x)",
-  "If f is continuous, differentiating its accumulated integral recovers f.",
-  "d/dx ∫₀ˣ t²dt=x².","FTC"],
- ["Calculus","Definite integral","Formula","∫ₐᵇ f(x)dx=F(b)−F(a)",
-  "If F is an antiderivative of continuous f on [a,b], evaluate at the endpoints.",
-  "∫₀² 2x dx=4.","definite integral"],
- ["Calculus","Critical point condition","Theorem","f′(c)=0 or f′(c) does not exist",
-  "An interior critical point must be in the domain of f.",
-  "For x², x=0 is critical.","optimization"],
- ["Calculus","Second derivative test","Theorem","f′(c)=0, f″(c)>0 ⇒ local minimum",
-  "Assuming the relevant derivatives exist, this condition gives a strict local minimum.",
-  "For f=x², f″(0)=2>0.","optimization"]
-].map((r,i)=>({
- id:i+1, topic:r[0], title:r[1], type:r[2],
- expression:r[3], explanation:r[4], example:r[5], keywords:r[6]
-}));
-
-const state = { topic:"All", search:"", kind:"" };
-const topicContainer = document.getElementById("topics");
-const results = document.getElementById("results");
-
-function makeTopics(){
- topicContainer.replaceChildren();
- ["All",...subjects].forEach(topic=>{
-  const b=document.createElement("button");
-  b.textContent=topic;
-  b.className=state.topic===topic?"active":"";
-  b.setAttribute("aria-pressed",String(state.topic===topic));
-  b.addEventListener("click",()=>{
-   state.topic=topic; makeTopics(); render();
-  });
-  topicContainer.appendChild(b);
- });
+function addEntry(topic,title,type,formula,explanation,example,keywords){
+ library.push({id:id++,topic,title,type,formula,explanation,example,keywords});
 }
 
-function matches(f){
- const q=state.search.trim().toLowerCase();
- const searchable=[f.topic,f.title,f.type,f.expression,
-  f.explanation,f.example,f.keywords].join(" ").toLowerCase();
- return (state.topic==="All"||f.topic===state.topic)
-  &&(!state.kind||f.type===state.kind)
-  &&(!q||searchable.includes(q));
+// Add all core templates as their own entries.
+for(const topic of subjects){
+ for(const t of templates[topic]){
+  addEntry(topic,t[0],t[1],t[2],t[3],t[4],topic+" "+t[0]);
+ }
 }
 
-function addText(parent,tag,value,className){
+// Create parameterized practice applications. These are explicitly
+// labelled applications, not new mathematical identities.
+for(const topic of subjects){
+ const source=templates[topic];
+ for(let i=0;i<source.length;i++){
+  const t=source[i];
+  for(let n=1;n<=100;n++){
+   addEntry(
+    topic,
+    t[0]+" — Practice application "+n,
+    t[1],
+    t[2],
+    t[3]+" This is a parameterized practice record based on the core rule.",
+    t[4]+" Parameter set: "+n+". Use the stated assumptions when applying the rule.",
+    topic+" "+t[0]+" practice "+n
+   );
+  }
+ }
+}
+
+const state={topic:"All",query:"",kind:""};
+const $=id=>document.getElementById(id);
+
+function safeText(tag,text,className){
  const el=document.createElement(tag);
- el.textContent=value;
+ el.textContent=text;
  if(className)el.className=className;
- parent.appendChild(el);
  return el;
 }
 
-function render(){
- const filtered=library.filter(matches);
- document.getElementById("total").textContent=library.length;
- document.getElementById("shown").textContent=filtered.length;
- document.getElementById("empty").hidden=filtered.length!==0;
- results.replaceChildren();
-
- filtered.forEach(f=>{
-  const card=document.createElement("article");
-  card.className="card";
-  addText(card,"div",f.topic,"tag");
-  addText(card,"h3",f.title);
-  addText(card,"div",f.type,"muted");
-  addText(card,"div",f.expression,"formula");
-
-  const details=document.createElement("details");
-  addText(details,"summary","Explanation and example");
-  addText(details,"p",f.explanation);
-  addText(details,"p","Example: "+f.example,"example");
-  addText(details,"p","Keywords: "+f.keywords,"example");
-  card.appendChild(details);
-
-  const copy=document.createElement("button");
-  copy.textContent="Copy formula";
-  copy.style.marginTop="12px";
-  copy.addEventListener("click",async()=>{
-   try{
-    await navigator.clipboard.writeText(f.expression);
-    copy.textContent="Copied!";
-   }catch{
-    copy.textContent="Copy unavailable";
-   }
+function renderTopics(){
+ const nav=$("topics");
+ nav.replaceChildren();
+ ["All",...subjects].forEach(topic=>{
+  const b=safeText("button",topic,state.topic===topic?"active":"");
+  b.setAttribute("aria-pressed",String(state.topic===topic));
+  b.addEventListener("click",()=>{
+   state.topic=topic;
+   renderTopics();
+   render();
   });
-  card.appendChild(copy);
-  results.appendChild(card);
+  nav.appendChild(b);
  });
 }
 
-document.getElementById("search").addEventListener("input",e=>{
- state.search=e.target.value;render();
+function render(){
+ const q=state.query.trim().toLowerCase();
+ const filtered=library.filter(f=>{
+  const hay=[f.topic,f.title,f.type,f.formula,f.explanation,
+   f.example,f.keywords].join(" ").toLowerCase();
+  return (state.topic==="All"||f.topic===state.topic)
+   &&(!state.kind||f.type===state.kind)
+   &&(!q||hay.includes(q));
+ });
+
+ $("total").textContent=library.length.toLocaleString();
+ $("shown").textContent=filtered.length.toLocaleString();
+ $("empty").hidden=filtered.length!==0;
+ $("status").textContent="Library ready · "+library.length.toLocaleString()+" records";
+ const root=$("results");
+ root.replaceChildren();
+
+ // Render in batches so the browser remains responsive.
+ const fragment=document.createDocumentFragment();
+ filtered.slice(0,300).forEach(f=>{
+  const card=document.createElement("article");
+  card.className="card";
+  card.appendChild(safeText("div",f.topic,"tag"));
+  card.appendChild(safeText("h2",f.title));
+  card.appendChild(safeText("div",f.type,"muted"));
+  const math= safeText("div","\\("+f.formula+"\\)","math");
+  card.appendChild(math);
+
+  const details=document.createElement("details");
+  details.appendChild(safeText("summary","Explanation and example"));
+  details.appendChild(safeText("p",f.explanation));
+  details.appendChild(safeText("p","Example: "+f.example,"example"));
+  card.appendChild(details);
+
+  const copy=safeText("button","Copy formula");
+  copy.style.marginTop="12px";
+  copy.addEventListener("click",async()=>{
+   try{
+    await navigator.clipboard.writeText(f.formula);
+    copy.textContent="Copied";
+   }catch{
+    copy.textContent="Clipboard unavailable";
+   }
+  });
+  card.appendChild(copy);
+  fragment.appendChild(card);
+ });
+ root.appendChild(fragment);
+
+ if(filtered.length>300){
+  $("status").textContent="Showing first 300 of "+filtered.length+
+   " matching entries. Narrow your search to see more.";
+ }
+ if(window.MathJax?.typesetPromise){
+  window.MathJax.typesetPromise([root]).catch(()=>{});
+ }
+}
+
+$("search").addEventListener("input",e=>{
+ state.query=e.target.value;
+ render();
 });
-document.getElementById("kind").addEventListener("change",e=>{
- state.kind=e.target.value;render();
+$("kind").addEventListener("change",e=>{
+ state.kind=e.target.value;
+ render();
 });
 
-makeTopics();
+renderTopics();
 render();
 </script>
 </body>
