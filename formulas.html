@@ -4,9 +4,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#0b1020">
 <title>Lekka Lab — Formula Vault</title>
-<meta name="description" content="Explore mathematics formulas, definitions, identities, theorems and worked examples.">
+<meta name="description" content="A searchable mathematics formula library covering algebra, geometry, number theory, statistics, coordinate geometry, trigonometry and calculus.">
 
 <script>
 window.MathJax = {
@@ -29,13 +28,13 @@ window.MathJax = {
 :root {
   color-scheme: dark;
   --bg: #0b1020;
-  --panel: #141e33;
-  --panel2: #091426;
+  --card: #141e33;
+  --panel: #091426;
   --line: #2c3a55;
   --text: #edf3ff;
   --muted: #a9b8d1;
   --green: #6ee7c2;
-  --blue: #82aaff;
+  --blue: #8ab4ff;
 }
 * { box-sizing: border-box; }
 body {
@@ -45,133 +44,127 @@ body {
   font: 16px/1.65 system-ui, sans-serif;
 }
 header {
-  padding: 34px 18px;
+  padding: 32px 18px;
   background: linear-gradient(120deg, #162a49, #125047);
   border-bottom: 1px solid var(--line);
 }
-main { max-width: 1250px; margin: auto; padding: 22px; }
-header main { padding-top: 0; padding-bottom: 0; }
-h1 { font-size: clamp(30px, 5vw, 46px); line-height: 1.2; margin: 8px 0; }
-h2 { font-size: 19px; line-height: 1.4; margin: 9px 0; }
-h3 { font-size: 15px; margin-bottom: 5px; }
-p { margin: 9px 0; }
+main { max-width: 1250px; margin: auto; padding: 20px; }
+h1 { font-size: clamp(30px, 5vw, 46px); margin: 0; line-height: 1.2; }
+h2 { font-size: 20px; line-height: 1.4; margin: 8px 0; }
+p { margin: 8px 0; }
 .tag {
-  color: var(--green);
   font-size: 12px;
   text-transform: uppercase;
-  letter-spacing: .08em;
+  color: var(--green);
+  letter-spacing: .07em;
   font-weight: 700;
 }
 .muted { color: var(--muted); }
-.stats {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-}
-.stat, .card {
-  background: var(--panel);
-  border: 1px solid var(--line);
-  border-radius: 13px;
-}
-.stat { padding: 14px 16px; }
-.stat strong {
-  display: block;
-  color: var(--green);
-  font-size: 25px;
-}
 .controls {
   display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(150px, 1fr);
-  gap: 12px;
+  grid-template-columns: 2fr 1fr;
+  gap: 10px;
   margin: 22px 0 14px;
 }
 input, select, button { font: inherit; }
 input, select {
   width: 100%;
-  padding: 12px 14px;
+  padding: 12px;
+  border-radius: 9px;
   border: 1px solid var(--line);
-  border-radius: 10px;
-  background: var(--panel);
+  background: var(--card);
   color: var(--text);
 }
 input:focus, select:focus, button:focus-visible {
   outline: 2px solid var(--green);
   outline-offset: 2px;
 }
-.topics { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0; }
+.topics {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 14px 0 20px;
+}
 button {
   cursor: pointer;
-  padding: 9px 14px;
-  border: 1px solid var(--line);
-  border-radius: 22px;
-  background: var(--panel);
+  background: var(--card);
   color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 9px 13px;
 }
 button:hover { border-color: var(--green); }
-button.active, button.primary {
+button.active {
   background: var(--green);
   color: #06261e;
   border-color: var(--green);
 }
-#status { font-size: 14px; margin: 15px 0; }
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.stat, .card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+.stat { padding: 14px; }
+.stat strong {
+  display: block;
+  color: var(--green);
+  font-size: 26px;
+}
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr));
   gap: 14px;
   margin-top: 16px;
-  align-items: start;
 }
-.card { padding: 17px; min-width: 0; }
-.card .type { font-size: 13px; color: var(--muted); }
-.math {
-  min-height: 62px;
+.card {
+  padding: 16px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.card .math {
+  padding: 16px 10px;
+  background: var(--panel);
+  border: 1px solid #1e3048;
+  border-radius: 9px;
+  margin: 13px 0;
+  min-height: 76px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 15px 10px;
-  margin: 13px 0;
-  border-radius: 9px;
-  background: var(--panel2);
-  border: 1px solid #1b2c45;
-  font-size: 19px;
+  text-align: center;
   overflow-x: auto;
   overflow-y: hidden;
-  text-align: center;
+  font-size: 19px;
 }
 .math mjx-container { max-width: 100%; }
 .math mjx-container[display="true"] { margin: 0 !important; }
-details {
+.details {
+  margin-top: auto;
   border-top: 1px solid var(--line);
-  padding-top: 10px;
-  margin-top: 10px;
+  padding-top: 12px;
 }
-summary { cursor: pointer; color: var(--green); font-weight: 600; }
-.example { color: var(--muted); font-size: 14px; overflow-wrap: anywhere; }
-.actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 13px; }
-.actions button { font-size: 13px; }
-#empty { text-align: center; padding: 35px 10px; color: var(--muted); }
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin: 25px 0;
-}
-.pagination button:disabled { opacity: .4; cursor: not-allowed; }
-footer {
+summary { cursor: pointer; color: var(--green); }
+.example { color: var(--muted); font-size: 14px; }
+.actions { margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap; }
+.actions button { border-radius: 9px; font-size: 14px; }
+.copy-status { color: var(--green); font-size: 13px; }
+#empty {
   text-align: center;
-  padding: 25px;
-  border-top: 1px solid var(--line);
+  padding: 35px 15px;
   color: var(--muted);
-  font-size: 14px;
 }
-noscript { display: block; padding: 20px; color: #fff; }
-@media(max-width:600px) {
-  main { padding: 16px; }
+footer { text-align: center; padding: 28px 16px; color: var(--muted); }
+@media (max-width: 600px) {
   .controls, .stats { grid-template-columns: 1fr; }
-  .grid { grid-template-columns: 1fr; }
-  header { padding: 26px 0; }
+  main { padding: 16px; }
+  header { padding: 27px 12px; }
+  .card .math { font-size: 17px; }
 }
 </style>
 </head>
@@ -181,7 +174,7 @@ noscript { display: block; padding: 20px; color: #fff; }
   <main>
     <div class="tag">LEKKA LAB · MATHEMATICS</div>
     <h1>Formula Vault</h1>
-    <p>Explore formulas, identities, definitions, theorems and worked examples across seven mathematical subjects.</p>
+    <p>Explore essential formulas, identities, definitions, theorems and worked examples.</p>
   </main>
 </header>
 
@@ -189,12 +182,17 @@ noscript { display: block; padding: 20px; color: #fff; }
   <section class="stats" aria-label="Library statistics">
     <div class="stat"><strong id="total">0</strong>Total formulas</div>
     <div class="stat"><strong id="subjectCount">7</strong>Subjects</div>
-    <div class="stat"><strong id="shown">0</strong>Matching records</div>
+    <div class="stat"><strong id="shown">0</strong>Matching results</div>
   </section>
 
-  <section class="controls" aria-label="Search and filter">
-    <input id="search" type="search" placeholder="Search formulas, examples or keywords..." aria-label="Search formulas">
-    <select id="kind" aria-label="Filter by type">
+  <section class="controls" aria-label="Search and filters">
+    <input
+      id="search"
+      type="search"
+      placeholder="Search formula, symbol, example or keyword..."
+      aria-label="Search formulas"
+    >
+    <select id="kind" aria-label="Filter by formula type">
       <option value="">All types</option>
       <option value="Formula">Formula</option>
       <option value="Identity">Identity</option>
@@ -203,23 +201,246 @@ noscript { display: block; padding: 20px; color: #fff; }
     </select>
   </section>
 
-  <nav id="topics" class="topics" aria-label="Mathematical subjects"></nav>
-  <div id="status" class="muted" role="status" aria-live="polite">Loading formula library...</div>
-  <section id="results" class="grid" aria-label="Formula results"></section>
-  <div id="empty" hidden>No matching entries found. Try another search.</div>
+  <nav id="topics" class="topics" aria-label="Choose a subject"></nav>
 
-  <nav id="pagination" class="pagination" aria-label="Results pages" hidden>
-    <button id="previous" type="button">← Previous</button>
-    <span id="pageInfo" class="muted"></span>
-    <button id="next" type="button">Next →</button>
-  </nav>
+  <div id="status" class="muted" role="status" aria-live="polite">
+    Loading mathematics library...
+  </div>
+
+  <section id="results" class="grid" aria-label="Formula results"></section>
+  <div id="empty" hidden>No matching formulas found. Try another search.</div>
 </main>
 
-<footer>Lekka Lab · Learn formulas with examples.</footer>
-<noscript>This website requires JavaScript to display the formula library.</noscript>
+<footer>Lekka Lab · Learn, explore and apply mathematics.</footer>
 
 <script>
 "use strict";
+
+/*
+  Formula format:
+  [subject, title, type, LaTeX, explanation, example, keywords]
+
+  All formulas use LaTeX. Do not put HTML markup in formula strings.
+*/
+
+const data = [
+
+/* ===================== NUMBER THEORY ===================== */
+["Number Theory","Even integer","Definition",String.raw`n=2k`,"An integer divisible by 2, where k is an integer.",String.raw`k=4\Rightarrow n=8`,"even integer parity"],
+["Number Theory","Odd integer","Definition",String.raw`n=2k+1`,"An integer one greater than an even integer.",String.raw`k=4\Rightarrow n=9`,"odd integer parity"],
+["Number Theory","Sum of first n integers","Formula",String.raw`\sum_{k=1}^{n}k=\frac{n(n+1)}2`,"Sum of the first n positive integers.",String.raw`n=10\Rightarrow 55`,"series summation"],
+["Number Theory","Sum of squares","Formula",String.raw`\sum_{k=1}^{n}k^2=\frac{n(n+1)(2n+1)}6`,"Sum of the squares of the first n positive integers.",String.raw`n=3\Rightarrow 1+4+9=14`,"square series"],
+["Number Theory","Sum of cubes","Formula",String.raw`\sum_{k=1}^{n}k^3=\left(\frac{n(n+1)}2\right)^2`,"The sum of cubes is the square of the triangular number.",String.raw`n=3\Rightarrow 1+8+27=36`,"cube series"],
+["Number Theory","Division algorithm","Theorem",String.raw`a=bq+r,\quad 0\le r<b`,"For integers a and b with b positive, q and r exist uniquely.",String.raw`29=5(5)+4`,"quotient remainder"],
+["Number Theory","Euclidean algorithm","Theorem",String.raw`\gcd(a,b)=\gcd(b,a\bmod b)`,"Repeated remainders find the greatest common divisor.",String.raw`\gcd(18,12)=\gcd(12,6)=6`,"gcd euclid"],
+["Number Theory","LCM and GCD","Formula",String.raw`\operatorname{lcm}(a,b)\gcd(a,b)=|ab|`,"For nonzero integers a and b.",String.raw`\operatorname{lcm}(6,8)\gcd(6,8)=24(2)=48`,"lcm gcd"],
+["Number Theory","Prime factorization","Theorem",String.raw`n=p_1^{a_1}p_2^{a_2}\cdots p_k^{a_k}`,"Every integer greater than 1 has a unique prime factorization up to order.",String.raw`60=2^2\cdot3\cdot5`,"prime factors"],
+["Number Theory","Number of divisors","Formula",String.raw`d(n)=\prod_{i=1}^{k}(a_i+1)`,"If the prime factorization has exponents a_i, this counts positive divisors.",String.raw`12=2^2\cdot3\Rightarrow d(12)=3\cdot2=6`,"divisor count"],
+["Number Theory","Sum of positive divisors","Formula",String.raw`\sigma(n)=\prod_{i=1}^{k}\frac{p_i^{a_i+1}-1}{p_i-1}`,"Sum of all positive divisors from the prime factorization.",String.raw`12=2^2\cdot3\Rightarrow \sigma(12)=28`,"divisor sum"],
+["Number Theory","Euler totient function","Formula",String.raw`\varphi(n)=n\prod_{p\mid n}\left(1-\frac1p\right)`,"Counts positive integers up to n that are coprime to n.",String.raw`\varphi(12)=12(1-\frac12)(1-\frac13)=4`,"totient phi"],
+["Number Theory","Fermat's little theorem","Theorem",String.raw`a^{p-1}\equiv1\pmod p`,"p must be prime and p must not divide a.",String.raw`2^4\equiv1\pmod5`,"modular arithmetic prime"],
+["Number Theory","Euler's theorem","Theorem",String.raw`a^{\varphi(n)}\equiv1\pmod n`,"Requires n greater than 1 and gcd(a,n)=1.",String.raw`3^{\varphi(8)}=3^4\equiv1\pmod8`,"modular arithmetic"],
+["Number Theory","Congruence definition","Definition",String.raw`a\equiv b\pmod m\iff m\mid(a-b)`,"Two integers are congruent modulo m when their difference is divisible by m.",String.raw`17\equiv2\pmod5`,"congruence remainder"],
+["Number Theory","Arithmetic progression term","Formula",String.raw`a_n=a_1+(n-1)d`,"Nth term of an arithmetic sequence.",String.raw`a_1=2,\ d=3,\ n=5\Rightarrow a_5=14`,"sequence progression"],
+["Number Theory","Arithmetic progression sum","Formula",String.raw`S_n=\frac n2(a_1+a_n)`,"Sum of the first n terms of an arithmetic progression.",String.raw`2+5+8+11=26`,"sequence sum"],
+["Number Theory","Geometric progression term","Formula",String.raw`a_n=a_1r^{n-1}`,"Nth term of a geometric sequence with common ratio r.",String.raw`a_1=2,\ r=3,\ n=4\Rightarrow a_4=54`,"geometric sequence"],
+["Number Theory","Finite geometric sum","Formula",String.raw`S_n=a_1\frac{1-r^n}{1-r},\quad r\ne1`,"Sum of the first n terms of a geometric progression.",String.raw`1+2+4+8=15`,"geometric series"],
+["Number Theory","Infinite geometric series","Formula",String.raw`S_\infty=\frac{a_1}{1-r},\quad |r|<1`,"The infinite geometric series converges when the absolute ratio is below 1.",String.raw`1+\frac12+\frac14+\cdots=2`,"infinite series"],
+["Number Theory","Binomial coefficients","Formula",String.raw`\binom nk=\frac{n!}{k!(n-k)!}`,"Counts the ways to choose k objects from n distinct objects.",String.raw`\binom52=10`,"combinations factorial"],
+["Number Theory","Greatest common divisor of coprime numbers","Definition",String.raw`\gcd(a,b)=1`,"Integers with greatest common divisor 1 are coprime.",String.raw`\gcd(8,15)=1`,"coprime relatively prime"],
+["Number Theory","Fundamental theorem of arithmetic","Theorem",String.raw`n=\prod_{i=1}^{k}p_i^{a_i}`,"Every integer greater than 1 factors uniquely into primes, apart from order.",String.raw`84=2^2\cdot3\cdot7`,"unique factorization"],
+
+/* ===================== GEOMETRY ===================== */
+["Geometry","Triangle angle sum","Theorem",String.raw`A+B+C=180^\circ`,"Interior angles of a Euclidean triangle add to 180 degrees.",String.raw`50^\circ+60^\circ+70^\circ=180^\circ`,"triangle angles"],
+["Geometry","Exterior angle theorem","Theorem",String.raw`E=A+B`,"An exterior angle equals the sum of the two remote interior angles.",String.raw`E=40^\circ+65^\circ=105^\circ`,"exterior angle"],
+["Geometry","Pythagorean theorem","Theorem",String.raw`c^2=a^2+b^2`,"For a right triangle, c is the hypotenuse.",String.raw`a=3,\ b=4\Rightarrow c=5`,"right triangle hypotenuse"],
+["Geometry","Triangle area","Formula",String.raw`A=\frac12 bh`,"Base multiplied by perpendicular height, divided by two.",String.raw`b=10,\ h=6\Rightarrow A=30`,"area"],
+["Geometry","Heron's formula","Formula",String.raw`A=\sqrt{s(s-a)(s-b)(s-c)},\quad s=\frac{a+b+c}{2}`,"Find triangle area from all three side lengths.",String.raw`a=3,\ b=4,\ c=5\Rightarrow A=6`,"triangle sides semiperimeter"],
+["Geometry","Rectangle area","Formula",String.raw`A=lw`,"Length multiplied by width.",String.raw`l=8,\ w=3\Rightarrow A=24`,"rectangle area"],
+["Geometry","Rectangle perimeter","Formula",String.raw`P=2(l+w)`,"Total distance around a rectangle.",String.raw`l=8,\ w=3\Rightarrow P=22`,"rectangle perimeter"],
+["Geometry","Square area","Formula",String.raw`A=s^2`,"Area of a square with side length s.",String.raw`s=5\Rightarrow A=25`,"square"],
+["Geometry","Square perimeter","Formula",String.raw`P=4s`,"Four equal sides.",String.raw`s=5\Rightarrow P=20`,"square perimeter"],
+["Geometry","Parallelogram area","Formula",String.raw`A=bh`,"Base multiplied by perpendicular height.",String.raw`b=8,\ h=4\Rightarrow A=32`,"parallelogram"],
+["Geometry","Trapezoid area","Formula",String.raw`A=\frac12(a+b)h`,"Here a and b are the parallel sides.",String.raw`a=5,\ b=9,\ h=4\Rightarrow A=28`,"trapezoid trapezium"],
+["Geometry","Rhombus area","Formula",String.raw`A=\frac12 d_1d_2`,"The diagonals of a rhombus are d1 and d2.",String.raw`d_1=6,\ d_2=8\Rightarrow A=24`,"rhombus diagonal"],
+["Geometry","Circle area","Formula",String.raw`A=\pi r^2`,"Area enclosed by a circle of radius r.",String.raw`r=3\Rightarrow A=9\pi`,"circle radius"],
+["Geometry","Circle circumference","Formula",String.raw`C=2\pi r=\pi d`,"Distance around a circle.",String.raw`r=7\Rightarrow C=14\pi`,"circumference diameter"],
+["Geometry","Arc length","Formula",String.raw`s=r\theta`,"Arc length for theta measured in radians.",String.raw`r=4,\ \theta=\frac\pi2\Rightarrow s=2\pi`,"arc radians"],
+["Geometry","Sector area","Formula",String.raw`A=\frac12r^2\theta`,"Sector area when theta is in radians.",String.raw`r=2,\ \theta=\frac\pi2\Rightarrow A=\pi`,"sector"],
+["Geometry","Polygon interior-angle sum","Formula",String.raw`S=(n-2)180^\circ`,"Sum of interior angles of a simple n-sided polygon.",String.raw`n=6\Rightarrow S=720^\circ`,"polygon angles"],
+["Geometry","Regular polygon exterior angle","Formula",String.raw`E=\frac{360^\circ}{n}`,"Each exterior angle of a regular n-sided polygon.",String.raw`n=5\Rightarrow E=72^\circ`,"regular polygon"],
+["Geometry","Regular polygon area","Formula",String.raw`A=\frac12 ap`,"Here a is the apothem and p is the perimeter.",String.raw`a=4,\ p=20\Rightarrow A=40`,"apothem"],
+["Geometry","Cylinder volume","Formula",String.raw`V=\pi r^2h`,"Circular base area multiplied by height.",String.raw`r=2,\ h=5\Rightarrow V=20\pi`,"cylinder volume"],
+["Geometry","Cylinder total surface area","Formula",String.raw`A=2\pi r^2+2\pi rh`,"Includes both circular ends and the curved surface.",String.raw`r=2,\ h=5\Rightarrow A=28\pi`,"cylinder surface"],
+["Geometry","Cone volume","Formula",String.raw`V=\frac13\pi r^2h`,"One third of the corresponding cylinder volume.",String.raw`r=3,\ h=4\Rightarrow V=12\pi`,"cone volume"],
+["Geometry","Cone slant height","Formula",String.raw`\ell=\sqrt{r^2+h^2}`,"For a right circular cone.",String.raw`r=3,\ h=4\Rightarrow \ell=5`,"cone slant"],
+["Geometry","Sphere volume","Formula",String.raw`V=\frac43\pi r^3`,"Volume enclosed by a sphere.",String.raw`r=3\Rightarrow V=36\pi`,"sphere volume"],
+["Geometry","Sphere surface area","Formula",String.raw`A=4\pi r^2`,"Total surface area of a sphere.",String.raw`r=3\Rightarrow A=36\pi`,"sphere surface"],
+["Geometry","Similar triangles","Theorem",String.raw`\frac{a_1}{a_2}=\frac{b_1}{b_2}=\frac{c_1}{c_2}`,"Corresponding sides of similar triangles have equal ratios.",String.raw`\text{Scale factor }2\text{ doubles every side.}`,"similarity"],
+["Geometry","Inscribed angle theorem","Theorem",String.raw`\theta_{\text{inscribed}}=\frac12\theta_{\text{central}}`,"Angles subtending the same arc obey this relationship.",String.raw`\theta_{\text{central}}=80^\circ\Rightarrow\theta_{\text{inscribed}}=40^\circ`,"circle angle"],
+["Geometry","Euler polyhedron formula","Theorem",String.raw`V-E+F=2`,"For a convex polyhedron, V is vertices, E edges and F faces.",String.raw`V=8,\ E=12,\ F=6\Rightarrow8-12+6=2`,"polyhedron vertices edges faces"],
+
+/* ===================== ALGEBRA ===================== */
+["Algebra","Square of a sum","Identity",String.raw`(a+b)^2=a^2+2ab+b^2`,"Expansion of a binomial square.",String.raw`(x+3)^2=x^2+6x+9`,"expansion binomial"],
+["Algebra","Square of a difference","Identity",String.raw`(a-b)^2=a^2-2ab+b^2`,"Expansion of a binomial difference.",String.raw`(x-4)^2=x^2-8x+16`,"expansion"],
+["Algebra","Difference of squares","Identity",String.raw`a^2-b^2=(a-b)(a+b)`,"Factors a difference of two squares.",String.raw`x^2-25=(x-5)(x+5)`,"factorization"],
+["Algebra","Cube of a sum","Identity",String.raw`(a+b)^3=a^3+3a^2b+3ab^2+b^3`,"Expansion of a binomial cube.",String.raw`(x+1)^3=x^3+3x^2+3x+1`,"cube expansion"],
+["Algebra","Cube of a difference","Identity",String.raw`(a-b)^3=a^3-3a^2b+3ab^2-b^3`,"Expansion of a binomial difference cubed.",String.raw`(x-1)^3=x^3-3x^2+3x-1`,"cube expansion"],
+["Algebra","Sum of cubes","Identity",String.raw`a^3+b^3=(a+b)(a^2-ab+b^2)`,"Factorization of a sum of cubes.",String.raw`x^3+8=(x+2)(x^2-2x+4)`,"cubic factorization"],
+["Algebra","Difference of cubes","Identity",String.raw`a^3-b^3=(a-b)(a^2+ab+b^2)`,"Factorization of a difference of cubes.",String.raw`x^3-27=(x-3)(x^2+3x+9)`,"cubic factorization"],
+["Algebra","Linear equation","Formula",String.raw`ax+b=0\Rightarrow x=-\frac ba,\quad a\ne0`,"Solution of a linear equation.",String.raw`2x+6=0\Rightarrow x=-3`,"linear equation"],
+["Algebra","Quadratic formula","Formula",String.raw`x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}`,"Solutions of ax squared plus bx plus c equals zero, with a nonzero.",String.raw`x^2-5x+6=0\Rightarrow x=2,3`,"quadratic roots"],
+["Algebra","Quadratic discriminant","Formula",String.raw`\Delta=b^2-4ac`,"Positive, zero or negative discriminants indicate two, one repeated, or no real roots.",String.raw`\Delta>0\Rightarrow\text{two distinct real roots}`,"discriminant"],
+["Algebra","Vieta's sum of roots","Formula",String.raw`x_1+x_2=-\frac ba`,"For roots of ax squared plus bx plus c equals zero.",String.raw`x^2-5x+6=0\Rightarrow x_1+x_2=5`,"roots vieta"],
+["Algebra","Vieta's product of roots","Formula",String.raw`x_1x_2=\frac ca`,"For roots of a quadratic with a nonzero leading coefficient.",String.raw`x^2-5x+6=0\Rightarrow x_1x_2=6`,"roots vieta"],
+["Algebra","Exponent product rule","Identity",String.raw`a^ma^n=a^{m+n}`,"Multiply powers with the same base.",String.raw`x^2x^3=x^5`,"exponents indices"],
+["Algebra","Exponent quotient rule","Identity",String.raw`\frac{a^m}{a^n}=a^{m-n},\quad a\ne0`,"Divide powers with the same nonzero base.",String.raw`\frac{x^5}{x^2}=x^3`,"exponents indices"],
+["Algebra","Power of a power","Identity",String.raw`(a^m)^n=a^{mn}`,"Raise a power to another power by multiplying exponents.",String.raw`(x^2)^3=x^6`,"exponents"],
+["Algebra","Zero exponent","Identity",String.raw`a^0=1,\quad a\ne0`,"Any nonzero base raised to zero equals one.",String.raw`7^0=1`,"zero power"],
+["Algebra","Negative exponent","Identity",String.raw`a^{-n}=\frac1{a^n},\quad a\ne0`,"A negative exponent denotes a reciprocal.",String.raw`2^{-3}=\frac18`,"negative power"],
+["Algebra","Logarithm product rule","Identity",String.raw`\log_a(xy)=\log_a x+\log_a y`,"Requires positive x and y, with a positive and not equal to one.",String.raw`\log_{10}(10\cdot100)=3`,"logarithm"],
+["Algebra","Logarithm quotient rule","Identity",String.raw`\log_a\frac xy=\log_a x-\log_a y`,"Requires positive x and y and a valid logarithm base.",String.raw`\log_{10}(1000/10)=2`,"logarithm"],
+["Algebra","Logarithm power rule","Identity",String.raw`\log_a(x^r)=r\log_a x`,"For x positive and a valid base.",String.raw`\log_2(8^2)=2\log_2 8=6`,"logarithm"],
+["Algebra","Change of logarithm base","Formula",String.raw`\log_a x=\frac{\ln x}{\ln a}`,"Converts between valid logarithm bases.",String.raw`\log_2 8=\frac{\ln8}{\ln2}=3`,"logarithm base"],
+["Algebra","Arithmetic series sum","Formula",String.raw`S_n=\frac n2(a_1+a_n)`,"Sum of an arithmetic sequence.",String.raw`2+5+8+11=26`,"series"],
+["Algebra","Geometric series sum","Formula",String.raw`S_n=a_1\frac{1-r^n}{1-r},\quad r\ne1`,"Finite geometric sum.",String.raw`1+2+4+8=15`,"series"],
+["Algebra","Binomial theorem","Theorem",String.raw`(x+y)^n=\sum_{k=0}^{n}\binom nkx^{n-k}y^k`,"Expands a nonnegative integer power of a binomial.",String.raw`(x+y)^2=x^2+2xy+y^2`,"binomial expansion"],
+["Algebra","Absolute value","Definition",String.raw`|x|=\begin{cases}x,&x\ge0\\-x,&x<0\end{cases}`,"Absolute value is the nonnegative distance from zero.",String.raw`|-7|=7`,"modulus"],
+["Algebra","Complex conjugate","Definition",String.raw`\overline{a+bi}=a-bi`,"Changes the sign of the imaginary part.",String.raw`\overline{3+2i}=3-2i`,"complex numbers"],
+["Algebra","Complex modulus","Formula",String.raw`|a+bi|=\sqrt{a^2+b^2}`,"Magnitude of a complex number.",String.raw`|3+4i|=5`,"complex modulus"],
+["Algebra","Sum and product of complex roots","Theorem",String.raw`z_1+z_2=2a,\quad z_1z_2=a^2+b^2`,"For the conjugate pair a plus or minus bi.",String.raw`(2+3i)+(2-3i)=4`,"complex roots"],
+
+/* ===================== STATISTICS ===================== */
+["Statistics","Arithmetic mean","Formula",String.raw`\bar{x}=\frac1n\sum_{i=1}^{n}x_i`,"Sum observations and divide by their count.",String.raw`2,4,6\Rightarrow\bar{x}=4`,"average mean"],
+["Statistics","Weighted mean","Formula",String.raw`\bar{x}_w=\frac{\sum w_ix_i}{\sum w_i}`,"The total weight must be nonzero.",String.raw`80,90\text{ with weights }1,3\Rightarrow87.5`,"weighted average"],
+["Statistics","Median position","Definition",String.raw`\text{Middle value of sorted observations}`,"For an even number of observations, average the two middle values.",String.raw`1,3,7\Rightarrow\text{median}=3`,"median"],
+["Statistics","Mode","Definition",String.raw`\text{Most frequently occurring value}`,"A dataset can have more than one mode.",String.raw`2,2,3,5\Rightarrow\text{mode}=2`,"mode frequency"],
+["Statistics","Range","Formula",String.raw`R=x_{\max}-x_{\min}`,"Difference between the maximum and minimum values.",String.raw`2,5,9\Rightarrow R=7`,"range spread"],
+["Statistics","Population variance","Formula",String.raw`\sigma^2=\frac1N\sum_{i=1}^{N}(x_i-\mu)^2`,"Average squared deviation from the population mean.",String.raw`2,4,6\Rightarrow\sigma^2=\frac83`,"variance population"],
+["Statistics","Sample variance","Formula",String.raw`s^2=\frac1{n-1}\sum_{i=1}^{n}(x_i-\bar{x})^2`,"Unbiased sample variance when n is greater than one.",String.raw`2,4,6\Rightarrow s^2=4`,"variance sample"],
+["Statistics","Standard deviation","Formula",String.raw`\sigma=\sqrt{\sigma^2}`,"Positive square root of the population variance.",String.raw`\sigma^2=9\Rightarrow\sigma=3`,"standard deviation"],
+["Statistics","Z score","Formula",String.raw`z=\frac{x-\mu}{\sigma}`,"Measures how many population standard deviations x lies from the mean.",String.raw`x=70,\ \mu=60,\ \sigma=5\Rightarrow z=2`,"standard score"],
+["Statistics","Probability complement","Formula",String.raw`P(A^c)=1-P(A)`,"Probability that event A does not occur.",String.raw`P(A)=0.3\Rightarrow P(A^c)=0.7`,"probability complement"],
+["Statistics","Probability addition rule","Formula",String.raw`P(A\cup B)=P(A)+P(B)-P(A\cap B)`,"Subtract the overlap when calculating the probability of either event.",String.raw`P(A)=0.5,\ P(B)=0.4,\ P(A\cap B)=0.2\Rightarrow0.7`,"probability union"],
+["Statistics","Conditional probability","Formula",String.raw`P(A\mid B)=\frac{P(A\cap B)}{P(B)}`,"Requires P(B) greater than zero.",String.raw`P(A\cap B)=0.2,\ P(B)=0.5\Rightarrow0.4`,"conditional probability"],
+["Statistics","Independent events","Definition",String.raw`P(A\cap B)=P(A)P(B)`,"For independent events, the occurrence of one does not change the probability of the other.",String.raw`0.5(0.2)=0.1`,"independence"],
+["Statistics","Bayes' theorem","Theorem",String.raw`P(A\mid B)=\frac{P(B\mid A)P(A)}{P(B)}`,"Requires P(B) greater than zero.",String.raw`P(A)=0.2,\ P(B\mid A)=0.8`,"Bayes posterior"],
+["Statistics","Binomial probability","Formula",String.raw`P(X=k)=\binom nkp^k(1-p)^{n-k}`,"For n independent Bernoulli trials with success probability p.",String.raw`n=2,\ p=0.5,\ k=1\Rightarrow P(X=1)=0.5`,"binomial distribution"],
+["Statistics","Binomial mean","Formula",String.raw`E(X)=np`,"Expected number of successes in a binomial distribution.",String.raw`n=10,\ p=0.3\Rightarrow E(X)=3`,"binomial expectation"],
+["Statistics","Binomial variance","Formula",String.raw`\operatorname{Var}(X)=np(1-p)`,"Variance of a binomial random variable.",String.raw`n=10,\ p=0.3\Rightarrow2.1`,"binomial variance"],
+["Statistics","Expected value","Formula",String.raw`E(X)=\sum_x xP(X=x)`,"Probability-weighted average of discrete outcomes.",String.raw`\text{Fair die: }E(X)=3.5`,"expectation"],
+["Statistics","Variance from moments","Formula",String.raw`\operatorname{Var}(X)=E(X^2)-[E(X)]^2`,"Equivalent expression for variance when the moments exist.",String.raw`E(X^2)=10,\ E(X)=2\Rightarrow\operatorname{Var}(X)=6`,"moments"],
+["Statistics","Covariance","Formula",String.raw`\operatorname{Cov}(X,Y)=E[(X-\mu_X)(Y-\mu_Y)]`,"Measures how two variables vary together.",String.raw`\operatorname{Cov}(X,Y)>0\text{ indicates positive linear co-variation}`,"covariance"],
+["Statistics","Pearson correlation","Formula",String.raw`r=\frac{\operatorname{Cov}(X,Y)}{\sigma_X\sigma_Y}`,"Defined when both standard deviations are positive; r lies between -1 and 1.",String.raw`r=1\text{ indicates perfect positive linear correlation}`,"correlation Pearson"],
+["Statistics","Standard error of mean","Formula",String.raw`SE(\bar{x})=\frac{s}{\sqrt n}`,"Estimated standard deviation of the sample mean.",String.raw`s=10,\ n=100\Rightarrow SE=1`,"standard error"],
+["Statistics","Normal distribution density","Formula",String.raw`f(x)=\frac1{\sigma\sqrt{2\pi}}e^{-\frac12((x-\mu)/\sigma)^2}`,"Density of a normal distribution with mean mu and positive standard deviation sigma.",String.raw`\mu=0,\ \sigma=1\text{ gives the standard normal density}`,"normal Gaussian"],
+["Statistics","Coefficient of variation","Formula",String.raw`CV=\frac{\sigma}{\mu}\times100\%`,"Relative dispersion when the mean is meaningful and nonzero.",String.raw`\sigma=5,\ \mu=20\Rightarrow CV=25\%`,"relative variability"],
+["Statistics","Poisson probability","Formula",String.raw`P(X=k)=\frac{\lambda^ke^{-\lambda}}{k!}`,"For a Poisson random variable with rate lambda and k a nonnegative integer.",String.raw`\lambda=2,\ k=0\Rightarrow P(X=0)=e^{-2}`,"Poisson"],
+["Statistics","Poisson mean and variance","Formula",String.raw`E(X)=\operatorname{Var}(X)=\lambda`,"Both mean and variance equal the Poisson rate.",String.raw`\lambda=4\Rightarrow E(X)=4,\ \operatorname{Var}(X)=4`,"Poisson rate"],
+
+/* ===================== COORDINATE GEOMETRY ===================== */
+["Coordinate Geometry","Distance between two points","Formula",String.raw`d=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}`,"Euclidean distance between two Cartesian points.",String.raw`(0,0),(3,4)\Rightarrow d=5`,"distance"],
+["Coordinate Geometry","Midpoint","Formula",String.raw`M=\left(\frac{x_1+x_2}{2},\frac{y_1+y_2}{2}\right)`,"Average corresponding coordinates.",String.raw`(0,2),(4,6)\Rightarrow M=(2,4)`,"midpoint"],
+["Coordinate Geometry","Slope","Formula",String.raw`m=\frac{y_2-y_1}{x_2-x_1}`,"Requires different x-coordinates.",String.raw`(1,2),(3,6)\Rightarrow m=2`,"gradient slope"],
+["Coordinate Geometry","Point-slope line equation","Formula",String.raw`y-y_1=m(x-x_1)`,"Line with slope m passing through a known point.",String.raw`(1,2),\ m=3\Rightarrow y-2=3(x-1)`,"straight line"],
+["Coordinate Geometry","Slope-intercept line equation","Formula",String.raw`y=mx+c`,"m is the slope and c is the vertical intercept.",String.raw`y=2x+1`,"line intercept"],
+["Coordinate Geometry","General line equation","Formula",String.raw`Ax+By+C=0`,"General equation of a straight line.",String.raw`2x+3y-6=0`,"line"],
+["Coordinate Geometry","Intercept form","Formula",String.raw`\frac xa+\frac yb=1`,"Line with nonzero x- and y-intercepts a and b.",String.raw`\frac x4+\frac y2=1`,"intercepts"],
+["Coordinate Geometry","Parallel lines","Theorem",String.raw`m_1=m_2`,"Distinct nonvertical parallel lines have equal slopes.",String.raw`m_1=m_2=2`,"parallel"],
+["Coordinate Geometry","Perpendicular lines","Theorem",String.raw`m_1m_2=-1`,"For nonvertical perpendicular lines with defined slopes.",String.raw`m_1=2,\ m_2=-\frac12`,"perpendicular"],
+["Coordinate Geometry","Triangle area from coordinates","Formula",String.raw`A=\frac12\left|x_1(y_2-y_3)+x_2(y_3-y_1)+x_3(y_1-y_2)\right|`,"Area determined by three vertices.",String.raw`(0,0),(4,0),(0,3)\Rightarrow A=6`,"coordinate triangle"],
+["Coordinate Geometry","Circle equation","Formula",String.raw`(x-h)^2+(y-k)^2=r^2`,"Circle centered at (h,k) with radius r.",String.raw`x^2+y^2=25\Rightarrow r=5`,"circle equation"],
+["Coordinate Geometry","Circle equation at origin","Formula",String.raw`x^2+y^2=r^2`,"Circle centered at the origin.",String.raw`x^2+y^2=9\Rightarrow r=3`,"circle origin"],
+["Coordinate Geometry","Parabola opening right","Formula",String.raw`y^2=4ax`,"Parabola with vertex at the origin and focus at (a,0).",String.raw`y^2=8x\Rightarrow\text{focus }(2,0)`,"parabola focus"],
+["Coordinate Geometry","Parabola opening upward","Formula",String.raw`x^2=4ay`,"Parabola with vertex at the origin and focus at (0,a).",String.raw`x^2=12y\Rightarrow\text{focus }(0,3)`,"parabola"],
+["Coordinate Geometry","Ellipse","Formula",String.raw`\frac{x^2}{a^2}+\frac{y^2}{b^2}=1`,"Ellipse centered at the origin with positive semiaxes a and b.",String.raw`\frac{x^2}{25}+\frac{y^2}{9}=1`,"ellipse"],
+["Coordinate Geometry","Horizontal hyperbola","Formula",String.raw`\frac{x^2}{a^2}-\frac{y^2}{b^2}=1`,"Horizontal hyperbola centered at the origin.",String.raw`\frac{x^2}{9}-\frac{y^2}{4}=1`,"hyperbola"],
+["Coordinate Geometry","Section formula","Formula",String.raw`P=\left(\frac{mx_2+nx_1}{m+n},\frac{my_2+ny_1}{m+n}\right)`,"Internal division of a segment in ratio m:n.",String.raw`m=n\Rightarrow\text{midpoint}`,"section ratio"],
+["Coordinate Geometry","Centroid of triangle","Formula",String.raw`G=\left(\frac{x_1+x_2+x_3}{3},\frac{y_1+y_2+y_3}{3}\right)`,"Intersection of the medians of a triangle.",String.raw`(0,0),(3,0),(0,3)\Rightarrow G=(1,1)`,"centroid"],
+["Coordinate Geometry","Point-to-line distance","Formula",String.raw`d=\frac{|Ax_0+By_0+C|}{\sqrt{A^2+B^2}}`,"Distance from point (x0,y0) to line Ax+By+C=0.",String.raw`(0,0),\ 3x+4y-10=0\Rightarrow d=2`,"line distance"],
+["Coordinate Geometry","Origin distance","Formula",String.raw`d=\sqrt{x^2+y^2}`,"Distance from the origin to a point.",String.raw`(3,4)\Rightarrow d=5`,"origin distance"],
+
+/* ===================== TRIGONOMETRY ===================== */
+["Trigonometry","Sine ratio","Definition",String.raw`\sin\theta=\frac{\text{opposite}}{\text{hypotenuse}}`,"Right-triangle sine ratio.",String.raw`\frac35\text{ for opposite }3\text{ and hypotenuse }5`,"sine"],
+["Trigonometry","Cosine ratio","Definition",String.raw`\cos\theta=\frac{\text{adjacent}}{\text{hypotenuse}}`,"Right-triangle cosine ratio.",String.raw`\frac45\text{ for adjacent }4\text{ and hypotenuse }5`,"cosine"],
+["Trigonometry","Tangent ratio","Definition",String.raw`\tan\theta=\frac{\text{opposite}}{\text{adjacent}}`,"Right-triangle tangent ratio.",String.raw`\frac34\text{ for opposite }3\text{ and adjacent }4`,"tangent"],
+["Trigonometry","Reciprocal cosecant","Identity",String.raw`\csc\theta=\frac1{\sin\theta}`,"Defined where sine is nonzero.",String.raw`\sin30^\circ=\frac12\Rightarrow\csc30^\circ=2`,"cosecant"],
+["Trigonometry","Reciprocal secant","Identity",String.raw`\sec\theta=\frac1{\cos\theta}`,"Defined where cosine is nonzero.",String.raw`\cos60^\circ=\frac12\Rightarrow\sec60^\circ=2`,"secant"],
+["Trigonometry","Cotangent","Identity",String.raw`\cot\theta=\frac{\cos\theta}{\sin\theta}`,"Defined where sine is nonzero.",String.raw`\cot45^\circ=1`,"cotangent"],
+["Trigonometry","Pythagorean identity","Identity",String.raw`\sin^2x+\cos^2x=1`,"Fundamental trigonometric identity.",String.raw`\sin x=\frac35\Rightarrow\cos^2x=\frac{16}{25}`,"identity"],
+["Trigonometry","Tangent identity","Identity",String.raw`1+\tan^2x=\sec^2x`,"Valid where tangent and secant are defined.",String.raw`\tan x=2\Rightarrow\sec^2x=5`,"identity"],
+["Trigonometry","Cotangent identity","Identity",String.raw`1+\cot^2x=\csc^2x`,"Valid where cotangent and cosecant are defined.",String.raw`\cot x=2\Rightarrow\csc^2x=5`,"identity"],
+["Trigonometry","Tangent quotient","Identity",String.raw`\tan x=\frac{\sin x}{\cos x}`,"Requires cosine to be nonzero.",String.raw`\tan45^\circ=1`,"quotient"],
+["Trigonometry","Sine of a sum","Identity",String.raw`\sin(A+B)=\sin A\cos B+\cos A\sin B`,"Compound-angle identity.",String.raw`\sin(30^\circ+60^\circ)=1`,"compound angle"],
+["Trigonometry","Sine of a difference","Identity",String.raw`\sin(A-B)=\sin A\cos B-\cos A\sin B`,"Compound-angle identity.",String.raw`\sin(45^\circ-45^\circ)=0`,"compound angle"],
+["Trigonometry","Cosine of a sum","Identity",String.raw`\cos(A+B)=\cos A\cos B-\sin A\sin B`,"Compound-angle identity.",String.raw`\cos(45^\circ+45^\circ)=0`,"compound angle"],
+["Trigonometry","Cosine of a difference","Identity",String.raw`\cos(A-B)=\cos A\cos B+\sin A\sin B`,"Compound-angle identity.",String.raw`\cos(60^\circ-60^\circ)=1`,"compound angle"],
+["Trigonometry","Tangent of a sum","Identity",String.raw`\tan(A+B)=\frac{\tan A+\tan B}{1-\tan A\tan B}`,"Valid where all expressions are defined.",String.raw`\tan(45^\circ+45^\circ)\text{ is undefined}`,"tangent sum"],
+["Trigonometry","Sine double angle","Identity",String.raw`\sin2x=2\sin x\cos x`,"Double-angle identity.",String.raw`x=45^\circ\Rightarrow\sin2x=1`,"double angle"],
+["Trigonometry","Cosine double angle","Identity",String.raw`\cos2x=\cos^2x-\sin^2x`,"Equivalent forms are 2 cos squared x minus 1 and 1 minus 2 sin squared x.",String.raw`x=60^\circ\Rightarrow\cos2x=-\frac12`,"double angle"],
+["Trigonometry","Tangent double angle","Identity",String.raw`\tan2x=\frac{2\tan x}{1-\tan^2x}`,"Valid when the expression is defined.",String.raw`\tan30^\circ=\frac1{\sqrt3}\Rightarrow\tan60^\circ=\sqrt3`,"double angle"],
+["Trigonometry","Half-angle cosine","Identity",String.raw`\cos^2\frac x2=\frac{1+\cos x}{2}`,"Half-angle identity.",String.raw`x=60^\circ\Rightarrow\cos^2 30^\circ=\frac34`,"half angle"],
+["Trigonometry","Sine rule","Formula",String.raw`\frac a{\sin A}=\frac b{\sin B}=\frac c{\sin C}`,"Each triangle side divided by its opposite-angle sine gives the same ratio.",String.raw`a=5,\ A=30^\circ\Rightarrow\frac a{\sin A}=10`,"sine rule triangle"],
+["Trigonometry","Cosine rule","Formula",String.raw`c^2=a^2+b^2-2ab\cos C`,"Find a side using two sides and the included angle.",String.raw`a=b=5,\ C=60^\circ\Rightarrow c=5`,"cosine rule"],
+["Trigonometry","Triangle area using sine","Formula",String.raw`A=\frac12 ab\sin C`,"Two sides and their included angle determine area.",String.raw`a=4,\ b=6,\ C=30^\circ\Rightarrow A=6`,"triangle area"],
+["Trigonometry","Degree-radian conversion","Formula",String.raw`\text{radians}=\text{degrees}\frac{\pi}{180^\circ}`,"Converts degrees into radians.",String.raw`90^\circ=\frac\pi2`,"radians degrees"],
+["Trigonometry","Unit circle","Definition",String.raw`x=\cos\theta,\quad y=\sin\theta,\quad x^2+y^2=1`,"A point on the unit circle has coordinates cosine and sine of the angle.",String.raw`\theta=0\Rightarrow(x,y)=(1,0)`,"unit circle"],
+["Trigonometry","Sine periodicity","Identity",String.raw`\sin(x+2\pi)=\sin x`,"Sine has period 2 pi radians.",String.raw`\sin(2\pi+x)=\sin x`,"period"],
+["Trigonometry","Cosine periodicity","Identity",String.raw`\cos(x+2\pi)=\cos x`,"Cosine has period 2 pi radians.",String.raw`\cos(2\pi+x)=\cos x`,"period"],
+["Trigonometry","Sine law of complementary angles","Identity",String.raw`\sin\left(\frac\pi2-x\right)=\cos x`,"Cofunction identity for angles in radians.",String.raw`\sin30^\circ=\cos60^\circ`,"complementary"],
+
+/* ===================== CALCULUS ===================== */
+["Calculus","Derivative from first principles","Definition",String.raw`f'(x)=\lim_{h\to0}\frac{f(x+h)-f(x)}h`,"Defines the derivative where the limit exists.",String.raw`f(x)=x^2\Rightarrow f'(x)=2x`,"limit derivative"],
+["Calculus","Power rule","Formula",String.raw`\frac{d}{dx}x^n=nx^{n-1}`,"For real powers on suitable domains where the function is differentiable.",String.raw`\frac{d}{dx}x^3=3x^2`,"derivative power"],
+["Calculus","Constant derivative","Formula",String.raw`\frac{d}{dx}c=0`,"The derivative of a constant is zero.",String.raw`\frac{d}{dx}7=0`,"derivative constant"],
+["Calculus","Constant multiple rule","Formula",String.raw`\frac{d}{dx}[cf(x)]=cf'(x)`,"A constant factor remains unchanged.",String.raw`\frac{d}{dx}(3x^2)=6x`,"derivative"],
+["Calculus","Sum rule","Formula",String.raw`(f+g)'=f'+g'`,"Differentiate each summand.",String.raw`\frac{d}{dx}(x^2+\sin x)=2x+\cos x`,"derivative sum"],
+["Calculus","Product rule","Formula",String.raw`(fg)'=f'g+fg'`,"Derivative of a product of differentiable functions.",String.raw`\frac{d}{dx}(x\sin x)=\sin x+x\cos x`,"product derivative"],
+["Calculus","Quotient rule","Formula",String.raw`\left(\frac fg\right)'=\frac{f'g-fg'}{g^2}`,"Requires g to be nonzero in the domain considered.",String.raw`\frac{d}{dx}\frac{x}{x+1}=\frac1{(x+1)^2}`,"quotient derivative"],
+["Calculus","Chain rule","Formula",String.raw`\frac{d}{dx}f(g(x))=f'(g(x))g'(x)`,"Differentiate the outer function, then multiply by the inner derivative.",String.raw`\frac{d}{dx}\sin(x^2)=2x\cos(x^2)`,"chain derivative"],
+["Calculus","Exponential derivative","Formula",String.raw`\frac{d}{dx}e^x=e^x`,"The natural exponential function is its own derivative.",String.raw`\frac{d}{dx}e^{3x}=3e^{3x}`,"exponential derivative"],
+["Calculus","General exponential derivative","Formula",String.raw`\frac{d}{dx}a^x=a^x\ln a`,"For a positive constant a.",String.raw`\frac{d}{dx}2^x=2^x\ln2`,"exponential"],
+["Calculus","Natural logarithm derivative","Formula",String.raw`\frac{d}{dx}\ln x=\frac1x`,"Valid for x greater than zero.",String.raw`\frac{d}{dx}\ln(3x)=\frac1x`,"log derivative"],
+["Calculus","Sine derivative","Formula",String.raw`\frac{d}{dx}\sin x=\cos x`,"Angles are measured in radians.",String.raw`\frac{d}{dx}(3\sin x)=3\cos x`,"trigonometric derivative"],
+["Calculus","Cosine derivative","Formula",String.raw`\frac{d}{dx}\cos x=-\sin x`,"Angles are measured in radians.",String.raw`\frac{d}{dx}\cos(2x)=-2\sin(2x)`,"trigonometric derivative"],
+["Calculus","Tangent derivative","Formula",String.raw`\frac{d}{dx}\tan x=\sec^2x`,"Valid where tangent is defined.",String.raw`\frac{d}{dx}\tan(3x)=3\sec^2(3x)`,"tangent derivative"],
+["Calculus","Implicit differentiation","Formula",String.raw`\frac{dy}{dx}=-\frac{F_x}{F_y}`,"For F(x,y)=0 where F is differentiable and F_y is nonzero.",String.raw`x^2+y^2=r^2\Rightarrow\frac{dy}{dx}=-\frac xy`,"implicit"],
+["Calculus","Second derivative","Definition",String.raw`f''(x)=\frac{d^2f}{dx^2}`,"Derivative of the first derivative; often describes curvature.",String.raw`f(x)=x^3\Rightarrow f''(x)=6x`,"second derivative"],
+["Calculus","Critical point condition","Definition",String.raw`f'(x)=0\quad\text{or }f'(x)\text{ is undefined}`,"Interior critical points occur where the derivative is zero or does not exist.",String.raw`f(x)=x^2\Rightarrow x=0`,"critical point"],
+["Calculus","Power integral","Formula",String.raw`\int x^n\,dx=\frac{x^{n+1}}{n+1}+C,\quad n\ne-1`,"Antiderivative power rule.",String.raw`\int x^2\,dx=\frac{x^3}{3}+C`,"integration power"],
+["Calculus","Integral of reciprocal","Formula",String.raw`\int\frac1x\,dx=\ln|x|+C`,"Valid on intervals that do not cross zero.",String.raw`\int\frac2x\,dx=2\ln|x|+C`,"logarithmic integral"],
+["Calculus","Exponential integral","Formula",String.raw`\int e^x\,dx=e^x+C`,"Antiderivative of the natural exponential.",String.raw`\int3e^x\,dx=3e^x+C`,"exponential integral"],
+["Calculus","Exponential base integral","Formula",String.raw`\int a^x\,dx=\frac{a^x}{\ln a}+C`,"For a positive base a not equal to one.",String.raw`\int2^x\,dx=\frac{2^x}{\ln2}+C`,"exponential"],
+["Calculus","Sine integral","Formula",String.raw`\int\sin x\,dx=-\cos x+C`,"Angles are measured in radians.",String.raw`\int2\sin x\,dx=-2\cos x+C`,"sine integral"],
+["Calculus","Cosine integral","Formula",String.raw`\int\cos x\,dx=\sin x+C`,"Angles are measured in radians.",String.raw`\int3\cos x\,dx=3\sin x+C`,"cosine integral"],
+["Calculus","Integration by parts","Formula",String.raw`\int u\,dv=uv-\int v\,du`,"Choose u and dv so the resulting integral is simpler.",String.raw`\int xe^x\,dx=xe^x-e^x+C`,"integration by parts"],
+["Calculus","Substitution rule","Formula",String.raw`\int f(g(x))g'(x)\,dx=\int f(u)\,du`,"Use u=g(x) to simplify a composite integrand.",String.raw`\int2x\cos(x^2)\,dx=\sin(x^2)+C`,"u substitution"],
+["Calculus","Fundamental theorem of calculus","Theorem",String.raw`\frac{d}{dx}\int_a^x f(t)\,dt=f(x)`,"If f is continuous, differentiation recovers the integrand.",String.raw`\frac{d}{dx}\int_0^x t^2\,dt=x^2`,"FTC"],
+["Calculus","Definite integral evaluation","Formula",String.raw`\int_a^b f(x)\,dx=F(b)-F(a)`,"F is an antiderivative of f on the interval.",String.raw`\int_0^1 2x\,dx=1`,"definite integral"],
+["Calculus","Average value of a function","Formula",String.raw`f_{\mathrm{avg}}=\frac1{b-a}\int_a^b f(x)\,dx`,"Average value of a continuous function on a finite interval with a less than b.",String.raw`f(x)=x,\ [0,2]\Rightarrow f_{\mathrm{avg}}=1`,"average value"],
+["Calculus","Arc length","Formula",String.raw`L=\int_a^b\sqrt{1+[f'(x)]^2}\,dx`,"Length of a differentiable curve y=f(x) on the interval.",String.raw`f(x)=0\text{ on }[0,3]\Rightarrow L=3`,"arc length"],
+["Calculus","Taylor series","Formula",String.raw`f(x)=\sum_{n=0}^{\infty}\frac{f^{(n)}(a)}{n!}(x-a)^n`,"When the Taylor series converges to the function, it represents the function near a.",String.raw`e^x=\sum_{n=0}^{\infty}\frac{x^n}{n!}`,"Taylor expansion"],
+["Calculus","Maclaurin series for sine","Formula",String.raw`\sin x=\sum_{n=0}^{\infty}\frac{(-1)^nx^{2n+1}}{(2n+1)!}`,"Taylor series for sine centered at zero.",String.raw`\sin x=x-\frac{x^3}{3!}+\frac{x^5}{5!}-\cdots`,"series sine"],
+["Calculus","Maclaurin series for cosine","Formula",String.raw`\cos x=\sum_{n=0}^{\infty}\frac{(-1)^nx^{2n}}{(2n)!}`,"Taylor series for cosine centered at zero.",String.raw`\cos x=1-\frac{x^2}{2!}+\frac{x^4}{4!}-\cdots`,"series cosine"],
+["Calculus","L'Hopital's rule","Theorem",String.raw`\lim_{x\to a}\frac{f(x)}{g(x)}=\lim_{x\to a}\frac{f'(x)}{g'(x)}`,"Applies to suitable indeterminate forms such as 0/0 or infinity/infinity when its conditions hold.",String.raw`\lim_{x\to0}\frac{\sin x}{x}=1`,"limits LHopital"],
+["Calculus","Derivative of inverse function","Formula",String.raw`(f^{-1})'(y)=\frac1{f'(x)},\quad y=f(x)`,"Requires an invertible differentiable function and a nonzero derivative at the relevant point.",String.raw`f(x)=2x\Rightarrow(f^{-1})'(y)=\frac12`,"inverse derivative"],
+["Calculus","Newton's method","Formula",String.raw`x_{n+1}=x_n-\frac{f(x_n)}{f'(x_n)}`,"Iterative numerical method for approximating a root.",String.raw`f(x)=x^2-2\text{ approximates }\sqrt2`,"numerical root"],
+
+/* ===================== ADDITIONAL IMPORTANT FORMULAS ===================== */
+["Algebra","Arithmetic mean-geometric mean inequality","Theorem",String.raw`\frac{a+b}{2}\ge\sqrt{ab},\quad a,b\ge0`,"The arithmetic mean of two nonnegative numbers is at least their geometric mean.",String.raw`a=4,\ b=9\Rightarrow6.5\ge6`,"AM GM inequality"],
+["Algebra","Cauchy-Schwarz inequality","Theorem",String.raw`|\mathbf a\cdot\mathbf b|\le\|\mathbf a\|\|\mathbf b\|`,"The absolute dot product is no greater than the product of vector magnitudes.",String.raw`|(1,2)\cdot(3,4)|=11\le\sqrt5\sqrt{25}`,"inequality vectors"],
+["Coordinate Geometry","Vector magnitude","Formula",String.raw`\|\mathbf v\|=\sqrt{v_1^2+v_2^2+v_3^2}`,"Euclidean length of a three-dimensional vector.",String.raw`\mathbf v=(2,3,6)\Rightarrow\|\mathbf v\|=7`,"vector magnitude"],
+["Coordinate Geometry","Dot product","Formula",String.raw`\mathbf a\cdot\mathbf b=\sum_{i=1}^{n}a_ib_i`,"The dot product is the sum of products of corresponding components.",String.raw`(1,2)\cdot(3,4)=11`,"vector dot product"],
+["Coordinate Geometry","Angle between vectors","Formula",String.raw`\cos\theta=\frac{\mathbf a\cdot\mathbf b}{\|\mathbf a\|\|\mathbf b\|}`,"For nonzero vectors, determines their included angle.",String.raw`\mathbf a\cdot\mathbf b=0\Rightarrow\theta=90^\circ`,"vector angle"],
+["Statistics","Chebyshev's inequality","Theorem",String.raw`P(|X-\mu|\ge k\sigma)\le\frac1{k^2}`,"For a random variable with finite mean and finite positive variance, k is positive.",String.raw`k=2\Rightarrow P(|X-\mu|\ge2\sigma)\le\frac14`,"probability inequality"],
+["Statistics","Law of total probability","Theorem",String.raw`P(B)=\sum_iP(B\mid A_i)P(A_i)`,"For a partition of the sample space into mutually exclusive events A_i with appropriate conditional probabilities.",String.raw`P(B)=P(B\mid A)P(A)+P(B\mid A^c)P(A^c)`,"total probability"],
+["Calculus","Gradient of a function","Formula",String.raw`\nabla f=\left(\frac{\partial f}{\partial x_1},\ldots,\frac{\partial f}{\partial x_n}\right)`,"The gradient collects the first partial derivatives.",String.raw`f(x,y)=x^2+y^2\Rightarrow\nabla f=(2x,2y)`,"multivariable gradient"],
+["Calculus","Partial derivative","Definition",String.raw`\frac{\partial f}{\partial x}`,"Differentiate with respect to x while holding the other independent variables fixed.",String.raw`f(x,y)=x^2y\Rightarrow\frac{\partial f}{\partial x}=2xy`,"partial derivative"],
+["Calculus","Double integral","Formula",String.raw`\iint_R f(x,y)\,dA`,"Integral over a two-dimensional region R.",String.raw`\iint_R1\,dA=\text{area}(R)`,"double integral"],
+["Calculus","Integration in polar coordinates","Formula",String.raw`dA=r\,dr\,d\theta`,"Area element in polar coordinates.",String.raw`\iint_R f(x,y)\,dA=\iint f(r\cos\theta,r\sin\theta)r\,dr\,d\theta`,"polar integration"]
+];
+
+/* ===================== APPLICATION ===================== */
 
 const subjects = [
   "Number Theory",
@@ -231,234 +452,24 @@ const subjects = [
   "Calculus"
 ];
 
-/*
-  All formula strings use LaTeX.
-  String.raw preserves backslashes without extra escaping.
-*/
-const raw = String.raw;
-
-const library = [
-  // NUMBER THEORY
-  {topic:"Number Theory",title:"Even integer",type:"Definition",
-   formula:raw`n=2k`,explanation:"An even integer is divisible by 2.",example:raw`k=4\implies n=8.`},
-  {topic:"Number Theory",title:"Odd integer",type:"Definition",
-   formula:raw`n=2k+1`,explanation:"An odd integer differs from an even integer by 1.",example:raw`k=4\implies n=9.`},
-  {topic:"Number Theory",title:"Sum of first n integers",type:"Formula",
-   formula:raw`\sum_{k=1}^{n}k=\frac{n(n+1)}{2}`,explanation:"Sum of the first n positive integers.",example:raw`n=10\implies 55.`},
-  {topic:"Number Theory",title:"Sum of squares",type:"Formula",
-   formula:raw`\sum_{k=1}^{n}k^2=\frac{n(n+1)(2n+1)}{6}`,explanation:"Sum of the squares of the first n positive integers.",example:raw`1^2+2^2+3^2=14.`},
-  {topic:"Number Theory",title:"Sum of cubes",type:"Formula",
-   formula:raw`\sum_{k=1}^{n}k^3=\left(\frac{n(n+1)}{2}\right)^2`,explanation:"The sum of cubes equals the square of the triangular number.",example:raw`1^3+2^3+3^3=36.`},
-  {topic:"Number Theory",title:"Division algorithm",type:"Theorem",
-   formula:raw`a=bq+r,\quad 0\le r<b`,explanation:"For an integer a and positive integer b, unique integers q and r exist.",example:raw`29=5(5)+4.`},
-  {topic:"Number Theory",title:"Euclidean algorithm",type:"Theorem",
-   formula:raw`\gcd(a,b)=\gcd(b,a\bmod b)`,explanation:"The greatest common divisor is preserved by the remainder step.",example:raw`\gcd(18,12)=\gcd(12,6)=6.`},
-  {topic:"Number Theory",title:"LCM and GCD",type:"Formula",
-   formula:raw`\operatorname{lcm}(a,b)\gcd(a,b)=|ab|`,explanation:"For nonzero integers a and b, using a positive LCM and GCD.",example:raw`\operatorname{lcm}(6,8)\gcd(6,8)=24(2)=48.`},
-  {topic:"Number Theory",title:"Prime factorization",type:"Theorem",
-   formula:raw`n=p_1^{a_1}p_2^{a_2}\cdots p_k^{a_k}`,explanation:"Every integer greater than 1 has a unique prime factorization up to ordering.",example:raw`60=2^2\cdot3\cdot5.`},
-  {topic:"Number Theory",title:"Number of divisors",type:"Formula",
-   formula:raw`d(n)=\prod_{i=1}^{k}(a_i+1)`,explanation:"If the prime factorization has exponents a₁ through aₖ, multiply each exponent plus one.",example:raw`12=2^2\cdot3^1\implies d(12)=3\cdot2=6.`},
-  {topic:"Number Theory",title:"Congruence modulo m",type:"Definition",
-   formula:raw`a\equiv b\pmod m\iff m\mid(a-b)`,explanation:"Two integers are congruent modulo m if their difference is divisible by m.",example:raw`17\equiv2\pmod5.`},
-  {topic:"Number Theory",title:"Fermat's little theorem",type:"Theorem",
-   formula:raw`a^{p-1}\equiv1\pmod p`,explanation:"Valid when p is prime and p does not divide a.",example:raw`2^4\equiv1\pmod5.`},
-  {topic:"Number Theory",title:"Arithmetic progression",type:"Formula",
-   formula:raw`a_n=a_1+(n-1)d`,explanation:"The nth term of a sequence with common difference d.",example:raw`a_1=2,\ d=3,\ n=5\implies a_5=14.`},
-  {topic:"Number Theory",title:"Geometric progression",type:"Formula",
-   formula:raw`a_n=a_1r^{n-1}`,explanation:"The nth term of a sequence with common ratio r.",example:raw`a_1=2,\ r=3,\ n=4\implies a_4=54.`},
-
-  // GEOMETRY
-  {topic:"Geometry",title:"Triangle angle sum",type:"Theorem",
-   formula:raw`A+B+C=180^\circ`,explanation:"The interior angles of a Euclidean triangle sum to 180 degrees.",example:raw`50^\circ+60^\circ+70^\circ=180^\circ.`},
-  {topic:"Geometry",title:"Exterior angle theorem",type:"Theorem",
-   formula:raw`E=A+B`,explanation:"An exterior angle equals the sum of the two remote interior angles.",example:raw`A=40^\circ,\ B=65^\circ\implies E=105^\circ.`},
-  {topic:"Geometry",title:"Pythagorean theorem",type:"Theorem",
-   formula:raw`c^2=a^2+b^2`,explanation:"For a right triangle, c is the hypotenuse.",example:raw`a=3,\ b=4\implies c=\sqrt{9+16}=5.`},
-  {topic:"Geometry",title:"Triangle area",type:"Formula",
-   formula:raw`A=\frac12 bh`,explanation:"Multiply the base by its perpendicular height and divide by two.",example:raw`b=10,\ h=6\implies A=30.`},
-  {topic:"Geometry",title:"Heron's formula",type:"Formula",
-   formula:raw`A=\sqrt{s(s-a)(s-b)(s-c)}`,explanation:raw`Here s=\frac{a+b+c}{2} is the semiperimeter.`,example:raw`a=3,\ b=4,\ c=5\implies A=6.`},
-  {topic:"Geometry",title:"Rectangle area",type:"Formula",
-   formula:raw`A=lw`,explanation:"Area equals length times width.",example:raw`l=8,\ w=3\implies A=24.`},
-  {topic:"Geometry",title:"Rectangle perimeter",type:"Formula",
-   formula:raw`P=2(l+w)`,explanation:"The sum of the four sides of a rectangle.",example:raw`l=8,\ w=3\implies P=22.`},
-  {topic:"Geometry",title:"Circle area",type:"Formula",
-   formula:raw`A=\pi r^2`,explanation:"The area of a circle with radius r.",example:raw`r=3\implies A=9\pi.`},
-  {topic:"Geometry",title:"Circle circumference",type:"Formula",
-   formula:raw`C=2\pi r`,explanation:"The distance around a circle.",example:raw`r=7\implies C=14\pi.`},
-  {topic:"Geometry",title:"Polygon interior-angle sum",type:"Formula",
-   formula:raw`S=(n-2)180^\circ`,explanation:"The sum of interior angles of a simple n-sided polygon.",example:raw`n=6\implies S=720^\circ.`},
-  {topic:"Geometry",title:"Regular polygon exterior angle",type:"Formula",
-   formula:raw`E=\frac{360^\circ}{n}`,explanation:"Each exterior angle of a regular polygon.",example:raw`n=5\implies E=72^\circ.`},
-  {topic:"Geometry",title:"Cylinder volume",type:"Formula",
-   formula:raw`V=\pi r^2h`,explanation:"Base area multiplied by height.",example:raw`r=2,\ h=5\implies V=20\pi.`},
-  {topic:"Geometry",title:"Sphere surface area",type:"Formula",
-   formula:raw`A=4\pi r^2`,explanation:"The total surface area of a sphere.",example:raw`r=3\implies A=36\pi.`},
-  {topic:"Geometry",title:"Sphere volume",type:"Formula",
-   formula:raw`V=\frac43\pi r^3`,explanation:"The volume enclosed by a sphere of radius r.",example:raw`r=3\implies V=36\pi.`},
-
-  // ALGEBRA
-  {topic:"Algebra",title:"Square of a sum",type:"Identity",
-   formula:raw`(a+b)^2=a^2+2ab+b^2`,explanation:"Expand a binomial square.",example:raw`(x+3)^2=x^2+6x+9.`},
-  {topic:"Algebra",title:"Square of a difference",type:"Identity",
-   formula:raw`(a-b)^2=a^2-2ab+b^2`,explanation:"Expand a binomial difference.",example:raw`(x-4)^2=x^2-8x+16.`},
-  {topic:"Algebra",title:"Difference of squares",type:"Identity",
-   formula:raw`a^2-b^2=(a-b)(a+b)`,explanation:"Factor a difference of two squares.",example:raw`x^2-25=(x-5)(x+5).`},
-  {topic:"Algebra",title:"Cube of a sum",type:"Identity",
-   formula:raw`(a+b)^3=a^3+3a^2b+3ab^2+b^3`,explanation:"Expansion of a binomial cube.",example:raw`(x+1)^3=x^3+3x^2+3x+1.`},
-  {topic:"Algebra",title:"Sum of cubes",type:"Identity",
-   formula:raw`a^3+b^3=(a+b)(a^2-ab+b^2)`,explanation:"Factorization identity for a sum of cubes.",example:raw`x^3+8=(x+2)(x^2-2x+4).`},
-  {topic:"Algebra",title:"Difference of cubes",type:"Identity",
-   formula:raw`a^3-b^3=(a-b)(a^2+ab+b^2)`,explanation:"Factorization identity for a difference of cubes.",example:raw`x^3-27=(x-3)(x^2+3x+9).`},
-  {topic:"Algebra",title:"Linear equation",type:"Formula",
-   formula:raw`ax+b=0\implies x=-\frac ba,\quad a\ne0`,explanation:"Solve a linear equation by isolating x.",example:raw`2x+6=0\implies x=-3.`},
-  {topic:"Algebra",title:"Quadratic formula",type:"Formula",
-   formula:raw`x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}`,explanation:raw`For ax^2+bx+c=0 with a\ne0.`,example:raw`x^2-5x+6=0\implies x=2\text{ or }3.`},
-  {topic:"Algebra",title:"Discriminant",type:"Formula",
-   formula:raw`\Delta=b^2-4ac`,explanation:"The discriminant indicates the nature of a quadratic's roots.",example:raw`\Delta>0: two distinct real roots; \Delta=0: one repeated real root.`},
-  {topic:"Algebra",title:"Product of powers",type:"Identity",
-   formula:raw`a^m a^n=a^{m+n}`,explanation:"When multiplying powers with the same base, add exponents.",example:raw`x^2x^3=x^5.`},
-  {topic:"Algebra",title:"Quotient of powers",type:"Identity",
-   formula:raw`\frac{a^m}{a^n}=a^{m-n},\quad a\ne0`,explanation:"When dividing powers with the same nonzero base, subtract exponents.",example:raw`\frac{x^5}{x^2}=x^3.`},
-  {topic:"Algebra",title:"Power of a power",type:"Identity",
-   formula:raw`(a^m)^n=a^{mn}`,explanation:"Multiply the exponents when raising a power to a power.",example:raw`(x^2)^3=x^6.`},
-  {topic:"Algebra",title:"Arithmetic series sum",type:"Formula",
-   formula:raw`S_n=\frac{n(a_1+a_n)}2`,explanation:"Sum of n terms in an arithmetic progression.",example:raw`2+5+8+11=26.`},
-  {topic:"Algebra",title:"Finite geometric series",type:"Formula",
-   formula:raw`S_n=a\frac{1-r^n}{1-r},\quad r\ne1`,explanation:"Sum of n terms in a geometric progression.",example:raw`1+2+4+8=15.`},
-  {topic:"Algebra",title:"Logarithm of a product",type:"Identity",
-   formula:raw`\log_a(xy)=\log_a x+\log_a y`,explanation:raw`Requires x,y>0,\ a>0,\ a\ne1.`,example:raw`\log_{10}(10\cdot100)=3.`},
-
-  // STATISTICS
-  {topic:"Statistics",title:"Arithmetic mean",type:"Formula",
-   formula:raw`\bar{x}=\frac1n\sum_{i=1}^{n}x_i`,explanation:"Add all observations and divide by their count.",example:raw`2,4,6\implies\bar{x}=4.`},
-  {topic:"Statistics",title:"Weighted mean",type:"Formula",
-   formula:raw`\bar{x}_w=\frac{\sum w_i x_i}{\sum w_i}`,explanation:"A weighted average; the total weight must be nonzero.",example:raw`80,\ 90\text{ with weights }1,\ 3\implies87.5.`},
-  {topic:"Statistics",title:"Range",type:"Formula",
-   formula:raw`R=x_{\max}-x_{\min}`,explanation:"The difference between the largest and smallest values.",example:raw`2,5,9\implies R=9-2=7.`},
-  {topic:"Statistics",title:"Population variance",type:"Formula",
-   formula:raw`\sigma^2=\frac1N\sum_{i=1}^{N}(x_i-\mu)^2`,explanation:"The average squared deviation from the population mean.",example:raw`2,4,6\implies\sigma^2=\frac83.`},
-  {topic:"Statistics",title:"Sample variance",type:"Formula",
-   formula:raw`s^2=\frac{\sum_{i=1}^{n}(x_i-\bar{x})^2}{n-1}`,explanation:"An unbiased sample variance estimator for n greater than 1.",example:raw`2,4,6\implies s^2=4.`},
-  {topic:"Statistics",title:"Standard deviation",type:"Formula",
-   formula:raw`\sigma=\sqrt{\sigma^2}`,explanation:"The nonnegative square root of population variance.",example:raw`\sigma^2=9\implies\sigma=3.`},
-  {topic:"Statistics",title:"Z-score",type:"Formula",
-   formula:raw`z=\frac{x-\mu}{\sigma}`,explanation:"Measures how many standard deviations an observation lies from the mean.",example:raw`x=70,\ \mu=60,\ \sigma=5\implies z=2.`},
-  {topic:"Statistics",title:"Complement probability",type:"Formula",
-   formula:raw`P(A^c)=1-P(A)`,explanation:"An event and its complement have probabilities summing to one.",example:raw`P(A)=0.3\implies P(A^c)=0.7.`},
-  {topic:"Statistics",title:"Addition rule",type:"Formula",
-   formula:raw`P(A\cup B)=P(A)+P(B)-P(A\cap B)`,explanation:"Subtract the overlap to avoid counting it twice.",example:raw`P(A)=0.4,\ P(B)=0.5,\ P(A\cap B)=0.2\implies P(A\cup B)=0.7.`},
-  {topic:"Statistics",title:"Conditional probability",type:"Formula",
-   formula:raw`P(A\mid B)=\frac{P(A\cap B)}{P(B)}`,explanation:raw`Requires P(B)>0.`,example:raw`P(A\cap B)=0.2,\ P(B)=0.5\implies P(A\mid B)=0.4.`},
-  {topic:"Statistics",title:"Binomial probability",type:"Formula",
-   formula:raw`P(X=k)=\binom nk p^k(1-p)^{n-k}`,explanation:"For the number of successes in n independent trials with success probability p.",example:raw`n=2,\ p=\frac12,\ k=1\implies P(X=1)=\frac12.`},
-  {topic:"Statistics",title:"Expected value",type:"Formula",
-   formula:raw`E(X)=\sum_x xP(X=x)`,explanation:"The probability-weighted average of the possible outcomes.",example:raw`E(\text{fair die})=\frac{1+2+3+4+5+6}{6}=3.5.`},
-  {topic:"Statistics",title:"Median",type:"Definition",
-   formula:raw`\text{Median}=\text{middle value of sorted data}`,explanation:"For an even number of observations, average the two middle values.",example:raw`1,3,7\implies\text{median}=3.`},
-  {topic:"Statistics",title:"Pearson correlation",type:"Formula",
-   formula:raw`r=\frac{\operatorname{cov}(X,Y)}{\sigma_X\sigma_Y}`,explanation:"Measures linear association when both standard deviations are positive.",example:raw`-1\le r\le1.`},
-
-  // COORDINATE GEOMETRY
-  {topic:"Coordinate Geometry",title:"Distance formula",type:"Formula",
-   formula:raw`d=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}`,explanation:"Distance between two points in the Cartesian plane.",example:raw`(0,0),(3,4)\implies d=5.`},
-  {topic:"Coordinate Geometry",title:"Midpoint formula",type:"Formula",
-   formula:raw`M=\left(\frac{x_1+x_2}{2},\frac{y_1+y_2}{2}\right)`,explanation:"Average the x-coordinates and y-coordinates.",example:raw`(0,2),(4,6)\implies M=(2,4).`},
-  {topic:"Coordinate Geometry",title:"Slope of a line",type:"Formula",
-   formula:raw`m=\frac{y_2-y_1}{x_2-x_1}`,explanation:raw`Requires x_2\ne x_1.`,example:raw`(1,2),(3,6)\implies m=2.`},
-  {topic:"Coordinate Geometry",title:"Point-slope equation",type:"Formula",
-   formula:raw`y-y_1=m(x-x_1)`,explanation:"Equation of a line with slope m through a known point.",example:raw`(1,2),\ m=3\implies y-2=3(x-1).`},
-  {topic:"Coordinate Geometry",title:"Slope-intercept equation",type:"Formula",
-   formula:raw`y=mx+c`,explanation:"Here m is the slope and c is the y-intercept.",example:raw`y=2x+1.`},
-  {topic:"Coordinate Geometry",title:"Parallel lines",type:"Theorem",
-   formula:raw`m_1=m_2`,explanation:"Distinct nonvertical parallel lines have equal slopes.",example:raw`m_1=2,\ m_2=2.`},
-  {topic:"Coordinate Geometry",title:"Perpendicular lines",type:"Theorem",
-   formula:raw`m_1m_2=-1`,explanation:"For two nonvertical lines with defined slopes.",example:raw`m_1=2,\ m_2=-\frac12.`},
-  {topic:"Coordinate Geometry",title:"Triangle area from coordinates",type:"Formula",
-   formula:raw`A=\frac12\left|x_1(y_2-y_3)+x_2(y_3-y_1)+x_3(y_1-y_2)\right|`,explanation:"Find a triangle's area from its three vertices.",example:raw`(0,0),(4,0),(0,3)\implies A=6.`},
-  {topic:"Coordinate Geometry",title:"Circle equation",type:"Formula",
-   formula:raw`(x-h)^2+(y-k)^2=r^2`,explanation:"Circle centered at (h,k) with radius r.",example:raw`x^2+y^2=25\implies r=5.`},
-  {topic:"Coordinate Geometry",title:"Parabola",type:"Formula",
-   formula:raw`y^2=4ax`,explanation:"A right-opening parabola with vertex at the origin.",example:raw`y^2=8x\implies a=2,\text{ focus }(2,0).`},
-  {topic:"Coordinate Geometry",title:"Ellipse",type:"Formula",
-   formula:raw`\frac{x^2}{a^2}+\frac{y^2}{b^2}=1`,explanation:"An ellipse centered at the origin with axis lengths determined by a and b.",example:raw`\frac{x^2}{25}+\frac{y^2}{9}=1.`},
-  {topic:"Coordinate Geometry",title:"Hyperbola",type:"Formula",
-   formula:raw`\frac{x^2}{a^2}-\frac{y^2}{b^2}=1`,explanation:"A horizontal hyperbola centered at the origin.",example:raw`\frac{x^2}{9}-\frac{y^2}{4}=1.`},
-
-  // TRIGONOMETRY
-  {topic:"Trigonometry",title:"Sine ratio",type:"Definition",
-   formula:raw`\sin\theta=\frac{\text{opposite}}{\text{hypotenuse}}`,explanation:"Right-triangle definition of sine.",example:raw`\frac{\text{opposite}}{\text{hypotenuse}}=\frac35.`},
-  {topic:"Trigonometry",title:"Cosine ratio",type:"Definition",
-   formula:raw`\cos\theta=\frac{\text{adjacent}}{\text{hypotenuse}}`,explanation:"Right-triangle definition of cosine.",example:raw`\frac{\text{adjacent}}{\text{hypotenuse}}=\frac45.`},
-  {topic:"Trigonometry",title:"Tangent ratio",type:"Definition",
-   formula:raw`\tan\theta=\frac{\text{opposite}}{\text{adjacent}}`,explanation:"Right-triangle definition of tangent.",example:raw`\frac{\text{opposite}}{\text{adjacent}}=\frac34.`},
-  {topic:"Trigonometry",title:"Pythagorean identity",type:"Identity",
-   formula:raw`\sin^2x+\cos^2x=1`,explanation:"A fundamental identity valid for all real angles.",example:raw`\sin x=\frac35\implies\cos^2x=\frac{16}{25}.`},
-  {topic:"Trigonometry",title:"Tangent identity",type:"Identity",
-   formula:raw`1+\tan^2x=\sec^2x`,explanation:"Valid wherever tangent and secant are defined.",example:raw`\tan x=2\implies\sec^2x=5.`},
-  {topic:"Trigonometry",title:"Cotangent identity",type:"Identity",
-   formula:raw`1+\cot^2x=\csc^2x`,explanation:"Valid wherever cotangent and cosecant are defined.",example:raw`\cot x=2\implies\csc^2x=5.`},
-  {topic:"Trigonometry",title:"Sine addition identity",type:"Identity",
-   formula:raw`\sin(A+B)=\sin A\cos B+\cos A\sin B`,explanation:"Expands the sine of a sum of two angles.",example:raw`A=30^\circ,\ B=60^\circ\implies\sin(A+B)=1.`},
-  {topic:"Trigonometry",title:"Cosine addition identity",type:"Identity",
-   formula:raw`\cos(A+B)=\cos A\cos B-\sin A\sin B`,explanation:"Expands the cosine of a sum of two angles.",example:raw`A=B=45^\circ\implies\cos(A+B)=0.`},
-  {topic:"Trigonometry",title:"Sine double angle",type:"Identity",
-   formula:raw`\sin(2x)=2\sin x\cos x`,explanation:"Double-angle identity for sine.",example:raw`x=45^\circ\implies\sin(2x)=1.`},
-  {topic:"Trigonometry",title:"Cosine double angle",type:"Identity",
-   formula:raw`\cos(2x)=\cos^2x-\sin^2x`,explanation:raw`Equivalent forms are \cos(2x)=2\cos^2x-1 and \cos(2x)=1-2\sin^2x.`,example:raw`x=60^\circ\implies\cos(2x)=-\frac12.`},
-  {topic:"Trigonometry",title:"Sine rule",type:"Formula",
-   formula:raw`\frac a{\sin A}=\frac b{\sin B}=\frac c{\sin C}`,explanation:"In a triangle, each side divided by the sine of its opposite angle gives the same ratio.",example:raw`Use a known side-angle pair to solve for another side.`},
-  {topic:"Trigonometry",title:"Cosine rule",type:"Formula",
-   formula:raw`c^2=a^2+b^2-2ab\cos C`,explanation:"Find a triangle side from two sides and their included angle.",example:raw`a=b=5,\ C=60^\circ\implies c=5.`},
-  {topic:"Trigonometry",title:"Degrees to radians",type:"Formula",
-   formula:raw`\text{Radians}=\text{Degrees}\cdot\frac{\pi}{180}`,explanation:"Convert angle measures from degrees to radians.",example:raw`90^\circ=\frac{\pi}{2}.`},
-  {topic:"Trigonometry",title:"Unit circle",type:"Definition",
-   formula:raw`x=\cos\theta,\quad y=\sin\theta`,explanation:raw`Points on the unit circle satisfy x^2+y^2=1.`,example:raw`\theta=0\implies(x,y)=(1,0).`},
-
-  // CALCULUS
-  {topic:"Calculus",title:"Power rule for derivatives",type:"Formula",
-   formula:raw`\frac{d}{dx}x^n=nx^{n-1}`,explanation:"Differentiate a power function with respect to x.",example:raw`\frac{d}{dx}x^3=3x^2.`},
-  {topic:"Calculus",title:"Constant derivative",type:"Formula",
-   formula:raw`\frac{d}{dx}c=0`,explanation:"The derivative of a constant is zero.",example:raw`\frac{d}{dx}7=0.`},
-  {topic:"Calculus",title:"Sum rule",type:"Formula",
-   formula:raw`\frac{d}{dx}(f+g)=f'+g'`,explanation:"Differentiate each term separately.",example:raw`\frac{d}{dx}(x^2+\sin x)=2x+\cos x.`},
-  {topic:"Calculus",title:"Product rule",type:"Formula",
-   formula:raw`(fg)'=f'g+fg'`,explanation:"Differentiate the first factor and multiply by the second, then add the first times the derivative of the second.",example:raw`\frac{d}{dx}(x\sin x)=\sin x+x\cos x.`},
-  {topic:"Calculus",title:"Quotient rule",type:"Formula",
-   formula:raw`\left(\frac fg\right)'=\frac{f'g-fg'}{g^2}`,explanation:raw`Requires g(x)\ne0.`,example:raw`\frac{d}{dx}\left(\frac{x}{x+1}\right)=\frac1{(x+1)^2}.`},
-  {topic:"Calculus",title:"Chain rule",type:"Formula",
-   formula:raw`\frac{d}{dx}f(g(x))=f'(g(x))g'(x)`,explanation:"Differentiate the outer function, then multiply by the derivative of the inner function.",example:raw`\frac{d}{dx}\sin(x^2)=2x\cos(x^2).`},
-  {topic:"Calculus",title:"Exponential derivative",type:"Formula",
-   formula:raw`\frac{d}{dx}e^x=e^x`,explanation:"The natural exponential function is its own derivative.",example:raw`\frac{d}{dx}e^{3x}=3e^{3x}.`},
-  {topic:"Calculus",title:"Logarithmic derivative",type:"Formula",
-   formula:raw`\frac{d}{dx}\ln x=\frac1x`,explanation:raw`Valid for x>0.`,example:raw`\frac{d}{dx}\ln x=\frac1x.`},
-  {topic:"Calculus",title:"Sine derivative",type:"Formula",
-   formula:raw`\frac{d}{dx}\sin x=\cos x`,explanation:"Trigonometric derivatives use radians.",example:raw`\frac{d}{dx}(3\sin x)=3\cos x.`},
-  {topic:"Calculus",title:"Cosine derivative",type:"Formula",
-   formula:raw`\frac{d}{dx}\cos x=-\sin x`,explanation:"The derivative of cosine is negative sine.",example:raw`\frac{d}{dx}\cos(2x)=-2\sin(2x).`},
-  {topic:"Calculus",title:"Power integration rule",type:"Formula",
-   formula:raw`\int x^n\,dx=\frac{x^{n+1}}{n+1}+C,\quad n\ne-1`,explanation:"The power rule for antiderivatives, excluding exponent negative one.",example:raw`\int x^2\,dx=\frac{x^3}{3}+C.`},
-  {topic:"Calculus",title:"Logarithmic integral",type:"Formula",
-   formula:raw`\int\frac1x\,dx=\ln|x|+C`,explanation:"The antiderivative of one over x on an interval not crossing zero.",example:raw`\int\frac2x\,dx=2\ln|x|+C.`},
-  {topic:"Calculus",title:"Exponential integral",type:"Formula",
-   formula:raw`\int e^x\,dx=e^x+C`,explanation:"The antiderivative of the natural exponential function.",example:raw`\int3e^x\,dx=3e^x+C.`},
-  {topic:"Calculus",title:"Integration by parts",type:"Formula",
-   formula:raw`\int u\,dv=uv-\int v\,du`,explanation:"Choose u and dv so that the remaining integral is easier to evaluate.",example:raw`\int xe^x\,dx=xe^x-e^x+C.`},
-  {topic:"Calculus",title:"Fundamental theorem of calculus",type:"Theorem",
-   formula:raw`\frac{d}{dx}\int_a^x f(t)\,dt=f(x)`,explanation:"If f is continuous, differentiating its accumulated integral recovers f.",example:raw`\frac{d}{dx}\int_0^x t^2\,dt=x^2.`}
-];
+const library = data.map((row, index) => ({
+  id: index + 1,
+  topic: row[0],
+  title: row[1],
+  type: row[2],
+  formula: row[3],
+  explanation: row[4],
+  example: row[5],
+  keywords: row[6] || ""
+}));
 
 const state = {
   topic: "All",
   query: "",
-  kind: "",
-  page: 1,
-  pageSize: 12
+  kind: ""
 };
 
 const $ = id => document.getElementById(id);
-const root = $("results");
 
 function makeElement(tag, text, className) {
   const element = document.createElement(tag);
@@ -483,7 +494,6 @@ function renderTopics() {
 
     button.addEventListener("click", () => {
       state.topic = topic;
-      state.page = 1;
       renderTopics();
       render();
     });
@@ -492,188 +502,168 @@ function renderTopics() {
   });
 }
 
-function createCard(item) {
-  const card = makeElement("article", undefined, "card");
+function matches(entry, query) {
+  const searchable = [
+    entry.topic,
+    entry.title,
+    entry.type,
+    entry.formula,
+    entry.explanation,
+    entry.example,
+    entry.keywords
+  ].join(" ").toLowerCase();
 
-  card.appendChild(makeElement("div", item.topic, "tag"));
-  card.appendChild(makeElement("h2", item.title));
-  card.appendChild(makeElement("div", item.type, "type"));
-
-  // Keep the formula as text so HTML is never interpreted.
-  const math = makeElement(
-    "div",
-    "\\(" + item.formula + "\\)",
-    "math"
-  );
-  math.setAttribute("aria-label", "Mathematical formula");
-  card.appendChild(math);
-
-  const details = document.createElement("details");
-  const summary = makeElement("summary", "Explanation and example");
-  const explanation = makeElement("p", item.explanation);
-  const example = makeElement("p", "Example: " + item.example, "example");
-
-  details.append(summary, explanation, example);
-  card.appendChild(details);
-
-  const actions = makeElement("div", undefined, "actions");
-  const copy = makeElement("button", "Copy LaTeX");
-  copy.type = "button";
-
-  copy.addEventListener("click", async () => {
-    const original = copy.textContent;
-
-    try {
-      if (navigator.clipboard && window.isSecureContext) {
-        await navigator.clipboard.writeText(item.formula);
-      } else {
-        const textarea = document.createElement("textarea");
-        textarea.value = item.formula;
-        textarea.style.position = "fixed";
-        textarea.style.opacity = "0";
-        document.body.appendChild(textarea);
-        textarea.select();
-
-        const success = document.execCommand("copy");
-        textarea.remove();
-
-        if (!success) throw new Error("Copy failed");
-      }
-
-      copy.textContent = "Copied!";
-    } catch {
-      copy.textContent = "Copy unavailable";
-    }
-
-    window.setTimeout(() => {
-      copy.textContent = original;
-    }, 1500);
-  });
-
-  const copyPlain = makeElement("button", "Copy title and formula");
-  copyPlain.type = "button";
-
-  copyPlain.addEventListener("click", async () => {
-    const text = item.title + "\n" + item.formula;
-
-    try {
-      await navigator.clipboard.writeText(text);
-      copyPlain.textContent = "Copied!";
-    } catch {
-      copyPlain.textContent = item.title + ": " + item.formula;
-    }
-  });
-
-  actions.append(copy, copyPlain);
-  card.appendChild(actions);
-
-  return card;
-}
-
-async function typesetResults() {
-  if (!window.MathJax || !window.MathJax.startup) return;
-
-  try {
-    await window.MathJax.startup.promise;
-    await window.MathJax.typesetPromise([root]);
-  } catch (error) {
-    console.error("MathJax rendering error:", error);
-    $("status").textContent =
-      "Formulas could not be typeset. Check your internet connection and reload.";
-  }
+  return !query || searchable.includes(query);
 }
 
 function render() {
   const query = state.query.trim().toLowerCase();
 
-  const filtered = library.filter(item => {
-    const searchable = [
-      item.topic,
-      item.title,
-      item.type,
-      item.formula,
-      item.explanation,
-      item.example
-    ].join(" ").toLowerCase();
-
+  const filtered = library.filter(entry => {
     return (
-      (state.topic === "All" || item.topic === state.topic) &&
-      (!state.kind || item.type === state.kind) &&
-      (!query || searchable.includes(query))
+      (state.topic === "All" || entry.topic === state.topic) &&
+      (!state.kind || entry.type === state.kind) &&
+      matches(entry, query)
     );
   });
 
-  const totalPages = Math.max(1, Math.ceil(filtered.length / state.pageSize));
-  state.page = Math.min(state.page, totalPages);
-
-  const start = (state.page - 1) * state.pageSize;
-  const pageItems = filtered.slice(start, start + state.pageSize);
-
   $("total").textContent = library.length.toLocaleString();
-  $("subjectCount").textContent = subjects.length;
   $("shown").textContent = filtered.length.toLocaleString();
+  $("subjectCount").textContent = subjects.length;
 
   $("empty").hidden = filtered.length !== 0;
-  $("pagination").hidden = filtered.length <= state.pageSize;
-  $("previous").disabled = state.page <= 1;
-  $("next").disabled = state.page >= totalPages;
-  $("pageInfo").textContent =
-    "Page " + state.page + " of " + totalPages;
 
-  $("status").textContent = filtered.length
-    ? "Showing " + (start + 1) + "–" +
-      Math.min(start + state.pageSize, filtered.length) +
-      " of " + filtered.length + " matching formulas."
-    : "No matching formulas.";
-
-  // Clear old MathJax output before replacing the formula cards.
-  if (window.MathJax && window.MathJax.typesetClear) {
-    window.MathJax.typesetClear([root]);
-  }
-
+  const root = $("results");
   root.replaceChildren();
 
   const fragment = document.createDocumentFragment();
-  pageItems.forEach(item => fragment.appendChild(createCard(item)));
+
+  filtered.forEach(entry => {
+    const card = makeElement("article", undefined, "card");
+
+    card.appendChild(makeElement("div", entry.topic, "tag"));
+    card.appendChild(makeElement("h2", entry.title));
+    card.appendChild(makeElement("div", entry.type, "muted"));
+
+    const math = makeElement("div", undefined, "math");
+    math.setAttribute("aria-label", "Mathematical formula");
+
+    // Explicit MathJax delimiters are essential.
+    math.textContent = "\\[" + entry.formula + "\\]";
+    card.appendChild(math);
+
+    const details = makeElement("details", undefined, "details");
+    const summary = makeElement("summary", "Explanation and worked example");
+    const explanation = makeElement("p", entry.explanation);
+    const example = makeElement("p", "Example: " + entry.example, "example");
+
+    details.appendChild(summary);
+    details.appendChild(explanation);
+    details.appendChild(example);
+    card.appendChild(details);
+
+    const actions = makeElement("div", undefined, "actions");
+    const copyButton = makeElement("button", "Copy LaTeX");
+    copyButton.type = "button";
+
+    const copyStatus = makeElement("span", "", "copy-status");
+    copyStatus.setAttribute("role", "status");
+
+    copyButton.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(entry.formula);
+        copyStatus.textContent = "Formula copied";
+        copyButton.textContent = "Copied!";
+      } catch {
+        // Fallback for browsers without clipboard permission.
+        const textarea = makeElement("textarea");
+        textarea.value = entry.formula;
+        textarea.setAttribute("aria-label", "Formula to copy");
+        textarea.style.position = "fixed";
+        textarea.style.opacity = "0";
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        let copied = false;
+        try {
+          copied = document.execCommand("copy");
+        } catch {
+          copied = false;
+        }
+
+        textarea.remove();
+
+        copyStatus.textContent = copied
+          ? "Formula copied"
+          : "Copy unavailable; select the formula from the source";
+        copyButton.textContent = copied ? "Copied!" : "Copy failed";
+      }
+    });
+
+    actions.appendChild(copyButton);
+    actions.appendChild(copyStatus);
+    card.appendChild(actions);
+
+    fragment.appendChild(card);
+  });
+
   root.appendChild(fragment);
 
-  // Typeset only the current page.
-  typesetResults();
+  $("status").textContent =
+    "Showing " + filtered.length.toLocaleString() +
+    " of " + library.length.toLocaleString() +
+    " formulas" +
+    (state.topic === "All" ? "" : " · " + state.topic) +
+    (state.kind ? " · " + state.kind : "");
+
+  typesetMath(root);
+}
+
+let typesetTimer = null;
+
+async function typesetMath(root) {
+  // MathJax loads asynchronously. If it is not ready yet,
+  // retry once its startup promise has settled.
+  if (!window.MathJax || !window.MathJax.typesetPromise) {
+    if (window.MathJax && window.MathJax.startup &&
+        window.MathJax.startup.promise) {
+      try {
+        await window.MathJax.startup.promise;
+      } catch (error) {
+        console.error("MathJax initialization failed:", error);
+      }
+    }
+  }
+
+  if (!window.MathJax || !window.MathJax.typesetPromise) {
+    clearTimeout(typesetTimer);
+    typesetTimer = setTimeout(() => typesetMath(root), 300);
+    return;
+  }
+
+  try {
+    // Clear any old MathJax output before typesetting again.
+    if (window.MathJax.typesetClear) {
+      window.MathJax.typesetClear([root]);
+    }
+    await window.MathJax.typesetPromise([root]);
+  } catch (error) {
+    console.error("Formula rendering failed:", error);
+  }
 }
 
 $("search").addEventListener("input", event => {
   state.query = event.target.value;
-  state.page = 1;
   render();
 });
 
 $("kind").addEventListener("change", event => {
   state.kind = event.target.value;
-  state.page = 1;
   render();
-});
-
-$("previous").addEventListener("click", () => {
-  if (state.page > 1) {
-    state.page--;
-    render();
-    window.scrollTo({ top: $("results").offsetTop, behavior: "smooth" });
-  }
-});
-
-$("next").addEventListener("click", () => {
-  state.page++;
-  render();
-  window.scrollTo({ top: $("results").offsetTop, behavior: "smooth" });
 });
 
 renderTopics();
 render();
-
-// Retry after deferred MathJax scripts have loaded.
-window.addEventListener("load", () => {
-  typesetResults();
-});
 </script>
 </body>
 </html>
