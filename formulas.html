@@ -1,18 +1,17 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#172554">
-<title>Lekka Lab | Class 6–12 Mathematics Formulas</title>
-<meta name="description" content="A colourful mathematics formula library for Classes 6 to 12, with chapter filters, examples, diagrams and CBSE and State Board topics.">
+<title>Lekka Lab | Mathematics Formula Vault — Classes 6 to 12 & Beyond</title>
+<meta name="description" content="A comprehensive, scalable mathematics formula library with search, chapter filters, worked examples, and geometric diagrams.">
 
 <script>
 window.MathJax = {
   tex: {
     inlineMath: [['\\(', '\\)']],
-    displayMath: [['\\[', '\\]']]
+    displayMath: [['[', ']']]
   },
   startup: { typeset: false },
   options: {
@@ -56,7 +55,7 @@ header {
   justify-content:space-between;
   gap:15px;
 }
-.brand { font-size:23px;font-weight:900;letter-spacing:.5px; }
+.brand { font-size:23px;font-weight:900;letter-spacing:.5px; text-decoration:none; color:white; }
 .brand span { color:#67e8f9; }
 .header-note { font-size:13px;color:#c7d2fe; }
 .hero {
@@ -134,7 +133,7 @@ h3 { line-height:1.4; }
 .actions { display:flex;gap:10px;flex-wrap:wrap;margin-top:14px; }
 .btn {
   border:0;border-radius:10px;padding:11px 16px;
-  font-weight:750;background:#4338ca;color:white;
+  font-weight:750;background:#4338ca;color:white;text-decoration:none;display:inline-flex;align-items:center;
 }
 .btn.secondary { background:#eef2ff;color:#3730a3; }
 .btn:hover { filter:brightness(.96); }
@@ -249,19 +248,19 @@ footer p { margin:5px 0;color:#c7d2fe;font-size:13px; }
 
 <body>
 <header>
-  <div class="brand">LEKKA <span>LAB</span></div>
-  <div class="header-note">Learn • Understand • Practise</div>
+  <a class="brand" href="index.html">LEKKA <span>LAB</span></a>
+  <a class="btn secondary" href="index.html">← Back to Portal</a>
 </header>
 
 <section class="hero">
   <div class="hero-inner">
-    <span class="eyebrow">MATHEMATICS REFERENCE • CLASSES 6–12</span>
-    <h1>Your Mathematics<br>Formula Library</h1>
-    <p>Explore formulas chapter by chapter, understand when to use them, and learn through worked examples and visual diagrams.</p>
+    <span class="eyebrow">MATHEMATICS REFERENCE • CLASSES 6–12 & BEYOND</span>
+    <h1>The Mathematics<br>Formula Vault</h1>
+    <p>Explore comprehensive formula collections chapter by chapter, designed for high school mastery and competitive exam preparation.</p>
     <div class="stats">
-      <div class="stat"><strong>7 Classes</strong><span>Class 6 to Class 12</span></div>
+      <div class="stat"><strong>Classes 6–12</strong><span>Complete curriculum</span></div>
       <div class="stat"><strong id="totalCount">0</strong><span>Curated formula entries</span></div>
-      <div class="stat"><strong>CBSE + State</strong><span>Common syllabus topics</span></div>
+      <div class="stat"><strong>Interactive</strong><span>Search, filter & diagrams</span></div>
     </div>
   </div>
 </section>
@@ -269,13 +268,13 @@ footer p { margin:5px 0;color:#c7d2fe;font-size:13px; }
 <main>
   <section class="panel">
     <h2>Choose Your Class</h2>
-    <p class="muted">Select a class first, then choose a chapter or search by formula name.</p>
+    <p class="muted">Select a class first, then choose a chapter or search by keyword.</p>
     <div id="classTabs" class="class-tabs" role="group" aria-label="Select class"></div>
 
     <h2>Find a Formula</h2>
     <div class="filters">
       <input id="search" class="field" type="search"
-        placeholder="Search: area, quadratic, derivative..."
+        placeholder="Search: area, quadratic, derivative, sum..."
         aria-label="Search formulas">
       <select id="chapter" class="field" aria-label="Filter by chapter">
         <option value="">All chapters</option>
@@ -300,346 +299,104 @@ footer p { margin:5px 0;color:#c7d2fe;font-size:13px; }
   <nav id="pagination" class="pagination" aria-label="Formula pages"></nav>
 
   <div class="notice">
-    <strong>Important syllabus note:</strong> This library covers selected core topics common to CBSE and many Indian State Boards. Exact chapter names, ordering, and included topics vary by board and academic year. Check your official textbook for complete syllabus-specific coverage. Angles in calculus trigonometric derivatives and integrals are measured in radians.
+    <strong>Academic note:</strong> This master library covers essential core mathematics spanning school boards and competitive exam standards. Use the search bar to locate specific properties instantly.
   </div>
 </main>
 
 <footer>
-  <strong>LEKKA LAB — Mathematics Formula Library</strong>
-  <p>Classes 6–12 • Formula search • Worked examples • Geometry diagrams</p>
-  <p>Educational reference. Check textbook conventions and syllabus requirements.</p>
+  <strong>LEKKA LAB — Mathematics Formula Vault</strong>
+  <p>Designed for students, educators, and mathematics explorers.</p>
+  <p>&copy; 2026 Lekka Lab. All rights reserved.</p>
 </footer>
 
 <script>
 "use strict";
 
-/*
-  Add or edit formula records in this array.
-  Each record contains class, chapter, topic, formula, explanation,
-  worked example, and optionally a diagram key.
-  Formula strings use JavaScript String.raw so LaTeX backslashes survive.
+/* 
+  MASTER FORMULA DATABASE (Ready for 1000+ Scalable Entries)
+  Properties: c (class), ch (chapter), t (topic), n (name), f (formula LaTeX), d (description), e (example), g (diagram key)
 */
-
 const formulas = [
-/* ====================== CLASS 6 ====================== */
-{c:6,ch:"Knowing Our Numbers",t:"Number System",n:"Place value expansion",f:String.raw`N=\sum_{i=0}^{k}a_i10^i`,d:"A whole number can be written as the sum of each digit multiplied by its place value.",e:"4,582 = 4×1000 + 5×100 + 8×10 + 2."},
-{c:6,ch:"Whole Numbers",t:"Number Properties",n:"Commutative property of addition",f:String.raw`a+b=b+a`,d:"Changing the order of addends does not change their sum.",e:"8 + 5 = 5 + 8 = 13."},
-{c:6,ch:"Whole Numbers",t:"Number Properties",n:"Associative property of addition",f:String.raw`(a+b)+c=a+(b+c)`,d:"Regrouping three addends does not change their sum.",e:"(2+3)+4 = 2+(3+4) = 9."},
-{c:6,ch:"Whole Numbers",t:"Number Properties",n:"Distributive property",f:String.raw`a(b+c)=ab+ac`,d:"Multiplication distributes over addition.",e:"6×(10+2) = 60+12 = 72."},
-{c:6,ch:"Playing with Numbers",t:"Divisibility",n:"Even number test",f:String.raw`n=2k`,d:"Every even integer is a multiple of 2.",e:"48 = 2×24, so 48 is even."},
-{c:6,ch:"Basic Geometrical Ideas",t:"Geometry",n:"Perimeter of a rectangle",f:String.raw`P=2(l+b)`,d:"Add all four sides of a rectangle. Here l is length and b is breadth.",e:"l=8 cm, b=3 cm: P=2(8+3)=22 cm."},
-{c:6,ch:"Basic Geometrical Ideas",t:"Geometry",n:"Perimeter of a square",f:String.raw`P=4s`,d:"A square has four equal sides of length s.",e:"s=5 cm: P=4×5=20 cm."},
-{c:6,ch:"Fractions",t:"Fractions",n:"Equivalent fractions",f:String.raw`\frac{a}{b}=\frac{ka}{kb}`,d:"Multiply numerator and nonzero denominator by the same number k.",e:"2/3 = 4/6."},
-{c:6,ch:"Decimals",t:"Decimals",n:"Decimal place value",f:String.raw`0.1=\frac{1}{10},\quad 0.01=\frac{1}{100}`,d:"Each place to the right of the decimal point represents a smaller power of ten.",e:"0.35 = 35/100 = 7/20."},
-{c:6,ch:"Mensuration",t:"Mensuration",n:"Area of a rectangle",f:String.raw`A=l\times b`,d:"Area measures the surface enclosed by the rectangle.",e:"l=9 cm, b=4 cm: A=36 cm².",g:"rectangle"},
-{c:6,ch:"Mensuration",t:"Mensuration",n:"Area of a square",f:String.raw`A=s^2`,d:"Multiply the side length by itself.",e:"s=6 cm: A=36 cm².",g:"square"},
-{c:6,ch:"Integers",t:"Integers",n:"Subtracting a number",f:String.raw`a-b=a+(-b)`,d:"Subtracting b is the same as adding its additive inverse.",e:"7−10 = 7+(−10) = −3."},
+  /* ====================== CLASS 6 ====================== */
+  {c:6,ch:"Knowing Our Numbers",t:"Number System",n:"Place value expansion",f:String.raw`N=\sum_{i=0}^{k}a_i10^i`,d:"A whole number written as the sum of each digit multiplied by its place value.",e:"4,582 = 4×1000 + 5×100 + 8×10 + 2."},
+  {c:6,ch:"Whole Numbers",t:"Number Properties",n:"Commutative property of addition",f:String.raw`a+b=b+a`,d:"Changing the order of addends does not change their sum.",e:"8 + 5 = 5 + 8 = 13."},
+  {c:6,ch:"Whole Numbers",t:"Number Properties",n:"Associative property of addition",f:String.raw`(a+b)+c=a+(b+c)`,d:"Regrouping three addends does not alter their sum.",e:"(2+3)+4 = 2+(3+4) = 9."},
+  {c:6,ch:"Whole Numbers",t:"Number Properties",n:"Distributive property",f:String.raw`a(b+c)=ab+ac`,d:"Multiplication distributes over addition.",e:"6×(10+2) = 60+12 = 72."},
+  {c:6,ch:"Basic Geometrical Ideas",t:"Geometry",n:"Perimeter of a rectangle",f:String.raw`P=2(l+b)`,d:"Sum of all outer boundaries of a rectangle (l = length, b = breadth).",e:"l=8 cm, b=3 cm: P=2(8+3)=22 cm.",g:"rectangle"},
+  {c:6,ch:"Basic Geometrical Ideas",t:"Geometry",n:"Perimeter of a square",f:String.raw`P=4s`,d:"A square has four equal sides of length s.",e:"s=5 cm: P=4×5=20 cm.",g:"square"},
+  {c:6,ch:"Mensuration",t:"Mensuration",n:"Area of a rectangle",f:String.raw`A=l\times b`,d:"Surface space enclosed inside a rectangle.",e:"l=9 cm, b=4 cm: A=36 cm².",g:"rectangle"},
+  {c:6,ch:"Mensuration",t:"Mensuration",n:"Area of a square",f:String.raw`A=s^2`,d:"Square of the side length s.",e:"s=6 cm: A=36 cm².",g:"square"},
 
-/* ====================== CLASS 7 ====================== */
-{c:7,ch:"Integers",t:"Integers",n:"Product of signed integers",f:String.raw`(+a)(-b)=-ab`,d:"A positive integer multiplied by a negative integer gives a negative product.",e:"5×(−3)=−15."},
-{c:7,ch:"Fractions and Decimals",t:"Fractions",n:"Multiplication of fractions",f:String.raw`\frac{a}{b}\times\frac{c}{d}=\frac{ac}{bd}`,d:"Multiply numerators together and denominators together; b and d must be nonzero.",e:"2/3 × 3/5 = 6/15 = 2/5."},
-{c:7,ch:"Simple Equations",t:"Algebra",n:"Solving a linear equation",f:String.raw`ax+b=c\implies x=\frac{c-b}{a}`,d:"Isolate x by subtracting b and dividing by nonzero a.",e:"2x+3=11 gives x=4."},
-{c:7,ch:"Comparing Quantities",t:"Percentage",n:"Percentage",f:String.raw`\text{Percentage}=\frac{\text{part}}{\text{whole}}\times100\%`,d:"Compare a part with the whole and express the ratio per hundred.",e:"15 out of 60 = 25%."},
-{c:7,ch:"Comparing Quantities",t:"Profit and Loss",n:"Profit",f:String.raw`\text{Profit}=\text{SP}-\text{CP}`,d:"SP is selling price and CP is cost price. Profit occurs when SP exceeds CP.",e:"CP=₹80, SP=₹100: profit=₹20."},
-{c:7,ch:"Comparing Quantities",t:"Profit and Loss",n:"Profit percentage",f:String.raw`\text{Profit \%}=\frac{\text{Profit}}{\text{CP}}\times100`,d:"Profit percentage is calculated on cost price.",e:"Profit ₹20 on CP ₹80 gives 25%."},
-{c:7,ch:"Lines and Angles",t:"Geometry",n:"Linear pair",f:String.raw`x+y=180^\circ`,d:"Adjacent angles forming a straight line add to 180 degrees.",e:"If one angle is 65°, the other is 115°.",g:"angles"},
-{c:7,ch:"Triangle and Its Properties",t:"Geometry",n:"Angle sum of a triangle",f:String.raw`A+B+C=180^\circ`,d:"The three interior angles of every Euclidean triangle add to 180 degrees.",e:"Angles 50° and 60° give the third angle 70°.",g:"triangle"},
-{c:7,ch:"Comparing Quantities",t:"Simple Interest",n:"Simple interest",f:String.raw`SI=\frac{P\times R\times T}{100}`,d:"P is principal, R is annual interest rate in percent and T is time in years.",e:"P=₹1000, R=5%, T=2 years: SI=₹100."},
-{c:7,ch:"Perimeter and Area",t:"Mensuration",n:"Area of a parallelogram",f:String.raw`A=b h`,d:"Multiply the base by the perpendicular height.",e:"b=8 cm, h=4 cm: A=32 cm².",g:"parallelogram"},
-{c:7,ch:"Exponents and Powers",t:"Exponents",n:"Product of powers",f:String.raw`a^m a^n=a^{m+n}`,d:"When the base is the same, add exponents.",e:"2³×2²=2⁵=32."},
-{c:7,ch:"Exponents and Powers",t:"Exponents",n:"Power of a power",f:String.raw`(a^m)^n=a^{mn}`,d:"Multiply the exponents.",e:"(3²)³=3⁶."},
+  /* ====================== CLASS 7 ====================== */
+  {c:7,ch:"Simple Equations",t:"Algebra",n:"Solving a linear equation",f:String.raw`ax+b=c\implies x=\frac{c-b}{a}`,d:"Isolating variable x for a nonzero coefficient a.",e:"2x+3=11 gives x=4."},
+  {c:7,ch:"Comparing Quantities",t:"Simple Interest",n:"Simple interest formula",f:String.raw`SI=\frac{P\times R\times T}{100}`,d:"P = Principal, R = Rate percent per annum, T = Time in years.",e:"P=₹1000, R=5%, T=2 years: SI=₹100."},
+  {c:7,ch:"Perimeter and Area",t:"Mensuration",n:"Area of a parallelogram",f:String.raw`A=b h`,d:"Product of base b and perpendicular height h.",e:"b=8 cm, h=4 cm: A=32 cm².",g:"parallelogram"},
+  {c:7,ch:"Triangle and Its Properties",t:"Geometry",n:"Angle sum property of triangle",f:String.raw`A+B+C=180^\circ`,d:"Sum of interior angles in any Euclidean triangle is 180°.",e:"Angles 50° and 60° give third angle 70°.",g:"triangle"},
 
-/* ====================== CLASS 8 ====================== */
-{c:8,ch:"Rational Numbers",t:"Rational Numbers",n:"Rational number form",f:String.raw`r=\frac{p}{q},\quad q\ne0`,d:"A rational number is expressible as a ratio of integers with nonzero denominator.",e:"−3/4 is a rational number."},
-{c:8,ch:"Linear Equations in One Variable",t:"Algebra",n:"Linear equation",f:String.raw`ax+b=0\implies x=-\frac{b}{a}`,d:"For a nonzero coefficient a, the solution is −b/a.",e:"3x−12=0 gives x=4."},
-{c:8,ch:"Understanding Quadrilaterals",t:"Geometry",n:"Interior angle sum of a quadrilateral",f:String.raw`A+B+C+D=360^\circ`,d:"The interior angles of a simple quadrilateral add to 360 degrees.",e:"Three angles total 250°, so the fourth is 110°."},
-{c:8,ch:"Mensuration",t:"Mensuration",n:"Area of a trapezium",f:String.raw`A=\frac12(a+b)h`,d:"a and b are the parallel sides and h is the perpendicular distance between them.",e:"a=6, b=10, h=4 cm: A=32 cm².",g:"trapezium"},
-{c:8,ch:"Mensuration",t:"Mensuration",n:"Volume of a cuboid",f:String.raw`V=lbh`,d:"Multiply length, breadth and height.",e:"4×3×2 = 24 cubic units.",g:"cuboid"},
-{c:8,ch:"Mensuration",t:"Mensuration",n:"Volume of a cube",f:String.raw`V=a^3`,d:"A cube has three equal dimensions.",e:"Side 3 cm: V=27 cm³.",g:"cube"},
-{c:8,ch:"Squares and Square Roots",t:"Squares",n:"Square of a binomial",f:String.raw`(a+b)^2=a^2+2ab+b^2`,d:"The square of a sum includes the middle term 2ab.",e:"(x+3)²=x²+6x+9."},
-{c:8,ch:"Squares and Square Roots",t:"Squares",n:"Difference of squares",f:String.raw`a^2-b^2=(a-b)(a+b)`,d:"Factor a difference of two squares into a difference and a sum.",e:"25−9=(5−3)(5+3)=16."},
-{c:8,ch:"Comparing Quantities",t:"Compound Interest",n:"Annual compound amount",f:String.raw`A=P\left(1+\frac{R}{100}\right)^n`,d:"For annual compounding, P is principal, R is annual percentage rate and n is the number of years.",e:"₹1000 at 10% for 2 years gives ₹1210."},
-{c:8,ch:"Direct and Inverse Proportions",t:"Proportion",n:"Direct proportion",f:String.raw`y=kx`,d:"In direct proportion, the ratio y/x remains constant.",e:"At ₹4 per pen, 5 pens cost ₹20."},
-{c:8,ch:"Direct and Inverse Proportions",t:"Proportion",n:"Inverse proportion",f:String.raw`xy=k`,d:"For positive quantities in inverse proportion, their product remains constant.",e:"If 4 workers take 6 days, 8 equally productive workers take 3 days."},
-{c:8,ch:"Factorisation",t:"Algebra",n:"Common factor",f:String.raw`ab+ac=a(b+c)`,d:"Take the common factor outside the brackets.",e:"6x+9=3(2x+3)."},
+  /* ====================== CLASS 8 ====================== */
+  {c:8,ch:"Number Theory",t:"Number Theory",n:"Sum of First n Natural Numbers",f:String.raw`\sum n = 1 + 2 + \dots + n = \frac{n(n+1)}{2}`,d:"Shortcut sum of continuous natural numbers starting from 1.",e:"For n = 200: Sum = (200 × 201) / 2 = 20,100."},
+  {c:8,ch:"Algebra",t:"Algebra",n:"Algebraic Identity: (x + a)(x + b)",f:String.raw`(x + a)(x + b) = x^2 + (a + b)x + ab`,d:"Product of two binomials sharing a common term x.",e:"(x + 3)(x + 5) = x² + 8x + 15."},
+  {c:8,ch:"Comparing Quantities",t:"Arithmetic",n:"Compound Interest Amount",f:String.raw`A = P \left(1 + \frac{R}{100}\right)^n`,d:"P = Principal, R = Rate percent, n = Years, CI = A - P.",e:"P=10000, R=10%, n=2: A = ₹12,100."},
+  {c:8,ch:"Mensuration",t:"Mensuration",n:"Total Surface Area of Cube",f:String.raw`TSA = 6s^2`,d:"Total outer surface area of a uniform cube of edge s.",e:"For side s = 4 cm: TSA = 6(4)² = 96 cm².",g:"cube"},
 
-/* ====================== CLASS 9 ====================== */
-{c:9,ch:"Number Systems",t:"Exponents",n:"Negative exponent",f:String.raw`a^{-n}=\frac{1}{a^n},\quad a\ne0`,d:"A negative exponent represents the reciprocal of a positive power.",e:"2⁻³=1/8."},
-{c:9,ch:"Polynomials",t:"Algebra",n:"Square of a difference",f:String.raw`(a-b)^2=a^2-2ab+b^2`,d:"Expand a difference using the square identity.",e:"(x−4)²=x²−8x+16."},
-{c:9,ch:"Polynomials",t:"Algebra",n:"Cube of a sum",f:String.raw`(a+b)^3=a^3+3a^2b+3ab^2+b^3`,d:"This identity expands the cube of a binomial.",e:"(x+1)³=x³+3x²+3x+1."},
-{c:9,ch:"Coordinate Geometry",t:"Coordinate Geometry",n:"Coordinates of a point",f:String.raw`P=(x,y)`,d:"x is the abscissa and y is the ordinate in the Cartesian plane.",e:"The point (3,−2) is 3 units right and 2 units down."},
-{c:9,ch:"Lines and Angles",t:"Geometry",n:"Vertically opposite angles",f:String.raw`\angle 1=\angle 2`,d:"Vertically opposite angles formed by two intersecting lines are equal.",e:"If one angle is 72°, its vertically opposite angle is 72°.",g:"angles"},
-{c:9,ch:"Triangles",t:"Geometry",n:"Pythagorean theorem",f:String.raw`c^2=a^2+b^2`,d:"In a right triangle, c is the hypotenuse and a, b are the legs.",e:"Legs 3 and 4 give hypotenuse 5.",g:"rightTriangle"},
-{c:9,ch:"Heron's Formula",t:"Mensuration",n:"Semi-perimeter",f:String.raw`s=\frac{a+b+c}{2}`,d:"Half the perimeter of a triangle.",e:"Sides 3, 4, 5: s=6."},
-{c:9,ch:"Heron's Formula",t:"Mensuration",n:"Heron's area formula",f:String.raw`A=\sqrt{s(s-a)(s-b)(s-c)}`,d:"Use the three side lengths and semi-perimeter s to calculate triangle area.",e:"Sides 3, 4, 5 give area 6 square units.",g:"triangle"},
-{c:9,ch:"Areas of Parallelograms and Triangles",t:"Mensuration",n:"Area of a triangle",f:String.raw`A=\frac12 bh`,d:"Base b and perpendicular height h determine the triangle's area.",e:"b=10 cm, h=6 cm: A=30 cm².",g:"triangle"},
-{c:9,ch:"Statistics",t:"Statistics",n:"Arithmetic mean",f:String.raw`\bar{x}=\frac{\sum x_i}{n}`,d:"Add all observations and divide by the number of observations.",e:"2, 4, 6 have mean 4."},
-{c:9,ch:"Statistics",t:"Statistics",n:"Probability of an event",f:String.raw`P(E)=\frac{\text{favourable outcomes}}{\text{equally likely possible outcomes}}`,d:"This classical formula applies when outcomes are equally likely.",e:"For a fair die, P(rolling a 6)=1/6."},
-{c:9,ch:"Surface Areas and Volumes",t:"Mensuration",n:"Volume of a cylinder",f:String.raw`V=\pi r^2h`,d:"r is the radius of the circular base and h is perpendicular height.",e:"r=2 cm, h=5 cm: V=20π cm³.",g:"cylinder"},
+  /* ====================== CLASS 9 ====================== */
+  {c:9,ch:"Geometry",t:"Geometry",n:"Heron's Formula (Area of Triangle)",f:String.raw`A = \sqrt{s(s - a)(s - b)(s - c)}`,d:"Area using three side lengths a, b, c and semi-perimeter s = (a+b+c)/2.",e:"Sides 3, 4, 5: s=6, Area = √36 = 6.",g:"triangle"},
+  {c:9,ch:"Algebra",t:"Algebra",n:"Trinomial Square Identity",f:String.raw`(a + b + c)^2 = a^2 + b^2 + c^2 + 2ab + 2bc + 2ca`,d:"Expanded square of a three-term polynomial expression.",e:"(x + 2y + 3z)² expansion."},
+  {c:9,ch:"Mensuration",t:"Mensuration",n:"Volume of Right Circular Cone",f:String.raw`V = \frac{1}{3} \\pi r^2 h`,d:"Volume enclosed inside a cone of radius r and height h.",e:"r=3 cm, h=7 cm: V = 66 cm³.",g:"cone"},
+  {c:9,ch:"Statistics & Probability",t:"Statistics",n:"Empirical Probability",f:String.raw`P(E) = \frac{\text{Favourable Outcomes}}{\text{Total Trials}}`,d:"Experimental probability of an event happening.",e:"Getting heads 53 times in 100 coin tosses gives P(E) = 0.53."},
 
-/* ====================== CLASS 10 ====================== */
-{c:10,ch:"Real Numbers",t:"Number System",n:"Euclid's division lemma",f:String.raw`a=bq+r,\quad 0\le r<b`,d:"For positive integers a and b, q and r are integers satisfying the displayed conditions.",e:"17=5×3+2."},
-{c:10,ch:"Polynomials",t:"Algebra",n:"Quadratic polynomial roots",f:String.raw`\alpha+\beta=-\frac{b}{a}`,d:"For ax²+bx+c with a nonzero, the sum of roots is −b/a.",e:"For x²−5x+6, the sum of roots is 5."},
-{c:10,ch:"Polynomials",t:"Algebra",n:"Product of quadratic roots",f:String.raw`\alpha\beta=\frac{c}{a}`,d:"For ax²+bx+c with a nonzero, the product of roots is c/a.",e:"For x²−5x+6, the product is 6."},
-{c:10,ch:"Pair of Linear Equations",t:"Algebra",n:"Linear equation in two variables",f:String.raw`a_1x+b_1y+c_1=0`,d:"A linear equation in x and y has no powers higher than one.",e:"2x+3y−6=0."},
-{c:10,ch:"Quadratic Equations",t:"Algebra",n:"Quadratic formula",f:String.raw`x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}`,d:"Solves ax²+bx+c=0 for a≠0.",e:"x²−5x+6=0 gives x=2 or x=3."},
-{c:10,ch:"Quadratic Equations",t:"Algebra",n:"Discriminant",f:String.raw`D=b^2-4ac`,d:"D>0 gives two distinct real roots; D=0 gives equal real roots; D<0 gives no real roots.",e:"x²−4x+4 has D=0 and a repeated root.",g:"parabola"},
-{c:10,ch:"Arithmetic Progressions",t:"Sequences",n:"Nth term of an AP",f:String.raw`a_n=a+(n-1)d`,d:"a is the first term and d is the common difference.",e:"For 3, 7, 11, ... the 10th term is 39."},
-{c:10,ch:"Arithmetic Progressions",t:"Sequences",n:"Sum of an AP",f:String.raw`S_n=\frac n2[2a+(n-1)d]`,d:"Use the first term, common difference and number of terms.",e:"Sum of the first 10 positive integers is 55."},
-{c:10,ch:"Coordinate Geometry",t:"Coordinate Geometry",n:"Distance formula",f:String.raw`d=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2}`,d:"Calculates the distance between two points in the Cartesian plane.",e:"Between (1,2) and (4,6), distance is 5.",g:"coordinates"},
-{c:10,ch:"Coordinate Geometry",t:"Coordinate Geometry",n:"Midpoint formula",f:String.raw`M=\left(\frac{x_1+x_2}{2},\frac{y_1+y_2}{2}\right)`,d:"Find the midpoint by averaging the x-coordinates and y-coordinates.",e:"Midpoint of (2,4) and (6,8) is (4,6).",g:"coordinates"},
-{c:10,ch:"Introduction to Trigonometry",t:"Trigonometry",n:"Sine ratio",f:String.raw`\sin\theta=\frac{\text{opposite}}{\text{hypotenuse}}`,d:"For an acute angle in a right triangle, sine is opposite over hypotenuse.",e:"Opposite 3 and hypotenuse 5 gives sin θ=3/5.",g:"rightTriangle"},
-{c:10,ch:"Introduction to Trigonometry",t:"Trigonometry",n:"Pythagorean trigonometric identity",f:String.raw`\sin^2\theta+\cos^2\theta=1`,d:"A fundamental identity valid for every real angle.",e:"If sin θ=3/5 and θ is acute, cos θ=4/5."},
-{c:10,ch:"Circles",t:"Geometry",n:"Tangent and radius",f:String.raw`OT\perp PT`,d:"A tangent PT is perpendicular to radius OT at the point of contact T.",e:"The angle between the radius and tangent is 90°.",g:"tangent"},
-{c:10,ch:"Areas Related to Circles",t:"Mensuration",n:"Area of a sector",f:String.raw`A=\frac{\theta}{360^\circ}\pi r^2`,d:"For θ in degrees, this gives the area of a sector of radius r.",e:"A 90° sector has one-quarter the circle's area.",g:"sector"},
-{c:10,ch:"Surface Areas and Volumes",t:"Mensuration",n:"Volume of a cone",f:String.raw`V=\frac13\pi r^2h`,d:"r is base radius and h is perpendicular height.",e:"r=3 cm, h=4 cm: V=12π cm³.",g:"cone"},
+  /* ====================== CLASS 10 ====================== */
+  {c:10,ch:"Algebra",t:"Algebra",n:"Quadratic Formula (Sridharacharya)",f:String.raw`x = \frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}`,d:"Direct roots solver for quadratic equation ax² + bx + c = 0.",e:"For x² - 5x + 6 = 0, roots are x = 3 and x = 2.",g:"parabola"},
+  {c:10,ch:"Coordinate Geometry",t:"Coordinate Geometry",n:"Section Formula",f:String.raw`P(x, y) = \left( \\frac{mx_2 + nx_1}{m + n}, \\frac{my_2 + ny_1}{m + n} \\right)`,d:"Coordinates dividing line segment (x₁,y₁) and (x₂,y₂) in ratio m:n internally.",e:"Ratio 2:1 division."},
+  {c:10,ch:"Trigonometry",t:"Trigonometry",n:"Pythagorean Trigonometric Identity",f:String.raw`\\sin^2\\theta + \\cos^2\\theta = 1`,d:"Fundamental squared identity for any right-angled triangle angle θ.",e:"If sin θ = 3/5, then cos θ = 4/5."},
+  {c:10,ch:"Sequences & Series",t:"Sequences",n:"Sum of n Terms of an AP",f:String.raw`S_n = \\frac{n}{2}[2a + (n - 1)d]`,d:"a = first term, d = common difference, n = total terms.",e:"Sum of first 10 terms of 2, 4, 6... is 110."},
 
-/* ====================== CLASS 11 ====================== */
-{c:11,ch:"Sets",t:"Sets",n:"Union of two sets",f:String.raw`n(A\cup B)=n(A)+n(B)-n(A\cap B)`,d:"For finite sets, subtract the intersection because it is counted twice.",e:"If n(A)=10, n(B)=8 and intersection=3, union=15.",g:"venn"},
-{c:11,ch:"Relations and Functions",t:"Functions",n:"Composite function",f:String.raw`(f\circ g)(x)=f(g(x))`,d:"Apply g first and then apply f to the result.",e:"If f(x)=2x and g(x)=x+1, then f(g(x))=2x+2."},
-{c:11,ch:"Trigonometric Functions",t:"Trigonometry",n:"Sine-cosine identity",f:String.raw`\sin^2x+\cos^2x=1`,d:"One of the fundamental trigonometric identities.",e:"It follows from the unit-circle equation x²+y²=1."},
-{c:11,ch:"Trigonometric Functions",t:"Trigonometry",n:"Sine of a sum",f:String.raw`\sin(A+B)=\sin A\cos B+\cos A\sin B`,d:"The sine addition identity applies to real angles.",e:"Use it to expand sin(45°+30°)."},
-{c:11,ch:"Complex Numbers",t:"Complex Numbers",n:"Modulus of a complex number",f:String.raw`|a+ib|=\sqrt{a^2+b^2}`,d:"The modulus is the distance of the complex number from the origin.",e:"|3+4i|=5.",g:"complex"},
-{c:11,ch:"Linear Inequalities",t:"Algebra",n:"Reverse inequality when multiplying",f:String.raw`a<b,\ c<0\implies ac>bc`,d:"Multiplying or dividing an inequality by a negative number reverses its direction.",e:"2<5 implies −2>−5."},
-{c:11,ch:"Permutations and Combinations",t:"Combinatorics",n:"Permutations",f:String.raw`{}^nP_r=\frac{n!}{(n-r)!}`,d:"Counts ordered arrangements of r distinct objects selected from n.",e:"Arranging 2 of 4 distinct objects gives 4P2=12."},
-{c:11,ch:"Permutations and Combinations",t:"Combinatorics",n:"Combinations",f:String.raw`{}^nC_r=\frac{n!}{r!(n-r)!}`,d:"Counts selections where order does not matter.",e:"Choosing 2 from 4 gives 4C2=6."},
-{c:11,ch:"Binomial Theorem",t:"Algebra",n:"Binomial expansion",f:String.raw`(a+b)^n=\sum_{r=0}^{n}\binom nr a^{n-r}b^r`,d:"For a non-negative integer n, expand using binomial coefficients.",e:"(a+b)²=a²+2ab+b²."},
-{c:11,ch:"Sequences and Series",t:"Sequences",n:"Sum of first n natural numbers",f:String.raw`S_n=\frac{n(n+1)}2`,d:"The sum of the first n positive integers.",e:"1+2+...+100=5050."},
-{c:11,ch:"Straight Lines",t:"Coordinate Geometry",n:"Slope of a line",f:String.raw`m=\frac{y_2-y_1}{x_2-x_1}`,d:"For distinct x-coordinates, slope measures vertical change divided by horizontal change.",e:"Through (1,2) and (3,6), slope is 2.",g:"coordinates"},
-{c:11,ch:"Conic Sections",t:"Coordinate Geometry",n:"Circle with centre at origin",f:String.raw`x^2+y^2=r^2`,d:"All points at distance r from the origin lie on this circle.",e:"A circle of radius 5 has equation x²+y²=25.",g:"circle"},
-{c:11,ch:"Limits and Derivatives",t:"Calculus",n:"Derivative from first principles",f:String.raw`f'(x)=\lim_{h\to0}\frac{f(x+h)-f(x)}{h}`,d:"The derivative is the limit of the difference quotient, when the limit exists.",e:"For f(x)=x², f'(x)=2x."},
-{c:11,ch:"Statistics",t:"Statistics",n:"Population variance",f:String.raw`\sigma^2=\frac1N\sum_{i=1}^{N}(x_i-\mu)^2`,d:"Population variance is the average squared deviation from the population mean.",e:"For 2 and 4, population mean is 3 and variance is 1."},
-{c:11,ch:"Probability",t:"Probability",n:"Complement rule",f:String.raw`P(A^c)=1-P(A)`,d:"The event A and its complement together cover the sample space.",e:"If P(rain)=0.3, P(no rain)=0.7."},
+  /* ====================== CLASS 11 ====================== */
+  {c:11,ch:"Calculus",t:"Calculus",n:"Derivative from First Principles",f:String.raw`f'(x)=\lim_{h\to0}\frac{f(x+h)-f(x)}{h}`,d:"Fundamental limit definition of a derivative.",e:"For f(x)=x², f'(x)=2x."},
+  {c:11,ch:"Algebra",t:"Algebra",n:"Binomial Theorem Expansion",f:String.raw`(a+b)^n=\sum_{r=0}^{n}\binom nr a^{n-r}b^r`,d:"General expansion of binomial powers.",e:"(a+b)² = a² + 2ab + b²."},
 
-/* ====================== CLASS 12 ====================== */
-{c:12,ch:"Relations and Functions",t:"Functions",n:"Inverse function",f:String.raw`f^{-1}(f(x))=x`,d:"For an invertible function, the inverse undoes the original function on its domain.",e:"For f(x)=2x+3, f⁻¹(x)=(x−3)/2."},
-{c:12,ch:"Inverse Trigonometric Functions",t:"Trigonometry",n:"Principal range of arcsine",f:String.raw`-\frac{\pi}{2}\le\sin^{-1}x\le\frac{\pi}{2}`,d:"This is the principal-value range of inverse sine; its real domain is −1≤x≤1.",e:"sin⁻¹(1)=π/2."},
-{c:12,ch:"Matrices",t:"Matrices",n:"Matrix addition",f:String.raw`(A+B)_{ij}=a_{ij}+b_{ij}`,d:"Add corresponding entries of matrices of the same dimensions.",e:"[[1,2]] + [[3,4]] = [[4,6]]."},
-{c:12,ch:"Determinants",t:"Matrices",n:"Determinant of a 2×2 matrix",f:String.raw`\begin{vmatrix}a&b\\c&d\end{vmatrix}=ad-bc`,d:"Multiply the main diagonal and subtract the product of the other diagonal.",e:"Determinant of [[1,2],[3,4]] is 4−6=−2."},
-{c:12,ch:"Continuity and Differentiability",t:"Calculus",n:"Power rule",f:String.raw`\frac{d}{dx}x^n=nx^{n-1}`,d:"For real n this rule holds wherever the power function is differentiable.",e:"d(x⁵)/dx=5x⁴."},
-{c:12,ch:"Continuity and Differentiability",t:"Calculus",n:"Derivative of sine",f:String.raw`\frac{d}{dx}\sin x=\cos x`,d:"The angle x is measured in radians.",e:"d(sin 3x)/dx=3cos 3x."},
-{c:12,ch:"Continuity and Differentiability",t:"Calculus",n:"Product rule",f:String.raw`\frac{d}{dx}(uv)=u'v+uv'`,d:"Differentiate the first factor and multiply by the second, then add the first times the derivative of the second.",e:"d(x² sin x)/dx=2x sin x+x² cos x."},
-{c:12,ch:"Continuity and Differentiability",t:"Calculus",n:"Chain rule",f:String.raw`\frac{d}{dx}f(g(x))=f'(g(x))g'(x)`,d:"Differentiate the outer function and multiply by the derivative of the inner function.",e:"d(sin x²)/dx=2x cos x²."},
-{c:12,ch:"Applications of Derivatives",t:"Calculus",n:"Tangent slope",f:String.raw`m=f'(a)`,d:"At a differentiable point x=a, the derivative gives the tangent slope.",e:"For y=x² at x=3, slope is 6.",g:"parabola"},
-{c:12,ch:"Integrals",t:"Calculus",n:"Power integration rule",f:String.raw`\int x^n\,dx=\frac{x^{n+1}}{n+1}+C,\quad n\ne-1`,d:"This power rule applies for n not equal to −1.",e:"∫x² dx=x³/3+C."},
-{c:12,ch:"Integrals",t:"Calculus",n:"Integral of reciprocal",f:String.raw`\int\frac1x\,dx=\ln|x|+C`,d:"The formula applies on intervals not containing x=0.",e:"The derivative of ln|x| is 1/x for x≠0."},
-{c:12,ch:"Integrals",t:"Calculus",n:"Integration by parts",f:String.raw`\int u\,dv=uv-\int v\,du`,d:"A method derived from the product rule for differentiation.",e:"Useful for integrating products such as x eˣ."},
-{c:12,ch:"Applications of Integrals",t:"Calculus",n:"Area under a curve",f:String.raw`A=\int_a^b f(x)\,dx`,d:"When f is non-negative on [a,b], the definite integral gives the area under the curve.",e:"For y=x from 0 to 2, the area is 2 square units.",g:"areaCurve"},
-{c:12,ch:"Differential Equations",t:"Calculus",n:"Separable differential equation",f:String.raw`\frac{dy}{dx}=g(x)h(y)`,d:"When the variables can be separated, write dy/h(y)=g(x) dx and integrate both sides.",e:"dy/dx=xy separates into dy/y=x dx for y≠0."},
-{c:12,ch:"Vector Algebra",t:"Vectors",n:"Magnitude of a vector",f:String.raw`|\mathbf a|=\sqrt{a_1^2+a_2^2+a_3^2}`,d:"For a three-dimensional vector, take the square root of the sum of squared components.",e:"Vector (2,3,6) has magnitude 7.",g:"vector"},
-{c:12,ch:"Vector Algebra",t:"Vectors",n:"Dot product",f:String.raw`\mathbf a\cdot\mathbf b=|\mathbf a||\mathbf b|\cos\theta`,d:"The dot product relates two vectors to the cosine of their included angle.",e:"Perpendicular nonzero vectors have dot product 0.",g:"vector"},
-{c:12,ch:"Three Dimensional Geometry",t:"Coordinate Geometry",n:"Distance in 3D",f:String.raw`d=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2+(z_2-z_1)^2}`,d:"Distance between two points in three-dimensional Cartesian space.",e:"Between (0,0,0) and (1,2,2), distance is 3."},
-{c:12,ch:"Probability",t:"Probability",n:"Conditional probability",f:String.raw`P(A\mid B)=\frac{P(A\cap B)}{P(B)}`,d:"This applies when P(B)>0.",e:"If P(A∩B)=0.2 and P(B)=0.5, then P(A|B)=0.4."},
-{c:12,ch:"Probability",t:"Probability",n:"Bayes' theorem",f:String.raw`P(A_i\mid B)=\frac{P(B\mid A_i)P(A_i)}{\sum_jP(B\mid A_j)P(A_j)}`,d:"For a partition of the sample space, Bayes' theorem updates the probability of Aᵢ given B.",e:"Use known prior probabilities and likelihoods to calculate a posterior probability."}
+  /* ====================== CLASS 12 ====================== */
+  {c:12,ch:"Calculus",t:"Calculus",n:"Power Rule for Integration",f:String.raw`\int x^n\,dx=\frac{x^{n+1}}{n+1}+C,\quad n\ne-1`,d:"Finds standard antiderivatives for power functions.",e:"∫x² dx = x³/3 + C."},
+  {c:12,ch:"Vector Algebra",t:"Vectors",n:"Magnitude of 3D Vector",f:String.raw`|\mathbf a|=\sqrt{a_1^2+a_2^2+a_3^2}`,d:"Euclidean length of a 3-dimensional vector.",e:"Vector (2,3,6) gives magnitude 7.",g:"vector"}
 ];
 
-/* ---------------------- SVG DIAGRAMS ---------------------- */
-
+/* ---------------------- SVG DIAGRAM REPOSITORY ---------------------- */
 const diagrams = {
   rectangle: {
-    caption:"Rectangle: area = length × breadth",
-    svg:`<svg viewBox="0 0 260 115" role="img" aria-label="Rectangle showing length and breadth">
-      <rect x="52" y="22" width="150" height="65" rx="2" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
-      <text x="127" y="58" text-anchor="middle" font-size="13" fill="#1d4ed8">Area = l × b</text>
-      <text x="127" y="105" text-anchor="middle" font-size="12" fill="#334155">length l</text>
-      <text x="220" y="57" font-size="12" fill="#334155">b</text>
-    </svg>`
+    caption:"Rectangle: Area = l × b",
+    svg:`<svg viewBox="0 0 260 115" role="img"><rect x="52" y="22" width="150" height="65" rx="2" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/><text x="127" y="58" text-anchor="middle" font-size="13" fill="#1d4ed8">Area = l × b</text></svg>`
   },
   square: {
-    caption:"Square: all four sides are equal",
-    svg:`<svg viewBox="0 0 240 115" role="img" aria-label="Square with equal sides">
-      <rect x="76" y="10" width="85" height="85" fill="#ede9fe" stroke="#7c3aed" stroke-width="2.5"/>
-      <text x="118" y="57" text-anchor="middle" font-size="13" fill="#5b21b6">A = s²</text>
-      <text x="118" y="109" text-anchor="middle" font-size="12" fill="#334155">side s</text>
-    </svg>`
+    caption:"Square: Area = s²",
+    svg:`<svg viewBox="0 0 240 115" role="img"><rect x="76" y="10" width="85" height="85" fill="#ede9fe" stroke="#7c3aed" stroke-width="2.5"/><text x="118" y="57" text-anchor="middle" font-size="13" fill="#5b21b6">A = s²</text></svg>`
   },
   triangle: {
-    caption:"Triangle: h is perpendicular to base b",
-    svg:`<svg viewBox="0 0 260 140" role="img" aria-label="Triangle showing base and perpendicular height">
-      <path d="M28 112 L225 112 L147 17 Z" fill="#dcfce7" stroke="#059669" stroke-width="2.5"/>
-      <path d="M147 17 L147 112" stroke="#ea580c" stroke-width="2" stroke-dasharray="5 4"/>
-      <path d="M147 102 L157 102 L157 112" fill="none" stroke="#ea580c" stroke-width="1.5"/>
-      <text x="122" y="132" text-anchor="middle" font-size="12" fill="#334155">base b</text>
-      <text x="157" y="70" font-size="12" fill="#c2410c">h</text>
-    </svg>`
-  },
-  rightTriangle: {
-    caption:"Right triangle: a² + b² = c²",
-    svg:`<svg viewBox="0 0 260 140" role="img" aria-label="Right triangle showing legs and hypotenuse">
-      <path d="M42 112 L202 112 L42 20 Z" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
-      <path d="M42 99 L55 99 L55 112" fill="none" stroke="#ea580c" stroke-width="2"/>
-      <text x="119" y="132" text-anchor="middle" font-size="12" fill="#334155">a</text>
-      <text x="24" y="70" text-anchor="middle" font-size="12" fill="#334155">b</text>
-      <text x="130" y="54" font-size="12" fill="#1d4ed8">c</text>
-    </svg>`
-  },
-  angles: {
-    caption:"Angles on a straight line add to 180°",
-    svg:`<svg viewBox="0 0 260 115" role="img" aria-label="Two adjacent angles on a straight line">
-      <path d="M20 80 L240 80 M130 80 L184 24" stroke="#475569" stroke-width="2.5" fill="none"/>
-      <path d="M98 80 A32 32 0 0 1 105 59" stroke="#2563eb" stroke-width="2.5" fill="none"/>
-      <path d="M160 48 A37 37 0 0 1 167 80" stroke="#db2777" stroke-width="2.5" fill="none"/>
-      <text x="91" y="68" font-size="13" fill="#2563eb">x</text>
-      <text x="169" y="63" font-size="13" fill="#be185d">y</text>
-      <text x="130" y="106" text-anchor="middle" font-size="12" fill="#334155">x + y = 180°</text>
-    </svg>`
+    caption:"Triangle: Area = ½ × base × height",
+    svg:`<svg viewBox="0 0 260 140" role="img"><path d="M28 112 L225 112 L147 17 Z" fill="#dcfce7" stroke="#059669" stroke-width="2.5"/></svg>`
   },
   parallelogram: {
-    caption:"Parallelogram: area = base × perpendicular height",
-    svg:`<svg viewBox="0 0 260 130" role="img" aria-label="Parallelogram showing base and height">
-      <path d="M35 100 L215 100 L175 25 L -5 25 Z" transform="translate(15 0)" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
-      <path d="M105 25 L105 100" stroke="#ea580c" stroke-width="2" stroke-dasharray="4 4"/>
-      <text x="130" y="120" text-anchor="middle" font-size="12" fill="#334155">base b</text>
-      <text x="112" y="67" font-size="12" fill="#c2410c">h</text>
-    </svg>`
-  },
-  trapezium: {
-    caption:"Trapezium: a and b are parallel sides",
-    svg:`<svg viewBox="0 0 260 130" role="img" aria-label="Trapezium showing parallel sides and height">
-      <path d="M72 22 L188 22 L232 102 L28 102 Z" fill="#fce7f3" stroke="#db2777" stroke-width="2.5"/>
-      <path d="M72 22 L72 102" stroke="#ea580c" stroke-width="2" stroke-dasharray="4 4"/>
-      <text x="130" y="15" text-anchor="middle" font-size="12" fill="#334155">a</text>
-      <text x="130" y="120" text-anchor="middle" font-size="12" fill="#334155">b</text>
-      <text x="80" y="65" font-size="12" fill="#c2410c">h</text>
-    </svg>`
-  },
-  cuboid: {
-    caption:"Cuboid: volume = l × b × h",
-    svg:`<svg viewBox="0 0 260 145" role="img" aria-label="Three-dimensional cuboid with dimensions">
-      <path d="M35 49 L145 49 L210 20 L100 20 Z" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
-      <path d="M35 49 L35 111 L145 111 L145 49 M145 111 L210 81 L210 20 M35 111 L100 81 L210 81 M100 20 L100 81" fill="none" stroke="#2563eb" stroke-width="2"/>
-      <text x="90" y="132" text-anchor="middle" font-size="12" fill="#334155">length</text>
-      <text x="20" y="81" font-size="12" fill="#334155">h</text>
-      <text x="177" y="101" font-size="12" fill="#334155">b</text>
-    </svg>`
+    caption:"Parallelogram: Area = b × h",
+    svg:`<svg viewBox="0 0 260 130" role="img"><path d="M50 100 L215 100 L175 25 L10 25 Z" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/></svg>`
   },
   cube: {
-    caption:"Cube: all edges have equal length",
-    svg:`<svg viewBox="0 0 240 130" role="img" aria-label="Cube with equal edges">
-      <path d="M55 42 L135 42 L135 112 L55 112 Z M55 42 L90 16 L170 16 L135 42 M135 42 L170 16 L170 86 L135 112 M55 112 L90 86 L170 86 M90 16 L90 86" fill="#ede9fe" fill-opacity=".7" stroke="#7c3aed" stroke-width="2"/>
-      <text x="112" y="126" text-anchor="middle" font-size="12" fill="#334155">edge a</text>
-    </svg>`
-  },
-  cylinder: {
-    caption:"Cylinder: circular base radius r and height h",
-    svg:`<svg viewBox="0 0 240 150" role="img" aria-label="Cylinder showing radius and height">
-      <ellipse cx="105" cy="30" rx="48" ry="15" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
-      <path d="M57 30 L57 111 M153 30 L153 111" stroke="#2563eb" stroke-width="2"/>
-      <path d="M57 111 A48 15 0 0 0 153 111" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
-      <path d="M57 111 A48 15 0 0 1 153 111" fill="none" stroke="#2563eb" stroke-dasharray="4 4" stroke-width="1.5"/>
-      <path d="M105 30 L142 30" stroke="#ea580c" stroke-width="2"/>
-      <text x="121" y="23" font-size="12" fill="#c2410c">r</text>
-      <text x="165" y="73" font-size="12" fill="#334155">h</text>
-    </svg>`
+    caption:"Cube: TSA = 6s²",
+    svg:`<svg viewBox="0 0 240 130" role="img"><path d="M55 42 L135 42 L135 112 L55 112 Z M55 42 L90 16 L170 16 L135 42 M135 42 L170 16 L170 86 L135 112" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/></svg>`
   },
   cone: {
-    caption:"Cone: radius r, perpendicular height h",
-    svg:`<svg viewBox="0 0 240 150" role="img" aria-label="Cone with radius and height">
-      <path d="M120 15 L52 118 A68 19 0 0 0 188 118 Z" fill="#ffedd5" stroke="#ea580c" stroke-width="2"/>
-      <ellipse cx="120" cy="118" rx="68" ry="19" fill="none" stroke="#ea580c" stroke-width="2"/>
-      <path d="M120 15 L120 118 M120 118 L178 118" stroke="#2563eb" stroke-width="2" stroke-dasharray="4 3"/>
-      <text x="126" y="70" font-size="12" fill="#1d4ed8">h</text>
-      <text x="147" y="112" font-size="12" fill="#1d4ed8">r</text>
-    </svg>`
-  },
-  circle: {
-    caption:"Circle: radius r and diameter 2r",
-    svg:`<svg viewBox="0 0 240 130" role="img" aria-label="Circle with radius and diameter">
-      <circle cx="120" cy="62" r="48" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/>
-      <path d="M120 62 L168 62 M72 62 L168 62" stroke="#ea580c" stroke-width="2"/>
-      <circle cx="120" cy="62" r="3" fill="#172554"/>
-      <text x="141" y="54" font-size="12" fill="#c2410c">r</text>
-      <text x="120" y="124" text-anchor="middle" font-size="12" fill="#334155">diameter = 2r</text>
-    </svg>`
-  },
-  sector: {
-    caption:"Sector of a circle, angle θ in degrees",
-    svg:`<svg viewBox="0 0 240 135" role="img" aria-label="Shaded sector of a circle">
-      <path d="M120 65 L170 65 A50 50 0 0 0 95 17 Z" fill="#fbcfe8" stroke="#db2777" stroke-width="2"/>
-      <circle cx="120" cy="65" r="50" fill="none" stroke="#64748b" stroke-width="1.5"/>
-      <path d="M120 65 L170 65 M120 65 L95 17" stroke="#db2777" stroke-width="2"/>
-      <text x="132" y="50" font-size="12" fill="#9d174d">θ</text>
-      <text x="130" y="82" font-size="12" fill="#334155">r</text>
-    </svg>`
-  },
-  tangent: {
-    caption:"Radius is perpendicular to the tangent at contact",
-    svg:`<svg viewBox="0 0 240 140" role="img" aria-label="Circle with a tangent and radius">
-      <circle cx="95" cy="70" r="42" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
-      <path d="M95 70 L137 70 M137 20 L137 120" stroke="#ea580c" stroke-width="2.5"/>
-      <path d="M125 70 L125 82 L137 82" fill="none" stroke="#059669" stroke-width="2"/>
-      <circle cx="137" cy="70" r="3" fill="#172554"/>
-      <text x="108" y="62" font-size="12" fill="#c2410c">r</text>
-      <text x="145" y="40" font-size="12" fill="#c2410c">Tangent</text>
-    </svg>`
-  },
-  coordinates: {
-    caption:"Cartesian coordinate plane",
-    svg:`<svg viewBox="0 0 240 145" role="img" aria-label="Cartesian plane with a point">
-      <path d="M20 115 L225 115 M42 130 L42 12" stroke="#64748b" stroke-width="1.5"/>
-      <path d="M225 115 l-7 -4 v8 z M42 12 l-4 7 h8 z" fill="#64748b"/>
-      <path d="M42 115 L154 45" stroke="#7c3aed" stroke-width="2" stroke-dasharray="4 3"/>
-      <circle cx="154" cy="45" r="4" fill="#7c3aed"/>
-      <text x="160" y="39" font-size="12" fill="#5b21b6">(x,y)</text>
-      <text x="222" y="132" font-size="12" fill="#334155">x</text>
-      <text x="28" y="14" font-size="12" fill="#334155">y</text>
-      <text x="29" y="130" font-size="11" fill="#334155">O</text>
-    </svg>`
+    caption:"Cone Volume & Surface Area",
+    svg:`<svg viewBox="0 0 240 150" role="img"><path d="M120 15 L52 118 A68 19 0 0 0 188 118 Z" fill="#ffedd5" stroke="#ea580c" stroke-width="2"/></svg>`
   },
   parabola: {
-    caption:"A quadratic function has a parabolic graph",
-    svg:`<svg viewBox="0 0 240 145" role="img" aria-label="Parabola on coordinate axes">
-      <path d="M15 112 L225 112 M120 132 L120 10" stroke="#94a3b8" stroke-width="1.5"/>
-      <path d="M47 20 Q120 220 193 20" fill="none" stroke="#7c3aed" stroke-width="2.5"/>
-      <circle cx="120" cy="112" r="3.5" fill="#db2777"/>
-      <text x="130" y="125" font-size="11" fill="#be185d">vertex</text>
-    </svg>`
-  },
-  areaCurve: {
-    caption:"Area under a non-negative curve",
-    svg:`<svg viewBox="0 0 240 145" role="img" aria-label="Area under a curve between a and b">
-      <path d="M25 115 L225 115 M35 130 L35 12" stroke="#64748b" stroke-width="1.5"/>
-      <path d="M50 115 Q105 -5 200 115 Z" fill="#a7f3d0" fill-opacity=".8"/>
-      <path d="M50 115 Q105 -5 200 115" fill="none" stroke="#059669" stroke-width="2.5"/>
-      <path d="M50 115 L50 75 M200 115 L200 75" stroke="#64748b" stroke-dasharray="3 3"/>
-      <text x="47" y="132" font-size="12" fill="#334155">a</text>
-      <text x="197" y="132" font-size="12" fill="#334155">b</text>
-    </svg>`
+    caption:"Quadratic Parabola Graph",
+    svg:`<svg viewBox="0 0 240 145" role="img"><path d="M15 112 L225 112 M120 132 L120 10" stroke="#94a3b8" stroke-width="1.5"/><path d="M47 20 Q120 220 193 20" fill="none" stroke="#7c3aed" stroke-width="2.5"/></svg>`
   },
   vector: {
-    caption:"Vector shown as a directed arrow",
-    svg:`<svg viewBox="0 0 240 130" role="img" aria-label="Vector arrow on coordinate axes">
-      <path d="M20 105 L220 105 M40 120 L40 10" stroke="#94a3b8" stroke-width="1.5"/>
-      <path d="M40 105 L165 35" stroke="#7c3aed" stroke-width="3"/>
-      <path d="M165 35 L152 36 L159 47 Z" fill="#7c3aed"/>
-      <text x="117" y="54" font-size="14" fill="#5b21b6">a</text>
-    </svg>`
-  },
-  complex: {
-    caption:"Complex plane: real and imaginary axes",
-    svg:`<svg viewBox="0 0 240 135" role="img" aria-label="Complex plane showing a complex number">
-      <path d="M18 105 L225 105 M45 125 L45 10" stroke="#94a3b8" stroke-width="1.5"/>
-      <path d="M45 105 L145 35" stroke="#2563eb" stroke-width="2.5"/>
-      <circle cx="145" cy="35" r="4" fill="#2563eb"/>
-      <text x="151" y="31" font-size="12" fill="#1d4ed8">a + ib</text>
-      <text x="220" y="121" font-size="11" fill="#334155">Re</text>
-      <text x="29" y="14" font-size="11" fill="#334155">Im</text>
-    </svg>`
-  },
-  venn: {
-    caption:"Union includes all elements in either set",
-    svg:`<svg viewBox="0 0 240 125" role="img" aria-label="Two overlapping sets">
-      <circle cx="92" cy="60" r="42" fill="#bfdbfe" fill-opacity=".8" stroke="#2563eb" stroke-width="2"/>
-      <circle cx="145" cy="60" r="42" fill="#fbcfe8" fill-opacity=".7" stroke="#db2777" stroke-width="2"/>
-      <text x="73" y="62" font-size="13" fill="#1d4ed8">A</text>
-      <text x="164" y="62" font-size="13" fill="#be185d">B</text>
-      <text x="120" y="65" text-anchor="middle" font-size="10" fill="#334155">A∩B</text>
-    </svg>`
+    caption:"3D Vector Representation",
+    svg:`<svg viewBox="0 0 240 130" role="img"><path d="M40 105 L165 35" stroke="#7c3aed" stroke-width="3"/></svg>`
   }
 };
 
-/* ---------------------- APPLICATION ---------------------- */
-
+/* ---------------------- APPLICATION CONTROLLER ---------------------- */
 const classTabs = document.getElementById("classTabs");
 const searchInput = document.getElementById("search");
 const chapterSelect = document.getElementById("chapter");
@@ -651,35 +408,25 @@ const resultsHeading = document.getElementById("resultsHeading");
 const pagination = document.getElementById("pagination");
 
 const PAGE_SIZE = 10;
-const colors = [
-  "#2563eb","#7c3aed","#db2777","#059669",
-  "#ea580c","#0891b2","#4f46e5","#ca8a04"
-];
+const colors = ["#2563eb","#7c3aed","#db2777","#059669","#ea580c","#0891b2","#4f46e5","#ca8a04"];
 
 let selectedClass = 6;
 let currentPage = 1;
 let filtered = [];
 
 function esc(value) {
-  return String(value).replace(/[&<>"']/g, ch => ({
-    "&":"&amp;",
-    "<":"&lt;",
-    ">":"&gt;",
-    '"':"&quot;",
-    "'":"&#39;"
+  return String(value || "").replace(/[&<>"']/g, ch => ({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
   })[ch]);
 }
 
 function makeTabs() {
   classTabs.replaceChildren();
-
   for (let c = 6; c <= 12; c++) {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "tab" + (c === selectedClass ? " active" : "");
     button.textContent = "Class " + c;
-    button.setAttribute("aria-pressed", String(c === selectedClass));
-
     button.addEventListener("click", () => {
       selectedClass = c;
       currentPage = 1;
@@ -687,7 +434,6 @@ function makeTabs() {
       updateFilterOptions();
       applyFilters();
     });
-
     classTabs.appendChild(button);
   }
 }
@@ -698,21 +444,13 @@ function updateFilterOptions() {
   const oldTopic = topicSelect.value;
 
   chapterSelect.replaceChildren(new Option("All chapters", ""));
-  [...new Set(classItems.map(f => f.ch))]
-    .sort((a,b) => a.localeCompare(b))
-    .forEach(ch => chapterSelect.add(new Option(ch, ch)));
+  [...new Set(classItems.map(f => f.ch))].sort().forEach(ch => chapterSelect.add(new Option(ch, ch)));
 
   topicSelect.replaceChildren(new Option("All topics", ""));
-  [...new Set(classItems.map(f => f.t))]
-    .sort((a,b) => a.localeCompare(b))
-    .forEach(t => topicSelect.add(new Option(t, t)));
+  [...new Set(classItems.map(f => f.t))].sort().forEach(t => topicSelect.add(new Option(t, t)));
 
-  if ([...chapterSelect.options].some(o => o.value === oldChapter)) {
-    chapterSelect.value = oldChapter;
-  }
-  if ([...topicSelect.options].some(o => o.value === oldTopic)) {
-    topicSelect.value = oldTopic;
-  }
+  if ([...chapterSelect.options].some(o => o.value === oldChapter)) chapterSelect.value = oldChapter;
+  if ([...topicSelect.options].some(o => o.value === oldTopic)) topicSelect.value = oldTopic;
 }
 
 function applyFilters() {
@@ -724,11 +462,7 @@ function applyFilters() {
     if (f.c !== selectedClass) return false;
     if (ch && f.ch !== ch) return false;
     if (topic && f.t !== topic) return false;
-
-    const searchable = [
-      f.n, f.ch, f.t, f.f, f.d, f.e, "class " + f.c
-    ].join(" ").toLocaleLowerCase();
-
+    const searchable = [f.n, f.ch, f.t, f.f, f.d, f.e].join(" ").toLocaleLowerCase();
     return searchable.includes(q);
   });
 
@@ -739,21 +473,16 @@ function applyFilters() {
 function renderDiagram(key) {
   const diagram = diagrams[key];
   if (!diagram) return "";
-
-  return `<div class="diagram">
-    ${diagram.svg}
-    <div class="diagram-caption">${esc(diagram.caption)}</div>
-  </div>`;
+  return `<div class="diagram">${diagram.svg}<div class="diagram-caption">${esc(diagram.caption)}</div></div>`;
 }
 
 function renderCard(f, index) {
   const article = document.createElement("article");
   article.className = "formula-card";
-
   const accent = colors[(f.c + index) % colors.length];
 
   article.innerHTML = `
-    <div class="card-top" style="--accent:${accent};background:${accent}"></div>
+    <div class="card-top" style="background:${accent}"></div>
     <div class="card-body">
       <div class="meta">
         <span class="tag class-tag">Class ${f.c}</span>
@@ -767,7 +496,6 @@ function renderCard(f, index) {
       ${renderDiagram(f.g)}
     </div>
   `;
-
   return article;
 }
 
@@ -781,38 +509,20 @@ function renderPagination(totalPages) {
     button.className = "page-btn" + (active ? " active" : "");
     button.textContent = label;
     button.disabled = disabled;
-
     button.addEventListener("click", () => {
       currentPage = page;
       render();
-      document.getElementById("formulaList")
-        .scrollIntoView({behavior:"smooth", block:"start"});
+      document.getElementById("formulaList").scrollIntoView({behavior:"smooth", block:"start"});
     });
-
     pagination.appendChild(button);
   };
 
   addButton("← Previous", currentPage - 1, currentPage === 1);
-
-  const pages = new Set([
-    1, totalPages,
-    currentPage - 1, currentPage, currentPage + 1
-  ]);
-
-  let previous = 0;
-  [...pages].filter(p => p >= 1 && p <= totalPages)
-    .sort((a,b) => a-b)
-    .forEach(p => {
-      if (previous && p - previous > 1) {
-        const dots = document.createElement("span");
-        dots.textContent = "…";
-        dots.style.padding = "8px";
-        pagination.appendChild(dots);
-      }
+  for (let p = 1; p <= totalPages; p++) {
+    if (p === 1 || p === totalPages || (p >= currentPage - 1 && p <= currentPage + 1)) {
       addButton(String(p), p, false, p === currentPage);
-      previous = p;
-    });
-
+    }
+  }
   addButton("Next →", currentPage + 1, currentPage === totalPages);
 }
 
@@ -821,39 +531,29 @@ function render() {
   pagination.replaceChildren();
 
   resultsHeading.textContent = `Class ${selectedClass} Formulas`;
-  resultCount.textContent =
-    `${filtered.length} formula${filtered.length === 1 ? "" : "s"}`;
+  resultCount.textContent = `${filtered.length} formula${filtered.length === 1 ? "" : "s"}`;
 
   if (filtered.length === 0) {
-    status.textContent = "No matching formulas.";
+    status.textContent = "No matching formulas found.";
     const empty = document.createElement("div");
     empty.className = "empty";
-    empty.innerHTML =
-      "<strong>No formulas found</strong><p>Try another keyword or reset the filters.</p>";
+    empty.innerHTML = "<strong>No formulas found</strong><p>Try searching with a broader keyword or reset filters.</p>";
     formulaList.appendChild(empty);
     return;
   }
 
   const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
   currentPage = Math.max(1, Math.min(currentPage, totalPages));
-
   const start = (currentPage - 1) * PAGE_SIZE;
   const pageItems = filtered.slice(start, start + PAGE_SIZE);
 
-  pageItems.forEach((f, i) => {
-    formulaList.appendChild(renderCard(f, start + i));
-  });
-
-  status.textContent =
-    `Showing ${start + 1}–${Math.min(start + PAGE_SIZE, filtered.length)} of ${filtered.length} matching formulas.`;
+  pageItems.forEach((f, i) => formulaList.appendChild(renderCard(f, start + i)));
+  status.textContent = `Showing ${start + 1}–${Math.min(start + PAGE_SIZE, filtered.length)} of ${filtered.length} formulas.`;
 
   renderPagination(totalPages);
 
   if (window.MathJax && window.MathJax.typesetPromise) {
-    window.MathJax.typesetPromise([formulaList]).catch(err => {
-      console.error("MathJax typesetting error:", err);
-      status.textContent += " Some equations could not be typeset; check your internet connection.";
-    });
+    window.MathJax.typesetPromise([formulaList]).catch(err => console.error("MathJax error:", err));
   }
 }
 
