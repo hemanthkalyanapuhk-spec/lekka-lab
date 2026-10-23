@@ -53,8 +53,8 @@
       width: 100%;
     }
     .header-box { max-width: 100%; margin: 0 auto; display: flex; flex-direction: column; align-items: center; width: 100%; }
-    .brand-overhead-crest { font-size: 0.85rem; letter-spacing: 6px; color: var(--gold-primary); text-transform: uppercase; font-weight: 700; margin-bottom: 4px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: center; }
-    .visitor-badge { background: rgba(212, 175, 55, 0.2); color: var(--gold-primary); border: 1px solid var(--gold-border); padding: 2px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 800; letter-spacing: 1px; }
+    .brand-overhead-crest { font-size: 0.85rem; letter-spacing: 6px; color: var(--gold-primary); text-transform: uppercase; font-weight: 700; margin-bottom: 4px; }
+    .visitor-badge-bottom { background: rgba(212, 175, 55, 0.15); color: var(--gold-primary); border: 1px solid var(--gold-border); padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 700; letter-spacing: 1px; margin-bottom: 15px; display: inline-block; }
 
     .brand-title {
       font-family: 'Cinzel', 'Montserrat', serif;
@@ -121,7 +121,6 @@
     }
     .solution-box svg { width: 100%; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 12px; margin: 14px auto; display: block; }
 
-    /* Relocated Foundation Boosters Box */
     .foundation-pill-box { margin-top: 25px; padding: 16px; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 14px; width: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
     .foundation-title { font-size: 1.05rem; font-weight: 800; color: #fef08a; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
     .foundation-btn-group { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -189,10 +188,7 @@
 
   <header>
     <div class="header-box">
-      <div class="brand-overhead-crest">
-        <span>✦ &nbsp; MATHEMATICS &amp; SCIENCE LEARNING HUB &nbsp; ✦</span>
-        <span class="visitor-badge" id="visitorCounter">👁️ Visitors: Loading...</span>
-      </div>
+      <div class="brand-overhead-crest">✦ &nbsp; MATHEMATICS &amp; SCIENCE LEARNING HUB &nbsp; ✦</div>
       <div class="brand-title">LEKKA LAB</div>
       <div class="brand-divider"><span>❖</span></div>
       <p>Explore • Discover • Excel | High School Learning Portal</p>
@@ -242,7 +238,7 @@
       </div>
     </div>
 
-    <!-- Universal Math Foundation Boosters (Relocated Outside Lucky Box) -->
+    <!-- Universal Math Foundation Boosters -->
     <div class="foundation-pill-box">
       <div class="foundation-title">🎯 Universal Math Foundation Boosters (English &amp; Telugu Notes):</div>
       <div class="foundation-btn-group">
@@ -480,6 +476,11 @@
       </div>
     </div>
 
+    <!-- Visitors Badge Placed Down Here -->
+    <div style="text-align: center; margin: 30px 0 10px;">
+      <div class="visitor-badge-bottom" id="visitorCounter">👁️ Visitors: Loading...</div>
+    </div>
+
     <footer>
       <div class="footer-signature">
         <span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: #cbd5e1; font-weight: 600;">Concept &amp; Learning Architecture</span>
@@ -505,7 +506,6 @@
     const DIRECT_GEMINI_KEYS = ENCODED_KEYS.map(k => atob(k));
     let base64Image = null;
 
-    // Render KaTeX globally on page load & Simulate Real Visitors
     function renderMathInPage() {
       if (window.renderMathInElement) {
         renderMathInElement(document.body, {
