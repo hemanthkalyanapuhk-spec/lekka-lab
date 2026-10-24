@@ -198,7 +198,7 @@
   <div class="container">
     <div class="ai-card">
       <div class="ai-header">
-        <h2>Ask Lucky (Universal AI Assistant)</h2>
+        <h2>Ask Lucky (Universal AI Search Assistant)</h2>
         <span class="online-badge">ONLINE</span>
       </div>
       
@@ -841,34 +841,43 @@
       if (!originalText && !base64Image) { alert('Please enter a question or attach a photo.'); return; }
 
       display.style.display = 'block';
-      mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">⚡ Analyzing query and detecting language...</p>';
+      mathContent.innerHTML = '<p style="color: #64748b; font-weight: 600;">🔍 Searching web and curriculum databases...</p>';
       btn.disabled = true;
 
       const qRaw = originalText.toLowerCase();
       const wantsAlgebraProof = (qRaw.includes("geometrical proof") || qRaw.includes("identity proof") || qRaw.includes("(a+b)^2"));
 
-      const systemInstruction = `You are "Lucky", the expert educational AI mentor for Lekka Lab.
+      const systemInstruction = `You are "Lucky", the expert educational AI search assistant for Lekka Lab.
 INSTRUCTIONS:
 1. Detect the language of the user's question. If the user asks in Telugu, you MUST respond entirely in the **TELUGU SCRIPT (తెలుగు లిపి)**, not in English letters or Romanized Telugu.
-2. Provide clear, step-by-step mathematical or scientific explanations.
+2. Provide clear, step-by-step mathematical or scientific explanations. Use live search grounding if the question involves recent updates, board notifications, or curriculum guidelines.
 3. Use Indian Rupee (₹) for all currency problems.`;
 
       const contents = [{ role: "user", parts: [{ text: `${systemInstruction}\n\nQuestion: ${originalText || "Solve image"}` }] }];
       if (base64Image) contents[0].parts.push({ inlineData: { mimeType: "image/jpeg", data: base64Image } });
 
       let rawAnswer = null;
+      let groundingMetadata = null;
       const shuffledKeys = [...DIRECT_GEMINI_KEYS].sort(() => 0.5 - Math.random());
+
+      // Payload configured with Google Search grounding tool enabled
+      const requestBody = {
+        contents,
+        tools: [{ google_search: {} }],
+        generationConfig: { temperature: 0.1, maxOutputTokens: 2500 }
+      };
 
       for (const apiKey of shuffledKeys) {
         try {
           const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent`, {
             method: "POST",
             headers: { "Content-Type": "application/json", "x-goog-api-key": apiKey },
-            body: JSON.stringify({ contents, generationConfig: { temperature: 0.1, maxOutputTokens: 2500 } })
+            body: JSON.stringify(requestBody)
           });
           const data = await res.json();
           if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
             rawAnswer = data.candidates[0].content.parts[0].text;
+            groundingMetadata = data.candidates[0].groundingMetadata;
             break;
           }
         } catch(e) {}
@@ -890,6 +899,18 @@ INSTRUCTIONS:
       let finalHTML = processMathSafely(processed);
       for (const [token, svgCode] of Object.entries(compMap)) {
         finalHTML = finalHTML.replace(token, svgCode);
+      }
+
+      // Append clickable web source citations if search grounding was utilized
+      if (groundingMetadata && groundingMetadata.groundingChunks) {
+        const sources = groundingMetadata.groundingChunks
+          .filter(chunk => chunk.web && chunk.web.uri)
+          .map(chunk => `<a href="${chunk.web.uri}" target="_blank" style="color: #0284c7; text-decoration: underline; margin-right: 12px; font-size: 0.85rem; display: inline-block; margin-top: 4px;">🔗 ${chunk.web.title || 'Source'}</a>`)
+          .join('');
+        
+        if (sources) {
+          finalHTML += `<div style="margin-top: 20px; padding-top: 10px; border-top: 1px solid #cbd5e1;"><strong style="font-size: 0.85rem; color: #475569;">Web Sources:</strong><br>${sources}</div>`;
+        }
       }
       
       mathContent.innerHTML = finalHTML;
