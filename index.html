@@ -492,7 +492,7 @@
 
   <script>
     // REPLACE THIS WITH YOUR ACTUAL GEMINI API KEY STARTING WITH "AIzaSy..."
-    const GEMINI_API_KEY = "YOUR_ACTUAL_API_KEY_HERE";
+    const GEMINI_API_KEY = "AIzaSyYourActualKeyGoesHere";
     let base64Image = null;
 
     function renderMathInPage() {
@@ -827,7 +827,7 @@
       const display = document.getElementById('aiSolutionDisplay');
       const mathContent = document.getElementById('mathRenderedContent');
 
-      if (!GEMINI_API_KEY || GEMINI_API_KEY === "YOUR_ACTUAL_API_KEY_HERE") {
+      if (!GEMINI_API_KEY || GEMINI_API_KEY.includes("YourActualKey")) {
         display.style.display = 'block';
         mathContent.innerHTML = '<p style="color: #ef4444; font-weight: 700;">Please insert your actual Gemini API key in the JavaScript code!</p>';
         return;
@@ -866,7 +866,7 @@ INSTRUCTIONS:
         const data = await res.json();
         
         if (!res.ok) {
-          mathContent.innerHTML = `<p style="color: #ef4444; font-weight: 700;">API Error (${res.status}): ${data.error?.message || 'Check your API key or network.'}</p>`;
+          mathContent.innerHTML = `<p style="color: #ef4444; font-weight: 700;">API Error (${res.status}): ${data.error?.message || 'Check your API key.'}</p>`;
           btn.disabled = false;
           return;
         }
