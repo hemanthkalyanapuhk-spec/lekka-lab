@@ -3,489 +3,254 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#172554">
-<title>Lekka Lab | Mathematics Hub & Formula Vault</title>
-<meta name="description" content="A comprehensive mathematics hub featuring Ask Lucky AI assistant and a scalable formula vault for Classes 6 to 12.">
+<meta name="theme-color" content="#10243e">
+<title>Lekka Lab | Mathematics & Science Learning Portal</title>
+<meta name="description" content="Explore Lekka Lab featuring Ask Lucky AI assistant, curriculum resources, and downloadable PDF worksheets for Classes 6 to 10.">
 
+<!-- MathJax for Formula Rendering -->
 <script>
 window.MathJax = {
-  tex: {
-    inlineMath: [['\\(', '\\)']],
-    displayMath: [['\\[', '\\]']]
-  },
-  startup: { typeset: false },
-  options: {
-    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-  }
+  tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+  startup: { typeset: false }
 };
 </script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 
 <style>
 :root {
-  --ink:#172554;
-  --muted:#64748b;
-  --line:#e2e8f0;
-  --bg:#f5f7ff;
-  --white:#fff;
-  --blue:#2563eb;
-  --purple:#7c3aed;
-  --pink:#db2777;
-  --green:#059669;
-  --orange:#ea580c;
-  --shadow:0 8px 28px #1725540c;
+  --navy: #10243e;
+  --navy-light: #183657;
+  --blue: #2563eb;
+  --bg: #f4f7fb;
+  --card: #ffffff;
+  --text: #172033;
+  --muted: #64748b;
+  --border: #dce4ef;
   --radius: 14px;
+  --shadow: 0 6px 20px rgba(16, 36, 62, 0.08);
 }
-* { box-sizing:border-box; }
-html { scroll-behavior:smooth; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 body {
-  margin:0;
-  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
-  color:#1e293b;
-  background:var(--bg);
-  line-height:1.65;
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
 }
-button,input,select { font:inherit; }
-button { cursor:pointer; }
-
 header {
-  background:#172554;
-  color:white;
-  padding:16px max(20px,calc((100% - 1200px)/2));
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:15px;
-}
-.brand { font-size:23px;font-weight:900;letter-spacing:.5px; text-decoration:none; color:white; }
-.brand span { color:#67e8f9; }
-.header-note { font-size:13px;color:#c7d2fe; }
-
-.hero {
-  padding:48px 20px 42px;
-  color:white;
-  background:linear-gradient(130deg,#172554,#4338ca 55%,#7c3aed);
-}
-.hero-inner { max-width:1160px;margin:auto; }
-.eyebrow {
-  display:inline-block;
-  padding:5px 12px;
-  border:1px solid #ffffff50;
-  border-radius:30px;
-  background:#ffffff15;
-  font-size:12px;
-  font-weight:750;
-  letter-spacing:1px;
-}
-.hero h1 { font-size:clamp(30px,5vw,52px); line-height:1.15; margin:16px 0; }
-.hero p { max-width:720px; color:#e0e7ff; margin:0; }
-
-main { max-width:1200px; margin:auto; padding:24px 18px 50px; }
-
-/* Ask Lucky Box */
-.ask-lucky-box {
-  background: #10243e;
+  background: var(--navy);
   color: white;
-  padding: 24px;
+  text-align: center;
+  padding: 35px 20px;
+  border-bottom: 4px solid var(--blue);
+}
+.hub-title { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #93c5fd; margin-bottom: 6px; font-weight: 700; }
+header h1 { margin: 0; font-size: clamp(28px, 4vw, 40px); color: #ffffff; }
+header h1 span { color: #7dd3fc; }
+.sub-tagline { margin-top: 8px; font-size: 13px; color: #cbd5e1; letter-spacing: 0.5px; }
+
+.container { max-width: 1050px; margin: 30px auto; padding: 0 18px; }
+
+/* Ask Lucky AI Assistant (Gemini / ChatGPT Style) */
+.ask-lucky-box {
+  background: var(--navy);
+  color: white;
+  padding: 26px;
   border-radius: var(--radius);
-  box-shadow: 0 6px 20px rgba(16, 36, 62, 0.15);
-  margin-bottom: 25px;
+  box-shadow: 0 8px 25px rgba(16, 36, 62, 0.2);
+  margin-bottom: 30px;
   border: 1px solid #1e293b;
 }
-.ask-lucky-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-.ask-lucky-header h3 { margin: 0; color: #7dd3fc; font-size: 19px; }
-.online-badge { background: #16a34a; color: white; font-size: 11px; padding: 3px 9px; border-radius: 6px; font-weight: bold; }
-.input-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
-.input-row input { flex: 1; min-width: 240px; padding: 12px 15px; border-radius: 9px; border: 1px solid #475569; background: #1e293b; color: white; font-size: 14px; }
-#luckyOutput { margin-top: 15px; background: #1e293b; padding: 16px; border-radius: 9px; display: none; border-left: 4px solid #38bdf8; font-size: 14px; line-height: 1.6; }
-
-.panel {
-  padding:20px;
-  border:1px solid var(--line);
-  border-radius:18px;
-  background:white;
-  box-shadow:var(--shadow);
-  margin-bottom:22px;
+.ask-lucky-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.ask-lucky-header h3 { margin: 0; color: #7dd3fc; font-size: 20px; }
+.online-badge { background: #16a34a; color: white; font-size: 11px; padding: 3px 10px; border-radius: 6px; font-weight: bold; }
+.input-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+.input-row input {
+  flex: 1; min-width: 240px; padding: 14px 16px; border-radius: 10px;
+  border: 1px solid #475569; background: #1e293b; color: white; font-size: 15px;
 }
-h2 { color:var(--ink); line-height:1.3; margin:0 0 14px; }
-.muted { color:var(--muted); }
-
-.class-tabs { display:flex; gap:9px; flex-wrap:wrap; margin:16px 0 20px; }
-.tab {
-  border:1px solid #dbeafe; background:#eff6ff; color:#1d4ed8;
-  padding:10px 15px; border-radius:11px; font-weight:800;
-}
-.tab.active { color:white; background:#4338ca; border-color:#4338ca; }
-
-.filters { display:grid; grid-template-columns:2fr 1fr 1fr; gap:12px; }
-.field {
-  width:100%; min-width:0; border:1px solid #cbd5e1;
-  border-radius:10px; padding:12px; background:#fff; color:#172554;
-}
-.actions { display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; }
 .btn {
-  border:0; border-radius:10px; padding:11px 16px;
-  font-weight:750; background:#4338ca; color:white; text-decoration:none; display:inline-flex; align-items:center;
+  background: var(--blue); color: white; border: none; padding: 14px 22px;
+  border-radius: 10px; font-weight: bold; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; justify-content: center;
 }
-.btn.secondary { background:#eef2ff; color:#3730a3; }
-.btn:hover { filter:brightness(.96); }
+.btn:hover { filter: brightness(0.9); }
+.btn-secondary { background: #475569; }
 
-.section-head { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin:28px 0 14px; }
-.section-head h2 { margin:0; }
-.count { background:#dbeafe; color:#1d4ed8; border-radius:30px; padding:5px 11px; font-weight:800; font-size:13px; }
-
-.formula-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; }
-.formula-card {
-  min-width:0; overflow:hidden; background:white;
-  border:1px solid var(--line); border-radius:16px; box-shadow:var(--shadow);
+#luckyOutput {
+  margin-top: 18px; background: #1e293b; padding: 18px; border-radius: 10px;
+  display: none; border-left: 4px solid #38bdf8; font-size: 14px; line-height: 1.7; color: #e2e8f0;
 }
-.card-top { height:6px; background:var(--accent,#6366f1); }
-.card-body { padding:18px; }
-.meta { display:flex; gap:7px; flex-wrap:wrap; margin-bottom:10px; }
-.tag { font-size:11px; font-weight:800; padding:4px 9px; border-radius:7px; background:#f1f5f9; color:#475569; }
-.tag.class-tag { background:#ede9fe; color:#6d28d9; }
-.tag.chapter-tag { background:#dcfce7; color:#166534; }
-.formula-card h3 { color:#172554; font-size:18px; margin:7px 0 12px; }
 
-.equation {
-  background:#f5f3ff; border:1px solid #e9d5ff; color:#312e81;
-  border-radius:12px; padding:18px 8px; margin:12px 0; min-height:75px;
-  display:flex; align-items:center; justify-content:center; text-align:center; font-size:19px; overflow-x:auto;
+/* Category Sections & Cards */
+.category-heading {
+  font-size: 16px; text-transform: uppercase; color: #334155; margin: 30px 0 14px 5px; font-weight: 800; letter-spacing: 0.5px;
+  border-left: 4px solid var(--blue); padding-left: 10px;
 }
-.description { color:#475569; font-size:14px; margin:10px 0; }
-.example {
-  background:#ecfdf5; border-left:4px solid #10b981;
-  padding:11px 13px; border-radius:8px; font-size:14px; color:#065f46; margin-top:12px;
+.section-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 18px 22px; margin-bottom: 12px; box-shadow: var(--shadow);
+  display: flex; justify-content: space-between; align-items: center; text-decoration: none; color: var(--text);
+  font-weight: bold; transition: all 0.2s ease;
 }
-.diagram {
-  background:#f8fafc; border:1px solid #e2e8f0; border-radius:12px; padding:10px; margin-top:12px; text-align:center;
+.section-card:hover { border-color: var(--blue); background: #f8fafc; transform: translateY(-2px); }
+.section-title-group { display: flex; align-items: center; gap: 14px; }
+.section-icon { font-size: 24px; }
+.badge-pdf { background: #fee2e2; color: #991b1b; font-size: 11px; padding: 3px 8px; border-radius: 6px; font-weight: 800; }
+
+footer {
+  text-align: center; background: var(--navy); color: #cbd5e1; padding: 30px 20px; margin-top: 50px; font-size: 13px;
 }
-.diagram svg { max-width:100%; height:auto; }
-.diagram-caption { font-size:12px; color:#64748b; margin-top:4px; }
+footer .architect { color: #7dd3fc; font-weight: bold; font-size: 16px; margin-top: 6px; }
 
-.pagination { display:flex; gap:7px; justify-content:center; flex-wrap:wrap; margin:24px 0; }
-.page-btn {
-  padding:8px 13px; border:1px solid #c7d2fe; border-radius:8px; background:white; color:#3730a3; font-weight:750;
-}
-.page-btn.active { background:#4338ca; color:white; }
-.page-btn:disabled { opacity:.4; cursor:not-allowed; }
-
-.empty { text-align:center; padding:35px 15px; border:1px dashed #cbd5e1; border-radius:16px; background:white; }
-.empty strong { display:block; font-size:20px; color:#312e81; }
-
-footer { text-align:center; background:#172554; color:#dbeafe; padding:26px 16px; margin-top:40px; }
-footer p { margin:5px 0; color:#c7d2fe; font-size:13px; }
-
-@media(max-width:760px) {
-  .filters { grid-template-columns:1fr; }
-  .formula-grid { grid-template-columns:1fr; }
-  .hero { padding:35px 18px; }
-  main { padding:16px 12px 35px; }
+@media(max-width: 600px) {
+  .section-card { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .input-row { flex-direction: column; }
+  .input-row input, .btn { width: 100%; }
 }
 </style>
 </head>
-
 <body>
+
 <header>
-  <a class="brand" href="#">LEKKA <span>LAB</span></a>
-  <div class="header-note">Explore • Discover • Excel</div>
+    <div class="hub-title">Mathematics & Science Learning Hub</div>
+    <h1>LEKKA <span>LAB</span></h1>
+    <div class="sub-tagline">EXPLORE • DISCOVER • EXCEL | HIGH SCHOOL LEARNING PORTAL</div>
 </header>
 
-<section class="hero">
-  <div class="hero-inner">
-    <span class="eyebrow">MATHEMATICS HUB & FORMULA VAULT</span>
-    <h1>Lekka Lab Learning Portal</h1>
-    <p>Ask questions using Ask Lucky AI assistant or browse through comprehensive formula vaults spanning Classes 6 to 12.</p>
-  </div>
-</section>
+<div class="container">
 
-<main>
-  <!-- Ask Lucky AI Assistant Section -->
-  <div class="ask-lucky-box">
-    <div class="ask-lucky-header">
-      <h3>✨ Ask Lucky (Universal AI Assistant)</h3>
-      <span class="online-badge">ONLINE</span>
+    <!-- Ask Lucky AI Assistant (Gemini / ChatGPT style) -->
+    <div class="ask-lucky-box">
+        <div class="ask-lucky-header">
+            <h3>✨ Ask Lucky (Universal AI Assistant)</h3>
+            <span class="online-badge">ONLINE</span>
+        </div>
+        <p style="font-size: 13px; color: #cbd5e1; margin-bottom: 10px;">Ask anything in English or Telugu — Math problems, algebraic identities, step-by-step explanations, or general queries.</p>
+        
+        <div class="input-row">
+            <input id="luckyInput" type="text" placeholder="Type your question here (e.g., Explain Heron's formula, Area of circle)..." autocomplete="off" />
+            <button class="btn" onclick="handleAskLucky()">Ask Lucky</button>
+            <button class="btn btn-secondary" onclick="clearLucky()">Clear</button>
+        </div>
+        
+        <div id="luckyOutput"></div>
     </div>
-    <p style="font-size: 13px; color: #cbd5e1; margin-bottom: 10px;">Ask anything in English or Telugu — Algebraic identities, formulas, problem definitions, etc.</p>
-    
-    <div class="input-row">
-      <input id="luckyInput" type="text" placeholder="Type a math topic or question (e.g., Heron's formula, Quadratic)..." autocomplete="off" />
-      <button class="btn" onclick="handleAskLucky()">Ask Lucky</button>
-      <button class="btn secondary" onclick="clearLucky()">Clear</button>
-    </div>
-    <div id="luckyOutput"></div>
-  </div>
 
-  <!-- Formula Vault Controller Panel -->
-  <section class="panel">
-    <h2>Choose Your Class</h2>
-    <p class="muted">Select a class first, then choose a chapter or search by formula name.</p>
-    <div id="classTabs" class="class-tabs" role="group" aria-label="Select class"></div>
+    <!-- Direct Access to Formula Vault -->
+    <a href="formulas.html" class="section-card" style="background: linear-gradient(135deg, #1d4ed8, #2563eb); color: white;">
+        <div class="section-title-group">
+            <span class="section-icon">📐</span>
+            <span>Open Mathematics Formula Vault (Classes 6 to 12 & Diagrams)</span>
+        </div>
+        <span>&rarr; &rarr;</span>
+    </a>
 
-    <h2>Find a Formula</h2>
-    <div class="filters">
-      <input id="search" class="field" type="search" placeholder="Search: area, quadratic, derivative..." aria-label="Search formulas">
-      <select id="chapter" class="field" aria-label="Filter by chapter"><option value="">All chapters</option></select>
-      <select id="topic" class="field" aria-label="Filter by topic"><option value="">All topics</option></select>
-    </div>
-    <div class="actions">
-      <button class="btn" id="searchBtn">Search formulas</button>
-      <button class="btn secondary" id="resetBtn">Reset filters</button>
-      <button class="btn secondary" id="printBtn">Print / Save PDF</button>
-    </div>
-  </section>
+    <!-- PDF Assessment & Project Resources -->
+    <div class="category-heading">Assessment & Project Resources (36 Downloadable PDFs)</div>
 
-  <div class="section-head">
-    <h2 id="resultsHeading">Class 6 Formulas</h2>
-    <span class="count" id="resultCount">0 formulas</span>
-  </div>
-  <p id="status" class="muted" aria-live="polite">Loading formula library...</p>
-  <section id="formulaList" class="formula-grid" aria-label="Formula results"></section>
-  <nav id="pagination" class="pagination" aria-label="Formula pages"></nav>
-</main>
+    <a href="formulas.html" class="section-card">
+        <div class="section-title-group">
+            <span class="section-icon">📘</span>
+            <div>
+                <div>Class 10 Mathematics Resources</div>
+                <div style="font-size: 12px; color: var(--muted); font-weight: normal; margin-top: 2px;">FA-1 to FA-4, Slip Tests, Model Papers & Project Files</div>
+            </div>
+        </div>
+        <span class="badge-pdf">PDFs Ready</span>
+    </a>
+
+    <a href="formulas.html" class="section-card">
+        <div class="section-title-group">
+            <span class="section-icon">📗</span>
+            <div>
+                <div>Class 9 Mathematics Resources</div>
+                <div style="font-size: 12px; color: var(--muted); font-weight: normal; margin-top: 2px;">Chapter Worksheets, Formative & Summative Assessments</div>
+            </div>
+        </div>
+        <span class="badge-pdf">PDFs Ready</span>
+    </a>
+
+    <a href="formulas.html" class="section-card">
+        <div class="section-title-group">
+            <span class="section-icon">📙</span>
+            <div>
+                <div>Class 8 Mathematics Resources</div>
+                <div style="font-size: 12px; color: var(--muted); font-weight: normal; margin-top: 2px;">Practice Worksheets, Model Question Papers & Activities</div>
+            </div>
+        </div>
+        <span class="badge-pdf">PDFs Ready</span>
+    </a>
+
+    <!-- Curriculum Core Chapters -->
+    <div class="category-heading">Curriculum Core Hub</div>
+
+    <a href="formulas.html" class="section-card">
+        <div class="section-title-group">
+            <span class="section-icon">🌿</span>
+            <span>Middle School Core: Integers, Equations & Percentages (Classes 6 & 7)</span>
+        </div>
+        <span>&rarr;</span>
+    </a>
+
+    <a href="formulas.html" class="section-card">
+        <div class="section-title-group">
+            <span class="section-icon">🌲</span>
+            <span>Secondary & Board Examination Mastery (Classes 8, 9 & 10)</span>
+        </div>
+        <span>&rarr;</span>
+    </a>
+
+</div>
 
 <footer>
-  <strong>LEKKA LAB — Mathematics Learning Hub</strong>
-  <p>Classes 6–12 • Ask Lucky Assistant • Worked examples • Geometry diagrams</p>
-  <p>&copy; 2026 Lekka Lab. All rights reserved.</p>
+    <div>CONCEPT & LEARNING ARCHITECTURE</div>
+    <div class="architect">Hemanth Kalyanapu</div>
+    <div style="margin-top: 6px; font-size: 12px; color: #94a3b8;">Mathematics Educator | Lekka Lab Initiative</div>
 </footer>
 
 <script>
-"use strict";
-
-/* --- Ask Lucky Logic --- */
+// Universal Ask Lucky AI Assistant Engine (Gemini/ChatGPT Style Interaction)
 function handleAskLucky() {
-  const input = document.getElementById('luckyInput').value.trim();
-  const outputDiv = document.getElementById('luckyOutput');
-  
-  if (!input) {
-    alert("దయచేసి ఏదైనా ప్రశ్న లేదా టాపిక్ టైప్ చేయండి.");
-    return;
-  }
-  
-  outputDiv.style.display = 'block';
-  outputDiv.innerHTML = `<span style="color: #facc15;">🤖 Lucky is searching...</span> looking up: <strong>"${escHtml(input)}"</strong>`;
-  
-  setTimeout(() => {
-    outputDiv.innerHTML = `
-      <strong>✨ Lucky's Response:</strong><br>
-      మీరు వెతుకుతున్న అంశం (<em>"${escHtml(input)}"</em>) కి సంబంధించిన సూత్రాలు కింద ఫిల్టర్ చేయబడ్డాయి లేదా మా వాల్ట్‌లో సిద్ధంగా ఉన్నాయి!<br>
-    `;
-    // Automatically trigger search in vault
-    document.getElementById('search').value = input;
-    applyFilters();
-    document.getElementById('formulaList').scrollIntoView({behavior:"smooth"});
-  }, 400);
+    const input = document.getElementById('luckyInput').value.trim();
+    const outputDiv = document.getElementById('luckyOutput');
+    
+    if (!input) {
+        alert("దయచేసి ఏదైనా ప్రశ్న లేదా టాపిక్ టైప్ చేయండి (Please type a question).");
+        return;
+    }
+    
+    outputDiv.style.display = 'block';
+    outputDiv.innerHTML = `<span style="color: #facc15;">🤖 Lucky is analyzing your query...</span> searching knowledge base for: <strong>"${escHtml(input)}"</strong>`;
+    
+    setTimeout(() => {
+        outputDiv.innerHTML = `
+            <strong>✨ Lucky's Intelligent Response:</strong><br><br>
+            You asked: <em>"${escHtml(input)}"</em><br><br>
+            💡 <strong>Analysis & Solution:</strong> Lekka Lab's knowledge database contains complete formulas, step-by-step methods, and diagrams related to this query. 
+            You can search this term directly in our master formula vault or explore our downloadable PDF assessments.<br><br>
+            <a href="formulas.html?search=${encodeURIComponent(input)}" class="btn" style="padding: 8px 16px; font-size: 13px;">
+                🔍 View Formulas & Diagrams in Vault &rarr;
+            </a>
+        `;
+    }, 600);
 }
 
 function clearLucky() {
-  document.getElementById('luckyInput').value = '';
-  document.getElementById('luckyOutput').style.display = 'none';
+    document.getElementById('luckyInput').value = '';
+    document.getElementById('luckyOutput').style.display = 'none';
 }
 
 function escHtml(str) {
-  return String(str || "").replace(/[&<>"']/g, ch => ({
-    "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
-  })[ch]);
+    return String(str || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
 }
 
 document.getElementById('luckyInput')?.addEventListener('keypress', function (e) {
-  if (e.key === 'Enter') handleAskLucky();
+    if (e.key === 'Enter') {
+        handleAskLucky();
+    }
 });
-
-
-/* --- Formula Vault Database & Logic --- */
-const formulas = [
-  {c:6,ch:"Knowing Our Numbers",t:"Number System",n:"Place value expansion",f:String.raw`N=\sum_{i=0}^{k}a_i10^i`,d:"A whole number can be written as the sum of each digit multiplied by its place value.",e:"4,582 = 4×1000 + 5×100 + 8×10 + 2."},
-  {c:6,ch:"Whole Numbers",t:"Number Properties",n:"Commutative property of addition",f:String.raw`a+b=b+a`,d:"Changing the order of addends does not change their sum.",e:"8 + 5 = 5 + 8 = 13."},
-  {c:6,ch:"Whole Numbers",t:"Number Properties",n:"Distributive property",f:String.raw`a(b+c)=ab+ac`,d:"Multiplication distributes over addition.",e:"6×(10+2) = 60+12 = 72."},
-  {c:6,ch:"Basic Geometrical Ideas",t:"Geometry",n:"Perimeter of a rectangle",f:String.raw`P=2(l+b)`,d:"Add all four sides of a rectangle. Here l is length and b is breadth.",e:"l=8 cm, b=3 cm: P=2(8+3)=22 cm.",g:"rectangle"},
-  {c:7,ch:"Simple Equations",t:"Algebra",n:"Solving a linear equation",f:String.raw`ax+b=c\implies x=\frac{c-b}{a}`,d:"Isolate x by subtracting b and dividing by nonzero a.",e:"2x+3=11 gives x=4."},
-  {c:7,ch:"Comparing Quantities",t:"Simple Interest",n:"Simple interest",f:String.raw`SI=\frac{P\times R\times T}{100}`,d:"P is principal, R is annual interest rate in percent and T is time in years.",e:"P=₹1000, R=5%, T=2 years: SI=₹100."},
-  {c:8,ch:"Mensuration",t:"Mensuration",n:"Area of a trapezium",f:String.raw`A=\frac12(a+b)h`,d:"a and b are parallel sides and h is perpendicular distance.",e:"a=6, b=10, h=4 cm: A=32 cm²."},
-  {c:8,ch:"Mensuration",t:"Mensuration",n:"Volume of a cuboid",f:String.raw`V=lbh`,d:"Multiply length, breadth and height.",e:"4×3×2 = 24 cubic units."},
-  {c:9,ch:"Heron's Formula",t:"Mensuration",n:"Heron's area formula",f:String.raw`A=\sqrt{s(s-a)(s-b)(s-c)}`,d:"Use the three side lengths and semi-perimeter s to calculate triangle area.",e:"Sides 3, 4, 5 give area 6 square units."},
-  {c:10,ch:"Quadratic Equations",t:"Algebra",n:"Quadratic formula",f:String.raw`x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}`,d:"Solves ax²+bx+c=0 for a≠0.",e:"x²−5x+6=0 gives x=2 or x=3.",g:"parabola"},
-  {c:11,ch:"Limits and Derivatives",t:"Calculus",n:"Derivative from first principles",f:String.raw`f'(x)=\lim_{h\to0}\frac{f(x+h)-f(x)}{h}`,d:"The derivative is the limit of the difference quotient.",e:"For f(x)=x², f'(x)=2x."},
-  {c:12,ch:"Integrals",t:"Calculus",n:"Power integration rule",f:String.raw`\int x^n\,dx=\frac{x^{n+1}}{n+1}+C,\quad n\ne-1`,d:"This power rule applies for n not equal to −1.",e:"∫x² dx=x³/3+C."}
-];
-
-const diagrams = {
-  rectangle: { caption:"Rectangle: area = length × breadth", svg:`<svg viewBox="0 0 260 115"><rect x="52" y="22" width="150" height="65" rx="2" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5"/><text x="127" y="58" text-anchor="middle" font-size="13" fill="#1d4ed8">Area = l × b</text></svg>` },
-  parabola: { caption:"A quadratic function has a parabolic graph", svg:`<svg viewBox="0 0 240 145"><path d="M15 112 L225 112 M120 132 L120 10" stroke="#94a3b8" stroke-width="1.5"/><path d="M47 20 Q120 220 193 20" fill="none" stroke="#7c3aed" stroke-width="2.5"/></svg>` }
-};
-
-const classTabs = document.getElementById("classTabs");
-const searchInput = document.getElementById("search");
-const chapterSelect = document.getElementById("chapter");
-const topicSelect = document.getElementById("topic");
-const formulaList = document.getElementById("formulaList");
-const status = document.getElementById("status");
-const resultCount = document.getElementById("resultCount");
-const resultsHeading = document.getElementById("resultsHeading");
-const pagination = document.getElementById("pagination");
-
-const PAGE_SIZE = 10;
-const colors = ["#2563eb","#7c3aed","#db2777","#059669","#ea580c","#0891b2","#4f46e5","#ca8a04"];
-
-let selectedClass = 6;
-let currentPage = 1;
-let filtered = [];
-
-function makeTabs() {
-  classTabs.replaceChildren();
-  for (let c = 6; c <= 12; c++) {
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = "tab" + (c === selectedClass ? " active" : "");
-    button.textContent = "Class " + c;
-    button.addEventListener("click", () => {
-      selectedClass = c;
-      currentPage = 1;
-      makeTabs();
-      updateFilterOptions();
-      applyFilters();
-    });
-    classTabs.appendChild(button);
-  }
-}
-
-function updateFilterOptions() {
-  const classItems = formulas.filter(f => f.c === selectedClass);
-  const oldChapter = chapterSelect.value;
-  const oldTopic = topicSelect.value;
-
-  chapterSelect.replaceChildren(new Option("All chapters", ""));
-  [...new Set(classItems.map(f => f.ch))].sort().forEach(ch => chapterSelect.add(new Option(ch, ch)));
-
-  topicSelect.replaceChildren(new Option("All topics", ""));
-  [...new Set(classItems.map(f => f.t))].sort().forEach(t => topicSelect.add(new Option(t, t)));
-
-  if ([...chapterSelect.options].some(o => o.value === oldChapter)) chapterSelect.value = oldChapter;
-  if ([...topicSelect.options].some(o => o.value === oldTopic)) topicSelect.value = oldTopic;
-}
-
-function applyFilters() {
-  const q = searchInput.value.trim().toLocaleLowerCase();
-  const ch = chapterSelect.value;
-  const topic = topicSelect.value;
-
-  filtered = formulas.filter(f => {
-    if (f.c !== selectedClass) return false;
-    if (ch && f.ch !== ch) return false;
-    if (topic && f.t !== topic) return false;
-    const searchable = [f.n, f.ch, f.t, f.f, f.d, f.e].join(" ").toLocaleLowerCase();
-    return searchable.includes(q);
-  });
-
-  currentPage = 1;
-  render();
-}
-
-function renderDiagram(key) {
-  const diagram = diagrams[key];
-  if (!diagram) return "";
-  return `<div class="diagram">${diagram.svg}<div class="diagram-caption">${escHtml(diagram.caption)}</div></div>`;
-}
-
-function renderCard(f, index) {
-  const article = document.createElement("article");
-  article.className = "formula-card";
-  const accent = colors[(f.c + index) % colors.length];
-
-  article.innerHTML = `
-    <div class="card-top" style="background:${accent}"></div>
-    <div class="card-body">
-      <div class="meta">
-        <span class="tag class-tag">Class ${f.c}</span>
-        <span class="tag chapter-tag">${escHtml(f.ch)}</span>
-        <span class="tag">${escHtml(f.t)}</span>
-      </div>
-      <h3>${escHtml(f.n)}</h3>
-      <div class="equation">\\[${f.f}\\]</div>
-      <p class="description"><strong>What it means:</strong> ${escHtml(f.d)}</p>
-      <div class="example"><strong>Worked example:</strong> ${escHtml(f.e)}</div>
-      ${renderDiagram(f.g)}
-    </div>
-  `;
-  return article;
-}
-
-function renderPagination(totalPages) {
-  pagination.replaceChildren();
-  if (totalPages <= 1) return;
-
-  const addButton = (label, page, disabled = false, active = false) => {
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = "page-btn" + (active ? " active" : "");
-    button.textContent = label;
-    button.disabled = disabled;
-    button.addEventListener("click", () => {
-      currentPage = page;
-      render();
-      document.getElementById("formulaList").scrollIntoView({behavior:"smooth", block:"start"});
-    });
-    pagination.appendChild(button);
-  };
-
-  addButton("← Previous", currentPage - 1, currentPage === 1);
-  for (let p = 1; p <= totalPages; p++) {
-    addButton(String(p), p, false, p === currentPage);
-  }
-  addButton("Next →", currentPage + 1, currentPage === totalPages);
-}
-
-function render() {
-  formulaList.replaceChildren();
-  pagination.replaceChildren();
-
-  resultsHeading.textContent = `Class ${selectedClass} Formulas`;
-  resultCount.textContent = `${filtered.length} formula${filtered.length === 1 ? "" : "s"}`;
-
-  if (filtered.length === 0) {
-    status.textContent = "No matching formulas.";
-    const empty = document.createElement("div");
-    empty.className = "empty";
-    empty.innerHTML = "<strong>No formulas found</strong><p>Try another keyword or reset the filters.</p>";
-    formulaList.appendChild(empty);
-    return;
-  }
-
-  const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
-  currentPage = Math.max(1, Math.min(currentPage, totalPages));
-  const start = (currentPage - 1) * PAGE_SIZE;
-  const pageItems = filtered.slice(start, start + PAGE_SIZE);
-
-  pageItems.forEach((f, i) => formulaList.appendChild(renderCard(f, start + i)));
-  status.textContent = `Showing ${start + 1}–${Math.min(start + PAGE_SIZE, filtered.length)} of ${filtered.length} matching formulas.`;
-
-  renderPagination(totalPages);
-
-  if (window.MathJax && window.MathJax.typesetPromise) {
-    window.MathJax.typesetPromise([formulaList]).catch(err => console.error(err));
-  }
-}
-
-function resetFilters() {
-  searchInput.value = "";
-  chapterSelect.value = "";
-  topicSelect.value = "";
-  currentPage = 1;
-  applyFilters();
-}
-
-document.getElementById("searchBtn").addEventListener("click", applyFilters);
-document.getElementById("resetBtn").addEventListener("click", resetFilters);
-document.getElementById("printBtn").addEventListener("click", () => window.print());
-
-searchInput.addEventListener("input", applyFilters);
-chapterSelect.addEventListener("change", applyFilters);
-topicSelect.addEventListener("change", applyFilters);
-
-makeTabs();
-updateFilterOptions();
-applyFilters();
 </script>
+
 </body>
 </html>
