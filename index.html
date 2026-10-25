@@ -665,7 +665,7 @@ function switchPdfTab(evt, tabId) {
     evt.currentTarget.classList.add("active");
 }
 
-// Ask Lucky AI Engine with Automatic Key Pool Rotation & Rich Fallback Proofs/Diagrams
+// Ask Lucky AI Engine with Automatic Key Pool Rotation & Clean HTML Fallback
 async function askLuckyUniverse() {
     const query = document.getElementById('universeInput').value.trim();
     const outputDiv = document.getElementById('luckyUniversalOutput');
@@ -683,7 +683,7 @@ async function askLuckyUniverse() {
     let attempts = 0;
     const maxAttempts = GEMINI_API_KEYS.length;
 
-    const universalPrompt = "You are Ask Lucky, an expert AI tutor for Lekka Lab. Provide a complete, detailed, step-by-step solution, proof, and conceptual explanation for this question from NCERT/SCERT or general knowledge. Format clearly with headings, structured steps, formulas, and diagrams where applicable in English or Telugu: " + query;
+    const universalPrompt = "You are Ask Lucky, an expert AI tutor for Lekka Lab. Provide a complete, detailed, step-by-step solution, proof, and conceptual explanation for this question from NCERT/SCERT or general knowledge. Format clearly with headings, structured steps, formulas (using plain text or standard HTML instead of LaTeX backslashes), and clear reasoning in English or Telugu: " + query;
 
     while (!success && attempts < maxAttempts) {
         const activeKey = getNextApiKey();
@@ -717,7 +717,7 @@ async function askLuckyUniverse() {
             </div>
         `;
     } else {
-        // --- RICH SMART FALLBACK WITH PROOFS AND DIAGRAMS FOR MAJOR TOPICS ---
+        // --- CLEAN HTML SMART FALLBACK WITHOUT LATEX CODE ---
         let fallback = getSmartFallbackAnswer(query);
         outputDiv.innerHTML = `
             <strong>✨ Lucky AI Step-by-Step Solution:</strong><br><br>
@@ -735,25 +735,25 @@ function getSmartFallbackAnswer(q) {
     let lower = q.toLowerCase();
     
     // PYTHAGORAS THEOREM
-    if (lower.includes("pythagoras") || lower.includes("পাইথাগোরাস")) {
+    if (lower.includes("pythagoras") || lower.includes("పైথাగోরাস")) {
         return {
             text: `<strong>Pythagoras Theorem - Complete Step-by-Step Proof:</strong><br><br>
-            <strong>1. Statement:</strong> In a right-angled triangle, the square of the hypotenuse side is equal to the sum of the squares of the other two sides.<br><br>
-            <strong>2. Given:</strong> A right-angled triangle $\\triangle ABC$ right-angled at $B$ ($\\angle B = 90^\\circ$).<br><br>
-            <strong>3. To Prove:</strong> $AC^2 = AB^2 + BC^2$<br><br>
-            <strong>4. Construction:</strong> Draw $BD \\perp AC$ from vertex $B$ to side $AC$.<br><br>
+            <strong>1. Statement:</strong> In a right-angled triangle, the square of the hypotenuse is equal to the sum of the squares of the other two sides.<br><br>
+            <strong>2. Given:</strong> Triangle ABC with right angle at B (Angle B = 90 degrees).<br><br>
+            <strong>3. To Prove:</strong> AC<sup>2</sup> = AB<sup>2</sup> + BC<sup>2</sup><br><br>
+            <strong>4. Construction:</strong> Draw perpendicular BD to side AC from vertex B.<br><br>
             <strong>5. Proof:</strong><br>
-            - Compare $\\triangle ADB$ and $\\triangle ABC$:<br>
-              &nbsp;&nbsp; $\\angle ADB = \\angle ABC = 90^\\circ$<br>
-              &nbsp;&nbsp; $\\angle A = \\angle A$ (Common angle)<br>
-              &nbsp;&nbsp; Therefore, $\\triangle ADB \\sim \\triangle ABC$ (by AA similarity).<br>
-            - Hence, $\\frac{AD}{AB} = \\frac{AB}{AC} \\implies AB^2 = AD \\times AC$ &nbsp;&nbsp; ...(1)<br><br>
-            - Similarly, compare $\\triangle BDC$ and $\\triangle ABC$:<br>
-              &nbsp;&nbsp; $\\triangle BDC \\sim \\triangle ABC$ (by AA similarity).<br>
-            - Hence, $\\frac{CD}{BC} = \\frac{BC}{AC} \\implies BC^2 = CD \\times AC$ &nbsp;&nbsp; ...(2)<br><br>
+            - Compare Triangle ADB and Triangle ABC:<br>
+              &nbsp;&nbsp; Angle ADB = Angle ABC = 90 degrees<br>
+              &nbsp;&nbsp; Angle A = Angle A (Common angle)<br>
+              &nbsp;&nbsp; Therefore, Triangle ADB is similar to Triangle ABC (by AA similarity).<br>
+            - Hence, AD / AB = AB / AC, which implies AB<sup>2</sup> = AD * AC &nbsp;&nbsp; ...(1)<br><br>
+            - Similarly, compare Triangle BDC and Triangle ABC:<br>
+              &nbsp;&nbsp; Triangle BDC is similar to Triangle ABC (by AA similarity).<br>
+            - Hence, CD / BC = BC / AC, which implies BC<sup>2</sup> = CD * AC &nbsp;&nbsp; ...(2)<br><br>
             - Adding equations (1) and (2):<br>
-              &nbsp;&nbsp; $AB^2 + BC^2 = AC(AD + CD)$<br>
-              &nbsp;&nbsp; Since $AD + CD = AC$, we get:
+              &nbsp;&nbsp; AB<sup>2</sup> + BC<sup>2</sup> = AC * (AD + CD)<br>
+              &nbsp;&nbsp; Since AD + CD = AC, we get:
               <div style="margin: 8px 0; text-align: center; font-size: 16px; color: #38bdf8; font-weight: bold;">
                 AC<sup>2</sup> = AB<sup>2</sup> + BC<sup>2</sup>
               </div>
@@ -761,7 +761,6 @@ function getSmartFallbackAnswer(q) {
             diagram: `<svg viewBox="0 0 250 180" width="100%" height="150">
                 <rect width="250" height="180" fill="#0f172a" rx="8"/>
                 <polygon points="50,140 200,140 50,40" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
-                <!-- Right angle box at B (50, 140) -->
                 <polyline points="50,120 70,120 70,140" fill="none" stroke="#f43f5e" stroke-width="2"/>
                 <line x1="50" y1="140" x2="110" y2="80" stroke="#f43f5e" stroke-width="2" stroke-dasharray="4"/>
                 <text x="35" y="38" fill="#fff" font-size="12" font-weight="bold">B</text>
@@ -776,15 +775,15 @@ function getSmartFallbackAnswer(q) {
         return {
             text: `<strong>Basic Proportionality Theorem (BPT / Thales Theorem) - Complete Step-by-Step Proof:</strong><br><br>
             <strong>1. Statement:</strong> If a line is drawn parallel to one side of a triangle to intersect the other two sides in distinct points, then the other two sides are divided in the same ratio.<br><br>
-            <strong>2. Given:</strong> In $\\triangle ABC$, $DE \\parallel BC$, intersecting $AB$ at $D$ and $AC$ at $E$.<br><br>
+            <strong>2. Given:</strong> In Triangle ABC, DE is parallel to BC, intersecting AB at D and AC at E.<br><br>
             <strong>3. To Prove:</strong> 
                <div style="margin: 8px 0; text-align: center; font-size: 16px;">
                  <span class="math-frac"><span class="math-num">AD</span><span>DB</span></span> = <span class="math-frac"><span class="math-num">AE</span><span>EC</span></span>
                </div><br>
-            <strong>4. Construction:</strong> Join $B$ to $E$ and $C$ to $D$. Draw $DM \\perp AC$ and $EN \\perp AB$.<br><br>
+            <strong>4. Construction:</strong> Join B to E and C to D. Draw DM perpendicular to AC and EN perpendicular to AB.<br><br>
             <strong>5. Proof:</strong><br>
-            - Area of $\\triangle ADE$ = $\\frac{1}{2} \\times AD \\times EN$.<br>
-            - Area of $\\triangle BDE$ = $\\frac{1}{2} \\times DB \\times EN$.<br>
+            - Area of Triangle ADE = 0.5 * AD * EN.<br>
+            - Area of Triangle BDE = 0.5 * DB * EN.<br>
             - Ratio: 
               <div style="margin: 6px 0; text-align: center;">
                 <span class="math-frac"><span class="math-num">ar(ADE)</span><span>ar(BDE)</span></span> = <span class="math-frac"><span class="math-num">AD</span><span>DB</span></span> &nbsp; ...(1)
@@ -793,7 +792,7 @@ function getSmartFallbackAnswer(q) {
               <div style="margin: 6px 0; text-align: center;">
                 <span class="math-frac"><span class="math-num">ar(ADE)</span><span>ar(DEC)</span></span> = <span class="math-frac"><span class="math-num">AE</span><span>EC</span></span> &nbsp; ...(2)
               </div>
-            - Since $\\triangle BDE$ and $\\triangle DEC$ lie on the same base $DE$ between same parallels, $\\text{ar}(\\text{BDE}) = \\text{ar}(\\text{DEC})$.<br>
+            - Since Triangle BDE and Triangle DEC lie on the same base DE between same parallels, their areas are equal.<br>
             - Therefore, from (1) and (2):
               <div style="margin: 8px 0; text-align: center; font-size: 16px; color: #38bdf8; font-weight: bold;">
                 <span class="math-frac"><span class="math-num">AD</span><span>DB</span></span> = <span class="math-frac"><span class="math-num">AE</span><span>EC</span></span>
@@ -817,10 +816,10 @@ function getSmartFallbackAnswer(q) {
         return {
             text: `<strong>Photosynthesis - Complete Step-by-Step Explanation:</strong><br><br>
             <strong>1. Definition:</strong> Photosynthesis is the biological process by which green plants convert light energy into chemical energy.<br><br>
-            <strong>2. Raw Materials:</strong> Carbon dioxide ($CO_2$), Water ($H_2O$), Sunlight, and Chlorophyll.<br><br>
+            <strong>2. Raw Materials:</strong> Carbon dioxide (CO<sub>2</sub>), Water (H<sub>2</sub>O), Sunlight, and Chlorophyll.<br><br>
             <strong>3. Chemical Equation:</strong>
                <div style="margin: 8px 0; text-align: center; font-size: 15px;">
-                 6CO<sub>2</sub> + 6H<sub>2</sub>O <span style="color:#38bdf8;">&#10230;</span> C<sub>6</sub>H<sub>12</sub>O<sub>6</sub> + 6O<sub>2</sub>
+                 6CO<sub>2</sub> + 6H<sub>2</sub>O <span style="color:#38bdf8;">&rarr;</span> C<sub>6</sub>H<sub>12</sub>O<sub>6</sub> + 6O<sub>2</sub>
                </div><br>
             <strong>4. Stages:</strong><br>
             - <strong>Light-Dependent Reaction:</strong> Water splitting and ATP/NADPH production in grana.<br>
