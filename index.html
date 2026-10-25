@@ -386,10 +386,10 @@ footer .architect { color: var(--accent-glow); font-weight: 800; font-size: 17px
 
         <div class="chips-row">
             <span style="color: #94a3b8; font-size: 12px; align-self: center;">Try topics:</span>
+            <span class="chip" onclick="quickAsk('Pythagoras theorem')">📐 Pythagoras Theorem</span>
             <span class="chip" onclick="quickAsk('Bpt theorem')">📐 BPT Theorem</span>
             <span class="chip" onclick="quickAsk('Photosynthesis')">🌿 Photosynthesis</span>
             <span class="chip" onclick="quickAsk('Quadratic equation x² - 5x + 6 = 0')">🔢 Quadratic Equation</span>
-            <span class="chip" onclick="quickAsk('Newton Third Law')">🚀 Newton's 3rd Law</span>
         </div>
         
         <div id="luckyUniversalOutput"></div>
@@ -665,7 +665,7 @@ function switchPdfTab(evt, tabId) {
     evt.currentTarget.classList.add("active");
 }
 
-// Ask Lucky AI Engine with Automatic Key Pool Rotation & Step-by-Step Fallback
+// Ask Lucky AI Engine with Automatic Key Pool Rotation & Rich Fallback Proofs/Diagrams
 async function askLuckyUniverse() {
     const query = document.getElementById('universeInput').value.trim();
     const outputDiv = document.getElementById('luckyUniversalOutput');
@@ -683,7 +683,7 @@ async function askLuckyUniverse() {
     let attempts = 0;
     const maxAttempts = GEMINI_API_KEYS.length;
 
-    const universalPrompt = "You are Ask Lucky, an expert AI tutor for Lekka Lab. Provide a complete, detailed, step-by-step solution, proof, or explanation for this question from NCERT/SCERT or general knowledge. Format clearly with headings, bullet points, and sequential steps in English or Telugu: " + query;
+    const universalPrompt = "You are Ask Lucky, an expert AI tutor for Lekka Lab. Provide a complete, detailed, step-by-step solution, proof, and conceptual explanation for this question from NCERT/SCERT or general knowledge. Format clearly with headings, structured steps, formulas, and diagrams where applicable in English or Telugu: " + query;
 
     while (!success && attempts < maxAttempts) {
         const activeKey = getNextApiKey();
@@ -717,7 +717,7 @@ async function askLuckyUniverse() {
             </div>
         `;
     } else {
-        // --- UNIVERSAL STEP-BY-STEP SMART FALLBACK FOR ANY QUESTION ---
+        // --- RICH SMART FALLBACK WITH PROOFS AND DIAGRAMS FOR MAJOR TOPICS ---
         let fallback = getSmartFallbackAnswer(query);
         outputDiv.innerHTML = `
             <strong>✨ Lucky AI Step-by-Step Solution:</strong><br><br>
@@ -734,7 +734,45 @@ async function askLuckyUniverse() {
 function getSmartFallbackAnswer(q) {
     let lower = q.toLowerCase();
     
-    if (lower.includes("bpt") || lower.includes("thales") || lower.includes("proportionality")) {
+    // PYTHAGORAS THEOREM
+    if (lower.includes("pythagoras") || lower.includes("পাইথাগোরাস")) {
+        return {
+            text: `<strong>Pythagoras Theorem - Complete Step-by-Step Proof:</strong><br><br>
+            <strong>1. Statement:</strong> In a right-angled triangle, the square of the hypotenuse side is equal to the sum of the squares of the other two sides.<br><br>
+            <strong>2. Given:</strong> A right-angled triangle $\\triangle ABC$ right-angled at $B$ ($\\angle B = 90^\\circ$).<br><br>
+            <strong>3. To Prove:</strong> $AC^2 = AB^2 + BC^2$<br><br>
+            <strong>4. Construction:</strong> Draw $BD \\perp AC$ from vertex $B$ to side $AC$.<br><br>
+            <strong>5. Proof:</strong><br>
+            - Compare $\\triangle ADB$ and $\\triangle ABC$:<br>
+              &nbsp;&nbsp; $\\angle ADB = \\angle ABC = 90^\\circ$<br>
+              &nbsp;&nbsp; $\\angle A = \\angle A$ (Common angle)<br>
+              &nbsp;&nbsp; Therefore, $\\triangle ADB \\sim \\triangle ABC$ (by AA similarity).<br>
+            - Hence, $\\frac{AD}{AB} = \\frac{AB}{AC} \\implies AB^2 = AD \\times AC$ &nbsp;&nbsp; ...(1)<br><br>
+            - Similarly, compare $\\triangle BDC$ and $\\triangle ABC$:<br>
+              &nbsp;&nbsp; $\\triangle BDC \\sim \\triangle ABC$ (by AA similarity).<br>
+            - Hence, $\\frac{CD}{BC} = \\frac{BC}{AC} \\implies BC^2 = CD \\times AC$ &nbsp;&nbsp; ...(2)<br><br>
+            - Adding equations (1) and (2):<br>
+              &nbsp;&nbsp; $AB^2 + BC^2 = AC(AD + CD)$<br>
+              &nbsp;&nbsp; Since $AD + CD = AC$, we get:
+              <div style="margin: 8px 0; text-align: center; font-size: 16px; color: #38bdf8; font-weight: bold;">
+                AC<sup>2</sup> = AB<sup>2</sup> + BC<sup>2</sup>
+              </div>
+            <strong>Hence Proved.</strong>`,
+            diagram: `<svg viewBox="0 0 250 180" width="100%" height="150">
+                <rect width="250" height="180" fill="#0f172a" rx="8"/>
+                <polygon points="50,140 200,140 50,40" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
+                <!-- Right angle box at B (50, 140) -->
+                <polyline points="50,120 70,120 70,140" fill="none" stroke="#f43f5e" stroke-width="2"/>
+                <line x1="50" y1="140" x2="110" y2="80" stroke="#f43f5e" stroke-width="2" stroke-dasharray="4"/>
+                <text x="35" y="38" fill="#fff" font-size="12" font-weight="bold">B</text>
+                <text x="35" y="155" fill="#fff" font-size="12" font-weight="bold">A</text>
+                <text x="205" y="155" fill="#fff" font-size="12" font-weight="bold">C</text>
+                <text x="115" y="75" fill="#f43f5e" font-size="11" font-weight="bold">D</text>
+            </svg>`
+        };
+    } 
+    // BPT THEOREM
+    else if (lower.includes("bpt") || lower.includes("thales") || lower.includes("proportionality")) {
         return {
             text: `<strong>Basic Proportionality Theorem (BPT / Thales Theorem) - Complete Step-by-Step Proof:</strong><br><br>
             <strong>1. Statement:</strong> If a line is drawn parallel to one side of a triangle to intersect the other two sides in distinct points, then the other two sides are divided in the same ratio.<br><br>
@@ -745,7 +783,7 @@ function getSmartFallbackAnswer(q) {
                </div><br>
             <strong>4. Construction:</strong> Join $B$ to $E$ and $C$ to $D$. Draw $DM \\perp AC$ and $EN \\perp AB$.<br><br>
             <strong>5. Proof:</strong><br>
-            - Area of $\\triangle ADE$ = $\\frac{1}{2} \\times \\text{base} \\times \\text{height} = \\frac{1}{2} \\times AD \\times EN$.<br>
+            - Area of $\\triangle ADE$ = $\\frac{1}{2} \\times AD \\times EN$.<br>
             - Area of $\\triangle BDE$ = $\\frac{1}{2} \\times DB \\times EN$.<br>
             - Ratio: 
               <div style="margin: 6px 0; text-align: center;">
@@ -773,10 +811,12 @@ function getSmartFallbackAnswer(q) {
                 <text x="135" y="80" fill="#f43f5e" font-size="10">DE || BC</text>
             </svg>`
         };
-    } else if (lower.includes("photosynthesis") || lower.includes("కిరణజన్య")) {
+    } 
+    // PHOTOSYNTHESIS
+    else if (lower.includes("photosynthesis") || lower.includes("కిరణజన్య")) {
         return {
             text: `<strong>Photosynthesis - Complete Step-by-Step Explanation:</strong><br><br>
-            <strong>1. Definition:</strong> Photosynthesis is the process by which green plants convert light energy into chemical energy.<br><br>
+            <strong>1. Definition:</strong> Photosynthesis is the biological process by which green plants convert light energy into chemical energy.<br><br>
             <strong>2. Raw Materials:</strong> Carbon dioxide ($CO_2$), Water ($H_2O$), Sunlight, and Chlorophyll.<br><br>
             <strong>3. Chemical Equation:</strong>
                <div style="margin: 8px 0; text-align: center; font-size: 15px;">
@@ -793,17 +833,19 @@ function getSmartFallbackAnswer(q) {
                 <text x="175" y="95" fill="#fff" font-size="11" font-weight="bold">Green Leaf</text>
             </svg>`
         };
-    } else {
+    } 
+    // GENERAL UNIVERSAL FALLBACK FOR ANY OTHER QUESTION
+    else {
         return {
-            text: `<strong>Step-by-Step Solution for: "${escapeHtml(q)}"</strong><br><br>
-            <strong>1. Understanding the Problem & Concepts:</strong><br>
-            - Identify all given parameters, definitions, or textbook references from NCERT/SCERT curriculum.<br>
-            - Understand what needs to be calculated, proven, or explained.<br><br>
-            <strong>2. Step-by-Step Working & Formulas:</strong><br>
-            - Step 1: Set up the fundamental equation or theoretical framework.<br>
-            - Step 2: Substitute values or apply logical/mathematical deductions sequentially.<br>
-            - Step 3: Perform calculations or detailed structural breakdown.<br><br>
-            <strong>3. Final Answer / Conclusion:</strong><br>
+            text: `<strong>Comprehensive Step-by-Step Solution for: "${escapeHtml(q)}"</strong><br><br>
+            <strong>1. Problem Identification & Core Concepts:</strong><br>
+            - Analyze the given question and identify the underlying academic principles from NCERT/SCERT curriculum.<br>
+            - Note down all given parameters, formulas, and definitions required for the solution.<br><br>
+            <strong>2. Step-by-Step Working & Analysis:</strong><br>
+            - <strong>Step 1:</strong> Set up the primary equations, laws, or theoretical frameworks.<br>
+            - <strong>Step 2:</strong> Substitute known values and carry out logical deductions or mathematical calculations sequentially.<br>
+            - <strong>Step 3:</strong> Verify intermediate results for accuracy.<br><br>
+            <strong>3. Final Conclusion & Answer:</strong><br>
             - State the final derived result clearly with appropriate units or structured summary points.<br><br>
             <em>Explore our Class-wise PDF Vault above for complete solved assessment papers and notes!</em>`,
             diagram: null
