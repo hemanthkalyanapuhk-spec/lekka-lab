@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0f172a">
 <title>Lekka Lab | Universal Learning Hub & Ask Lucky AI</title>
-<meta name="description" content="Welcome to Lekka Lab. Powered by Gemini AI with multi-key rotation and organized Formative Assessment PDF vaults.">
+<meta name="description" content="Welcome to Lekka Lab. Powered by Gemini AI with multi-key rotation and class-organized PDF vaults.">
 
 <style>
 :root {
@@ -248,7 +248,7 @@ header h1 span { color: var(--accent-glow); }
   color: var(--accent);
 }
 
-/* Organized FA PDF Vault Styling */
+/* Class-Organized PDF Vault Styling */
 .pdf-vault-box {
   background: var(--card-bg);
   border: 1px solid var(--border);
@@ -270,12 +270,12 @@ header h1 span { color: var(--accent-glow); }
 .pdf-tab-btn {
   background: #f1f5f9;
   border: none;
-  padding: 10px 22px;
-  border-radius: 8px;
+  padding: 12px 24px;
+  border-radius: 10px;
   font-weight: 700;
   cursor: pointer;
   color: var(--text-muted);
-  font-size: 14px;
+  font-size: 15px;
   transition: all 0.2s;
 }
 .pdf-tab-btn.active {
@@ -290,7 +290,7 @@ header h1 span { color: var(--accent-glow); }
   font-size: 14px;
   text-transform: uppercase;
   color: var(--accent);
-  margin: 15px 0 8px 5px;
+  margin: 18px 0 8px 5px;
   font-weight: 800;
   letter-spacing: 0.5px;
 }
@@ -345,7 +345,7 @@ footer .architect { color: var(--accent-glow); font-weight: 800; font-size: 17px
 <header>
     <div class="hub-eyebrow">Universal Learning & AI Ecosystem</div>
     <h1>LEKKA <span>LAB</span></h1>
-    <div class="sub-tagline">Ask Anything (English & Telugu) • Official Textbooks • Organized FA Vault (36 PDFs)</div>
+    <div class="sub-tagline">Ask Anything (English & Telugu) • Official Textbooks • Class-Organized PDF Vault</div>
 </header>
 
 <div class="container">
@@ -411,23 +411,22 @@ footer .architect { color: var(--accent-glow); font-weight: 800; font-size: 17px
         </a>
     </div>
 
-    <!-- Organized PDF Vault by FA1, FA2, FA3, FA4 -->
-    <div class="section-title">📂 Assessment & Project PDF Vault (Organized by FA)</div>
+    <!-- Organized PDF Vault by Class Buttons -->
+    <div class="section-title">📂 Assessment & Project PDF Vault (Class-wise)</div>
     <p style="color: var(--text-muted); font-size: 14px; margin-top: -10px; margin-bottom: 15px;">
-        Select an assessment tab below to view and download all Class 8, Class 9, and Class 10 files in perfect order.
+        Click a class button below to view and download all corresponding assessment files organized by Formative Assessments.
     </p>
 
     <div class="pdf-vault-box">
         <div class="pdf-tabs">
-            <button class="pdf-tab-btn active" onclick="switchPdfTab(event, 'fa1Panel')">FA1 Assessment</button>
-            <button class="pdf-tab-btn" onclick="switchPdfTab(event, 'fa2Panel')">FA2 Assessment</button>
-            <button class="pdf-tab-btn" onclick="switchPdfTab(event, 'fa3Panel')">FA3 Assessment</button>
-            <button class="pdf-tab-btn" onclick="switchPdfTab(event, 'fa4Panel')">FA4 Assessment</button>
+            <button class="pdf-tab-btn active" onclick="switchPdfTab(event, 'class10Panel')">Class 10 PDFs</button>
+            <button class="pdf-tab-btn" onclick="switchPdfTab(event, 'class9Panel')">Class 9 PDFs</button>
+            <button class="pdf-tab-btn" onclick="switchPdfTab(event, 'class8Panel')">Class 8 PDFs</button>
         </div>
 
-        <!-- FA1 Panel -->
-        <div id="fa1Panel" class="pdf-panel active">
-            <div class="pdf-category-heading">Class 10 Files</div>
+        <!-- Class 10 Panel -->
+        <div id="class10Panel" class="pdf-panel active">
+            <div class="pdf-category-heading">Formative Assessment 1 (FA1)</div>
             <div class="pdf-item">
                 <div class="pdf-name"><span>📘</span> class10-fa1-generating-new-models.pdf</div>
                 <div class="pdf-actions"><a href="class10-fa1-generating-new-models.pdf" target="_blank" class="btn-sm">View</a><a href="class10-fa1-generating-new-models.pdf" download class="btn-sm">Download</a></div>
@@ -441,38 +440,7 @@ footer .architect { color: var(--accent-glow); font-weight: 800; font-size: 17px
                 <div class="pdf-actions"><a href="class10-fa1-slip-test.pdf" target="_blank" class="btn-sm">View</a><a href="class10-fa1-slip-test.pdf" download class="btn-sm">Download</a></div>
             </div>
 
-            <div class="pdf-category-heading" style="margin-top:20px;">Class 9 Files</div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📗</span> class9-fa1-generating-new-models.pdf</div>
-                <div class="pdf-actions"><a href="class9-fa1-generating-new-models.pdf" target="_blank" class="btn-sm">View</a><a href="class9-fa1-generating-new-models.pdf" download class="btn-sm">Download</a></div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📗</span> class9-fa1-project.pdf</div>
-                <div class="pdf-actions"><a href="class9-fa1-project.pdf" target="_blank" class="btn-sm">View</a><a href="class9-fa1-project.pdf" download class="btn-sm">Download</a></div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📗</span> class9-fa1-slip-test.pdf</div>
-                <div class="pdf-actions"><a href="class9-fa1-slip-test.pdf" target="_blank" class="btn-sm">View</a><a href="class9-fa1-slip-test.pdf" download class="btn-sm">Download</a></div>
-            </div>
-
-            <div class="pdf-category-heading" style="margin-top:20px;">Class 8 Files</div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📙</span> class8-fa1-generating-new-models.pdf</div>
-                <div class="pdf-actions"><a href="class8-fa1-generating-new-models.pdf" target="_blank" class="btn-sm">View</a><a href="class8-fa1-generating-new-models.pdf" download class="btn-sm">Download</a></div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📙</span> class8-fa1-slip-test.pdf</div>
-                <div class="pdf-actions"><a href="class8-fa1-slip-test.pdf" target="_blank" class="btn-sm">View</a><a href="class8-fa1-slip-test.pdf" download class="btn-sm">Download</a></div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📙</span> Class 8 FA1 Project.pdf</div>
-                <div class="pdf-actions"><a href="Class 8 FA1 Project.pdf" target="_blank" class="btn-sm">View</a><a href="Class 8 FA1 Project.pdf" download class="btn-sm">Download</a></div>
-            </div>
-        </div>
-
-        <!-- FA2 Panel -->
-        <div id="fa2Panel" class="pdf-panel">
-            <div class="pdf-category-heading">Class 10 Files</div>
+            <div class="pdf-category-heading">Formative Assessment 2 (FA2)</div>
             <div class="pdf-item">
                 <div class="pdf-name"><span>📘</span> class10-fa2-generating-new-models.pdf</div>
                 <div class="pdf-actions"><a href="class10-fa2-generating-new-models.pdf" target="_blank" class="btn-sm">View</a><a href="class10-fa2-generating-new-models.pdf" download class="btn-sm">Download</a></div>
@@ -486,38 +454,7 @@ footer .architect { color: var(--accent-glow); font-weight: 800; font-size: 17px
                 <div class="pdf-actions"><a href="class10-fa2-slip-test.pdf" target="_blank" class="btn-sm">View</a><a href="class10-fa2-slip-test.pdf" download class="btn-sm">Download</a></div>
             </div>
 
-            <div class="pdf-category-heading" style="margin-top:20px;">Class 9 Files</div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📗</span> class9-fa2-generating-new-models.pdf</div>
-                <div class="pdf-actions"><a href="class9-fa2-generating-new-models.pdf" target="_blank" class="btn-sm">View</a><a href="class9-fa2-generating-new-models.pdf" download class="btn-sm">Download</a></div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📗</span> class9-fa2-project.pdf</div>
-                <div class="pdf-actions"><a href="class9-fa2-project.pdf" target="_blank" class="btn-sm">View</a><a href="class9-fa2-project.pdf" download class="btn-sm">Download</a></div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📗</span> class9-fa2-slip-test.pdf</div>
-                <div class="pdf-actions"><a href="class9-fa2-slip-test.pdf" target="_blank" class="btn-sm">View</a><a href="class9-fa2-slip-test.pdf" download class="btn-sm">Download</a></div>
-            </div>
-
-            <div class="pdf-category-heading" style="margin-top:20px;">Class 8 Files</div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📙</span> class8-fa2-generating-new-models.pdf</div>
-                <div class="pdf-actions"><a href="class8-fa2-generating-new-models.pdf" target="_blank" class="btn-sm">View</a><a href="class8-fa2-generating-new-models.pdf" download class="btn-sm">Download</a></div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📙</span> class8-fa2-project.pdf</div>
-                <div class="pdf-actions"><a href="class8-fa2-project.pdf" target="_blank" class="btn-sm">View</a><a href="class8-fa2-project.pdf" download class="btn-sm">Download</a></div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📙</span> class8-fa2-slip-test.pdf</div>
-                <div class="pdf-actions"><a href="class8-fa2-slip-test.pdf" target="_blank" class="btn-sm">View</a><a href="class8-fa2-slip-test.pdf" download class="btn-sm">Download</a></div>
-            </div>
-        </div>
-
-        <!-- FA3 Panel -->
-        <div id="fa3Panel" class="pdf-panel">
-            <div class="pdf-category-heading">Class 10 Files</div>
+            <div class="pdf-category-heading">Formative Assessment 3 (FA3)</div>
             <div class="pdf-item">
                 <div class="pdf-name"><span>📘</span> class10-fa3-generating-new-models.pdf</div>
                 <div class="pdf-actions"><a href="class10-fa3-generating-new-models.pdf" target="_blank" class="btn-sm">View</a><a href="class10-fa3-generating-new-models.pdf" download class="btn-sm">Download</a></div>
@@ -531,38 +468,7 @@ footer .architect { color: var(--accent-glow); font-weight: 800; font-size: 17px
                 <div class="pdf-actions"><a href="class10-fa3-slip-test.pdf" target="_blank" class="btn-sm">View</a><a href="class10-fa3-slip-test.pdf" download class="btn-sm">Download</a></div>
             </div>
 
-            <div class="pdf-category-heading" style="margin-top:20px;">Class 9 Files</div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📗</span> class9-fa3-generating-new-models.pdf</div>
-                <div class="pdf-actions"><a href="class9-fa3-generating-new-models.pdf" target="_blank" class="btn-sm">View</a><a href="class9-fa3-generating-new-models.pdf" download class="btn-sm">Download</a></div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📗</span> class9-fa3-project.pdf</div>
-                <div class="pdf-actions"><a href="class9-fa3-project.pdf" target="_blank" class="btn-sm">View</a><a href="class9-fa3-project.pdf" download class="btn-sm">Download</a></div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📗</span> class9-fa3-slip-test.pdf</div>
-                <div class="pdf-actions"><a href="class9-fa3-slip-test.pdf" target="_blank" class="btn-sm">View</a><a href="class9-fa3-slip-test.pdf" download class="btn-sm">Download</a></div>
-            </div>
-
-            <div class="pdf-category-heading" style="margin-top:20px;">Class 8 Files</div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📙</span> class8-fa3-generating-new-models.pdf</div>
-                <div class="pdf-actions"><a href="class8-fa3-generating-new-models.pdf" target="_blank" class="btn-sm">View</a><a href="class8-fa3-generating-new-models.pdf" download class="btn-sm">Download</a></div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📙</span> class8-fa3-project.pdf</div>
-                <div class="pdf-actions"><a href="class8-fa3-project.pdf" target="_blank" class="btn-sm">View</a><a href="class8-fa3-project.pdf" download class="btn-sm">Download</a></div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📙</span> class8-fa3-slip-test.pdf</div>
-                <div class="pdf-actions"><a href="class8-fa3-slip-test.pdf" target="_blank" class="btn-sm">View</a><a href="class8-fa3-slip-test.pdf" download class="btn-sm">Download</a></div>
-            </div>
-        </div>
-
-        <!-- FA4 Panel -->
-        <div id="fa4Panel" class="pdf-panel">
-            <div class="pdf-category-heading">Class 10 Files</div>
+            <div class="pdf-category-heading">Formative Assessment 4 (FA4)</div>
             <div class="pdf-item">
                 <div class="pdf-name"><span>📘</span> class10-fa4-generating-new-models.pdf</div>
                 <div class="pdf-actions"><a href="class10-fa4-generating-new-models.pdf" target="_blank" class="btn-sm">View</a><a href="class10-fa4-generating-new-models.pdf" download class="btn-sm">Download</a></div>
@@ -575,8 +481,53 @@ footer .architect { color: var(--accent-glow); font-weight: 800; font-size: 17px
                 <div class="pdf-name"><span>📘</span> class10-fa4-slip-test.pdf</div>
                 <div class="pdf-actions"><a href="class10-fa4-slip-test.pdf" target="_blank" class="btn-sm">View</a><a href="class10-fa4-slip-test.pdf" download class="btn-sm">Download</a></div>
             </div>
+        </div>
 
-            <div class="pdf-category-heading" style="margin-top:20px;">Class 9 Files</div>
+        <!-- Class 9 Panel -->
+        <div id="class9Panel" class="pdf-panel">
+            <div class="pdf-category-heading">Formative Assessment 1 (FA1)</div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📗</span> class9-fa1-generating-new-models.pdf</div>
+                <div class="pdf-actions"><a href="class9-fa1-generating-new-models.pdf" target="_blank" class="btn-sm">View</a><a href="class9-fa1-generating-new-models.pdf" download class="btn-sm">Download</a></div>
+            </div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📗</span> class9-fa1-project.pdf</div>
+                <div class="pdf-actions"><a href="class9-fa1-project.pdf" target="_blank" class="btn-sm">View</a><a href="class9-fa1-project.pdf" download class="btn-sm">Download</a></div>
+            </div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📗</span> class9-fa1-slip-test.pdf</div>
+                <div class="pdf-actions"><a href="class9-fa1-slip-test.pdf" target="_blank" class="btn-sm">View</a><a href="class9-fa1-slip-test.pdf" download class="btn-sm">Download</a></div>
+            </div>
+
+            <div class="pdf-category-heading">Formative Assessment 2 (FA2)</div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📗</span> class9-fa2-generating-new-models.pdf</div>
+                <div class="pdf-actions"><a href="class9-fa2-generating-new-models.pdf" target="_blank" class="btn-sm">View</a><a href="class9-fa2-generating-new-models.pdf" download class="btn-sm">Download</a></div>
+            </div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📗</span> class9-fa2-project.pdf</div>
+                <div class="pdf-actions"><a href="class9-fa2-project.pdf" target="_blank" class="btn-sm">View</a><a href="class9-fa2-project.pdf" download class="btn-sm">Download</a></div>
+            </div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📗</span> class9-fa2-slip-test.pdf</div>
+                <div class="pdf-actions"><a href="class9-fa2-slip-test.pdf" target="_blank" class="btn-sm">View</a><a href="class9-fa2-slip-test.pdf" download class="btn-sm">Download</a></div>
+            </div>
+
+            <div class="pdf-category-heading">Formative Assessment 3 (FA3)</div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📗</span> Class9-fa3-generating-new-models.pdf</div>
+                <div class="pdf-actions"><a href="Class9-fa3-generating-new-models.pdf" target="_blank" class="btn-sm">View</a><a href="Class9-fa3-generating-new-models.pdf" download class="btn-sm">Download</a></div>
+            </div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📗</span> class9-fa3-project.pdf</div>
+                <div class="pdf-actions"><a href="class9-fa3-project.pdf" target="_blank" class="btn-sm">View</a><a href="class9-fa3-project.pdf" download class="btn-sm">Download</a></div>
+            </div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📗</span> class9-fa3-slip-test.pdf</div>
+                <div class="pdf-actions"><a href="class9-fa3-slip-test.pdf" target="_blank" class="btn-sm">View</a><a href="class9-fa3-slip-test.pdf" download class="btn-sm">Download</a></div>
+            </div>
+
+            <div class="pdf-category-heading">Formative Assessment 4 (FA4)</div>
             <div class="pdf-item">
                 <div class="pdf-name"><span>📗</span> class9-fa4-generating-new-models.pdf</div>
                 <div class="pdf-actions"><a href="class9-fa4-generating-new-models.pdf" target="_blank" class="btn-sm">View</a><a href="class9-fa4-generating-new-models.pdf" download class="btn-sm">Download</a></div>
@@ -589,8 +540,53 @@ footer .architect { color: var(--accent-glow); font-weight: 800; font-size: 17px
                 <div class="pdf-name"><span>📗</span> class9-fa4-slip-test.pdf</div>
                 <div class="pdf-actions"><a href="class9-fa4-slip-test.pdf" target="_blank" class="btn-sm">View</a><a href="class9-fa4-slip-test.pdf" download class="btn-sm">Download</a></div>
             </div>
+        </div>
 
-            <div class="pdf-category-heading" style="margin-top:20px;">Class 8 Files</div>
+        <!-- Class 8 Panel -->
+        <div id="class8Panel" class="pdf-panel">
+            <div class="pdf-category-heading">Formative Assessment 1 (FA1)</div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📙</span> FA-1 Generating New Models.pdf</div>
+                <div class="pdf-actions"><a href="FA-1 Generating New Models.pdf" target="_blank" class="btn-sm">View</a><a href="FA-1 Generating New Models.pdf" download class="btn-sm">Download</a></div>
+            </div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📙</span> FA-1 Slip Test.pdf</div>
+                <div class="pdf-actions"><a href="FA-1 Slip Test.pdf" target="_blank" class="btn-sm">View</a><a href="FA-1 Slip Test.pdf" download class="btn-sm">Download</a></div>
+            </div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📙</span> Class 8 FA1 Project.pdf</div>
+                <div class="pdf-actions"><a href="Class 8 FA1 Project.pdf" target="_blank" class="btn-sm">View</a><a href="Class 8 FA1 Project.pdf" download class="btn-sm">Download</a></div>
+            </div>
+
+            <div class="pdf-category-heading">Formative Assessment 2 (FA2)</div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📙</span> class8-fa2-generating-new-models.pdf</div>
+                <div class="pdf-actions"><a href="class8-fa2-generating-new-models.pdf" target="_blank" class="btn-sm">View</a><a href="class8-fa2-generating-new-models.pdf" download class="btn-sm">Download</a></div>
+            </div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📙</span> class8-fa2-project.pdf</div>
+                <div class="pdf-actions"><a href="class8-fa2-project.pdf" target="_blank" class="btn-sm">View</a><a href="class8-fa2-project.pdf" download class="btn-sm">Download</a></div>
+            </div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📙</span> class8-fa2-slip-test.pdf</div>
+                <div class="pdf-actions"><a href="class8-fa2-slip-test.pdf" target="_blank" class="btn-sm">View</a><a href="class8-fa2-slip-test.pdf" download class="btn-sm">Download</a></div>
+            </div>
+
+            <div class="pdf-category-heading">Formative Assessment 3 (FA3)</div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📙</span> class8-fa3-generating-new-models.pdf</div>
+                <div class="pdf-actions"><a href="class8-fa3-generating-new-models.pdf" target="_blank" class="btn-sm">View</a><a href="class8-fa3-generating-new-models.pdf" download class="btn-sm">Download</a></div>
+            </div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📙</span> class8-fa3-project.pdf</div>
+                <div class="pdf-actions"><a href="class8-fa3-project.pdf" target="_blank" class="btn-sm">View</a><a href="class8-fa3-project.pdf" download class="btn-sm">Download</a></div>
+            </div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📙</span> class8-fa3-slip-test.pdf</div>
+                <div class="pdf-actions"><a href="class8-fa3-slip-test.pdf" target="_blank" class="btn-sm">View</a><a href="class8-fa3-slip-test.pdf" download class="btn-sm">Download</a></div>
+            </div>
+
+            <div class="pdf-category-heading">Formative Assessment 4 (FA4)</div>
             <div class="pdf-item">
                 <div class="pdf-name"><span>📙</span> class8-fa4-generating-new-models.pdf</div>
                 <div class="pdf-actions"><a href="class8-fa4-generating-new-models.pdf" target="_blank" class="btn-sm">View</a><a href="class8-fa4-generating-new-models.pdf" download class="btn-sm">Download</a></div>
@@ -639,7 +635,7 @@ function getNextApiKey() {
     return key;
 }
 
-// PDF Vault Tab Switcher for FA1, FA2, FA3, FA4
+// PDF Vault Tab Switcher for Class Buttons
 function switchPdfTab(evt, tabId) {
     const panels = document.getElementsByClassName("pdf-panel");
     for (let p of panels) p.classList.remove("active");
