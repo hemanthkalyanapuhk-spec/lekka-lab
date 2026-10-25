@@ -665,25 +665,25 @@ function switchPdfTab(evt, tabId) {
     evt.currentTarget.classList.add("active");
 }
 
-// Ask Lucky AI Engine with Dynamic Search Engine Intelligence
+// Ask Lucky AI Engine with Universal Search Intelligence
 async function askLuckyUniverse() {
     const query = document.getElementById('universeInput').value.trim();
     const outputDiv = document.getElementById('luckyUniversalOutput');
     
     if (!query) {
-        alert("Please enter a search query or question.");
+        alert("దయచేసి ఒక ప్రశ్న లేదా టాపిక్ టైప్ చేయండి.");
         return;
     }
     
     outputDiv.style.display = 'block';
-    outputDiv.innerHTML = `<span style="color: #38bdf8;">🔍 Searching and analyzing...</span> retrieving verified answer for: <strong>"${escapeHtml(query)}"</strong>`;
+    outputDiv.innerHTML = `<span style="color: #38bdf8;">🔍 Searching & Analyzing...</span> generating verified answer for: <strong>"${escapeHtml(query)}"</strong>`;
 
     let success = false;
     let dataResult = null;
     let attempts = 0;
     const maxAttempts = GEMINI_API_KEYS.length;
 
-    const searchEnginePrompt = "You are Ask Lucky, an expert universal search engine and AI tutor for Lekka Lab. Provide a comprehensive, accurate, step-by-step verified answer, explanation, or historical record for any query (such as historical events, science concepts, math proofs, or general knowledge). Format cleanly with structured headings, bullet points, and clear reasoning in English or Telugu: " + query;
+    const searchEnginePrompt = "You are Ask Lucky, an expert universal search engine and AI tutor for Lekka Lab. Provide a comprehensive, accurate, step-by-step verified answer, explanation, or historical record for any query (such as historical events, science concepts, math proofs, or general knowledge). Format clearly with structured headings, bullet points, and clear reasoning in English or Telugu: " + query;
 
     while (!success && attempts < maxAttempts) {
         const activeKey = getNextApiKey();
@@ -717,7 +717,7 @@ async function askLuckyUniverse() {
             </div>
         `;
     } else {
-        // --- ADVANCED DYNAMIC SEARCH FALLBACK ENGINE ---
+        // --- ADVANCED SMART SEARCH FALLBACK ENGINE ---
         let fallback = getAdvancedSearchFallback(query);
         outputDiv.innerHTML = `
             <strong>✨ Search Result & Step-by-Step Explanation:</strong><br><br>
