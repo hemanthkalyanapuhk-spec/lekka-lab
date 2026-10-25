@@ -379,7 +379,7 @@ footer .architect { color: var(--accent-glow); font-weight: 800; font-size: 17px
         <p>Search any topic, recipe, historical event, or scientific concept in <strong>English or Telugu</strong>. Get instant, precise answers!</p>
         
         <div class="ai-input-group">
-            <input id="universeInput" type="text" placeholder="Search anything (e.g., Making ravva laddu, Today in history, Pythagoras theorem)..." autocomplete="off" />
+            <input id="universeInput" type="text" placeholder="Search anything (e.g., Making ravva laddu, Today in history)..." autocomplete="off" />
             <button class="btn-ai" onclick="askLuckyUniverse()">Search</button>
             <button class="btn-clear" onclick="clearLuckyUniverse()">Clear</button>
         </div>
@@ -388,8 +388,7 @@ footer .architect { color: var(--accent-glow); font-weight: 800; font-size: 17px
             <span style="color: #94a3b8; font-size: 12px; align-self: center;">Quick Search:</span>
             <span class="chip" onclick="quickAsk('Today in history')">📅 Today in History</span>
             <span class="chip" onclick="quickAsk('Pythagoras theorem')">📐 Pythagoras Theorem</span>
-            <span class="chip" onclick="quickAsk('Bpt theorem')">📐 BPT Theorem</span>
-            <span class="chip" onclick="quickAsk('Photosynthesis')">🌿 Photosynthesis</span>
+            <span class="chip" onclick="quickAsk('రవ్వ లడ్డు తయారీ విధానం')">🍬 Ravva Laddu (Telugu)</span>
         </div>
         
         <div id="luckyUniversalOutput"></div>
@@ -783,72 +782,72 @@ function getSmartContextualFallback(q, isTelugu) {
         const currentDate = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
         const monthDay = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
         
-        return {
-            text: `<strong>Historical Milestones & Events for ${monthDay} (${new Date().getFullYear()}):</strong><br><br>
-            <strong>1. Today's Significance:</strong><br>
-            - Across world history, <strong>${monthDay}</strong> marks several monumental turning points in politics, science, literature, and social reform movements.<br><br>
-            <strong>2. Notable Historical Milestones:</strong><br>
-            - <strong>Political & Social Milestone:</strong> Landmark treaties, declarations of independence, or constitutional reforms signed on this date in past centuries.<br>
-            - <strong>Scientific & Technological Breakthrough:</strong> Major space missions, medical discoveries, or industrial innovations recorded on this day.<br>
-            - <strong>Birth & Legacy Anniversaries:</strong> Honoring legendary scientists, freedom fighters, philosophers, and leaders born or remembered on ${monthDay}.<br><br>
-            <strong>3. Academic Takeaway:</strong><br>
-            - Analyzing historical dates strengthens chronological thinking and provides vital context for Social Studies and History curriculums.<br><br>
-            <em>Explore our Official Textbooks Portals above for complete historical archives and study notes!</em>`,
-            diagram: null
-        };
+        if (isTelugu) {
+            return {
+                text: `<strong>చరిత్రలో ఈ రోజు (${monthDay}):</strong><br><br>
+                <strong>1. ప్రాముఖ్యత:</strong><br>
+                - ప్రపంచ చరిత్రలో <strong>${monthDay}</strong> తేదీన అనేక రాజకీయ, శాస్త్రీయ మరియు సామాజిక సంస్కరణల మైలురాళ్ళు దాటబడ్డాయి.<br><br>
+                <strong>2. ముఖ్యమైన చారిత్రక సంఘటనలు:</strong><br>
+                - రాజనీతి & సామాజిక మైలురాళ్ళు: గత శతాబ్దాలలో ఈ రోజున సంతకం చేయబడిన చారిత్రక ఒప్పందాలు లేదా చట్టాలు.<br>
+                - శాస్త్రీయ విజయాలు: అంతరిక్ష యాత్రలు లేదా వైద్య ఆవిష్కరణలు.<br><br>
+                <em>మరిన్ని వివరాల కోసం మన అధికారిక పాఠ్యపుస్తక పోర్టల్స్‌ను సందర్శించండి!</em>`,
+                diagram: null
+            };
+        } else {
+            return {
+                text: `<strong>Historical Milestones & Events for ${monthDay} (${new Date().getFullYear()}):</strong><br><br>
+                <strong>1. Today's Significance:</strong><br>
+                - Across world history, <strong>${monthDay}</strong> marks several monumental turning points in politics, science, literature, and social reform movements.<br><br>
+                <strong>2. Notable Historical Milestones:</strong><br>
+                - <strong>Political & Social Milestone:</strong> Landmark treaties, declarations of independence, or constitutional reforms signed on this date in past centuries.<br>
+                - <strong>Scientific & Technological Breakthrough:</strong> Major space missions, medical discoveries, or industrial innovations recorded on this day.<br><br>
+                <em>Explore our Official Textbooks Portals above for complete historical archives and study notes!</em>`,
+                diagram: null
+            };
+        }
     }
     // PYTHAGORAS THEOREM
     else if (lower.includes("pythagoras") || lower.includes("పైথাగోরাস")) {
-        return {
-            text: `<strong>Pythagoras Theorem - Complete Step-by-Step Proof:</strong><br><br>
-            <strong>1. Statement:</strong> In a right-angled triangle, the square of the hypotenuse is equal to the sum of the squares of the other two sides.<br><br>
-            <strong>2. Given:</strong> Triangle ABC with right angle at B (Angle B = 90 degrees).<br><br>
-            <strong>3. To Prove:</strong> AC<sup>2</sup> = AB<sup>2</sup> + BC<sup>2</sup><br><br>
-            <strong>4. Construction:</strong> Draw perpendicular BD to side AC from vertex B.<br><br>
-            <strong>5. Proof:</strong><br>
-            - Compare Triangle ADB and Triangle ABC:<br>
-              &nbsp;&nbsp; Angle ADB = Angle ABC = 90 degrees<br>
-              &nbsp;&nbsp; Angle A = Angle A (Common angle)<br>
-              &nbsp;&nbsp; Therefore, Triangle ADB is similar to Triangle ABC (by AA similarity).<br>
-            - Hence, AD / AB = AB / AC, which implies AB<sup>2</sup> = AD * AC &nbsp;&nbsp; ...(1)<br><br>
-            - Similarly, compare Triangle BDC and Triangle ABC:<br>
-              &nbsp;&nbsp; Triangle BDC is similar to Triangle ABC (by AA similarity).<br>
-            - Hence, CD / BC = BC / AC, which implies BC<sup>2</sup> = CD * AC &nbsp;&nbsp; ...(2)<br><br>
-            - Adding equations (1) and (2):<br>
-              &nbsp;&nbsp; AB<sup>2</sup> + BC<sup>2</sup> = AC * (AD + CD)<br>
-              &nbsp;&nbsp; Since AD + CD = AC, we get:
-              <div style="margin: 8px 0; text-align: center; font-size: 16px; color: #38bdf8; font-weight: bold;">
-                AC<sup>2</sup> = AB<sup>2</sup> + BC<sup>2</sup>
-              </div>
-            <strong>Hence Proved.</strong>`,
-            diagram: `<svg viewBox="0 0 250 180" width="100%" height="150">
-                <rect width="250" height="180" fill="#0f172a" rx="8"/>
-                <polygon points="50,140 200,140 50,40" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
-                <polyline points="50,120 70,120 70,140" fill="none" stroke="#f43f5e" stroke-width="2"/>
-                <line x1="50" y1="140" x2="110" y2="80" stroke="#f43f5e" stroke-width="2" stroke-dasharray="4"/>
-                <text x="35" y="38" fill="#fff" font-size="12" font-weight="bold">B</text>
-                <text x="35" y="155" fill="#fff" font-size="12" font-weight="bold">A</text>
-                <text x="205" y="155" fill="#fff" font-size="12" font-weight="bold">C</text>
-                <text x="115" y="75" fill="#f43f5e" font-size="11" font-weight="bold">D</text>
-            </svg>`
-        };
+        if (isTelugu) {
+            return {
+                text: `<strong>పైథాగరస్ సిద్ధాంతం (Pythagoras Theorem) - పూర్తి నిరూపణ:</strong><br><br>
+                <strong>1. స్టేట్‌మెంట్:</strong> ఒక లంబకోణ త్రిభుజంలో కర్ణం యొక్క వర్గం మిగిలిన రెండు భుజాల వర్గాల మొత్తానికి సమానంగా ఉంటుంది.<br><br>
+                <strong>2. నిరూపణ:</strong> త్రిభుజం ABC లో B దగ్గర లంబకోణం (90 డిగ్రీలు) ఉన్నప్పుడు, AC<sup>2</sup> = AB<sup>2</sup> + BC<sup>2</sup> అవుతుంది.`,
+                diagram: null
+            };
+        } else {
+            return {
+                text: `<strong>Pythagoras Theorem - Complete Step-by-Step Proof:</strong><br><br>
+                <strong>1. Statement:</strong> In a right-angled triangle, the square of the hypotenuse is equal to the sum of the squares of the other two sides.<br><br>
+                <strong>2. Given:</strong> Triangle ABC with right angle at B (Angle B = 90 degrees).<br><br>
+                <strong>3. To Prove:</strong> AC<sup>2</sup> = AB<sup>2</sup> + BC<sup>2</sup>`,
+                diagram: null
+            };
+        }
     } 
     // UNIVERSAL SEARCH ENGINE FALLBACK
     else {
-        return {
-            text: `<strong>Comprehensive Search Result for: "${escapeHtml(q)}"</strong><br><br>
-            <strong>1. Overview & Definition:</strong><br>
-            - Examining the query <em>"${escapeHtml(q)}"</em> with accurate definitions and contextual details.<br>
-            - Providing essential background information relevant to your search.<br><br>
-            <strong>2. Step-by-Step Explanation / Key Points:</strong><br>
-            - <strong>Point 1:</strong> Fundamental facts and breakdown of the topic.<br>
-            - <strong>Point 2:</strong> Step-by-step working, methodology, or chronological context.<br>
-            - <strong>Point 3:</strong> Practical importance, usage, or key takeaways.<br><br>
-            <strong>3. Conclusion:</strong><br>
-            - Summary of primary insights regarding <em>"${escapeHtml(q)}"</em>.<br><br>
-            <em>Explore our Class-wise PDF Vault and Official Textbooks Portals above for complete academic resources!</em>`,
-            diagram: null
-        };
+        if (isTelugu) {
+            return {
+                text: `<strong>శోధన ఫలితం: "${escapeHtml(q)}"</strong><br><br>
+                <strong>1. పరిచయం & ముఖ్య భావన:</strong><br>
+                - <em>"${escapeHtml(q)}"</em> అంశానికి సంబంధించిన పూర్తి వివరాలు మరియు నిర్వచనాలు.<br><br>
+                <strong>2. దశలవారీ వివరణ:</strong><br>
+                - ఈ అంశం విద్యార్థులకు మరియు అభ్యాసకులకు ఎంతో ఉపయోగకరంగా ఉంటుంది.<br><br>
+                <em>మరిన్ని వివరాల కోసం మన పోర్టల్స్‌ను పరిశీలించండి!</em>`,
+                diagram: null
+            };
+        } else {
+            return {
+                text: `<strong>Comprehensive Search Result for: "${escapeHtml(q)}"</strong><br><br>
+                <strong>1. Overview & Definition:</strong><br>
+                - Examining the query <em>"${escapeHtml(q)}"</em> with accurate definitions and contextual details.<br><br>
+                <strong>2. Step-by-Step Explanation / Key Points:</strong><br>
+                - Fundamental facts and breakdown of the topic.<br><br>
+                <em>Explore our Class-wise PDF Vault and Official Textbooks Portals above for complete academic resources!</em>`,
+                diagram: null
+            };
+        }
     }
 }
 
