@@ -365,7 +365,7 @@ footer .architect { color: var(--accent-glow); font-weight: 800; font-size: 17px
 <header>
     <div class="hub-eyebrow">Universal Learning & AI Ecosystem</div>
     <h1>LEKKA <span>LAB</span></h1>
-    <div class="sub-tagline">Ask Anything (తెలుగు & English) • Official Textbooks • Class-Organized PDF Vault</div>
+    <div class="sub-tagline">Ask Anything (English & Telugu) • Official Textbooks • Class-Organized PDF Vault</div>
 </header>
 
 <div class="container">
@@ -376,19 +376,19 @@ footer .architect { color: var(--accent-glow); font-weight: 800; font-size: 17px
             <h3>✨ Ask Lucky (Universal Search & AI Engine)</h3>
             <span class="online-badge">ONLINE (Smart Search)</span>
         </div>
-        <p>ఏదైనా ప్రశ్న, వంటకం, చారిత్రక అంశం లేదా పాఠ్యాంశాన్ని <strong>తెలుగులో లేదా ఇంగ్లీషులో</strong> అడగండి. పూర్తి వివరాలతో కూడిన స్టెప్-బై-స్టెప్ సమాధానం పొందండి!</p>
+        <p>Search any topic, recipe, historical event, or scientific concept in <strong>English or Telugu</strong>. Get instant, precise answers!</p>
         
         <div class="ai-input-group">
-            <input id="universeInput" type="text" placeholder="ఇక్కడ టైప్ చేయండి (ఉదా: రవ్వ లడ్డు తయారీ విధానం, పైథాగరస్ సిద్ధాంతం)..." autocomplete="off" />
-            <button class="btn-ai" onclick="askLuckyUniverse()">శోధించండి (Search)</button>
-            <button class="btn-clear" onclick="clearLuckyUniverse()">క్షమించు (Clear)</button>
+            <input id="universeInput" type="text" placeholder="Search anything (e.g., Making ravva laddu, Today in history, Pythagoras theorem)..." autocomplete="off" />
+            <button class="btn-ai" onclick="askLuckyUniverse()">Search</button>
+            <button class="btn-clear" onclick="clearLuckyUniverse()">Clear</button>
         </div>
 
         <div class="chips-row">
-            <span style="color: #94a3b8; font-size: 12px; align-self: center;">త్వరిత శోధన:</span>
-            <span class="chip" onclick="quickAsk('రవ్వ లడ్డు తయారీ విధానం')">🍬 రవ్వ లడ్డు (Ravva Laddu)</span>
+            <span style="color: #94a3b8; font-size: 12px; align-self: center;">Quick Search:</span>
             <span class="chip" onclick="quickAsk('Today in history')">📅 Today in History</span>
             <span class="chip" onclick="quickAsk('Pythagoras theorem')">📐 Pythagoras Theorem</span>
+            <span class="chip" onclick="quickAsk('Bpt theorem')">📐 BPT Theorem</span>
             <span class="chip" onclick="quickAsk('Photosynthesis')">🌿 Photosynthesis</span>
         </div>
         
@@ -665,25 +665,29 @@ function switchPdfTab(evt, tabId) {
     evt.currentTarget.classList.add("active");
 }
 
-// Ask Lucky AI Engine with Multilingual Support (Telugu & English)
+// Ask Lucky AI Engine with Default English & Auto Telugu Detection
 async function askLuckyUniverse() {
     const query = document.getElementById('universeInput').value.trim();
     const outputDiv = document.getElementById('luckyUniversalOutput');
     
     if (!query) {
-        alert("దయచేసి ఒక ప్రశ్న లేదా టాపిక్ టైప్ చేయండి / Please enter a query.");
+        alert("Please enter a question or topic to search.");
         return;
     }
     
     outputDiv.style.display = 'block';
-    outputDiv.innerHTML = `<span style="color: #38bdf8;">🔍 శోధిస్తోంది / Searching...</span> generating step-by-step solution for: <strong>"${escapeHtml(query)}"</strong>`;
+    outputDiv.innerHTML = `<span style="color: #38bdf8;">🔍 Searching & Analyzing...</span> generating step-by-step solution for: <strong>"${escapeHtml(query)}"</strong>`;
 
     let success = false;
     let dataResult = null;
     let attempts = 0;
     const maxAttempts = GEMINI_API_KEYS.length;
 
-    const searchEnginePrompt = "You are Ask Lucky, an expert universal search engine and AI tutor for Lekka Lab. Provide a complete, detailed, step-by-step verified answer, recipe, or explanation. If the user asks in Telugu, respond entirely in natural Telugu. If in English, respond in English. Format clearly with structured headings and bullet points: " + query;
+    // Detect if query contains Telugu characters
+    const isTelugu = /[\u0C00-\u0C7F]/.test(query);
+    const targetLangInstruction = isTelugu ? "Respond entirely in natural Telugu." : "Respond in English by default.";
+
+    const searchEnginePrompt = `You are Ask Lucky, an expert universal search engine and AI tutor for Lekka Lab. Provide a complete, detailed, step-by-step verified answer, explanation, or recipe. ${targetLangInstruction} Format clearly with structured headings and bullet points: ${query}`;
 
     while (!success && attempts < maxAttempts) {
         const activeKey = getNextApiKey();
@@ -717,8 +721,8 @@ async function askLuckyUniverse() {
             </div>
         `;
     } else {
-        // --- SMART CONTEXTUAL FALLBACK (TELUGU & ENGLISH) ---
-        let fallback = getSmartContextualFallback(query);
+        // --- SMART CONTEXTUAL FALLBACK (ENGLISH BY DEFAULT, TELUGU IF REQUESTED) ---
+        let fallback = getSmartContextualFallback(query, isTelugu);
         outputDiv.innerHTML = `
             <strong>✨ Search Result & Step-by-Step Explanation:</strong><br><br>
             ${fallback.text}
@@ -731,29 +735,48 @@ async function askLuckyUniverse() {
     }
 }
 
-function getSmartContextualFallback(q) {
+function getSmartContextualFallback(q, isTelugu) {
     let lower = q.toLowerCase();
     
-    // RECIPES / RAVVA LADDU (TELUGU)
+    // RECIPES / RAVVA LADDU
     if (lower.includes("laddu") || lower.includes("ravva") || lower.includes("లడ్డు") || lower.includes("రవ్వ") || lower.includes("recipe")) {
-        return {
-            text: `<strong>రవ్వ లడ్డు తయారీ విధానం (Ravva Laddu Recipe):</strong><br><br>
-            <strong>1. కావలసిన పదార్థాలు (Ingredients):</strong><br>
-            - బంబాయి రవ్వ (సూజి రవ్వ): 1 కప్పు<br>
-            - చక్కెర: 3/4 కప్పు (మెత్తని పొడి చేసుకోవాలి)<br>
-            - నెయ్యి: 4 నుండి 5 టేబుల్ స్పూన్లు<br>
-            - జీడిపప్పు మరియు కిస్మిస్: తగినన్ని<br>
-            - యాలకుల పొడి: 1/2 టీస్పూన్<br>
-            - కాచి చల్లార్చిన పాలు లేదా నీరు: 2 నుండి 3 టేబుల్ స్పూన్లు<br><br>
-            <strong>2. తయారీ విధానం (Step-by-Step Instructions):</strong><br>
-            - <strong>దశ 1:</strong> ఒక బాణలిలో 2 స్పూన్ల నెయ్యి వేసి, జీడిపప్పు మరియు కిస్మిస్ దోరగా వేయించి ఒక గిన్నెలోకి తీసుకోవాలి.<br>
-            - <strong>దశ 2:</strong> అదే బాణలిలో బంబాయి రవ్వను వేసి, మంటను సన్నగా ఉంచుతూ మంచి సువాసన వచ్చే వరకు బాగా వేయించాలి.<br>
-            - <strong>దశ 3:</strong> ముందుగా పౌడర్ చేసుకున్న చక్కెరను, వేయించిన రవ్వ మరియు యాలకుల పొడిని ఒక పెద్ద గిన్నెలో వేసి బాగా కలుపుకోవాలి.<br>
-            - <strong>దశ 4:</strong> ఇప్పుడు మిగిలిన నెయ్యిని కరిగించి పోసి, అవసరమైతే కొద్దిగా గోరువెచ్చని పాలు చిలకరిస్తూ కలపాలి.<br>
-            - <strong>దశ 5:</strong> మిశ్రమం గోరువెచ్చగా ఉన్నప్పుడే చేతికి నెయ్యి రాసుకుంటూ గట్టిగా ఉండలుగా (లడ్లలాగా) చుట్టుకోవాలి.<br><br>
-            <strong>3. ముగింపు:</strong> ఎంతో రుచికరమైన, సాంప్రదాయ రవ్వ లడ్డు సిద్ధం!`,
-            diagram: null
-        };
+        if (isTelugu) {
+            return {
+                text: `<strong>రవ్వ లడ్డు తయారీ విధానం (Ravva Laddu Recipe):</strong><br><br>
+                <strong>1. కావలసిన పదార్థాలు (Ingredients):</strong><br>
+                - బంబాయి రవ్వ (సూజి రవ్వ): 1 కప్పు<br>
+                - చక్కెర: 3/4 కప్పు (మెత్తని పొడి చేసుకోవాలి)<br>
+                - నెయ్యి: 4 నుండి 5 టేబుల్ స్పూన్లు<br>
+                - జీడిపప్పు మరియు కిస్మిస్: తగినన్ని<br>
+                - యాలకుల పొడి: 1/2 టీస్పూన్<br>
+                - కాచి చల్లార్చిన పాలు లేదా నీరు: 2 నుండి 3 టేబుల్ స్పూన్లు<br><br>
+                <strong>2. తయారీ విధానం (Step-by-Step Instructions):</strong><br>
+                - <strong>దశ 1:</strong> ఒక బాణలిలో 2 స్పూన్ల నెయ్యి వేసి, జీడిపప్పు మరియు కిస్మిస్ దోరగా వేయించి ఒక గిన్నెలోకి తీసుకోవాలి.<br>
+                - <strong>దశ 2:</strong> అదే బాణలిలో బంబాయి రవ్వను వేసి, మంటను సన్నగా ఉంచుతూ మంచి సువాసన వచ్చే వరకు బాగా వేయించాలి.<br>
+                - <strong>దశ 3:</strong> ముందుగా పౌడర్ చేసుకున్న చక్కెరను, వేయించిన రవ్వ మరియు యాలకుల పొడిని ఒక పెద్ద గిన్నెలో వేసి బాగా కలుపుకోవాలి.<br>
+                - <strong>దశ 4:</strong> ఇప్పుడు మిగిలిన నెయ్యిని కరిగించి పోసి, అవసరమైతే కొద్దిగా గోరువెచ్చని పాలు చిలకరిస్తూ కలపాలి.<br>
+                - <strong>దశ 5:</strong> మిశ్రమం గోరువెచ్చగా ఉన్నప్పుడే చేతికి నెయ్యి రాసుకుంటూ గట్టిగా ఉండలుగా (లడ్లలాగా) చుట్టుకోవాలి.`,
+                diagram: null
+            };
+        } else {
+            return {
+                text: `<strong>How to Make Ravva Laddu (Step-by-Step Recipe):</strong><br><br>
+                <strong>1. Ingredients Required:</strong><br>
+                - Bombay Ravva (Sooji): 1 cup<br>
+                - Sugar: 3/4 cup (powdered)<br>
+                - Ghee: 4-5 tablespoons<br>
+                - Cashews & Raisins: As needed<br>
+                - Cardamom powder: 1/2 teaspoon<br>
+                - Warm milk or water: 2-3 tablespoons<br><br>
+                <strong>2. Preparation Steps:</strong><br>
+                - <strong>Step 1:</strong> Heat 2 spoons of ghee in a pan and fry cashews and raisins until golden brown, then set aside.<br>
+                - <strong>Step 2:</strong> Roast the Bombay ravva in the same pan on low flame until aromatic and slightly golden.<br>
+                - <strong>Step 3:</strong> Mix the powdered sugar, roasted ravva, and cardamom powder in a large bowl.<br>
+                - <strong>Step 4:</strong> Pour remaining melted ghee and gradually add warm milk/water.<br>
+                - <strong>Step 5:</strong> Shape the warm mixture tightly into round laddus.`,
+                diagram: null
+            };
+        }
     }
     // TODAY IN HISTORY
     else if (lower.includes("history") || lower.includes("today") || lower.includes("event") || lower.includes("date")) {
