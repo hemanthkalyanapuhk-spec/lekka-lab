@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0f172a">
 <title>Lekka Lab | Universal Search & Learning Hub</title>
-<meta name="description" content="Welcome to Lekka Lab. Powered by advanced AI engine for precise step-by-step solutions to any academic or general query in English and Telugu.">
+<meta name="description" content="Welcome to Lekka Lab. Powered by advanced universal search engine for precise step-by-step solutions to any query in English and Telugu.">
 
 <style>
 :root {
@@ -379,16 +379,16 @@ footer .architect { color: var(--accent-glow); font-weight: 800; font-size: 17px
         <p>Search any topic, recipe, historical event, or scientific concept in <strong>English or Telugu</strong>. Get instant, precise answers!</p>
         
         <div class="ai-input-group">
-            <input id="universeInput" type="text" placeholder="Search anything (e.g., Making ravva laddu, Today in history)..." autocomplete="off" />
+            <input id="universeInput" type="text" placeholder="Search anything (e.g., Making ravva laddu in Telugu, Pythagoras theorem)..." autocomplete="off" />
             <button class="btn-ai" onclick="askLuckyUniverse()">Search</button>
             <button class="btn-clear" onclick="clearLuckyUniverse()">Clear</button>
         </div>
 
         <div class="chips-row">
             <span style="color: #94a3b8; font-size: 12px; align-self: center;">Quick Search:</span>
+            <span class="chip" onclick="quickAsk('Making ravva laddu in Telugu')">🍬 Ravva Laddu (Telugu)</span>
             <span class="chip" onclick="quickAsk('Today in history')">📅 Today in History</span>
             <span class="chip" onclick="quickAsk('Pythagoras theorem')">📐 Pythagoras Theorem</span>
-            <span class="chip" onclick="quickAsk('రవ్వ లడ్డు తయారీ విధానం')">🍬 Ravva Laddu (Telugu)</span>
         </div>
         
         <div id="luckyUniversalOutput"></div>
@@ -664,7 +664,7 @@ function switchPdfTab(evt, tabId) {
     evt.currentTarget.classList.add("active");
 }
 
-// Ask Lucky AI Engine with Default English & Auto Telugu Detection
+// Ask Lucky AI Engine with Default English & Smart Telugu Keyword Detection
 async function askLuckyUniverse() {
     const query = document.getElementById('universeInput').value.trim();
     const outputDiv = document.getElementById('luckyUniversalOutput');
@@ -682,8 +682,8 @@ async function askLuckyUniverse() {
     let attempts = 0;
     const maxAttempts = GEMINI_API_KEYS.length;
 
-    // Detect if query contains Telugu characters
-    const isTelugu = /[\u0C00-\u0C7F]/.test(query);
+    // Enhanced Detection: Check Telugu Unicode OR keywords like "telugu" or "తెలుగు"
+    const isTelugu = /[\u0C00-\u0C7F]/.test(query) || query.toLowerCase().includes('telugu') || query.toLowerCase().includes('తెలుగు');
     const targetLangInstruction = isTelugu ? "Respond entirely in natural Telugu." : "Respond in English by default.";
 
     const searchEnginePrompt = `You are Ask Lucky, an expert universal search engine and AI tutor for Lekka Lab. Provide a complete, detailed, step-by-step verified answer, explanation, or recipe. ${targetLangInstruction} Format clearly with structured headings and bullet points: ${query}`;
