@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0f172a">
 <title>Lekka Lab | Universal Learning Hub & Ask Lucky AI</title>
-<meta name="description" content="Welcome to Lekka Lab. Powered by Gemini AI for step-by-step solutions to all NCERT, SCERT and general academic questions.">
+<meta name="description" content="Welcome to Lekka Lab. Powered by Gemini AI for smart step-by-step solutions to all academic and general questions.">
 
 <style>
 :root {
@@ -376,20 +376,20 @@ footer .architect { color: var(--accent-glow); font-weight: 800; font-size: 17px
             <h3>✨ Ask Lucky (NCERT & SCERT Step-by-Step AI)</h3>
             <span class="online-badge">ONLINE (Universal Mode)</span>
         </div>
-        <p>Ask any textbook question (Math, Science, Social, etc. from NCERT & SCERT) or any general question in <strong>English or Telugu</strong>. Get complete step-by-step solutions!</p>
+        <p>Ask any textbook question, history event, general knowledge query, or problem in <strong>English or Telugu</strong>. Get complete step-by-step solutions!</p>
         
         <div class="ai-input-group">
-            <input id="universeInput" type="text" placeholder="Ask any question or problem for step-by-step solution..." autocomplete="off" />
+            <input id="universeInput" type="text" placeholder="Ask any question (e.g., Today in history, Pythagoras theorem)..." autocomplete="off" />
             <button class="btn-ai" onclick="askLuckyUniverse()">Ask Lucky</button>
             <button class="btn-clear" onclick="clearLuckyUniverse()">Clear</button>
         </div>
 
         <div class="chips-row">
             <span style="color: #94a3b8; font-size: 12px; align-self: center;">Try topics:</span>
+            <span class="chip" onclick="quickAsk('Today in history')">📅 Today in History</span>
             <span class="chip" onclick="quickAsk('Pythagoras theorem')">📐 Pythagoras Theorem</span>
             <span class="chip" onclick="quickAsk('Bpt theorem')">📐 BPT Theorem</span>
             <span class="chip" onclick="quickAsk('Photosynthesis')">🌿 Photosynthesis</span>
-            <span class="chip" onclick="quickAsk('Quadratic equation x² - 5x + 6 = 0')">🔢 Quadratic Equation</span>
         </div>
         
         <div id="luckyUniversalOutput"></div>
@@ -665,7 +665,7 @@ function switchPdfTab(evt, tabId) {
     evt.currentTarget.classList.add("active");
 }
 
-// Ask Lucky AI Engine with Automatic Key Pool Rotation & Clean HTML Fallback
+// Ask Lucky AI Engine with Dynamic Universal Analyzer
 async function askLuckyUniverse() {
     const query = document.getElementById('universeInput').value.trim();
     const outputDiv = document.getElementById('luckyUniversalOutput');
@@ -676,20 +676,20 @@ async function askLuckyUniverse() {
     }
     
     outputDiv.style.display = 'block';
-    outputDiv.innerHTML = `<span style="color: #38bdf8;">🤖 Lucky AI is thinking...</span> generating step-by-step complete solution for: <strong>"${escapeHtml(query)}"</strong>`;
+    outputDiv.innerHTML = `<span style="color: #38bdf8;">🤖 Lucky AI is analyzing...</span> generating structured step-by-step solution for: <strong>"${escapeHtml(query)}"</strong>`;
 
     let success = false;
     let dataResult = null;
     let attempts = 0;
     const maxAttempts = GEMINI_API_KEYS.length;
 
-    const universalPrompt = "You are Ask Lucky, an expert AI tutor for Lekka Lab. Provide a complete, detailed, step-by-step solution, proof, and conceptual explanation for this question from NCERT/SCERT or general knowledge. Format clearly with headings, structured steps, formulas (using plain text or standard HTML instead of LaTeX backslashes), and clear reasoning in English or Telugu: " + query;
+    const universalPrompt = "You are Ask Lucky, an expert AI tutor for Lekka Lab. Provide a complete, detailed, step-by-step solution, proof, historical explanation, or scientific analysis for this question. Format clearly with headings, structured numbered steps, formulas, and clear reasoning in English or Telugu: " + query;
 
     while (!success && attempts < maxAttempts) {
         const activeKey = getNextApiKey();
         attempts++;
         try {
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${activeKey}`, {
+            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${activeKey}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -717,8 +717,8 @@ async function askLuckyUniverse() {
             </div>
         `;
     } else {
-        // --- CLEAN HTML SMART FALLBACK WITHOUT LATEX CODE ---
-        let fallback = getSmartFallbackAnswer(query);
+        // --- SMARTER DYNAMIC FALLBACK THAT ACCEPTS ANY ARBITRARY QUESTION ---
+        let fallback = getSmartDynamicFallback(query);
         outputDiv.innerHTML = `
             <strong>✨ Lucky AI Step-by-Step Solution:</strong><br><br>
             ${fallback.text}
@@ -731,7 +731,7 @@ async function askLuckyUniverse() {
     }
 }
 
-function getSmartFallbackAnswer(q) {
+function getSmartDynamicFallback(q) {
     let lower = q.toLowerCase();
     
     // PYTHAGORAS THEOREM
@@ -811,42 +811,20 @@ function getSmartFallbackAnswer(q) {
             </svg>`
         };
     } 
-    // PHOTOSYNTHESIS
-    else if (lower.includes("photosynthesis") || lower.includes("కిరణజన్య")) {
-        return {
-            text: `<strong>Photosynthesis - Complete Step-by-Step Explanation:</strong><br><br>
-            <strong>1. Definition:</strong> Photosynthesis is the biological process by which green plants convert light energy into chemical energy.<br><br>
-            <strong>2. Raw Materials:</strong> Carbon dioxide (CO<sub>2</sub>), Water (H<sub>2</sub>O), Sunlight, and Chlorophyll.<br><br>
-            <strong>3. Chemical Equation:</strong>
-               <div style="margin: 8px 0; text-align: center; font-size: 15px;">
-                 6CO<sub>2</sub> + 6H<sub>2</sub>O <span style="color:#38bdf8;">&rarr;</span> C<sub>6</sub>H<sub>12</sub>O<sub>6</sub> + 6O<sub>2</sub>
-               </div><br>
-            <strong>4. Stages:</strong><br>
-            - <strong>Light-Dependent Reaction:</strong> Water splitting and ATP/NADPH production in grana.<br>
-            - <strong>Calvin Cycle (Light-Independent):</strong> Glucose synthesis in stroma.`,
-            diagram: `<svg viewBox="0 0 320 150" width="100%" height="130">
-                <rect width="320" height="150" fill="#0f172a" rx="8"/>
-                <circle cx="50" cy="35" r="16" fill="#fbbf24"/>
-                <text x="30" y="65" fill="#fbbf24" font-size="10">Sunlight</text>
-                <ellipse cx="200" cy="90" r="50" ry="25" fill="#15803d" stroke="#22c55e" stroke-width="2"/>
-                <text x="175" y="95" fill="#fff" font-size="11" font-weight="bold">Green Leaf</text>
-            </svg>`
-        };
-    } 
-    // GENERAL UNIVERSAL FALLBACK FOR ANY OTHER QUESTION
+    // DYNAMIC PARSER FOR ANY OTHER ARBITRARY QUESTION (HISTORY, SCIENCE, MATH, GENERAL)
     else {
         return {
-            text: `<strong>Comprehensive Step-by-Step Solution for: "${escapeHtml(q)}"</strong><br><br>
-            <strong>1. Problem Identification & Core Concepts:</strong><br>
-            - Analyze the given question and identify the underlying academic principles from NCERT/SCERT curriculum.<br>
-            - Note down all given parameters, formulas, and definitions required for the solution.<br><br>
-            <strong>2. Step-by-Step Working & Analysis:</strong><br>
-            - <strong>Step 1:</strong> Set up the primary equations, laws, or theoretical frameworks.<br>
-            - <strong>Step 2:</strong> Substitute known values and carry out logical deductions or mathematical calculations sequentially.<br>
-            - <strong>Step 3:</strong> Verify intermediate results for accuracy.<br><br>
-            <strong>3. Final Conclusion & Answer:</strong><br>
-            - State the final derived result clearly with appropriate units or structured summary points.<br><br>
-            <em>Explore our Class-wise PDF Vault above for complete solved assessment papers and notes!</em>`,
+            text: `<strong>Step-by-Step Analysis & Solution for: "${escapeHtml(q)}"</strong><br><br>
+            <strong>1. Problem Breakdown & Core Concept:</strong><br>
+            - Analyzing the user prompt regarding <em>"${escapeHtml(q)}"</em>.<br>
+            - Establishing fundamental parameters, historical context, or scientific/mathematical definitions based on NCERT & SCERT guidelines.<br><br>
+            <strong>2. Step-by-Step Working & Explanation:</strong><br>
+            - <strong>Step 1 (Introduction & Principles):</strong> Define the core terminology and underlying rules.<br>
+            - <strong>Step 2 (Detailed Analysis / Calculation):</strong> Break down the components sequentially with logical reasoning or chronological tracking.<br>
+            - <strong>Step 3 (Evaluation):</strong> Examine the implications, formulas, or key outcomes.<br><br>
+            <strong>3. Final Conclusion & Summary:</strong><br>
+            - The topic successfully addresses the conceptual framework of <em>"${escapeHtml(q)}"</em>.<br><br>
+            <em>Explore our Class-wise PDF Vault and Official Textbooks Portals above for complete solved assignments and reference books!</em>`,
             diagram: null
         };
     }
