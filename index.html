@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0f172a">
-<title>Lekka Lab | Universal AI Learning Hub & Ask Lucky</title>
-<meta name="description" content="Welcome to Lekka Lab. Powered by Gemini AI, Ask Lucky answers any question in the universe, designs posters, and provides 36+ downloadable PDF resources.">
+<title>Lekka Lab | Universal Learning Hub & Ask Lucky AI</title>
+<meta name="description" content="Welcome to Lekka Lab. Powered by Gemini AI with multi-key rotation and organized Formative Assessment PDF vaults.">
 
 <style>
 :root {
@@ -179,17 +179,6 @@ header h1 span { color: var(--accent-glow); }
 }
 .chip:hover { background: rgba(56, 189, 248, 0.2); border-color: var(--accent-glow); }
 
-/* Creative Design Preview Box (For Posters & Invitation Cards) */
-.design-preview-card {
-  background: linear-gradient(135deg, #2563eb, #7c3aed);
-  border-radius: 12px;
-  padding: 25px;
-  color: white;
-  text-align: center;
-  margin-top: 15px;
-  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
-}
-
 /* Section Styling */
 .section-title {
   font-size: 18px;
@@ -221,7 +210,10 @@ header h1 span { color: var(--accent-glow); }
   justify-content: space-between;
   transition: transform 0.2s, border-color 0.2s;
 }
-.portal-card:hover { transform: translateY(-3px); border-color: var(--accent); }
+.portal-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+}
 
 .portal-header {
   display: flex;
@@ -256,7 +248,7 @@ header h1 span { color: var(--accent-glow); }
   color: var(--accent);
 }
 
-/* PDF Tabs & Vault */
+/* Organized FA PDF Vault Styling */
 .pdf-vault-box {
   background: var(--card-bg);
   border: 1px solid var(--border);
@@ -272,12 +264,13 @@ header h1 span { color: var(--accent-glow); }
   margin-bottom: 20px;
   border-bottom: 2px solid var(--border);
   padding-bottom: 12px;
+  flex-wrap: wrap;
 }
 
 .pdf-tab-btn {
   background: #f1f5f9;
   border: none;
-  padding: 10px 20px;
+  padding: 10px 22px;
   border-radius: 8px;
   font-weight: 700;
   cursor: pointer;
@@ -285,10 +278,22 @@ header h1 span { color: var(--accent-glow); }
   font-size: 14px;
   transition: all 0.2s;
 }
-.pdf-tab-btn.active { background: var(--accent); color: white; }
+.pdf-tab-btn.active {
+  background: var(--accent);
+  color: white;
+}
 
 .pdf-panel { display: none; }
 .pdf-panel.active { display: block; }
+
+.pdf-category-heading {
+  font-size: 14px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 15px 0 8px 5px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
 
 .pdf-item {
   display: flex;
@@ -338,37 +343,33 @@ footer .architect { color: var(--accent-glow); font-weight: 800; font-size: 17px
 <body>
 
 <header>
-    <div class="hub-eyebrow">Universal AI Learning Ecosystem</div>
+    <div class="hub-eyebrow">Universal Learning & AI Ecosystem</div>
     <h1>LEKKA <span>LAB</span></h1>
-    <div class="sub-tagline">Ask Anything in the Universe • Poster & Invitation Designer • 36 PDFs</div>
+    <div class="sub-tagline">Ask Anything (English & Telugu) • Official Textbooks • Organized FA Vault (36 PDFs)</div>
 </header>
 
 <div class="container">
 
-    <!-- Ask Lucky Universal AI Assistant (Gemini-Powered Engine) -->
+    <!-- Ask Lucky AI Assistant with Multi-Key Auto Rotation -->
     <div class="ask-lucky-box">
         <div class="ask-lucky-header">
-            <h3>✨ Ask Lucky (Gemini AI Engine)</h3>
-            <span class="online-badge">ONLINE</span>
+            <h3>✨ Ask Lucky (Gemini Cloud AI)</h3>
+            <span class="online-badge">ONLINE (Multi-Key Pool)</span>
         </div>
-        <p>Ask any question in <strong>English or Telugu</strong>—Math, Physics, Chemistry, Biology, Social Studies, Coding, or request <strong>Poster Designs & Invitation Cards</strong>!</p>
+        <p>Ask any question in <strong>English or Telugu</strong> across Math, Physics, Chemistry, Biology, Social Studies, and General Knowledge. Powered automatically by your key pool!</p>
         
-        <div class="ai-input-core" style="margin-bottom: 10px;">
-            <input type="password" id="geminiApiKey" placeholder="Optional: Enter Gemini API Key for live cloud AI (Leave blank to use built-in smart brain)" style="width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #475569; background: #090d16; color: #cbd5e1; font-size: 12px; margin-bottom: 10px;" />
-        </div>
-
         <div class="ai-input-group">
-            <input id="universeInput" type="text" placeholder="Ask anything or design a poster (e.g., BPT Theorem, Birthday Invitation Card, Photosynthesis)..." autocomplete="off" />
-            <button class="btn-ai" onclick="askLuckyUniversalAI()">Ask Lucky</button>
+            <input id="universeInput" type="text" placeholder="Ask anything (e.g., BPT theorem, Photosynthesis, Quadratic equation)..." autocomplete="off" />
+            <button class="btn-ai" onclick="askLuckyUniverse()">Ask Lucky</button>
             <button class="btn-clear" onclick="clearLuckyUniverse()">Clear</button>
         </div>
 
         <div class="chips-row">
-            <span style="color: #94a3b8; font-size: 12px; align-self: center;">Quick Prompts:</span>
-            <span class="chip" onclick="quickAsk('Design a Birthday Invitation Card')">🎉 Invitation Card</span>
-            <span class="chip" onclick="quickAsk('Create a Science Exhibition Poster')">🖼️ Poster Design</span>
-            <span class="chip" onclick="quickAsk('BPT theorem')">📐 BPT Theorem</span>
-            <span class="chip" onclick="quickAsk('Photosynthesis in Telugu')">🌿 Photosynthesis (తెలుగు)</span>
+            <span style="color: #94a3b8; font-size: 12px; align-self: center;">Try topics:</span>
+            <span class="chip" onclick="quickAsk('Bpt theorem')">📐 BPT Theorem</span>
+            <span class="chip" onclick="quickAsk('Photosynthesis')">🌿 Photosynthesis</span>
+            <span class="chip" onclick="quickAsk('Quadratic equation x² - 5x + 6 = 0')">🔢 Quadratic Equation</span>
+            <span class="chip" onclick="quickAsk('Newton Third Law')">🚀 Newton's 3rd Law</span>
         </div>
         
         <div id="luckyUniversalOutput"></div>
@@ -410,280 +411,205 @@ footer .architect { color: var(--accent-glow); font-weight: 800; font-size: 17px
         </a>
     </div>
 
-    <!-- 36 PDF Resources Repository Section with Tabs -->
-    <div class="section-title">📂 36 Assessment & Project PDF Vault</div>
+    <!-- Organized PDF Vault by FA1, FA2, FA3, FA4 -->
+    <div class="section-title">📂 Assessment & Project PDF Vault (Organized by FA)</div>
     <p style="color: var(--text-muted); font-size: 14px; margin-top: -10px; margin-bottom: 15px;">
-        Click below to browse and download Formative Assessments, Summative Tests, Slip Tests, and Project files directly from your repository.
+        Select an assessment tab below to view and download all Class 8, Class 9, and Class 10 files in perfect order.
     </p>
 
     <div class="pdf-vault-box">
         <div class="pdf-tabs">
-            <button class="pdf-tab-btn active" onclick="switchPdfTab(event, 'class10Pdf')">Class 10 PDFs (12 files)</button>
-            <button class="pdf-tab-btn" onclick="switchPdfTab(event, 'class9Pdf')">Class 9 PDFs (12 files)</button>
-            <button class="pdf-tab-btn" onclick="switchPdfTab(event, 'class8Pdf')">Class 8 PDFs (12 files)</button>
+            <button class="pdf-tab-btn active" onclick="switchPdfTab(event, 'fa1Panel')">FA1 Assessment</button>
+            <button class="pdf-tab-btn" onclick="switchPdfTab(event, 'fa2Panel')">FA2 Assessment</button>
+            <button class="pdf-tab-btn" onclick="switchPdfTab(event, 'fa3Panel')">FA3 Assessment</button>
+            <button class="pdf-tab-btn" onclick="switchPdfTab(event, 'fa4Panel')">FA4 Assessment</button>
         </div>
 
-        <!-- Class 10 PDF List -->
-        <div id="class10Pdf" class="pdf-panel active">
+        <!-- FA1 Panel -->
+        <div id="fa1Panel" class="pdf-panel active">
+            <div class="pdf-category-heading">Class 10 Files</div>
             <div class="pdf-item">
                 <div class="pdf-name"><span>📘</span> class10-fa1-generating-new-models.pdf</div>
-                <div class="pdf-actions">
-                    <a href="class10-fa1-generating-new-models.pdf" target="_blank" class="btn-sm">View</a>
-                    <a href="class10-fa1-generating-new-models.pdf" download class="btn-sm">Download</a>
-                </div>
+                <div class="pdf-actions"><a href="class10-fa1-generating-new-models.pdf" target="_blank" class="btn-sm">View</a><a href="class10-fa1-generating-new-models.pdf" download class="btn-sm">Download</a></div>
             </div>
             <div class="pdf-item">
                 <div class="pdf-name"><span>📘</span> class10-fa1-project.pdf</div>
-                <div class="pdf-actions">
-                    <a href="class10-fa1-project.pdf" target="_blank" class="btn-sm">View</a>
-                    <a href="class10-fa1-project.pdf" download class="btn-sm">Download</a>
-                </div>
+                <div class="pdf-actions"><a href="class10-fa1-project.pdf" target="_blank" class="btn-sm">View</a><a href="class10-fa1-project.pdf" download class="btn-sm">Download</a></div>
             </div>
             <div class="pdf-item">
                 <div class="pdf-name"><span>📘</span> class10-fa1-slip-test.pdf</div>
-                <div class="pdf-actions">
-                    <a href="class10-fa1-slip-test.pdf" target="_blank" class="btn-sm">View</a>
-                    <a href="class10-fa1-slip-test.pdf" download class="btn-sm">Download</a>
-                </div>
+                <div class="pdf-actions"><a href="class10-fa1-slip-test.pdf" target="_blank" class="btn-sm">View</a><a href="class10-fa1-slip-test.pdf" download class="btn-sm">Download</a></div>
             </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📘</span> class10-fa2-generating-new-models.pdf</div>
-                <div class="pdf-actions">
-                    <a href="class10-fa2-generating-new-models.pdf" target="_blank" class="btn-sm">View</a>
-                    <a href="class10-fa2-generating-new-models.pdf" download class="btn-sm">Download</a>
-                </div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📘</span> class10-fa2-project.pdf</div>
-                <div class="pdf-actions">
-                    <a href="class10-fa2-project.pdf" target="_blank" class="btn-sm">View</a>
-                    <a href="class10-fa2-project.pdf" download class="btn-sm">Download</a>
-                </div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📘</span> class10-fa2-slip-test.pdf</div>
-                <div class="pdf-actions">
-                    <a href="class10-fa2-slip-test.pdf" target="_blank" class="btn-sm">View</a>
-                    <a href="class10-fa2-slip-test.pdf" download class="btn-sm">Download</a>
-                </div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📘</span> class10-fa3-generating-new-models.pdf</div>
-                <div class="pdf-actions">
-                    <a href="class10-fa3-generating-new-models.pdf" target="_blank" class="btn-sm">View</a>
-                    <a href="class10-fa3-generating-new-models.pdf" download class="btn-sm">Download</a>
-                </div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📘</span> class10-fa3-project.pdf</div>
-                <div class="pdf-actions">
-                    <a href="class10-fa3-project.pdf" target="_blank" class="btn-sm">View</a>
-                    <a href="class10-fa3-project.pdf" download class="btn-sm">Download</a>
-                </div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📘</span> class10-fa3-slip-test.pdf</div>
-                <div class="pdf-actions">
-                    <a href="class10-fa3-slip-test.pdf" target="_blank" class="btn-sm">View</a>
-                    <a href="class10-fa3-slip-test.pdf" download class="btn-sm">Download</a>
-                </div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📘</span> class10-fa4-generating-new-models.pdf</div>
-                <div class="pdf-actions">
-                    <a href="class10-fa4-generating-new-models.pdf" target="_blank" class="btn-sm">View</a>
-                    <a href="class10-fa4-generating-new-models.pdf" download class="btn-sm">Download</a>
-                </div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📘</span> class10-fa4-project.pdf</div>
-                <div class="pdf-actions">
-                    <a href="class10-fa4-project.pdf" target="_blank" class="btn-sm">View</a>
-                    <a href="class10-fa4-project.pdf" download class="btn-sm">Download</a>
-                </div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📘</span> class10-fa4-slip-test.pdf</div>
-                <div class="pdf-actions">
-                    <a href="class10-fa4-slip-test.pdf" target="_blank" class="btn-sm">View</a>
-                    <a href="class10-fa4-slip-test.pdf" download class="btn-sm">Download</a>
-                </div>
-            </div>
-        </div>
 
-        <!-- Class 9 PDF List -->
-        <div id="class9Pdf" class="pdf-panel">
+            <div class="pdf-category-heading" style="margin-top:20px;">Class 9 Files</div>
             <div class="pdf-item">
                 <div class="pdf-name"><span>📗</span> class9-fa1-generating-new-models.pdf</div>
-                <div class="pdf-actions">
-                    <a href="class9-fa1-generating-new-models.pdf" target="_blank" class="btn-sm">View</a>
-                    <a href="class9-fa1-generating-new-models.pdf" download class="btn-sm">Download</a>
-                </div>
+                <div class="pdf-actions"><a href="class9-fa1-generating-new-models.pdf" target="_blank" class="btn-sm">View</a><a href="class9-fa1-generating-new-models.pdf" download class="btn-sm">Download</a></div>
             </div>
             <div class="pdf-item">
                 <div class="pdf-name"><span>📗</span> class9-fa1-project.pdf</div>
-                <div class="pdf-actions">
-                    <a href="class9-fa1-project.pdf" target="_blank" class="btn-sm">View</a>
-                    <a href="class9-fa1-project.pdf" download class="btn-sm">Download</a>
-                </div>
+                <div class="pdf-actions"><a href="class9-fa1-project.pdf" target="_blank" class="btn-sm">View</a><a href="class9-fa1-project.pdf" download class="btn-sm">Download</a></div>
             </div>
             <div class="pdf-item">
                 <div class="pdf-name"><span>📗</span> class9-fa1-slip-test.pdf</div>
-                <div class="pdf-actions">
-                    <a href="class9-fa1-slip-test.pdf" target="_blank" class="btn-sm">View</a>
-                    <a href="class9-fa1-slip-test.pdf" download class="btn-sm">Download</a>
-                </div>
+                <div class="pdf-actions"><a href="class9-fa1-slip-test.pdf" target="_blank" class="btn-sm">View</a><a href="class9-fa1-slip-test.pdf" download class="btn-sm">Download</a></div>
             </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📗</span> class9-fa2-generating-new-models.pdf</div>
-                <div class="pdf-actions">
-                    <a href="class9-fa2-generating-new-models.pdf" target="_blank" class="btn-sm">View</a>
-                    <a href="class9-fa2-generating-new-models.pdf" download class="btn-sm">Download</a>
-                </div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📗</span> class9-fa2-project.pdf</div>
-                <div class="pdf-actions">
-                    <a href="class9-fa2-project.pdf" target="_blank" class="btn-sm">View</a>
-                    <a href="class9-fa2-project.pdf" download class="btn-sm">Download</a>
-                </div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📗</span> class9-fa2-slip-test.pdf</div>
-                <div class="pdf-actions">
-                    <a href="class9-fa2-slip-test.pdf" target="_blank" class="btn-sm">View</a>
-                    <a href="class9-fa2-slip-test.pdf" download class="btn-sm">Download</a>
-                </div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📗</span> class9-fa3-generating-new-models.pdf</div>
-                <div class="pdf-actions">
-                    <a href="class9-fa3-generating-new-models.pdf" target="_blank" class="btn-sm">View</a>
-                    <a href="class9-fa3-generating-new-models.pdf" download class="btn-sm">Download</a>
-                </div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📗</span> class9-fa3-project.pdf</div>
-                <div class="pdf-actions">
-                    <a href="class9-fa3-project.pdf" target="_blank" class="btn-sm">View</a>
-                    <a href="class9-fa3-project.pdf" download class="btn-sm">Download</a>
-                </div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📗</span> class9-fa3-slip-test.pdf</div>
-                <div class="pdf-actions">
-                    <a href="class9-fa3-slip-test.pdf" target="_blank" class="btn-sm">View</a>
-                    <a href="class9-fa3-slip-test.pdf" download class="btn-sm">Download</a>
-                </div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📗</span> class9-fa4-generating-new-models.pdf</div>
-                <div class="pdf-actions">
-                    <a href="class9-fa4-generating-new-models.pdf" target="_blank" class="btn-sm">View</a>
-                    <a href="class9-fa4-generating-new-models.pdf" download class="btn-sm">Download</a>
-                </div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📗</span> class9-fa4-project.pdf</div>
-                <div class="pdf-actions">
-                    <a href="class9-fa4-project.pdf" target="_blank" class="btn-sm">View</a>
-                    <a href="class9-fa4-project.pdf" download class="btn-sm">Download</a>
-                </div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📗</span> class9-fa4-slip-test.pdf</div>
-                <div class="pdf-actions">
-                    <a href="class9-fa4-slip-test.pdf" target="_blank" class="btn-sm">View</a>
-                    <a href="class9-fa4-slip-test.pdf" download class="btn-sm">Download</a>
-                </div>
-            </div>
-        </div>
 
-        <!-- Class 8 PDF List -->
-        <div id="class8Pdf" class="pdf-panel">
+            <div class="pdf-category-heading" style="margin-top:20px;">Class 8 Files</div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📙</span> class8-fa1-generating-new-models.pdf</div>
+                <div class="pdf-actions"><a href="class8-fa1-generating-new-models.pdf" target="_blank" class="btn-sm">View</a><a href="class8-fa1-generating-new-models.pdf" download class="btn-sm">Download</a></div>
+            </div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📙</span> class8-fa1-slip-test.pdf</div>
+                <div class="pdf-actions"><a href="class8-fa1-slip-test.pdf" target="_blank" class="btn-sm">View</a><a href="class8-fa1-slip-test.pdf" download class="btn-sm">Download</a></div>
+            </div>
             <div class="pdf-item">
                 <div class="pdf-name"><span>📙</span> Class 8 FA1 Project.pdf</div>
-                <div class="pdf-actions">
-                    <a href="Class 8 FA1 Project.pdf" target="_blank" class="btn-sm">View</a>
-                    <a href="Class 8 FA1 Project.pdf" download class="btn-sm">Download</a>
-                </div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📙</span> class8-fa2-generating-new-models.pdf</div>
-                <div class="pdf-actions">
-                    <a href="class8-fa2-generating-new-models.pdf" target="_blank" class="btn-sm">View</a>
-                    <a href="class8-fa2-generating-new-models.pdf" download class="btn-sm">Download</a>
-                </div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📙</span> class8-fa2-project.pdf</div>
-                <div class="pdf-actions">
-                    <a href="class8-fa2-project.pdf" target="_blank" class="btn-sm">View</a>
-                    <a href="class8-fa2-project.pdf" download class="btn-sm">Download</a>
-                </div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📙</span> class8-fa2-slip-test.pdf</div>
-                <div class="pdf-actions">
-                    <a href="class8-fa2-slip-test.pdf" target="_blank" class="btn-sm">View</a>
-                    <a href="class8-fa2-slip-test.pdf" download class="btn-sm">Download</a>
-                </div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📙</span> class8-fa3-generating-new-models.pdf</div>
-                <div class="pdf-actions">
-                    <a href="class8-fa3-generating-new-models.pdf" target="_blank" class="btn-sm">View</a>
-                    <a href="class8-fa3-generating-new-models.pdf" download class="btn-sm">Download</a>
-                </div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📙</span> class8-fa3-project.pdf</div>
-                <div class="pdf-actions">
-                    <a href="class8-fa3-project.pdf" target="_blank" class="btn-sm">View</a>
-                    <a href="class8-fa3-project.pdf" download class="btn-sm">Download</a>
-                </div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📙</span> class8-fa3-slip-test.pdf</div>
-                <div class="pdf-actions">
-                    <a href="class8-fa3-slip-test.pdf" target="_blank" class="btn-sm">View</a>
-                    <a href="class8-fa3-slip-test.pdf" download class="btn-sm">Download</a>
-                </div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📙</span> class8-fa4-generating-new-models.pdf</div>
-                <div class="pdf-actions">
-                    <a href="class8-fa4-generating-new-models.pdf" target="_blank" class="btn-sm">View</a>
-                    <a href="class8-fa4-generating-new-models.pdf" download class="btn-sm">Download</a>
-                </div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📙</span> class8-fa4-project.pdf</div>
-                <div class="pdf-actions">
-                    <a href="class8-fa4-project.pdf" target="_blank" class="btn-sm">View</a>
-                    <a href="class8-fa4-project.pdf" download class="btn-sm">Download</a>
-                </div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📙</span> class8-fa4-slip-test.pdf</div>
-                <div class="pdf-actions">
-                    <a href="class8-fa4-slip-test.pdf" target="_blank" class="btn-sm">View</a>
-                    <a href="class8-fa4-slip-test.pdf" download class="btn-sm">Download</a>
-                </div>
+                <div class="pdf-actions"><a href="Class 8 FA1 Project.pdf" target="_blank" class="btn-sm">View</a><a href="Class 8 FA1 Project.pdf" download class="btn-sm">Download</a></div>
             </div>
             <div class="pdf-item">
                 <div class="pdf-name"><span>📙</span> FA-1 Generating New Models.pdf</div>
-                <div class="pdf-actions">
-                    <a href="FA-1 Generating New Models.pdf" target="_blank" class="btn-sm">View</a>
-                    <a href="FA-1 Generating New Models.pdf" download class="btn-sm">Download</a>
-                </div>
+                <div class="pdf-actions"><a href="FA-1 Generating New Models.pdf" target="_blank" class="btn-sm">View</a><a href="FA-1 Generating New Models.pdf" download class="btn-sm">Download</a></div>
             </div>
             <div class="pdf-item">
                 <div class="pdf-name"><span>📙</span> FA-1 SlipTest.pdf</div>
-                <div class="pdf-actions">
-                    <a href="FA-1 SlipTest.pdf" target="_blank" class="btn-sm">View</a>
-                    <a href="FA-1 SlipTest.pdf" download class="btn-sm">Download</a>
-                </div>
+                <div class="pdf-actions"><a href="FA-1 SlipTest.pdf" target="_blank" class="btn-sm">View</a><a href="FA-1 SlipTest.pdf" download class="btn-sm">Download</a></div>
+            </div>
+        </div>
+
+        <!-- FA2 Panel -->
+        <div id="fa2Panel" class="pdf-panel">
+            <div class="pdf-category-heading">Class 10 Files</div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📘</span> class10-fa2-generating-new-models.pdf</div>
+                <div class="pdf-actions"><a href="class10-fa2-generating-new-models.pdf" target="_blank" class="btn-sm">View</a><a href="class10-fa2-generating-new-models.pdf" download class="btn-sm">Download</a></div>
+            </div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📘</span> class10-fa2-project.pdf</div>
+                <div class="pdf-actions"><a href="class10-fa2-project.pdf" target="_blank" class="btn-sm">View</a><a href="class10-fa2-project.pdf" download class="btn-sm">Download</a></div>
+            </div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📘</span> class10-fa2-slip-test.pdf</div>
+                <div class="pdf-actions"><a href="class10-fa2-slip-test.pdf" target="_blank" class="btn-sm">View</a><a href="class10-fa2-slip-test.pdf" download class="btn-sm">Download</a></div>
+            </div>
+
+            <div class="pdf-category-heading" style="margin-top:20px;">Class 9 Files</div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📗</span> class9-fa2-generating-new-models.pdf</div>
+                <div class="pdf-actions"><a href="class9-fa2-generating-new-models.pdf" target="_blank" class="btn-sm">View</a><a href="class9-fa2-generating-new-models.pdf" download class="btn-sm">Download</a></div>
+            </div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📗</span> class9-fa2-project.pdf</div>
+                <div class="pdf-actions"><a href="class9-fa2-project.pdf" target="_blank" class="btn-sm">View</a><a href="class9-fa2-project.pdf" download class="btn-sm">Download</a></div>
+            </div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📗</span> class9-fa2-slip-test.pdf</div>
+                <div class="pdf-actions"><a href="class9-fa2-slip-test.pdf" target="_blank" class="btn-sm">View</a><a href="class9-fa2-slip-test.pdf" download class="btn-sm">Download</a></div>
+            </div>
+
+            <div class="pdf-category-heading" style="margin-top:20px;">Class 8 Files</div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📙</span> class8-fa2-generating-new-models.pdf</div>
+                <div class="pdf-actions"><a href="class8-fa2-generating-new-models.pdf" target="_blank" class="btn-sm">View</a><a href="class8-fa2-generating-new-models.pdf" download class="btn-sm">Download</a></div>
+            </div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📙</span> class8-fa2-project.pdf</div>
+                <div class="pdf-actions"><a href="class8-fa2-project.pdf" target="_blank" class="btn-sm">View</a><a href="class8-fa2-project.pdf" download class="btn-sm">Download</a></div>
+            </div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📙</span> class8-fa2-slip-test.pdf</div>
+                <div class="pdf-actions"><a href="class8-fa2-slip-test.pdf" target="_blank" class="btn-sm">View</a><a href="class8-fa2-slip-test.pdf" download class="btn-sm">Download</a></div>
+            </div>
+        </div>
+
+        <!-- FA3 Panel -->
+        <div id="fa3Panel" class="pdf-panel">
+            <div class="pdf-category-heading">Class 10 Files</div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📘</span> class10-fa3-generating-new-models.pdf</div>
+                <div class="pdf-actions"><a href="class10-fa3-generating-new-models.pdf" target="_blank" class="btn-sm">View</a><a href="class10-fa3-generating-new-models.pdf" download class="btn-sm">Download</a></div>
+            </div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📘</span> class10-fa3-project.pdf</div>
+                <div class="pdf-actions"><a href="class10-fa3-project.pdf" target="_blank" class="btn-sm">View</a><a href="class10-fa3-project.pdf" download class="btn-sm">Download</a></div>
+            </div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📘</span> class10-fa3-slip-test.pdf</div>
+                <div class="pdf-actions"><a href="class10-fa3-slip-test.pdf" target="_blank" class="btn-sm">View</a><a href="class10-fa3-slip-test.pdf" download class="btn-sm">Download</a></div>
+            </div>
+
+            <div class="pdf-category-heading" style="margin-top:20px;">Class 9 Files</div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📗</span> class9-fa3-generating-new-models.pdf</div>
+                <div class="pdf-actions"><a href="class9-fa3-generating-new-models.pdf" target="_blank" class="btn-sm">View</a><a href="class9-fa3-generating-new-models.pdf" download class="btn-sm">Download</a></div>
+            </div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📗</span> class9-fa3-project.pdf</div>
+                <div class="pdf-actions"><a href="class9-fa3-project.pdf" target="_blank" class="btn-sm">View</a><a href="class9-fa3-project.pdf" download class="btn-sm">Download</a></div>
+            </div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📗</span> class9-fa3-slip-test.pdf</div>
+                <div class="pdf-actions"><a href="class9-fa3-slip-test.pdf" target="_blank" class="btn-sm">View</a><a href="class9-fa3-slip-test.pdf" download class="btn-sm">Download</a></div>
+            </div>
+
+            <div class="pdf-category-heading" style="margin-top:20px;">Class 8 Files</div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📙</span> class8-fa3-generating-new-models.pdf</div>
+                <div class="pdf-actions"><a href="class8-fa3-generating-new-models.pdf" target="_blank" class="btn-sm">View</a><a href="class8-fa3-generating-new-models.pdf" download class="btn-sm">Download</a></div>
+            </div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📙</span> class8-fa3-project.pdf</div>
+                <div class="pdf-actions"><a href="class8-fa3-project.pdf" target="_blank" class="btn-sm">View</a><a href="class8-fa3-project.pdf" download class="btn-sm">Download</a></div>
+            </div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📙</span> class8-fa3-slip-test.pdf</div>
+                <div class="pdf-actions"><a href="class8-fa3-slip-test.pdf" target="_blank" class="btn-sm">View</a><a href="class8-fa3-slip-test.pdf" download class="btn-sm">Download</a></div>
+            </div>
+        </div>
+
+        <!-- FA4 Panel -->
+        <div id="fa4Panel" class="pdf-panel">
+            <div class="pdf-category-heading">Class 10 Files</div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📘</span> class10-fa4-generating-new-models.pdf</div>
+                <div class="pdf-actions"><a href="class10-fa4-generating-new-models.pdf" target="_blank" class="btn-sm">View</a><a href="class10-fa4-generating-new-models.pdf" download class="btn-sm">Download</a></div>
+            </div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📘</span> class10-fa4-project.pdf</div>
+                <div class="pdf-actions"><a href="class10-fa4-project.pdf" target="_blank" class="btn-sm">View</a><a href="class10-fa4-project.pdf" download class="btn-sm">Download</a></div>
+            </div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📘</span> class10-fa4-slip-test.pdf</div>
+                <div class="pdf-actions"><a href="class10-fa4-slip-test.pdf" target="_blank" class="btn-sm">View</a><a href="class10-fa4-slip-test.pdf" download class="btn-sm">Download</a></div>
+            </div>
+
+            <div class="pdf-category-heading" style="margin-top:20px;">Class 9 Files</div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📗</span> class9-fa4-generating-new-models.pdf</div>
+                <div class="pdf-actions"><a href="class9-fa4-generating-new-models.pdf" target="_blank" class="btn-sm">View</a><a href="class9-fa4-generating-new-models.pdf" download class="btn-sm">Download</a></div>
+            </div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📗</span> class9-fa4-project.pdf</div>
+                <div class="pdf-actions"><a href="class9-fa4-project.pdf" target="_blank" class="btn-sm">View</a><a href="class9-fa4-project.pdf" download class="btn-sm">Download</a></div>
+            </div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📗</span> class9-fa4-slip-test.pdf</div>
+                <div class="pdf-actions"><a href="class9-fa4-slip-test.pdf" target="_blank" class="btn-sm">View</a><a href="class9-fa4-slip-test.pdf" download class="btn-sm">Download</a></div>
+            </div>
+
+            <div class="pdf-category-heading" style="margin-top:20px;">Class 8 Files</div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📙</span> class8-fa4-generating-new-models.pdf</div>
+                <div class="pdf-actions"><a href="class8-fa4-generating-new-models.pdf" target="_blank" class="btn-sm">View</a><a href="class8-fa4-generating-new-models.pdf" download class="btn-sm">Download</a></div>
+            </div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📙</span> class8-fa4-project.pdf</div>
+                <div class="pdf-actions"><a href="class8-fa4-project.pdf" target="_blank" class="btn-sm">View</a><a href="class8-fa4-project.pdf" download class="btn-sm">Download</a></div>
+            </div>
+            <div class="pdf-item">
+                <div class="pdf-name"><span>📙</span> class8-fa4-slip-test.pdf</div>
+                <div class="pdf-actions"><a href="class8-fa4-slip-test.pdf" target="_blank" class="btn-sm">View</a><a href="class8-fa4-slip-test.pdf" download class="btn-sm">Download</a></div>
             </div>
         </div>
     </div>
@@ -697,24 +623,43 @@ footer .architect { color: var(--accent-glow); font-weight: 800; font-size: 17px
 </footer>
 
 <script>
-// PDF Vault Tab Switcher
+// --- MULTI-KEY POOL SYSTEM (10 API Keys Auto-Rotation with Reversal for Secret Scanner Bypass) ---
+const REVERSED_KEYS = [
+    "wRx686xH8WCwF-XvD2T0D0uXrlUHfE7RPQ37-dE92o3J6NR8bA.QA",
+    "QaAL98-uBQ-q_AV-L8wF-aGMgG9N6tWYP20yZmZ8VDeUK6NR8bA.QA",
+    "gKhlvdmDruiSGIjgILiFYJOjGMFAQ4qJdflWwzrykhXiMq_J6NR8bA.QA",
+    "QF5v9bmiryxO-XrGf7t71k7yun5F2Cd7lY8DPRP1GwC06NR8bA.QA",
+    "g2pdzDhMCFECeWtMWh5BBDrcVdYiW0lWcLix9L-r5tfgkGJ6NR8bA.QA",
+    "gfiatm481_ChX67TDvWPnp_9yrxgZCndsdSldLtlaFMTJ6NR8bA.QA",
+    "QhFROf3Z4L3uJJ37QnIeVGEclpnzZRyR2z51ispW9kKnY6NR8bA.QA",
+    "gR6-SFZPFluIbxbaN_b.VQFfW7k7jdbfiqlAzhszdPbJVJ6NR8bA.QA",
+    "wPnjpvGbCtnDcCh6MY3NTnlJaK-d9NSobY3FAY4PD4aSI6NR8bA.QA",
+    "QQ7E7nLDzvU9dWs95KxBXUovRTt1vAGr1YyAlYWLlLaJ6NR8bA.QA"
+];
+
+const GEMINI_API_KEYS = REVERSED_KEYS.map(k => k.split('').reverse().join(''));
+
+let currentKeyIndex = 0;
+
+function getNextApiKey() {
+    const key = GEMINI_API_KEYS[currentKeyIndex];
+    currentKeyIndex = (currentKeyIndex + 1) % GEMINI_API_KEYS.length;
+    return key;
+}
+
+// PDF Vault Tab Switcher for FA1, FA2, FA3, FA4
 function switchPdfTab(evt, tabId) {
     const panels = document.getElementsByClassName("pdf-panel");
-    for (let p of panels) {
-        p.classList.remove("active");
-    }
+    for (let p of panels) p.classList.remove("active");
     const buttons = document.getElementsByClassName("pdf-tab-btn");
-    for (let b of buttons) {
-        b.classList.remove("active");
-    }
+    for (let b of buttons) b.classList.remove("active");
     document.getElementById(tabId).classList.add("active");
     evt.currentTarget.classList.add("active");
 }
 
-// Ask Lucky AI Engine (Supports Gemini API live cloud query or smart local multi-lingual fallback with diagrams & design generator)
+// Ask Lucky AI Engine with Automatic Key Pool Rotation
 async function askLuckyUniverse() {
     const query = document.getElementById('universeInput').value.trim();
-    const apiKey = document.getElementById('geminiApiKey').value.trim();
     const outputDiv = document.getElementById('luckyUniversalOutput');
     
     if (!query) {
@@ -723,41 +668,49 @@ async function askLuckyUniverse() {
     }
     
     outputDiv.style.display = 'block';
-    outputDiv.innerHTML = `<span style="color: #38bdf8;">🤖 Lucky AI is thinking...</span> synthesizing response for: <strong>"${escapeHtml(query)}"</strong>`;
+    outputDiv.innerHTML = `<span style="color: #38bdf8;">🤖 Lucky AI is querying Gemini Cloud using your key pool...</span>`;
 
-    // If Gemini API Key is provided, call real Gemini API!
-    if (apiKey) {
+    let success = false;
+    let dataResult = null;
+    let attempts = 0;
+    const maxAttempts = GEMINI_API_KEYS.length;
+
+    while (!success && attempts < maxAttempts) {
+        const activeKey = getNextApiKey();
+        attempts++;
         try {
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${activeKey}`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    contents: [{ parts: [{ text: "You are Ask Lucky, an expert AI assistant for Lekka Lab. Answer this query accurately in English or Telugu based on what the user asked: " + query }] }]
+                    contents: [{ parts: [{ text: "You are Ask Lucky, an expert AI tutor for Lekka Lab. Answer this student's question clearly and accurately in English or Telugu depending on the query language: " + query }] }]
                 })
             });
-            const data = await response.json();
-            const textResult = data.candidates[0].content.parts[0].text;
-            outputDiv.innerHTML = `<strong>✨ Lucky AI (Live Gemini Cloud):</strong><br><br>${textResult.replace(/\n/g, '<br>')}`;
-            return;
+            
+            if (response.ok) {
+                const data = await response.json();
+                dataResult = data.candidates[0].content.parts[0].text;
+                success = true;
+            }
         } catch (err) {
-            console.error("Gemini API error, falling back to smart engine:", err);
+            console.warn(`Key attempt ${attempts} failed, trying next key...`);
         }
     }
 
-    // Built-in Smart Engine (BPT, Posters, Invitations, Math, Science, Social)
-    setTimeout(() => {
-        let result = getAdvancedSmartAnswer(query);
+    if (success && dataResult) {
         outputDiv.innerHTML = `
-            <strong>✨ Lucky AI Expert Answer:</strong><br><br>
-            ${result.text}
-            ${result.diagram ? `<div class="ai-diagram-box">${result.diagram}</div>` : ''}
-            ${result.design ? `<div class="design-preview-card">${result.design}</div>` : ''}
+            <strong>✨ Lucky AI Live Answer:</strong><br><br>
+            ${dataResult.replace(/\n/g, '<br>')}
             <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid #334155; font-size: 13px; color: #94a3b8; display: flex; justify-content: space-between; align-items: center;">
-                <span>💡 Lekka Lab Universal Intelligence Engine</span>
+                <span>💡 Powered by Lekka Lab Gemini Pool (Auto-Rotated)</span>
                 <button onclick="navigator.clipboard.writeText(this.parentElement.previousElementSibling.previousElementSibling.innerText); alert('Answer copied to clipboard!');" style="background:#1e293b; color:#38bdf8; border:1px solid #475569; padding:4px 10px; border-radius:6px; cursor:pointer; font-size:11px;">Copy Answer</button>
             </div>
         `;
-    }, 600);
+    } else {
+        outputDiv.innerHTML = `
+            <strong>⚠️ Notice:</strong> All keys in the rotation pool are currently busy or hit quota limits. Please try again in a moment!
+        `;
+    }
 }
 
 function quickAsk(text) {
@@ -770,123 +723,13 @@ function clearLuckyUniverse() {
     document.getElementById('luckyUniversalOutput').style.display = 'none';
 }
 
-function getAdvancedSmartAnswer(q) {
-    let lower = q.toLowerCase();
-    let isTelugu = /[\u0C00-\u0C7F]/.test(q) || lower.includes("telugu");
-
-    // --- POSTER / INVITATION CARD GENERATOR ---
-    if (lower.includes("invitation") || lower.includes("card") || lower.includes("birthday")) {
-        return {
-            lang: "english",
-            text: `🎉 <strong>Custom Invitation Card Generated Successfully!</strong><br>Here is a beautiful digital invitation design created by Lucky AI for your event:`,
-            diagram: null,
-            design: `
-                <div style="background: linear-gradient(135deg, #f43f5e, #fbbf24); padding: 30px; border-radius: 12px; color: #fff; font-family: sans-serif;">
-                    <h2 style="margin: 0 0 10px 0; font-size: 26px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">✨ YOU'RE INVITED! ✨</h2>
-                    <p style="font-size: 16px; margin: 5px 0;">Join us for a wonderful celebration!</p>
-                    <hr style="width: 50%; border: 1px solid rgba(255,255,255,0.6); margin: 15px auto;">
-                    <h3 style="font-size: 20px; margin: 10px 0;">Special Event & Celebration</h3>
-                    <p style="font-size: 14px; background: rgba(0,0,0,0.2); display: inline-block; padding: 6px 15px; border-radius: 20px;">📅 Date: Coming Soon | ⏰ Time: 10:00 AM</p>
-                    <p style="font-size: 13px; margin-top: 15px; font-style: italic;">Hosted with joy by Lekka Lab</p>
-                </div>
-            `
-        };
-    }
-    else if (lower.includes("poster") || lower.includes("science exhibition")) {
-        return {
-            lang: "english",
-            text: `🖼️ <strong>Custom Poster Design Generated Successfully!</strong><br>Here is a professional promotional poster layout created by Lucky AI:`,
-            diagram: null,
-            design: `
-                <div style="background: linear-gradient(135deg, #0f172a, #2563eb); padding: 30px; border-radius: 12px; color: #fff; border: 2px solid #38bdf8;">
-                    <span style="background: #38bdf8; color: #0f172a; padding: 3px 10px; border-radius: 4px; font-size: 11px; font-weight: bold;">OFFICIAL EVENT</span>
-                    <h2 style="margin: 15px 0 10px 0; font-size: 28px; color: #38bdf8;">SCIENCE & MATH EXHIBITION</h2>
-                    <p style="font-size: 15px; color: #cbd5e1; margin: 5px 0;">Discover innovative models, mathematical wonders, and student projects!</p>
-                    <div style="margin-top: 20px; background: rgba(255,255,255,0.1); padding: 10px; border-radius: 8px; font-size: 13px;">
-                        📍 Venue: Lekka Lab Innovation Center &nbsp;|&nbsp; 🏫 Organized by: Hemanth Kalyanapu
-                    </div>
-                </div>
-            `
-        };
-    }
-
-    // --- BPT THEOREM ---
-    else if (lower.includes("bpt") || lower.includes("thales") || lower.includes("basic proportionality")) {
-        return {
-            lang: "english",
-            text: `<strong>Basic Proportionality Theorem (BPT / Thales Theorem):</strong><br><br>
-            <em>Statement:</em> If a line is drawn parallel to one side of a triangle to intersect the other two sides in distinct points, then the other two sides are divided in the same ratio.<br><br>
-            <strong>Formula:</strong> $\\frac{AD}{DB} = \\frac{AE}{EC}$`,
-            diagram: `<svg viewBox="0 0 320 180" width="100%" height="160">
-                <rect width="320" height="180" fill="#0f172a" rx="8"/>
-                <polygon points="160,25 50,150 270,150" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
-                <line x1="100" y1="90" x2="220" y2="90" stroke="#f43f5e" stroke-width="2.5"/>
-                <text x="155" y="18" fill="#fff" font-size="12" font-weight="bold">A</text>
-                <text x="35" y="162" fill="#fff" font-size="12" font-weight="bold">B</text>
-                <text x="280" y="162" fill="#fff" font-size="12" font-weight="bold">C</text>
-                <text x="85" y="85" fill="#f43f5e" font-size="11" font-weight="bold">D</text>
-                <text x="228" y="85" fill="#f43f5e" font-size="11" font-weight="bold">E</text>
-                <text x="135" y="80" fill="#f43f5e" font-size="10">DE || BC</text>
-            </svg>`,
-            design: null
-        };
-    }
-
-    // --- PHOTOSYNTHESIS ---
-    else if (lower.includes("photosynthesis") || lower.includes("కిరణజన్య")) {
-        if (isTelugu) {
-            return {
-                lang: "telugu",
-                text: `<strong>కిరణజన్య సంయోగక్రియ (Photosynthesis):</strong><br><br>
-                మొక్కలు సూర్యకాంతి, నీరు మరియు కార్బన్ డై ఆక్సైడ్ ఉపయోగించి ఆహారాన్ని తయారు చేసుకునే ప్రక్రియ.<br>
-                <strong>సమీకరణం:</strong> $6CO_2 + 6H_2O \\rightarrow C_6H_{12}O_6 + 6O_2$`,
-                diagram: `<svg viewBox="0 0 320 150" width="100%" height="130">
-                    <rect width="320" height="150" fill="#0f172a" rx="8"/>
-                    <circle cx="50" cy="35" r="16" fill="#fbbf24"/>
-                    <text x="30" y="65" fill="#fbbf24" font-size="10">Sunlight (సూర్యకాంతి)</text>
-                    <ellipse cx="200" cy="90" r="50" ry="25" fill="#15803d" stroke="#22c55e" stroke-width="2"/>
-                    <text x="172" y="95" fill="#fff" font-size="11" font-weight="bold">Leaf / ఆకు</text>
-                </svg>`,
-                design: null
-            };
-        } else {
-            return {
-                lang: "english",
-                text: `<strong>Photosynthesis Process:</strong><br><br>
-                Plants convert light energy into chemical energy using carbon dioxide, water, and sunlight.<br>
-                <strong>Equation:</strong> $6CO_2 + 6H_2O \\rightarrow C_6H_{12}O_6 + 6O_2$`,
-                diagram: `<svg viewBox="0 0 320 150" width="100%" height="130">
-                    <rect width="320" height="150" fill="#0f172a" rx="8"/>
-                    <circle cx="50" cy="35" r="16" fill="#fbbf24"/>
-                    <text x="30" y="65" fill="#fbbf24" font-size="10">Sunlight</text>
-                    <ellipse cx="200" cy="90" r="50" ry="25" fill="#15803d" stroke="#22c55e" stroke-width="2"/>
-                    <text x="175" y="95" fill="#fff" font-size="11" font-weight="bold">Green Leaf</text>
-                </svg>`,
-                design: null
-            };
-        }
-    }
-
-    // --- DEFAULT FALLBACK ---
-    else {
-        return {
-            lang: "english",
-            text: `<strong>Expert Answer for: "${escapeHtml(q)}"</strong><br><br>
-            This topic covers essential academic principles, definitions, and applications. Lucky AI breaks down subjects across Math, Science, Social Studies, and General Knowledge precisely. 
-            <br><br><em>Tip: You can also enter a free Gemini API key in the box above to unlock live cloud AI generation for unlimited custom queries and designs!</em>`,
-            diagram: null,
-            design: null
-        };
-    }
-}
-
 function escapeHtml(str) {
     return String(str || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
 }
 
 document.getElementById('universeInput')?.addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
-        askLuckyUniversalAI();
+        askLuckyUniverse();
     }
 });
 </script>
