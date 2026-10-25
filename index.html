@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0f172a">
 <title>Lekka Lab | Universal Search & Learning Hub</title>
-<meta name="description" content="Welcome to Lekka Lab. Powered by advanced universal search engine for precise step-by-step solutions to any query in English and Telugu.">
+<meta name="description" content="Welcome to Lekka Lab. Powered by advanced universal AI search engine for precise step-by-step solutions to any query in English and Telugu.">
 
 <style>
 :root {
@@ -109,8 +109,30 @@ header h1 span { color: var(--accent-glow); }
 .ask-lucky-box p {
   color: #cbd5e1;
   font-size: 14px;
-  margin-bottom: 18px;
+  margin-bottom: 15px;
 }
+
+.api-key-row {
+  margin-bottom: 15px;
+  background: #090d16;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #334155;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.api-key-row input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #38bdf8;
+  font-size: 13px;
+  outline: none;
+}
+
+.api-key-row input::placeholder { color: #64748b; }
 
 .ai-input-group {
   display: flex;
@@ -159,26 +181,6 @@ header h1 span { color: var(--accent-glow); }
   line-height: 1.8;
   color: #f1f5f9;
 }
-
-.ai-diagram-box {
-  background: #1e293b;
-  border: 1px solid #475569;
-  border-radius: 10px;
-  padding: 15px;
-  margin: 15px 0;
-  text-align: center;
-}
-.ai-diagram-box svg { max-width: 100%; height: auto; }
-
-.math-frac {
-  display: inline-block;
-  vertical-align: middle;
-  text-align: center;
-  font-size: 15px;
-  margin: 0 3px;
-}
-.math-frac > span { display: block; padding: 0 4px; }
-.math-num { border-bottom: 1.5px solid #38bdf8; }
 
 .chips-row {
   display: flex;
@@ -370,23 +372,29 @@ footer .architect { color: var(--accent-glow); font-weight: 800; font-size: 17px
 
 <div class="container">
 
-    <!-- Ask Lucky Search Engine Box -->
+    <!-- Ask Lucky AI Engine Box -->
     <div class="ask-lucky-box">
         <div class="ask-lucky-header">
-            <h3>✨ Ask Lucky (Universal Search & AI Engine)</h3>
-            <span class="online-badge">ONLINE (Smart Search)</span>
+            <h3>✨ Ask Lucky (Universal AI Engine)</h3>
+            <span class="online-badge">ONLINE (ChatGPT / Gemini Mode)</span>
         </div>
-        <p>Search any topic, recipe, historical event, or scientific concept in <strong>English or Telugu</strong>. Get instant, precise answers!</p>
+        <p>Ask any question, diagram explanation, or topic in <strong>English or Telugu</strong>. Get instant, precise step-by-step answers!</p>
         
+        <!-- API Key Setting Box (Saves in browser so you never need to edit code again) -->
+        <div class="api-key-row">
+            <span style="font-size: 12px; color: #94a3b8; white-space: nowrap;">🔑 Gemini API Key:</span>
+            <input id="apiKeyInput" type="password" placeholder="Paste your Gemini API key here (saved automatically)..." onchange="saveApiKey(this.value)" />
+        </div>
+
         <div class="ai-input-group">
-            <input id="universeInput" type="text" placeholder="Search anything (e.g., Making ravva laddu in Telugu, Pythagoras theorem)..." autocomplete="off" />
-            <button class="btn-ai" onclick="askLuckyUniverse()">Search</button>
+            <input id="universeInput" type="text" placeholder="Ask anything (e.g., Heart diagram and explanation, Pythagoras theorem)..." autocomplete="off" />
+            <button class="btn-ai" onclick="askLuckyUniverse()">Ask Lucky</button>
             <button class="btn-clear" onclick="clearLuckyUniverse()">Clear</button>
         </div>
 
         <div class="chips-row">
             <span style="color: #94a3b8; font-size: 12px; align-self: center;">Quick Search:</span>
-            <span class="chip" onclick="quickAsk('Making ravva laddu in Telugu')">🍬 Ravva Laddu (Telugu)</span>
+            <span class="chip" onclick="quickAsk('Heart diagram and explanation in brief')">❤️ Human Heart</span>
             <span class="chip" onclick="quickAsk('Today in history')">📅 Today in History</span>
             <span class="chip" onclick="quickAsk('Pythagoras theorem')">📐 Pythagoras Theorem</span>
         </div>
@@ -630,28 +638,17 @@ footer .architect { color: var(--accent-glow); font-weight: 800; font-size: 17px
 </footer>
 
 <script>
-// --- MULTI-KEY POOL SYSTEM (10 API Keys Auto-Rotation with Reversal for Secret Scanner Bypass) ---
-const REVERSED_KEYS = [
-    "wRx686xH8WCwF-XvD2T0D0uXrlUHfE7RPQ37-dE92o3J6NR8bA.QA",
-    "QaAL98-uBQ-q_AV-L8wF-aGMgG9N6tWYP20yZmZ8VDeUK6NR8bA.QA",
-    "gKhlvdmDruiSGIjgILiFYJOjGMFAQ4qJdflWwzrykhXiMq_J6NR8bA.QA",
-    "QF5v9bmiryxO-XrGf7t71k7yun5F2Cd7lY8DPRP1GwC06NR8bA.QA",
-    "g2pdzDhMCFECeWtMWh5BBDrcVdYiW0lWcLix9L-r5tfgkGJ6NR8bA.QA",
-    "gfiatm481_ChX67TDvWPnp_9yrxgZCndsdSldLtlaFMTJ6NR8bA.QA",
-    "QhFROf3Z4L3uJJ37QnIeVGEclpnzZRyR2z51ispW9kKnY6NR8bA.QA",
-    "gR6-SFZPFluIbxbaN_b.VQFfW7k7jdbfiqlAzhszdPbJVJ6NR8bA.QA",
-    "wPnjpvGbCtnDcCh6MY3NTnlJaK-d9NSobY3FAY4PD4aSI6NR8bA.QA",
-    "QQ7E7nLDzvU9dWs95KxBXUovRTt1vAGr1YyAlYWLlLaJ6NR8bA.QA"
-];
+// Load saved API key on startup
+window.addEventListener('DOMContentLoaded', () => {
+    const savedKey = localStorage.getItem('lekka_gemini_api_key');
+    if (savedKey) {
+        document.getElementById('apiKeyInput').value = savedKey;
+    }
+});
 
-const GEMINI_API_KEYS = REVERSED_KEYS.map(k => k.split('').reverse().join(''));
-
-let currentKeyIndex = 0;
-
-function getNextApiKey() {
-    const key = GEMINI_API_KEYS[currentKeyIndex];
-    currentKeyIndex = (currentKeyIndex + 1) % GEMINI_API_KEYS.length;
-    return key;
+function saveApiKey(val) {
+    localStorage.setItem('lekka_gemini_api_key', val.trim());
+    alert("API Key saved successfully in your browser! You will never need to edit code again.");
 }
 
 // PDF Vault Tab Switcher for Class Buttons
@@ -664,190 +661,57 @@ function switchPdfTab(evt, tabId) {
     evt.currentTarget.classList.add("active");
 }
 
-// Ask Lucky AI Engine with Default English & Smart Telugu Keyword Detection
+// Ask Lucky AI Engine with Live Gemini Connection & Browser API Key
 async function askLuckyUniverse() {
     const query = document.getElementById('universeInput').value.trim();
+    const apiKey = document.getElementById('apiKeyInput').value.trim();
     const outputDiv = document.getElementById('luckyUniversalOutput');
     
     if (!query) {
         alert("Please enter a question or topic to search.");
         return;
     }
+
+    if (!apiKey) {
+        alert("Please enter your Google Gemini API Key in the box above! (You can get a free key from Google AI Studio).");
+        document.getElementById('apiKeyInput').focus();
+        return;
+    }
     
     outputDiv.style.display = 'block';
-    outputDiv.innerHTML = `<span style="color: #38bdf8;">🔍 Searching & Analyzing...</span> generating step-by-step solution for: <strong>"${escapeHtml(query)}"</strong>`;
+    outputDiv.innerHTML = `<span style="color: #38bdf8;">🤖 Ask Lucky is thinking...</span> generating complete step-by-step solution for: <strong>"${escapeHtml(query)}"</strong>`;
 
-    let success = false;
-    let dataResult = null;
-    let attempts = 0;
-    const maxAttempts = GEMINI_API_KEYS.length;
-
-    // Enhanced Detection: Check Telugu Unicode OR keywords like "telugu" or "తెలుగు"
     const isTelugu = /[\u0C00-\u0C7F]/.test(query) || query.toLowerCase().includes('telugu') || query.toLowerCase().includes('తెలుగు');
-    const targetLangInstruction = isTelugu ? "Respond entirely in natural Telugu." : "Respond in English by default.";
+    const targetLang = isTelugu ? "Respond entirely in natural Telugu." : "Respond in English by default.";
 
-    const searchEnginePrompt = `You are Ask Lucky, an expert universal search engine and AI tutor for Lekka Lab. Provide a complete, detailed, step-by-step verified answer, explanation, or recipe. ${targetLangInstruction} Format clearly with structured headings and bullet points: ${query}`;
+    const promptText = `You are Ask Lucky, an expert universal AI tutor and search engine for Lekka Lab, created by Hemanth Kalyanapu. Provide a comprehensive, accurate, detailed step-by-step explanation, proof, or answer for any query (such as science diagrams, math, history, recipes, or general knowledge). ${targetLang} Format clearly with headings, structured bullet points, and clear reasoning: ${query}`;
 
-    while (!success && attempts < maxAttempts) {
-        const activeKey = getNextApiKey();
-        attempts++;
-        try {
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${activeKey}`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    contents: [{ parts: [{ text: searchEnginePrompt }] }]
-                })
-            });
-            
-            if (response.ok) {
-                const data = await response.json();
-                dataResult = data.candidates[0].content.parts[0].text;
-                success = true;
-            }
-        } catch (err) {
-            console.warn(`Key attempt ${attempts} failed, trying next key...`);
-        }
-    }
+    try {
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                contents: [{ parts: [{ text: promptText }] }]
+            })
+        });
 
-    if (success && dataResult) {
-        outputDiv.innerHTML = `
-            <strong>✨ Search Result & Step-by-Step Explanation:</strong><br><br>
-            ${dataResult.replace(/\n/g, '<br>')}
-            <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid #334155; font-size: 13px; color: #94a3b8; display: flex; justify-content: space-between; align-items: center;">
-                <span>💡 Powered by Lekka Lab Search Engine</span>
-                <button onclick="navigator.clipboard.writeText(this.parentElement.previousElementSibling.previousElementSibling.innerText); alert('Answer copied to clipboard!');" style="background:#1e293b; color:#38bdf8; border:1px solid #475569; padding:4px 10px; border-radius:6px; cursor:pointer; font-size:11px;">Copy Answer</button>
-            </div>
-        `;
-    } else {
-        // --- SMART CONTEXTUAL FALLBACK (ENGLISH BY DEFAULT, TELUGU IF REQUESTED) ---
-        let fallback = getSmartContextualFallback(query, isTelugu);
-        outputDiv.innerHTML = `
-            <strong>✨ Search Result & Step-by-Step Explanation:</strong><br><br>
-            ${fallback.text}
-            ${fallback.diagram ? `<div class="ai-diagram-box">${fallback.diagram}</div>` : ''}
-            <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid #334155; font-size: 13px; color: #94a3b8; display: flex; justify-content: space-between; align-items: center;">
-                <span>💡 Verified by Lekka Lab Intelligence Engine (Smart Uptime Mode)</span>
-                <button onclick="navigator.clipboard.writeText(this.parentElement.previousElementSibling.previousElementSibling.innerText); alert('Answer copied to clipboard!');" style="background:#1e293b; color:#38bdf8; border:1px solid #475569; padding:4px 10px; border-radius:6px; cursor:pointer; font-size:11px;">Copy Answer</button>
-            </div>
-        `;
-    }
-}
-
-function getSmartContextualFallback(q, isTelugu) {
-    let lower = q.toLowerCase();
-    
-    // RECIPES / RAVVA LADDU
-    if (lower.includes("laddu") || lower.includes("ravva") || lower.includes("లడ్డు") || lower.includes("రవ్వ") || lower.includes("recipe")) {
-        if (isTelugu) {
-            return {
-                text: `<strong>రవ్వ లడ్డు తయారీ విధానం (Ravva Laddu Recipe):</strong><br><br>
-                <strong>1. కావలసిన పదార్థాలు (Ingredients):</strong><br>
-                - బంబాయి రవ్వ (సూజి రవ్వ): 1 కప్పు<br>
-                - చక్కెర: 3/4 కప్పు (మెత్తని పొడి చేసుకోవాలి)<br>
-                - నెయ్యి: 4 నుండి 5 టేబుల్ స్పూన్లు<br>
-                - జీడిపప్పు మరియు కిస్మిస్: తగినన్ని<br>
-                - యాలకుల పొడి: 1/2 టీస్పూన్<br>
-                - కాచి చల్లార్చిన పాలు లేదా నీరు: 2 నుండి 3 టేబుల్ స్పూన్లు<br><br>
-                <strong>2. తయారీ విధానం (Step-by-Step Instructions):</strong><br>
-                - <strong>దశ 1:</strong> ఒక బాణలిలో 2 స్పూన్ల నెయ్యి వేసి, జీడిపప్పు మరియు కిస్మిస్ దోరగా వేయించి ఒక గిన్నెలోకి తీసుకోవాలి.<br>
-                - <strong>దశ 2:</strong> అదే బాణలిలో బంబాయి రవ్వను వేసి, మంటను సన్నగా ఉంచుతూ మంచి సువాసన వచ్చే వరకు బాగా వేయించాలి.<br>
-                - <strong>దశ 3:</strong> ముందుగా పౌడర్ చేసుకున్న చక్కెరను, వేయించిన రవ్వ మరియు యాలకుల పొడిని ఒక పెద్ద గిన్నెలో వేసి బాగా కలుపుకోవాలి.<br>
-                - <strong>దశ 4:</strong> ఇప్పుడు మిగిలిన నెయ్యిని కరిగించి పోసి, అవసరమైతే కొద్దిగా గోరువెచ్చని పాలు చిలకరిస్తూ కలపాలి.<br>
-                - <strong>దశ 5:</strong> మిశ్రమం గోరువెచ్చగా ఉన్నప్పుడే చేతికి నెయ్యి రాసుకుంటూ గట్టిగా ఉండలుగా (లడ్లలాగా) చుట్టుకోవాలి.`,
-                diagram: null
-            };
+        if (response.ok) {
+            const data = await response.json();
+            const resultText = data.candidates[0].content.parts[0].text;
+            outputDiv.innerHTML = `
+                <strong>✨ Ask Lucky AI Solution:</strong><br><br>
+                ${resultText.replace(/\n/g, '<br>')}
+                <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid #334155; font-size: 13px; color: #94a3b8; display: flex; justify-content: space-between; align-items: center;">
+                    <span>💡 Powered by Lekka Lab & Gemini AI</span>
+                    <button onclick="navigator.clipboard.writeText(this.parentElement.previousElementSibling.previousElementSibling.innerText); alert('Answer copied to clipboard!');" style="background:#1e293b; color:#38bdf8; border:1px solid #475569; padding:4px 10px; border-radius:6px; cursor:pointer; font-size:11px;">Copy Answer</button>
+                </div>
+            `;
         } else {
-            return {
-                text: `<strong>How to Make Ravva Laddu (Step-by-Step Recipe):</strong><br><br>
-                <strong>1. Ingredients Required:</strong><br>
-                - Bombay Ravva (Sooji): 1 cup<br>
-                - Sugar: 3/4 cup (powdered)<br>
-                - Ghee: 4-5 tablespoons<br>
-                - Cashews & Raisins: As needed<br>
-                - Cardamom powder: 1/2 teaspoon<br>
-                - Warm milk or water: 2-3 tablespoons<br><br>
-                <strong>2. Preparation Steps:</strong><br>
-                - <strong>Step 1:</strong> Heat 2 spoons of ghee in a pan and fry cashews and raisins until golden brown, then set aside.<br>
-                - <strong>Step 2:</strong> Roast the Bombay ravva in the same pan on low flame until aromatic and slightly golden.<br>
-                - <strong>Step 3:</strong> Mix the powdered sugar, roasted ravva, and cardamom powder in a large bowl.<br>
-                - <strong>Step 4:</strong> Pour remaining melted ghee and gradually add warm milk/water.<br>
-                - <strong>Step 5:</strong> Shape the warm mixture tightly into round laddus.`,
-                diagram: null
-            };
+            const errData = await response.json();
+            outputDiv.innerHTML = `<span style="color: #f43f5e;">⚠️ API Error:</span> Please check if your Gemini API key is correct and active. (${errData.error?.message || response.statusText})`;
         }
-    }
-    // TODAY IN HISTORY
-    else if (lower.includes("history") || lower.includes("today") || lower.includes("event") || lower.includes("date")) {
-        const currentDate = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-        const monthDay = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
-        
-        if (isTelugu) {
-            return {
-                text: `<strong>చరిత్రలో ఈ రోజు (${monthDay}):</strong><br><br>
-                <strong>1. ప్రాముఖ్యత:</strong><br>
-                - ప్రపంచ చరిత్రలో <strong>${monthDay}</strong> తేదీన అనేక రాజకీయ, శాస్త్రీయ మరియు సామాజిక సంస్కరణల మైలురాళ్ళు దాటబడ్డాయి.<br><br>
-                <strong>2. ముఖ్యమైన చారిత్రక సంఘటనలు:</strong><br>
-                - రాజనీతి & సామాజిక మైలురాళ్ళు: గత శతాబ్దాలలో ఈ రోజున సంతకం చేయబడిన చారిత్రక ఒప్పందాలు లేదా చట్టాలు.<br>
-                - శాస్త్రీయ విజయాలు: అంతరిక్ష యాత్రలు లేదా వైద్య ఆవిష్కరణలు.<br><br>
-                <em>మరిన్ని వివరాల కోసం మన అధికారిక పాఠ్యపుస్తక పోర్టల్స్‌ను సందర్శించండి!</em>`,
-                diagram: null
-            };
-        } else {
-            return {
-                text: `<strong>Historical Milestones & Events for ${monthDay} (${new Date().getFullYear()}):</strong><br><br>
-                <strong>1. Today's Significance:</strong><br>
-                - Across world history, <strong>${monthDay}</strong> marks several monumental turning points in politics, science, literature, and social reform movements.<br><br>
-                <strong>2. Notable Historical Milestones:</strong><br>
-                - <strong>Political & Social Milestone:</strong> Landmark treaties, declarations of independence, or constitutional reforms signed on this date in past centuries.<br>
-                - <strong>Scientific & Technological Breakthrough:</strong> Major space missions, medical discoveries, or industrial innovations recorded on this day.<br><br>
-                <em>Explore our Official Textbooks Portals above for complete historical archives and study notes!</em>`,
-                diagram: null
-            };
-        }
-    }
-    // PYTHAGORAS THEOREM
-    else if (lower.includes("pythagoras") || lower.includes("పైথাగోরাস")) {
-        if (isTelugu) {
-            return {
-                text: `<strong>పైథాగరస్ సిద్ధాంతం (Pythagoras Theorem) - పూర్తి నిరూపణ:</strong><br><br>
-                <strong>1. స్టేట్‌మెంట్:</strong> ఒక లంబకోణ త్రిభుజంలో కర్ణం యొక్క వర్గం మిగిలిన రెండు భుజాల వర్గాల మొత్తానికి సమానంగా ఉంటుంది.<br><br>
-                <strong>2. నిరూపణ:</strong> త్రిభుజం ABC లో B దగ్గర లంబకోణం (90 డిగ్రీలు) ఉన్నప్పుడు, AC<sup>2</sup> = AB<sup>2</sup> + BC<sup>2</sup> అవుతుంది.`,
-                diagram: null
-            };
-        } else {
-            return {
-                text: `<strong>Pythagoras Theorem - Complete Step-by-Step Proof:</strong><br><br>
-                <strong>1. Statement:</strong> In a right-angled triangle, the square of the hypotenuse is equal to the sum of the squares of the other two sides.<br><br>
-                <strong>2. Given:</strong> Triangle ABC with right angle at B (Angle B = 90 degrees).<br><br>
-                <strong>3. To Prove:</strong> AC<sup>2</sup> = AB<sup>2</sup> + BC<sup>2</sup>`,
-                diagram: null
-            };
-        }
-    } 
-    // UNIVERSAL SEARCH ENGINE FALLBACK
-    else {
-        if (isTelugu) {
-            return {
-                text: `<strong>శోధన ఫలితం: "${escapeHtml(q)}"</strong><br><br>
-                <strong>1. పరిచయం & ముఖ్య భావన:</strong><br>
-                - <em>"${escapeHtml(q)}"</em> అంశానికి సంబంధించిన పూర్తి వివరాలు మరియు నిర్వచనాలు.<br><br>
-                <strong>2. దశలవారీ వివరణ:</strong><br>
-                - ఈ అంశం విద్యార్థులకు మరియు అభ్యాసకులకు ఎంతో ఉపయోగకరంగా ఉంటుంది.<br><br>
-                <em>మరిన్ని వివరాల కోసం మన పోర్టల్స్‌ను పరిశీలించండి!</em>`,
-                diagram: null
-            };
-        } else {
-            return {
-                text: `<strong>Comprehensive Search Result for: "${escapeHtml(q)}"</strong><br><br>
-                <strong>1. Overview & Definition:</strong><br>
-                - Examining the query <em>"${escapeHtml(q)}"</em> with accurate definitions and contextual details.<br><br>
-                <strong>2. Step-by-Step Explanation / Key Points:</strong><br>
-                - Fundamental facts and breakdown of the topic.<br><br>
-                <em>Explore our Class-wise PDF Vault and Official Textbooks Portals above for complete academic resources!</em>`,
-                diagram: null
-            };
-        }
+    } catch (err) {
+        outputDiv.innerHTML = `<span style="color: #f43f5e;">⚠️ Connection Error:</span> Unable to connect to Gemini AI. Please check your internet connection or API key.`;
     }
 }
 
