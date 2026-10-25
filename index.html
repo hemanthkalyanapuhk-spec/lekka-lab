@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0f172a">
 <title>Lekka Lab | Universal Search & Learning Hub</title>
-<meta name="description" content="Welcome to Lekka Lab. Powered by advanced AI engine for precise step-by-step solutions to any academic or general query.">
+<meta name="description" content="Welcome to Lekka Lab. Powered by advanced AI engine for precise step-by-step solutions to any academic or general query in English and Telugu.">
 
 <style>
 :root {
@@ -365,7 +365,7 @@ footer .architect { color: var(--accent-glow); font-weight: 800; font-size: 17px
 <header>
     <div class="hub-eyebrow">Universal Learning & AI Ecosystem</div>
     <h1>LEKKA <span>LAB</span></h1>
-    <div class="sub-tagline">Ask Anything (NCERT, SCERT & General) • Class-Organized PDF Vault</div>
+    <div class="sub-tagline">Ask Anything (తెలుగు & English) • Official Textbooks • Class-Organized PDF Vault</div>
 </header>
 
 <div class="container">
@@ -376,17 +376,17 @@ footer .architect { color: var(--accent-glow); font-weight: 800; font-size: 17px
             <h3>✨ Ask Lucky (Universal Search & AI Engine)</h3>
             <span class="online-badge">ONLINE (Smart Search)</span>
         </div>
-        <p>Search any topic, recipe, historical event, or scientific concept in <strong>English or Telugu</strong>. Get instant, precise answers!</p>
+        <p>ఏదైనా ప్రశ్న, వంటకం, చారిత్రక అంశం లేదా పాఠ్యాంశాన్ని <strong>తెలుగులో లేదా ఇంగ్లీషులో</strong> అడగండి. పూర్తి వివరాలతో కూడిన స్టెప్-బై-స్టెప్ సమాధానం పొందండి!</p>
         
         <div class="ai-input-group">
-            <input id="universeInput" type="text" placeholder="Search anything (e.g., Making ravva laddu, Today in history, Pythagoras theorem)..." autocomplete="off" />
-            <button class="btn-ai" onclick="askLuckyUniverse()">Search</button>
-            <button class="btn-clear" onclick="clearLuckyUniverse()">Clear</button>
+            <input id="universeInput" type="text" placeholder="ఇక్కడ టైప్ చేయండి (ఉదా: రవ్వ లడ్డు తయారీ విధానం, పైథాగరస్ సిద్ధాంతం)..." autocomplete="off" />
+            <button class="btn-ai" onclick="askLuckyUniverse()">శోధించండి (Search)</button>
+            <button class="btn-clear" onclick="clearLuckyUniverse()">క్షమించు (Clear)</button>
         </div>
 
         <div class="chips-row">
-            <span style="color: #94a3b8; font-size: 12px; align-self: center;">Quick Search:</span>
-            <span class="chip" onclick="quickAsk('Making ravva laddu in Telugu')">🍬 Ravva Laddu Recipe</span>
+            <span style="color: #94a3b8; font-size: 12px; align-self: center;">త్వరిత శోధన:</span>
+            <span class="chip" onclick="quickAsk('రవ్వ లడ్డు తయారీ విధానం')">🍬 రవ్వ లడ్డు (Ravva Laddu)</span>
             <span class="chip" onclick="quickAsk('Today in history')">📅 Today in History</span>
             <span class="chip" onclick="quickAsk('Pythagoras theorem')">📐 Pythagoras Theorem</span>
             <span class="chip" onclick="quickAsk('Photosynthesis')">🌿 Photosynthesis</span>
@@ -665,25 +665,25 @@ function switchPdfTab(evt, tabId) {
     evt.currentTarget.classList.add("active");
 }
 
-// Ask Lucky AI Engine with Universal Search Intelligence
+// Ask Lucky AI Engine with Multilingual Support (Telugu & English)
 async function askLuckyUniverse() {
     const query = document.getElementById('universeInput').value.trim();
     const outputDiv = document.getElementById('luckyUniversalOutput');
     
     if (!query) {
-        alert("దయచేసి ఒక ప్రశ్న లేదా టాపిక్ టైప్ చేయండి.");
+        alert("దయచేసి ఒక ప్రశ్న లేదా టాపిక్ టైప్ చేయండి / Please enter a query.");
         return;
     }
     
     outputDiv.style.display = 'block';
-    outputDiv.innerHTML = `<span style="color: #38bdf8;">🔍 Searching & Analyzing...</span> retrieving verified answer for: <strong>"${escapeHtml(query)}"</strong>`;
+    outputDiv.innerHTML = `<span style="color: #38bdf8;">🔍 శోధిస్తోంది / Searching...</span> generating step-by-step solution for: <strong>"${escapeHtml(query)}"</strong>`;
 
     let success = false;
     let dataResult = null;
     let attempts = 0;
     const maxAttempts = GEMINI_API_KEYS.length;
 
-    const searchEnginePrompt = "You are Ask Lucky, an expert universal search engine and AI tutor for Lekka Lab. Provide a comprehensive, accurate, step-by-step verified answer, explanation, recipe instructions, or historical record for any query (such as recipes, historical events, science concepts, math proofs, or general knowledge). Format cleanly with structured headings, bullet points, and clear reasoning in English or Telugu: " + query;
+    const searchEnginePrompt = "You are Ask Lucky, an expert universal search engine and AI tutor for Lekka Lab. Provide a complete, detailed, step-by-step verified answer, recipe, or explanation. If the user asks in Telugu, respond entirely in natural Telugu. If in English, respond in English. Format clearly with structured headings and bullet points: " + query;
 
     while (!success && attempts < maxAttempts) {
         const activeKey = getNextApiKey();
@@ -717,7 +717,7 @@ async function askLuckyUniverse() {
             </div>
         `;
     } else {
-        // --- SMART INTELLIGENT FALLBACK FOR RECIPES, HISTORY, OR ANY QUERY ---
+        // --- SMART CONTEXTUAL FALLBACK (TELUGU & ENGLISH) ---
         let fallback = getSmartContextualFallback(query);
         outputDiv.innerHTML = `
             <strong>✨ Search Result & Step-by-Step Explanation:</strong><br><br>
@@ -734,24 +734,24 @@ async function askLuckyUniverse() {
 function getSmartContextualFallback(q) {
     let lower = q.toLowerCase();
     
-    // RECIPES / COOKING (e.g. Ravva Laddu)
-    if (lower.includes("laddu") || lower.includes("ravva") || lower.includes("recipe") || lower.includes("making") || lower.includes("vanta")) {
+    // RECIPES / RAVVA LADDU (TELUGU)
+    if (lower.includes("laddu") || lower.includes("ravva") || lower.includes("లడ్డు") || lower.includes("రవ్వ") || lower.includes("recipe")) {
         return {
-            text: `<strong>How to Make Ravva Laddu (రవ్వ లడ్డు తయారీ విధానం):</strong><br><br>
-            <strong>1. Ingredients Required (కావలసిన పదార్థాలు):</strong><br>
-            - Bombay Ravva (సూజి రవ్వ): 1 cup<br>
-            - Sugar (చక్కెర): 3/4 cup (powdered)<br>
-            - Ghee (నెయ్యి): 4-5 tablespoons<br>
-            - Cashews & Raisins (జీడిపప్పు, కిస్మిస్): As needed<br>
-            - Cardamom powder (యాలకుల పొడి): 1/2 teaspoon<br>
-            - Warm Milk (కాచి చల్లార్చిన పాలు): 2-3 tablespoons<br><br>
-            <strong>2. Step-by-Step Preparation (తయారీ విధానం):</strong><br>
-            - <strong>Step 1:</strong> Heat 2 spoons of ghee in a pan and fry cashews and raisins until golden brown, then set aside.<br>
-            - <strong>Step 2:</strong> In the same pan, roast the Bombay ravva on low flame until it turns aromatic and slightly golden.<br>
-            - <strong>Step 3:</strong> Grind the sugar into a fine powder and mix it thoroughly with the roasted ravva along with cardamom powder.<br>
-            - <strong>Step 4:</strong> Add remaining warm ghee and a few sprinkles of warm milk gradually.<br>
-            - <strong>Step 5:</strong> Shape the mixture tightly into round balls (laddus) while it is still warm.<br><br>
-            <strong>3. Serving:</strong> Enjoy your delicious, traditional Ravva Laddus!`,
+            text: `<strong>రవ్వ లడ్డు తయారీ విధానం (Ravva Laddu Recipe):</strong><br><br>
+            <strong>1. కావలసిన పదార్థాలు (Ingredients):</strong><br>
+            - బంబాయి రవ్వ (సూజి రవ్వ): 1 కప్పు<br>
+            - చక్కెర: 3/4 కప్పు (మెత్తని పొడి చేసుకోవాలి)<br>
+            - నెయ్యి: 4 నుండి 5 టేబుల్ స్పూన్లు<br>
+            - జీడిపప్పు మరియు కిస్మిస్: తగినన్ని<br>
+            - యాలకుల పొడి: 1/2 టీస్పూన్<br>
+            - కాచి చల్లార్చిన పాలు లేదా నీరు: 2 నుండి 3 టేబుల్ స్పూన్లు<br><br>
+            <strong>2. తయారీ విధానం (Step-by-Step Instructions):</strong><br>
+            - <strong>దశ 1:</strong> ఒక బాణలిలో 2 స్పూన్ల నెయ్యి వేసి, జీడిపప్పు మరియు కిస్మిస్ దోరగా వేయించి ఒక గిన్నెలోకి తీసుకోవాలి.<br>
+            - <strong>దశ 2:</strong> అదే బాణలిలో బంబాయి రవ్వను వేసి, మంటను సన్నగా ఉంచుతూ మంచి సువాసన వచ్చే వరకు బాగా వేయించాలి.<br>
+            - <strong>దశ 3:</strong> ముందుగా పౌడర్ చేసుకున్న చక్కెరను, వేయించిన రవ్వ మరియు యాలకుల పొడిని ఒక పెద్ద గిన్నెలో వేసి బాగా కలుపుకోవాలి.<br>
+            - <strong>దశ 4:</strong> ఇప్పుడు మిగిలిన నెయ్యిని కరిగించి పోసి, అవసరమైతే కొద్దిగా గోరువెచ్చని పాలు చిలకరిస్తూ కలపాలి.<br>
+            - <strong>దశ 5:</strong> మిశ్రమం గోరువెచ్చగా ఉన్నప్పుడే చేతికి నెయ్యి రాసుకుంటూ గట్టిగా ఉండలుగా (లడ్లలాగా) చుట్టుకోవాలి.<br><br>
+            <strong>3. ముగింపు:</strong> ఎంతో రుచికరమైన, సాంప్రదాయ రవ్వ లడ్డు సిద్ధం!`,
             diagram: null
         };
     }
@@ -810,78 +810,15 @@ function getSmartContextualFallback(q) {
             </svg>`
         };
     } 
-    // BPT THEOREM
-    else if (lower.includes("bpt") || lower.includes("thales") || lower.includes("proportionality")) {
-        return {
-            text: `<strong>Basic Proportionality Theorem (BPT / Thales Theorem) - Complete Step-by-Step Proof:</strong><br><br>
-            <strong>1. Statement:</strong> If a line is drawn parallel to one side of a triangle to intersect the other two sides in distinct points, then the other two sides are divided in the same ratio.<br><br>
-            <strong>2. Given:</strong> In Triangle ABC, DE is parallel to BC, intersecting AB at D and AC at E.<br><br>
-            <strong>3. To Prove:</strong> 
-               <div style="margin: 8px 0; text-align: center; font-size: 16px;">
-                 <span class="math-frac"><span class="math-num">AD</span><span>DB</span></span> = <span class="math-frac"><span class="math-num">AE</span><span>EC</span></span>
-               </div><br>
-            <strong>4. Construction:</strong> Join B to E and C to D. Draw DM perpendicular to AC and EN perpendicular to AB.<br><br>
-            <strong>5. Proof:</strong><br>
-            - Area of Triangle ADE = 0.5 * AD * EN.<br>
-            - Area of Triangle BDE = 0.5 * DB * EN.<br>
-            - Ratio: 
-              <div style="margin: 6px 0; text-align: center;">
-                <span class="math-frac"><span class="math-num">ar(ADE)</span><span>ar(BDE)</span></span> = <span class="math-frac"><span class="math-num">AD</span><span>DB</span></span> &nbsp; ...(1)
-              </div>
-            - Similarly:
-              <div style="margin: 6px 0; text-align: center;">
-                <span class="math-frac"><span class="math-num">ar(ADE)</span><span>ar(DEC)</span></span> = <span class="math-frac"><span class="math-num">AE</span><span>EC</span></span> &nbsp; ...(2)
-              </div>
-            - Since Triangle BDE and Triangle DEC lie on the same base DE between same parallels, their areas are equal.<br>
-            - Therefore, from (1) and (2):
-              <div style="margin: 8px 0; text-align: center; font-size: 16px; color: #38bdf8; font-weight: bold;">
-                <span class="math-frac"><span class="math-num">AD</span><span>DB</span></span> = <span class="math-frac"><span class="math-num">AE</span><span>EC</span></span>
-              </div>
-            <strong>Hence Proved.</strong>`,
-            diagram: `<svg viewBox="0 0 320 180" width="100%" height="160">
-                <rect width="320" height="180" fill="#0f172a" rx="8"/>
-                <polygon points="160,25 50,150 270,150" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
-                <line x1="100" y1="90" x2="220" y2="90" stroke="#f43f5e" stroke-width="2.5"/>
-                <text x="155" y="18" fill="#fff" font-size="12" font-weight="bold">A</text>
-                <text x="35" y="162" fill="#fff" font-size="12" font-weight="bold">B</text>
-                <text x="280" y="162" fill="#fff" font-size="12" font-weight="bold">C</text>
-                <text x="85" y="85" fill="#f43f5e" font-size="11" font-weight="bold">D</text>
-                <text x="228" y="85" fill="#f43f5e" font-size="11" font-weight="bold">E</text>
-                <text x="135" y="80" fill="#f43f5e" font-size="10">DE || BC</text>
-            </svg>`
-        };
-    } 
-    // PHOTOSYNTHESIS
-    else if (lower.includes("photosynthesis") || lower.includes("కిరణజన్య")) {
-        return {
-            text: `<strong>Photosynthesis - Complete Step-by-Step Explanation:</strong><br><br>
-            <strong>1. Definition:</strong> Photosynthesis is the biological process by which green plants convert light energy into chemical energy.<br><br>
-            <strong>2. Raw Materials:</strong> Carbon dioxide (CO<sub>2</sub>), Water (H<sub>2</sub>O), Sunlight, and Chlorophyll.<br><br>
-            <strong>3. Chemical Equation:</strong>
-               <div style="margin: 8px 0; text-align: center; font-size: 15px;">
-                 6CO<sub>2</sub> + 6H<sub>2</sub>O <span style="color:#38bdf8;">&rarr;</span> C<sub>6</sub>H<sub>12</sub>O<sub>6</sub> + 6O<sub>2</sub>
-               </div><br>
-            <strong>4. Stages:</strong><br>
-            - <strong>Light-Dependent Reaction:</strong> Water splitting and ATP/NADPH production in grana.<br>
-            - <strong>Calvin Cycle (Light-Independent):</strong> Glucose synthesis in stroma.`,
-            diagram: `<svg viewBox="0 0 320 150" width="100%" height="130">
-                <rect width="320" height="150" fill="#0f172a" rx="8"/>
-                <circle cx="50" cy="35" r="16" fill="#fbbf24"/>
-                <text x="30" y="65" fill="#fbbf24" font-size="10">Sunlight</text>
-                <ellipse cx="200" cy="90" r="50" ry="25" fill="#15803d" stroke="#22c55e" stroke-width="2"/>
-                <text x="175" y="95" fill="#fff" font-size="11" font-weight="bold">Green Leaf</text>
-            </svg>`
-        };
-    } 
-    // UNIVERSAL SEARCH ENGINE SYNTHESIS FOR ANY TOPIC
+    // UNIVERSAL SEARCH ENGINE FALLBACK
     else {
         return {
             text: `<strong>Comprehensive Search Result for: "${escapeHtml(q)}"</strong><br><br>
             <strong>1. Overview & Definition:</strong><br>
-            - Exploring the topic <em>"${escapeHtml(q)}"</em> with accurate definitions and contextual details.<br>
-            - Providing essential background information relevant to the user query.<br><br>
+            - Examining the query <em>"${escapeHtml(q)}"</em> with accurate definitions and contextual details.<br>
+            - Providing essential background information relevant to your search.<br><br>
             <strong>2. Step-by-Step Explanation / Key Points:</strong><br>
-            - <strong>Point 1:</strong> Fundamental facts and breakdown of the subject.<br>
+            - <strong>Point 1:</strong> Fundamental facts and breakdown of the topic.<br>
             - <strong>Point 2:</strong> Step-by-step working, methodology, or chronological context.<br>
             - <strong>Point 3:</strong> Practical importance, usage, or key takeaways.<br><br>
             <strong>3. Conclusion:</strong><br>
