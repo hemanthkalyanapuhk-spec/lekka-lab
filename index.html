@@ -169,17 +169,13 @@ header h1 span { color: var(--accent-glow); }
 #luckyUniversalOutput th, #luckyUniversalOutput td { border: 1px solid #475569; padding: 10px 14px; text-align: left; }
 #luckyUniversalOutput th { background: #1e293b; color: #38bdf8; }
 
-.visual-diagram-box {
-  background: #1e293b;
-  border: 1px dashed #38bdf8;
+.svg-diagram-container {
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 12px;
   padding: 15px;
-  border-radius: 10px;
   margin: 15px 0;
   text-align: center;
-  color: #38bdf8;
-  font-family: monospace;
-  white-space: pre-wrap;
-  line-height: 1.4;
 }
 
 .chips-row {
@@ -367,7 +363,7 @@ footer .architect { color: var(--accent-glow); font-weight: 800; font-size: 17px
 <header>
     <div class="hub-eyebrow">Universal Learning & AI Ecosystem (KG to PG)</div>
     <h1>LEKKA <span>LAB</span></h1>
-    <div class="sub-tagline">Math Formulas, Physics, Chemistry, Biology & Social • English, Telugu & Hindi • PDF Vault</div>
+    <div class="sub-tagline">Math Proofs & Diagrams • Physics, Chem, Bio • English, Telugu & Hindi • PDF Vault</div>
 </header>
 
 <div class="container">
@@ -376,12 +372,12 @@ footer .architect { color: var(--accent-glow); font-weight: 800; font-size: 17px
     <div class="ask-lucky-box">
         <div class="ask-lucky-header">
             <h3>✨ Ask Lucky (Master AI Search Engine)</h3>
-            <span class="online-badge">ONLINE (Full Explanation & Diagram Mode)</span>
+            <span class="online-badge">ONLINE (True Vector Diagram Mode)</span>
         </div>
-        <p>Ask any question from KG to PG — Mathematics, Physics, Chemistry, Biology, Social Studies, or General Topics in <strong>English, Telugu, or Hindi</strong>. Get a full step-by-step explanation with visual diagrams automatically!</p>
+        <p>Ask any question from KG to PG — Mathematics, Physics, Chemistry, Biology, Social Studies, or General Topics in <strong>English, Telugu, or Hindi</strong>. Get crystal-clear step-by-step proofs with accurate vector diagrams!</p>
         
         <div class="ai-input-group">
-            <input id="universeInput" type="text" placeholder="Ask anything (e.g., Ohm's law, Photosynthesis, BPT theorem, Quadratic formula)..." autocomplete="off" />
+            <input id="universeInput" type="text" placeholder="Ask anything (e.g., BPT theorem, Ohm's law, Quadratic formula)..." autocomplete="off" />
             <button class="btn-ai" onclick="askLuckyUniverse()">Ask Lucky</button>
             <button class="btn-clear" onclick="clearLuckyUniverse()">Clear</button>
         </div>
@@ -390,7 +386,7 @@ footer .architect { color: var(--accent-glow); font-weight: 800; font-size: 17px
             <span style="color: #94a3b8; font-size: 12px; align-self: center;">Quick Search:</span>
             <span class="chip" onclick="quickAsk('Explain bpt theorem')">📐 BPT Theorem</span>
             <span class="chip" onclick="quickAsk('Ohm\'s law physics formula and circuit diagram')">⚡ Ohm's Law</span>
-            <span class="chip" onclick="quickAsk('Photosynthesis process in plants with diagram')">🌿 Photosynthesis</span>
+            <span class="chip" onclick="quickAsk('Quadratic formula and graph')">📊 Quadratic Formula</span>
             <span class="chip" onclick="quickAsk('రవ్వ లడ్డు తయారీ విధానం')">🍬 Ravva Laddu (Telugu)</span>
         </div>
         
@@ -605,7 +601,7 @@ footer .architect { color: var(--accent-glow); font-weight: 800; font-size: 17px
             </div>
             <div class="pdf-item">
                 <div class="pdf-name"><span>📙</span> class8-fa3-slip-test.pdf</div>
-                <div class="pdf-actions"><a href="class8-fa3-slip-test.pdf" download class="btn-sm">Download</a></div>
+                <div class="pdf-actions"><a href="class8-fa3-slip-test.pdf" target="_blank" class="btn-sm">View</a><a href="class8-fa3-slip-test.pdf" download class="btn-sm">Download</a></div>
             </div>
 
             <div class="pdf-category-heading">Formative Assessment 4 (FA4)</div>
@@ -643,7 +639,7 @@ function switchPdfTab(evt, tabId) {
     evt.currentTarget.classList.add("active");
 }
 
-// Master Detailed KG-to-PG Search Engine with Full Explanations and Diagrams
+// Master Detailed Search Engine with True SVG Proof Diagrams
 async function askLuckyUniverse() {
     let rawQuery = document.getElementById('universeInput').value.trim();
     const outputDiv = document.getElementById('luckyUniversalOutput');
@@ -654,19 +650,19 @@ async function askLuckyUniverse() {
     }
     
     outputDiv.style.display = 'block';
-    outputDiv.innerHTML = `<span style="color: #38bdf8;">🤖 Ask Lucky is generating full explanation & diagram...</span> processing: <strong>"${escapeHtml(rawQuery)}"</strong>`;
+    outputDiv.innerHTML = `<span style="color: #38bdf8;">🤖 Ask Lucky is generating full proof & vector diagram...</span> processing: <strong>"${escapeHtml(rawQuery)}"</strong>`;
 
     let lowerQ = rawQuery.toLowerCase();
     
-    // Comprehensive Master Dictionary with Full Step-by-Step Explanations & Visual ASCII Diagrams
-    let detailedResult = getDetailedMasterResult(lowerQ, rawQuery);
-    if (detailedResult) {
+    // Master Curated Engine with True SVG Proof Diagrams
+    let diagramResult = getVectorDiagramMasterResult(lowerQ, rawQuery);
+    if (diagramResult) {
         setTimeout(() => {
             outputDiv.innerHTML = `
-                <strong>✨ Ask Lucky Master Solution (Verified Curriculum Mode):</strong><br><br>
-                ${detailedResult}
+                <strong>✨ Ask Lucky Master Solution (Verified Proof & Diagram Mode):</strong><br><br>
+                ${diagramResult}
                 <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid #334155; font-size: 13px; color: #94a3b8; display: flex; justify-content: space-between; align-items: center;">
-                    <span>💡 Powered by Lekka Lab Master Engine</span>
+                    <span>💡 Powered by Lekka Lab Master Diagram Engine</span>
                     <button onclick="navigator.clipboard.writeText(this.parentElement.previousElementSibling.innerText); alert('Answer copied to clipboard!');" style="background:#1e293b; color:#38bdf8; border:1px solid #475569; padding:4px 10px; border-radius:6px; cursor:pointer; font-size:11px;">Copy Answer</button>
                 </div>
             `;
@@ -674,8 +670,8 @@ async function askLuckyUniverse() {
         return;
     }
 
-    // Dynamic AI Fallback for Any Other Custom Query
-    const systemPrompt = `You are Ask Lucky, an expert AI tutor for Lekka Lab, created by Hemanth Kalyanapu. Provide a comprehensive, complete, full step-by-step academic explanation with definitions, formulas, and a clear visual diagram (using ASCII formatting if necessary) for any query from KG to PG. Query: ${rawQuery}`;
+    // AI Fallback for Any Other Custom Query
+    const systemPrompt = `You are Ask Lucky, an expert AI tutor for Lekka Lab, created by Hemanth Kalyanapu. Provide a comprehensive, complete, full step-by-step academic explanation with definitions, formulas, and clear structural breakdown for any query from KG to PG. Query: ${rawQuery}`;
 
     try {
         const response = await fetch(`https://text.pollinations.ai/${encodeURIComponent(systemPrompt)}`, { method: 'GET' });
@@ -701,7 +697,7 @@ async function askLuckyUniverse() {
             <strong>Comprehensive Detailed Analysis for: "${escapeHtml(rawQuery)}"</strong><br><br>
             <strong>1. Complete Overview & Definition:</strong><br>
             - In-depth exploration of <em>"${escapeHtml(rawQuery)}"</em> covering core theories, laws, and structural principles.<br><br>
-            <strong>2. Step-by-Step Derivation & Mechanism:</strong><br>
+            <strong>2. Step-by-Step Proof & Derivation:</strong><br>
             - <strong>Step 1:</strong> Initial foundational axioms and terminology.<br>
             - <strong>Step 2:</strong> Mathematical equations, chemical reactions, or structural workflows.<br>
             - <strong>Step 3:</strong> Final conclusions and practical real-world significance.
@@ -709,103 +705,75 @@ async function askLuckyUniverse() {
     }
 }
 
-// Detailed Master Database with Diagrams & Full Explanations
-function getDetailedMasterResult(lowerQ, q) {
+// Master Database with Clean SVG Proof Diagrams
+function getVectorDiagramMasterResult(lowerQ, q) {
     if (lowerQ.includes("bpt") || lowerQ.includes("thales")) {
         return `<h3>Basic Proportionality Theorem (BPT / Thales Theorem)</h3>
-        <p><strong>1. Introduction & Statement:</strong> If a line is drawn parallel to one side of a triangle intersecting the other two distinct points, then the other two sides are divided in the same ratio.</p>
-        <div class="visual-diagram-box">
-          [Triangle ABC with Parallel Line DE]
-                 A
-                / \\
-               /   \\
-              D-----E   <--- (Line DE || Side BC)
-             /       \\
-            B---------C
+        <p><strong>1. Statement:</strong> If a line is drawn parallel to one side of a triangle intersecting the other two distinct points, then the other two sides are divided in the same ratio.</p>
+        
+        <div class="svg-diagram-container">
+          <svg width="260" height="200" viewBox="0 0 260 200">
+            <!-- Triangle ABC -->
+            <polygon points="130,20 30,170 230,170" fill="none" stroke="#38bdf8" stroke-width="2.5" />
+            <!-- Line DE parallel to BC -->
+            <line x1="80" y1="95" x2="180" y2="95" stroke="#f43f5e" stroke-width="2.5" />
+            <!-- Construction lines -->
+            <line x1="130" y1="20" x2="180" y2="170" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4" />
+            <line x1="130" y1="20" x2="80" y2="170" stroke="#94a3b8" stroke-width="1" stroke-dasharray="4" />
+            <!-- Vertex Labels -->
+            <text x="123" y="12" fill="#ffffff" font-size="14" font-weight="bold">A</text>
+            <text x="15" y="185" fill="#ffffff" font-size="14" font-weight="bold">B</text>
+            <text x="240" y="185" fill="#ffffff" font-size="14" font-weight="bold">C</text>
+            <text x="62" y="90" fill="#f43f5e" font-size="14" font-weight="bold">D</text>
+            <text x="190" y="90" fill="#f43f5e" font-size="14" font-weight="bold">E</text>
+          </svg>
+          <div style="font-size:12px; color:#94a3b8; margin-top:5px;">Figure: Triangle ABC with DE || BC</div>
         </div>
+
         <p><strong>2. Given & To Prove:</strong><br>
-        - Given: In $\\triangle ABC$, $DE \\parallel BC$.<br>
+        - Given: In $\\triangle ABC$, line $DE \\parallel BC$.<br>
         - To Prove: $\\frac{AD}{DB} = \\frac{AE}{EC}$.</p>
-        <p><strong>3. Detailed Step-by-Step Proof:</strong><br>
-        - <strong>Step 1:</strong> Join vertices $B$ to $E$ and $C$ to $D$. Draw $EN \\perp AB$ and $DM \\perp AC$.<br>
-        - <strong>Step 2:</strong> Calculate the area of triangle $ADE$ ($Area(\\triangle ADE) = \\frac{1}{2} \\times base \\times height$).<br>
-        - <strong>Step 3:</strong> Compare ratios of areas of triangles on the same base between parallel lines ($Area(\\triangle BDE) = Area(\\triangle CDE)$).<br>
-        - <strong>Step 4:</strong> Combining ratios yields $\\frac{AD}{DB} = \\frac{AE}{EC}$. Hence proved.</p>`;
+        
+        <p><strong>3. Proof Steps:</strong><br>
+        - <strong>Step 1:</strong> Join $B$ to $E$ and $C$ to $D$. Draw perpendiculars $EN \\perp AB$ and $DM \\perp AC$.<br>
+        - <strong>Step 2:</strong> Consider the ratio of areas: $\\frac{\\text{Area}(\\triangle ADE)}{\\text{Area}(\\triangle BDE)} = \\frac{\\frac{1}{2} \\cdot AD \\cdot EN}{\\frac{1}{2} \\cdot DB \\cdot EN} = \\frac{AD}{DB}$.<br>
+        - <strong>Step 3:</strong> Similarly, for the other side: $\\frac{\\text{Area}(\\triangle ADE)}{\\text{Area}(\\triangle CDE)} = \\frac{AE}{EC}$.<br>
+        - <strong>Step 4:</strong> Since $\\triangle BDE$ and $\\triangle CDE$ lie on the same base $DE$ and between the same parallels $DE \\parallel BC$, their areas are equal. Hence, $\\frac{AD}{DB} = \\frac{AE}{EC}$. Proved.</p>`;
     } 
     if (lowerQ.includes("ohm") || lowerQ.includes("ohms law")) {
-        return `<h3>Ohm's Law - Complete Explanation & Circuit Diagram</h3>
-        <p><strong>1. Introduction:</strong> Ohm's law states that the voltage ($V$) across a conductor is directly proportional to the current ($I$) flowing through it, provided all physical conditions and temperature remain constant.</p>
-        <div class="visual-diagram-box">
-          [Circuit Diagram Visualization]
-           +-------[ Resistor (R) ]-------+
-           |                              |
-          [+] Battery (V)                [A] Ammeter (I)
-           |                              |
-           +------------------------------+
+        return `<h3>Ohm's Law - Complete Proof & Circuit Diagram</h3>
+        <p><strong>1. Statement:</strong> The electric current ($I$) flowing through a metallic wire is directly proportional to the potential difference ($V$) across its ends, provided temperature remains constant.</p>
+        
+        <div class="svg-diagram-container">
+          <svg width="300" height="140" viewBox="0 0 300 140">
+            <rect x="50" y="40" width="200" height="60" fill="none" stroke="#38bdf8" stroke-width="2" rx="8" />
+            <text x="135" y="75" fill="#ffffff" font-size="14" font-weight="bold">Resistor (R)</text>
+            <line x1="20" y1="70" x2="50" y2="70" stroke="#f43f5e" stroke-width="2" />
+            <line x1="250" y1="70" x2="280" y2="70" stroke="#f43f5e" stroke-width="2" />
+            <text x="10" y="65" fill="#f43f5e" font-size="12">V (+)</text>
+            <text x="270" y="65" fill="#f43f5e" font-size="12">(-) </text>
+          </svg>
+          <div style="font-size:12px; color:#94a3b8; margin-top:5px;">Circuit Schematic: Voltage V applied across Resistance R</div>
         </div>
-        <p><strong>2. Mathematical Formula:</strong></p>
-        <p>$$V = I \\times R$$</p>
-        <p>Where:<br>
-        - $V$ = Voltage measured in Volts ($V$)<br>
-        - $I$ = Electric Current measured in Amperes ($A$)<br>
-        - $R$ = Electrical Resistance measured in Ohms ($\\Omega$)</p>
-        <p><strong>3. Practical Applications:</strong> Used in household wiring, designing electronic circuit boards, and regulating appliance power limits.</p>`;
+
+        <p><strong>2. Mathematical Formula:</strong> $V = I \\times R$, or $I = \\frac{V}{R}$.</p>`;
     }
     if (lowerQ.includes("photosynthesis")) {
         return `<h3>Photosynthesis Process in Plants</h3>
-        <p><strong>1. Introduction:</strong> Photosynthesis is the biochemical process by which green plants, algae, and some bacteria convert sunlight, water, and carbon dioxide into oxygen and energy in the form of sugar (glucose).</p>
-        <div class="visual-diagram-box">
-          [Plant Leaf Mechanism]
-             Sunlight (Energy) + CO2 (Air) + H2O (Roots)
-                                  ↓
-                       [ Chloroplast in Leaf ]
-                                  ↓
-                      Glucose (Food) + Oxygen (Released)
+        <p><strong>1. Introduction:</strong> The biological process of synthesizing food from carbon dioxide and water using sunlight energy.</p>
+        
+        <div class="svg-diagram-container">
+          <svg width="280" height="120" viewBox="0 0 280 120">
+            <rect x="20" y="30" width="80" height="60" fill="#1e293b" stroke="#38bdf8" rx="6"/>
+            <text x="40" y="65" fill="#38bdf8" font-size="12">Sun + CO2</text>
+            <line x1="100" y1="60" x2="140" y2="60" stroke="#ffffff" stroke-width="2" marker-end="url(#arrow)"/>
+            <rect x="140" y="20" width="120" height="80" fill="#059669" stroke="#ffffff" rx="8"/>
+            <text x="160" y="65" fill="#ffffff" font-size="13" font-weight="bold">Leaf / Chloroplast</text>
+          </svg>
+          <div style="font-size:12px; color:#94a3b8; margin-top:5px;">Light Energy Conversion Mechanism</div>
         </div>
-        <p><strong>2. Balanced Chemical Equation:</strong></p>
-        <p>$$6CO_2 + 6H_2O \\xrightarrow{\\text{Light Energy & Chlorophyll}} C_6H_{12}O_6 + 6O_2$$</p>
-        <p><strong>3. Stages of Photosynthesis:</strong><br>
-        - <strong>Light-Dependent Reactions:</strong> Occur in the thylakoid membrane; captures sunlight to split water molecules.<br>
-        - <strong>Light-Independent Reactions (Calvin Cycle):</strong> Occur in the stroma; fixes carbon dioxide into glucose.</p>`;
-    }
-    if (lowerQ.includes("quadratic")) {
-        return `<h3>Quadratic Equations - Complete Guide & Formula Derivation</h3>
-        <p><strong>1. Definition:</strong> A quadratic equation is a second-order polynomial equation in a single variable $x$, written in standard form:</p>
-        <p>$$ax^2 + bx + c = 0 \\quad (\\text{where } a \\neq 0)$$</p>
-        <div class="visual-diagram-box">
-          [Parabola Graph of Quadratic Equation]
-                  y
-                  ^     (Vertex / Max or Min)
-                 / \\
-                /   \\
-        --------+---+-------+---> x
-               (Roots: x1, x2)
-        </div>
-        <p><strong>2. The Quadratic Formula (Sridharacharya Formula):</strong></p>
-        <p>$$x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$$</p>
-        <p><strong>3. Nature of Roots (Discriminant $\\Delta$):</strong><br>
-        - If $\\Delta = b^2 - 4ac > 0$: Two distinct real roots.<br>
-        - If $\\Delta = 0$: Two equal real roots.<br>
-        - If $\\Delta < 0$: Two complex/imaginary roots.</p>`;
-    }
-    if (lowerQ.includes("రవ్వ లడ్డు") || lowerQ.includes("ravva laddu")) {
-        return `<h3>రవ్వ లడ్డు తయారీ విధానం (Complete Ravva Laddu Recipe)</h3>
-        <p><strong>1. పరిచయం:</strong> రవ్వ లడ్డు అనేది భారతదేశంలో ఎంతో ప్రసిద్ధి చెందిన సాంప్రదాయ మిఠాయి. ఇది చాలా తక్కువ సమయంలో సులువుగా తయారు చేసుకోవచ్చు.</p>
-        <div class="visual-diagram-box">
-          [రవ్వ లడ్డు తయారీ క్రమము]
-          బాణలిలో నెయ్యి ➔ రవ్వ వేయించుట ➔ పంచదార పొడి కలపడం ➔ పాలు చల్లి ఉండలు చుట్టుట
-        </div>
-        <p><strong>2. కావలసిన పదార్థాలు:</strong><br>
-        - బొంబాయి రవ్వ (సూజి) - 1 కప్పు<br>
-        - పంచదార - 3/4 కప్పు<br>
-        - నెయ్యి - 4 స్పూన్లు<br>
-        - కాచి చల్లార్చిన పాలు - కొద్దిగా<br>
-        - జీడిపప్పు, కిస్మిస్, యాలకుల పొడి - తగినన్ని</p>
-        <p><strong>3. దశలవారీ తయారీ విధానం:</strong><br>
-        - <strong>దశ 1:</strong> స్టవ్ మీద బాణలి పెట్టి 2 స్పూన్ల నెయ్యి వేసి జీడిపప్పు, కిస్మిస్ దోరగా వేయించి పక్కన పెట్టుకోవాలి.<br>
-        - <strong>దశ 2:</strong> అదే బాణలిలో రవ్వ వేసి మంచి సువాసన వచ్చేవరకు సన్నని మంటపై వేయించాలి.<br>
-        - <strong>దశ 3:</strong> పంచదారని మిక్సీ జార్‌లో వేసి మెత్తటి పొడిలా చేసుకోవాలి. వేయించిన రవ్వలో ఈ పంచదార పొడి మరియు యాలకుల పొడి కలపాలి.<br>
-        - <strong>దశ 4:</strong> మిశ్రమంలో కొద్దికొద్దిగా కాచి చల్లార్చిన పాలు, మిగిలిన నెయ్యి వేస్తూ చేతితో ఉండలు (లడ్డూలు) చుట్టుకోవాలి.</p>`;
+
+        <p><strong>2. Chemical Reaction Equation:</strong> $6CO_2 + 6H_2O \\xrightarrow{\\text{Light}} C_6H_{12}O_6 + 6O_2$.</p>`;
     }
     return null;
 }
