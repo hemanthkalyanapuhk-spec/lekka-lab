@@ -3,21 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ask Lucky - AI Study Assistant</title>
-    <!-- Tailwind CSS CDN for styling -->
+    <title>Lekka Lab - Mathematics Study Portal & PDF Library</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col items-center p-4">
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col items-center p-4 md:p-8">
 
-    <div class="w-full max-w-2xl mx-auto space-y-6">
+    <div class="w-full max-w-4xl mx-auto space-y-8">
         
-        <!-- App Header / Input Card -->
-        <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4">
+        <!-- Header Banner -->
+        <header class="text-center space-y-2">
+            <h1 class="text-3xl font-extrabold tracking-tight text-white flex items-center justify-center gap-2">
+                <span>📐</span> Lekka Lab Portal
+            </h1>
+            <p class="text-xs text-slate-400">High School Mathematics Teaching Resources, Assessments & AI Assistant</p>
+        </header>
+
+        <!-- Ask Lucky AI Section -->
+        <section class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4">
+            <div class="flex items-center justify-between">
+                <h2 class="text-sm font-bold tracking-wider text-blue-400 uppercase flex items-center gap-2">
+                    🤖 Ask Lucky Assistant
+                </h2>
+            </div>
             
             <!-- Textarea for User Prompt -->
             <div>
-                <label for="promptInput" class="block text-xs font-semibold tracking-wider text-slate-400 uppercase mb-2">Ask Anything</label>
-                <textarea id="promptInput" rows="3" placeholder="e.g., Explain bpt theorem..." 
+                <textarea id="promptInput" rows="3" placeholder="Ask a math concept, teaching strategy, or search queries..." 
                     class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent resize-none text-sm"></textarea>
             </div>
 
@@ -38,13 +50,12 @@
                 <span class="text-xs text-slate-400 block mb-2 font-medium">Quick Search:</span>
                 <div class="flex flex-wrap gap-2">
                     <button onclick="setQuickSearch('Explain bpt theorem')" class="text-xs bg-slate-800 hover:bg-slate-700 border border-slate-700/60 py-1.5 px-3 rounded-full text-slate-300 transition">📐 BPT Theorem</button>
-                    <button onclick="setQuickSearch('Explain differentiation intuitively')" class="text-xs bg-slate-800 hover:bg-slate-700 border border-slate-700/60 py-1.5 px-3 rounded-full text-slate-300 transition">📈 Differentiation</button>
-                    <button onclick="setQuickSearch('Explain human heart structure and function')" class="text-xs bg-slate-800 hover:bg-slate-700 border border-slate-700/60 py-1.5 px-3 rounded-full text-slate-300 transition">❤️ Human Heart</button>
+                    <button onclick="setQuickSearch('Explain differentiation intuitively to class 9')" class="text-xs bg-slate-800 hover:bg-slate-700 border border-slate-700/60 py-1.5 px-3 rounded-full text-slate-300 transition">📈 Differentiation</button>
+                    <button onclick="setQuickSearch('Explain human heart structure')" class="text-xs bg-slate-800 hover:bg-slate-700 border border-slate-700/60 py-1.5 px-3 rounded-full text-slate-300 transition">❤️ Human Heart</button>
                     <button onclick="setQuickSearch('రవ్వ లడ్డు తయారీ విధానం')" class="text-xs bg-slate-800 hover:bg-slate-700 border border-slate-700/60 py-1.5 px-3 rounded-full text-slate-300 transition">🍬 Ravva Laddu (Telugu)</button>
                 </div>
             </div>
-
-        </div>
+        </section>
 
         <!-- Output / Response Card -->
         <div id="outputCard" class="hidden bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-3">
@@ -57,22 +68,139 @@
             </div>
         </div>
 
-        <!-- Official Textbook Portals Section -->
-        <div class="space-y-3 pt-4">
-            <h2 class="text-sm font-bold tracking-wider text-slate-400 uppercase flex items-center gap-2">
-                📚 OFFICIAL TEXTBOOK PORTALS
-            </h2>
+        <!-- PDF Library Section -->
+        <section class="space-y-4 pt-2">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
+                <h2 class="text-base font-bold tracking-wider text-slate-200 uppercase flex items-center gap-2">
+                    📚 Official PDF Document Library
+                </h2>
+                <!-- Class Filter Tabs -->
+                <div class="flex bg-slate-900 p-1 rounded-xl border border-slate-800 text-xs">
+                    <button onclick="filterClass('all')" id="tab-all" class="px-4 py-2 rounded-lg bg-blue-600 text-white font-medium transition">All Classes</button>
+                    <button onclick="filterClass('class8')" id="tab-class8" class="px-4 py-2 rounded-lg text-slate-400 hover:text-slate-200 transition">Class 8</button>
+                    <button onclick="filterClass('class9')" id="tab-class9" class="px-4 py-2 rounded-lg text-slate-400 hover:text-slate-200 transition">Class 9</button>
+                    <button onclick="filterClass('class10')" id="tab-class10" class="px-4 py-2 rounded-lg text-slate-400 hover:text-slate-200 transition">Class 10</button>
+                </div>
+            </div>
+
+            <!-- PDF Files Grid -->
+            <div id="pdfGrid" class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                
+                <!-- CLASS 8 PDFs -->
+                <div class="pdf-item class8 bg-slate-900 border border-slate-800 rounded-xl p-4 flex items-center justify-between hover:border-slate-700 transition">
+                    <div>
+                        <span class="text-[10px] bg-blue-500/10 text-blue-400 px-2 py-0.5 rounded font-semibold uppercase">Class 8</span>
+                        <h3 class="font-medium text-slate-200 text-sm mt-1">FA-1 Project & Materials</h3>
+                    </div>
+                    <a href="Class 8 FA1 Project.pdf" target="_blank" class="text-xs bg-slate-800 hover:bg-blue-600 text-slate-300 hover:text-white font-medium py-2 px-3 rounded-lg transition">View PDF →</a>
+                </div>
+
+                <div class="pdf-item class8 bg-slate-900 border border-slate-800 rounded-xl p-4 flex items-center justify-between hover:border-slate-700 transition">
+                    <div>
+                        <span class="text-[10px] bg-blue-500/10 text-blue-400 px-2 py-0.5 rounded font-semibold uppercase">Class 8</span>
+                        <h3 class="font-medium text-slate-200 text-sm mt-1">FA-2 Slip Test</h3>
+                    </div>
+                    <a href="class8-fa2-slip-test.pdf" target="_blank" class="text-xs bg-slate-800 hover:bg-blue-600 text-slate-300 hover:text-white font-medium py-2 px-3 rounded-lg transition">View PDF →</a>
+                </div>
+
+                <div class="pdf-item class8 bg-slate-900 border border-slate-800 rounded-xl p-4 flex items-center justify-between hover:border-slate-700 transition">
+                    <div>
+                        <span class="text-[10px] bg-blue-500/10 text-blue-400 px-2 py-0.5 rounded font-semibold uppercase">Class 8</span>
+                        <h3 class="font-medium text-slate-200 text-sm mt-1">FA-3 Generating New Problems</h3>
+                    </div>
+                    <a href="class8-fa3-generating-new-problems.pdf" target="_blank" class="text-xs bg-slate-800 hover:bg-blue-600 text-slate-300 hover:text-white font-medium py-2 px-3 rounded-lg transition">View PDF →</a>
+                </div>
+
+                <div class="pdf-item class8 bg-slate-900 border border-slate-800 rounded-xl p-4 flex items-center justify-between hover:border-slate-700 transition">
+                    <div>
+                        <span class="text-[10px] bg-blue-500/10 text-blue-400 px-2 py-0.5 rounded font-semibold uppercase">Class 8</span>
+                        <h3 class="font-medium text-slate-200 text-sm mt-1">FA-4 Project</h3>
+                    </div>
+                    <a href="class8-fa4-project.pdf" target="_blank" class="text-xs bg-slate-800 hover:bg-blue-600 text-slate-300 hover:text-white font-medium py-2 px-3 rounded-lg transition">View PDF →</a>
+                </div>
+
+                <!-- CLASS 9 PDFs -->
+                <div class="pdf-item class9 bg-slate-900 border border-slate-800 rounded-xl p-4 flex items-center justify-between hover:border-slate-700 transition">
+                    <div>
+                        <span class="text-[10px] bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded font-semibold uppercase">Class 9</span>
+                        <h3 class="font-medium text-slate-200 text-sm mt-1">FA-1 Generating New Problems</h3>
+                    </div>
+                    <a href="class9-fa1-generating-new-problems.pdf" target="_blank" class="text-xs bg-slate-800 hover:bg-emerald-600 text-slate-300 hover:text-white font-medium py-2 px-3 rounded-lg transition">View PDF →</a>
+                </div>
+
+                <div class="pdf-item class9 bg-slate-900 border border-slate-800 rounded-xl p-4 flex items-center justify-between hover:border-slate-700 transition">
+                    <div>
+                        <span class="text-[10px] bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded font-semibold uppercase">Class 9</span>
+                        <h3 class="font-medium text-slate-200 text-sm mt-1">FA-2 Slip Test</h3>
+                    </div>
+                    <a href="class9-fa2-slip-test.pdf" target="_blank" class="text-xs bg-slate-800 hover:bg-emerald-600 text-slate-300 hover:text-white font-medium py-2 px-3 rounded-lg transition">View PDF →</a>
+                </div>
+
+                <div class="pdf-item class9 bg-slate-900 border border-slate-800 rounded-xl p-4 flex items-center justify-between hover:border-slate-700 transition">
+                    <div>
+                        <span class="text-[10px] bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded font-semibold uppercase">Class 9</span>
+                        <h3 class="font-medium text-slate-200 text-sm mt-1">FA-3 Project</h3>
+                    </div>
+                    <a href="class9-fa3-project.pdf" target="_blank" class="text-xs bg-slate-800 hover:bg-emerald-600 text-slate-300 hover:text-white font-medium py-2 px-3 rounded-lg transition">View PDF →</a>
+                </div>
+
+                <div class="pdf-item class9 bg-slate-900 border border-slate-800 rounded-xl p-4 flex items-center justify-between hover:border-slate-700 transition">
+                    <div>
+                        <span class="text-[10px] bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded font-semibold uppercase">Class 9</span>
+                        <h3 class="font-medium text-slate-200 text-sm mt-1">FA-4 Slip Test</h3>
+                    </div>
+                    <a href="class9-fa4-slip-test.pdf" target="_blank" class="text-xs bg-slate-800 hover:bg-emerald-600 text-slate-300 hover:text-white font-medium py-2 px-3 rounded-lg transition">View PDF →</a>
+                </div>
+
+                <!-- CLASS 10 PDFs -->
+                <div class="pdf-item class10 bg-slate-900 border border-slate-800 rounded-xl p-4 flex items-center justify-between hover:border-slate-700 transition">
+                    <div>
+                        <span class="text-[10px] bg-purple-500/10 text-purple-400 px-2 py-0.5 rounded font-semibold uppercase">Class 10</span>
+                        <h3 class="font-medium text-slate-200 text-sm mt-1">FA-1 Project</h3>
+                    </div>
+                    <a href="class10-fa1-project.pdf" target="_blank" class="text-xs bg-slate-800 hover:bg-purple-600 text-slate-300 hover:text-white font-medium py-2 px-3 rounded-lg transition">View PDF →</a>
+                </div>
+
+                <div class="pdf-item class10 bg-slate-900 border border-slate-800 rounded-xl p-4 flex items-center justify-between hover:border-slate-700 transition">
+                    <div>
+                        <span class="text-[10px] bg-purple-500/10 text-purple-400 px-2 py-0.5 rounded font-semibold uppercase">Class 10</span>
+                        <h3 class="font-medium text-slate-200 text-sm mt-1">FA-2 Generating New Problems</h3>
+                    </div>
+                    <a href="class10-fa2-generating-new-problems.pdf" target="_blank" class="text-xs bg-slate-800 hover:bg-purple-600 text-slate-300 hover:text-white font-medium py-2 px-3 rounded-lg transition">View PDF →</a>
+                </div>
+
+                <div class="pdf-item class10 bg-slate-900 border border-slate-800 rounded-xl p-4 flex items-center justify-between hover:border-slate-700 transition">
+                    <div>
+                        <span class="text-[10px] bg-purple-500/10 text-purple-400 px-2 py-0.5 rounded font-semibold uppercase">Class 10</span>
+                        <h3 class="font-medium text-slate-200 text-sm mt-1">FA-3 Slip Test</h3>
+                    </div>
+                    <a href="class10-fa3-slip-test.pdf" target="_blank" class="text-xs bg-slate-800 hover:bg-purple-600 text-slate-300 hover:text-white font-medium py-2 px-3 rounded-lg transition">View PDF →</a>
+                </div>
+
+                <div class="pdf-item class10 bg-slate-900 border border-slate-800 rounded-xl p-4 flex items-center justify-between hover:border-slate-700 transition">
+                    <div>
+                        <span class="text-[10px] bg-purple-500/10 text-purple-400 px-2 py-0.5 rounded font-semibold uppercase">Class 10</span>
+                        <h3 class="font-medium text-slate-200 text-sm mt-1">FA-4 Project</h3>
+                    </div>
+                    <a href="class10-fa4-project.pdf" target="_blank" class="text-xs bg-slate-800 hover:bg-purple-600 text-slate-300 hover:text-white font-medium py-2 px-3 rounded-lg transition">View PDF →</a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Official Textbook Portals Footer Link -->
+        <footer class="space-y-3 pt-4 border-t border-slate-900">
             <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex items-center justify-between shadow-lg">
                 <div class="space-y-1">
-                    <h3 class="font-semibold text-slate-200 text-sm">NCERT Textbooks Portal</h3>
-                    <p class="text-xs text-slate-400">Access official digital textbooks from Class 1 to Class 12 across all subjects.</p>
+                    <h3 class="font-semibold text-slate-200 text-sm">NCERT Official Portal</h3>
+                    <p class="text-xs text-slate-400">Access official digital textbooks across all subjects.</p>
                 </div>
                 <a href="https://ncert.nic.in" target="_blank" rel="noopener noreferrer" 
-                   class="text-xs bg-slate-800 hover:bg-slate-700 text-blue-400 hover:text-blue-300 font-medium py-2 px-3 rounded-xl transition whitespace-nowrap">
+                   class="text-xs bg-slate-800 hover:bg-slate-700 text-blue-400 font-medium py-2 px-3 rounded-xl transition">
                     Visit Portal →
                 </a>
             </div>
-        </div>
+        </footer>
 
     </div>
 
@@ -88,6 +216,28 @@
             document.getElementById('outputCard').classList.add('hidden');
         }
 
+        function filterClass(className) {
+            // Update Tab Styles
+            ['all', 'class8', 'class9', 'class10'].forEach(c => {
+                const btn = document.getElementById(`tab-${c}`);
+                if (c === className) {
+                    btn.className = "px-4 py-2 rounded-lg bg-blue-600 text-white font-medium transition";
+                } else {
+                    btn.className = "px-4 py-2 rounded-lg text-slate-400 hover:text-slate-200 transition";
+                }
+            });
+
+            // Filter Grid Items
+            const items = document.querySelectorAll('.pdf-item');
+            items.forEach(item => {
+                if (className === 'all' || item.classList.contains(className)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
         async function handleAskLucky() {
             const promptInput = document.getElementById('promptInput');
             const outputCard = document.getElementById('outputCard');
@@ -98,7 +248,7 @@
             const query = promptInput.value.trim();
             if (!query) return;
 
-            // 1. Show Loading State & Clear previous errors/hangs
+            // Show Loading State Safely
             outputCard.classList.remove('hidden');
             outputStatusText.textContent = `generating complete answer for: "${query}"`;
             outputContent.innerHTML = `
@@ -110,38 +260,34 @@
             askBtn.classList.add('opacity-50', 'cursor-not-allowed');
 
             try {
-                // Simulating network response delay (Replace this block with real fetch() to your backend API if needed)
+                // Simulating network response delay with guaranteed resolution
                 await new Promise((resolve) => setTimeout(resolve, 1500));
 
-                // Simulated Successful Response Generation
                 outputStatusText.textContent = "Answer Generated Successfully";
                 outputContent.innerHTML = getSimulatedAnswer(query);
 
             } catch (error) {
-                // 2. Robust Error Handler preventing infinite loading
                 console.error("Ask Lucky Error:", error);
                 outputStatusText.textContent = "Request Failed";
-                outputContent.innerHTML = `<span class="text-red-400">⚠️ Sorry, something went wrong or the request timed out. Please check your connection and try again.</span>`;
+                outputContent.innerHTML = `<span class="text-red-400">⚠️ Sorry, something went wrong. Please check your connection and try again.</span>`;
             } finally {
-                // 3. Always guarantees button resets state
                 askBtn.disabled = false;
                 askBtn.classList.remove('opacity-50', 'cursor-not-allowed');
             }
         }
 
-        // Mock generator for common queries
         function getSimulatedAnswer(query) {
             const q = query.toLowerCase();
             if (q.includes('bpt') || q.includes('theorem')) {
                 return `**Basic Proportionality Theorem (Thales Theorem):**\n\nIf a line is drawn parallel to one side of a triangle intersecting the other two sides in distinct points, then the other two sides are divided in the same ratio.\n\n* **Formula:** If DE || BC in triangle ABC, then AD/DB = AE/EC.`;
             } else if (q.includes('differentiation')) {
-                return `**Differentiation (Intuitive Overview):**\n\nDifferentiation measures how a function changes as its input changes—essentially finding the exact rate of change or the slope of a curve at a single point (instantaneous rate of change).`;
+                return `**Differentiation (Intuitive Overview for Class 9):**\n\nDifferentiation measures how a function changes as its input changes—essentially finding the exact rate of change or the slope of a curve at a single point (instantaneous rate of change).`;
             } else if (q.includes('heart') || q.includes('human')) {
-                return `**Human Heart Structure:**\n\nThe human heart is a muscular organ roughly the size of a fist, divided into 4 chambers: two upper chambers (atria) and two lower chambers (ventricles). It pumps oxygenated blood to the body and deoxygenated blood to the lungs.`;
+                return `**Human Heart Structure:**\n\nThe human heart is a muscular organ divided into 4 chambers: two upper chambers (atria) and two lower chambers (ventricles), pumping blood throughout the body.`;
             } else if (q.includes('రవ్వ లడ్డు') || q.includes('laddu')) {
-                return `**రవ్వ లడ్డు తయారీ విధానం:**\n\n1. బాణలిలో నెయ్యి వేసి జీడిపప్పు, కిస్మిస్ వేయించి పక్కన పెట్టుకోవాలి.\n2. అదే నెయ్యిలో బొంబాయి రవ్వ (సూజి) వేసి మంచి సువాసన వచ్చే వరకు వేయించాలి.\n3. తగినంత పంచదార పొడి, యాలకల పొడి కలపాలి.\n4. కొద్దిగా వేడి పాలు లేదా నెయ్యి చిలకరిస్తూ ఉండలుగా చుట్టుకోవాలి.`;
+                return `**రవ్వ లడ్డు తయారీ విధానం:**\n\n1. బాణలిలో నెయ్యి వేసి జీడిపప్పు, కిస్మిస్ వేయించి పక్కన పెట్టుకోవాలి.\n2. అదే నెయ్యిలో బొంబాయి రవ్వ వేసి మంచి సువాసన వచ్చే వరకు వేయించాలి.\n3. పంచదార పొడి, యాలకల పొడి కలపాలి.\n4. వేడి పాలు చిలకరిస్తూ ఉండలుగా చుట్టుకోవాలి.`;
             }
-            return `Here is the generated information regarding "${query}". You can easily wire this function up to connect with your live LLM endpoint if you migrate your backend code.`;
+            return `Here is the generated information regarding "${query}". You can check your uploaded PDFs below for detailed class notes and assessment materials!`;
         }
     </script>
 </body>
