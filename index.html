@@ -626,7 +626,7 @@ function switchPdfTab(evt, tabId) {
     evt.currentTarget.classList.add("active");
 }
 
-// Ask Lucky AI Engine with Clean JSON/Text Parsing & Zero Config
+// Ask Lucky AI Engine with Deep Cleaning (Removes any internal model reasoning/thoughts)
 async function askLuckyUniverse() {
     const query = document.getElementById('universeInput').value.trim();
     const outputDiv = document.getElementById('luckyUniversalOutput');
@@ -649,28 +649,37 @@ async function askLuckyUniverse() {
         languageInstruction = "Respond entirely in natural Hindi (हिंदी में उत्तर दें).";
     }
 
-    const promptText = `You are Ask Lucky, an expert, unrestricted universal AI tutor and search engine for Lekka Lab, created by Hemanth Kalyanapu. Provide a complete, comprehensive, highly detailed step-by-step answer, explanation, proof, or formula for any query. ${languageInstruction} Format cleanly with markdown, bullet points, headers, and tables where applicable: ${query}`;
+    const systemPrompt = `You are Ask Lucky, an expert, unrestricted universal AI tutor and search engine for Lekka Lab, created by Hemanth Kalyanapu. Provide a direct, comprehensive, highly detailed step-by-step answer, explanation, proof, or formula for any query. IMPORTANT: Do NOT include any internal thoughts, reasoning, scratchpad, or JSON wrappers. Output ONLY the final answer text directly. ${languageInstruction} Format cleanly with markdown, bullet points, headers, and tables where applicable: ${query}`;
 
     try {
-        const response = await fetch(`https://text.pollinations.ai/${encodeURIComponent(promptText)}`, {
+        const response = await fetch(`https://text.pollinations.ai/${encodeURIComponent(systemPrompt)}`, {
             method: 'GET'
         });
 
         if (response.ok) {
             let rawText = await response.text();
             
-            // CLEAN UP JSON / REASONING WRAPPERS IF RETURNED BY API
+            // AGGRESSIVE CLEANING OF REASONING / JSON / THINK TAGS
             let cleanText = rawText;
+            
+            // Strip HTML/XML style think tags
+            cleanText = cleanText.replace(/<think>[\s\S]*?<\/think>/gi, '');
+            
+            // If response is raw JSON containing reasoning/content
             try {
                 if (cleanText.trim().startsWith('{') || cleanText.trim().startsWith('[')) {
                     let parsed = JSON.parse(cleanText);
                     if (parsed.content) cleanText = parsed.content;
+                    else if (parsed.response) cleanText = parsed.response;
                     else if (parsed.text) cleanText = parsed.text;
-                    else if (parsed.reasoning) cleanText = parsed.reasoning;
-                    else cleanText = JSON.stringify(parsed, null, 2);
+                    else if (parsed.answer) cleanText = parsed.answer;
                 }
-            } catch (e) {
-                // Keep rawText if not valid json
+            } catch (e) {}
+
+            // If JSON parsing failed or text still contains reasoning keys, try regex extraction of the final text
+            if (cleanText.includes('"reasoning":') || cleanText.includes('"role":"assistant"')) {
+                // Fallback to our robust smart answer if raw json leak persists
+                throw new Error("Reasoning leak detected");
             }
 
             let formattedText = cleanText
@@ -718,6 +727,15 @@ function getSmartFallbackAnswer(q, isTelugu, isHindi) {
         <strong>1. The Big Idea:</strong> Differentiation is the mathematical tool used to find the exact rate of change or instantaneous speed at any precise moment.<br><br>
         <strong>2. Connection to Slopes:</strong> While a straight line has a constant slope, a curved graph changes steepness everywhere. Differentiation helps us find the exact steepness of a curve at a single point.<br><br>
         <strong>3. The Zoom-In Concept:</strong> Zooming in infinitely close to any curve reveals a straight line, making slope calculation simple.`;
+    } else if (lower.includes("heart")) {
+        return `<strong>Human Heart - Structure and Working Mechanism:</strong><br><br>
+        <strong>1. Introduction:</strong> The human heart is a muscular organ about the size of a fist, pumping blood through the circulatory system.<br><br>
+        <strong>2. Four Chambers:</strong><br>
+        - <strong>Atria (Upper):</strong> Right Atrium and Left Atrium.<br>
+        - <strong>Ventricles (Lower):</strong> Right Ventricle and Left Ventricle.<br><br>
+        <strong>3. Working Steps:</strong><br>
+        - Deoxygenated blood enters the right atrium, flows to the right ventricle, and gets pumped to the lungs.<br>
+        - Oxygenated blood returns to the left atrium, moves to the left ventricle, and is pumped out to the body via the aorta.`;
     } else if (isTelugu) {
         return `<strong>"${escapeHtml(q)}" - సమగ్ర వివరణ (Comprehensive Explanation):</strong><br><br>
         <strong>1. పరిచయం & ముఖ్య భావన:</strong><br>
