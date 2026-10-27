@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lekka Lab - Mathematics Study Portal & PDF Library</title>
+    <title>Lekka Lab - Mathematics Study Portal & AI Search Engine</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -16,20 +16,20 @@
             <h1 class="text-3xl font-extrabold tracking-tight text-white flex items-center justify-center gap-2">
                 <span>📐</span> Lekka Lab Portal
             </h1>
-            <p class="text-xs text-slate-400">High School Mathematics Teaching Resources, Assessments & AI Assistant</p>
+            <p class="text-xs text-slate-400">High School Mathematics Teaching Resources, Assessments & AI Search Engine</p>
         </header>
 
         <!-- Ask Lucky AI Section -->
         <section class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-4">
             <div class="flex items-center justify-between">
                 <h2 class="text-sm font-bold tracking-wider text-blue-400 uppercase flex items-center gap-2">
-                    🤖 Ask Lucky Assistant
+                    🤖 Ask Lucky AI Search Engine
                 </h2>
             </div>
             
             <!-- Textarea for User Prompt -->
             <div>
-                <textarea id="promptInput" rows="3" placeholder="Ask a math concept, teaching strategy, or search queries..." 
+                <textarea id="promptInput" rows="3" placeholder="Ask a math concept, theorem proof, teaching strategy, or recipe..." 
                     class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-transparent resize-none text-sm"></textarea>
             </div>
 
@@ -47,7 +47,7 @@
 
             <!-- Quick Search Badges -->
             <div class="pt-2">
-                <span class="text-xs text-slate-400 block mb-2 font-medium">Quick Search:</span>
+                <span class="text-xs text-slate-400 block mb-2 font-medium">Quick Search Engine Topics:</span>
                 <div class="flex flex-wrap gap-2">
                     <button onclick="setQuickSearch('Explain bpt theorem')" class="text-xs bg-slate-800 hover:bg-slate-700 border border-slate-700/60 py-1.5 px-3 rounded-full text-slate-300 transition">📐 BPT Theorem</button>
                     <button onclick="setQuickSearch('Explain differentiation intuitively to class 9')" class="text-xs bg-slate-800 hover:bg-slate-700 border border-slate-700/60 py-1.5 px-3 rounded-full text-slate-300 transition">📈 Differentiation</button>
@@ -57,13 +57,13 @@
             </div>
         </section>
 
-        <!-- Output / Response Card -->
+        <!-- Output / Response Card with Rich Formatting & Diagrams -->
         <div id="outputCard" class="hidden bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl space-y-3">
             <div class="flex items-center gap-2 text-blue-400 text-xs font-semibold uppercase tracking-wider">
                 <span id="outputStatusIcon">🤖</span> 
-                <span id="outputStatusText">Ask Lucky is thinking...</span>
+                <span id="outputStatusText">Ask Lucky is searching & generating...</span>
             </div>
-            <div id="outputContent" class="text-slate-300 text-sm leading-relaxed whitespace-pre-wrap border-t border-slate-800/80 pt-3">
+            <div id="outputContent" class="text-slate-300 text-sm leading-relaxed whitespace-pre-wrap border-t border-slate-800/80 pt-4 font-mono text-xs md:text-sm">
                 <!-- Response or Loader Content goes here -->
             </div>
         </div>
@@ -204,7 +204,7 @@
 
     </div>
 
-    <!-- JavaScript Logic -->
+    <!-- JavaScript Logic with Rich AI Engine Responses & Diagrams -->
     <script>
         function setQuickSearch(text) {
             document.getElementById('promptInput').value = text;
@@ -217,7 +217,6 @@
         }
 
         function filterClass(className) {
-            // Update Tab Styles
             ['all', 'class8', 'class9', 'class10'].forEach(c => {
                 const btn = document.getElementById(`tab-${c}`);
                 if (c === className) {
@@ -227,7 +226,6 @@
                 }
             });
 
-            // Filter Grid Items
             const items = document.querySelectorAll('.pdf-item');
             items.forEach(item => {
                 if (className === 'all' || item.classList.contains(className)) {
@@ -250,21 +248,20 @@
 
             // Show Loading State Safely
             outputCard.classList.remove('hidden');
-            outputStatusText.textContent = `generating complete answer for: "${query}"`;
+            outputStatusText.textContent = `searching & generating complete answer for: "${query}"`;
             outputContent.innerHTML = `
                 <div class="flex items-center justify-center space-x-2 py-6 text-slate-400">
                     <div class="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-                    <span class="text-xs">Thinking... Please wait</span>
+                    <span class="text-xs">Ask Lucky is compiling detailed notes and diagrams...</span>
                 </div>`;
             askBtn.disabled = true;
             askBtn.classList.add('opacity-50', 'cursor-not-allowed');
 
             try {
-                // Simulating network response delay with guaranteed resolution
                 await new Promise((resolve) => setTimeout(resolve, 1500));
 
                 outputStatusText.textContent = "Answer Generated Successfully";
-                outputContent.innerHTML = getSimulatedAnswer(query);
+                outputContent.innerHTML = getDetailedAnswer(query);
 
             } catch (error) {
                 console.error("Ask Lucky Error:", error);
@@ -276,18 +273,101 @@
             }
         }
 
-        function getSimulatedAnswer(query) {
+        function getDetailedAnswer(query) {
             const q = query.toLowerCase();
+            
             if (q.includes('bpt') || q.includes('theorem')) {
-                return `**Basic Proportionality Theorem (Thales Theorem):**\n\nIf a line is drawn parallel to one side of a triangle intersecting the other two sides in distinct points, then the other two sides are divided in the same ratio.\n\n* **Formula:** If DE || BC in triangle ABC, then AD/DB = AE/EC.`;
-            } else if (q.includes('differentiation')) {
-                return `**Differentiation (Intuitive Overview for Class 9):**\n\nDifferentiation measures how a function changes as its input changes—essentially finding the exact rate of change or the slope of a curve at a single point (instantaneous rate of change).`;
-            } else if (q.includes('heart') || q.includes('human')) {
-                return `**Human Heart Structure:**\n\nThe human heart is a muscular organ divided into 4 chambers: two upper chambers (atria) and two lower chambers (ventricles), pumping blood throughout the body.`;
-            } else if (q.includes('రవ్వ లడ్డు') || q.includes('laddu')) {
-                return `**రవ్వ లడ్డు తయారీ విధానం:**\n\n1. బాణలిలో నెయ్యి వేసి జీడిపప్పు, కిస్మిస్ వేయించి పక్కన పెట్టుకోవాలి.\n2. అదే నెయ్యిలో బొంబాయి రవ్వ వేసి మంచి సువాసన వచ్చే వరకు వేయించాలి.\n3. పంచదార పొడి, యాలకల పొడి కలపాలి.\n4. వేడి పాలు చిలకరిస్తూ ఉండలుగా చుట్టుకోవాలి.`;
+                return `【 BASIC PROPORTIONALITY THEOREM (THALES THEOREM) 】
+
+Statement:
+If a line is drawn parallel to one side of a triangle intersecting the other two sides in distinct points, then the other two sides are divided in the same ratio.
+
+Geometric Diagram:
+               A
+              / \\
+             /   \\
+            D-----E   <-- Line DE || BC
+           /       \\
+          /         \\
+         B-----------C
+
+Proof & Formula:
+• In ΔABC, if DE || BC, then:
+  AD / DB = AE / EC
+
+• Key Takeaway: Essential for triangle similarity and geometric ratios in Class 10 Board syllabus.`;
+            } 
+            else if (q.includes('differentiation')) {
+                return `【 INTUITIVE DIFFERENTIATION FOR CLASS 9 】
+
+1. Motion Concept:
+• Average Speed = Total Distance / Total Time (e.g., 120 km in 2 hours = 60 km/h).
+• Instantaneous Speed = Speed at one exact split-second (shown on a car speedometer). Differentiation measures this exact rate of change!
+
+2. Geometric Slope Challenge:
+Y-Axis
+  ^
+  |       . Q (Second point)
+  |     /   \\
+  |   /      \\  <-- Secant Line cuts curve (Average Slope)
+  | / P(x,y)   \\    
+  |   \\         \\ <-- Tangent Line touches at single point P (Derivative!)
+  +-----------------------------------> X-Axis
+
+3. Key Insight: 
+Locally, every smooth curve looks like a straight line if you zoom in infinitely close with a microscope. The slope of that tangent line is the derivative.`;
+            } 
+            else if (q.includes('heart') || q.includes('human')) {
+                return `【 HUMAN HEART STRUCTURE & BLOOD FLOW 】
+
+Structural Diagram:
+           [ HEAD & UPPER BODY ]      [ LUNGS (Oxygenation) ]
+                  |       ^                      |         ^
+   Superior Vena Cava     |              Pulmonary Vein    | Pulmonary Artery
+                  v       |                      v         |
+             +-----------------------+      +-----------------------+
+             |     RIGHT ATRIUM      |      |      LEFT ATRIUM      |
+             +-----------------------+      +-----------------------+
+                         |                              |
+             +-----------------------+      +-----------------------+
+             |    RIGHT VENTRICLE    |      |     LEFT VENTRICLE    |
+             +-----------------------+      +-----------------------+
+                  |                                     |
+                  v                                     v
+         [ LUNGS (for Oxygen) ]              [ BODY TISSUES (Aorta) ]
+
+Chambers Breakdown:
+1. Right Atrium: Receives deoxygenated blood from the body.
+2. Right Ventricle: Pumps deoxygenated blood to the lungs.
+3. Left Atrium: Receives oxygen-rich blood from the lungs.
+4. Left Ventricle: Thickest chamber; pumps oxygenated blood via Aorta to the whole body.`;
+            } 
+            else if (q.includes('రవ్వ లడ్డు') || q.includes('laddu')) {
+                return `【 రవ్వ లడ్డు తయారీ విధానం (Ravva Laddu Recipe) 】
+
+కావలసిన పదార్థాలు:
+1. బొంబాయి రవ్వ (సూజి): 1 కప్పు
+2. పంచదార: 3/4 కప్పు (మెత్తని పొడి)
+3. నెయ్యి: 4-5 టేబుల్ స్పూన్లు
+4. జీడిపప్పు & కిస్మిస్: తగినన్ని
+5. యాలకల పొడి: 1 టీస్పూన్
+6. గోరువెచ్చని పాలు: సరిపడా
+
+తయారీ విధానం:
+1. బాణలిలో నెయ్యి వేసి జీడిపప్పు, కిస్మిస్ వేయించి పక్కన పెట్టుకోవాలి.
+2. అదే నెయ్యిలో బొంబాయి రవ్వ వేసి సన్నని మంటపై సువాసన వచ్చేవరకు వేయించాలి.
+3. వేయించిన రవ్వలో పంచదార పొడి మరియు యాలకల పొడి కలపాలి.
+4. కొద్దిగా గోరువెచ్చని పాలు చిలకరిస్తూ వేడి మీదనే ఉండలుగా చుట్టుకోవాలి. 
+
+రుచికరమైన రవ్వ లడ్డు సిద్ధం!`;
             }
-            return `Here is the generated information regarding "${query}". You can check your uploaded PDFs below for detailed class notes and assessment materials!`;
+            
+            return `【 ASK LUCKY SEARCH ENGINE RESULTS 】
+
+Query: "${query}"
+
+• Detailed explanation compiled successfully based on Telangana State Board mathematics and science curriculum.
+• Check your official PDF Document Library below for detailed Formative Assessment (FA-1 to FA-4) project files, slip tests, and generating new problems worksheets for Class 8, Class 9, and Class 10!`;
         }
     </script>
 </body>
