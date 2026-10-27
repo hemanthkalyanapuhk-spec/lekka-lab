@@ -361,19 +361,19 @@ footer .architect { color: var(--accent-glow); font-weight: 800; font-size: 17px
             <h3>✨ Ask Lucky (Universal AI Engine)</h3>
             <span class="online-badge">ONLINE (ChatGPT / Gemini Mode)</span>
         </div>
-        <p>Ask any question, diagram explanation, math formula, table, or topic in <strong>English, Telugu, or Hindi</strong>. Get instant, unrestricted step-by-step answers automatically!</p>
+        <p>Ask any question, BPT theorem, differentiation, math formula, or topic in <strong>English, Telugu, or Hindi</strong>. Get instant, unrestricted step-by-step answers automatically!</p>
         
         <div class="ai-input-group">
-            <input id="universeInput" type="text" placeholder="Ask anything (e.g., Introduction to differentiation for class 9, Human heart)..." autocomplete="off" />
+            <input id="universeInput" type="text" placeholder="Ask anything (e.g., Explain bpt theorem, Differentiation, రవ్వ లడ్డు)..." autocomplete="off" />
             <button class="btn-ai" onclick="askLuckyUniverse()">Ask Lucky</button>
             <button class="btn-clear" onclick="clearLuckyUniverse()">Clear</button>
         </div>
 
         <div class="chips-row">
             <span style="color: #94a3b8; font-size: 12px; align-self: center;">Quick Search:</span>
+            <span class="chip" onclick="quickAsk('Explain bpt theorem')">📐 BPT Theorem</span>
             <span class="chip" onclick="quickAsk('Introduction to differentiation for class 9')">📈 Differentiation</span>
             <span class="chip" onclick="quickAsk('Human heart diagram and detailed explanation')">❤️ Human Heart</span>
-            <span class="chip" onclick="quickAsk('Pythagoras theorem proof with steps')">📐 Pythagoras Theorem</span>
             <span class="chip" onclick="quickAsk('రవ్వ లడ్డు తయారీ విధానం')">🍬 Ravva Laddu (Telugu)</span>
         </div>
         
@@ -616,29 +616,6 @@ footer .architect { color: var(--accent-glow); font-weight: 800; font-size: 17px
 </footer>
 
 <script>
-// --- EMBEDDED MULTI-KEY POOL SYSTEM (Silent Background Rotation - Zero Configuration for Students) ---
-const REVERSED_KEYS = [
-    "wRx686xH8WCwF-XvD2T0D0uXrlUHfE7RPQ37-dE92o3J6NR8bA.QA",
-    "QaAL98-uBQ-q_AV-L8wF-aGMgG9N6tWYP20yZmZ8VDeUK6NR8bA.QA",
-    "gKhlvdmDruiSGIjgILiFYJOjGMFAQ4qJdflWwzrykhXiMq_J6NR8bA.QA",
-    "QF5v9bmiryxO-XrGf7t71k7yun5F2Cd7lY8DPRP1GwC06NR8bA.QA",
-    "g2pdzDhMCFECeWtMWh5BBDrcVdYiW0lWcLix9L-r5tfgkGJ6NR8bA.QA",
-    "gfiatm481_ChX67TDvWPnp_9yrxgZCndsdSldLtlaFMTJ6NR8bA.QA",
-    "QhFROf3Z4L3uJJ37QnIeVGEclpnzZRyR2z51ispW9kKnY6NR8bA.QA",
-    "gR6-SFZPFluIbxbaN_b.VQFfW7k7jdbfiqlAzhszdPbJVJ6NR8bA.QA",
-    "wPnjpvGbCtnDcCh6MY3NTnlJaK-d9NSobY3FAY4PD4aSI6NR8bA.QA",
-    "QQ7E7nLDzvU9dWs95KxBXUovRTt1vAGr1YyAlYWLlLaJ6NR8bA.QA"
-];
-
-const GEMINI_API_KEYS = REVERSED_KEYS.map(k => k.split('').reverse().join(''));
-let currentKeyIndex = 0;
-
-function getNextApiKey() {
-    const key = GEMINI_API_KEYS[currentKeyIndex];
-    currentKeyIndex = (currentKeyIndex + 1) % GEMINI_API_KEYS.length;
-    return key;
-}
-
 // PDF Vault Tab Switcher for Class Buttons
 function switchPdfTab(evt, tabId) {
     const panels = document.getElementsByClassName("pdf-panel");
@@ -649,7 +626,7 @@ function switchPdfTab(evt, tabId) {
     evt.currentTarget.classList.add("active");
 }
 
-// Ask Lucky AI Engine with Unrestricted ChatGPT/Gemini Capabilities & Automatic Language Detection
+// Ask Lucky AI Engine with Zero Config & Public AI Integration (No API keys needed for students)
 async function askLuckyUniverse() {
     const query = document.getElementById('universeInput').value.trim();
     const outputDiv = document.getElementById('luckyUniversalOutput');
@@ -662,7 +639,6 @@ async function askLuckyUniverse() {
     outputDiv.style.display = 'block';
     outputDiv.innerHTML = `<span style="color: #38bdf8;">🤖 Ask Lucky is thinking...</span> generating complete answer for: <strong>"${escapeHtml(query)}"</strong>`;
 
-    // Smart Multi-Language Detection (Telugu, Hindi, or English by default)
     const isTelugu = /[\u0C00-\u0C7F]/.test(query) || query.toLowerCase().includes('telugu') || query.toLowerCase().includes('తెలుగు');
     const isHindi = /[\u0900-\u097F]/.test(query) || query.toLowerCase().includes('hindi') || query.toLowerCase().includes('हिंदी');
     
@@ -673,54 +649,32 @@ async function askLuckyUniverse() {
         languageInstruction = "Respond entirely in natural Hindi (हिंदी में उत्तर दें).";
     }
 
-    const systemPrompt = `You are Ask Lucky, an expert, unrestricted universal AI tutor and search engine for Lekka Lab, created by Hemanth Kalyanapu. You possess capabilities identical to ChatGPT and Gemini. Provide complete, comprehensive, highly detailed answers, explanations, diagrams descriptions, step-by-step proofs, formulas, tables, posters/invitation ideas, or general chat responses for any query without any limitations. ${languageInstruction} Format cleanly with markdown, bullet points, headers, and tables where applicable: ${query}`;
+    const promptText = `You are Ask Lucky, an expert, unrestricted universal AI tutor and search engine for Lekka Lab, created by Hemanth Kalyanapu. Provide a complete, comprehensive, highly detailed step-by-step answer, explanation, proof, or formula for any query. ${languageInstruction} Format cleanly with markdown, bullet points, headers, and tables where applicable: ${query}`;
 
-    let success = false;
-    let dataResult = null;
-    let attempts = 0;
-    const maxAttempts = GEMINI_API_KEYS.length;
+    try {
+        const response = await fetch(`https://text.pollinations.ai/${encodeURIComponent(promptText)}`, {
+            method: 'GET'
+        });
 
-    while (!success && attempts < maxAttempts) {
-        const activeKey = getNextApiKey();
-        attempts++;
-        try {
-            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${activeKey}`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    contents: [{ parts: [{ text: systemPrompt }] }]
-                })
-            });
+        if (response.ok) {
+            let rawText = await response.text();
+            let formattedText = rawText
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                .replace(/\n/g, '<br>');
 
-            if (response.ok) {
-                const data = await response.json();
-                let rawText = data.candidates[0].content.parts[0].text;
-                
-                // Clean formatting and convert markdown to clean HTML tags
-                let formattedText = rawText
-                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                    .replace(/\*(.*?)\*/g, '<em>$1</em>')
-                    .replace(/\n/g, '<br>');
-
-                dataResult = formattedText;
-                success = true;
-            }
-        } catch (err) {
-            console.warn(`Key attempt ${attempts} failed, trying next key...`);
+            outputDiv.innerHTML = `
+                <strong>✨ Ask Lucky AI Solution:</strong><br><br>
+                ${formattedText}
+                <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid #334155; font-size: 13px; color: #94a3b8; display: flex; justify-content: space-between; align-items: center;">
+                    <span>💡 Powered by Lekka Lab & AI Engine</span>
+                    <button onclick="navigator.clipboard.writeText(this.parentElement.previousElementSibling.previousElementSibling.innerText); alert('Answer copied to clipboard!');" style="background:#1e293b; color:#38bdf8; border:1px solid #475569; padding:4px 10px; border-radius:6px; cursor:pointer; font-size:11px;">Copy Answer</button>
+                </div>
+            `;
+        } else {
+            throw new Error("API request failed");
         }
-    }
-
-    if (success && dataResult) {
-        outputDiv.innerHTML = `
-            <strong>✨ Ask Lucky AI Solution:</strong><br><br>
-            ${dataResult}
-            <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid #334155; font-size: 13px; color: #94a3b8; display: flex; justify-content: space-between; align-items: center;">
-                <span>💡 Powered by Lekka Lab & Gemini AI</span>
-                <button onclick="navigator.clipboard.writeText(this.parentElement.previousElementSibling.previousElementSibling.innerText); alert('Answer copied to clipboard!');" style="background:#1e293b; color:#38bdf8; border:1px solid #475569; padding:4px 10px; border-radius:6px; cursor:pointer; font-size:11px;">Copy Answer</button>
-            </div>
-        `;
-    } else {
-        // Ultimate fallback if keys get exhausted: dynamic smart generation so students never see a failure notice
+    } catch (err) {
         let fallbackAns = getSmartFallbackAnswer(query, isTelugu, isHindi);
         outputDiv.innerHTML = `
             <strong>✨ Ask Lucky AI Solution:</strong><br><br>
@@ -735,17 +689,20 @@ async function askLuckyUniverse() {
 
 function getSmartFallbackAnswer(q, isTelugu, isHindi) {
     let lower = q.toLowerCase();
-    if (lower.includes("differentiation") || lower.includes("calculus")) {
+    if (lower.includes("bpt") || lower.includes("thales")) {
+        return `<strong>Basic Proportionality Theorem (BPT / Thales Theorem):</strong><br><br>
+        <strong>1. Statement:</strong> If a line is drawn parallel to one side of a triangle intersecting the other two sides, then the other two sides are divided in the same ratio.<br><br>
+        <strong>2. Given & To Prove:</strong> In $\\triangle ABC$, line $DE \\parallel BC$. To prove that $\\frac{AD}{DB} = \\frac{AE}{EC}$.<br><br>
+        <strong>3. Proof Steps:</strong><br>
+        - Join vertices B and C to E and D respectively.<br>
+        - Draw perpendiculars $EN \\perp AB$ and $DM \\perp AC$.<br>
+        - Compare areas of triangles $\\triangle ADE$ and $\\triangle BDE$, and $\\triangle ADE$ and $\\triangle CDE$.<br>
+        - Since $\\triangle BDE$ and $\\triangle CDE$ share the same base DE and lie between the same parallel lines, their areas are equal. Hence, the ratios are proved equal.`;
+    } else if (lower.includes("differentiation")) {
         return `<strong>Introduction to Differentiation for Class 9 Students:</strong><br><br>
-        <strong>1. The Big Idea (Average vs. Instant Speed):</strong><br>
-        - Imagine a car trip of 100 km that takes 2 hours. Your average speed is 50 km/h. But did you maintain that exact speed the whole time? No! You stopped at traffic signals and sped up on highways.<br>
-        - <strong>Differentiation</strong> is the mathematical superpower that tells us your exact speed at one precise split-second.<br><br>
-        <strong>2. Connecting to Graphs (Slopes):</strong><br>
-        - In Class 9, you learn that a straight line has a constant slope (steepness) = Change in y / Change in x.<br>
-        - On a curved graph (like a hill or roller coaster), the steepness changes everywhere.<br>
-        - Differentiation simply finds the <strong>exact steepness of a curve at one single point</strong>.<br><br>
-        <strong>3. The Zoom-In Trick:</strong><br>
-        - If you look at a curved slide from afar, it bends. But if you zoom in infinitely close to a tiny spot on that curve, it looks like a straight line! Once it's a straight line, finding its slope is easy.`;
+        <strong>1. The Big Idea:</strong> Differentiation is the mathematical tool used to find the exact rate of change or instantaneous speed at any precise moment.<br><br>
+        <strong>2. Connection to Slopes:</strong> While a straight line has a constant slope, a curved graph changes steepness everywhere. Differentiation helps us find the exact steepness of a curve at a single point.<br><br>
+        <strong>3. The Zoom-In Concept:</strong> Zooming in infinitely close to any curve reveals a straight line, making slope calculation simple.`;
     } else if (isTelugu) {
         return `<strong>"${escapeHtml(q)}" - సమగ్ర వివరణ (Comprehensive Explanation):</strong><br><br>
         <strong>1. పరిచయం & ముఖ్య భావన:</strong><br>
