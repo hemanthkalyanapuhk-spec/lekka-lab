@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0f172a">
 <title>Lekka Lab | Universal Search & Learning Hub</title>
-<meta name="description" content="Welcome to Lekka Lab. Complete student hub with AI Ask Lucky search engine and class-organized PDF vault for FA assessments.">
+<meta name="description" content="Welcome to Lekka Lab. Powered by advanced universal AI search engine for precise step-by-step solutions to any query in English, Telugu, and Hindi.">
 
 <style>
 :root {
@@ -358,10 +358,10 @@ footer .architect { color: var(--accent-glow); font-weight: 800; font-size: 17px
     <!-- Ask Lucky AI Engine Box -->
     <div class="ask-lucky-box">
         <div class="ask-lucky-header">
-            <h3>✨ Ask Lucky (Instant Smart AI Engine)</h3>
-            <span class="online-badge">READY (Zero Configuration)</span>
+            <h3>✨ Ask Lucky (Universal AI Engine)</h3>
+            <span class="online-badge">ONLINE (ChatGPT / Gemini Mode)</span>
         </div>
-        <p>Ask any topic, BPT theorem, differentiation, math formula, or concept in <strong>English, Telugu, or Hindi</strong>. Get instant, comprehensive answers!</p>
+        <p>Ask any question, BPT theorem, differentiation, math formula, or topic in <strong>English, Telugu, or Hindi</strong>. Get instant, unrestricted step-by-step answers automatically!</p>
         
         <div class="ai-input-group">
             <input id="universeInput" type="text" placeholder="Ask anything (e.g., Explain bpt theorem, Differentiation, రవ్వ లడ్డు)..." autocomplete="off" />
@@ -626,7 +626,7 @@ function switchPdfTab(evt, tabId) {
     evt.currentTarget.classList.add("active");
 }
 
-// Ask Lucky AI Engine with Zero Config & Public AI Integration
+// Ask Lucky AI Engine with Clean JSON/Text Parsing & Zero Config
 async function askLuckyUniverse() {
     const query = document.getElementById('universeInput').value.trim();
     const outputDiv = document.getElementById('luckyUniversalOutput');
@@ -658,7 +658,22 @@ async function askLuckyUniverse() {
 
         if (response.ok) {
             let rawText = await response.text();
-            let formattedText = rawText
+            
+            // CLEAN UP JSON / REASONING WRAPPERS IF RETURNED BY API
+            let cleanText = rawText;
+            try {
+                if (cleanText.trim().startsWith('{') || cleanText.trim().startsWith('[')) {
+                    let parsed = JSON.parse(cleanText);
+                    if (parsed.content) cleanText = parsed.content;
+                    else if (parsed.text) cleanText = parsed.text;
+                    else if (parsed.reasoning) cleanText = parsed.reasoning;
+                    else cleanText = JSON.stringify(parsed, null, 2);
+                }
+            } catch (e) {
+                // Keep rawText if not valid json
+            }
+
+            let formattedText = cleanText
                 .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
                 .replace(/\*(.*?)\*/g, '<em>$1</em>')
                 .replace(/\n/g, '<br>');
