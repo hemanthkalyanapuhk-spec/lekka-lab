@@ -9,6 +9,10 @@
 
 <!-- Marked.js for Markdown Rendering -->
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.js"></script>
+<!-- KaTeX for Professional Math & Formula Rendering -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
 
 <style>
 :root {
@@ -639,7 +643,7 @@ function switchPdfTab(evt, tabId) {
     evt.currentTarget.classList.add("active");
 }
 
-// Master Detailed Search Engine with True SVG Proof Diagrams
+// Master Detailed Search Engine with True SVG Proof Diagrams & KaTeX Support
 async function askLuckyUniverse() {
     let rawQuery = document.getElementById('universeInput').value.trim();
     const outputDiv = document.getElementById('luckyUniversalOutput');
@@ -666,6 +670,13 @@ async function askLuckyUniverse() {
                     <button onclick="navigator.clipboard.writeText(this.parentElement.previousElementSibling.innerText); alert('Answer copied to clipboard!');" style="background:#1e293b; color:#38bdf8; border:1px solid #475569; padding:4px 10px; border-radius:6px; cursor:pointer; font-size:11px;">Copy Answer</button>
                 </div>
             `;
+            // Auto-render KaTeX math elements
+            renderMathInElement(outputDiv, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
         }, 300);
         return;
     }
@@ -688,6 +699,12 @@ async function askLuckyUniverse() {
                     <button onclick="navigator.clipboard.writeText(this.parentElement.previousElementSibling.innerText); alert('Answer copied to clipboard!');" style="background:#1e293b; color:#38bdf8; border:1px solid #475569; padding:4px 10px; border-radius:6px; cursor:pointer; font-size:11px;">Copy Answer</button>
                 </div>
             `;
+            renderMathInElement(outputDiv, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ]
+            });
         } else {
             throw new Error("API failed");
         }
@@ -705,7 +722,7 @@ async function askLuckyUniverse() {
     }
 }
 
-// Master Database with Clean SVG Proof Diagrams
+// Master Database with Clean SVG Proof Diagrams & Formatted Math Expressions
 function getVectorDiagramMasterResult(lowerQ, q) {
     if (lowerQ.includes("bpt") || lowerQ.includes("thales")) {
         return `<h3>Basic Proportionality Theorem (BPT / Thales Theorem)</h3>
