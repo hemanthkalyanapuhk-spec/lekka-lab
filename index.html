@@ -5,13 +5,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0f172a">
-
-<title>Lekka Lab | Universal Search & Learning Hub</title>
-<meta name="description" content="Lekka Lab — student learning resources, exam PDFs and Ask Lucky AI.">
+<title>Lekka Lab | Learning Hub</title>
+<meta name="description" content="Lekka Lab: student learning resources, exam PDFs and Ask Lucky AI.">
 
 <style>
 :root {
-  --bg: #f8fafc;
+  --bg: #f1f5f9;
   --card: #ffffff;
   --text: #0f172a;
   --muted: #64748b;
@@ -22,103 +21,109 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: var(--bg);
   color: var(--text);
+  background: var(--bg);
   line-height: 1.6;
 }
 header {
-  padding: 24px 16px;
-  text-align: center;
-  color: white;
   background: #0f172a;
+  color: white;
+  text-align: center;
+  padding: 28px 16px;
 }
 header h1 { margin: 0; font-size: 30px; }
-header p { margin: 8px 0 0; color: #cbd5e1; }
+header p { color: #cbd5e1; margin-bottom: 0; }
 nav {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 22px;
   padding: 14px;
   background: #1e293b;
 }
-nav a {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-}
-main {
-  width: min(1100px, 100%);
-  margin: auto;
-  padding: 20px 14px 40px;
-}
+nav a { color: white; text-decoration: none; font-weight: bold; }
+main { max-width: 1150px; margin: auto; padding: 18px; }
 section {
-  margin: 22px 0;
-  padding: 20px;
+  margin: 20px 0;
+  padding: 22px;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 16px;
 }
 h2 { margin-top: 0; }
 .muted { color: var(--muted); }
-input, select, textarea, button {
-  font: inherit;
-}
+input, select, textarea, button { font: inherit; }
 input, select, textarea {
   width: 100%;
   padding: 12px;
   border: 1px solid #cbd5e1;
   border-radius: 9px;
   background: white;
-  color: #0f172a;
+  color: var(--text);
 }
-button, .action {
+button, .open-pdf {
   display: inline-block;
+  padding: 11px 16px;
   border: 0;
   border-radius: 9px;
-  padding: 11px 16px;
   background: var(--primary);
   color: white;
   font-weight: bold;
-  cursor: pointer;
   text-decoration: none;
+  cursor: pointer;
 }
 button:disabled { opacity: .6; cursor: wait; }
-button:hover, .action:hover { filter: brightness(.92); }
 .filters {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 10px;
-  margin: 16px 0;
+  margin: 18px 0;
+}
+.class-heading {
+  margin: 30px 0 14px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  color: white;
+  background: #1e293b;
+}
+.fa-heading {
+  margin: 18px 0 10px;
+  padding-bottom: 7px;
+  border-bottom: 2px solid var(--border);
+  color: #1d4ed8;
 }
 .pdf-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
+  gap: 12px;
 }
 .pdf-card {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
   padding: 15px;
   border: 1px solid var(--border);
   border-radius: 12px;
+  background: white;
   overflow-wrap: anywhere;
 }
-.pdf-card h3 { font-size: 16px; margin: 0 0 8px; }
-.pdf-card p { font-size: 13px; color: var(--muted); }
-.pdf-card .action { width: 100%; text-align: center; }
+.pdf-card h4 { margin: 0; font-size: 16px; }
+.pdf-card p { margin: 0; color: var(--muted); font-size: 12px; }
+.pdf-card .open-pdf { text-align: center; margin-top: auto; }
 #aiQuestion { min-height: 110px; resize: vertical; }
 #aiAnswer {
-  margin-top: 16px;
+  margin-top: 14px;
   padding: 14px;
-  border-radius: 10px;
   background: #f1f5f9;
+  border-radius: 10px;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
 }
 footer {
-  text-align: center;
   padding: 24px;
+  text-align: center;
   background: #0f172a;
-  color: #cbd5e1;
+  color: white;
 }
 [hidden] { display: none !important; }
 </style>
@@ -127,7 +132,7 @@ footer {
 <body>
 <header>
   <h1>📘 Lekka Lab</h1>
-  <p>Your Learning Hub — Study, Practice and Explore</p>
+  <p>Your Universal Search &amp; Learning Hub</p>
 </header>
 
 <nav>
@@ -139,46 +144,44 @@ footer {
 <main>
   <section id="home">
     <h2>Welcome to Lekka Lab</h2>
-    <p>Find your exam materials and use Ask Lucky AI for learning support.</p>
+    <p>Learn, practise and prepare for your examinations with Lekka Lab.</p>
   </section>
 
   <!-- ASK LUCKY AI -->
   <section id="ask-lucky">
     <h2>🤖 Ask Lucky AI</h2>
-    <p class="muted">
-      Ask a question to receive an explanation from your configured AI backend.
-    </p>
+    <p class="muted">Ask a question and get a response from your configured AI backend.</p>
 
     <form id="aiForm">
-      <label for="aiQuestion">Your question</label>
+      <label for="aiQuestion">Enter your question</label>
       <textarea id="aiQuestion" required
         placeholder="Type your question here..."></textarea>
-      <p>
-        <button id="aiSubmit" type="submit">Ask Lucky</button>
-      </p>
+      <p><button id="aiButton" type="submit">Ask Lucky</button></p>
     </form>
 
-    <div id="aiStatus" role="status" aria-live="polite"></div>
+    <p id="aiStatus" role="status" aria-live="polite"></p>
     <div id="aiAnswer" hidden></div>
   </section>
 
   <!-- PDF VAULT -->
   <section id="pdf-vault">
     <h2>📚 PDF Vault</h2>
-    <p class="muted">Class 8, Class 9 and Class 10 examination materials.</p>
+    <p class="muted">
+      Class 8, Class 9 and Class 10 — FA1 to FA4 examination materials.
+    </p>
 
     <div class="filters">
       <input id="pdfSearch" type="search"
-        placeholder="Search PDF files..." aria-label="Search PDFs">
+        placeholder="🔍 Search PDFs..." aria-label="Search PDFs">
 
-      <select id="classFilter" aria-label="Filter class">
+      <select id="classFilter" aria-label="Select class">
         <option value="all">All Classes</option>
         <option value="8">Class 8</option>
         <option value="9">Class 9</option>
         <option value="10">Class 10</option>
       </select>
 
-      <select id="faFilter" aria-label="Filter FA">
+      <select id="faFilter" aria-label="Select FA">
         <option value="all">All FAs</option>
         <option value="1">FA1</option>
         <option value="2">FA2</option>
@@ -186,46 +189,38 @@ footer {
         <option value="4">FA4</option>
       </select>
 
-      <select id="typeFilter" aria-label="Filter material">
+      <select id="typeFilter" aria-label="Select material type">
         <option value="all">All Materials</option>
+        <option value="generating-new-problems">Generating New Problems</option>
         <option value="project">Project</option>
         <option value="slip-test">Slip Test</option>
-        <option value="generating-new-problems">Generating New Problems</option>
       </select>
     </div>
 
     <p id="pdfCount" class="muted" aria-live="polite"></p>
-    <div id="pdfList" class="pdf-grid"></div>
+    <div id="pdfList"></div>
     <p id="pdfEmpty" hidden>No matching PDFs found.</p>
   </section>
 </main>
 
 <footer>
-  <p>© <span id="year"></span> Lekka Lab | Learning for Everyone</p>
+  <p>© <span id="year"></span> Lekka Lab. All rights reserved.</p>
 </footer>
 
 <script>
 "use strict";
 
-/*
-  ASK LUCKY AI CONFIGURATION
+/* ==========================================
+   ASK LUCKY AI
+   Enter your existing Cloudflare Worker URL.
+   Never put your private API key in this file.
+   ========================================== */
 
-  Replace the placeholder below with your existing Cloudflare Worker URL.
-  This frontend expects the Worker to accept POST JSON:
-      { "question": "..." }
-
-  Expected successful response:
-      { "answer": "..." }
-
-  Adapt the response parsing if your existing Worker uses another format.
-  NEVER put a secret API key in this public HTML file.
-*/
 const LUCKY_API_URL = "YOUR_CLOUDFLARE_WORKER_URL";
 
-/* ---------- Ask Lucky AI ---------- */
 const aiForm = document.getElementById("aiForm");
 const aiQuestion = document.getElementById("aiQuestion");
-const aiSubmit = document.getElementById("aiSubmit");
+const aiButton = document.getElementById("aiButton");
 const aiStatus = document.getElementById("aiStatus");
 const aiAnswer = document.getElementById("aiAnswer");
 
@@ -235,15 +230,16 @@ aiForm.addEventListener("submit", async function(event) {
   const question = aiQuestion.value.trim();
   if (!question) return;
 
-  if (!LUCKY_API_URL.startsWith("https://")) {
+  if (!/^https:\/\//i.test(LUCKY_API_URL) ||
+      LUCKY_API_URL === "YOUR_CLOUDFLARE_WORKER_URL") {
     aiStatus.textContent =
-      "Setup required: add your HTTPS Cloudflare Worker URL to LUCKY_API_URL.";
+      "Setup required: configure your Cloudflare Worker URL in the code.";
     aiAnswer.hidden = true;
     return;
   }
 
-  aiSubmit.disabled = true;
-  aiStatus.textContent = "Lucky is preparing your answer...";
+  aiButton.disabled = true;
+  aiStatus.textContent = "Connecting to Ask Lucky AI...";
   aiAnswer.hidden = true;
 
   try {
@@ -256,64 +252,71 @@ aiForm.addEventListener("submit", async function(event) {
     const data = await response.json();
 
     if (!response.ok) {
-      throw new Error(data.error || "The AI service returned an error.");
+      throw new Error(data.error || "AI service request failed.");
     }
 
     const answer = data.answer || data.response || data.text;
 
     if (typeof answer !== "string" || !answer.trim()) {
-      throw new Error("The backend returned no readable answer.");
+      throw new Error("No answer was returned by the backend.");
     }
 
     aiAnswer.textContent = answer;
     aiAnswer.hidden = false;
-    aiStatus.textContent = "Answer ready.";
+    aiStatus.textContent = "Answer received.";
   } catch (error) {
     aiStatus.textContent =
-      "Could not get an answer: " + error.message +
-      " Check your Worker URL, backend and network connection.";
+      "Unable to get an answer. Check your Worker URL, backend and network.";
+    console.error("Ask Lucky error:", error);
   } finally {
-    aiSubmit.disabled = false;
+    aiButton.disabled = false;
   }
 });
 
-/* ---------- PDF Vault ---------- */
+
+/* ==========================================
+   PDF VAULT
+   Display order:
+   Class 8 → Class 9 → Class 10
+   FA1 → FA2 → FA3 → FA4
+   Generating New Problems → Project → Slip Test
+   ========================================== */
+
+const materialTypes = [
+  {
+    type: "generating-new-problems",
+    label: "Generating New Problems"
+  },
+  {
+    type: "project",
+    label: "Project"
+  },
+  {
+    type: "slip-test",
+    label: "Slip Test"
+  }
+];
+
 const pdfs = [];
 
-/*
-  All standard filenames below follow your repository listing.
-  The Class 8 FA1 Project has a special filename with spaces.
-*/
 for (const cls of [8, 9, 10]) {
   for (const fa of [1, 2, 3, 4]) {
-    for (const type of [
-      "project",
-      "slip-test",
-      "generating-new-problems"
-    ]) {
+    for (const material of materialTypes) {
       let filename;
-      let title;
 
-      if (cls === 8 && fa === 1 && type === "project") {
+      if (cls === 8 && fa === 1 && material.type === "project") {
         filename = "Class 8 FA1 Project.pdf";
-        title = "Class 8 FA1 Project";
-      } else if (type === "project") {
-        filename = `class${cls}-fa${fa}-project.pdf`;
-        title = `Class ${cls} FA${fa} Project`;
-      } else if (type === "slip-test") {
-        filename = `class${cls}-fa${fa}-slip-test.pdf`;
-        title = `Class ${cls} FA${fa} Slip Test`;
       } else {
-        filename = `class${cls}-fa${fa}-generating-new-problems.pdf`;
-        title = `Class ${cls} FA${fa} Generating New Problems`;
+        filename = `class${cls}-fa${fa}-${material.type}.pdf`;
       }
 
       pdfs.push({
         cls: String(cls),
         fa: String(fa),
-        type,
+        type: material.type,
+        label: material.label,
         filename,
-        title
+        title: `FA${fa} ${material.label}`
       });
     }
   }
@@ -327,44 +330,91 @@ const pdfList = document.getElementById("pdfList");
 const pdfCount = document.getElementById("pdfCount");
 const pdfEmpty = document.getElementById("pdfEmpty");
 
+function makePdfCard(pdf) {
+  const card = document.createElement("article");
+  card.className = "pdf-card";
+
+  const heading = document.createElement("h4");
+  heading.textContent = `📄 ${pdf.title}`;
+
+  const filename = document.createElement("p");
+  filename.textContent = pdf.filename;
+
+  const link = document.createElement("a");
+  link.className = "open-pdf";
+  link.href = "./" + encodeURIComponent(pdf.filename);
+  link.target = "_blank";
+  link.rel = "noopener";
+  link.textContent = "Open PDF ↗";
+
+  card.append(heading, filename, link);
+  return card;
+}
+
 function renderPDFs() {
   const query = pdfSearch.value.trim().toLowerCase();
 
   const filtered = pdfs.filter(pdf =>
-    (classFilter.value === "all" || pdf.cls === classFilter.value) &&
-    (faFilter.value === "all" || pdf.fa === faFilter.value) &&
-    (typeFilter.value === "all" || pdf.type === typeFilter.value) &&
-    (pdf.title.toLowerCase().includes(query) ||
-     pdf.filename.toLowerCase().includes(query))
+    (classFilter.value === "all" ||
+      pdf.cls === classFilter.value) &&
+    (faFilter.value === "all" ||
+      pdf.fa === faFilter.value) &&
+    (typeFilter.value === "all" ||
+      pdf.type === typeFilter.value) &&
+    (`class ${pdf.cls} fa${pdf.fa} ${pdf.label} ${pdf.filename}`)
+      .toLowerCase().includes(query)
+  );
+
+  // Sort by class, then FA, then material type.
+  const typeOrder = {
+    "generating-new-problems": 0,
+    "project": 1,
+    "slip-test": 2
+  };
+
+  filtered.sort((a, b) =>
+    Number(a.cls) - Number(b.cls) ||
+    Number(a.fa) - Number(b.fa) ||
+    typeOrder[a.type] - typeOrder[b.type]
   );
 
   pdfList.replaceChildren();
 
+  let currentClass = "";
+  let currentFA = "";
+  let group = null;
+
   filtered.forEach(pdf => {
-    const card = document.createElement("article");
-    card.className = "pdf-card";
+    if (pdf.cls !== currentClass) {
+      currentClass = pdf.cls;
+      currentFA = "";
 
-    const heading = document.createElement("h3");
-    heading.textContent = "📄 " + pdf.title;
+      const classHeading = document.createElement("h3");
+      classHeading.className = "class-heading";
+      classHeading.textContent = `📚 Class ${currentClass}`;
+      pdfList.appendChild(classHeading);
+    }
 
-    const filename = document.createElement("p");
-    filename.textContent = pdf.filename;
+    if (pdf.fa !== currentFA) {
+      currentFA = pdf.fa;
 
-    const link = document.createElement("a");
-    link.className = "action";
-    link.href = "./" + encodeURIComponent(pdf.filename);
-    link.target = "_blank";
-    link.rel = "noopener";
-    link.textContent = "Open PDF";
+      const faHeading = document.createElement("h4");
+      faHeading.className = "fa-heading";
+      faHeading.textContent = `FA${currentFA}`;
+      pdfList.appendChild(faHeading);
 
-    card.append(heading, filename, link);
-    pdfList.appendChild(card);
+      group = document.createElement("div");
+      group.className = "pdf-grid";
+      pdfList.appendChild(group);
+    }
+
+    group.appendChild(makePdfCard(pdf));
   });
 
   pdfCount.textContent =
     `Showing ${filtered.length} of ${pdfs.length} PDF entries`;
 
-  pdfEmpty.hidden = filtered.length > 0;
+  pdfEmpty.hidden = filtered.length !== 0;
 }
 
 [pdfSearch, classFilter, faFilter, typeFilter].forEach(element => {
@@ -373,6 +423,7 @@ function renderPDFs() {
 });
 
 document.getElementById("year").textContent = new Date().getFullYear();
+
 renderPDFs();
 </script>
 </body>
