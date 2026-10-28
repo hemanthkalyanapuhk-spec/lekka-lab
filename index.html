@@ -24,7 +24,7 @@
 * { box-sizing:border-box; }
 body {
   margin:0;
-  font-family:Arial, sans-serif;
+  font-family:Arial,sans-serif;
   background:var(--bg);
   color:var(--primary);
   line-height:1.7;
@@ -59,6 +59,7 @@ input {
 }
 select { background:#090d16; color:white; border:1px solid #475569; }
 button { cursor:pointer; border:0; font-weight:bold; }
+button:disabled { opacity:.6; cursor:wait; }
 .ask-btn { background:var(--accent); color:white; }
 .clear-btn { background:#475569; color:white; }
 .chips { display:flex; flex-wrap:wrap; gap:8px; margin-top:15px; }
@@ -79,7 +80,11 @@ button { cursor:pointer; border:0; font-weight:bold; }
 #answer td,#answer th { border:1px solid #64748b; padding:8px; }
 #answer a { color:var(--glow); }
 .section-title { margin-top:35px; font-size:20px; }
-.cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:15px; }
+.cards {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:15px;
+}
 .card {
   display:block;
   background:white;
@@ -138,27 +143,28 @@ footer {
 
   <form id="askForm">
     <div class="input-row">
-      <input id="question" placeholder="Ask any question..." required>
+      <input id="question" maxlength="4000"
+        placeholder="Ask any question..." required>
       <select id="language" aria-label="Answer language">
         <option value="auto">Same as question</option>
         <option value="English">English</option>
         <option value="Telugu">తెలుగు</option>
         <option value="Hindi">हिन्दी</option>
       </select>
-      <button class="ask-btn" id="askButton">Ask Lucky</button>
+      <button class="ask-btn" id="askButton" type="submit">Ask Lucky</button>
       <button class="clear-btn" type="button" id="clearButton">Clear</button>
     </div>
   </form>
 
   <div class="chips">
-    <button class="chip" data-question="Explain BPT theorem with a detailed step-by-step proof.">BPT Theorem</button>
-    <button class="chip" data-question="Explain the quadratic formula with derivation and an example.">Quadratic Formula</button>
-    <button class="chip" data-question="Explain Ohm's law with formula and an example.">Ohm's Law</button>
-    <button class="chip" data-question="రవ్వ లడ్డు తయారీ విధానాన్ని తెలుగులో వివరించండి.">రవ్వ లడ్డు</button>
+    <button type="button" class="chip" data-question="Explain BPT theorem with a detailed step-by-step proof.">BPT Theorem</button>
+    <button type="button" class="chip" data-question="Explain the quadratic formula with derivation and an example.">Quadratic Formula</button>
+    <button type="button" class="chip" data-question="Explain Ohm's law with formula and an example.">Ohm's Law</button>
+    <button type="button" class="chip" data-question="రవ్వ లడ్డు తయారీ విధానాన్ని తెలుగులో వివరించండి.">రవ్వ లడ్డు</button>
   </div>
 
   <div id="answer" aria-live="polite"></div>
-  <p id="status">AI status: checking connection…</p>
+  <p id="status">Checking Cloudflare connection...</p>
 </section>
 
 <h2 class="section-title">📚 Official Textbook Portals</h2>
@@ -174,13 +180,13 @@ footer {
 </div>
 
 <h2 class="section-title">📂 Class-wise PDF Vault</h2>
-<p>Keep your original PDF files in the correct folder. This code does not change or delete them.</p>
+<p>Original PDF files remain unchanged. Keep these files in the same folder as this page.</p>
 
 <section class="vault">
   <div class="tabs">
-    <button class="tab active" data-tab="class10">Class 10</button>
-    <button class="tab" data-tab="class9">Class 9</button>
-    <button class="tab" data-tab="class8">Class 8</button>
+    <button type="button" class="tab active" data-tab="class10">Class 10</button>
+    <button type="button" class="tab" data-tab="class9">Class 9</button>
+    <button type="button" class="tab" data-tab="class8">Class 8</button>
   </div>
   <div id="class10" class="panel active"></div>
   <div id="class9" class="panel"></div>
@@ -191,6 +197,10 @@ footer {
 <footer>LEKKA LAB • Learn step by step</footer>
 
 <script>
+// Cloudflare Worker URL: public URL is okay; never put API keys here.
+const WORKER_URL =
+  "https://rough-shape-40e0.hemanthkalyanapu-hk.workers.dev";
+
 const questionInput = document.getElementById("question");
 const answerBox = document.getElementById("answer");
 const askButton = document.getElementById("askButton");
@@ -213,40 +223,50 @@ async function askLuckyUniverse() {
   showMessage("Ask Lucky is preparing your answer...");
 
   try {
-    // This endpoint must be provided by your secure AI backend.
-    const response = await fetch("/api/ask-lucky", {
+    const response = await fetch(WORKER_URL + "/api/ask", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        question: question,
+        question,
         language: document.getElementById("language").value
       })
     });
 
+    const contentType = response.headers.get("content-type") || "";
+    if (!contentType.includes("application/json")) {
+      throw new Error(
+        "Worker returned non-JSON (HTTP " + response.status +
+        "). Check the deployed Worker endpoint."
+      );
+    }
+
     const data = await response.json();
 
     if (!response.ok) {
-      throw new Error(data.error || "AI service is not available.");
+      throw new Error(data.error || "AI service unavailable.");
     }
-    if (!data.answer) {
-      throw new Error("The AI service returned an empty answer.");
+    if (typeof data.answer !== "string" || !data.answer.trim()) {
+      throw new Error("Worker did not return an answer.");
     }
 
     answerBox.innerHTML = DOMPurify.sanitize(marked.parse(data.answer));
+    answerBox.style.display = "block";
 
     renderMathInElement(answerBox, {
       delimiters: [
-        {left:"$$",right:"$$",display:true},
-        {left:"$",right:"$",display:false},
-        {left:"\\(",right:"\\)",display:false},
-        {left:"\\[",right:"\\]",display:true}
+        {left:"$$", right:"$$", display:true},
+        {left:"$", right:"$", display:false},
+        {left:"\\(", right:"\\)", display:false},
+        {left:"\\[", right:"\\]", display:true}
       ],
       throwOnError:false
     });
+
   } catch (error) {
     showMessage(
-      error.message +
-      "\n\nTo generate detailed AI answers, configure and run the secure backend. This HTML alone is not an AI model."
+      "Ask Lucky connection error: " + error.message +
+      "\n\nCheck the Worker deployment, /api/ask endpoint, CORS origin, " +
+      "and AI configuration."
     );
   } finally {
     askButton.disabled = false;
@@ -284,14 +304,15 @@ document.querySelectorAll("[data-tab]").forEach(button => {
   });
 });
 
-// Create class-wise links without touching the actual PDF files.
+// Keep the original PDF filenames and link structure.
 for (const classNumber of [8, 9, 10]) {
   const panel = document.getElementById("class" + classNumber);
 
   for (let fa = 1; fa <= 4; fa++) {
     const heading = document.createElement("div");
     heading.className = "category";
-    heading.textContent = "Formative Assessment " + fa + " (FA" + fa + ")";
+    heading.textContent =
+      "Formative Assessment " + fa + " (FA" + fa + ")";
     panel.appendChild(heading);
 
     for (const type of [
@@ -325,22 +346,21 @@ for (const classNumber of [8, 9, 10]) {
       panel.appendChild(item);
     }
   }
-}
+});
 
-// Test whether a backend health endpoint exists.
-fetch("/api/health")
-  .then(response => {
-    if (!response.ok) throw new Error("Backend unavailable");
-    return response.json();
-  })
-  .then(data => {
-    statusText.textContent = data.aiConfigured
-      ? "AI backend connected"
-      : "Backend connected, but API key is not configured";
+// Health check uses the Cloudflare Worker, not GitHub Pages /api/health.
+fetch(WORKER_URL + "/")
+  .then(async response => {
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error("HTTP " + response.status);
+
+    statusText.textContent = data.status === "ok"
+      ? "Cloudflare connected • Ask Lucky ready for testing"
+      : "Cloudflare reached • check AI endpoint configuration";
   })
   .catch(() => {
     statusText.textContent =
-      "AI backend not connected — setup is required for AI answers";
+      "Cloudflare connection check failed. Check Worker deployment.";
   });
 </script>
 </body>
