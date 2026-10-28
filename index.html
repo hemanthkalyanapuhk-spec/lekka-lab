@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0f172a">
 <title>Lekka Lab | Learning Hub</title>
-<meta name="description" content="Lekka Lab: student learning resources, exam PDFs and Ask Lucky AI.">
+<meta name="description" content="Lekka Lab student learning resources, exam PDFs and Ask Lucky AI.">
 
 <style>
 :root {
@@ -21,15 +21,15 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  color: var(--text);
   background: var(--bg);
+  color: var(--text);
   line-height: 1.6;
 }
 header {
-  background: #0f172a;
-  color: white;
   text-align: center;
   padding: 28px 16px;
+  color: white;
+  background: #0f172a;
 }
 header h1 { margin: 0; font-size: 30px; }
 header p { color: #cbd5e1; margin-bottom: 0; }
@@ -144,13 +144,12 @@ footer {
 <main>
   <section id="home">
     <h2>Welcome to Lekka Lab</h2>
-    <p>Learn, practise and prepare for your examinations with Lekka Lab.</p>
+    <p>Learn, practise and prepare for your examinations.</p>
   </section>
 
-  <!-- ASK LUCKY AI -->
   <section id="ask-lucky">
     <h2>🤖 Ask Lucky AI</h2>
-    <p class="muted">Ask a question and get a response from your configured AI backend.</p>
+    <p class="muted">Ask a question using your configured AI backend.</p>
 
     <form id="aiForm">
       <label for="aiQuestion">Enter your question</label>
@@ -163,11 +162,10 @@ footer {
     <div id="aiAnswer" hidden></div>
   </section>
 
-  <!-- PDF VAULT -->
   <section id="pdf-vault">
     <h2>📚 PDF Vault</h2>
     <p class="muted">
-      Class 8, Class 9 and Class 10 — FA1 to FA4 examination materials.
+      Class 8, Class 9 and Class 10 — FA1 to FA4.
     </p>
 
     <div class="filters">
@@ -210,11 +208,12 @@ footer {
 <script>
 "use strict";
 
-/* ==========================================
+/* ======================================
    ASK LUCKY AI
-   Enter your existing Cloudflare Worker URL.
-   Never put your private API key in this file.
-   ========================================== */
+   Replace this with your Cloudflare
+   Worker URL. Never add secret API keys
+   to public HTML.
+   ====================================== */
 
 const LUCKY_API_URL = "YOUR_CLOUDFLARE_WORKER_URL";
 
@@ -233,7 +232,7 @@ aiForm.addEventListener("submit", async function(event) {
   if (!/^https:\/\//i.test(LUCKY_API_URL) ||
       LUCKY_API_URL === "YOUR_CLOUDFLARE_WORKER_URL") {
     aiStatus.textContent =
-      "Setup required: configure your Cloudflare Worker URL in the code.";
+      "Please configure your Cloudflare Worker URL first.";
     aiAnswer.hidden = true;
     return;
   }
@@ -258,7 +257,7 @@ aiForm.addEventListener("submit", async function(event) {
     const answer = data.answer || data.response || data.text;
 
     if (typeof answer !== "string" || !answer.trim()) {
-      throw new Error("No answer was returned by the backend.");
+      throw new Error("No readable answer was returned.");
     }
 
     aiAnswer.textContent = answer;
@@ -274,48 +273,49 @@ aiForm.addEventListener("submit", async function(event) {
 });
 
 
-/* ==========================================
+/* ======================================
    PDF VAULT
-   Display order:
-   Class 8 → Class 9 → Class 10
-   FA1 → FA2 → FA3 → FA4
-   Generating New Problems → Project → Slip Test
-   ========================================== */
+   Ordered by class, FA, and material.
+   ====================================== */
 
 const materialTypes = [
-  {
-    type: "generating-new-problems",
-    label: "Generating New Problems"
-  },
-  {
-    type: "project",
-    label: "Project"
-  },
-  {
-    type: "slip-test",
-    label: "Slip Test"
-  }
+  { type: "generating-new-problems", label: "Generating New Problems" },
+  { type: "project", label: "Project" },
+  { type: "slip-test", label: "Slip Test" }
 ];
+
+/*
+  Exact filename overrides based on your repository list.
+  Add further overrides here whenever a filename differs.
+*/
+const specialFiles = {
+  "8-1-generating-new-problems": "FA-1 Generating New Problems.pdf",
+  "8-1-project": "Class 8 FA1 Project.pdf",
+  "8-1-slip-test": "FA-1 Slip Test.pdf",
+  "9-3-generating-new-problems": "Class9-fa3-generating-new-Problems.pdf"
+};
+
+function getPdfFilename(cls, fa, type) {
+  const key = `${cls}-${fa}-${type}`;
+
+  if (specialFiles[key]) {
+    return specialFiles[key];
+  }
+
+  return `class${cls}-fa${fa}-${type}.pdf`;
+}
 
 const pdfs = [];
 
 for (const cls of [8, 9, 10]) {
   for (const fa of [1, 2, 3, 4]) {
     for (const material of materialTypes) {
-      let filename;
-
-      if (cls === 8 && fa === 1 && material.type === "project") {
-        filename = "Class 8 FA1 Project.pdf";
-      } else {
-        filename = `class${cls}-fa${fa}-${material.type}.pdf`;
-      }
-
       pdfs.push({
         cls: String(cls),
         fa: String(fa),
         type: material.type,
         label: material.label,
-        filename,
+        filename: getPdfFilename(cls, fa, material.type),
         title: `FA${fa} ${material.label}`
       });
     }
@@ -355,17 +355,13 @@ function renderPDFs() {
   const query = pdfSearch.value.trim().toLowerCase();
 
   const filtered = pdfs.filter(pdf =>
-    (classFilter.value === "all" ||
-      pdf.cls === classFilter.value) &&
-    (faFilter.value === "all" ||
-      pdf.fa === faFilter.value) &&
-    (typeFilter.value === "all" ||
-      pdf.type === typeFilter.value) &&
+    (classFilter.value === "all" || pdf.cls === classFilter.value) &&
+    (faFilter.value === "all" || pdf.fa === faFilter.value) &&
+    (typeFilter.value === "all" || pdf.type === typeFilter.value) &&
     (`class ${pdf.cls} fa${pdf.fa} ${pdf.label} ${pdf.filename}`)
       .toLowerCase().includes(query)
   );
 
-  // Sort by class, then FA, then material type.
   const typeOrder = {
     "generating-new-problems": 0,
     "project": 1,
@@ -382,33 +378,33 @@ function renderPDFs() {
 
   let currentClass = "";
   let currentFA = "";
-  let group = null;
+  let currentGrid = null;
 
   filtered.forEach(pdf => {
     if (pdf.cls !== currentClass) {
       currentClass = pdf.cls;
       currentFA = "";
 
-      const classHeading = document.createElement("h3");
-      classHeading.className = "class-heading";
-      classHeading.textContent = `📚 Class ${currentClass}`;
-      pdfList.appendChild(classHeading);
+      const heading = document.createElement("h3");
+      heading.className = "class-heading";
+      heading.textContent = `📚 Class ${currentClass}`;
+      pdfList.appendChild(heading);
     }
 
     if (pdf.fa !== currentFA) {
       currentFA = pdf.fa;
 
-      const faHeading = document.createElement("h4");
-      faHeading.className = "fa-heading";
-      faHeading.textContent = `FA${currentFA}`;
-      pdfList.appendChild(faHeading);
+      const heading = document.createElement("h4");
+      heading.className = "fa-heading";
+      heading.textContent = `FA${currentFA}`;
+      pdfList.appendChild(heading);
 
-      group = document.createElement("div");
-      group.className = "pdf-grid";
-      pdfList.appendChild(group);
+      currentGrid = document.createElement("div");
+      currentGrid.className = "pdf-grid";
+      pdfList.appendChild(currentGrid);
     }
 
-    group.appendChild(makePdfCard(pdf));
+    currentGrid.appendChild(makePdfCard(pdf));
   });
 
   pdfCount.textContent =
@@ -423,7 +419,6 @@ function renderPDFs() {
 });
 
 document.getElementById("year").textContent = new Date().getFullYear();
-
 renderPDFs();
 </script>
 </body>
