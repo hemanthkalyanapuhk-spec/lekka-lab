@@ -1,761 +1,347 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#0f172a">
-<title>Lekka Lab | Universal Search & Learning Hub</title>
-<meta name="description" content="Welcome to Lekka Lab. Powered by advanced universal AI search engine for precise step-by-step solutions to any query from KG to PG in English, Telugu, and Hindi.">
+<title>Lekka Lab | Ask Lucky AI</title>
 
-<!-- Marked.js for Markdown Rendering -->
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.js"></script>
-<!-- KaTeX for Professional Math & Formula Rendering -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
 
 <style>
 :root {
-  --primary: #0f172a;
-  --primary-light: #1e293b;
-  --accent: #2563eb;
-  --accent-glow: #38bdf8;
-  --bg: #f8fafc;
-  --card-bg: #ffffff;
-  --text: #0f172a;
-  --text-muted: #64748b;
-  --border: #e2e8f0;
-  --radius: 16px;
-  --shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+  --primary:#0f172a;
+  --accent:#2563eb;
+  --glow:#38bdf8;
+  --bg:#f8fafc;
+  --border:#e2e8f0;
 }
-
-* { box-sizing: border-box; }
-
-html { scroll-behavior: smooth; }
+* { box-sizing:border-box; }
 body {
-  margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.7;
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:var(--bg);
+  color:var(--primary);
+  line-height:1.7;
 }
-
 header {
-  background: var(--primary);
-  color: white;
-  text-align: center;
-  padding: 45px 20px;
-  border-bottom: 4px solid var(--accent);
+  background:var(--primary);
+  color:white;
+  text-align:center;
+  padding:35px 15px;
+  border-bottom:4px solid var(--accent);
 }
-
-.hub-eyebrow {
-  font-size: 11px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--accent-glow);
-  margin-bottom: 8px;
-  font-weight: 800;
+header h1 { margin:5px; font-size:40px; }
+header h1 span { color:var(--glow); }
+header p { color:#cbd5e1; }
+.container { max-width:1050px; margin:25px auto; padding:0 15px; }
+.ask-box {
+  background:linear-gradient(135deg,#0f172a,#1e293b);
+  color:white;
+  padding:25px;
+  border-radius:16px;
 }
-
-header h1 {
-  margin: 0;
-  font-size: clamp(32px, 5vw, 48px);
-  color: #ffffff;
+.ask-box h2 { color:var(--glow); }
+.ask-box p { color:#cbd5e1; }
+.input-row { display:flex; gap:10px; flex-wrap:wrap; }
+input,select,button { font:inherit; padding:12px; border-radius:9px; }
+input {
+  flex:1;
+  min-width:180px;
+  background:#090d16;
+  color:white;
+  border:1px solid #475569;
 }
-
-header h1 span { color: var(--accent-glow); }
-
-.sub-tagline {
-  margin-top: 10px;
-  font-size: 14px;
-  color: #94a3b8;
+select { background:#090d16; color:white; border:1px solid #475569; }
+button { cursor:pointer; border:0; font-weight:bold; }
+.ask-btn { background:var(--accent); color:white; }
+.clear-btn { background:#475569; color:white; }
+.chips { display:flex; flex-wrap:wrap; gap:8px; margin-top:15px; }
+.chip { background:#334155; color:white; font-size:13px; }
+#answer {
+  display:none;
+  margin-top:20px;
+  background:#090d16;
+  color:#f1f5f9;
+  padding:20px;
+  border-left:5px solid var(--glow);
+  border-radius:10px;
+  overflow-wrap:anywhere;
+  overflow-x:auto;
 }
-
-.container {
-  max-width: 1100px;
-  margin: 35px auto;
-  padding: 0 20px;
+#answer h1,#answer h2,#answer h3 { color:var(--glow); }
+#answer table { border-collapse:collapse; width:100%; }
+#answer td,#answer th { border:1px solid #64748b; padding:8px; }
+#answer a { color:var(--glow); }
+.section-title { margin-top:35px; font-size:20px; }
+.cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:15px; }
+.card {
+  display:block;
+  background:white;
+  color:var(--primary);
+  padding:20px;
+  border:1px solid var(--border);
+  border-radius:13px;
+  text-decoration:none;
 }
-
-/* Ask Lucky Search Engine Box */
-.ask-lucky-box {
-  background: linear-gradient(135deg, #0f172a, #1e293b);
-  color: white;
-  padding: 30px;
-  border-radius: var(--radius);
-  box-shadow: 0 15px 40px rgba(15, 23, 42, 0.25);
-  margin-bottom: 40px;
-  border: 1px solid #334155;
+.card:hover { border-color:var(--accent); }
+.vault {
+  background:white;
+  padding:18px;
+  border:1px solid var(--border);
+  border-radius:13px;
 }
-
-.ask-lucky-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
-}
-
-.ask-lucky-header h3 {
-  margin: 0;
-  color: var(--accent-glow);
-  font-size: 22px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.online-badge {
-  background: #059669;
-  color: white;
-  font-size: 11px;
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-weight: 800;
-  box-shadow: 0 0 12px rgba(5, 150, 105, 0.4);
-}
-
-.ask-lucky-box p {
-  color: #cbd5e1;
-  font-size: 14px;
-  margin-bottom: 18px;
-}
-
-.ai-input-group {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.ai-input-group input {
-  flex: 1;
-  min-width: 260px;
-  padding: 15px 18px;
-  border-radius: 12px;
-  border: 1px solid #475569;
-  background: #090d16;
-  color: white;
-  font-size: 15px;
-  outline: none;
-  transition: border-color 0.2s;
-}
-
-.ai-input-group input:focus { border-color: var(--accent-glow); }
-
-.btn-ai {
-  background: var(--accent);
-  color: white;
-  border: none;
-  padding: 15px 28px;
-  border-radius: 12px;
-  font-weight: 700;
-  cursor: pointer;
-  font-size: 15px;
-  transition: filter 0.2s, transform 0.1s;
-}
-.btn-ai:hover { filter: brightness(1.1); transform: translateY(-1px); }
-.btn-clear { background: #334155; color: #cbd5e1; border: none; padding: 15px 20px; border-radius: 12px; font-weight: 600; cursor: pointer; }
-.btn-clear:hover { background: #475569; }
-
-#luckyUniversalOutput {
-  margin-top: 20px;
-  background: #090d16;
-  padding: 22px;
-  border-radius: 12px;
-  display: none;
-  border-left: 5px solid var(--accent-glow);
-  font-size: 15px;
-  line-height: 1.8;
-  color: #f1f5f9;
-  overflow-x: auto;
-}
-
-#luckyUniversalOutput table { width: 100%; border-collapse: collapse; margin: 15px 0; }
-#luckyUniversalOutput th, #luckyUniversalOutput td { border: 1px solid #475569; padding: 10px 14px; text-align: left; }
-#luckyUniversalOutput th { background: #1e293b; color: #38bdf8; }
-
-.chips-row {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-top: 14px;
-}
-
-.chip {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #e2e8f0;
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-size: 12px;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-.chip:hover { background: rgba(56, 189, 248, 0.2); border-color: var(--accent-glow); }
-
-/* Section Styling */
-.section-title {
-  font-size: 18px;
-  text-transform: uppercase;
-  color: var(--primary);
-  margin: 40px 0 16px 4px;
-  font-weight: 800;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.grid-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 18px;
-}
-
-.portal-card {
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 22px 24px;
-  box-shadow: var(--shadow);
-  text-decoration: none;
-  color: var(--text);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  transition: transform 0.2s, border-color 0.2s;
-}
-.portal-card:hover {
-  transform: translateY(-3px);
-  border-color: var(--accent);
-}
-
-.portal-header {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 12px;
-}
-
-.portal-icon {
-  font-size: 28px;
-  background: #eff6ff;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 12px;
-}
-
-.portal-info h3 { margin: 0; font-size: 17px; color: var(--primary); }
-.portal-info p { margin: 4px 0 0 0; font-size: 13px; color: var(--text-muted); }
-
-.portal-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 15px;
-  padding-top: 12px;
-  border-top: 1px solid var(--border);
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--accent);
-}
-
-/* Class-Organized PDF Vault Styling */
-.pdf-vault-box {
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 24px;
-  box-shadow: var(--shadow);
-  margin-top: 15px;
-}
-
-.pdf-tabs {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-  border-bottom: 2px solid var(--border);
-  padding-bottom: 12px;
-  flex-wrap: wrap;
-}
-
-.pdf-tab-btn {
-  background: #f1f5f9;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 10px;
-  font-weight: 700;
-  cursor: pointer;
-  color: var(--text-muted);
-  font-size: 15px;
-  transition: all 0.2s;
-}
-.pdf-tab-btn.active {
-  background: var(--accent);
-  color: white;
-}
-
-.pdf-panel { display: none; }
-.pdf-panel.active { display: block; }
-
-.pdf-category-heading {
-  font-size: 14px;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin: 18px 0 8px 5px;
-  font-weight: 800;
-  letter-spacing: 0.5px;
-}
-
+.tabs { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:15px; }
+.tab { background:#e2e8f0; }
+.tab.active { background:var(--accent); color:white; }
+.panel { display:none; }
+.panel.active { display:block; }
 .pdf-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 15px;
-  border-bottom: 1px solid var(--border);
-  gap: 15px;
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  flex-wrap:wrap;
+  padding:12px 0;
+  border-bottom:1px solid var(--border);
 }
-.pdf-item:last-child { border-bottom: none; }
-
-.pdf-name { font-weight: 600; font-size: 14px; color: var(--primary); display: flex; align-items: center; gap: 8px; }
-.pdf-actions { display: flex; gap: 8px; }
-
-.btn-sm {
-  background: #eff6ff;
-  color: var(--accent);
-  border: 1px solid #dbeafe;
-  padding: 6px 14px;
-  border-radius: 8px;
-  font-size: 12px;
-  font-weight: 700;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-}
-.btn-sm:hover { background: var(--accent); color: white; }
-
+.pdf-item a { margin-left:5px; }
+.category { color:var(--accent); font-weight:bold; margin-top:18px; }
 footer {
-  text-align: center;
-  background: var(--primary);
-  color: #94a3b8;
-  padding: 40px 20px;
-  margin-top: 60px;
-  font-size: 14px;
+  background:var(--primary);
+  color:#cbd5e1;
+  padding:25px;
+  margin-top:40px;
+  text-align:center;
 }
-footer .architect { color: var(--accent-glow); font-weight: 800; font-size: 17px; margin-top: 8px; }
-
-@media(max-width: 600px) {
-  .ai-input-group { flex-direction: column; }
-  .ai-input-group input, .btn-ai, .btn-clear { width: 100%; }
-  .pdf-item { flex-direction: column; align-items: flex-start; }
-  .pdf-tabs { flex-direction: column; }
+@media(max-width:600px) {
+  .input-row { flex-direction:column; }
+  input,select,.input-row button { width:100%; }
 }
 </style>
 </head>
-<body>
 
+<body>
 <header>
-    <div class="hub-eyebrow">Universal Learning & AI Ecosystem (KG to PG)</div>
-    <h1>LEKKA <span>LAB</span></h1>
-    <div class="sub-tagline">Math, Physics, Chem, Bio & Social • English, Telugu & Hindi • Official Textbooks & PDF Vault</div>
+  <h1>LEKKA <span>LAB</span></h1>
+  <p>Universal Learning Hub • English • తెలుగు • हिन्दी</p>
 </header>
 
-<div class="container">
+<main class="container">
+<section class="ask-box">
+  <h2>✨ Ask Lucky — AI Learning Assistant</h2>
+  <p>Ask questions about mathematics, science, social studies, languages and general knowledge.</p>
 
-    <!-- Ask Lucky AI Engine Box -->
-    <div class="ask-lucky-box">
-        <div class="ask-lucky-header">
-            <h3>✨ Ask Lucky (Master AI Engine)</h3>
-            <span class="online-badge">ONLINE (Smart Verification Mode)</span>
-        </div>
-        <p>Ask any question from KG to PG — Mathematics proofs, Physics laws, Chemistry reactions, Biology mechanisms, or Social Studies in <strong>English, Telugu, or Hindi</strong> with full step-by-step explanations!</p>
-        
-        <div class="ai-input-group">
-            <input id="universeInput" type="text" placeholder="Ask anything (e.g., BPT theorem, Quadratic formula, Ohm's law, రవ్వ లడ్డు)..." autocomplete="off" />
-            <button class="btn-ai" onclick="askLuckyUniverse()">Ask Lucky</button>
-            <button class="btn-clear" onclick="clearLuckyUniverse()">Clear</button>
-        </div>
-
-        <div class="chips-row">
-            <span style="color: #94a3b8; font-size: 12px; align-self: center;">Quick Search:</span>
-            <span class="chip" onclick="quickAsk('Explain bpt theorem with step-by-step proof')">📐 BPT Theorem</span>
-            <span class="chip" onclick="quickAsk('Quadratic formula proof and graph explanation')">📊 Quadratic Formula</span>
-            <span class="chip" onclick="quickAsk('Ohm\'s law formula and circuit explanation')">⚡ Ohm's Law</span>
-            <span class="chip" onclick="quickAsk('రవ్వ లడ్డు తయారీ విధానం')">🍬 Ravva Laddu (Telugu)</span>
-        </div>
-        
-        <div id="luckyUniversalOutput"></div>
+  <form id="askForm">
+    <div class="input-row">
+      <input id="question" placeholder="Ask any question..." required>
+      <select id="language" aria-label="Answer language">
+        <option value="auto">Same as question</option>
+        <option value="English">English</option>
+        <option value="Telugu">తెలుగు</option>
+        <option value="Hindi">हिन्दी</option>
+      </select>
+      <button class="ask-btn" id="askButton">Ask Lucky</button>
+      <button class="clear-btn" type="button" id="clearButton">Clear</button>
     </div>
+  </form>
 
-    <!-- Official Textbook Portals Section -->
-    <div class="section-title">📚 Official Textbook Portals</div>
-    <div class="grid-cards">
-        <a href="https://ncert.nic.in/textbook.php" target="_blank" class="portal-card">
-            <div>
-                <div class="portal-header">
-                    <div class="portal-icon">📖</div>
-                    <div class="portal-info">
-                        <h3>NCERT Textbooks Portal</h3>
-                        <p>Access official digital textbooks from Class 1 to Class 12 across all subjects.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="portal-footer">
-                <span>Visit NCERT Portal</span>
-                <span>&rarr;</span>
-            </div>
-        </a>
+  <div class="chips">
+    <button class="chip" data-question="Explain BPT theorem with a detailed step-by-step proof.">BPT Theorem</button>
+    <button class="chip" data-question="Explain the quadratic formula with derivation and an example.">Quadratic Formula</button>
+    <button class="chip" data-question="Explain Ohm's law with formula and an example.">Ohm's Law</button>
+    <button class="chip" data-question="రవ్వ లడ్డు తయారీ విధానాన్ని తెలుగులో వివరించండి.">రవ్వ లడ్డు</button>
+  </div>
 
-        <a href="https://scert.telangana.gov.in/" target="_blank" class="portal-card">
-            <div>
-                <div class="portal-header">
-                    <div class="portal-icon">🏫</div>
-                    <div class="portal-info">
-                        <h3>SCERT Telangana Portal</h3>
-                        <p>State Board curriculum textbooks, syllabi, and academic calendars.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="portal-footer">
-                <span>Visit SCERT Portal</span>
-                <span>&rarr;</span>
-            </div>
-        </a>
-    </div>
+  <div id="answer" aria-live="polite"></div>
+  <p id="status">AI status: checking connection…</p>
+</section>
 
-    <!-- Organized PDF Vault by Class Buttons -->
-    <div class="section-title">📂 Assessment & Project PDF Vault (Class-wise)</div>
-    <p style="color: var(--text-muted); font-size: 14px; margin-top: -10px; margin-bottom: 15px;">
-        Click a class button below to view and download all corresponding assessment files organized by Formative Assessments (FA1 to FA4).
-    </p>
-
-    <div class="pdf-vault-box">
-        <div class="pdf-tabs">
-            <button class="pdf-tab-btn active" onclick="switchPdfTab(event, 'class10Panel')">Class 10 PDFs</button>
-            <button class="pdf-tab-btn" onclick="switchPdfTab(event, 'class9Panel')">Class 9 PDFs</button>
-            <button class="pdf-tab-btn" onclick="switchPdfTab(event, 'class8Panel')">Class 8 PDFs</button>
-        </div>
-
-        <!-- Class 10 Panel -->
-        <div id="class10Panel" class="pdf-panel active">
-            <div class="pdf-category-heading">Formative Assessment 1 (FA1)</div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📘</span> class10-fa1-generating-new-problems.pdf</div>
-                <div class="pdf-actions"><a href="class10-fa1-generating-new-problems.pdf" target="_blank" class="btn-sm">View</a><a href="class10-fa1-generating-new-problems.pdf" download class="btn-sm">Download</a></div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📘</span> class10-fa1-project.pdf</div>
-                <div class="pdf-actions"><a href="class10-fa1-project.pdf" target="_blank" class="btn-sm">View</a><a href="class10-fa1-project.pdf" download class="btn-sm">Download</a></div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📘</span> class10-fa1-slip-test.pdf</div>
-                <div class="pdf-actions"><a href="class10-fa1-slip-test.pdf" target="_blank" class="btn-sm">View</a><a href="class10-fa1-slip-test.pdf" download class="btn-sm">Download</a></div>
-            </div>
-
-            <div class="pdf-category-heading">Formative Assessment 2 (FA2)</div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📘</span> class10-fa2-generating-new-problems.pdf</div>
-                <div class="pdf-actions"><a href="class10-fa2-generating-new-problems.pdf" target="_blank" class="btn-sm">View</a><a href="class10-fa2-generating-new-problems.pdf" download class="btn-sm">Download</a></div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📘</span> class10-fa2-project.pdf</div>
-                <div class="pdf-actions"><a href="class10-fa2-project.pdf" target="_blank" class="btn-sm">View</a><a href="class10-fa2-project.pdf" download class="btn-sm">Download</a></div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📘</span> class10-fa2-slip-test.pdf</div>
-                <div class="pdf-actions"><a href="class10-fa2-slip-test.pdf" target="_blank" class="btn-sm">View</a><a href="class10-fa2-slip-test.pdf" download class="btn-sm">Download</a></div>
-            </div>
-
-            <div class="pdf-category-heading">Formative Assessment 3 (FA3)</div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📘</span> class10-fa3-generating-new-problems.pdf</div>
-                <div class="pdf-actions"><a href="class10-fa3-generating-new-problems.pdf" target="_blank" class="btn-sm">View</a><a href="class10-fa3-generating-new-problems.pdf" download class="btn-sm">Download</a></div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📘</span> class10-fa3-project.pdf</div>
-                <div class="pdf-actions"><a href="class10-fa3-project.pdf" target="_blank" class="btn-sm">View</a><a href="class10-fa3-project.pdf" download class="btn-sm">Download</a></div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📘</span> class10-fa3-slip-test.pdf</div>
-                <div class="pdf-actions"><a href="class10-fa3-slip-test.pdf" target="_blank" class="btn-sm">View</a><a href="class10-fa3-slip-test.pdf" download class="btn-sm">Download</a></div>
-            </div>
-
-            <div class="pdf-category-heading">Formative Assessment 4 (FA4)</div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📘</span> class10-fa4-generating-new-problems.pdf</div>
-                <div class="pdf-actions"><a href="class10-fa4-generating-new-problems.pdf" target="_blank" class="btn-sm">View</a><a href="class10-fa4-generating-new-problems.pdf" download class="btn-sm">Download</a></div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📘</span> class10-fa4-project.pdf</div>
-                <div class="pdf-actions"><a href="class10-fa4-project.pdf" target="_blank" class="btn-sm">View</a><a href="class10-fa4-project.pdf" download class="btn-sm">Download</a></div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📘</span> class10-fa4-slip-test.pdf</div>
-                <div class="pdf-actions"><a href="class10-fa4-slip-test.pdf" target="_blank" class="btn-sm">View</a><a href="class10-fa4-slip-test.pdf" download class="btn-sm">Download</a></div>
-            </div>
-        </div>
-
-        <!-- Class 9 Panel -->
-        <div id="class9Panel" class="pdf-panel">
-            <div class="pdf-category-heading">Formative Assessment 1 (FA1)</div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📗</span> class9-fa1-generating-new-problems.pdf</div>
-                <div class="pdf-actions"><a href="class9-fa1-generating-new-problems.pdf" target="_blank" class="btn-sm">View</a><a href="class9-fa1-generating-new-problems.pdf" download class="btn-sm">Download</a></div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📗</span> class9-fa1-project.pdf</div>
-                <div class="pdf-actions"><a href="class9-fa1-project.pdf" target="_blank" class="btn-sm">View</a><a href="class9-fa1-project.pdf" download class="btn-sm">Download</a></div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📗</span> class9-fa1-slip-test.pdf</div>
-                <div class="pdf-actions"><a href="class9-fa1-slip-test.pdf" target="_blank" class="btn-sm">View</a><a href="class9-fa1-slip-test.pdf" download class="btn-sm">Download</a></div>
-            </div>
-
-            <div class="pdf-category-heading">Formative Assessment 2 (FA2)</div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📗</span> class9-fa2-generating-new-problems.pdf</div>
-                <div class="pdf-actions"><a href="class9-fa2-generating-new-problems.pdf" target="_blank" class="btn-sm">View</a><a href="class9-fa2-generating-new-problems.pdf" download class="btn-sm">Download</a></div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📗</span> class9-fa2-project.pdf</div>
-                <div class="pdf-actions"><a href="class9-fa2-project.pdf" target="_blank" class="btn-sm">View</a><a href="class9-fa2-project.pdf" download class="btn-sm">Download</a></div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📗</span> class9-fa2-slip-test.pdf</div>
-                <div class="pdf-actions"><a href="class9-fa2-slip-test.pdf" target="_blank" class="btn-sm">View</a><a href="class9-fa2-slip-test.pdf" download class="btn-sm">Download</a></div>
-            </div>
-
-            <div class="pdf-category-heading">Formative Assessment 3 (FA3)</div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📗</span> Class9-fa3-generating-new-problems.pdf</div>
-                <div class="pdf-actions"><a href="Class9-fa3-generating-new-problems.pdf" target="_blank" class="btn-sm">View</a><a href="Class9-fa3-generating-new-problems.pdf" download class="btn-sm">Download</a></div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📗</span> class9-fa3-project.pdf</div>
-                <div class="pdf-actions"><a href="class9-fa3-project.pdf" target="_blank" class="btn-sm">View</a><a href="class9-fa3-project.pdf" download class="btn-sm">Download</a></div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📗</span> class9-fa3-slip-test.pdf</div>
-                <div class="pdf-actions"><a href="class9-fa3-slip-test.pdf" target="_blank" class="btn-sm">View</a><a href="class9-fa3-slip-test.pdf" download class="btn-sm">Download</a></div>
-            </div>
-
-            <div class="pdf-category-heading">Formative Assessment 4 (FA4)</div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📗</span> class9-fa4-generating-new-problems.pdf</div>
-                <div class="pdf-actions"><a href="class9-fa4-generating-new-problems.pdf" target="_blank" class="btn-sm">View</a><a href="class9-fa4-generating-new-problems.pdf" download class="btn-sm">Download</a></div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📗</span> class9-fa4-project.pdf</div>
-                <div class="pdf-actions"><a href="class9-fa4-project.pdf" target="_blank" class="btn-sm">View</a><a href="class9-fa4-project.pdf" download class="btn-sm">Download</a></div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📗</span> class9-fa4-slip-test.pdf</div>
-                <div class="pdf-actions"><a href="class9-fa4-slip-test.pdf" target="_blank" class="btn-sm">View</a><a href="class9-fa4-slip-test.pdf" download class="btn-sm">Download</a></div>
-            </div>
-        </div>
-
-        <!-- Class 8 Panel -->
-        <div id="class8Panel" class="pdf-panel">
-            <div class="pdf-category-heading">Formative Assessment 1 (FA1)</div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📙</span> FA-1 Generating New Problems.pdf</div>
-                <div class="pdf-actions"><a href="FA-1 Generating New Problems.pdf" target="_blank" class="btn-sm">View</a><a href="FA-1 Generating New Problems.pdf" download class="btn-sm">Download</a></div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📙</span> FA-1 Slip Test.pdf</div>
-                <div class="pdf-actions"><a href="FA-1 Slip Test.pdf" target="_blank" class="btn-sm">View</a><a href="FA-1 Slip Test.pdf" download class="btn-sm">Download</a></div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📙</span> Class 8 FA1 Project.pdf</div>
-                <div class="pdf-actions"><a href="Class 8 FA1 Project.pdf" target="_blank" class="btn-sm">View</a><a href="Class 8 FA1 Project.pdf" download class="btn-sm">Download</a></div>
-            </div>
-
-            <div class="pdf-category-heading">Formative Assessment 2 (FA2)</div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📙</span> class8-fa2-generating-new-problems.pdf</div>
-                <div class="pdf-actions"><a href="class8-fa2-generating-new-problems.pdf" target="_blank" class="btn-sm">View</a><a href="class8-fa2-generating-new-problems.pdf" download class="btn-sm">Download</a></div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📙</span> class8-fa2-project.pdf</div>
-                <div class="pdf-actions"><a href="class8-fa2-project.pdf" target="_blank" class="btn-sm">View</a><a href="class8-fa2-project.pdf" download class="btn-sm">Download</a></div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📙</span> class8-fa2-slip-test.pdf</div>
-                <div class="pdf-actions"><a href="class8-fa2-slip-test.pdf" target="_blank" class="btn-sm">View</a><a href="class8-fa2-slip-test.pdf" download class="btn-sm">Download</a></div>
-            </div>
-
-            <div class="pdf-category-heading">Formative Assessment 3 (FA3)</div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📙</span> class8-fa3-generating-new-problems.pdf</div>
-                <div class="pdf-actions"><a href="class8-fa3-generating-new-problems.pdf" target="_blank" class="btn-sm">View</a><a href="class8-fa3-generating-new-problems.pdf" download class="btn-sm">Download</a></div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📙</span> class8-fa3-project.pdf</div>
-                <div class="pdf-actions"><a href="class8-fa3-project.pdf" target="_blank" class="btn-sm">View</a><a href="class8-fa3-project.pdf" download class="btn-sm">Download</a></div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📙</span> class8-fa3-slip-test.pdf</div>
-                <div class="pdf-actions"><a href="class8-fa3-slip-test.pdf" target="_blank" class="btn-sm">View</a><a href="class8-fa3-slip-test.pdf" download class="btn-sm">Download</a></div>
-            </div>
-
-            <div class="pdf-category-heading">Formative Assessment 4 (FA4)</div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📙</span> class8-fa4-generating-new-problems.pdf</div>
-                <div class="pdf-actions"><a href="class8-fa4-generating-new-problems.pdf" target="_blank" class="btn-sm">View</a><a href="class8-fa4-generating-new-problems.pdf" download class="btn-sm">Download</a></div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📙</span> class8-fa4-project.pdf</div>
-                <div class="pdf-actions"><a href="class8-fa4-project.pdf" target="_blank" class="btn-sm">View</a><a href="class8-fa4-project.pdf" download class="btn-sm">Download</a></div>
-            </div>
-            <div class="pdf-item">
-                <div class="pdf-name"><span>📙</span> class8-fa4-slip-test.pdf</div>
-                <div class="pdf-actions"><a href="class8-fa4-slip-test.pdf" target="_blank" class="btn-sm">View</a><a href="class8-fa4-slip-test.pdf" download class="btn-sm">Download</a></div>
-            </div>
-        </div>
-    </div>
-
+<h2 class="section-title">📚 Official Textbook Portals</h2>
+<div class="cards">
+  <a class="card" href="https://ncert.nic.in/textbook.php" target="_blank" rel="noopener">
+    <h3>📖 NCERT Textbooks</h3>
+    <p>Official school textbooks.</p>
+  </a>
+  <a class="card" href="https://scert.telangana.gov.in/" target="_blank" rel="noopener">
+    <h3>🏫 Telangana SCERT</h3>
+    <p>State syllabus and textbooks.</p>
+  </a>
 </div>
 
-<footer>
-    <div>CONCEPT & LEARNING ARCHITECTURE</div>
-    <div class="architect">Hemanth Kalyanapu</div>
-    <div style="margin-top: 6px; font-size: 13px; color: #64748b;">Mathematics Educator & Creator | Lekka Lab Initiative</div>
-</footer>
+<h2 class="section-title">📂 Class-wise PDF Vault</h2>
+<p>Keep your original PDF files in the correct folder. This code does not change or delete them.</p>
+
+<section class="vault">
+  <div class="tabs">
+    <button class="tab active" data-tab="class10">Class 10</button>
+    <button class="tab" data-tab="class9">Class 9</button>
+    <button class="tab" data-tab="class8">Class 8</button>
+  </div>
+  <div id="class10" class="panel active"></div>
+  <div id="class9" class="panel"></div>
+  <div id="class8" class="panel"></div>
+</section>
+</main>
+
+<footer>LEKKA LAB • Learn step by step</footer>
 
 <script>
-// PDF Vault Tab Switcher for Class Buttons
-function switchPdfTab(evt, tabId) {
-    const panels = document.getElementsByClassName("pdf-panel");
-    for (let p of panels) p.classList.remove("active");
-    const buttons = document.getElementsByClassName("pdf-tab-btn");
-    for (let b of buttons) b.classList.remove("active");
-    document.getElementById(tabId).classList.add("active");
-    evt.currentTarget.classList.add("active");
+const questionInput = document.getElementById("question");
+const answerBox = document.getElementById("answer");
+const askButton = document.getElementById("askButton");
+const statusText = document.getElementById("status");
+
+function showMessage(message) {
+  answerBox.style.display = "block";
+  answerBox.textContent = message;
 }
 
-// Ask Lucky Master Search Engine (Instant & Seamless)
 async function askLuckyUniverse() {
-    let rawQuery = document.getElementById('universeInput').value.trim();
-    const outputDiv = document.getElementById('luckyUniversalOutput');
-    
-    if (!rawQuery) {
-        alert("Please enter any question from KG to PG.");
-        return;
-    }
-    
-    outputDiv.style.display = 'block';
-    outputDiv.innerHTML = `<span style="color: #38bdf8;">🤖 Ask Lucky is generating full explanation & proof...</span> processing: <strong>"${escapeHtml(rawQuery)}"</strong>`;
+  const question = questionInput.value.trim();
+  if (!question) {
+    questionInput.focus();
+    return;
+  }
 
-    let lowerQ = rawQuery.toLowerCase();
-    
-    // Master Curated Database for instant, flawless curriculum answers
-    let masterResult = getMasterCuratedResult(lowerQ, rawQuery);
-    
-    setTimeout(() => {
-        if (masterResult) {
-            outputDiv.innerHTML = `
-                <strong>✨ Ask Lucky Master Solution (Verified Proof Mode):</strong><br><br>
-                ${masterResult}
-                <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid #334155; font-size: 13px; color: #94a3b8; display: flex; justify-content: space-between; align-items: center;">
-                    <span>💡 Powered by Lekka Lab Master Engine</span>
-                    <button onclick="navigator.clipboard.writeText(this.parentElement.previousElementSibling.innerText); alert('Answer copied to clipboard!');" style="background:#1e293b; color:#38bdf8; border:1px solid #475569; padding:4px 10px; border-radius:6px; cursor:pointer; font-size:11px;">Copy Answer</button>
-                </div>
-            `;
-        } else {
-            // General Dynamic Deep Breakdown for any other query
-            outputDiv.innerHTML = `
-                <strong>✨ Ask Lucky AI Solution:</strong><br><br>
-                <strong>Comprehensive Detailed Analysis for: "${escapeHtml(rawQuery)}"</strong><br><br>
-                <strong>1. Complete Overview & Core Concept:</strong><br>
-                - In-depth exploration of <em>"${escapeHtml(rawQuery)}"</em> covering core theories, governing laws, and academic principles from KG to PG.<br><br>
-                <strong>2. Step-by-Step Derivation & Mechanism:</strong><br>
-                - <strong>Step 1:</strong> Initial foundational axioms, definitions, and terminology.<br>
-                - <strong>Step 2:</strong> Mathematical equations, chemical reactions, or structural workflows.<br>
-                - <strong>Step 3:</strong> Final conclusions, proofs, and practical real-world significance.<br><br>
-                <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid #334155; font-size: 13px; color: #94a3b8; display: flex; justify-content: space-between; align-items: center;">
-                    <span>💡 Powered by Lekka Lab Universal Engine</span>
-                    <button onclick="navigator.clipboard.writeText(this.parentElement.previousElementSibling.innerText); alert('Answer copied to clipboard!');" style="background:#1e293b; color:#38bdf8; border:1px solid #475569; padding:4px 10px; border-radius:6px; cursor:pointer; font-size:11px;">Copy Answer</button>
-                </div>
-            `;
-        }
-        
-        // Trigger KaTeX rendering
-        if (typeof renderMathInElement === 'function') {
-            renderMathInElement(outputDiv, {
-                delimiters: [
-                    {left: "$$", right: "$$", display: true},
-                    {left: "$", right: "$", display: false}
-                ]
-            });
-        }
-    }, 300);
+  askButton.disabled = true;
+  askButton.textContent = "Thinking...";
+  showMessage("Ask Lucky is preparing your answer...");
+
+  try {
+    // This endpoint must be provided by your secure AI backend.
+    const response = await fetch("/api/ask-lucky", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        question: question,
+        language: document.getElementById("language").value
+      })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || "AI service is not available.");
+    }
+    if (!data.answer) {
+      throw new Error("The AI service returned an empty answer.");
+    }
+
+    answerBox.innerHTML = DOMPurify.sanitize(marked.parse(data.answer));
+
+    renderMathInElement(answerBox, {
+      delimiters: [
+        {left:"$$",right:"$$",display:true},
+        {left:"$",right:"$",display:false},
+        {left:"\\(",right:"\\)",display:false},
+        {left:"\\[",right:"\\]",display:true}
+      ],
+      throwOnError:false
+    });
+  } catch (error) {
+    showMessage(
+      error.message +
+      "\n\nTo generate detailed AI answers, configure and run the secure backend. This HTML alone is not an AI model."
+    );
+  } finally {
+    askButton.disabled = false;
+    askButton.textContent = "Ask Lucky";
+  }
 }
 
-// Master Knowledge Base with Full Proofs & Formulas
-function getMasterCuratedResult(lowerQ, q) {
-    if (lowerQ.includes("bpt") || lowerQ.includes("thales")) {
-        return `<h3>Basic Proportionality Theorem (BPT / Thales Theorem)</h3>
-        <p><strong>1. Statement:</strong> If a line is drawn parallel to one side of a triangle intersecting the other two distinct points, then the other two sides are divided in the same ratio.</p>
-        <p><strong>2. Given & To Prove:</strong><br>
-        - Given: In $\\triangle ABC$, line $DE \\parallel BC$.<br>
-        - To Prove: $\\frac{AD}{DB} = \\frac{AE}{EC}$.</p>
-        <p><strong>3. Detailed Proof Steps:</strong><br>
-        - <strong>Step 1:</strong> Join vertex $B$ to $E$ and $C$ to $D$. Draw perpendiculars $EN \\perp AB$ and $DM \\perp AC$.<br>
-        - <strong>Step 2:</strong> Consider the ratio of triangle areas: $\\frac{\\text{Area}(\\triangle ADE)}{\\text{Area}(\\triangle BDE)} = \\frac{\\frac{1}{2} \\cdot AD \\cdot EN}{\\frac{1}{2} \\cdot DB \\cdot EN} = \\frac{AD}{DB}$.<br>
-        - <strong>Step 3:</strong> Similarly, for the other side: $\\frac{\\text{Area}(\\triangle ADE)}{\\text{Area}(\\triangle CDE)} = \\frac{AE}{EC}$.<br>
-        - <strong>Step 4:</strong> Since $\\triangle BDE$ and $\\triangle CDE$ lie on the same base $DE$ and between the same parallels $DE \\parallel BC$, their areas are equal. Hence, $\\frac{AD}{DB} = \\frac{AE}{EC}$. Proved.</p>`;
-    } 
-    if (lowerQ.includes("quadratic") || lowerQ.includes("formula")) {
-        return `<h3>Quadratic Formula & Complete Derivation</h3>
-        <p><strong>1. Standard Form:</strong> $ax^2 + bx + c = 0$ (where $a \\neq 0$).</p>
-        <p><strong>2. The Quadratic Formula:</strong></p>
-        <p>$$x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$$</p>
-        <p><strong>3. Derivation by Completing the Square:</strong><br>
-        - Divide by $a$: $x^2 + \\frac{b}{a}x + \\frac{c}{a} = 0$<br>
-        - Shift constant: $x^2 + \\frac{b}{a}x = -\\frac{c}{a}$<br>
-        - Add $\\left(\\frac{b}{2a}\\right)^2$ to both sides: $\\left(x + \\frac{b}{2a}\\right)^2 = \\frac{b^2 - 4ac}{4a^2}$<br>
-        - Take square roots and solve for $x$ to get the final formula.</p>`;
-    }
-    if (lowerQ.includes("ohm") || lowerQ.includes("ohms law")) {
-        return `<h3>Ohm's Law - Complete Explanation</h3>
-        <p><strong>1. Statement:</strong> The electric current ($I$) flowing through a metallic conductor is directly proportional to the potential difference ($V$) across its ends, at constant temperature.</p>
-        <p><strong>2. Mathematical Formula:</strong></p>
-        <p>$$V = I \\times R \\quad \\text{or} \\quad I = \\frac{V}{R}$$</p>
-        <p>Where $V$ = Voltage (Volts), $I$ = Current (Amperes), $R$ = Resistance (Ohms $\\Omega$).</p>`;
-    }
-    if (lowerQ.includes("రవ్వ లడ్డు") || lowerQ.includes("ravva laddu")) {
-        return `<h3>రవ్వ లడ్డు తయారీ విధానం (Ravva Laddu Recipe)</h3>
-        <p><strong>కావలసిన పదార్థాలు:</strong> బొంబాయి రవ్వ (సూజి) - 1 కప్పు, పంచదార - 3/4 కప్పు, నెయ్యి - 4 స్పూన్లు, పాలు - కొద్దిగా, జీడిపప్పు, యాలకుల పొడి.</p>
-        <p><strong>తయారీ విధానం:</strong><br>
-        1. బాణలిలో నెయ్యి వేసి జీడిపప్పు వేయించి పక్కన పెట్టుకోవాలి.<br>
-        2. రవ్వను దోరగా సువాసన వచ్చేవరకు వేయించాలి.<br>
-        3. పంచదారని మిక్సీలో మెత్తటి పొడిగా చేసుకోవాలి.<br>
-        4. రవ్వ, పంచదార పొడి, యాలకుల పొడి, నెయ్యి కలిపి కొద్దిగా పాలు చల్లుతూ ఉండలు చుట్టుకోవాలి.</p>`;
-    }
-    return null;
-}
-
-function quickAsk(text) {
-    document.getElementById('universeInput').value = text;
-    askLuckyUniverse();
-}
-
-function clearLuckyUniverse() {
-    document.getElementById('universeInput').value = '';
-    document.getElementById('luckyUniversalOutput').style.display = 'none';
-}
-
-function escapeHtml(str) {
-    return String(str || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
-}
-
-document.getElementById('universeInput')?.addEventListener('keypress', function (e) {
-    if (e.key === 'Enter') {
-        askLuckyUniverse();
-    }
+document.getElementById("askForm").addEventListener("submit", event => {
+  event.preventDefault();
+  askLuckyUniverse();
 });
-</script>
 
+document.getElementById("clearButton").addEventListener("click", () => {
+  questionInput.value = "";
+  answerBox.style.display = "none";
+  answerBox.textContent = "";
+  questionInput.focus();
+});
+
+document.querySelectorAll("[data-question]").forEach(button => {
+  button.addEventListener("click", () => {
+    questionInput.value = button.dataset.question;
+    askLuckyUniverse();
+  });
+});
+
+document.querySelectorAll("[data-tab]").forEach(button => {
+  button.addEventListener("click", () => {
+    document.querySelectorAll("[data-tab]").forEach(tab =>
+      tab.classList.toggle("active", tab === button)
+    );
+    document.querySelectorAll(".panel").forEach(panel =>
+      panel.classList.toggle("active", panel.id === button.dataset.tab)
+    );
+  });
+});
+
+// Create class-wise links without touching the actual PDF files.
+for (const classNumber of [8, 9, 10]) {
+  const panel = document.getElementById("class" + classNumber);
+
+  for (let fa = 1; fa <= 4; fa++) {
+    const heading = document.createElement("div");
+    heading.className = "category";
+    heading.textContent = "Formative Assessment " + fa + " (FA" + fa + ")";
+    panel.appendChild(heading);
+
+    for (const type of [
+      ["generating-new-problems", "Generating New Problems"],
+      ["project", "Project"],
+      ["slip-test", "Slip Test"]
+    ]) {
+      const filename =
+        "class" + classNumber + "-fa" + fa + "-" + type[0] + ".pdf";
+
+      const item = document.createElement("div");
+      item.className = "pdf-item";
+
+      const name = document.createElement("span");
+      name.textContent = "📘 " + filename;
+
+      const actions = document.createElement("span");
+      const view = document.createElement("a");
+      view.href = filename;
+      view.target = "_blank";
+      view.rel = "noopener";
+      view.textContent = "View";
+
+      const download = document.createElement("a");
+      download.href = filename;
+      download.download = "";
+      download.textContent = "Download";
+
+      actions.append(view, document.createTextNode(" | "), download);
+      item.append(name, actions);
+      panel.appendChild(item);
+    }
+  }
+}
+
+// Test whether a backend health endpoint exists.
+fetch("/api/health")
+  .then(response => {
+    if (!response.ok) throw new Error("Backend unavailable");
+    return response.json();
+  })
+  .then(data => {
+    statusText.textContent = data.aiConfigured
+      ? "AI backend connected"
+      : "Backend connected, but API key is not configured";
+  })
+  .catch(() => {
+    statusText.textContent =
+      "AI backend not connected — setup is required for AI answers";
+  });
+</script>
 </body>
 </html>
