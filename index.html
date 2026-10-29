@@ -250,7 +250,7 @@ aiForm.addEventListener("submit", async function(event) {
 
     const answer = data.answer || data.response || data.text;
 
-    if (typeof answer !== "string" || !answer.trim()) {
+    if (!answer || typeof answer !== "string" || !answer.trim()) {
       throw new Error("No readable answer was returned.");
     }
 
@@ -258,7 +258,7 @@ aiForm.addEventListener("submit", async function(event) {
     aiAnswer.hidden = false;
     aiStatus.textContent = "Answer received.";
   } catch (error) {
-    aiStatus.textContent = "Unable to get an answer. Check your Worker URL, backend and network.";
+    aiStatus.textContent = error.message;
     console.error("Ask Lucky error:", error);
   } finally {
     aiButton.disabled = false;
