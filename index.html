@@ -209,11 +209,9 @@ footer {
 
 /* ======================================
    ASK LUCKY AI CONFIGURATION
-   Paste your deployed Cloudflare Worker URL below.
-   Example: "https://lekka-worker.yourname.workers.dev"
    ====================================== */
 
-const LUCKY_API_URL = "https://YOUR_WORKER_SUBDOMAIN.workers.dev";
+const LUCKY_API_URL = "https://rough-shape-40e0.hemanthkalyanapu-hk.workers.dev";
 
 const aiForm = document.getElementById("aiForm");
 const aiQuestion = document.getElementById("aiQuestion");
@@ -227,8 +225,8 @@ aiForm.addEventListener("submit", async function(event) {
   const question = aiQuestion.value.trim();
   if (!question) return;
 
-  if (!/^https:\/\//i.test(LUCKY_API_URL) || LUCKY_API_URL.includes("YOUR_WORKER_SUBDOMAIN")) {
-    aiStatus.textContent = "Please configure your Cloudflare Worker URL in line 192 first.";
+  if (!/^https:\/\//i.test(LUCKY_API_URL)) {
+    aiStatus.textContent = "Please configure your Cloudflare Worker URL first.";
     aiAnswer.hidden = true;
     return;
   }
